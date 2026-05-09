@@ -84,7 +84,7 @@
 
         {{-- LEFT: hands + phone photograph --}}
         <div class="order-2 lg:order-1 lg:col-span-7 relative">
-            <div class="reveal reveal-left relative mx-auto w-full max-w-[560px] sm:max-w-[640px] lg:max-w-none">
+            <div class="reveal reveal-left relative w-full max-w-none -ml-5 sm:-ml-8 lg:ml-0">
                 {{-- Soft pedestal --}}
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
