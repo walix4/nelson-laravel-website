@@ -96,8 +96,16 @@
                 {{-- Soft pedestal --}}
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
-                {{-- The hands+phone photo --}}
-                <div class="relative float-slow">
+                {{-- Red flashing radar behind photo (rideshare "finding" style) --}}
+                <div class="absolute inset-0 grid place-items-center pointer-events-none" aria-hidden="true">
+                    <span class="absolute w-[60%] aspect-square rounded-full bg-red-500/30 blur-3xl radar-glow"></span>
+                    <span class="absolute w-[58%] aspect-square rounded-full border-[3px] border-red-500/60 radar-ring"></span>
+                    <span class="absolute w-[58%] aspect-square rounded-full border-[3px] border-red-500/60 radar-ring" style="animation-delay:1s"></span>
+                    <span class="absolute w-[58%] aspect-square rounded-full border-[3px] border-red-500/60 radar-ring" style="animation-delay:2s"></span>
+                </div>
+
+                {{-- The hands+phone photo (above radar) --}}
+                <div class="relative z-10 float-slow">
                     @include('partials.hero-hands')
                 </div>
 
