@@ -97,7 +97,7 @@
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
                 {{-- Red drop-ripple BEHIND the phone — emerges from behind device --}}
-                <div class="absolute pointer-events-none z-0 top-[24%] left-[14%] w-[34%] aspect-square" aria-hidden="true">
+                <div class="absolute pointer-events-none z-0 aspect-square" style="top:18%; left:38%; width:30%;" aria-hidden="true">
                     <span class="absolute inset-0 rounded-full bg-red-500 map-pulse"></span>
                     <span class="absolute inset-0 rounded-full bg-red-500 map-pulse" style="animation-delay:1.75s"></span>
                 </div>
