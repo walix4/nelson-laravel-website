@@ -80,24 +80,38 @@
         <div data-parallax="0.12" class="absolute bottom-0 right-1/3 w-[360px] h-[360px] rounded-full bg-gold-100/60 blur-3xl"></div>
     </div>
 
-    <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-14 lg:pt-20 pb-20 lg:pb-28 grid lg:grid-cols-12 gap-12 items-center">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-10 sm:pt-14 lg:pt-20 pb-16 sm:pb-20 lg:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
 
-        {{-- LEFT: hands + phone --}}
-        <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-left relative mx-auto max-w-[520px] aspect-square">
+        {{-- LEFT: hands + phone photograph with red SOS badge ring --}}
+        <div class="order-2 lg:order-1 lg:col-span-6 relative">
+            <div class="reveal reveal-left relative mx-auto w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[560px]">
                 {{-- Soft pedestal / stage --}}
-                <div class="absolute inset-x-6 bottom-6 h-12 rounded-[50%] bg-navy-900/10 blur-2xl"></div>
+                <div class="absolute inset-x-6 -bottom-2 sm:bottom-2 h-10 sm:h-12 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
-                {{-- Animated rotating ring behind --}}
-                <div class="absolute inset-8 rounded-full border border-dashed border-navy-200 spin-slow opacity-60"></div>
+                {{-- Red animated badge ring system --}}
+                <div class="absolute inset-0 grid place-items-center pointer-events-none" aria-hidden="true">
+                    {{-- outermost soft red glow --}}
+                    <span class="absolute w-[88%] aspect-square rounded-full bg-red-500/15 blur-3xl sos-glow"></span>
+                    {{-- two ping rings --}}
+                    <span class="absolute w-[78%] aspect-square rounded-full ring-2 ring-red-500/60 sos-ping"></span>
+                    <span class="absolute w-[78%] aspect-square rounded-full ring-2 ring-red-500/40 sos-ping" style="animation-delay:1s"></span>
+                    {{-- slow rotating dashed ring --}}
+                    <span class="absolute w-[80%] aspect-square rounded-full border-2 border-dashed border-red-500/50 spin-slow"></span>
+                </div>
 
-                {{-- The hands+phone composition --}}
-                <div class="absolute inset-0 grid place-items-center float-slow">
+                {{-- The hands+phone photo --}}
+                <div class="relative float-slow px-4 sm:px-6">
                     @include('partials.hero-hands')
                 </div>
 
+                {{-- SOS · LIVE badge anchored to the photo (top-right) --}}
+                <div class="reveal reveal-delay-2 absolute top-2 right-2 sm:top-4 sm:right-4 z-20 inline-flex items-center gap-2 rounded-full bg-red-600 text-white px-3 py-1.5 shadow-lg shadow-red-600/40 sos-glow">
+                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-white pulse-dot text-white"></span>
+                    <span class="text-[11px] font-bold tracking-widest uppercase">SOS · Live</span>
+                </div>
+
                 {{-- Floating notification cards --}}
-                <div class="reveal reveal-delay-3 absolute top-6 -left-2 sm:-left-6 flex items-center gap-3 rounded-2xl bg-white border border-ink-100 px-4 py-3 shadow-lg">
+                <div class="reveal reveal-delay-3 absolute top-4 -left-1 sm:-left-6 z-20 hidden sm:flex items-center gap-3 rounded-2xl bg-white border border-ink-100 px-4 py-3 shadow-lg">
                     <span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-50 text-brand-600">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
                     </span>
@@ -106,24 +120,20 @@
                         <p class="text-ink-500">Lily entered school zone · 3:42 PM</p>
                     </div>
                 </div>
-                <div class="reveal reveal-delay-4 absolute bottom-10 -right-2 sm:-right-4 flex items-center gap-3 rounded-2xl bg-white border border-ink-100 px-4 py-3 shadow-lg">
-                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-navy-900 text-white">
+                <div class="reveal reveal-delay-4 absolute -bottom-3 sm:bottom-6 -right-1 sm:-right-4 z-20 flex items-center gap-3 rounded-2xl bg-white border border-ink-100 px-3 py-2 sm:px-4 sm:py-3 shadow-lg">
+                    <span class="grid place-items-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-navy-900 text-white">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5" stroke-width="2"/></svg>
                     </span>
-                    <div class="text-xs">
+                    <div class="text-[11px] sm:text-xs">
                         <p class="font-semibold text-navy-900">Registry refreshed</p>
                         <p class="text-ink-500">2 within 0.5mi of home</p>
                     </div>
-                </div>
-                <div class="reveal reveal-delay-2 absolute top-1/2 -right-2 sm:right-4 flex items-center gap-2.5 rounded-full bg-white border border-ink-100 px-3.5 py-2 shadow-md">
-                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-brand-600 pulse-dot text-brand-600"></span>
-                    <span class="text-[11px] font-semibold tracking-widest text-navy-800">SOS · LIVE</span>
                 </div>
             </div>
         </div>
 
         {{-- RIGHT: heading + CTAs --}}
-        <div class="lg:col-span-6 lg:pl-6">
+        <div class="order-1 lg:order-2 lg:col-span-6 lg:pl-6">
             <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-[64px] leading-[1.04] tracking-tight text-navy-900">
                 Designed for safety of the families,<br/>
                 <span class="text-brand-600">making it accessible</span> for citizens.
@@ -158,6 +168,104 @@
             </div>
 
             <p class="reveal reveal-delay-5 mt-5 text-sm text-ink-500">Get it. Download from Appstore and Google Playstore.</p>
+        </div>
+    </div>
+</section>
+
+{{-- =======================================================================
+     LIVE COVERAGE — Newark crime map showcase
+========================================================================--}}
+<section id="coverage" class="relative overflow-hidden bg-white">
+    <div class="pointer-events-none absolute inset-0 -z-10">
+        <div class="absolute -top-24 left-1/3 w-[520px] h-[520px] rounded-full bg-brand-100/40 blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-gold-100/60 blur-3xl"></div>
+    </div>
+
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        {{-- LEFT: copy --}}
+        <div class="order-2 lg:order-1 lg:col-span-6">
+            <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-brand-600">Live coverage · Newark, NJ</p>
+            <h2 class="reveal reveal-delay-1 mt-4 font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+                Every incident, <span class="text-brand-600">on one map.</span>
+            </h2>
+            <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-700/80 leading-relaxed max-w-xl">
+                Verified Super Agents log every report the moment it lands. Sex crimes, robberies, physical violence and more — all pinned to their actual location, refreshed in real time so you always know what's happening around you.
+            </p>
+
+            <ul class="reveal reveal-delay-3 mt-8 grid sm:grid-cols-2 gap-4 max-w-xl">
+                <li class="flex items-start gap-3 rounded-2xl border border-ink-100 bg-white px-4 py-3 shadow-sm">
+                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-gold-100 text-gold-600 shrink-0">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+                    </span>
+                    <div class="text-sm">
+                        <p class="font-semibold text-navy-900">Verified pins only</p>
+                        <p class="text-ink-500">Every marker traces back to a Super Agent report.</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-3 rounded-2xl border border-ink-100 bg-white px-4 py-3 shadow-sm">
+                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-red-100 text-red-600 shrink-0">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                    </span>
+                    <div class="text-sm">
+                        <p class="font-semibold text-navy-900">Real-time updates</p>
+                        <p class="text-ink-500">New incidents appear within seconds of the report.</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-3 rounded-2xl border border-ink-100 bg-white px-4 py-3 shadow-sm">
+                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-50 text-brand-600 shrink-0">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                    </span>
+                    <div class="text-sm">
+                        <p class="font-semibold text-navy-900">Location-aware alerts</p>
+                        <p class="text-ink-500">Get notified when something happens within your radius.</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-3 rounded-2xl border border-ink-100 bg-white px-4 py-3 shadow-sm">
+                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 shrink-0">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </span>
+                    <div class="text-sm">
+                        <p class="font-semibold text-navy-900">Filter what matters</p>
+                        <p class="text-ink-500">Toggle categories — see only what's relevant to you.</p>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="reveal reveal-delay-4 mt-8 inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[.18em] text-ink-500">
+                <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-500 pulse-dot text-emerald-500"></span>
+                12 active reports · last updated just now
+            </div>
+        </div>
+
+        {{-- RIGHT: photo --}}
+        <div class="order-1 lg:order-2 lg:col-span-6 relative">
+            <div class="reveal reveal-right relative mx-auto w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[560px]">
+                {{-- soft pedestal --}}
+                <div class="absolute inset-x-10 -bottom-2 h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
+                {{-- subtle dashed ring backdrop --}}
+                <div class="absolute inset-6 rounded-full border border-dashed border-navy-200 spin-slow opacity-50" aria-hidden="true"></div>
+
+                <div class="relative float-slow px-2 sm:px-4">
+                    <img src="/images/hand-phone-map.png"
+                         alt="Auxilio User — hand holding a phone displaying the Newark live crime map"
+                         class="relative z-10 w-full h-auto select-none pointer-events-none drop-shadow-[0_30px_60px_rgba(12,17,38,.25)]" />
+                </div>
+
+                {{-- floating stat chips --}}
+                <div class="reveal reveal-delay-3 hidden sm:flex absolute top-6 left-0 z-20 items-center gap-3 rounded-2xl bg-white border border-ink-100 px-4 py-3 shadow-lg">
+                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-gold-100 text-gold-600">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+                    </span>
+                    <div class="text-xs">
+                        <p class="font-semibold text-navy-900">SC · 8 nearby</p>
+                        <p class="text-ink-500">Sexual crimes · last 30 days</p>
+                    </div>
+                </div>
+                <div class="reveal reveal-delay-4 absolute bottom-4 right-0 sm:-right-2 z-20 inline-flex items-center gap-2 rounded-full bg-white border border-ink-100 px-3.5 py-2 shadow-md">
+                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-brand-600 pulse-dot text-brand-600"></span>
+                    <span class="text-[11px] font-semibold tracking-widest text-navy-800">RC · LIVE</span>
+                </div>
+            </div>
         </div>
     </div>
 </section>
