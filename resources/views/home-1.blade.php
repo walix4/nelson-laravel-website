@@ -96,11 +96,10 @@
                 {{-- Soft pedestal --}}
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
-                {{-- Red map-pin pulse: solid → fade → vanish, looped --}}
+                {{-- Red drop-ripple: solid expanding circles, no shadow, slow + cozy --}}
                 <div class="absolute inset-0 grid place-items-center pointer-events-none" aria-hidden="true">
                     <span class="absolute w-[55%] aspect-square rounded-full bg-red-500 map-pulse"></span>
-                    <span class="absolute w-[55%] aspect-square rounded-full bg-red-500 map-pulse" style="animation-delay:.75s"></span>
-                    <span class="absolute w-[55%] aspect-square rounded-full bg-red-500 map-pulse" style="animation-delay:1.5s"></span>
+                    <span class="absolute w-[55%] aspect-square rounded-full bg-red-500 map-pulse" style="animation-delay:1.75s"></span>
                 </div>
 
                 {{-- The hands+phone photo (above radar) --}}

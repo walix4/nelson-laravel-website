@@ -169,16 +169,16 @@
         50%      { filter: drop-shadow(0 0 18px rgba(220,38,38,.55)); opacity: .92; }
     }
 
-    /* ---------- Hero red bubble pulse (map-pin style) ---------- */
+    /* ---------- Hero red drop-ripple (map-pin style) ---------- */
     .map-pulse {
-        animation: mapPulse 2.4s cubic-bezier(.2, .6, .25, 1) infinite;
+        animation: mapPulse 3.5s cubic-bezier(.2, .7, .3, 1) infinite;
         transform-origin: center;
         will-change: transform, opacity;
     }
     @keyframes mapPulse {
-        0%   { transform: scale(.35); opacity: 1; }
-        25%  { opacity: .85; }
-        100% { transform: scale(1.7);  opacity: 0; }
+        0%   { transform: scale(.25); opacity: 1; }
+        70%  { opacity: 1; }
+        100% { transform: scale(1.9);  opacity: 0; }
     }
 
     /* ---------- Submit Emergency super button ---------- */
