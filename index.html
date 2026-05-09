@@ -9,7 +9,7 @@
     <title>Auxilio User — Your Safety, Your Control</title>
     <link rel="icon" type="image/png" href="images/auxilio-user.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="preload" as="style" href="build/assets/app-BStZkABe.css" /><link rel="modulepreload" as="script" href="build/assets/app-CkiRmKRj.js" /><link rel="stylesheet" href="build/assets/app-BStZkABe.css" /><script type="module" src="build/assets/app-CkiRmKRj.js"></script>    <style>
+    <link rel="preload" as="style" href="build/assets/app-B8Zco-Xz.css" /><link rel="modulepreload" as="script" href="build/assets/app-CkiRmKRj.js" /><link rel="stylesheet" href="build/assets/app-B8Zco-Xz.css" /><script type="module" src="build/assets/app-CkiRmKRj.js"></script>    <style>
         [data-nav].is-scrolled {
             box-shadow: 0 8px 24px -12px rgba(116, 25, 33, .45);
         }
@@ -88,7 +88,7 @@
 
         
         <div class="order-2 lg:order-1 lg:col-span-6 relative">
-            <div class="reveal reveal-left relative w-full max-w-[440px] sm:max-w-[480px] lg:max-w-[520px] mx-auto lg:mx-0 lg:mr-auto">
+            <div class="reveal reveal-left relative w-full max-w-[520px] sm:max-w-[600px] lg:max-w-none mx-auto lg:mx-0 lg:-ml-4 xl:-ml-8">
                 
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
@@ -121,11 +121,6 @@
         
         <div class="order-1 lg:order-2 lg:col-span-6 lg:pl-4">
             <div>
-            <div class="reveal stagger flex items-end justify-center lg:justify-start gap-6 sm:gap-10 mb-6 sm:mb-8">
-                <img src="images/auxilio-user.png" alt="Auxilio" class="h-24 sm:h-28 lg:h-32 w-auto drop-shadow-sm float-y" />
-                <img src="images/auxilio-police.png" alt="Auxilio" class="h-24 sm:h-28 lg:h-32 w-auto drop-shadow-sm float-y" style="animation-delay:.4s" />
-            </div>
-
             <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-[64px] leading-[1.04] tracking-tight text-navy-900">
                 Designed for safety of the families,<br/>
                 <span class="text-brand-600">making it accessible</span> for citizens.
@@ -1448,7 +1443,7 @@
         
         <div class="lg:col-span-7">
             <form action="#contact" method="POST" class="reveal reveal-right relative rounded-3xl border border-white/10 bg-navy-900 p-8 lg:p-10 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)]">
-                <input type="hidden" name="_token" value="0OZvpR9rnAgY1b6YKHUNVIQlfN5NaAQAcealnCfh" autocomplete="off">
+                <input type="hidden" name="_token" value="OFv1BtmEPD5Mq1BV3l3Gmfdl1A5h0nFi6NisK9Bb" autocomplete="off">
                 <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.2em] text-gold-300">
                     <span class="grid place-items-center w-7 h-7 rounded-full bg-gold-300/15 ring-1 ring-gold-300/30">
                         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -1497,89 +1492,66 @@
 
 
 <div data-view="crime-map" class="hidden">
-    <section class="relative overflow-hidden bg-white">
-        <div class="pointer-events-none absolute inset-0 -z-10">
-            <div class="absolute -top-24 left-1/3 w-[520px] h-[520px] rounded-full bg-brand-100/40 blur-3xl"></div>
-            <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-gold-100/60 blur-3xl"></div>
+    <section class="relative w-full" style="height: calc(100vh - 78px);">
+        <div id="auxilio-map" class="absolute inset-0 bg-ink-100"></div>
+
+        
+        <div class="absolute top-4 left-4 z-[500] flex items-center gap-2 rounded-full bg-white shadow-lg ring-1 ring-ink-100 pl-2 pr-4 py-1.5">
+            <a data-route href="#/" class="grid place-items-center w-7 h-7 rounded-full bg-ink-100 hover:bg-ink-200 text-navy-900 transition" aria-label="Home">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </a>
+            <span class="text-sm font-bold text-navy-900">Crime Map</span>
+            <span class="text-xs text-ink-500 hidden sm:inline">· Newark, NJ</span>
         </div>
-        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-12 lg:py-16">
-            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
-                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a>
-                <span>›</span>
-                <span class="text-navy-900">Crime Map</span>
-            </div>
-            <h1 class="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
-                Newark <span class="text-brand-600">Crime Map</span>
-            </h1>
-            <p class="mt-4 text-lg text-navy-700/80 max-w-2xl">
-                Pan, zoom, and tap any pin to inspect the verified report — victim profile, location, evidence, and active dispatch.
-            </p>
 
-            <div class="mt-8 flex flex-wrap gap-2 sm:gap-3">
-                <span class="inline-flex items-center gap-2 rounded-full bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> SC · Sexual Crimes</span>
-                <span class="inline-flex items-center gap-2 rounded-full bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-orange-500"></span> RC · Robbery</span>
-                <span class="inline-flex items-center gap-2 rounded-full bg-red-100 text-red-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-red-600"></span> H · Homicide</span>
-                <span class="inline-flex items-center gap-2 rounded-full bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span> PV · Physical Violence</span>
-                <span class="inline-flex items-center gap-2 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> O · Other</span>
-            </div>
+        
+        <div class="absolute top-4 right-4 z-[500] inline-flex items-center gap-2 rounded-full bg-white shadow-lg ring-1 ring-ink-100 px-3 py-1.5">
+            <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-500 pulse-dot text-emerald-500"></span>
+            <span class="text-xs font-semibold tracking-wider uppercase text-navy-900">Live · 15 reports</span>
+        </div>
 
-            <div class="mt-6 relative rounded-3xl overflow-hidden shadow-[0_40px_90px_-30px_rgba(12,17,38,.45)] ring-1 ring-ink-100 bg-white">
-                <div class="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-ink-100 bg-white">
-                    <div class="flex items-center gap-2">
-                        <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-500 pulse-dot text-emerald-500"></span>
-                        <span class="text-xs font-semibold tracking-wider uppercase text-navy-900">Live · 15 active reports</span>
-                    </div>
-                    <div class="hidden sm:flex items-center gap-2 text-xs text-ink-500"><span class="font-mono">Newark · 5 km radius</span></div>
-                </div>
-                <div id="auxilio-map" class="w-full h-[520px] sm:h-[600px] lg:h-[680px] bg-ink-100"></div>
+        
+        <div class="absolute bottom-4 left-4 right-4 z-[500] flex justify-center pointer-events-none">
+            <div class="pointer-events-auto inline-flex flex-wrap gap-2 rounded-2xl bg-white/95 backdrop-blur shadow-lg ring-1 ring-ink-100 p-2">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> SC</span>
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-orange-500"></span> RC</span>
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-red-600"></span> H</span>
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> PV</span>
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> O</span>
             </div>
-            <p class="mt-3 text-xs text-ink-500 text-center">Map © OpenStreetMap contributors · Tap any marker to open the case file.</p>
         </div>
     </section>
 </div>
 
 
 <div data-view="sex-offender-map" class="hidden">
-    <section class="relative overflow-hidden bg-white">
-        <div class="pointer-events-none absolute inset-0 -z-10">
-            <div class="absolute -top-24 right-1/3 w-[520px] h-[520px] rounded-full bg-blue-100/50 blur-3xl"></div>
-            <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-navy-100/60 blur-3xl"></div>
+    <section class="relative w-full" style="height: calc(100vh - 78px);">
+        <div id="auxilio-so-map" class="absolute inset-0 bg-ink-100"></div>
+
+        <div class="absolute top-4 left-4 z-[500] flex items-center gap-2 rounded-full bg-white shadow-lg ring-1 ring-ink-100 pl-2 pr-4 py-1.5">
+            <a data-route href="#/" class="grid place-items-center w-7 h-7 rounded-full bg-ink-100 hover:bg-ink-200 text-navy-900 transition" aria-label="Home">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </a>
+            <span class="text-sm font-bold text-navy-900">Sex Offender Map</span>
         </div>
-        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-12 lg:py-16">
-            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
-                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a>
-                <span>›</span>
-                <span class="text-navy-900">Sex Offender Map</span>
-            </div>
-            <h1 class="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
-                Registered <span class="text-blue-600">Sex Offenders</span>
-            </h1>
-            <p class="mt-4 text-lg text-navy-700/80 max-w-2xl">
-                Every blue pin marks a verified registry entry. Tap a pin to view the offender's profile, conviction, and registered residence.
-            </p>
 
-            <div class="mt-8 flex flex-wrap gap-2 sm:gap-3">
-                <span class="inline-flex items-center gap-2 rounded-full bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Registered Sex Offender</span>
-                <span class="inline-flex items-center gap-2 rounded-full bg-ink-100 text-navy-800 text-xs font-bold px-3 py-1.5">Source · State Registry</span>
-            </div>
+        <div class="absolute top-4 right-4 z-[500] inline-flex items-center gap-2 rounded-full bg-white shadow-lg ring-1 ring-ink-100 px-3 py-1.5">
+            <span class="relative inline-flex w-2 h-2 rounded-full bg-blue-500 pulse-dot text-blue-500"></span>
+            <span class="text-xs font-semibold tracking-wider uppercase text-navy-900">12 registered</span>
+        </div>
 
-            <div class="mt-6 relative rounded-3xl overflow-hidden shadow-[0_40px_90px_-30px_rgba(12,17,38,.45)] ring-1 ring-ink-100 bg-white">
-                <div class="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-ink-100 bg-white">
-                    <div class="flex items-center gap-2">
-                        <span class="relative inline-flex w-2 h-2 rounded-full bg-blue-500 pulse-dot text-blue-500"></span>
-                        <span class="text-xs font-semibold tracking-wider uppercase text-navy-900">12 registered · 5 km radius</span>
-                    </div>
-                    <div class="hidden sm:flex items-center gap-2 text-xs text-ink-500"><span class="font-mono">Refreshed daily</span></div>
-                </div>
-                <div id="auxilio-so-map" class="w-full h-[520px] sm:h-[600px] lg:h-[680px] bg-ink-100"></div>
+        <div class="absolute bottom-4 left-4 right-4 z-[500] flex justify-center pointer-events-none">
+            <div class="pointer-events-auto inline-flex items-center gap-2 rounded-2xl bg-white/95 backdrop-blur shadow-lg ring-1 ring-ink-100 px-3 py-2">
+                <span class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Registered Sex Offender</span>
+                <span class="text-ink-300">·</span>
+                <span class="text-xs text-ink-500">State Registry</span>
             </div>
-            <p class="mt-3 text-xs text-ink-500 text-center">Map © OpenStreetMap contributors · Information shown is illustrative sample data.</p>
         </div>
     </section>
 </div>
 
 
-<div id="incident-modal" class="fixed inset-0 z-[60] hidden">
+<div id="incident-modal" class="fixed inset-0 z-[9999] hidden">
     <div class="absolute inset-0 bg-navy-950/50 backdrop-blur-sm" data-modal-close></div>
     <div class="modal-panel absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl overflow-y-auto">
         <button class="absolute top-4 right-4 z-10 grid place-items-center w-9 h-9 rounded-full bg-white border border-ink-100 shadow hover:bg-ink-50 transition" data-modal-close aria-label="Close">
