@@ -63,7 +63,6 @@
             <li><a data-route href="#/sex-offender-map">Sex Offender Map</a></li>
             <li><a href="#walkthrough">Walkthrough</a></li>
             <li><a href="#voices">Voices</a></li>
-            <li><a href="#contact" class="inline-flex items-center justify-center w-full mt-2 rounded-full bg-brand-600 text-white py-3">Download App</a></li>
         </ul>
     </div>
 </header>
