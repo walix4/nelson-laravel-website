@@ -96,12 +96,10 @@
                 {{-- Soft pedestal --}}
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
-                {{-- Red flashing radar behind photo (rideshare "finding" style) --}}
+                {{-- Red flashing glow behind photo --}}
                 <div class="absolute inset-0 grid place-items-center pointer-events-none" aria-hidden="true">
-                    <span class="absolute w-[60%] aspect-square rounded-full bg-red-500/30 blur-3xl radar-glow"></span>
-                    <span class="absolute w-[58%] aspect-square rounded-full border-[3px] border-red-500/60 radar-ring"></span>
-                    <span class="absolute w-[58%] aspect-square rounded-full border-[3px] border-red-500/60 radar-ring" style="animation-delay:1s"></span>
-                    <span class="absolute w-[58%] aspect-square rounded-full border-[3px] border-red-500/60 radar-ring" style="animation-delay:2s"></span>
+                    <span class="absolute w-[78%] aspect-square rounded-full bg-red-500/40 blur-3xl radar-glow"></span>
+                    <span class="absolute w-[55%] aspect-square rounded-full bg-red-600/35 blur-2xl radar-glow" style="animation-delay:1.2s"></span>
                 </div>
 
                 {{-- The hands+phone photo (above radar) --}}
