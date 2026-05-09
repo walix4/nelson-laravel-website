@@ -1,0 +1,328 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+    /* Auxilio red */
+    --color-brand-50:  #fef2f3;
+    --color-brand-100: #fde3e6;
+    --color-brand-200: #fbccd1;
+    --color-brand-300: #f7a3ac;
+    --color-brand-400: #f06f7c;
+    --color-brand-500: #e44352;
+    --color-brand-600: #c8202f;
+    --color-brand-700: #a81824;
+    --color-brand-800: #8b1822;
+    --color-brand-900: #741921;
+    --color-brand-950: #40070d;
+
+    /* Auxilio navy */
+    --color-navy-50:  #f3f5fb;
+    --color-navy-100: #e3e8f4;
+    --color-navy-200: #c7d1e8;
+    --color-navy-300: #9fafd5;
+    --color-navy-400: #6f86bd;
+    --color-navy-500: #4d65a4;
+    --color-navy-600: #3a4f87;
+    --color-navy-700: #303f6c;
+    --color-navy-800: #283355;
+    --color-navy-900: #1a2548;
+    --color-navy-950: #0c1126;
+
+    /* Auxilio yellow */
+    --color-gold-50:  #fefae8;
+    --color-gold-100: #fdf2c2;
+    --color-gold-200: #fbe388;
+    --color-gold-300: #f8cd45;
+    --color-gold-400: #f4c441;
+    --color-gold-500: #e7a91a;
+    --color-gold-600: #c88012;
+    --color-gold-700: #a05c12;
+    --color-gold-800: #844915;
+    --color-gold-900: #703c17;
+
+    /* neutral ink */
+    --color-ink-50:  #f6f7fa;
+    --color-ink-100: #ebedf3;
+    --color-ink-200: #d4d8e3;
+    --color-ink-300: #aeb6c5;
+    --color-ink-400: #828d9f;
+    --color-ink-500: #636e80;
+    --color-ink-600: #4d5666;
+    --color-ink-700: #404750;
+    --color-ink-800: #383d44;
+    --color-ink-900: #0c0f14;
+    --color-ink-950: #06080b;
+}
+
+@layer base {
+    html { scroll-behavior: smooth; }
+    body {
+        @apply bg-white text-navy-900 antialiased;
+        font-feature-settings: "ss01", "cv11";
+    }
+    ::selection { background: var(--color-brand-600); color: #fff; }
+}
+
+@layer utilities {
+    /* ---------- Reveal-on-scroll variants ---------- */
+    .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1), filter .9s ease;
+        filter: blur(6px);
+        will-change: opacity, transform, filter;
+    }
+    .reveal.is-visible { opacity: 1; transform: none; filter: blur(0); }
+
+    .reveal-left  { transform: translateX(-40px); }
+    .reveal-left.is-visible  { transform: none; }
+    .reveal-right { transform: translateX(40px); }
+    .reveal-right.is-visible { transform: none; }
+    .reveal-zoom  { transform: scale(.94); }
+    .reveal-zoom.is-visible  { transform: scale(1); }
+
+    .reveal-delay-1 { transition-delay: .08s; }
+    .reveal-delay-2 { transition-delay: .18s; }
+    .reveal-delay-3 { transition-delay: .28s; }
+    .reveal-delay-4 { transition-delay: .38s; }
+    .reveal-delay-5 { transition-delay: .48s; }
+    .reveal-delay-6 { transition-delay: .58s; }
+
+    /* Staggered children — apply to a parent and direct children animate sequentially */
+    .stagger > * { opacity: 0; transform: translateY(22px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+    .stagger.is-visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: .05s; }
+    .stagger.is-visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: .12s; }
+    .stagger.is-visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: .19s; }
+    .stagger.is-visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: .26s; }
+    .stagger.is-visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: .33s; }
+    .stagger.is-visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: .40s; }
+    .stagger.is-visible > *:nth-child(7) { opacity: 1; transform: none; transition-delay: .47s; }
+    .stagger.is-visible > *:nth-child(8) { opacity: 1; transform: none; transition-delay: .54s; }
+    .stagger.is-visible > *:nth-child(9) { opacity: 1; transform: none; transition-delay: .61s; }
+
+    /* ---------- Background washes ---------- */
+    .grain {
+        background-image:
+            radial-gradient(ellipse at top right, rgba(200,32,47,.06), transparent 60%),
+            radial-gradient(ellipse at bottom left, rgba(26,37,72,.06), transparent 55%);
+    }
+
+    /* ---------- Marquee ---------- */
+    .marquee-track { animation: marquee 38s linear infinite; }
+    @keyframes marquee {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+    }
+
+    /* ---------- Pulse dot ---------- */
+    .pulse-dot::before {
+        content: "";
+        position: absolute;
+        inset: -6px;
+        border-radius: 9999px;
+        background: currentColor;
+        opacity: .35;
+        animation: pulse 1.6s ease-out infinite;
+    }
+    @keyframes pulse {
+        0%   { transform: scale(.6); opacity: .55; }
+        100% { transform: scale(1.7); opacity: 0; }
+    }
+
+    /* ---------- Float / drift ---------- */
+    .float-slow { animation: float 9s ease-in-out infinite; }
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-12px); }
+    }
+
+    .float-y { animation: floaty 6s ease-in-out infinite; }
+    @keyframes floaty {
+        0%,100% { transform: translateY(0) rotate(0); }
+        50%     { transform: translateY(-8px) rotate(.5deg); }
+    }
+
+    /* ---------- Spin slow (for hero glow ring) ---------- */
+    .spin-slow { animation: spinSlow 36s linear infinite; }
+    @keyframes spinSlow { to { transform: rotate(360deg); } }
+
+    /* ---------- Submit Emergency super button ---------- */
+    .submit-emergency {
+        position: relative;
+        isolation: isolate;
+        background: linear-gradient(135deg, #e44352 0%, #c8202f 60%, #a81824 100%);
+        box-shadow:
+            0 22px 50px -12px rgba(228, 67, 82, .65),
+            inset 0 1px 0 rgba(255,255,255,.3),
+            inset 0 -2px 0 rgba(0,0,0,.25);
+        animation: submit-glow 2.4s ease-in-out infinite;
+    }
+    .submit-emergency::before {
+        content: '';
+        position: absolute;
+        inset: -3px;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, #f4c441, #e44352, #c8202f, #f4c441);
+        background-size: 200% 200%;
+        z-index: -1;
+        animation: submit-border 4s linear infinite;
+        filter: blur(6px);
+        opacity: .7;
+    }
+    .submit-emergency::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 9999px;
+        background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+        background-size: 200% 100%;
+        animation: submit-shine 3s linear infinite;
+        pointer-events: none;
+    }
+    @keyframes submit-glow {
+        0%, 100% { box-shadow: 0 22px 50px -12px rgba(228,67,82,.65), inset 0 1px 0 rgba(255,255,255,.3), inset 0 -2px 0 rgba(0,0,0,.25); }
+        50%      { box-shadow: 0 30px 70px -10px rgba(228,67,82,.85), inset 0 1px 0 rgba(255,255,255,.3), inset 0 -2px 0 rgba(0,0,0,.25); }
+    }
+    @keyframes submit-border {
+        from { background-position: 0 0; }
+        to   { background-position: 200% 0; }
+    }
+    @keyframes submit-shine {
+        from { background-position: 200% 0; }
+        to   { background-position: -200% 0; }
+    }
+    .submit-emergency.is-firing {
+        animation: submit-fire .7s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    @keyframes submit-fire {
+        0%   { transform: scale(1); }
+        40%  { transform: scale(.94); }
+        100% { transform: scale(1.04); box-shadow: 0 0 0 80px rgba(228,67,82,0), inset 0 1px 0 rgba(255,255,255,.3); }
+    }
+    .submit-emergency.is-attention {
+        animation: submit-attention .7s ease-in-out;
+    }
+    @keyframes submit-attention {
+        0%, 100% { transform: translateX(0); }
+        20%      { transform: translateX(-6px) rotate(-1deg); }
+        40%      { transform: translateX(6px)  rotate(1deg);  }
+        60%      { transform: translateX(-4px) rotate(-1deg); }
+        80%      { transform: translateX(4px)  rotate(1deg);  }
+    }
+    [data-submit-hint].is-locked {
+        color: rgba(244, 196, 65, .9);
+    }
+    [data-submit-hint].is-locked span:first-child {
+        background: #f4c441 !important;
+    }
+
+    /* ---------- Live dispatch animations ---------- */
+    .sonar {
+        position: absolute;
+        inset: 50%;
+        width: 0; height: 0;
+        border-radius: 9999px;
+        border: 2px solid rgba(228, 67, 82, .55);
+        transform: translate(-50%, -50%) scale(.4);
+        animation: sonar 2.8s cubic-bezier(.2,.7,.2,1) infinite;
+        pointer-events: none;
+    }
+    .sonar.sonar-2 { animation-delay: .9s; border-color: rgba(244, 196, 65, .55); }
+    .sonar.sonar-3 { animation-delay: 1.8s; border-color: rgba(228, 67, 82, .35); }
+    @keyframes sonar {
+        0%   { width: 0;  height: 0;  opacity: .9; }
+        80%  { opacity: .15; }
+        100% { width: 220px; height: 220px; opacity: 0; }
+    }
+
+    .route-march {
+        stroke-dasharray: 6 6;
+        animation: route-march 1.4s linear infinite;
+    }
+    @keyframes route-march {
+        to { stroke-dashoffset: -24; }
+    }
+
+    .ring-deplete {
+        stroke-dasharray: 276;
+        animation: ring-deplete 35s linear infinite;
+    }
+    @keyframes ring-deplete {
+        from { stroke-dashoffset: 0; }
+        to   { stroke-dashoffset: 276; }
+    }
+
+    .dispatch-pulse {
+        position: relative;
+    }
+    .dispatch-pulse::before {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border-radius: 9999px;
+        box-shadow: 0 0 0 0 rgba(228, 67, 82, .55);
+        animation: dispatch-pulse 1.6s ease-out infinite;
+    }
+    @keyframes dispatch-pulse {
+        0%   { box-shadow: 0 0 0 0 rgba(228, 67, 82, .55); }
+        100% { box-shadow: 0 0 0 16px rgba(228, 67, 82, 0); }
+    }
+
+    /* Rotating status feed — each child fades in, holds, fades out */
+    .feed { position: relative; height: 1.5rem; overflow: hidden; }
+    .feed > * {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        opacity: 0;
+        transform: translateY(8px);
+        animation: feed-cycle var(--feed-duration, 8s) ease-in-out infinite;
+    }
+    .feed > *:nth-child(1) { animation-delay: 0s; }
+    .feed > *:nth-child(2) { animation-delay: 2s; }
+    .feed > *:nth-child(3) { animation-delay: 4s; }
+    .feed > *:nth-child(4) { animation-delay: 6s; }
+    @keyframes feed-cycle {
+        0%, 25%, 100% { opacity: 0; transform: translateY(8px); }
+        3%, 22%       { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Agents sliding in (used inline with delays) */
+    @keyframes agent-slide {
+        from { opacity: 0; transform: translateX(20px) scale(.9); }
+        to   { opacity: 1; transform: translateX(0) scale(1); }
+    }
+    .agent-pop {
+        animation: agent-slide .6s cubic-bezier(.2,.7,.2,1) forwards;
+        opacity: 0;
+    }
+
+    /* ---------- Underline draw on hover ---------- */
+    .nav-link {
+        position: relative;
+    }
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 0; right: 0; bottom: -4px;
+        height: 2px;
+        background: var(--color-brand-600);
+        transform: scaleX(0);
+        transform-origin: right center;
+        transition: transform .35s cubic-bezier(.7,0,.2,1);
+    }
+    .nav-link:hover::after,
+    .nav-link.is-active::after {
+        transform: scaleX(1);
+        transform-origin: left center;
+    }
+}
