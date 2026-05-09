@@ -8,6 +8,7 @@
     <meta property="og:description" content="Designed for safety of the families, making it accessible for citizens." />
     <title>Auxilio User — Your Safety, Your Control</title>
     <link rel="icon" type="image/png" href="/images/auxilio-user.png" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         [data-nav].is-scrolled {
@@ -16,6 +17,12 @@
         [data-menu-panel] { transform: translateY(-12px); opacity: 0; pointer-events: none; transition: .25s ease; }
         [data-menu-panel].is-open { transform: none; opacity: 1; pointer-events: auto; }
         .hero-bg { background: linear-gradient(180deg, #eef2f8 0%, #f4f6fb 50%, #ffffff 100%); }
+        .crime-marker { background:transparent !important; border:0 !important; }
+        .crime-marker .pin { display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:22px; padding:2px 6px; color:#fff; font-weight:800; font-size:11px; border-radius:6px; border:2px solid #fff; box-shadow:0 6px 14px rgba(0,0,0,.28); }
+        .crime-marker .pin:hover { transform: translateY(-2px); }
+        .leaflet-container { font-family: inherit; }
+        #incident-modal[data-open] .modal-panel { transform: translateX(0); }
+        .modal-panel { transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1); }
     </style>
 </head>
 <body class="font-sans">
@@ -32,12 +39,12 @@
             <span class="text-lg font-bold tracking-tight text-white uppercase">AUXILIO</span>
         </a>
 
-        <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-white/90">
-            <li><a data-nav-link href="#features"    class="nav-link hover:text-white transition">Features</a></li>
-            <li><a data-nav-link href="#walkthrough" class="nav-link hover:text-white transition">Walkthrough</a></li>
-            <li><a data-nav-link href="#how"         class="nav-link hover:text-white transition">Report flow</a></li>
-            <li><a data-nav-link href="#dispatch"    class="nav-link hover:text-white transition">Dispatch</a></li>
-            <li><a data-nav-link href="#voices"      class="nav-link hover:text-white transition">Voices</a></li>
+        <ul class="hidden md:flex items-center gap-6 text-sm font-medium text-white/90">
+            <li><a data-route href="#/"                 class="nav-link hover:text-white transition">Home</a></li>
+            <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
+            <li><a data-route href="#/sex-offender-map" class="nav-link hover:text-white transition">Sex Offender Map</a></li>
+            <li><a data-nav-link href="#walkthrough"    class="nav-link hover:text-white transition">Walkthrough</a></li>
+            <li><a data-nav-link href="#voices"         class="nav-link hover:text-white transition">Voices</a></li>
         </ul>
 
         <div class="hidden md:flex items-center gap-3">
@@ -56,18 +63,22 @@
 
     <div id="mobile-menu" data-menu-panel class="md:hidden absolute inset-x-4 top-[72px] rounded-2xl bg-white border border-ink-100 shadow-xl p-6">
         <ul class="flex flex-col gap-4 text-base font-medium text-navy-800">
-            <li><a href="#features">Features</a></li>
+            <li><a data-route href="#/">Home</a></li>
+            <li><a data-route href="#/crime-map">Crime Map</a></li>
+            <li><a data-route href="#/sex-offender-map">Sex Offender Map</a></li>
             <li><a href="#walkthrough">Walkthrough</a></li>
-            <li><a href="#how">Report flow</a></li>
-            <li><a href="#dispatch">Live dispatch</a></li>
             <li><a href="#voices">Voices</a></li>
-            <li><a href="#blog">Resources</a></li>
             <li><a href="#contact" class="inline-flex items-center justify-center w-full mt-2 rounded-full bg-brand-600 text-white py-3">Download App</a></li>
         </ul>
     </div>
 </header>
 
 <main id="top" class="pt-[78px]">
+
+{{-- ============================================================
+     HOME VIEW
+============================================================--}}
+<div data-view="home">
 
 {{-- =======================================================================
      HERO  — matches the reference: phone-in-hands left, dual logos right
@@ -159,103 +170,7 @@
     </div>
 </section>
 
-{{-- =======================================================================
-     LIVE COVERAGE — Newark crime map showcase
-========================================================================--}}
-<section id="coverage" class="relative overflow-hidden bg-white">
-    <div class="pointer-events-none absolute inset-0 -z-10">
-        <div class="absolute -top-24 left-1/3 w-[520px] h-[520px] rounded-full bg-brand-100/40 blur-3xl"></div>
-        <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-gold-100/60 blur-3xl"></div>
-    </div>
-
-    <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-        {{-- LEFT: copy --}}
-        <div class="order-2 lg:order-1 lg:col-span-6">
-            <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-brand-600">Live coverage · Newark, NJ</p>
-            <h2 class="reveal reveal-delay-1 mt-4 font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
-                Every incident, <span class="text-brand-600">on one map.</span>
-            </h2>
-            <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-700/80 leading-relaxed max-w-xl">
-                Verified Super Agents log every report the moment it lands. Sex crimes, robberies, physical violence and more — all pinned to their actual location, refreshed in real time so you always know what's happening around you.
-            </p>
-
-            <ul class="reveal reveal-delay-3 mt-8 grid sm:grid-cols-2 gap-4 max-w-xl">
-                <li class="flex items-start gap-3 rounded-2xl border border-ink-100 bg-white px-4 py-3 shadow-sm">
-                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-gold-100 text-gold-600 shrink-0">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
-                    </span>
-                    <div class="text-sm">
-                        <p class="font-semibold text-navy-900">Verified pins only</p>
-                        <p class="text-ink-500">Every marker traces back to a Super Agent report.</p>
-                    </div>
-                </li>
-                <li class="flex items-start gap-3 rounded-2xl border border-ink-100 bg-white px-4 py-3 shadow-sm">
-                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-red-100 text-red-600 shrink-0">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
-                    </span>
-                    <div class="text-sm">
-                        <p class="font-semibold text-navy-900">Real-time updates</p>
-                        <p class="text-ink-500">New incidents appear within seconds of the report.</p>
-                    </div>
-                </li>
-                <li class="flex items-start gap-3 rounded-2xl border border-ink-100 bg-white px-4 py-3 shadow-sm">
-                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-50 text-brand-600 shrink-0">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
-                    </span>
-                    <div class="text-sm">
-                        <p class="font-semibold text-navy-900">Location-aware alerts</p>
-                        <p class="text-ink-500">Get notified when something happens within your radius.</p>
-                    </div>
-                </li>
-                <li class="flex items-start gap-3 rounded-2xl border border-ink-100 bg-white px-4 py-3 shadow-sm">
-                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 shrink-0">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                    </span>
-                    <div class="text-sm">
-                        <p class="font-semibold text-navy-900">Filter what matters</p>
-                        <p class="text-ink-500">Toggle categories — see only what's relevant to you.</p>
-                    </div>
-                </li>
-            </ul>
-
-            <div class="reveal reveal-delay-4 mt-8 inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[.18em] text-ink-500">
-                <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-500 pulse-dot text-emerald-500"></span>
-                12 active reports · last updated just now
-            </div>
-        </div>
-
-        {{-- RIGHT: photo --}}
-        <div class="order-1 lg:order-2 lg:col-span-6 relative">
-            <div class="reveal reveal-right relative mx-auto w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[560px]">
-                {{-- soft pedestal --}}
-                <div class="absolute inset-x-10 -bottom-2 h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
-                {{-- subtle dashed ring backdrop --}}
-                <div class="absolute inset-6 rounded-full border border-dashed border-navy-200 spin-slow opacity-50" aria-hidden="true"></div>
-
-                <div class="relative float-slow px-2 sm:px-4">
-                    <img src="/images/hand-phone-map.png"
-                         alt="Auxilio User — hand holding a phone displaying the Newark live crime map"
-                         class="relative z-10 w-full h-auto select-none pointer-events-none drop-shadow-[0_30px_60px_rgba(12,17,38,.25)]" />
-                </div>
-
-                {{-- floating stat chips --}}
-                <div class="reveal reveal-delay-3 hidden sm:flex absolute top-6 left-0 z-20 items-center gap-3 rounded-2xl bg-white border border-ink-100 px-4 py-3 shadow-lg">
-                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-gold-100 text-gold-600">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
-                    </span>
-                    <div class="text-xs">
-                        <p class="font-semibold text-navy-900">SC · 8 nearby</p>
-                        <p class="text-ink-500">Sexual crimes · last 30 days</p>
-                    </div>
-                </div>
-                <div class="reveal reveal-delay-4 absolute bottom-4 right-0 sm:-right-2 z-20 inline-flex items-center gap-2 rounded-full bg-white border border-ink-100 px-3.5 py-2 shadow-md">
-                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-brand-600 pulse-dot text-brand-600"></span>
-                    <span class="text-[11px] font-semibold tracking-widest text-navy-800">RC · LIVE</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+{{-- (Crime Map moved to its own view below; see [data-view="crime-map"]) --}}
 
 {{-- =======================================================================
      STATS
@@ -1271,6 +1186,106 @@
     </div>
 </section>
 
+</div>{{-- /data-view=home --}}
+
+{{-- ============================================================
+     CRIME MAP VIEW
+============================================================--}}
+<div data-view="crime-map" class="hidden">
+    <section class="relative overflow-hidden bg-white">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute -top-24 left-1/3 w-[520px] h-[520px] rounded-full bg-brand-100/40 blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-gold-100/60 blur-3xl"></div>
+        </div>
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-12 lg:py-16">
+            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a>
+                <span>›</span>
+                <span class="text-navy-900">Crime Map</span>
+            </div>
+            <h1 class="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+                Newark <span class="text-brand-600">Crime Map</span>
+            </h1>
+            <p class="mt-4 text-lg text-navy-700/80 max-w-2xl">
+                Pan, zoom, and tap any pin to inspect the verified report — victim profile, location, evidence, and active dispatch.
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-2 sm:gap-3">
+                <span class="inline-flex items-center gap-2 rounded-full bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> SC · Sexual Crimes</span>
+                <span class="inline-flex items-center gap-2 rounded-full bg-orange-100 text-orange-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-orange-500"></span> RC · Robbery</span>
+                <span class="inline-flex items-center gap-2 rounded-full bg-red-100 text-red-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-red-600"></span> H · Homicide</span>
+                <span class="inline-flex items-center gap-2 rounded-full bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span> PV · Physical Violence</span>
+                <span class="inline-flex items-center gap-2 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> O · Other</span>
+            </div>
+
+            <div class="mt-6 relative rounded-3xl overflow-hidden shadow-[0_40px_90px_-30px_rgba(12,17,38,.45)] ring-1 ring-ink-100 bg-white">
+                <div class="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-ink-100 bg-white">
+                    <div class="flex items-center gap-2">
+                        <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-500 pulse-dot text-emerald-500"></span>
+                        <span class="text-xs font-semibold tracking-wider uppercase text-navy-900">Live · 15 active reports</span>
+                    </div>
+                    <div class="hidden sm:flex items-center gap-2 text-xs text-ink-500"><span class="font-mono">Newark · 5 km radius</span></div>
+                </div>
+                <div id="auxilio-map" class="w-full h-[520px] sm:h-[600px] lg:h-[680px] bg-ink-100"></div>
+            </div>
+            <p class="mt-3 text-xs text-ink-500 text-center">Map © OpenStreetMap contributors · Tap any marker to open the case file.</p>
+        </div>
+    </section>
+</div>
+
+{{-- ============================================================
+     SEX OFFENDER MAP VIEW
+============================================================--}}
+<div data-view="sex-offender-map" class="hidden">
+    <section class="relative overflow-hidden bg-white">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute -top-24 right-1/3 w-[520px] h-[520px] rounded-full bg-blue-100/50 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-navy-100/60 blur-3xl"></div>
+        </div>
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-12 lg:py-16">
+            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a>
+                <span>›</span>
+                <span class="text-navy-900">Sex Offender Map</span>
+            </div>
+            <h1 class="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+                Registered <span class="text-blue-600">Sex Offenders</span>
+            </h1>
+            <p class="mt-4 text-lg text-navy-700/80 max-w-2xl">
+                Every blue pin marks a verified registry entry. Tap a pin to view the offender's profile, conviction, and registered residence.
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-2 sm:gap-3">
+                <span class="inline-flex items-center gap-2 rounded-full bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Registered Sex Offender</span>
+                <span class="inline-flex items-center gap-2 rounded-full bg-ink-100 text-navy-800 text-xs font-bold px-3 py-1.5">Source · State Registry</span>
+            </div>
+
+            <div class="mt-6 relative rounded-3xl overflow-hidden shadow-[0_40px_90px_-30px_rgba(12,17,38,.45)] ring-1 ring-ink-100 bg-white">
+                <div class="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-ink-100 bg-white">
+                    <div class="flex items-center gap-2">
+                        <span class="relative inline-flex w-2 h-2 rounded-full bg-blue-500 pulse-dot text-blue-500"></span>
+                        <span class="text-xs font-semibold tracking-wider uppercase text-navy-900">12 registered · 5 km radius</span>
+                    </div>
+                    <div class="hidden sm:flex items-center gap-2 text-xs text-ink-500"><span class="font-mono">Refreshed daily</span></div>
+                </div>
+                <div id="auxilio-so-map" class="w-full h-[520px] sm:h-[600px] lg:h-[680px] bg-ink-100"></div>
+            </div>
+            <p class="mt-3 text-xs text-ink-500 text-center">Map © OpenStreetMap contributors · Information shown is illustrative sample data.</p>
+        </div>
+    </section>
+</div>
+
+{{-- Shared Incident / Profile Detail Modal --}}
+<div id="incident-modal" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-navy-950/50 backdrop-blur-sm" data-modal-close></div>
+    <div class="modal-panel absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl overflow-y-auto">
+        <button class="absolute top-4 right-4 z-10 grid place-items-center w-9 h-9 rounded-full bg-white border border-ink-100 shadow hover:bg-ink-50 transition" data-modal-close aria-label="Close">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div class="p-6 pt-14 space-y-6" id="incident-modal-body"></div>
+    </div>
+</div>
+
 </main>
 
 {{-- =======================================================================
@@ -1333,5 +1348,334 @@
     </div>
 </footer>
 
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function(){
+    'use strict';
+
+    var NEWARK = [40.7357, -74.1724];
+
+    var COLORS = { SC:'#f59e0b', RC:'#f97316', H:'#dc2626', PV:'#3b82f6', O:'#10b981' };
+
+    var INCIDENTS = [
+        { id:1, lat:40.7585, lng:-74.1730, type:'SC',
+          person:{name:'Karen Buldier', photo:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&q=80', hair:'Straight', eyes:'Brown', height:"6'4", weight:'123.00', sex:'Male', race:'-'},
+          address:'870 Broadway, Newark, NJ 07104, USA', status:100,
+          agents:['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&q=80','https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=80&h=80&fit=crop&q=80','https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:50,y:14},{x:38,y:30},{x:50,y:36},{x:30,y:78}] },
+        { id:2, lat:40.7510, lng:-74.1690, type:'SC',
+          person:{name:'Sarah Mitchell', photo:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&q=80', hair:'Wavy', eyes:'Hazel', height:"5'6", weight:'135', sex:'Female', race:'White'},
+          address:'45 Mt Prospect Ave, Newark, NJ', status:78,
+          agents:['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&q=80','https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:45,y:18},{x:55,y:32}] },
+        { id:3, lat:40.7460, lng:-74.1810, type:'RC',
+          person:{name:'Marcus Chen', photo:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80', hair:'Black', eyes:'Brown', height:"5'10", weight:'170', sex:'Male', race:'Asian'},
+          address:'Branford Pl, Newark, NJ', status:92,
+          agents:['https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:50,y:38}] },
+        { id:4, lat:40.7395, lng:-74.1750, type:'H',
+          person:{name:'Daniel Rivers', photo:'https://images.unsplash.com/photo-1521119989659-a83eee488004?w=200&h=200&fit=crop&q=80', hair:'Brown', eyes:'Green', height:"6'0", weight:'190', sex:'Male', race:'White'},
+          address:'200 Mulberry St, Newark, NJ', status:100,
+          agents:['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&q=80','https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:50,y:14},{x:50,y:36}] },
+        { id:5, lat:40.7370, lng:-74.1670, type:'SC',
+          person:{name:'Linda Park', photo:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&q=80', hair:'Black', eyes:'Brown', height:"5'4", weight:'120', sex:'Female', race:'Asian'},
+          address:'15 Halsey St, Newark, NJ', status:65,
+          agents:['https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:55,y:22}] },
+        { id:6, lat:40.7300, lng:-74.1670, type:'RC',
+          person:{name:'Tyrone Walker', photo:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&q=80', hair:'Short', eyes:'Brown', height:"6'1", weight:'200', sex:'Male', race:'Black'},
+          address:'Broad St & Market, Newark, NJ', status:88,
+          agents:['https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:60,y:30}] },
+        { id:7, lat:40.7280, lng:-74.1580, type:'H',
+          person:{name:'Robert Greene', photo:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&q=80', hair:'Salt-pepper', eyes:'Blue', height:"5'9", weight:'175', sex:'Male', race:'White'},
+          address:'East Ferry St, Newark, NJ', status:100,
+          agents:['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&q=80','https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=80&h=80&fit=crop&q=80','https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:50,y:14},{x:42,y:36},{x:50,y:60}] },
+        { id:8, lat:40.7240, lng:-74.1720, type:'O',
+          person:{name:'Anonymous', photo:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80', hair:'-', eyes:'-', height:'-', weight:'-', sex:'-', race:'-'},
+          address:'Ironbound District, Newark, NJ', status:42,
+          agents:[], injured:[] },
+        { id:9, lat:40.7200, lng:-74.1450, type:'RC',
+          person:{name:'Jasmine Reed', photo:'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&q=80', hair:'Curly', eyes:'Brown', height:"5'5", weight:'140', sex:'Female', race:'Black'},
+          address:'Wilson Ave, Newark, NJ', status:73,
+          agents:['https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:35,y:50}] },
+        { id:10, lat:40.7155, lng:-74.1610, type:'SC',
+          person:{name:'Emily Hart', photo:'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=200&h=200&fit=crop&q=80', hair:'Blonde', eyes:'Blue', height:"5'7", weight:'125', sex:'Female', race:'White'},
+          address:'Frelinghuysen Ave, Newark, NJ', status:55,
+          agents:['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:48,y:24},{x:52,y:34}] },
+        { id:11, lat:40.7090, lng:-74.1700, type:'RC',
+          person:{name:'Carlos Vega', photo:'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&h=200&fit=crop&q=80', hair:'Black', eyes:'Brown', height:"5'8", weight:'165', sex:'Male', race:'Hispanic'},
+          address:'Weequahic Park, Newark, NJ', status:81,
+          agents:['https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:45,y:42}] },
+        { id:12, lat:40.7020, lng:-74.1620, type:'SC',
+          person:{name:'Rebecca Klein', photo:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&q=80', hair:'Red', eyes:'Green', height:"5'6", weight:'130', sex:'Female', race:'White'},
+          address:'Clinton Ave, Newark, NJ', status:60,
+          agents:['https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:50,y:20}] },
+        { id:13, lat:40.6940, lng:-74.1530, type:'PV',
+          person:{name:'Aisha Brooks', photo:'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&q=80', hair:'Braids', eyes:'Brown', height:"5'5", weight:'135', sex:'Female', race:'Black'},
+          address:'Bayonne Bridge area, NJ', status:48,
+          agents:[], injured:[{x:40,y:30}] },
+        { id:14, lat:40.7480, lng:-74.1620, type:'H',
+          person:{name:'Michael O\'Brien', photo:'https://images.unsplash.com/photo-1500048993953-d23a436266cf?w=200&h=200&fit=crop&q=80', hair:'Brown', eyes:'Hazel', height:"5'11", weight:'180', sex:'Male', race:'White'},
+          address:'McCarter Hwy, Newark, NJ', status:100,
+          agents:['https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&q=80','https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=80&h=80&fit=crop&q=80'],
+          injured:[{x:50,y:14},{x:50,y:36},{x:55,y:60}] },
+        { id:15, lat:40.7530, lng:-74.1855, type:'SC',
+          person:{name:'Olivia Tran', photo:'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=200&h=200&fit=crop&q=80', hair:'Black', eyes:'Brown', height:"5'3", weight:'110', sex:'Female', race:'Asian'},
+          address:'South Orange Ave, Newark, NJ', status:35,
+          agents:[], injured:[{x:50,y:24}] }
+    ];
+
+    var OFFENDERS = [
+        { id:101, lat:40.7515, lng:-74.1740, type:'PV',
+          person:{name:'James K. Holland', photo:'https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?w=200&h=200&fit=crop&q=80', hair:'Bald', eyes:'Blue', height:"5'11", weight:'195', sex:'Male', race:'White'},
+          address:'118 Park Ave, Newark, NJ 07104',
+          offense:'Sexual Assault, 2nd Degree',
+          tier:'Tier 2 · Moderate',
+          registeredSince:'2018-03-15',
+          distance:'0.3 mi' },
+        { id:102, lat:40.7460, lng:-74.1670, type:'PV',
+          person:{name:'Anthony R. Pierce', photo:'https://images.unsplash.com/photo-1463453091185-61582044d556?w=200&h=200&fit=crop&q=80', hair:'Short Brown', eyes:'Hazel', height:"6'0", weight:'205', sex:'Male', race:'White'},
+          address:'42 Halsey St, Newark, NJ 07102',
+          offense:'Endangering the Welfare of a Child',
+          tier:'Tier 1 · Low',
+          registeredSince:'2020-09-02',
+          distance:'0.7 mi' },
+        { id:103, lat:40.7390, lng:-74.1850, type:'PV',
+          person:{name:'David Mosley', photo:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&q=80', hair:'Grey', eyes:'Brown', height:"5'8", weight:'170', sex:'Male', race:'Black'},
+          address:'305 South Orange Ave, Newark, NJ',
+          offense:'Aggravated Sexual Assault',
+          tier:'Tier 3 · High',
+          registeredSince:'2014-11-22',
+          distance:'1.1 mi' },
+        { id:104, lat:40.7330, lng:-74.1620, type:'PV',
+          person:{name:'Steven Garrett', photo:'https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?w=200&h=200&fit=crop&q=80', hair:'Black', eyes:'Brown', height:"5'10", weight:'185', sex:'Male', race:'Black'},
+          address:'90 Market St, Newark, NJ',
+          offense:'Criminal Sexual Contact',
+          tier:'Tier 2 · Moderate',
+          registeredSince:'2019-06-10',
+          distance:'1.4 mi' },
+        { id:105, lat:40.7250, lng:-74.1740, type:'PV',
+          person:{name:'Frank L. Castle', photo:'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&h=200&fit=crop&q=80', hair:'Bald', eyes:'Brown', height:"5'9", weight:'175', sex:'Male', race:'Hispanic'},
+          address:'17 Avon Ave, Newark, NJ',
+          offense:'Lewdness · Repeat',
+          tier:'Tier 1 · Low',
+          registeredSince:'2021-02-08',
+          distance:'1.8 mi' },
+        { id:106, lat:40.7185, lng:-74.1530, type:'PV',
+          person:{name:'Marcus Whitfield', photo:'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=200&h=200&fit=crop&q=80', hair:'Beard', eyes:'Green', height:"6'2", weight:'215', sex:'Male', race:'White'},
+          address:'Wilson Ave & Wilson Pl, Newark, NJ',
+          offense:'Sexual Assault, 1st Degree',
+          tier:'Tier 3 · High',
+          registeredSince:'2011-08-14',
+          distance:'2.3 mi' },
+        { id:107, lat:40.7100, lng:-74.1620, type:'PV',
+          person:{name:'Eric Thompson', photo:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop&q=80', hair:'Brown', eyes:'Brown', height:"5'7", weight:'160', sex:'Male', race:'White'},
+          address:'Frelinghuysen Ave, Newark, NJ',
+          offense:'Endangering Welfare · Internet',
+          tier:'Tier 2 · Moderate',
+          registeredSince:'2017-04-30',
+          distance:'2.6 mi' },
+        { id:108, lat:40.7050, lng:-74.1450, type:'PV',
+          person:{name:'Lawrence Diaz', photo:'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200&h=200&fit=crop&q=80', hair:'Black', eyes:'Brown', height:"5'8", weight:'170', sex:'Male', race:'Hispanic'},
+          address:'Bayonne, NJ (border)',
+          offense:'Sexual Assault, 2nd Degree',
+          tier:'Tier 2 · Moderate',
+          registeredSince:'2016-07-01',
+          distance:'3.1 mi' },
+        { id:109, lat:40.7560, lng:-74.1620, type:'PV',
+          person:{name:'Henry Pollock', photo:'https://images.unsplash.com/photo-1521119989659-a83eee488004?w=200&h=200&fit=crop&q=80', hair:'Greying', eyes:'Blue', height:"5'10", weight:'180', sex:'Male', race:'White'},
+          address:'Mt Prospect Ave, Newark, NJ',
+          offense:'Criminal Sexual Contact · Minor',
+          tier:'Tier 2 · Moderate',
+          registeredSince:'2013-12-19',
+          distance:'0.9 mi' },
+        { id:110, lat:40.7610, lng:-74.1810, type:'PV',
+          person:{name:'Vincent Reilly', photo:'https://images.unsplash.com/photo-1500048993953-d23a436266cf?w=200&h=200&fit=crop&q=80', hair:'Brown', eyes:'Brown', height:"6'1", weight:'200', sex:'Male', race:'White'},
+          address:'Forest Hill, Newark, NJ',
+          offense:'Aggravated Sexual Assault',
+          tier:'Tier 3 · High',
+          registeredSince:'2009-05-25',
+          distance:'1.2 mi' },
+        { id:111, lat:40.7290, lng:-74.1815, type:'PV',
+          person:{name:'Nathan Bridges', photo:'https://images.unsplash.com/photo-1463453091185-61582044d556?w=200&h=200&fit=crop&q=80', hair:'Black', eyes:'Brown', height:"5'9", weight:'175', sex:'Male', race:'Black'},
+          address:'West Side, Newark, NJ',
+          offense:'Endangering the Welfare of a Child',
+          tier:'Tier 1 · Low',
+          registeredSince:'2022-01-12',
+          distance:'1.6 mi' },
+        { id:112, lat:40.7405, lng:-74.1530, type:'PV',
+          person:{name:'Gregory Stone', photo:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&q=80', hair:'Salt-pepper', eyes:'Hazel', height:"5'11", weight:'190', sex:'Male', race:'White'},
+          address:'Ironbound, Newark, NJ',
+          offense:'Sexual Assault, 2nd Degree',
+          tier:'Tier 2 · Moderate',
+          registeredSince:'2015-10-04',
+          distance:'1.9 mi' }
+    ];
+
+    /* ---------- Hash routing ---------- */
+    var currentView = 'home';
+    var crimeMapInited = false;
+    var soMapInited = false;
+    var crimeMap, soMap;
+
+    function getRoute() {
+        var h = (window.location.hash || '').replace(/^#\//, '');
+        if (h === 'crime-map' || h === 'sex-offender-map') return h;
+        return 'home';
+    }
+    function showView(view) {
+        var views = document.querySelectorAll('[data-view]');
+        for (var i = 0; i < views.length; i++) {
+            if (views[i].getAttribute('data-view') === view) views[i].classList.remove('hidden');
+            else views[i].classList.add('hidden');
+        }
+        currentView = view;
+        if (view === 'crime-map') initCrimeMap();
+        if (view === 'sex-offender-map') initSOMap();
+    }
+    function applyRoute() {
+        showView(getRoute());
+        window.scrollTo({top:0, behavior:'instant'});
+    }
+
+    /* ---------- Marker icon ---------- */
+    function makeIcon(type) {
+        return L.divIcon({
+            className: 'crime-marker',
+            html: '<span class="pin" style="background:'+COLORS[type]+';">'+type+'</span>',
+            iconSize: [34, 22],
+            iconAnchor: [17, 11]
+        });
+    }
+
+    /* ---------- Map init ---------- */
+    function initCrimeMap() {
+        if (crimeMapInited) { setTimeout(function(){ crimeMap && crimeMap.invalidateSize(); }, 100); return; }
+        if (typeof L === 'undefined') { setTimeout(initCrimeMap, 100); return; }
+        var el = document.getElementById('auxilio-map');
+        if (!el) return;
+        crimeMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:'© OpenStreetMap', maxZoom: 19 }).addTo(crimeMap);
+        L.circle(NEWARK, { radius: 5000, color:'#0f172a', fillColor:'#0f172a', weight:1.5, opacity:.45, fillOpacity:.04, dashArray:'6 6' }).addTo(crimeMap);
+        INCIDENTS.forEach(function(inc){
+            var m = L.marker([inc.lat, inc.lng], { icon: makeIcon(inc.type) }).addTo(crimeMap);
+            m.on('click', function(){ openIncident(inc, 'crime'); });
+        });
+        crimeMapInited = true;
+        setTimeout(function(){ crimeMap.invalidateSize(); }, 100);
+    }
+    function initSOMap() {
+        if (soMapInited) { setTimeout(function(){ soMap && soMap.invalidateSize(); }, 100); return; }
+        if (typeof L === 'undefined') { setTimeout(initSOMap, 100); return; }
+        var el = document.getElementById('auxilio-so-map');
+        if (!el) return;
+        soMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:'© OpenStreetMap', maxZoom: 19 }).addTo(soMap);
+        L.circle(NEWARK, { radius: 5000, color:'#1d4ed8', fillColor:'#1d4ed8', weight:1.5, opacity:.5, fillOpacity:.04, dashArray:'6 6' }).addTo(soMap);
+        OFFENDERS.forEach(function(off){
+            var m = L.marker([off.lat, off.lng], { icon: makeIcon('PV') }).addTo(soMap);
+            m.on('click', function(){ openIncident(off, 'offender'); });
+        });
+        soMapInited = true;
+        setTimeout(function(){ soMap.invalidateSize(); }, 100);
+    }
+
+    /* ---------- Modal ---------- */
+    function openIncident(inc, mode) {
+        var p = inc.person;
+        var body = document.getElementById('incident-modal-body');
+        if (!body) return;
+        var html = '';
+        html += '<div class="flex items-start gap-4 rounded-2xl border border-ink-100 bg-white p-4 shadow-sm">';
+        html += '  <img src="'+p.photo+'" alt="'+p.name+'" class="w-20 h-20 rounded-xl object-cover" loading="lazy" />';
+        html += '  <div class="text-sm leading-relaxed flex-1 min-w-0">';
+        html += '    <p class="font-bold text-navy-900 flex items-center gap-1.5">'+p.name+' <span class="inline-flex w-2 h-2 rounded-full bg-blue-500"></span></p>';
+        html += '    <p class="text-ink-500 mt-1.5">Hair : <span class="text-navy-900 font-medium">'+p.hair+'</span> &nbsp; Eyes : <span class="text-navy-900 font-medium">'+p.eyes+'</span></p>';
+        html += '    <p class="text-ink-500">Height : <span class="text-navy-900 font-medium">'+p.height+'</span> &nbsp; Weight : <span class="text-navy-900 font-medium">'+p.weight+'</span></p>';
+        html += '    <p class="text-ink-500">Sex : <span class="text-navy-900 font-medium">'+p.sex+'</span> &nbsp; Race : <span class="text-navy-900 font-medium">'+p.race+'</span></p>';
+        html += '  </div>';
+        html += '</div>';
+        html += '<div><p class="text-xs font-semibold text-navy-900">Location <span class="text-red-500">*</span></p>';
+        html += '<div class="mt-2 rounded-xl border border-ink-100 bg-white px-4 py-3 text-sm text-navy-800">'+inc.address+'</div></div>';
+
+        if (mode === 'offender') {
+            html += '<div class="grid grid-cols-2 gap-3 text-sm">';
+            html += '  <div class="rounded-xl border border-ink-100 bg-white p-3"><p class="text-[10px] font-bold uppercase tracking-wider text-ink-500">Offense</p><p class="mt-1 text-navy-900 font-medium">'+inc.offense+'</p></div>';
+            html += '  <div class="rounded-xl border border-ink-100 bg-white p-3"><p class="text-[10px] font-bold uppercase tracking-wider text-ink-500">Risk Tier</p><p class="mt-1 text-navy-900 font-medium">'+inc.tier+'</p></div>';
+            html += '  <div class="rounded-xl border border-ink-100 bg-white p-3"><p class="text-[10px] font-bold uppercase tracking-wider text-ink-500">Registered Since</p><p class="mt-1 text-navy-900 font-medium">'+inc.registeredSince+'</p></div>';
+            html += '  <div class="rounded-xl border border-ink-100 bg-white p-3"><p class="text-[10px] font-bold uppercase tracking-wider text-ink-500">Distance</p><p class="mt-1 text-navy-900 font-medium">'+inc.distance+'</p></div>';
+            html += '</div>';
+        } else {
+            html += '<div><p class="text-xs font-semibold text-navy-900">Emergency Location</p><div class="mt-2 grid grid-cols-4 gap-2">';
+            html += '<div class="aspect-square rounded-lg bg-gradient-to-br from-ink-100 to-ink-200 grid place-items-center text-ink-400"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16l4-4 5 5 4-4 5 5M21 8a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>';
+            html += '<div class="aspect-square rounded-lg bg-gradient-to-br from-ink-100 to-ink-200"></div>';
+            html += '<div class="aspect-square rounded-lg bg-gradient-to-br from-ink-100 to-ink-200"></div>';
+            html += '<div class="aspect-square rounded-lg bg-gradient-to-br from-ink-100 to-ink-200"></div>';
+            html += '</div></div>';
+
+            html += '<div><div class="flex items-center justify-between text-xs"><span class="font-semibold text-navy-900 uppercase tracking-wider">Status</span><span class="text-ink-500">completion</span><span class="font-bold text-emerald-600">'+inc.status+'%</span></div>';
+            html += '<div class="mt-2 h-2 rounded-full bg-ink-100 overflow-hidden"><div class="h-full bg-emerald-500 transition-all" style="width:'+inc.status+'%"></div></div></div>';
+
+            html += '<div><p class="text-xs font-semibold text-navy-900 uppercase tracking-wider">Agent Assist</p><div class="mt-2 flex items-center -space-x-2">';
+            (inc.agents || []).forEach(function(ph){ html += '<img src="'+ph+'" class="w-9 h-9 rounded-full border-2 border-white object-cover" loading="lazy" />'; });
+            html += '<span class="ml-3 grid place-items-center w-9 h-9 rounded-full bg-ink-100 text-xs font-bold text-navy-900">+3</span></div></div>';
+
+            html += '<div><p class="text-xs font-semibold text-navy-900 uppercase tracking-wider">Incident Photos</p><div class="mt-2 grid grid-cols-4 gap-2">';
+            for (var i = 0; i < 4; i++) html += '<div class="aspect-square rounded-lg bg-gradient-to-br from-ink-100 to-ink-200 grid place-items-center text-ink-400"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16l4-4 5 5 4-4 5 5M21 8a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>';
+            html += '</div></div>';
+
+            html += '<div><p class="text-center text-sm font-semibold text-navy-900">Victim Injured</p>';
+            html += '<div class="mt-3 relative mx-auto w-40 h-72">';
+            html += '<svg viewBox="0 0 100 200" class="w-full h-full text-ink-200" fill="currentColor">';
+            html += '<circle cx="50" cy="15" r="11"/><path d="M30 28 Q50 24 70 28 L72 70 L60 72 L60 130 L62 188 L52 188 L48 132 L48 188 L38 188 L40 130 L40 72 L28 70 Z"/>';
+            html += '<rect x="18" y="32" width="14" height="46" rx="6"/><rect x="68" y="32" width="14" height="46" rx="6"/>';
+            html += '</svg>';
+            (inc.injured || []).forEach(function(d){ html += '<span class="absolute w-3 h-3 rounded-full bg-red-500 ring-2 ring-white shadow-lg" style="left:calc('+d.x+'% - 6px);top:calc('+d.y+'% - 6px);"></span>'; });
+            html += '</div></div>';
+        }
+
+        body.innerHTML = html;
+        var modal = document.getElementById('incident-modal');
+        modal.classList.remove('hidden');
+        requestAnimationFrame(function(){ modal.setAttribute('data-open',''); });
+        document.body.style.overflow = 'hidden';
+    }
+    function closeIncident() {
+        var modal = document.getElementById('incident-modal');
+        modal.removeAttribute('data-open');
+        setTimeout(function(){ modal.classList.add('hidden'); }, 350);
+        document.body.style.overflow = '';
+    }
+
+    /* ---------- Wire it up ---------- */
+    document.addEventListener('click', function(e){
+        var t = e.target.closest('[data-modal-close]');
+        if (t) { e.preventDefault(); closeIncident(); return; }
+        var a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+        var href = a.getAttribute('href');
+        if (href === '#' || href.indexOf('#/') === 0 || href === '#top') return;
+        if (currentView !== 'home') {
+            e.preventDefault();
+            if (window.location.hash !== '#/') window.location.hash = '#/';
+            else showView('home');
+            setTimeout(function(){
+                var tgt = document.querySelector(href);
+                if (tgt) tgt.scrollIntoView({ behavior:'smooth' });
+            }, 80);
+        }
+    });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeIncident(); });
+    window.addEventListener('hashchange', applyRoute);
+    document.addEventListener('DOMContentLoaded', applyRoute);
+})();
+</script>
 </body>
 </html>
