@@ -49,13 +49,6 @@
             <li><a data-nav-link href="#voices"         class="nav-link hover:text-white transition">Voices</a></li>
         </ul>
 
-        <div class="hidden md:flex items-center gap-3">
-            <a href="tel:+17045550127" class="text-sm font-medium text-white/90 hover:text-white transition">(704) 555-0127</a>
-            <a href="#contact" class="inline-flex items-center gap-1.5 rounded-full bg-white text-brand-700 text-sm font-semibold px-4 py-2.5 hover:bg-navy-900 hover:text-white transition-colors">
-                Download App
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6" /></svg>
-            </a>
-        </div>
 
         <button data-menu-btn aria-expanded="false" aria-controls="mobile-menu" class="md:hidden relative w-10 h-10 grid place-items-center rounded-lg hover:bg-white/10 transition">
             <span class="sr-only">Toggle menu</span>
