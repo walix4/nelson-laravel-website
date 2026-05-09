@@ -43,7 +43,7 @@
             </a>
         </div>
 
-        <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-white/90 shrink-0">
+        <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-white/90 shrink-0 whitespace-nowrap">
             <li><a data-route href="#/"                 class="nav-link hover:text-white transition">Home</a></li>
             <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
             <li><a data-route href="#/sex-offender-map" class="nav-link hover:text-white transition">Sex Offender Map</a></li>
@@ -123,7 +123,7 @@
         {{-- RIGHT: heading + CTAs --}}
         <div class="order-1 lg:order-2 lg:col-span-5 lg:pl-2">
             <div>
-            <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-[60px] leading-[1.06] tracking-tight text-navy-900">
+            <h1 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl lg:text-[40px] xl:text-[48px] leading-[1.1] tracking-tight text-navy-900">
                 Designed for<br/>
                 safety of the families,<br/>
                 <span class="text-brand-600">making it accessible</span><br/>
