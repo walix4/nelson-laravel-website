@@ -21,8 +21,10 @@
         .crime-marker .pin { display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:22px; padding:2px 6px; color:#fff; font-weight:800; font-size:11px; border-radius:6px; border:2px solid #fff; box-shadow:0 6px 14px rgba(0,0,0,.28); }
         .crime-marker .pin:hover { transform: translateY(-2px); }
         .leaflet-container { font-family: inherit; }
+        #incident-modal { transition: opacity .25s ease; opacity: 0; }
+        #incident-modal[data-open] { opacity: 1; }
         #incident-modal[data-open] .modal-panel { transform: translateX(0); }
-        .modal-panel { transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1); }
+        .modal-panel { transform: translateX(100%); transition: transform .45s cubic-bezier(.16,1,.3,1); }
     </style>
 </head>
 <body class="font-sans">
@@ -93,9 +95,9 @@
 
     <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-10 sm:pt-14 lg:pt-20 pb-16 sm:pb-20 lg:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
 
-        {{-- LEFT: hands + phone photograph (left-aligned in column) --}}
-        <div class="order-2 lg:order-1 lg:col-span-6 relative">
-            <div class="reveal reveal-left relative w-full max-w-[520px] sm:max-w-[600px] lg:max-w-none mx-auto lg:mx-0 lg:-ml-4 xl:-ml-8">
+        {{-- LEFT: hands + phone photograph (bigger + left-bleed) --}}
+        <div class="order-2 lg:order-1 lg:col-span-7 relative">
+            <div class="reveal reveal-left relative w-full max-w-[560px] sm:max-w-[680px] lg:max-w-none mx-auto lg:mx-0 lg:-ml-16 xl:-ml-32">
                 {{-- Soft pedestal --}}
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
@@ -124,7 +126,7 @@
         </div>
 
         {{-- RIGHT: heading + CTAs --}}
-        <div class="order-1 lg:order-2 lg:col-span-6 lg:pl-4">
+        <div class="order-1 lg:order-2 lg:col-span-5 lg:pl-2">
             <div>
             <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-[64px] leading-[1.04] tracking-tight text-navy-900">
                 Designed for safety of the families,<br/>
@@ -1329,6 +1331,43 @@
 
     var COLORS = { SC:'#f59e0b', RC:'#f97316', H:'#dc2626', PV:'#3b82f6', O:'#10b981' };
 
+    /* Stock-photo pools (Unsplash) — sized 240x240 thumbnails */
+    var EMERGENCY_PHOTOS = [
+        'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=240&h=240&fit=crop&q=80'
+    ];
+    var INCIDENT_PHOTOS = [
+        'https://images.unsplash.com/photo-1517490232338-06b912a786b5?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1542435503-956c469947f6?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1505066836950-2bea3df3a8d5?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1582719188393-bb71ca45dbb9?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1551898284-15bb6cea7820?w=240&h=240&fit=crop&q=80',
+        'https://images.unsplash.com/photo-1532635241-17e820acc59f?w=240&h=240&fit=crop&q=80'
+    ];
+    function pickPhotos(pool, n, seed) {
+        var out = [];
+        for (var i = 0; i < n; i++) out.push(pool[(seed + i) % pool.length]);
+        return out;
+    }
+    function photoGrid(photos) {
+        var h = '<div class="grid grid-cols-4 gap-2 mt-2">';
+        for (var i = 0; i < photos.length; i++) {
+            h += '<a href="'+photos[i]+'" target="_blank" rel="noopener" class="group block aspect-square rounded-lg overflow-hidden ring-1 ring-ink-100 hover:ring-brand-500 transition">'
+              +  '<img src="'+photos[i]+'" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />'
+              +  '</a>';
+        }
+        h += '</div>';
+        return h;
+    }
+
     var INCIDENTS = [
         { id:1, lat:40.7585, lng:-74.1730, type:'SC',
           person:{name:'Karen Buldier', photo:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&q=80', hair:'Straight', eyes:'Brown', height:"6'4", weight:'123.00', sex:'Male', race:'-'},
@@ -1533,8 +1572,11 @@
         if (typeof L === 'undefined') { setTimeout(initCrimeMap, 100); return; }
         var el = document.getElementById('auxilio-map');
         if (!el) return;
-        crimeMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:'© OpenStreetMap', maxZoom: 19 }).addTo(crimeMap);
+        crimeMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 11);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution:'© OpenStreetMap contributors © CARTO',
+            subdomains:'abcd', maxZoom: 19
+        }).addTo(crimeMap);
         L.circle(NEWARK, { radius: 5000, color:'#0f172a', fillColor:'#0f172a', weight:1.5, opacity:.45, fillOpacity:.04, dashArray:'6 6' }).addTo(crimeMap);
         INCIDENTS.forEach(function(inc){
             var m = L.marker([inc.lat, inc.lng], { icon: makeIcon(inc.type) }).addTo(crimeMap);
@@ -1548,8 +1590,11 @@
         if (typeof L === 'undefined') { setTimeout(initSOMap, 100); return; }
         var el = document.getElementById('auxilio-so-map');
         if (!el) return;
-        soMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 12);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:'© OpenStreetMap', maxZoom: 19 }).addTo(soMap);
+        soMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 11);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution:'© OpenStreetMap contributors © CARTO',
+            subdomains:'abcd', maxZoom: 19
+        }).addTo(soMap);
         L.circle(NEWARK, { radius: 5000, color:'#1d4ed8', fillColor:'#1d4ed8', weight:1.5, opacity:.5, fillOpacity:.04, dashArray:'6 6' }).addTo(soMap);
         OFFENDERS.forEach(function(off){
             var m = L.marker([off.lat, off.lng], { icon: makeIcon('PV') }).addTo(soMap);
@@ -1577,6 +1622,10 @@
         html += '<div><p class="text-xs font-semibold text-navy-900">Location <span class="text-red-500">*</span></p>';
         html += '<div class="mt-2 rounded-xl border border-ink-100 bg-white px-4 py-3 text-sm text-navy-800">'+inc.address+'</div></div>';
 
+        var seed = inc.id || 1;
+        var locPhotos = pickPhotos(EMERGENCY_PHOTOS, 4, seed);
+        var evPhotos = pickPhotos(INCIDENT_PHOTOS, 4, seed + 3);
+
         if (mode === 'offender') {
             html += '<div class="grid grid-cols-2 gap-3 text-sm">';
             html += '  <div class="rounded-xl border border-ink-100 bg-white p-3"><p class="text-[10px] font-bold uppercase tracking-wider text-ink-500">Offense</p><p class="mt-1 text-navy-900 font-medium">'+inc.offense+'</p></div>';
@@ -1584,13 +1633,10 @@
             html += '  <div class="rounded-xl border border-ink-100 bg-white p-3"><p class="text-[10px] font-bold uppercase tracking-wider text-ink-500">Registered Since</p><p class="mt-1 text-navy-900 font-medium">'+inc.registeredSince+'</p></div>';
             html += '  <div class="rounded-xl border border-ink-100 bg-white p-3"><p class="text-[10px] font-bold uppercase tracking-wider text-ink-500">Distance</p><p class="mt-1 text-navy-900 font-medium">'+inc.distance+'</p></div>';
             html += '</div>';
+            html += '<div><p class="text-xs font-semibold text-navy-900">Registered Residence</p>'+photoGrid(locPhotos)+'</div>';
+            html += '<div><p class="text-xs font-semibold text-navy-900 uppercase tracking-wider">Background</p>'+photoGrid(evPhotos)+'</div>';
         } else {
-            html += '<div><p class="text-xs font-semibold text-navy-900">Emergency Location</p><div class="mt-2 grid grid-cols-4 gap-2">';
-            html += '<div class="aspect-square rounded-lg bg-gradient-to-br from-ink-100 to-ink-200 grid place-items-center text-ink-400"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16l4-4 5 5 4-4 5 5M21 8a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>';
-            html += '<div class="aspect-square rounded-lg bg-gradient-to-br from-ink-100 to-ink-200"></div>';
-            html += '<div class="aspect-square rounded-lg bg-gradient-to-br from-ink-100 to-ink-200"></div>';
-            html += '<div class="aspect-square rounded-lg bg-gradient-to-br from-ink-100 to-ink-200"></div>';
-            html += '</div></div>';
+            html += '<div><p class="text-xs font-semibold text-navy-900">Emergency Location</p>'+photoGrid(locPhotos)+'</div>';
 
             html += '<div><div class="flex items-center justify-between text-xs"><span class="font-semibold text-navy-900 uppercase tracking-wider">Status</span><span class="text-ink-500">completion</span><span class="font-bold text-emerald-600">'+inc.status+'%</span></div>';
             html += '<div class="mt-2 h-2 rounded-full bg-ink-100 overflow-hidden"><div class="h-full bg-emerald-500 transition-all" style="width:'+inc.status+'%"></div></div></div>';
@@ -1599,17 +1645,20 @@
             (inc.agents || []).forEach(function(ph){ html += '<img src="'+ph+'" class="w-9 h-9 rounded-full border-2 border-white object-cover" loading="lazy" />'; });
             html += '<span class="ml-3 grid place-items-center w-9 h-9 rounded-full bg-ink-100 text-xs font-bold text-navy-900">+3</span></div></div>';
 
-            html += '<div><p class="text-xs font-semibold text-navy-900 uppercase tracking-wider">Incident Photos</p><div class="mt-2 grid grid-cols-4 gap-2">';
-            for (var i = 0; i < 4; i++) html += '<div class="aspect-square rounded-lg bg-gradient-to-br from-ink-100 to-ink-200 grid place-items-center text-ink-400"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16l4-4 5 5 4-4 5 5M21 8a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>';
-            html += '</div></div>';
+            html += '<div><p class="text-xs font-semibold text-navy-900 uppercase tracking-wider">Incident Photos</p>'+photoGrid(evPhotos)+'</div>';
 
             html += '<div><p class="text-center text-sm font-semibold text-navy-900">Victim Injured</p>';
-            html += '<div class="mt-3 relative mx-auto w-40 h-72">';
-            html += '<svg viewBox="0 0 100 200" class="w-full h-full text-ink-200" fill="currentColor">';
-            html += '<circle cx="50" cy="15" r="11"/><path d="M30 28 Q50 24 70 28 L72 70 L60 72 L60 130 L62 188 L52 188 L48 132 L48 188 L38 188 L40 130 L40 72 L28 70 Z"/>';
-            html += '<rect x="18" y="32" width="14" height="46" rx="6"/><rect x="68" y="32" width="14" height="46" rx="6"/>';
+            html += '<div class="mt-3 relative mx-auto w-36 h-80">';
+            html += '<svg viewBox="0 0 100 230" class="w-full h-full text-ink-300" fill="currentColor" preserveAspectRatio="xMidYMid meet">';
+            html += '<ellipse cx="50" cy="22" rx="15" ry="17"/>';
+            html += '<rect x="44" y="36" width="12" height="8"/>';
+            html += '<path d="M 28 50 Q 50 40 72 50 L 84 60 Q 88 64 84 70 L 76 130 L 24 130 L 16 70 Q 12 64 16 60 Z"/>';
+            html += '<path d="M 16 60 Q 8 62 6 70 L 4 138 Q 4 148 14 148 Q 22 148 24 138 L 28 76 Z"/>';
+            html += '<path d="M 84 60 Q 92 62 94 70 L 96 138 Q 96 148 86 148 Q 78 148 76 138 L 72 76 Z"/>';
+            html += '<path d="M 24 130 L 50 150 L 48 220 Q 48 226 42 226 L 28 226 Q 22 226 22 220 L 22 150 Z"/>';
+            html += '<path d="M 76 130 L 50 150 L 52 220 Q 52 226 58 226 L 72 226 Q 78 226 78 220 L 78 150 Z"/>';
             html += '</svg>';
-            (inc.injured || []).forEach(function(d){ html += '<span class="absolute w-3 h-3 rounded-full bg-red-500 ring-2 ring-white shadow-lg" style="left:calc('+d.x+'% - 6px);top:calc('+d.y+'% - 6px);"></span>'; });
+            (inc.injured || []).forEach(function(d){ html += '<span class="absolute w-3.5 h-3.5 rounded-full bg-red-500 ring-2 ring-white shadow-lg sos-glow" style="left:calc('+d.x+'% - 7px);top:calc('+d.y+'% - 7px);"></span>'; });
             html += '</div></div>';
         }
 
