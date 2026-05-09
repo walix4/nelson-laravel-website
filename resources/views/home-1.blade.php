@@ -26,10 +26,10 @@
 <header data-nav class="fixed inset-x-0 top-0 z-50 bg-brand-600 text-white shadow-md">
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center justify-between px-5 sm:px-8">
         <a href="#top" class="flex items-center gap-3 group">
-            <span class="grid place-items-center h-11 w-11 rounded-xl bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
+            <span class="grid place-items-center h-11 w-11 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
                 <img src="/images/auxilio-user.png" alt="" class="h-9 w-auto" />
             </span>
-            <span class="text-lg font-semibold tracking-tight text-white">Auxilio <span class="font-bold">User</span></span>
+            <span class="text-lg font-bold tracking-tight text-white uppercase">AUXILIO</span>
         </a>
 
         <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-white/90">
@@ -122,15 +122,9 @@
             </div>
         </div>
 
-        {{-- RIGHT: logos + heading + CTAs --}}
+        {{-- RIGHT: heading + CTAs --}}
         <div class="lg:col-span-6 lg:pl-6">
-            <div class="reveal stagger flex items-center gap-5 sm:gap-7">
-                <img src="/images/auxilio-user.png"   alt="Auxilio User"   class="h-20 sm:h-24 w-auto drop-shadow-sm float-y" />
-                <img src="/images/auxilio-police.png" alt="Auxilio Police" class="h-20 sm:h-24 w-auto drop-shadow-sm float-y" style="animation-delay:.4s" />
-                <span class="hidden sm:inline-flex items-center text-[10px] font-mono uppercase tracking-[.18em] text-ink-500 border border-ink-200 rounded-full px-3 py-1">User · Police</span>
-            </div>
-
-            <h1 class="reveal reveal-delay-1 mt-8 font-display text-4xl sm:text-5xl lg:text-[64px] leading-[1.04] tracking-tight text-navy-900">
+            <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-[64px] leading-[1.04] tracking-tight text-navy-900">
                 Designed for safety of the families,<br/>
                 <span class="text-brand-600">making it accessible</span> for citizens.
             </h1>
@@ -1192,10 +1186,10 @@
         <div class="grid lg:grid-cols-12 gap-12">
             <div class="lg:col-span-5">
                 <a href="#top" class="inline-flex items-center gap-3 group">
-                    <span class="grid place-items-center h-12 w-12 rounded-xl bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
+                    <span class="grid place-items-center h-12 w-12 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
                         <img src="/images/auxilio-user.png" alt="" class="h-10 w-auto" />
                     </span>
-                    <span class="text-xl font-semibold tracking-tight text-white">Auxilio <span class="font-bold text-brand-400">User</span></span>
+                    <span class="text-xl font-bold tracking-tight text-white uppercase">AUXILIO</span>
                 </a>
                 <p class="mt-5 max-w-md text-navy-300/80 leading-relaxed">
                     Real-time alerts, one-tap SOS, verified Super Agents, and live case tracking — Auxilio User is a personal safety companion built for the people you love.
