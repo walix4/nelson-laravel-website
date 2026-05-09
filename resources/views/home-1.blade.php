@@ -33,15 +33,17 @@
      NAV
 ========================================================================--}}
 <header data-nav class="fixed inset-x-0 top-0 z-50 bg-brand-600 text-white shadow-md">
-    <nav class="mx-auto flex h-[78px] max-w-7xl items-center justify-between px-5 sm:px-8">
-        <a href="#top" class="flex items-center gap-3 group">
-            <span class="grid place-items-center h-11 w-11 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
-                <img src="/images/auxilio-user.png" alt="" class="h-9 w-auto" />
-            </span>
-            <span class="text-lg font-bold tracking-tight text-white uppercase">AUXILIO</span>
-        </a>
+    <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
+        <div class="flex-1 flex items-center">
+            <a href="#top" class="flex items-center gap-3 group">
+                <span class="grid place-items-center h-11 w-11 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
+                    <img src="/images/auxilio-user.png" alt="" class="h-9 w-auto" />
+                </span>
+                <span class="text-lg font-bold tracking-tight text-white uppercase">AUXILIO</span>
+            </a>
+        </div>
 
-        <ul class="hidden md:flex items-center gap-6 text-sm font-medium text-white/90">
+        <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-white/90 shrink-0">
             <li><a data-route href="#/"                 class="nav-link hover:text-white transition">Home</a></li>
             <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
             <li><a data-route href="#/sex-offender-map" class="nav-link hover:text-white transition">Sex Offender Map</a></li>
@@ -49,11 +51,12 @@
             <li><a data-nav-link href="#voices"         class="nav-link hover:text-white transition">Voices</a></li>
         </ul>
 
-
-        <button data-menu-btn aria-expanded="false" aria-controls="mobile-menu" class="md:hidden relative w-10 h-10 grid place-items-center rounded-lg hover:bg-white/10 transition">
-            <span class="sr-only">Toggle menu</span>
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
-        </button>
+        <div class="flex-1 flex items-center justify-end">
+            <button data-menu-btn aria-expanded="false" aria-controls="mobile-menu" class="md:hidden relative w-10 h-10 grid place-items-center rounded-lg hover:bg-white/10 transition">
+                <span class="sr-only">Toggle menu</span>
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
+            </button>
+        </div>
     </nav>
 
     <div id="mobile-menu" data-menu-panel class="md:hidden absolute inset-x-4 top-[72px] rounded-2xl bg-white border border-ink-100 shadow-xl p-6">
