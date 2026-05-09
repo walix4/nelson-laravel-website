@@ -92,7 +92,7 @@
 
         {{-- LEFT: hands + phone photograph (bigger + left-bleed) --}}
         <div class="order-2 lg:order-1 lg:col-span-7 relative">
-            <div class="reveal reveal-left relative w-full max-w-[560px] sm:max-w-[680px] lg:max-w-none mx-auto lg:mx-0 lg:-ml-16 xl:-ml-32">
+            <div class="reveal reveal-left relative w-full max-w-[560px] sm:max-w-[680px] lg:max-w-none mx-auto lg:mx-0 lg:-ml-24 xl:-ml-48">
                 {{-- Soft pedestal --}}
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
@@ -123,9 +123,11 @@
         {{-- RIGHT: heading + CTAs --}}
         <div class="order-1 lg:order-2 lg:col-span-5 lg:pl-2">
             <div>
-            <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-[64px] leading-[1.04] tracking-tight text-navy-900">
-                Designed for safety of the families,<br/>
-                <span class="text-brand-600">making it accessible</span> for citizens.
+            <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-[60px] leading-[1.06] tracking-tight text-navy-900">
+                Designed for<br/>
+                safety of the families,<br/>
+                <span class="text-brand-600">making it accessible</span><br/>
+                for citizens.
             </h1>
 
             <p class="reveal reveal-delay-2 mt-6 max-w-xl text-lg text-navy-700/80 leading-relaxed">
