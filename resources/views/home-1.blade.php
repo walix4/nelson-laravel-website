@@ -80,11 +80,11 @@
         <div data-parallax="0.12" class="absolute bottom-0 right-1/3 w-[360px] h-[360px] rounded-full bg-gold-100/60 blur-3xl"></div>
     </div>
 
-    <div class="grid lg:grid-cols-2 lg:items-center pt-10 sm:pt-14 lg:pt-20 pb-16 sm:pb-20 lg:pb-28 gap-10 lg:gap-0">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-10 sm:pt-14 lg:pt-20 pb-16 sm:pb-20 lg:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
 
-        {{-- LEFT: hands + phone photograph (flush to viewport-left on lg) --}}
-        <div class="order-2 lg:order-1 relative px-5 sm:px-8 lg:px-0 lg:pr-8">
-            <div class="reveal reveal-left relative w-full max-w-none">
+        {{-- LEFT: hands + phone photograph (left-aligned in column) --}}
+        <div class="order-2 lg:order-1 lg:col-span-6 relative">
+            <div class="reveal reveal-left relative w-full max-w-[440px] sm:max-w-[480px] lg:max-w-[520px] mx-auto lg:mx-0 lg:mr-auto">
                 {{-- Soft pedestal --}}
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
@@ -113,8 +113,8 @@
         </div>
 
         {{-- RIGHT: heading + CTAs --}}
-        <div class="order-1 lg:order-2 px-5 sm:px-8 lg:pl-12 lg:pr-8 xl:pr-16">
-            <div class="mx-auto lg:mx-0 max-w-[640px] lg:max-w-[600px]">
+        <div class="order-1 lg:order-2 lg:col-span-6 lg:pl-4">
+            <div>
             <div class="reveal stagger flex items-end justify-center lg:justify-start gap-6 sm:gap-10 mb-6 sm:mb-8">
                 <img src="/images/auxilio-user.png" alt="Auxilio" class="h-24 sm:h-28 lg:h-32 w-auto drop-shadow-sm float-y" />
                 <img src="/images/auxilio-police.png" alt="Auxilio" class="h-24 sm:h-28 lg:h-32 w-auto drop-shadow-sm float-y" style="animation-delay:.4s" />
