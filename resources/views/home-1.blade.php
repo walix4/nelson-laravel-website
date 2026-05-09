@@ -80,47 +80,27 @@
         <div data-parallax="0.12" class="absolute bottom-0 right-1/3 w-[360px] h-[360px] rounded-full bg-gold-100/60 blur-3xl"></div>
     </div>
 
-    <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-10 sm:pt-14 lg:pt-20 pb-16 sm:pb-20 lg:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-10 sm:pt-14 lg:pt-20 pb-16 sm:pb-20 lg:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
 
-        {{-- LEFT: hands + phone photograph with red SOS badge ring --}}
-        <div class="order-2 lg:order-1 lg:col-span-6 relative">
-            <div class="reveal reveal-left relative mx-auto w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[560px]">
-                {{-- Soft pedestal / stage --}}
-                <div class="absolute inset-x-6 -bottom-2 sm:bottom-2 h-10 sm:h-12 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
-
-                {{-- Red animated badge ring system --}}
-                <div class="absolute inset-0 grid place-items-center pointer-events-none" aria-hidden="true">
-                    {{-- outermost soft red glow --}}
-                    <span class="absolute w-[88%] aspect-square rounded-full bg-red-500/15 blur-3xl sos-glow"></span>
-                    {{-- two ping rings --}}
-                    <span class="absolute w-[78%] aspect-square rounded-full ring-2 ring-red-500/60 sos-ping"></span>
-                    <span class="absolute w-[78%] aspect-square rounded-full ring-2 ring-red-500/40 sos-ping" style="animation-delay:1s"></span>
-                    {{-- slow rotating dashed ring --}}
-                    <span class="absolute w-[80%] aspect-square rounded-full border-2 border-dashed border-red-500/50 spin-slow"></span>
-                </div>
+        {{-- LEFT: hands + phone photograph --}}
+        <div class="order-2 lg:order-1 lg:col-span-7 relative">
+            <div class="reveal reveal-left relative mx-auto w-full max-w-[560px] sm:max-w-[640px] lg:max-w-none">
+                {{-- Soft pedestal --}}
+                <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
                 {{-- The hands+phone photo --}}
-                <div class="relative float-slow px-4 sm:px-6">
+                <div class="relative float-slow">
                     @include('partials.hero-hands')
                 </div>
 
-                {{-- SOS · LIVE badge anchored to the photo (top-right) --}}
-                <div class="reveal reveal-delay-2 absolute top-2 right-2 sm:top-4 sm:right-4 z-20 inline-flex items-center gap-2 rounded-full bg-red-600 text-white px-3 py-1.5 shadow-lg shadow-red-600/40 sos-glow">
+                {{-- SOS · LIVE pill (top-right) --}}
+                <div class="reveal reveal-delay-2 absolute top-1 right-1 sm:top-3 sm:right-3 z-20 inline-flex items-center gap-2 rounded-full bg-red-600 text-white px-3 py-1.5 shadow-lg shadow-red-600/40 sos-glow">
                     <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-white pulse-dot text-white"></span>
                     <span class="text-[11px] font-bold tracking-widest uppercase">SOS · Live</span>
                 </div>
 
-                {{-- Floating notification cards --}}
-                <div class="reveal reveal-delay-3 absolute top-4 -left-1 sm:-left-6 z-20 hidden sm:flex items-center gap-3 rounded-2xl bg-white border border-ink-100 px-4 py-3 shadow-lg">
-                    <span class="grid place-items-center w-9 h-9 rounded-xl bg-brand-50 text-brand-600">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-                    </span>
-                    <div class="text-xs">
-                        <p class="font-semibold text-navy-900">Geofence triggered</p>
-                        <p class="text-ink-500">Lily entered school zone · 3:42 PM</p>
-                    </div>
-                </div>
-                <div class="reveal reveal-delay-4 absolute -bottom-3 sm:bottom-6 -right-1 sm:-right-4 z-20 flex items-center gap-3 rounded-2xl bg-white border border-ink-100 px-3 py-2 sm:px-4 sm:py-3 shadow-lg">
+                {{-- Registry notification card (bottom-right) --}}
+                <div class="reveal reveal-delay-4 absolute -bottom-2 right-2 sm:bottom-4 sm:-right-4 z-20 flex items-center gap-3 rounded-2xl bg-white border border-ink-100 px-3 py-2 sm:px-4 sm:py-3 shadow-lg">
                     <span class="grid place-items-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-navy-900 text-white">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5" stroke-width="2"/></svg>
                     </span>
@@ -133,7 +113,7 @@
         </div>
 
         {{-- RIGHT: heading + CTAs --}}
-        <div class="order-1 lg:order-2 lg:col-span-6 lg:pl-6">
+        <div class="order-1 lg:order-2 lg:col-span-5 lg:pl-4">
             <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-[64px] leading-[1.04] tracking-tight text-navy-900">
                 Designed for safety of the families,<br/>
                 <span class="text-brand-600">making it accessible</span> for citizens.
