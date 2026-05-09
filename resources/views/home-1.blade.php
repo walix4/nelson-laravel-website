@@ -114,6 +114,17 @@
 
         {{-- RIGHT: heading + CTAs --}}
         <div class="order-1 lg:order-2 lg:col-span-5 lg:pl-4">
+            <div class="reveal stagger flex items-end justify-center lg:justify-start gap-6 sm:gap-10 mb-6 sm:mb-8">
+                <div class="text-center">
+                    <img src="/images/auxilio-user.png" alt="Auxilio" class="h-24 sm:h-28 lg:h-32 w-auto mx-auto drop-shadow-sm float-y" />
+                    <p class="mt-2 text-lg sm:text-xl font-bold tracking-[.18em] text-red-600">AUXILIO</p>
+                </div>
+                <div class="text-center">
+                    <img src="/images/auxilio-police.png" alt="Auxilio" class="h-24 sm:h-28 lg:h-32 w-auto mx-auto drop-shadow-sm float-y" style="animation-delay:.4s" />
+                    <p class="mt-2 text-lg sm:text-xl font-bold tracking-[.18em] text-navy-900">AUXILIO</p>
+                </div>
+            </div>
+
             <h1 class="reveal reveal-delay-1 font-display text-4xl sm:text-5xl lg:text-[64px] leading-[1.04] tracking-tight text-navy-900">
                 Designed for safety of the families,<br/>
                 <span class="text-brand-600">making it accessible</span> for citizens.
