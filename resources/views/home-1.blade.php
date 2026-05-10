@@ -651,15 +651,6 @@
      HOW IT WORKS VIEW
 ============================================================--}}
 <div data-view="how-it-works" class="hidden">
-    {{-- Slim breadcrumb header so the page leads with the 5 steps --}}
-    <section class="relative bg-navy-950 text-white pt-10 pb-2">
-        <div class="mx-auto max-w-7xl px-5 sm:px-8">
-            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-navy-300">
-                <a data-route href="#/" class="hover:text-brand-400 transition">Home</a><span>›</span><span class="text-white">How it works</span>
-            </div>
-        </div>
-    </section>
-
     {{-- =======================================================================
          REPORT FLOW — 5-step capture (moved from home)
     ========================================================================--}}
