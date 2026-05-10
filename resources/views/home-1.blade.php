@@ -751,7 +751,7 @@
                 Hit the button to lock the report, encrypt it, and dispatch a verified Super Agent in your radius — instantly.
             </p>
             <div class="reveal reveal-delay-3 mt-8">
-                <a href="#dispatch" class="submit-emergency group inline-flex items-center gap-3 rounded-full text-white font-bold uppercase tracking-[.18em] text-base px-10 py-5">
+                <a href="#dispatch" data-show-dispatch class="submit-emergency group inline-flex items-center gap-3 rounded-full text-white font-bold uppercase tracking-[.18em] text-base px-10 py-5">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"/></svg>
                     Submit Emergency
                     <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
@@ -763,7 +763,7 @@
     {{-- =======================================================================
          LIVE AGENT DISPATCH (moved from home — fires after Submit Emergency)
     ========================================================================--}}
-        <section id="dispatch" class="relative py-24 lg:py-32 bg-navy-950 text-white overflow-hidden">
+        <section id="dispatch" data-dispatch-section class="hidden relative py-24 lg:py-32 bg-navy-950 text-white overflow-hidden">
         <div class="pointer-events-none absolute inset-0 -z-0 opacity-30">
             <div class="absolute top-0 left-1/4 w-[480px] h-[480px] rounded-full bg-brand-600/40 blur-3xl"></div>
             <div class="absolute bottom-0 right-1/4 w-[420px] h-[420px] rounded-full bg-gold-500/30 blur-3xl"></div>
@@ -1771,6 +1771,9 @@
             else views[i].classList.add('hidden');
         }
         currentView = view;
+        // Always reset the dispatch section to hidden when changing view
+        var dispatchSec = document.querySelector('[data-dispatch-section]');
+        if (dispatchSec) dispatchSec.classList.add('hidden');
         if (view === 'crime-map') initCrimeMap();
         if (view === 'sex-offender-map') initSOMap();
         // Re-trigger reveal animations on the now-visible view
@@ -1907,6 +1910,23 @@
     document.addEventListener('click', function(e){
         var t = e.target.closest('[data-modal-close]');
         if (t) { e.preventDefault(); closeIncident(); return; }
+
+        // Submit Emergency on how-it-works → reveal hidden dispatch section + scroll
+        var trigger = e.target.closest('[data-show-dispatch]');
+        if (trigger) {
+            e.preventDefault();
+            var dispatchSec = document.querySelector('[data-dispatch-section]');
+            if (dispatchSec) {
+                dispatchSec.classList.remove('hidden');
+                // Replay any reveal animations inside the dispatch section
+                dispatchSec.querySelectorAll('.reveal').forEach(function(el){
+                    el.classList.remove('is-visible');
+                    requestAnimationFrame(function(){ el.classList.add('is-visible'); });
+                });
+                setTimeout(function(){ dispatchSec.scrollIntoView({ behavior:'smooth', block:'start' }); }, 80);
+            }
+            return;
+        }
         var a = e.target.closest('a[href^="#"]');
         if (!a) return;
         var href = a.getAttribute('href');
