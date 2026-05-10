@@ -928,51 +928,30 @@
                             {{-- River label --}}
                             <text x="160" y="245" fill="rgba(140,190,230,.45)" font-family="Inter, sans-serif" font-style="italic" font-size="8">East River</text>
 
-                            {{-- 12 dashed routes converging from the perimeter onto victim at center (200, 125) --}}
+                            {{-- 6 sweeping arc routes converging from the perimeter onto the victim at center (200, 125) --}}
                             @php
-                                // Each: id, start (sx,sy), control (cx,cy), strokeColor, glowColor
+                                // C-cubic curves give a graceful arc (sweep outward, then inward to the victim).
                                 $routes = [
-                                    ['id'=>'dispatchRoute',  'd'=>'M 60 40 Q 130 90 200 125',   'sc'=>'url(#routeStroke)',     'gc'=>'rgba(244,196,65,.25)'],
-                                    ['id'=>'dispatchRoute2', 'd'=>'M 340 40 Q 270 90 200 125',  'sc'=>'rgba(228,67,82,.7)',    'gc'=>'rgba(228,67,82,.18)'],
-                                    ['id'=>'dispatchRoute3', 'd'=>'M 380 125 Q 290 125 200 125','sc'=>'rgba(59,130,246,.7)',   'gc'=>'rgba(59,130,246,.18)'],
-                                    ['id'=>'dispatchRoute4', 'd'=>'M 340 210 Q 270 170 200 125','sc'=>'rgba(244,196,65,.7)',   'gc'=>'rgba(244,196,65,.18)'],
-                                    ['id'=>'dispatchRoute5', 'd'=>'M 60 210 Q 130 170 200 125', 'sc'=>'rgba(228,67,82,.7)',    'gc'=>'rgba(228,67,82,.18)'],
-                                    ['id'=>'dispatchRoute6', 'd'=>'M 20 125 Q 110 125 200 125', 'sc'=>'rgba(59,130,246,.7)',   'gc'=>'rgba(59,130,246,.18)'],
-                                    ['id'=>'dispatchRoute7', 'd'=>'M 200 20 Q 200 70 200 125',  'sc'=>'rgba(228,67,82,.55)',   'gc'=>'rgba(228,67,82,.14)'],
-                                    ['id'=>'dispatchRoute8', 'd'=>'M 200 230 Q 200 180 200 125','sc'=>'rgba(59,130,246,.55)',  'gc'=>'rgba(59,130,246,.14)'],
-                                    ['id'=>'dispatchRoute9', 'd'=>'M 130 25 Q 165 75 200 125',  'sc'=>'rgba(244,196,65,.55)',  'gc'=>'rgba(244,196,65,.14)'],
-                                    ['id'=>'dispatchRoute10','d'=>'M 270 25 Q 235 75 200 125', 'sc'=>'rgba(59,130,246,.55)',  'gc'=>'rgba(59,130,246,.14)'],
-                                    ['id'=>'dispatchRoute11','d'=>'M 130 225 Q 165 175 200 125','sc'=>'rgba(228,67,82,.55)',   'gc'=>'rgba(228,67,82,.14)'],
-                                    ['id'=>'dispatchRoute12','d'=>'M 270 225 Q 235 175 200 125','sc'=>'rgba(244,196,65,.55)',  'gc'=>'rgba(244,196,65,.14)'],
+                                    ['id'=>'dispatchRoute',  'd'=>'M 60 40   C 90 80, 130 110, 200 125',   'sc'=>'url(#routeStroke)',   'gc'=>'rgba(244,196,65,.22)'],
+                                    ['id'=>'dispatchRoute2', 'd'=>'M 340 40  C 310 80, 270 110, 200 125',  'sc'=>'rgba(228,67,82,.7)',  'gc'=>'rgba(228,67,82,.18)'],
+                                    ['id'=>'dispatchRoute3', 'd'=>'M 380 125 C 320 110, 260 120, 200 125','sc'=>'rgba(59,130,246,.7)', 'gc'=>'rgba(59,130,246,.18)'],
+                                    ['id'=>'dispatchRoute4', 'd'=>'M 340 210 C 310 175, 260 145, 200 125','sc'=>'rgba(244,196,65,.7)', 'gc'=>'rgba(244,196,65,.18)'],
+                                    ['id'=>'dispatchRoute5', 'd'=>'M 60 210  C 90 175, 130 145, 200 125', 'sc'=>'rgba(228,67,82,.7)',  'gc'=>'rgba(228,67,82,.18)'],
+                                    ['id'=>'dispatchRoute6', 'd'=>'M 20 125  C 80 110, 140 120, 200 125', 'sc'=>'rgba(59,130,246,.7)', 'gc'=>'rgba(59,130,246,.18)'],
                                 ];
                             @endphp
                             @foreach ($routes as $r)
-                                <path id="{{ $r['id'] }}" d="{{ $r['d'] }}" stroke="{{ $r['sc'] }}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="4 5" class="route-march"/>
                                 <path d="{{ $r['d'] }}" stroke="{{ $r['gc'] }}" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glowR)"/>
+                                <path id="{{ $r['id'] }}" d="{{ $r['d'] }}" stroke="{{ $r['sc'] }}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="4 5" class="route-march"/>
                             @endforeach
 
-                            {{-- 12 police cruisers, each animating along its route. First 6 use the full detailed cruiser, last 6 use lighter glow markers for performance. --}}
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute',  'dur'=>'5s'])
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute2', 'dur'=>'5.5s'])
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute3', 'dur'=>'6s'])
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute4', 'dur'=>'6.5s'])
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute5', 'dur'=>'7s'])
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute6', 'dur'=>'7.5s'])
-                            @foreach (['dispatchRoute7'=>'5.2s','dispatchRoute8'=>'5.7s','dispatchRoute9'=>'6.2s','dispatchRoute10'=>'6.7s','dispatchRoute11'=>'7.2s','dispatchRoute12'=>'7.7s'] as $rid => $rdur)
-                                <g>
-                                    <circle r="10" fill="rgba(228,67,82,.45)" filter="url(#bigGlow)"><animate attributeName="opacity" values=".9;.2;.9" dur=".42s" repeatCount="indefinite"/></circle>
-                                    <circle r="10" fill="rgba(59,130,246,.45)" filter="url(#bigGlow)"><animate attributeName="opacity" values=".2;.9;.2" dur=".42s" repeatCount="indefinite"/></circle>
-                                    <ellipse cx="0" cy="2" rx="9" ry="3.5" fill="rgba(0,0,0,.5)"/>
-                                    <path d="M-7 -3.5 Q-8 -3.5 -8 -2.5 L-8 2.5 Q-8 3.5 -7 3.5 L7 3.5 Q8 3.5 8 2.5 L8 -2.5 Q8 -3.5 7 -3.5 Z" fill="url(#carBody)" stroke="#1a2548" stroke-width="0.3"/>
-                                    <rect x="-7" y="-.8" width="14" height="1.6" fill="#0c1126"/>
-                                    <rect x="-2.5" y="-2" width="5" height="4" rx=".5" fill="#0c1126"/>
-                                    <circle cx="-1.5" cy="-1" r=".5" fill="#e44352"><animate attributeName="fill-opacity" values="1;.2;1" dur=".42s" repeatCount="indefinite"/></circle>
-                                    <circle cx="1.5"  cy="-1" r=".5" fill="#3b82f6"><animate attributeName="fill-opacity" values=".2;1;.2" dur=".42s" repeatCount="indefinite"/></circle>
-                                    <circle cx="-1.5" cy="1" r=".5" fill="#3b82f6"><animate attributeName="fill-opacity" values=".2;1;.2" dur=".42s" repeatCount="indefinite"/></circle>
-                                    <circle cx="1.5"  cy="1" r=".5" fill="#e44352"><animate attributeName="fill-opacity" values="1;.2;1" dur=".42s" repeatCount="indefinite"/></circle>
-                                    <animateMotion dur="{{ $rdur }}" repeatCount="indefinite" rotate="auto"><mpath href="#{{ $rid }}"/></animateMotion>
-                                </g>
-                            @endforeach
+                            {{-- 6 detailed police cruisers (one per officer), scaled down a bit for the busier map --}}
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute',  'dur'=>'5.5s', 'scale'=>'0.7'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute2', 'dur'=>'6s',   'scale'=>'0.7'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute3', 'dur'=>'6.5s', 'scale'=>'0.7'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute4', 'dur'=>'7s',   'scale'=>'0.7'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute5', 'dur'=>'7.5s', 'scale'=>'0.7'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute6', 'dur'=>'8s',   'scale'=>'0.7'])
 
 
                             {{-- victim destination — pulsing red halo at center (200,125), avatar overlay sits on top --}}

@@ -1,6 +1,7 @@
 {{-- Reusable detailed top-down police cruiser SVG group.
-     Vars: $mpath (id of the path to animate along), $dur (animation duration, e.g. "6s") --}}
+     Vars: $mpath (id of the path to animate along), $dur (animation duration), $scale (visual scale factor, default 0.65) --}}
 <g>
+    <g transform="scale({{ $scale ?? '0.65' }})">
     {{-- Big red & blue siren glow halos (alternating, soft-blurred) --}}
     <circle cx="0" cy="0" r="28" fill="rgba(228,67,82,.55)" filter="url(#bigGlow)">
         <animate attributeName="opacity" values=".85;0;.85" dur=".42s" repeatCount="indefinite"/>
@@ -74,6 +75,7 @@
         <circle cx="2.6"  cy="2" r=".7" fill="#3b82f6" filter="url(#glowR)"><animate attributeName="fill-opacity" values="1;.2;.2;.2;1" dur=".4s" repeatCount="indefinite"/></circle>
     </g>
 
+    </g>
     <animateMotion dur="{{ $dur ?? '6s' }}" repeatCount="indefinite" rotate="auto">
         <mpath href="#{{ $mpath ?? 'dispatchRoute' }}"/>
     </animateMotion>
