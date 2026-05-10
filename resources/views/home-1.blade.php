@@ -744,28 +744,62 @@
     <section class="relative bg-navy-950 overflow-hidden">
         <div class="absolute inset-0 -z-0 opacity-30 pointer-events-none">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] rounded-full bg-brand-600/30 blur-3xl"></div>
+            <div class="absolute top-10 right-1/4 w-[280px] h-[280px] rounded-full bg-gold-500/20 blur-3xl"></div>
         </div>
-        <div class="relative mx-auto max-w-3xl px-5 sm:px-8 pt-28 pb-24 lg:pt-36 lg:pb-32 text-center text-white">
+        <div class="relative mx-auto max-w-3xl px-5 sm:px-8 pt-28 pb-32 lg:pt-36 lg:pb-40 text-center text-white">
             <span class="reveal inline-flex items-center gap-2 rounded-full bg-emerald-500/15 border border-emerald-400/30 px-4 py-2 text-[11px] font-bold uppercase tracking-[.2em] text-emerald-300">
                 <span class="grid place-items-center w-5 h-5 rounded-full bg-emerald-400/30 text-emerald-200 shrink-0">
                     <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                 </span>
                 Report complete · 5 of 5
             </span>
-            <h3 class="reveal reveal-delay-1 mt-8 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-[1.15]">
+
+            {{-- 5 completed step indicators --}}
+            @php
+                $done = [
+                    ['n' => '01', 'label' => 'Categorize'],
+                    ['n' => '02', 'label' => 'Describe'],
+                    ['n' => '03', 'label' => 'Vehicle'],
+                    ['n' => '04', 'label' => 'Evidence'],
+                    ['n' => '05', 'label' => 'Sketch'],
+                ];
+            @endphp
+            <ol class="reveal reveal-delay-1 mt-10 stagger flex items-start justify-center">
+                @foreach ($done as $i => $d)
+                    @if ($i > 0)
+                        <li class="flex-shrink-0 w-8 sm:w-14 lg:w-20 mx-1 sm:mx-2" style="padding-top: 26px;" aria-hidden="true">
+                            <span class="block w-full h-0.5 bg-emerald-400/70"></span>
+                        </li>
+                    @endif
+                    <li class="flex flex-col items-center w-16 sm:w-20 shrink-0">
+                        <span class="relative grid place-items-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-500/15 ring-2 ring-emerald-400 text-emerald-300">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            <span class="absolute -inset-1 rounded-full bg-emerald-400/25 blur-md -z-10"></span>
+                        </span>
+                        <span class="mt-3 text-[11px] font-bold uppercase tracking-[.18em] text-white/85 leading-none">{{ $d['n'] }}</span>
+                        <span class="mt-1 text-[11px] text-white/55 leading-none">{{ $d['label'] }}</span>
+                    </li>
+                @endforeach
+            </ol>
+
+            <h3 class="reveal reveal-delay-2 mt-12 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-[1.15]">
                 All <span class="text-gold-400">5 steps</span> complete.<br class="hidden sm:block"/>
                 <span class="text-white/85">Ready to dispatch.</span>
             </h3>
-            <p class="reveal reveal-delay-2 mt-5 text-base sm:text-lg text-navy-200/80 max-w-xl mx-auto leading-relaxed">
+            <p class="reveal reveal-delay-3 mt-5 text-base sm:text-lg text-navy-200/80 max-w-xl mx-auto leading-relaxed">
                 Hit the button to lock the report, encrypt it, and dispatch a verified Super Agent in your radius — instantly.
             </p>
-            <div class="reveal reveal-delay-3 mt-10">
+            <div class="reveal reveal-delay-4 mt-10">
                 <a href="#dispatch" data-show-dispatch class="submit-emergency group inline-flex items-center gap-3 rounded-full text-white font-bold uppercase tracking-[.18em] text-base px-10 py-5">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"/></svg>
                     Submit Emergency
                     <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
                 </a>
             </div>
+            <p class="reveal reveal-delay-5 mt-5 text-xs text-white/50 flex items-center justify-center gap-2">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse"></span>
+                Tap to lock the report and dispatch instantly
+            </p>
         </div>
     </section>
 
