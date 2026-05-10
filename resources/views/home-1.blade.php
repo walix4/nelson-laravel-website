@@ -96,10 +96,9 @@
                 {{-- Soft pedestal --}}
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
-                {{-- Red drop-ripple BEHIND the phone — extends into photo's transparent zones --}}
+                {{-- Red drop-ripple BEHIND the phone — sequential one-at-a-time loop --}}
                 <div class="absolute pointer-events-none aspect-square" style="top:23%; left:30%; width:40%; z-index:0;" aria-hidden="true">
                     <span class="absolute inset-0 rounded-full bg-red-500 map-pulse"></span>
-                    <span class="absolute inset-0 rounded-full bg-red-500 map-pulse" style="animation-delay:1.75s"></span>
                 </div>
 
                 {{-- The hands+phone photo (above pulse) --}}
