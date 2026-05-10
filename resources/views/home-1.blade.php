@@ -746,7 +746,7 @@
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] rounded-full bg-brand-600/30 blur-3xl"></div>
             <div class="absolute top-10 right-1/4 w-[280px] h-[280px] rounded-full bg-gold-500/20 blur-3xl"></div>
         </div>
-        <div class="relative mx-auto max-w-3xl px-5 sm:px-8 pt-40 pb-32 lg:pt-52 lg:pb-40 text-center text-white">
+        <div class="relative mx-auto max-w-3xl px-5 sm:px-8 text-center text-white" style="padding-top:8rem; padding-bottom:8rem;">
             <span class="reveal inline-flex items-center gap-2 rounded-full bg-emerald-500/15 border border-emerald-400/30 px-4 py-2 text-[11px] font-bold uppercase tracking-[.2em] text-emerald-300">
                 <span class="grid place-items-center w-5 h-5 rounded-full bg-emerald-400/30 text-emerald-200 shrink-0">
                     <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
@@ -790,7 +790,7 @@
                 Hit the button to lock the report, encrypt it, and dispatch a verified Super Agent in your radius — instantly.
             </p>
             <div class="reveal reveal-delay-4 mt-10">
-                <a href="#dispatch" data-show-dispatch class="submit-emergency group inline-flex items-center gap-3 rounded-full text-white font-bold uppercase tracking-[.18em] text-base px-10 py-5">
+                <a href="#dispatch" data-show-dispatch class="submit-emergency group inline-flex items-center gap-3 rounded-md text-white font-bold uppercase tracking-[.18em] text-base px-10 py-5">
                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"/></svg>
                     Submit Emergency
                     <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
