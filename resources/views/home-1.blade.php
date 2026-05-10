@@ -144,20 +144,20 @@
             </p>
 
             {{-- store buttons --}}
-            <div class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center gap-3">
+            <div class="reveal reveal-delay-4 mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md">
                 {{-- Google Play --}}
-                <a href="#" class="group inline-flex items-center gap-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
-                    <img src="/images/google-play.svg" alt="" class="w-7 h-7" />
+                <a href="#" class="group inline-flex items-center justify-start gap-3 rounded-md bg-navy-900 hover:bg-navy-800 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
+                    <img src="/images/google-play.svg" alt="" class="w-7 h-7 shrink-0" />
                     <div class="text-left">
                         <p class="text-[10px] uppercase tracking-[.18em] text-white/80">Get it on</p>
                         <p class="text-base font-semibold leading-none -mt-0.5">Google Play</p>
                     </div>
                 </a>
                 {{-- Apple App Store --}}
-                <a href="#" class="group inline-flex items-center gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
-                    <img src="/images/app-store.svg" alt="" class="w-7 h-7" />
+                <a href="#" class="group inline-flex items-center justify-start gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
+                    <img src="/images/app-store.svg" alt="" class="w-7 h-7 shrink-0" />
                     <div class="text-left">
-                        <p class="text-[10px] uppercase tracking-[.18em] text-white/80">Download on the</p>
+                        <p class="text-[10px] uppercase tracking-[.18em] text-white/80">Get it on</p>
                         <p class="text-base font-semibold leading-none -mt-0.5">App Store</p>
                     </div>
                 </a>
