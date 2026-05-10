@@ -1096,33 +1096,11 @@
                                 </animateMotion>
                             </g>
 
-                            {{-- Second cruiser — pulsing glow dot along route 2 --}}
-                            <g>
-                                <circle r="14" fill="rgba(228,67,82,.45)" filter="url(#bigGlow)">
-                                    <animate attributeName="opacity" values=".9;.2;.9" dur=".42s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle r="5" fill="#fff" stroke="rgba(228,67,82,.9)" stroke-width="1.5"/>
-                                <circle r="2" fill="#e44352">
-                                    <animate attributeName="r" values="2;2.6;2" dur=".42s" repeatCount="indefinite"/>
-                                </circle>
-                                <animateMotion dur="7.2s" repeatCount="indefinite" rotate="auto">
-                                    <mpath href="#dispatchRoute2"/>
-                                </animateMotion>
-                            </g>
+                            {{-- Second police cruiser — Officer Diaz, route 2 --}}
+                            @include('partials.police-cruiser', ['mpath' => 'dispatchRoute2', 'dur' => '7.2s'])
 
-                            {{-- Third cruiser — pulsing glow dot along route 3 --}}
-                            <g>
-                                <circle r="14" fill="rgba(59,130,246,.45)" filter="url(#bigGlow)">
-                                    <animate attributeName="opacity" values=".9;.2;.9" dur=".42s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle r="5" fill="#fff" stroke="rgba(59,130,246,.9)" stroke-width="1.5"/>
-                                <circle r="2" fill="#3b82f6">
-                                    <animate attributeName="r" values="2;2.6;2" dur=".42s" repeatCount="indefinite"/>
-                                </circle>
-                                <animateMotion dur="8s" repeatCount="indefinite" rotate="auto">
-                                    <mpath href="#dispatchRoute3"/>
-                                </animateMotion>
-                            </g>
+                            {{-- Third police cruiser — Officer Pollock, route 3 --}}
+                            @include('partials.police-cruiser', ['mpath' => 'dispatchRoute3', 'dur' => '8s'])
 
                             {{-- user destination pin --}}
                             <g transform="translate(330 200)">
@@ -1208,28 +1186,10 @@
                         </div>
 
                         {{-- Officer Diaz — second responder, top-right start --}}
-                        <div class="absolute" style="left: calc(360/400 * 100%); top: calc(40/250 * 100%); transform: translate(-50%, -50%);">
-                            <div class="relative">
-                                <div class="absolute -inset-1 rounded-full bg-brand-500/40 blur-md"></div>
-                                <div class="relative w-10 h-10 rounded-full ring-2 ring-brand-400 ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-gradient-to-br from-brand-600 to-brand-800 grid place-items-center text-white font-bold text-sm shadow-lg">D</div>
-                                <div class="absolute right-full mr-2 top-1/2 -translate-y-1/2 whitespace-nowrap text-right">
-                                    <p class="text-[10px] font-bold text-white leading-tight drop-shadow">Officer Diaz</p>
-                                    <p class="text-[9px] text-brand-300 leading-tight drop-shadow">en route · ★ 4.7</p>
-                                </div>
-                            </div>
-                        </div>
+                        @include('partials.officer-avatar', ['key' => 'D', 'x' => 360, 'y' => 40, 'name' => 'Officer Diaz', 'rating' => '4.7', 'accent' => 'brand', 'labelSide' => 'left'])
 
                         {{-- Officer Pollock — third responder, bottom-left start --}}
-                        <div class="absolute" style="left: calc(40/400 * 100%); top: calc(215/250 * 100%); transform: translate(-50%, -50%);">
-                            <div class="relative">
-                                <div class="absolute -inset-1 rounded-full bg-blue-500/40 blur-md"></div>
-                                <div class="relative w-10 h-10 rounded-full ring-2 ring-blue-400 ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800 grid place-items-center text-white font-bold text-sm shadow-lg">P</div>
-                                <div class="absolute left-full ml-2 top-1/2 -translate-y-1/2 whitespace-nowrap">
-                                    <p class="text-[10px] font-bold text-white leading-tight drop-shadow">Officer Pollock</p>
-                                    <p class="text-[9px] text-blue-300 leading-tight drop-shadow">en route · ★ 4.8</p>
-                                </div>
-                            </div>
-                        </div>
+                        @include('partials.officer-avatar', ['key' => 'P', 'x' => 40, 'y' => 215, 'name' => 'Officer Pollock', 'rating' => '4.8', 'accent' => 'blue', 'labelSide' => 'right'])
 
                         {{-- Sonar rings on user destination --}}
                         <div class="absolute" style="left: calc(330/400 * 100%); top: calc(200/250 * 100%); transform: translate(-50%, -50%);">
