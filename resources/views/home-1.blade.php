@@ -98,7 +98,7 @@
 
                 {{-- Red drop-ripple BEHIND the phone — sequential one-at-a-time loop --}}
                 <div class="absolute pointer-events-none aspect-square" style="top:23%; left:30%; width:40%; z-index:0;" aria-hidden="true">
-                    <span class="absolute inset-0 rounded-full bg-red-500 map-pulse"></span>
+                    <span class="absolute inset-0 rounded-full bg-navy-900 map-pulse"></span>
                 </div>
 
                 {{-- The hands+phone photo (above pulse) --}}
