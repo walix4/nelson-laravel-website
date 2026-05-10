@@ -35,8 +35,11 @@
 <header data-nav class="fixed inset-x-0 top-0 z-50 bg-brand-600 text-white shadow-md">
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
         <div class="flex-1 flex items-center">
-            <a href="#top" class="flex items-center group">
-                <img src="/images/auxilio-logo.png" alt="Auxilio" class="h-7 sm:h-8 w-auto brightness-0 invert" />
+            <a href="#top" class="flex items-center gap-3 group">
+                <span class="grid place-items-center h-11 w-11 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
+                    <img src="/images/auxilio-user.png" alt="" class="h-9 w-auto" />
+                </span>
+                <img src="/images/auxilio-logo.png" alt="Auxilio" class="h-5 sm:h-6 w-auto brightness-0 invert" />
             </a>
         </div>
 
@@ -1269,8 +1272,11 @@
     <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-20 pb-10">
         <div class="grid lg:grid-cols-12 gap-12">
             <div class="lg:col-span-5">
-                <a href="#top" class="inline-flex items-center group">
-                    <img src="/images/auxilio-logo.png" alt="Auxilio" class="h-9 w-auto brightness-0 invert" />
+                <a href="#top" class="inline-flex items-center gap-3 group">
+                    <span class="grid place-items-center h-12 w-12 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
+                        <img src="/images/auxilio-user.png" alt="" class="h-10 w-auto" />
+                    </span>
+                    <img src="/images/auxilio-logo.png" alt="Auxilio" class="h-6 w-auto brightness-0 invert" />
                 </a>
                 <p class="mt-5 max-w-md text-navy-300/80 leading-relaxed">
                     Real-time alerts, one-tap SOS, verified Super Agents, and live case tracking — Auxilio User is a personal safety companion built for the people you love.
