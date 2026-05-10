@@ -335,6 +335,40 @@
         opacity: 0;
     }
 
+    /* ---------- Hero dotted-map role tags (cycle in/out) ---------- */
+    .role-tag {
+        opacity: 0;
+        transform: translateY(6px) scale(.92);
+        animation: roleTagCycle 9s ease-in-out infinite;
+        will-change: opacity, transform;
+    }
+    @keyframes roleTagCycle {
+        0%, 100% { opacity: 0; transform: translateY(6px) scale(.92); }
+        8%, 28%  { opacity: 1; transform: translateY(0) scale(1); }
+        36%      { opacity: 0; transform: translateY(-4px) scale(.96); }
+    }
+    .map-pin {
+        animation: mapPinPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes mapPinPulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(251,6,6,.55); }
+        50%      { box-shadow: 0 0 0 12px rgba(251,6,6,0); }
+    }
+    .map-line {
+        stroke-dasharray: 4 6;
+        animation: mapLineDraw 3.5s linear infinite;
+    }
+    @keyframes mapLineDraw {
+        to { stroke-dashoffset: -40; }
+    }
+
+    /* ---------- Police badge marquee (slower, infinite) ---------- */
+    .badge-marquee { animation: badgeMarq 42s linear infinite; }
+    @keyframes badgeMarq {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+    }
+
     /* ---------- Underline draw on hover ---------- */
     .nav-link {
         position: relative;

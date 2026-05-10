@@ -102,159 +102,182 @@
 @endphp
 
 {{-- =======================================================================
-     HERO  — centered, dark navy with grid + glow + dual CTAs
+     HERO — Nexagent-inspired LIGHT split (text left, dotted map + role tags right)
 ========================================================================--}}
-<section class="relative overflow-hidden" style="background: radial-gradient(ellipse at top, #1a2548 0%, #0c1126 55%, #06080b 100%);">
-    {{-- subtle grid background --}}
-    <div class="pointer-events-none absolute inset-0 -z-0 opacity-[0.18]"
-         style="background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);"></div>
-
-    {{-- ambient glows --}}
+<section class="relative overflow-hidden" style="background: linear-gradient(135deg, #ffffff 0%, #f5fbe5 35%, #ffffff 70%, #f4f7fb 100%);">
+    {{-- ambient soft glow blobs --}}
     <div class="pointer-events-none absolute inset-0 -z-0 overflow-hidden">
-        <div data-parallax="0.06" class="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(228,67,82,.35) 0%, rgba(228,67,82,0) 65%);"></div>
-        <div data-parallax="0.10" class="absolute top-1/3 -left-40 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(244,196,65,.18) 0%, rgba(244,196,65,0) 65%);"></div>
-        <div data-parallax="0.08" class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(200,32,47,.30) 0%, rgba(200,32,47,0) 65%);"></div>
+        <div class="absolute -top-40 -left-40 w-[640px] h-[640px] rounded-full blur-3xl opacity-70" style="background: radial-gradient(circle, rgba(244,196,65,.25) 0%, transparent 65%);"></div>
+        <div class="absolute -bottom-40 -right-20 w-[600px] h-[600px] rounded-full blur-3xl opacity-60" style="background: radial-gradient(circle, rgba(251,6,6,.10) 0%, transparent 65%);"></div>
     </div>
 
-    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-16 sm:pt-20 lg:pt-28 pb-20 sm:pb-28 lg:pb-32 text-center">
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-14 sm:pt-20 lg:pt-24 pb-16 sm:pb-20 lg:pb-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
 
-        {{-- eyebrow pill --}}
-        <div class="reveal flex justify-center">
-            <span class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] backdrop-blur px-4 py-1.5 text-xs font-semibold uppercase tracking-[.18em] text-white/85">
-                <span class="relative inline-flex">
-                    <span class="absolute inline-flex h-2 w-2 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
-                    <span class="relative inline-flex h-2 w-2 rounded-full" style="background:#FB0606;"></span>
-                </span>
-                <span style="color:#f4c441;">Live</span>
-                <span class="text-white/40">·</span>
-                America&rsquo;s personal safety platform
-            </span>
+        {{-- LEFT: copy + CTAs --}}
+        <div class="lg:col-span-6">
+            <p class="reveal inline-flex items-center gap-2 text-sm font-medium text-navy-900/70">
+                <svg class="w-4 h-4" style="color:#FB0606;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6v8a4 4 0 004 4h8m0 0l-4-4m4 4l-4 4"/></svg>
+                World&rsquo;s 1<sup class="text-[0.65em] align-super">st</sup> personal safety platform.
+            </p>
+
+            <h1 class="reveal reveal-delay-1 mt-5 font-display font-extrabold tracking-tight text-navy-950 text-[46px] sm:text-6xl lg:text-[80px] leading-[1.02]">
+                One Tap,<br/>
+                <span style="color:#FB0606;">Total Safety</span>
+            </h1>
+
+            <p class="reveal reveal-delay-2 mt-6 max-w-xl text-base sm:text-lg text-navy-900/65 leading-relaxed">
+                Your pocket-sized panic button, neighborhood watch and verified responder network — all in one. Built for families that refuse to wait for the news.
+            </p>
+
+            <div class="reveal reveal-delay-3 mt-9 flex items-center gap-4">
+                <a href="#download" class="group relative inline-flex items-center justify-center rounded-xl text-white px-7 py-3.5 text-[15px] font-semibold shadow-[0_18px_38px_-12px_rgba(251,6,6,.55)] hover:-translate-y-0.5 transition" style="background:linear-gradient(135deg,#FB0606 0%,#c8202f 100%);">
+                    Get Auxilio
+                    <span class="pointer-events-none absolute -inset-px rounded-xl opacity-50 blur-md -z-10" style="background:#FB0606;"></span>
+                </a>
+                <a data-route href="#/how-it-works" class="group inline-flex items-center gap-1.5 text-[15px] font-semibold text-navy-950 hover:text-brand-600 transition">
+                    Talk to Dispatch
+                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+                </a>
+            </div>
         </div>
 
-        {{-- massive headline --}}
-        <h1 class="reveal reveal-delay-1 mt-7 mx-auto max-w-5xl font-display font-extrabold tracking-tight text-white text-[44px] sm:text-6xl lg:text-[78px] leading-[1.02]">
-            World&rsquo;s 1<sup class="text-[0.5em] align-super" style="color:#f4c441;">st</sup> personal safety<br/>
-            platform for <span style="background:linear-gradient(90deg,#FB0606,#f4c441); -webkit-background-clip:text; background-clip:text; color:transparent;">families.</span>
-        </h1>
+        {{-- RIGHT: dotted world/US map + animated role tags --}}
+        <div class="lg:col-span-6 relative">
+            <div class="reveal reveal-right relative aspect-[1.15/1] w-full max-w-[640px] mx-auto">
 
-        {{-- 2-line poetic sub --}}
-        <p class="reveal reveal-delay-2 mt-6 mx-auto max-w-2xl text-base sm:text-lg text-white/70 leading-relaxed">
-            One tap to verified responders. Live crime maps, registered offender alerts, and a real-time safety network — engineered for parents, students, and neighborhoods that refuse to wait for the news.
-        </p>
+                {{-- dotted world map (inline SVG: dots arranged in continental shapes) --}}
+                <svg viewBox="0 0 600 480" class="absolute inset-0 w-full h-full" aria-hidden="true">
+                    <defs>
+                        <pattern id="dotPat" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                            <circle cx="5" cy="5" r="1.4" fill="#cbd5e1"/>
+                        </pattern>
+                        <pattern id="dotPatActive" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                            <circle cx="5" cy="5" r="1.6" fill="#94a3b8"/>
+                        </pattern>
+                    </defs>
 
-        {{-- dual CTAs --}}
-        <div class="reveal reveal-delay-3 mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a href="#download" class="group inline-flex items-center justify-center gap-2 rounded-md text-white px-7 py-3.5 text-sm font-semibold shadow-[0_20px_40px_-15px_rgba(251,6,6,.65)] hover:-translate-y-0.5 transition" style="background:linear-gradient(135deg,#FB0606 0%,#c8202f 100%);">
-                Download Auxilio
-                <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
-            </a>
-            <a data-route href="#/how-it-works" class="group inline-flex items-center justify-center gap-2 rounded-md border border-white/15 bg-white/[0.04] backdrop-blur text-white px-7 py-3.5 text-sm font-semibold hover:bg-white/[0.10] transition">
-                See how it works
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
-            </a>
-        </div>
+                    {{-- North America --}}
+                    <path fill="url(#dotPatActive)" d="M60,90 C90,70 140,68 180,80 C220,75 240,95 250,130 C245,160 230,175 215,195 C200,220 175,240 145,235 C115,232 90,215 75,190 C55,165 50,135 60,110 Z"/>
+                    {{-- South America --}}
+                    <path fill="url(#dotPat)" d="M170,260 C195,250 220,260 230,290 C240,330 230,370 215,400 C200,425 180,432 165,420 C150,400 145,365 150,330 C155,300 162,275 170,260 Z"/>
+                    {{-- Europe --}}
+                    <path fill="url(#dotPat)" d="M285,90 C310,80 340,82 360,95 C375,110 372,135 360,150 C340,165 310,168 290,160 C275,148 270,125 275,108 Z"/>
+                    {{-- Africa --}}
+                    <path fill="url(#dotPatActive)" d="M295,170 C325,158 360,170 375,200 C390,240 388,290 370,330 C355,360 330,375 310,365 C285,348 275,310 280,270 C285,225 290,195 295,170 Z"/>
+                    {{-- Asia (large blob) --}}
+                    <path fill="url(#dotPatActive)" d="M395,80 C440,68 500,72 540,95 C560,118 560,150 545,180 C520,210 480,225 435,222 C405,215 388,195 385,165 C383,135 388,105 395,85 Z"/>
+                    {{-- India / SE Asia --}}
+                    <path fill="url(#dotPat)" d="M430,210 C455,205 478,215 482,238 C480,262 460,275 440,272 C422,265 418,242 425,222 Z"/>
+                    {{-- Australia --}}
+                    <path fill="url(#dotPat)" d="M488,338 C515,332 545,340 555,360 C560,380 545,395 520,397 C495,395 478,382 478,365 C480,352 482,344 488,340 Z"/>
 
-        {{-- trust line --}}
-        <p class="reveal reveal-delay-4 mt-7 text-xs uppercase tracking-[.18em] text-white/40 font-semibold">
-            Built &amp; trained by veteran responders &middot; Trusted by 200K+ families
-        </p>
+                    {{-- Connection lines from center hub to pins --}}
+                    <g stroke="#FB0606" stroke-width="1.4" fill="none" opacity=".55">
+                        <line class="map-line" x1="305" y1="245" x2="155" y2="135"/>
+                        <line class="map-line" x1="305" y1="245" x2="455" y2="125"/>
+                        <line class="map-line" x1="305" y1="245" x2="195" y2="335"/>
+                        <line class="map-line" x1="305" y1="245" x2="335" y2="270"/>
+                        <line class="map-line" x1="305" y1="245" x2="510" y2="365"/>
+                        <line class="map-line" x1="305" y1="245" x2="475" y2="240"/>
+                    </g>
+                </svg>
 
-        {{-- dashboard mockup card --}}
-        <div class="reveal reveal-delay-5 mt-16 lg:mt-20 mx-auto max-w-5xl">
-            <div class="relative rounded-2xl border border-white/10 p-2 shadow-[0_60px_120px_-30px_rgba(0,0,0,.7)]" style="background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.01) 100%);">
-                {{-- glow ring --}}
-                <div class="pointer-events-none absolute -inset-1 rounded-3xl opacity-60 blur-2xl -z-10" style="background:linear-gradient(120deg,#FB0606 0%,#f4c441 50%,#1a2548 100%);"></div>
-                <div class="rounded-xl overflow-hidden" style="background:#0c1126;">
-                    <div class="grid lg:grid-cols-12 gap-0">
-                        {{-- left: phone --}}
-                        <div class="lg:col-span-5 relative p-8 lg:p-10 flex items-center justify-center" style="background:radial-gradient(circle at 30% 30%,rgba(251,6,6,.18),transparent 60%),#0c1126;">
-                            <div class="relative w-full max-w-[240px] aspect-[9/19] rounded-[36px] p-2 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)] float-slow" style="background:#06080b;">
-                                <div class="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-4 rounded-full z-20" style="background:#06080b;"></div>
-                                <div class="relative w-full h-full rounded-[28px] overflow-hidden bg-white">
-                                    <img src="/images/screen-sos.png" alt="Auxilio SOS screen" class="absolute inset-0 w-full h-full object-cover object-top" />
-                                </div>
-                                {{-- floating SOS pill --}}
-                                <span class="absolute -top-3 -right-3 inline-flex items-center gap-1.5 rounded-full text-white px-2.5 py-1 text-[10px] font-bold tracking-widest uppercase shadow-lg sos-glow" style="background:#FB0606;">
-                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-white pulse-dot text-white"></span>
-                                    SOS
-                                </span>
-                            </div>
-                        </div>
-
-                        {{-- right: live feed mockup --}}
-                        <div class="lg:col-span-7 p-7 lg:p-9 border-t lg:border-t-0 lg:border-l border-white/10">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2 text-[11px] uppercase tracking-[.16em] text-white/50 font-semibold">
-                                    <span class="grid place-items-center w-6 h-6 rounded-md" style="background:rgba(244,196,65,.15);">
-                                        <svg class="w-3 h-3" style="color:#f4c441;" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
-                                    </span>
-                                    Live activity
-                                </div>
-                                <span class="text-[10px] font-mono text-white/40">NEWARK &middot; SECTOR 4</span>
-                            </div>
-
-                            <div class="mt-5 space-y-3">
-                                @php
-                                    $feed = [
-                                        ['tag'=>'SOS','tag_color'=>'#FB0606','title'=>'Karen B. tapped SOS','meta'=>'870 Broadway · 0.6mi · 18s ago'],
-                                        ['tag'=>'ALERT','tag_color'=>'#f4c441','title'=>'Registered offender within 0.5mi','meta'=>'Auto-refreshed registry · Home zone'],
-                                        ['tag'=>'AGENT','tag_color'=>'#22c55e','title'=>'Agent Mosley en-route, ETA 4m','meta'=>'Verified Super Agent · Badge #4129'],
-                                        ['tag'=>'CASE','tag_color'=>'#3b82f6','title'=>'Case #2026-0488 closed safely','meta'=>'Resolution: family reunified'],
-                                    ];
-                                @endphp
-                                @foreach ($feed as $i => $f)
-                                    <div class="flex items-center gap-3 rounded-lg border border-white/5 p-3" style="background:rgba(255,255,255,0.025);">
-                                        <span class="rounded-md text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 shrink-0" style="background:{{ $f['tag_color'] }};">{{ $f['tag'] }}</span>
-                                        <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-semibold text-white truncate">{{ $f['title'] }}</p>
-                                            <p class="text-[11px] text-white/50 truncate">{{ $f['meta'] }}</p>
-                                        </div>
-                                        <svg class="w-4 h-4 text-white/30 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                                    </div>
-                                @endforeach
-                            </div>
-
-                            {{-- mini metric strip --}}
-                            <div class="mt-5 grid grid-cols-3 gap-3">
-                                <div class="rounded-lg border border-white/5 p-3" style="background:rgba(255,255,255,0.025);">
-                                    <p class="text-[10px] uppercase tracking-[.14em] text-white/40 font-semibold">Active</p>
-                                    <p class="mt-1 text-lg font-bold text-white">12</p>
-                                </div>
-                                <div class="rounded-lg border border-white/5 p-3" style="background:rgba(255,255,255,0.025);">
-                                    <p class="text-[10px] uppercase tracking-[.14em] text-white/40 font-semibold">Avg ETA</p>
-                                    <p class="mt-1 text-lg font-bold" style="color:#f4c441;">4.2m</p>
-                                </div>
-                                <div class="rounded-lg border border-white/5 p-3" style="background:rgba(255,255,255,0.025);">
-                                    <p class="text-[10px] uppercase tracking-[.14em] text-white/40 font-semibold">Cleared</p>
-                                    <p class="mt-1 text-lg font-bold" style="color:#22c55e;">98%</p>
-                                </div>
-                            </div>
-                        </div>
+                {{-- Center HUB (Auxilio core) --}}
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                    <div class="grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.55)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
+                        <svg class="w-7 h-7" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+                        </svg>
                     </div>
+                    <span class="absolute inset-0 rounded-full map-pin" aria-hidden="true"></span>
                 </div>
+
+                {{-- Pin + role tag clusters (absolute positioned over the SVG map) --}}
+                @php
+                    $pins = [
+                        ['top'=>'24%','left'=>'24%','label'=>'Police Officer',   'delay'=>'0s',  'side'=>'left'],
+                        ['top'=>'20%','left'=>'72%','label'=>'911 Dispatch',     'delay'=>'1.5s','side'=>'right'],
+                        ['top'=>'68%','left'=>'30%','label'=>'Super Agent',      'delay'=>'3s',  'side'=>'left'],
+                        ['top'=>'52%','left'=>'56%','label'=>'First Responder',  'delay'=>'4.5s','side'=>'right'],
+                        ['top'=>'76%','left'=>'82%','label'=>'Trusted Contact',  'delay'=>'6s',  'side'=>'left'],
+                        ['top'=>'46%','left'=>'78%','label'=>'EMT',              'delay'=>'7.5s','side'=>'right'],
+                    ];
+                @endphp
+                @foreach ($pins as $p)
+                    <div class="absolute z-10" style="top:{{ $p['top'] }};left:{{ $p['left'] }};">
+                        {{-- pin dot --}}
+                        <span class="block w-3 h-3 rounded-full ring-4 ring-white" style="background:#FB0606;"></span>
+                        {{-- role label --}}
+                        <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 {{ $p['side']==='right' ? 'left-5 top-1/2 -translate-y-1/2' : 'right-5 top-1/2 -translate-y-1/2' }}" style="animation-delay:{{ $p['delay'] }};">
+                            {{ $p['label'] }}
+                            {{-- speech-bubble tail --}}
+                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 {{ $p['side']==='right' ? '-left-1 border-l border-b' : '-right-1 border-r border-t' }}"></span>
+                        </span>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
 </section>
 
 {{-- =======================================================================
-     PARTNER / TRUST MARQUEE
+     POLICE BADGE MARQUEE — moving bar of US PD insignia under hero
 ========================================================================--}}
-<section class="relative border-y border-ink-100 bg-white py-10 overflow-hidden">
-    <p class="text-center text-[11px] font-semibold uppercase tracking-[.22em] text-ink-500">
-        Working alongside agencies, registries &amp; communities across <span class="text-brand-600">40+ states</span>
+<section class="relative bg-white border-y border-ink-100 py-12 overflow-hidden">
+    <p class="text-center text-sm font-medium text-navy-900/65">
+        Trusted alongside <span class="font-semibold" style="color:#FB0606;">law enforcement &amp; first responders</span> nationwide.
     </p>
-    <div class="mt-7 flex items-center gap-12 marquee-track whitespace-nowrap">
-        @php
-            $partners = ['NEWARK PD','NJSP','NCMEC','911 Dispatch','NSOPW Registry','City of Charlotte','Austin Safety Net','Denver SafeWalk','Megan&rsquo;s Law','State Patrol','Verified Super Agents','iOS · Android'];
-            $partners = array_merge($partners, $partners);
-        @endphp
-        @foreach ($partners as $p)
-            <span class="inline-flex items-center gap-3 text-base font-display font-bold tracking-tight text-navy-900/70">
-                <svg class="w-4 h-4 text-brand-600" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
-                {!! $p !!}
-            </span>
-        @endforeach
+
+    <div class="mt-8 relative">
+        {{-- fade edges --}}
+        <div class="pointer-events-none absolute inset-y-0 left-0 w-24 z-10" style="background:linear-gradient(90deg,#fff 10%,rgba(255,255,255,0));"></div>
+        <div class="pointer-events-none absolute inset-y-0 right-0 w-24 z-10" style="background:linear-gradient(-90deg,#fff 10%,rgba(255,255,255,0));"></div>
+
+        <div class="flex items-center gap-14 badge-marquee whitespace-nowrap">
+            @php
+                // Stylized US police agency badges — circular shield with department initials.
+                // Real PD logos are licensed; these are designed insignia placeholders.
+                $depts = [
+                    ['name'=>'NYPD',       'sub'=>'New York City',  'color'=>'#1a3a8a'],
+                    ['name'=>'LAPD',       'sub'=>'Los Angeles',    'color'=>'#0f3d6e'],
+                    ['name'=>'CPD',        'sub'=>'Chicago',        'color'=>'#1e3a8a'],
+                    ['name'=>'HPD',        'sub'=>'Houston',        'color'=>'#1a2548'],
+                    ['name'=>'PPD',        'sub'=>'Philadelphia',   'color'=>'#0c4a6e'],
+                    ['name'=>'PhxPD',      'sub'=>'Phoenix',        'color'=>'#7c2d12'],
+                    ['name'=>'SAPD',       'sub'=>'San Antonio',    'color'=>'#14532d'],
+                    ['name'=>'SDPD',       'sub'=>'San Diego',      'color'=>'#1e3a8a'],
+                    ['name'=>'DPD',        'sub'=>'Dallas',         'color'=>'#1a2548'],
+                    ['name'=>'BPD',        'sub'=>'Boston',         'color'=>'#0c4a6e'],
+                    ['name'=>'NPD',        'sub'=>'Newark',         'color'=>'#FB0606'],
+                    ['name'=>'NJSP',       'sub'=>'NJ State Police','color'=>'#1a2548'],
+                    ['name'=>'FBI',        'sub'=>'Federal Bureau', 'color'=>'#0c1126'],
+                    ['name'=>'USMS',       'sub'=>'US Marshals',    'color'=>'#1a3a8a'],
+                    ['name'=>'CHP',        'sub'=>'California HP',  'color'=>'#7c2d12'],
+                ];
+                $depts = array_merge($depts, $depts);
+            @endphp
+            @foreach ($depts as $d)
+                <div class="inline-flex items-center gap-3 shrink-0 grayscale hover:grayscale-0 transition opacity-80 hover:opacity-100">
+                    {{-- badge SVG: police shield/star --}}
+                    <span class="relative grid place-items-center w-12 h-12 shrink-0">
+                        <svg viewBox="0 0 64 64" class="absolute inset-0 w-full h-full">
+                            {{-- outer star (7-point) --}}
+                            <path fill="{{ $d['color'] }}" d="M32 2 L37 14 L50 12 L46 25 L58 30 L46 37 L50 50 L37 48 L32 62 L27 48 L14 50 L18 37 L6 30 L18 25 L14 12 L27 14 Z" stroke="#fff" stroke-width="1.4"/>
+                            {{-- inner shield --}}
+                            <path fill="#fff" d="M32 16 L44 21 V32 C44 39 38 44 32 46 C26 44 20 39 20 32 V21 Z"/>
+                            {{-- inner mark --}}
+                            <path fill="{{ $d['color'] }}" d="M32 22 L40 26 V32 C40 36 36 40 32 41 C28 40 24 36 24 32 V26 Z"/>
+                            {{-- center star --}}
+                            <path fill="#fff" d="M32 27 L33.2 30 L36.4 30 L33.8 32 L34.8 35 L32 33.2 L29.2 35 L30.2 32 L27.6 30 L30.8 30 Z"/>
+                        </svg>
+                    </span>
+                    <div class="flex flex-col">
+                        <span class="font-display font-extrabold text-lg tracking-tight leading-none" style="color:{{ $d['color'] }};">{{ $d['name'] }}</span>
+                        <span class="mt-1 text-[10px] uppercase tracking-[.18em] font-semibold text-ink-500">{{ $d['sub'] }}</span>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 </section>
 
@@ -269,7 +292,7 @@
                 We turn safety information into <span class="text-brand-600">decisive action.</span>
             </h2>
             <p class="reveal reveal-delay-2 mt-6 text-lg text-navy-700/80 leading-relaxed">
-                Auxilio is the personal safety layer your phone has been missing. We unify live crime data, public registries, verified responders, and a one-tap SOS into a single experience — so families never have to refresh the news to know whether to keep the kids inside.
+                Auxilio is the personal safety layer your phone has been missing. We unify live crime data, public registries, verified responders, and a one-tap Alert into a single experience — so families never have to refresh the news to know whether to keep the kids inside.
             </p>
             <div class="reveal reveal-delay-3 mt-8 grid grid-cols-2 gap-x-8 gap-y-5">
                 <div class="flex items-start gap-3">
@@ -353,9 +376,9 @@
 
         @php
             $solutions = [
-                ['title'=>'End-to-end SOS','body'=>'One tap routes your location, identity, and situation to verified responders and trusted contacts simultaneously — no menus, no panic-typing.','icon'=>'sos','accent'=>'#FB0606'],
-                ['title'=>'Intelligent screening','body'=>'Live crime maps and registry overlays filter the noise so you see only what matters within your geofence — color-coded, time-sorted, actionable.','icon'=>'shield','accent'=>'#f4c441'],
-                ['title'=>'Data-driven decisions','body'=>'Case progress, agent ETAs, and resolution metrics — every interaction adds to a transparent record you can trust over time.','icon'=>'progress','accent'=>'#22c55e'],
+                ['title'=>'End-to-end Alert','body'=>'One tap routes your location, identity, and situation to verified responders and trusted contacts simultaneously — no menus, no panic-typing.','icon'=>'sos','accent'=>'#FB0606'],
+                ['title'=>'Intelligent screening','body'=>'Live crime maps and registry overlays filter the noise so you see only what matters within your geofence — color-coded, time-sorted, actionable.','icon'=>'shield','accent'=>'#FB0606'],
+                ['title'=>'Data-driven decisions','body'=>'Case progress, agent ETAs, and resolution metrics — every interaction adds to a transparent record you can trust over time.','icon'=>'progress','accent'=>'#FB0606'],
             ];
         @endphp
         <div class="mt-14 stagger grid md:grid-cols-3 gap-5">
@@ -389,14 +412,14 @@
                 The intelligent network behind <span class="text-brand-600">safer streets.</span>
             </h2>
             <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-700/80 leading-relaxed">
-                Nine capabilities, one continuous safety fabric. Each feature talks to the next — alerts inform geofences, geofences trigger SOS shortcuts, SOS routes to verified responders.
+                Nine capabilities, one continuous safety fabric. Each feature talks to the next — alerts inform geofences, geofences trigger Alert shortcuts, Alerts route to verified responders.
             </p>
         </div>
 
         @php
             $features = [
                 ['title' => 'Real-Time Safety Alerts',  'body' => 'Instant push notifications the moment something happens near you, your home, or the people you care about.', 'icon' => 'bell'],
-                ['title' => 'Quick SOS for Instant Help', 'body' => 'One tap alerts trusted agents or emergency responders with your location, situation, and identity — when seconds matter.',  'icon' => 'sos'],
+                ['title' => 'Quick Alert for Instant Help', 'body' => 'One tap alerts trusted agents or emergency responders with your location, situation, and identity — when seconds matter.',  'icon' => 'sos'],
                 ['title' => 'Track &amp; Share Location', 'body' => 'Let your loved ones or verified security agents monitor your location in real time — never alone on the way home.',     'icon' => 'location'],
                 ['title' => 'Verified Super Agents',     'body' => 'A trained, background-checked network of safety agents who can respond, escort, or coordinate help on your behalf.',                'icon' => 'shield'],
                 ['title' => 'Live Crime Map',            'body' => 'A live, color-coded map of incidents reported around you — searchable, filterable, and refreshed as events come in.',          'icon' => 'map'],
@@ -428,15 +451,15 @@
 {{-- =======================================================================
      WHY CHOOSE — 4-col cards on dark
 ========================================================================--}}
-<section class="relative py-24 lg:py-32 overflow-hidden" style="background:#06080b;">
-    <div class="pointer-events-none absolute inset-0 -z-0 opacity-50">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[600px] rounded-full blur-3xl" style="background:radial-gradient(ellipse,rgba(251,6,6,.18) 0%,transparent 60%);"></div>
+<section class="relative py-24 lg:py-32 overflow-hidden" style="background:#FB0606;">
+    <div class="pointer-events-none absolute inset-0 -z-0 opacity-60">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[600px] rounded-full blur-3xl" style="background:radial-gradient(ellipse,rgba(0,0,0,.35) 0%,transparent 60%);"></div>
     </div>
     <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div class="max-w-3xl">
             <p class="reveal text-xs font-semibold uppercase tracking-[.2em]" style="color:#f4c441;">Why choose Auxilio?</p>
             <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-white">
-                A safety stack designed to <span style="color:#FB0606;">act,</span> not just inform.
+                A safety stack designed to <span style="color:#f4c441;">act,</span> not just inform.
             </h2>
         </div>
 
@@ -445,7 +468,7 @@
                 ['title'=>'Real-time, not next-day','body'=>'Sub-30-second alerting from incident to your lock screen — beating local news by minutes.','icon'=>'bell'],
                 ['title'=>'Verified network','body'=>'Every responder, agent, and registry update is verified — no anonymous &ldquo;tips&rdquo; clogging the feed.','icon'=>'shield'],
                 ['title'=>'Private by default','body'=>'You choose who sees you. End-to-end location encryption with explicit, revocable sharing.','icon'=>'location'],
-                ['title'=>'Always on, always free','body'=>'Core safety features — alerts, SOS, registry — are free forever. No paywall on emergencies.','icon'=>'sos'],
+                ['title'=>'Always on, always free','body'=>'Core safety features — alerts, panic button, registry — are free forever. No paywall on emergencies.','icon'=>'sos'],
             ];
         @endphp
         <div class="mt-14 stagger grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -534,40 +557,6 @@
                     <span class="text-sm font-semibold text-navy-900">{!! $b['name'] !!}</span>
                 </div>
             @endforeach
-        </div>
-    </div>
-</section>
-
-{{-- =======================================================================
-     INTEGRATIONS — agencies, registries, devices
-========================================================================--}}
-<section class="relative py-24 lg:py-32 bg-white">
-    <div class="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-5">
-            <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-brand-600">Integrations</p>
-            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl tracking-tight text-navy-900 leading-[1.05]">
-                Plugs into the safety infrastructure you <span class="text-brand-600">already trust.</span>
-            </h2>
-            <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-700/80 leading-relaxed">
-                Local PDs, public registries, family group chats, smart devices — Auxilio pulls them into one canonical timeline so nothing slips through.
-            </p>
-            <a href="#download" class="reveal reveal-delay-3 mt-7 inline-flex items-center gap-2 rounded-md bg-navy-900 hover:bg-navy-800 text-white px-6 py-3 text-sm font-semibold transition">
-                See full list
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
-            </a>
-        </div>
-
-        <div class="lg:col-span-7">
-            <div class="reveal reveal-right grid grid-cols-3 sm:grid-cols-4 gap-3">
-                @php
-                    $ints = ['NEWARK PD','NJSP','NCMEC','NSOPW','911','Ring','Apple Watch','Wear OS','Google Maps','Waze','Twilio','iMessage','SMS','WhatsApp','Slack','Teams'];
-                @endphp
-                @foreach ($ints as $i => $name)
-                    <div class="aspect-square rounded-xl border border-ink-100 bg-white grid place-items-center text-center p-3 text-xs font-semibold text-navy-900 hover:border-brand-600 hover:text-brand-600 hover:-translate-y-0.5 transition shadow-sm">
-                        {{ $name }}
-                    </div>
-                @endforeach
-            </div>
         </div>
     </div>
 </section>
