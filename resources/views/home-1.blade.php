@@ -17,6 +17,11 @@
         [data-menu-panel] { transform: translateY(-12px); opacity: 0; pointer-events: none; transition: .25s ease; }
         [data-menu-panel].is-open { transform: none; opacity: 1; pointer-events: auto; }
         .hero-bg { background: linear-gradient(180deg, #eef2f8 0%, #f4f6fb 50%, #ffffff 100%); }
+        /* Inside the dispatch panel, force Leaflet's panes BELOW our SVG overlay + avatars
+           (Leaflet's defaults go up to z:700 which would hide everything we layer on top). */
+        #dispatch-leaflet .leaflet-pane,
+        #dispatch-leaflet .leaflet-top,
+        #dispatch-leaflet .leaflet-bottom { z-index: 1 !important; }
         .crime-marker { background:transparent !important; border:0 !important; }
         .crime-marker .pin { display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:22px; padding:2px 6px; color:#fff; font-weight:800; font-size:11px; border-radius:6px; border:2px solid #fff; box-shadow:0 6px 14px rgba(0,0,0,.28); }
         .crime-marker .pin:hover { transform: translateY(-2px); }
