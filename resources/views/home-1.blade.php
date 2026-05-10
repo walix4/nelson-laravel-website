@@ -956,6 +956,20 @@
                             <path d="M 70 70 Q 160 110 200 150 Q 250 180 330 200"
                                   stroke="rgba(244,196,65,.25)" stroke-width="8" fill="none" stroke-linecap="round" filter="url(#glowR)"/>
 
+                            {{-- Second responder route: top-right → user --}}
+                            <path id="dispatchRoute2" d="M 360 40 Q 380 90 360 140 Q 348 175 330 200"
+                                  stroke="rgba(228,67,82,.7)" stroke-width="2.5" fill="none" stroke-linecap="round"
+                                  stroke-dasharray="4 5" class="route-march" />
+                            <path d="M 360 40 Q 380 90 360 140 Q 348 175 330 200"
+                                  stroke="rgba(228,67,82,.18)" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glowR)"/>
+
+                            {{-- Third responder route: bottom-left → user --}}
+                            <path id="dispatchRoute3" d="M 40 215 Q 130 220 210 215 Q 280 210 330 200"
+                                  stroke="rgba(59,130,246,.7)" stroke-width="2.5" fill="none" stroke-linecap="round"
+                                  stroke-dasharray="4 5" class="route-march" />
+                            <path d="M 40 215 Q 130 220 210 215 Q 280 210 330 200"
+                                  stroke="rgba(59,130,246,.18)" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glowR)"/>
+
                             {{-- Moving police cruiser — top-down, fully detailed --}}
                             <g>
                                 {{-- Big red & blue siren glow halos (alternating, soft-blurred) --}}
@@ -1082,6 +1096,34 @@
                                 </animateMotion>
                             </g>
 
+                            {{-- Second cruiser — pulsing glow dot along route 2 --}}
+                            <g>
+                                <circle r="14" fill="rgba(228,67,82,.45)" filter="url(#bigGlow)">
+                                    <animate attributeName="opacity" values=".9;.2;.9" dur=".42s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle r="5" fill="#fff" stroke="rgba(228,67,82,.9)" stroke-width="1.5"/>
+                                <circle r="2" fill="#e44352">
+                                    <animate attributeName="r" values="2;2.6;2" dur=".42s" repeatCount="indefinite"/>
+                                </circle>
+                                <animateMotion dur="7.2s" repeatCount="indefinite" rotate="auto">
+                                    <mpath href="#dispatchRoute2"/>
+                                </animateMotion>
+                            </g>
+
+                            {{-- Third cruiser — pulsing glow dot along route 3 --}}
+                            <g>
+                                <circle r="14" fill="rgba(59,130,246,.45)" filter="url(#bigGlow)">
+                                    <animate attributeName="opacity" values=".9;.2;.9" dur=".42s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle r="5" fill="#fff" stroke="rgba(59,130,246,.9)" stroke-width="1.5"/>
+                                <circle r="2" fill="#3b82f6">
+                                    <animate attributeName="r" values="2;2.6;2" dur=".42s" repeatCount="indefinite"/>
+                                </circle>
+                                <animateMotion dur="8s" repeatCount="indefinite" rotate="auto">
+                                    <mpath href="#dispatchRoute3"/>
+                                </animateMotion>
+                            </g>
+
                             {{-- user destination pin --}}
                             <g transform="translate(330 200)">
                                 <circle r="11" fill="rgba(228,67,82,.18)"/>
@@ -1161,6 +1203,30 @@
                                 <div class="absolute left-full ml-2 top-1/2 -translate-y-1/2 whitespace-nowrap">
                                     <p class="text-[10px] font-bold text-white leading-tight drop-shadow">Officer Marcus</p>
                                     <p class="text-[9px] text-gold-300 leading-tight drop-shadow">en route · ★ 4.9</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Officer Diaz — second responder, top-right start --}}
+                        <div class="absolute" style="left: calc(360/400 * 100%); top: calc(40/250 * 100%); transform: translate(-50%, -50%);">
+                            <div class="relative">
+                                <div class="absolute -inset-1 rounded-full bg-brand-500/40 blur-md"></div>
+                                <div class="relative w-10 h-10 rounded-full ring-2 ring-brand-400 ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-gradient-to-br from-brand-600 to-brand-800 grid place-items-center text-white font-bold text-sm shadow-lg">D</div>
+                                <div class="absolute right-full mr-2 top-1/2 -translate-y-1/2 whitespace-nowrap text-right">
+                                    <p class="text-[10px] font-bold text-white leading-tight drop-shadow">Officer Diaz</p>
+                                    <p class="text-[9px] text-brand-300 leading-tight drop-shadow">en route · ★ 4.7</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Officer Pollock — third responder, bottom-left start --}}
+                        <div class="absolute" style="left: calc(40/400 * 100%); top: calc(215/250 * 100%); transform: translate(-50%, -50%);">
+                            <div class="relative">
+                                <div class="absolute -inset-1 rounded-full bg-blue-500/40 blur-md"></div>
+                                <div class="relative w-10 h-10 rounded-full ring-2 ring-blue-400 ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800 grid place-items-center text-white font-bold text-sm shadow-lg">P</div>
+                                <div class="absolute left-full ml-2 top-1/2 -translate-y-1/2 whitespace-nowrap">
+                                    <p class="text-[10px] font-bold text-white leading-tight drop-shadow">Officer Pollock</p>
+                                    <p class="text-[9px] text-blue-300 leading-tight drop-shadow">en route · ★ 4.8</p>
                                 </div>
                             </div>
                         </div>
