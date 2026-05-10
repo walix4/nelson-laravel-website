@@ -941,17 +941,17 @@
                                 ];
                             @endphp
                             @foreach ($routes as $r)
-                                <path d="{{ $r['d'] }}" stroke="{{ $r['gc'] }}" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glowR)"/>
-                                <path id="{{ $r['id'] }}" d="{{ $r['d'] }}" stroke="{{ $r['sc'] }}" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-dasharray="4 5" class="route-march"/>
+                                <path d="{{ $r['d'] }}" stroke="{{ $r['gc'] }}" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#glowR)"/>
+                                <path id="{{ $r['id'] }}" d="{{ $r['d'] }}" stroke="{{ $r['sc'] }}" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="3 4" class="route-march"/>
                             @endforeach
 
                             {{-- 6 detailed police cruisers (one per officer), scaled down a bit for the busier map --}}
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute',  'dur'=>'5.5s', 'scale'=>'0.7'])
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute2', 'dur'=>'6s',   'scale'=>'0.7'])
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute3', 'dur'=>'6.5s', 'scale'=>'0.7'])
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute4', 'dur'=>'7s',   'scale'=>'0.7'])
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute5', 'dur'=>'7.5s', 'scale'=>'0.7'])
-                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute6', 'dur'=>'8s',   'scale'=>'0.7'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute',  'dur'=>'5.5s', 'scale'=>'0.55'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute2', 'dur'=>'6s',   'scale'=>'0.55'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute3', 'dur'=>'6.5s', 'scale'=>'0.55'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute4', 'dur'=>'7s',   'scale'=>'0.55'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute5', 'dur'=>'7.5s', 'scale'=>'0.55'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute6', 'dur'=>'8s',   'scale'=>'0.55'])
 
 
                             {{-- victim destination — pulsing red halo at center (200,125), avatar overlay sits on top --}}
