@@ -928,16 +928,21 @@
                             {{-- River label --}}
                             <text x="160" y="245" fill="rgba(140,190,230,.45)" font-family="Inter, sans-serif" font-style="italic" font-size="8">East River</text>
 
-                            {{-- 6 sweeping arc routes converging from the perimeter onto the victim at center (200, 125) --}}
+                            {{-- 6 distinct sweeping routes — each has its own personality so the map doesn't feel like spokes on a wheel --}}
                             @php
-                                // C-cubic curves give a graceful arc (sweep outward, then inward to the victim).
                                 $routes = [
-                                    ['id'=>'dispatchRoute',  'd'=>'M 60 40   C 90 80, 130 110, 200 125',   'sc'=>'url(#routeStroke)',   'gc'=>'rgba(244,196,65,.22)'],
-                                    ['id'=>'dispatchRoute2', 'd'=>'M 340 40  C 310 80, 270 110, 200 125',  'sc'=>'rgba(228,67,82,.7)',  'gc'=>'rgba(228,67,82,.18)'],
-                                    ['id'=>'dispatchRoute3', 'd'=>'M 380 125 C 320 110, 260 120, 200 125','sc'=>'rgba(59,130,246,.7)', 'gc'=>'rgba(59,130,246,.18)'],
-                                    ['id'=>'dispatchRoute4', 'd'=>'M 340 210 C 310 175, 260 145, 200 125','sc'=>'rgba(244,196,65,.7)', 'gc'=>'rgba(244,196,65,.18)'],
-                                    ['id'=>'dispatchRoute5', 'd'=>'M 60 210  C 90 175, 130 145, 200 125', 'sc'=>'rgba(228,67,82,.7)',  'gc'=>'rgba(228,67,82,.18)'],
-                                    ['id'=>'dispatchRoute6', 'd'=>'M 20 125  C 80 110, 140 120, 200 125', 'sc'=>'rgba(59,130,246,.7)', 'gc'=>'rgba(59,130,246,.18)'],
+                                    // Marcus (top-left): S-shape swooping down-left then up to victim
+                                    ['id'=>'dispatchRoute',  'd'=>'M 60 40   C 10 130, 110 60, 200 125',   'sc'=>'url(#routeStroke)',   'gc'=>'rgba(244,196,65,.22)'],
+                                    // Diaz (top-right): wide outside-right arc, sweeping down then in
+                                    ['id'=>'dispatchRoute2', 'd'=>'M 340 40  C 395 95, 360 175, 200 125',  'sc'=>'rgba(228,67,82,.7)',  'gc'=>'rgba(228,67,82,.18)'],
+                                    // Holland (east): drops south then comes up from below
+                                    ['id'=>'dispatchRoute3', 'd'=>'M 380 125 C 365 215, 245 215, 200 125','sc'=>'rgba(59,130,246,.7)', 'gc'=>'rgba(59,130,246,.18)'],
+                                    // Pierce (bottom-right): big outer right hook climbing up to victim
+                                    ['id'=>'dispatchRoute4', 'd'=>'M 340 210 C 395 175, 380 70, 200 125', 'sc'=>'rgba(244,196,65,.7)', 'gc'=>'rgba(244,196,65,.18)'],
+                                    // Pollock (bottom-left): mirror of Marcus, swoops up then in
+                                    ['id'=>'dispatchRoute5', 'd'=>'M 60 210  C 5 130, 110 200, 200 125',  'sc'=>'rgba(228,67,82,.7)',  'gc'=>'rgba(228,67,82,.18)'],
+                                    // Mosley (west): rises north then drops down to victim
+                                    ['id'=>'dispatchRoute6', 'd'=>'M 20 125  C 35 35, 135 35, 200 125',   'sc'=>'rgba(59,130,246,.7)', 'gc'=>'rgba(59,130,246,.18)'],
                                 ];
                             @endphp
                             @foreach ($routes as $r)
