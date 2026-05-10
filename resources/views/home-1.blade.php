@@ -96,8 +96,8 @@
                 {{-- Soft pedestal --}}
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
-                {{-- Red drop-ripple OVER the phone (z above) — pulses out from device --}}
-                <div class="absolute pointer-events-none aspect-square" style="top:22%; left:40%; width:25%; z-index:30;" aria-hidden="true">
+                {{-- Red drop-ripple BEHIND the phone — emerges from behind device --}}
+                <div class="absolute pointer-events-none aspect-square" style="top:25%; left:30%; width:40%; z-index:0;" aria-hidden="true">
                     <span class="absolute inset-0 rounded-full bg-red-500 map-pulse"></span>
                     <span class="absolute inset-0 rounded-full bg-red-500 map-pulse" style="animation-delay:1.75s"></span>
                 </div>
