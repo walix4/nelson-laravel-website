@@ -251,491 +251,6 @@
 
 
 
-<section id="dispatch" class="relative py-24 lg:py-32 bg-navy-950 text-white overflow-hidden">
-    <div class="pointer-events-none absolute inset-0 -z-0 opacity-30">
-        <div class="absolute top-0 left-1/4 w-[480px] h-[480px] rounded-full bg-brand-600/40 blur-3xl"></div>
-        <div class="absolute bottom-0 right-1/4 w-[420px] h-[420px] rounded-full bg-gold-500/30 blur-3xl"></div>
-    </div>
-
-    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-6 reveal reveal-left">
-            <p class="text-xs font-semibold uppercase tracking-[.2em] text-brand-400">Live Agent Dispatch</p>
-            <h2 class="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight">
-                A verified agent, <span class="text-gold-400">on the way</span> in seconds.
-            </h2>
-            <p class="mt-5 text-lg text-navy-200/80 leading-relaxed max-w-xl">
-                The moment you confirm an emergency, Auxilio searches nearby Super Agents, locks in the closest match, and shows you the countdown — distance, duration, ETA — until they arrive.
-            </p>
-
-            <ul class="mt-8 stagger space-y-3">
-                                                    <li class="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition">
-                        <span class="grid place-items-center shrink-0 w-9 h-9 rounded-xl bg-brand-600 text-white">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                        </span>
-                        <div>
-                            <p class="font-semibold">Verified Super Agents</p>
-                            <p class="text-sm text-navy-200/80 mt-0.5">Background-checked, trained, and rated by the community.</p>
-                        </div>
-                    </li>
-                                    <li class="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition">
-                        <span class="grid place-items-center shrink-0 w-9 h-9 rounded-xl bg-brand-600 text-white">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                        </span>
-                        <div>
-                            <p class="font-semibold">Live ETA &amp; metrics</p>
-                            <p class="text-sm text-navy-200/80 mt-0.5">Distance, duration, driving and walking times — refreshed continuously.</p>
-                        </div>
-                    </li>
-                                    <li class="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition">
-                        <span class="grid place-items-center shrink-0 w-9 h-9 rounded-xl bg-brand-600 text-white">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                        </span>
-                        <div>
-                            <p class="font-semibold">Trusted contacts loop</p>
-                            <p class="text-sm text-navy-200/80 mt-0.5">Loved ones can watch the same dispatch — no extra setup.</p>
-                        </div>
-                    </li>
-                            </ul>
-        </div>
-
-        
-        <div class="lg:col-span-6 reveal reveal-right">
-            <div data-dispatch data-dispatch-start="35" class="relative rounded-[28px] border border-white/10 bg-white/[0.04] backdrop-blur p-6 lg:p-8 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)] overflow-hidden">
-                <div class="absolute -inset-px rounded-[28px] bg-gradient-to-tr from-brand-600/20 via-transparent to-gold-400/20 -z-10"></div>
-
-                
-                <div class="flex items-center justify-between">
-                    <div class="dispatch-pulse inline-flex items-center gap-2.5 rounded-full bg-brand-600/20 border border-brand-500/40 px-3 py-1.5">
-                        <span class="relative inline-flex w-2 h-2 rounded-full bg-brand-400 pulse-dot text-brand-400"></span>
-                        <span class="text-[11px] font-bold uppercase tracking-[.2em] text-brand-200">Dispatching</span>
-                    </div>
-                    <span class="text-[11px] font-mono text-white/50">AUX.DISPATCH · UNIT 04</span>
-                </div>
-
-                
-                <div class="relative mt-6 aspect-[16/10] rounded-md border border-white/10 bg-[#0d1429] overflow-hidden">
-                    <svg viewBox="0 0 400 250" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
-                        <defs>
-                            <pattern id="dispatchGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                                <path d="M40 0H0V40" stroke="rgba(255,255,255,.04)" stroke-width="1" fill="none"/>
-                            </pattern>
-                            <linearGradient id="routeStroke" x1="0" x2="1">
-                                <stop offset="0%"  stop-color="#f4c441"/>
-                                <stop offset="100%" stop-color="#e44352"/>
-                            </linearGradient>
-                            <linearGradient id="bgFade" x1="0" x2="0" y1="0" y2="1">
-                                <stop offset="0%"  stop-color="#0e1b3d"/>
-                                <stop offset="100%" stop-color="#0a1428"/>
-                            </linearGradient>
-                            <radialGradient id="vignette" cx="50%" cy="55%" r="80%">
-                                <stop offset="60%" stop-color="rgba(0,0,0,0)"/>
-                                <stop offset="100%" stop-color="rgba(0,0,0,.65)"/>
-                            </radialGradient>
-                            <filter id="glowR" x="-50%" y="-50%" width="200%" height="200%">
-                                <feGaussianBlur stdDeviation="3"/>
-                            </filter>
-                            <filter id="bigGlow" x="-100%" y="-100%" width="300%" height="300%">
-                                <feGaussianBlur stdDeviation="6"/>
-                            </filter>
-                            <linearGradient id="carBody" x1="0" y1="-1" x2="0" y2="1">
-                                <stop offset="0%"  stop-color="#ffffff"/>
-                                <stop offset="50%" stop-color="#e8edf2"/>
-                                <stop offset="100%" stop-color="#aab3bf"/>
-                            </linearGradient>
-                            <linearGradient id="hoodShine" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%"  stop-color="rgba(255,255,255,.6)"/>
-                                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-                            </linearGradient>
-                        </defs>
-
-                        
-                        <rect width="400" height="250" fill="url(#bgFade)"/>
-                        <rect width="400" height="250" fill="url(#dispatchGrid)"/>
-
-                        
-                        <path d="M-10 220 Q60 200 130 215 Q210 232 280 218 Q340 208 410 226 L410 260 L-10 260 Z"
-                              fill="#0c2742" opacity=".75"/>
-                        <path d="M-10 220 Q60 200 130 215 Q210 232 280 218 Q340 208 410 226"
-                              stroke="rgba(120,180,230,.08)" stroke-width="1.2" fill="none"/>
-
-                        
-                        <path d="M40 110 Q70 95 110 105 Q140 113 145 140 Q140 165 105 168 Q70 170 50 155 Q35 138 40 110 Z"
-                              fill="#1a3a2c" opacity=".55"/>
-                        <path d="M260 30 Q300 20 335 40 Q355 60 345 88 Q325 105 290 100 Q260 92 255 65 Q252 45 260 30 Z"
-                              fill="#1a3a2c" opacity=".4"/>
-
-                        
-                        <g fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.05)" stroke-width="0.5">
-                            <rect x="160" y="50"  width="38" height="22" rx="2"/>
-                            <rect x="205" y="50"  width="32" height="22" rx="2"/>
-                            <rect x="160" y="78"  width="38" height="18" rx="2"/>
-                            <rect x="205" y="78"  width="32" height="18" rx="2"/>
-                            <rect x="246" y="115" width="42" height="26" rx="2"/>
-                            <rect x="293" y="115" width="34" height="26" rx="2"/>
-                            <rect x="246" y="146" width="42" height="22" rx="2"/>
-                            <rect x="293" y="146" width="34" height="22" rx="2"/>
-                            <rect x="22"  y="40"  width="36" height="20" rx="2"/>
-                            <rect x="22"  y="65"  width="36" height="22" rx="2"/>
-                            <rect x="335" y="40"  width="40" height="22" rx="2"/>
-                            <rect x="335" y="68"  width="40" height="22" rx="2"/>
-                            <rect x="55"  y="180" width="34" height="20" rx="2"/>
-                            <rect x="92"  y="180" width="38" height="20" rx="2"/>
-                            <rect x="170" y="180" width="42" height="20" rx="2"/>
-                        </g>
-
-                        
-                        <path d="M-10 95 Q90 75 200 90 Q300 105 410 90"
-                              stroke="rgba(245,221,135,.18)" stroke-width="6" fill="none" stroke-linecap="round"/>
-                        <path d="M-10 95 Q90 75 200 90 Q300 105 410 90"
-                              stroke="rgba(245,221,135,.55)" stroke-width="1.4" fill="none" stroke-dasharray="6 6"/>
-
-                        
-                        <g stroke="rgba(255,255,255,.12)" stroke-width="2.2" fill="none" stroke-linecap="round">
-                            <path d="M-10 165 Q90 150 200 170 Q310 190 410 170"/>
-                            <path d="M105 -10 Q120 60 150 130 Q175 200 165 260"/>
-                            <path d="M295 -10 Q280 60 270 120 Q258 195 245 260"/>
-                        </g>
-
-                        
-                        <g stroke="rgba(255,255,255,.06)" stroke-width="1" fill="none">
-                            <path d="M-10 35  L410 35"/>
-                            <path d="M-10 130 L410 130"/>
-                            <path d="M-10 195 L410 195"/>
-                            <path d="M50  -10 L50  260"/>
-                            <path d="M210 -10 L210 260"/>
-                            <path d="M360 -10 L360 260"/>
-                        </g>
-
-                        
-                        <g fill="rgba(255,255,255,.18)" font-family="Inter, sans-serif" font-weight="600" font-size="7" letter-spacing=".15em">
-                            <text x="60"  y="155" >RIVERSIDE</text>
-                            <text x="170" y="62"  >MIDTOWN</text>
-                            <text x="270" y="60"  >EAST HILL</text>
-                            <text x="100" y="195" >DOWNTOWN</text>
-                        </g>
-
-                        
-                        <text x="160" y="245" fill="rgba(140,190,230,.45)" font-family="Inter, sans-serif" font-style="italic" font-size="8">East River</text>
-
-                        
-                        <path id="dispatchRoute" d="M 70 70 Q 160 110 200 150 Q 250 180 330 200"
-                              stroke="url(#routeStroke)" stroke-width="3" fill="none" stroke-linecap="round"
-                              class="route-march" />
-                        
-                        <path d="M 70 70 Q 160 110 200 150 Q 250 180 330 200"
-                              stroke="rgba(244,196,65,.25)" stroke-width="8" fill="none" stroke-linecap="round" filter="url(#glowR)"/>
-
-                        
-                        <g>
-                            
-                            <circle cx="0" cy="0" r="28" fill="rgba(228,67,82,.55)" filter="url(#bigGlow)">
-                                <animate attributeName="opacity" values=".85;0;.85" dur=".42s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="0" cy="0" r="28" fill="rgba(59,130,246,.55)" filter="url(#bigGlow)">
-                                <animate attributeName="opacity" values="0;.85;0" dur=".42s" repeatCount="indefinite"/>
-                            </circle>
-
-                            
-                            <path d="M0 0 L34 -22 L34 22 Z" fill="rgba(228,67,82,.3)" filter="url(#glowR)">
-                                <animate attributeName="opacity" values=".6;0;.6" dur=".42s" repeatCount="indefinite"/>
-                            </path>
-                            <path d="M0 0 L-34 -22 L-34 22 Z" fill="rgba(59,130,246,.3)" filter="url(#glowR)">
-                                <animate attributeName="opacity" values="0;.6;0" dur=".42s" repeatCount="indefinite"/>
-                            </path>
-
-                            
-                            <path d="M14 -4 L34 -10 L34 10 L14 4 Z" fill="rgba(255,250,200,.18)" filter="url(#glowR)"/>
-
-                            
-                            <ellipse cx="0" cy="2.8" rx="16" ry="5" fill="rgba(0,0,0,.5)"/>
-
-                            
-                            <g>
-                                <rect x="-10" y="-7.8" width="4" height="2.4" rx=".7" fill="#0a0a0a"/>
-                                <rect x="-9.7" y="-7.4" width="3.4" height="1.6" rx=".3" fill="#2a2a2a"/>
-                            </g>
-                            <g>
-                                <rect x="6" y="-7.8" width="4" height="2.4" rx=".7" fill="#0a0a0a"/>
-                                <rect x="6.3" y="-7.4" width="3.4" height="1.6" rx=".3" fill="#2a2a2a"/>
-                            </g>
-                            <g>
-                                <rect x="-10" y="5.4" width="4" height="2.4" rx=".7" fill="#0a0a0a"/>
-                                <rect x="-9.7" y="5.8" width="3.4" height="1.6" rx=".3" fill="#2a2a2a"/>
-                            </g>
-                            <g>
-                                <rect x="6" y="5.4" width="4" height="2.4" rx=".7" fill="#0a0a0a"/>
-                                <rect x="6.3" y="5.8" width="3.4" height="1.6" rx=".3" fill="#2a2a2a"/>
-                            </g>
-
-                            
-                            <path d="M-12.5 -6 Q-14 -6 -14 -4.5 L-14 4.5 Q-14 6 -12.5 6 L11.5 6 Q14 6 14 4 L14 -4 Q14 -6 11.5 -6 Z"
-                                  fill="url(#carBody)" stroke="#1a2548" stroke-width="0.4"/>
-
-                            
-                            <path d="M5 -5.6 L13.5 -5.4 L13.5 -2 L5 -2.6 Z" fill="url(#hoodShine)" opacity=".7"/>
-
-                            
-                            <line x1="-3" y1="-6" x2="-3" y2="6" stroke="rgba(0,0,0,.18)" stroke-width=".35"/>
-                            <line x1="3"  y1="-6" x2="3"  y2="6" stroke="rgba(0,0,0,.18)" stroke-width=".35"/>
-
-                            
-                            <line x1="14" y1="0" x2="9" y2="0" stroke="rgba(0,0,0,.12)" stroke-width=".3"/>
-
-                            
-                            <rect x="2.5" y="-7"  width="2" height="1.4" rx=".4" fill="#1a2548"/>
-                            <rect x="2.5" y="5.6" width="2" height="1.4" rx=".4" fill="#1a2548"/>
-
-                            
-                            <path d="M3 -5 L8.5 -3.5 L8.5 3.5 L3 5 Z" fill="#1e3a5f"/>
-                            <path d="M3 -5 L8.5 -3.5 L8.5 -1.5 L3 -2 Z" fill="rgba(140,180,230,.45)"/>
-                            
-                            <path d="M-8.5 -3.5 L-3 -5 L-3 5 L-8.5 3.5 Z" fill="#1e3a5f"/>
-                            <path d="M-8.5 -3.5 L-3 -5 L-3 -3 L-8.5 -1.5 Z" fill="rgba(140,180,230,.4)"/>
-
-                            
-                            <rect x="-12" y="-1.4" width="24" height="2.8" fill="#0c1126"/>
-                            <text x="0" y=".7" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="1.9" fill="#fff" letter-spacing=".45">POLICE</text>
-
-                            
-                            <rect x="12.6" y="-4.8" width="1.6" height="1.8" rx=".4" fill="#fffce5"/>
-                            <rect x="12.6" y="3"    width="1.6" height="1.8" rx=".4" fill="#fffce5"/>
-                            
-                            <rect x="13" y="-1.5" width="1" height="3" rx=".2" fill="#0c1126"/>
-
-                            
-                            <rect x="-14" y="-4.8" width="1.2" height="1.8" rx=".3" fill="#a01818"/>
-                            <rect x="-14" y="3"    width="1.2" height="1.8" rx=".3" fill="#a01818"/>
-
-                            
-                            <rect x="-4" y="-3.4" width="8" height="6.8" rx="1" fill="#0c1126" stroke="#1a2548" stroke-width=".25"/>
-
-                            
-                            <g>
-                                <circle cx="-2.6" cy="-2" r=".7" fill="#e44352" filter="url(#glowR)">
-                                    <animate attributeName="fill-opacity" values="1;.2;.2;.2;1" dur=".4s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx="-.85" cy="-2" r=".7" fill="#e44352" filter="url(#glowR)">
-                                    <animate attributeName="fill-opacity" values=".2;1;.2;.2;.2" dur=".4s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx=".85"  cy="-2" r=".7" fill="#e44352" filter="url(#glowR)">
-                                    <animate attributeName="fill-opacity" values=".2;.2;1;.2;.2" dur=".4s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx="2.6"  cy="-2" r=".7" fill="#e44352" filter="url(#glowR)">
-                                    <animate attributeName="fill-opacity" values=".2;.2;.2;1;.2" dur=".4s" repeatCount="indefinite"/>
-                                </circle>
-                            </g>
-
-                            
-                            <rect x="-1" y=".1" width="2" height=".5" rx=".15" fill="#fff">
-                                <animate attributeName="fill-opacity" values="1;0;1;0;1" dur=".22s" repeatCount="indefinite"/>
-                            </rect>
-
-                            
-                            <g>
-                                <circle cx="-2.6" cy="2" r=".7" fill="#3b82f6" filter="url(#glowR)">
-                                    <animate attributeName="fill-opacity" values=".2;.2;.2;1;.2" dur=".4s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx="-.85" cy="2" r=".7" fill="#3b82f6" filter="url(#glowR)">
-                                    <animate attributeName="fill-opacity" values=".2;.2;1;.2;.2" dur=".4s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx=".85"  cy="2" r=".7" fill="#3b82f6" filter="url(#glowR)">
-                                    <animate attributeName="fill-opacity" values=".2;1;.2;.2;.2" dur=".4s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx="2.6"  cy="2" r=".7" fill="#3b82f6" filter="url(#glowR)">
-                                    <animate attributeName="fill-opacity" values="1;.2;.2;.2;1" dur=".4s" repeatCount="indefinite"/>
-                                </circle>
-                            </g>
-
-                            <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
-                                <mpath href="#dispatchRoute"/>
-                            </animateMotion>
-                        </g>
-
-                        
-                        <g transform="translate(330 200)">
-                            <circle r="11" fill="rgba(228,67,82,.18)"/>
-                            <circle r="7"  fill="#fff"/>
-                            <circle r="3.5" fill="#e44352"/>
-                        </g>
-                        <text x="312" y="225" fill="#fff" font-size="10" font-family="Inter, sans-serif" font-weight="700">You</text>
-
-                        
-                        <rect width="400" height="250" fill="url(#vignette)" pointer-events="none"/>
-                    </svg>
-
-                    
-                    <div class="absolute" style="left: calc(70/400 * 100%); top: calc(70/250 * 100%); transform: translate(-50%, -50%);">
-                        <div class="relative">
-                            <div class="absolute -inset-1 rounded-full bg-gold-400/30 blur-md"></div>
-                            <div class="relative w-12 h-12 rounded-full ring-2 ring-gold-300 ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-navy-800 shadow-lg">
-                                <svg viewBox="0 0 64 64" class="w-full h-full">
-                                    <defs>
-                                        <radialGradient id="officerBg" cx="50%" cy="35%" r="65%">
-                                            <stop offset="0%"  stop-color="#3a4870"/>
-                                            <stop offset="100%" stop-color="#0c1126"/>
-                                        </radialGradient>
-                                        <linearGradient id="officerSkin" x1="0" x2="0" y1="0" y2="1">
-                                            <stop offset="0%"  stop-color="#f3d4b3"/>
-                                            <stop offset="60%" stop-color="#dcb189"/>
-                                            <stop offset="100%" stop-color="#a87a55"/>
-                                        </linearGradient>
-                                        <linearGradient id="officerCap" x1="0" x2="0" y1="0" y2="1">
-                                            <stop offset="0%" stop-color="#3a4870"/>
-                                            <stop offset="100%" stop-color="#0c1126"/>
-                                        </linearGradient>
-                                        <linearGradient id="officerUni" x1="0" x2="0" y1="0" y2="1">
-                                            <stop offset="0%" stop-color="#28335a"/>
-                                            <stop offset="100%" stop-color="#0c1126"/>
-                                        </linearGradient>
-                                        <radialGradient id="officerCheek" cx="50%" cy="50%" r="50%">
-                                            <stop offset="0%" stop-color="rgba(220,130,110,.45)"/>
-                                            <stop offset="100%" stop-color="transparent"/>
-                                        </radialGradient>
-                                    </defs>
-                                    <rect width="64" height="64" fill="url(#officerBg)"/>
-                                    <path d="M0 64 Q3 44 16 42 L48 42 Q61 44 64 64 Z" fill="url(#officerUni)"/>
-                                    <rect x="5" y="46" width="6" height="2.5" rx=".4" fill="#f4c441"/>
-                                    <rect x="53" y="46" width="6" height="2.5" rx=".4" fill="#f4c441"/>
-                                    <path d="M22 42 Q27 46 32 50 Q37 46 42 42 L40 50 L24 50 Z" fill="#0a0e1f"/>
-                                    <rect x="27" y="55" width="10" height="3" rx=".4" fill="#f4c441"/>
-                                    <path d="M27.5 38 L27.5 45 Q32 47.5 36.5 45 L36.5 38 Z" fill="url(#officerSkin)"/>
-                                    <path d="M27.5 39 Q32 41 36.5 39 L36.5 40.2 Q32 42.2 27.5 40.2 Z" fill="rgba(0,0,0,.18)"/>
-                                    <ellipse cx="32" cy="29" rx="10.5" ry="12.5" fill="url(#officerSkin)"/>
-                                    <ellipse cx="22" cy="29" rx="1.4" ry="2.4" fill="url(#officerSkin)"/>
-                                    <ellipse cx="42" cy="29" rx="1.4" ry="2.4" fill="url(#officerSkin)"/>
-                                    <ellipse cx="26" cy="32.5" rx="2.5" ry="1.4" fill="url(#officerCheek)"/>
-                                    <ellipse cx="38" cy="32.5" rx="2.5" ry="1.4" fill="url(#officerCheek)"/>
-                                    <path d="M22 24 Q32 21 42 24 Q42 28 38 28.5 L26 28.5 Q22 28 22 24 Z" fill="#3a2615"/>
-                                    <path d="M19 24 Q32 28 45 24 L45 25.6 Q32 29 19 25.6 Z" fill="#070b1a"/>
-                                    <path d="M19 24 Q19 13 32 11 Q45 13 45 24 Z" fill="url(#officerCap)"/>
-                                    <ellipse cx="32" cy="14" rx="7" ry="1.5" fill="rgba(255,255,255,.12)"/>
-                                    <rect x="20" y="22" width="24" height="2.4" fill="#070b1a"/>
-                                    <g transform="translate(32 17)">
-                                        <path d="M0 -3.4 L1 -1.1 L3.4 -.6 L1.5 1 L2 3.4 L0 2.1 L-2 3.4 L-1.5 1 L-3.4 -.6 L-1 -1.1 Z" fill="#f4c441" stroke="#9a7a14" stroke-width=".3"/>
-                                    </g>
-                                    <path d="M25 25.5 Q27 25 29 25.5" stroke="#3a2615" stroke-width="1" fill="none" stroke-linecap="round"/>
-                                    <path d="M35 25.5 Q37 25 39 25.5" stroke="#3a2615" stroke-width="1" fill="none" stroke-linecap="round"/>
-                                    <ellipse cx="27.5" cy="29.5" rx="1.7" ry="1.9" fill="#fff"/>
-                                    <ellipse cx="36.5" cy="29.5" rx="1.7" ry="1.9" fill="#fff"/>
-                                    <circle cx="27.7" cy="29.7" r="1.15" fill="#3a4870"/>
-                                    <circle cx="36.7" cy="29.7" r="1.15" fill="#3a4870"/>
-                                    <circle cx="27.8" cy="29.8" r=".55" fill="#0c1126"/>
-                                    <circle cx="36.8" cy="29.8" r=".55" fill="#0c1126"/>
-                                    <circle cx="28.1" cy="29.2" r=".3" fill="#fff"/>
-                                    <circle cx="37.1" cy="29.2" r=".3" fill="#fff"/>
-                                    <path d="M32 30.5 Q31.4 33.6 32.6 33.6" stroke="rgba(120,75,45,.45)" stroke-width=".5" fill="none" stroke-linecap="round"/>
-                                    <path d="M29 36.6 Q32 37.8 35 36.6" stroke="#6a3920" stroke-width=".9" fill="none" stroke-linecap="round"/>
-                                </svg>
-                            </div>
-                            <div class="absolute left-full ml-2 top-1/2 -translate-y-1/2 whitespace-nowrap">
-                                <p class="text-[10px] font-bold text-white leading-tight drop-shadow">Officer Marcus</p>
-                                <p class="text-[9px] text-gold-300 leading-tight drop-shadow">en route · ★ 4.9</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                    <div class="absolute" style="left: calc(330/400 * 100%); top: calc(200/250 * 100%); transform: translate(-50%, -50%);">
-                        <span class="sonar"></span>
-                        <span class="sonar sonar-2"></span>
-                        <span class="sonar sonar-3"></span>
-                    </div>
-
-                    
-                    <div class="absolute top-3 left-3 inline-flex items-center gap-2 rounded-full bg-navy-950/80 backdrop-blur border border-white/10 px-3 py-1.5">
-                        <svg class="w-3.5 h-3.5 text-gold-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>
-                        <span class="text-[11px] font-semibold tracking-wider text-white">ETA <span data-dispatch-count>35</span>s</span>
-                    </div>
-                    <div class="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 backdrop-blur border border-emerald-300/30 px-3 py-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span class="text-[11px] font-semibold tracking-wider text-emerald-200">Agent locked</span>
-                    </div>
-                </div>
-
-                
-                <div class="mt-5 rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
-                    <div class="feed text-[13px] text-white/85" style="--feed-duration:8s;">
-                        <div><span class="grid place-items-center w-6 h-6 rounded-full bg-brand-600/30 text-brand-300"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/></svg></span><span><b>Locating you</b> · GPS lock acquired</span></div>
-                        <div><span class="grid place-items-center w-6 h-6 rounded-full bg-gold-400/25 text-gold-300"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M20 20l-3-3"/></svg></span><span><b>Searching agents</b> · 12 nearby in 1.2 mi</span></div>
-                        <div><span class="grid place-items-center w-6 h-6 rounded-full bg-emerald-400/25 text-emerald-300"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span><b>Agent locked</b> · Officer Marcus, ★ 4.9</span></div>
-                        <div><span class="grid place-items-center w-6 h-6 rounded-full bg-brand-600/30 text-brand-300"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg></span><span><b>Dispatching now</b> · 4.2 mi · 35s ETA</span></div>
-                    </div>
-                </div>
-
-                
-                <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
-                    <div class="flex items-center gap-4">
-                        <div class="relative w-24 h-24 shrink-0">
-                            <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle cx="50" cy="50" r="44" stroke="rgba(255,255,255,.08)" stroke-width="8" fill="none"/>
-                                <circle cx="50" cy="50" r="44" stroke="url(#countdownGrad)" stroke-width="8" fill="none" stroke-linecap="round" pathLength="276" class="ring-deplete" />
-                                <defs>
-                                    <linearGradient id="countdownGrad" x1="0" x2="1" y1="0" y2="1">
-                                        <stop offset="0%" stop-color="#f4c441"/>
-                                        <stop offset="100%" stop-color="#e44352"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                            <div class="absolute inset-0 grid place-items-center text-center">
-                                <div>
-                                    <p class="font-display text-2xl font-semibold tracking-tight"><span data-dispatch-count>35</span></p>
-                                    <p class="text-[9px] uppercase tracking-[.18em] text-white/60">seconds</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <p class="text-[10px] uppercase tracking-[.18em] text-white/50 font-semibold">Case</p>
-                            <p class="text-sm font-semibold mt-0.5">Gender Violence</p>
-                            <p class="text-[11px] text-white/60 mt-0.5">Altagracia St #14 · Alcarrizos</p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                                                    <div class="rounded-xl bg-white/[0.04] border border-white/10 p-2.5">
-                                <p class="text-[9px] uppercase tracking-[.18em] text-white/50">Distance</p>
-                                <p class="text-xs font-semibold mt-0.5">4.2 mi</p>
-                            </div>
-                                                    <div class="rounded-xl bg-white/[0.04] border border-white/10 p-2.5">
-                                <p class="text-[9px] uppercase tracking-[.18em] text-white/50">Duration</p>
-                                <p class="text-xs font-semibold mt-0.5">4 m</p>
-                            </div>
-                                                    <div class="rounded-xl bg-white/[0.04] border border-white/10 p-2.5">
-                                <p class="text-[9px] uppercase tracking-[.18em] text-white/50">Driving</p>
-                                <p class="text-xs font-semibold mt-0.5">4 m</p>
-                            </div>
-                                                    <div class="rounded-xl bg-white/[0.04] border border-white/10 p-2.5">
-                                <p class="text-[9px] uppercase tracking-[.18em] text-white/50">Walking</p>
-                                <p class="text-xs font-semibold mt-0.5">12 m</p>
-                            </div>
-                                            </div>
-                </div>
-
-                
-                <div class="mt-5 rounded-md border border-brand-500/30 bg-brand-600/10 px-4 py-3 flex items-center justify-between">
-                    <div>
-                        <p class="text-[10px] uppercase tracking-[.18em] text-brand-300 font-semibold">Agents in assistance</p>
-                        <p class="text-sm font-semibold mt-0.5">3 nearby · +10 backing up</p>
-                    </div>
-                    <div class="flex -space-x-2">
-                                                                            <span class="agent-pop w-9 h-9 rounded-full ring-2 ring-navy-950 overflow-hidden bg-white/10" style="animation-delay: 0.25s">
-                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&amp;h=80&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="w-full h-full object-cover" />
-                            </span>
-                                                    <span class="agent-pop w-9 h-9 rounded-full ring-2 ring-navy-950 overflow-hidden bg-white/10" style="animation-delay: 0.5s">
-                                <img src="https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=80&amp;h=80&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="w-full h-full object-cover" />
-                            </span>
-                                                    <span class="agent-pop w-9 h-9 rounded-full ring-2 ring-navy-950 overflow-hidden bg-white/10" style="animation-delay: 0.75s">
-                                <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=80&amp;h=80&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="w-full h-full object-cover" />
-                            </span>
-                                                    <span class="agent-pop w-9 h-9 rounded-full ring-2 ring-navy-950 overflow-hidden bg-white/10" style="animation-delay: 1s">
-                                <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=80&amp;h=80&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="w-full h-full object-cover" />
-                            </span>
-                                                <span class="agent-pop w-9 h-9 rounded-full ring-2 ring-navy-950 bg-white/10 grid place-items-center text-[10px] font-bold text-white" style="animation-delay: 1.25s">+10</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 
 <section class="relative border-y border-ink-100 bg-white">
     <div class="mx-auto max-w-7xl px-5 sm:px-8 py-14 lg:py-20 stagger grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6">
@@ -1173,7 +688,7 @@
         
         <div class="lg:col-span-7">
             <form action="#contact" method="POST" class="reveal reveal-right relative rounded-lg border border-white/10 bg-navy-900 p-8 lg:p-10 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)]">
-                <input type="hidden" name="_token" value="7i7uzS4fdQCPcxtsypTGmus2TXtUq63DjQU8o1Vn" autocomplete="off">
+                <input type="hidden" name="_token" value="4v0K772dOyH4yFYuxK2Fu8WlLnioLWd4lzr5Ds77" autocomplete="off">
                 <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.2em] text-gold-300">
                     <span class="grid place-items-center w-7 h-7 rounded-full bg-gold-300/15 ring-1 ring-gold-300/30">
                         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -1282,110 +797,11 @@
 
 
 <div data-view="how-it-works" class="hidden">
-    <section class="relative overflow-hidden hero-bg">
-        <div class="pointer-events-none absolute inset-0 -z-10">
-            <div class="absolute -top-24 right-1/4 w-[500px] h-[500px] rounded-full bg-brand-100/40 blur-3xl"></div>
-            <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-gold-100/50 blur-3xl"></div>
-        </div>
-        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
-            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
-                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">How it works</span>
-            </div>
-            <h1 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
-                How <span class="text-brand-600">Auxilio</span> works.
-            </h1>
-            <p class="reveal reveal-delay-2 mt-4 text-lg text-navy-700/80 max-w-2xl">
-                From siren to signal in three taps. Here's the journey from the moment you sense danger to the moment a verified Super Agent arrives.
-            </p>
-
-            <div class="reveal stagger mt-12 grid md:grid-cols-3 gap-6">
-                                    <div class="relative rounded-md border border-ink-100 bg-white p-7 shadow-sm hover:shadow-lg transition">
-                        <span class="grid place-items-center w-12 h-12 rounded-md font-display text-xl font-bold bg-brand-50 text-brand-600">01</span>
-                        <h3 class="mt-5 text-xl font-bold text-navy-900">Tap to alert</h3>
-                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">Open Auxilio User and trigger one-tap SOS — your live location, profile and trusted contacts are pushed to dispatch instantly.</p>
-                    </div>
-                                    <div class="relative rounded-md border border-ink-100 bg-white p-7 shadow-sm hover:shadow-lg transition">
-                        <span class="grid place-items-center w-12 h-12 rounded-md font-display text-xl font-bold bg-gold-100 text-gold-600">02</span>
-                        <h3 class="mt-5 text-xl font-bold text-navy-900">Capture the report</h3>
-                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">Five guided steps — categorize, describe the suspect, log the vehicle, drop in evidence, and build a sketch. Skip what you don&#039;t know; Auxilio fills in the rest.</p>
-                    </div>
-                                    <div class="relative rounded-md border border-ink-100 bg-white p-7 shadow-sm hover:shadow-lg transition">
-                        <span class="grid place-items-center w-12 h-12 rounded-md font-display text-xl font-bold bg-emerald-100 text-emerald-600">03</span>
-                        <h3 class="mt-5 text-xl font-bold text-navy-900">Verified responder arrives</h3>
-                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">The closest Super Agent is auto-dispatched. Watch their ETA, distance and live route on your map until they reach you.</p>
-                    </div>
-                            </div>
-
-            <div class="mt-16 grid lg:grid-cols-2 gap-8 items-center">
-                <div class="reveal reveal-left">
-                    <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-600">Behind the curtain</p>
-                    <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">Verified people. Encrypted pipes.</h2>
-                    <p class="mt-4 text-navy-700/80 leading-relaxed">
-                        Every report is signed by a real, vetted Super Agent. Evidence is encrypted on-device before upload. Your location is shared only with the agent who accepts your case — and revoked the second the case closes.
-                    </p>
-                    <ul class="mt-6 space-y-3 text-sm">
-                                                    <li class="flex items-start gap-3">
-                                <span class="mt-0.5 grid place-items-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
-                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                </span>
-                                <span class="text-navy-800">Background-checked Super Agents on every dispatch</span>
-                            </li>
-                                                    <li class="flex items-start gap-3">
-                                <span class="mt-0.5 grid place-items-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
-                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                </span>
-                                <span class="text-navy-800">End-to-end encryption on photos, audio, and video</span>
-                            </li>
-                                                    <li class="flex items-start gap-3">
-                                <span class="mt-0.5 grid place-items-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
-                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                </span>
-                                <span class="text-navy-800">Auto-shred of location data after case closure</span>
-                            </li>
-                                                    <li class="flex items-start gap-3">
-                                <span class="mt-0.5 grid place-items-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
-                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                </span>
-                                <span class="text-navy-800">Audit log on every status change</span>
-                            </li>
-                                            </ul>
-                </div>
-                <div class="reveal reveal-right relative rounded-md bg-navy-950 text-white p-8 lg:p-10 overflow-hidden">
-                    <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-brand-600/30 blur-3xl"></div>
-                    <p class="relative text-xs font-bold uppercase tracking-[.2em] text-brand-300">Sample dispatch</p>
-                    <p class="relative mt-3 font-display text-3xl font-bold">Case #A-7421</p>
-                    <p class="relative mt-1 text-navy-300 text-sm">Newark, NJ · Sexual Crime · Tier 2</p>
-                    <div class="relative mt-6 space-y-3 text-sm">
-                                                    <div class="flex items-start gap-3 border-l-2 border-brand-500/40 pl-3">
-                                <span class="font-mono text-[11px] text-brand-300 shrink-0">09:14:02</span>
-                                <div>
-                                    <p class="font-semibold">Report submitted by victim</p>
-                                    <p class="text-navy-300 text-xs">Photos × 4, audio × 1</p>
-                                </div>
-                            </div>
-                                                    <div class="flex items-start gap-3 border-l-2 border-brand-500/40 pl-3">
-                                <span class="font-mono text-[11px] text-brand-300 shrink-0">09:14:08</span>
-                                <div>
-                                    <p class="font-semibold">Auto-dispatch · 3 agents pinged</p>
-                                    <p class="text-navy-300 text-xs">Closest match: Agent J. Holland — 0.7 mi</p>
-                                </div>
-                            </div>
-                                                    <div class="flex items-start gap-3 border-l-2 border-brand-500/40 pl-3">
-                                <span class="font-mono text-[11px] text-brand-300 shrink-0">09:14:53</span>
-                                <div>
-                                    <p class="font-semibold">Agent accepted — en route</p>
-                                    <p class="text-navy-300 text-xs">ETA 4 min</p>
-                                </div>
-                            </div>
-                                                    <div class="flex items-start gap-3 border-l-2 border-brand-500/40 pl-3">
-                                <span class="font-mono text-[11px] text-brand-300 shrink-0">09:18:11</span>
-                                <div>
-                                    <p class="font-semibold">On scene</p>
-                                    <p class="text-navy-300 text-xs">Status: Active assist</p>
-                                </div>
-                            </div>
-                                            </div>
-                </div>
+    
+    <section class="relative bg-navy-950 text-white pt-10 pb-2">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8">
+            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-navy-300">
+                <a data-route href="#/" class="hover:text-brand-400 transition">Home</a><span>›</span><span class="text-white">How it works</span>
             </div>
         </div>
     </section>
@@ -1568,6 +984,522 @@
                             </div>
         </div>
     </section>
+
+    
+    <section class="relative bg-navy-950 overflow-hidden">
+        <div class="absolute inset-0 -z-0 opacity-30 pointer-events-none">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] rounded-full bg-brand-600/30 blur-3xl"></div>
+        </div>
+        <div class="relative mx-auto max-w-3xl px-5 sm:px-8 py-20 lg:py-28 text-center text-white">
+            <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-emerald-300 inline-flex items-center gap-2">
+                <span class="grid place-items-center w-5 h-5 rounded-full bg-emerald-400/20 text-emerald-300">
+                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                Report complete · 5 of 5
+            </p>
+            <h3 class="reveal reveal-delay-1 mt-6 font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight">
+                All <span class="text-gold-400">5 steps</span> complete. <br class="hidden sm:block"/>
+                <span class="text-white/85">Ready to dispatch.</span>
+            </h3>
+            <p class="reveal reveal-delay-2 mt-4 text-base text-navy-200/80 max-w-xl mx-auto leading-relaxed">
+                Hit the button to lock the report, encrypt it, and dispatch a verified Super Agent in your radius — instantly.
+            </p>
+            <div class="reveal reveal-delay-3 mt-8">
+                <a href="#dispatch" class="submit-emergency group inline-flex items-center gap-3 rounded-full text-white font-bold uppercase tracking-[.18em] text-base px-10 py-5">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"/></svg>
+                    Submit Emergency
+                    <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    
+        <section id="dispatch" class="relative py-24 lg:py-32 bg-navy-950 text-white overflow-hidden">
+        <div class="pointer-events-none absolute inset-0 -z-0 opacity-30">
+            <div class="absolute top-0 left-1/4 w-[480px] h-[480px] rounded-full bg-brand-600/40 blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-[420px] h-[420px] rounded-full bg-gold-500/30 blur-3xl"></div>
+        </div>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-6 reveal reveal-left">
+                <p class="text-xs font-semibold uppercase tracking-[.2em] text-brand-400">Live Agent Dispatch</p>
+                <h2 class="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight">
+                    A verified agent, <span class="text-gold-400">on the way</span> in seconds.
+                </h2>
+                <p class="mt-5 text-lg text-navy-200/80 leading-relaxed max-w-xl">
+                    The moment you confirm an emergency, Auxilio searches nearby Super Agents, locks in the closest match, and shows you the countdown — distance, duration, ETA — until they arrive.
+                </p>
+
+                <ul class="mt-8 stagger space-y-3">
+                                                                <li class="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition">
+                            <span class="grid place-items-center shrink-0 w-9 h-9 rounded-xl bg-brand-600 text-white">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            </span>
+                            <div>
+                                <p class="font-semibold">Verified Super Agents</p>
+                                <p class="text-sm text-navy-200/80 mt-0.5">Background-checked, trained, and rated by the community.</p>
+                            </div>
+                        </li>
+                                            <li class="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition">
+                            <span class="grid place-items-center shrink-0 w-9 h-9 rounded-xl bg-brand-600 text-white">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            </span>
+                            <div>
+                                <p class="font-semibold">Live ETA &amp; metrics</p>
+                                <p class="text-sm text-navy-200/80 mt-0.5">Distance, duration, driving and walking times — refreshed continuously.</p>
+                            </div>
+                        </li>
+                                            <li class="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition">
+                            <span class="grid place-items-center shrink-0 w-9 h-9 rounded-xl bg-brand-600 text-white">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            </span>
+                            <div>
+                                <p class="font-semibold">Trusted contacts loop</p>
+                                <p class="text-sm text-navy-200/80 mt-0.5">Loved ones can watch the same dispatch — no extra setup.</p>
+                            </div>
+                        </li>
+                                    </ul>
+            </div>
+
+            
+            <div class="lg:col-span-6 reveal reveal-right">
+                <div data-dispatch data-dispatch-start="35" class="relative rounded-[28px] border border-white/10 bg-white/[0.04] backdrop-blur p-6 lg:p-8 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)] overflow-hidden">
+                    <div class="absolute -inset-px rounded-[28px] bg-gradient-to-tr from-brand-600/20 via-transparent to-gold-400/20 -z-10"></div>
+
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="dispatch-pulse inline-flex items-center gap-2.5 rounded-full bg-brand-600/20 border border-brand-500/40 px-3 py-1.5">
+                            <span class="relative inline-flex w-2 h-2 rounded-full bg-brand-400 pulse-dot text-brand-400"></span>
+                            <span class="text-[11px] font-bold uppercase tracking-[.2em] text-brand-200">Dispatching</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-white/50">AUX.DISPATCH · UNIT 04</span>
+                    </div>
+
+                    
+                    <div class="relative mt-6 aspect-[16/10] rounded-md border border-white/10 bg-[#0d1429] overflow-hidden">
+                        <svg viewBox="0 0 400 250" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+                            <defs>
+                                <pattern id="dispatchGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                    <path d="M40 0H0V40" stroke="rgba(255,255,255,.04)" stroke-width="1" fill="none"/>
+                                </pattern>
+                                <linearGradient id="routeStroke" x1="0" x2="1">
+                                    <stop offset="0%"  stop-color="#f4c441"/>
+                                    <stop offset="100%" stop-color="#e44352"/>
+                                </linearGradient>
+                                <linearGradient id="bgFade" x1="0" x2="0" y1="0" y2="1">
+                                    <stop offset="0%"  stop-color="#0e1b3d"/>
+                                    <stop offset="100%" stop-color="#0a1428"/>
+                                </linearGradient>
+                                <radialGradient id="vignette" cx="50%" cy="55%" r="80%">
+                                    <stop offset="60%" stop-color="rgba(0,0,0,0)"/>
+                                    <stop offset="100%" stop-color="rgba(0,0,0,.65)"/>
+                                </radialGradient>
+                                <filter id="glowR" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur stdDeviation="3"/>
+                                </filter>
+                                <filter id="bigGlow" x="-100%" y="-100%" width="300%" height="300%">
+                                    <feGaussianBlur stdDeviation="6"/>
+                                </filter>
+                                <linearGradient id="carBody" x1="0" y1="-1" x2="0" y2="1">
+                                    <stop offset="0%"  stop-color="#ffffff"/>
+                                    <stop offset="50%" stop-color="#e8edf2"/>
+                                    <stop offset="100%" stop-color="#aab3bf"/>
+                                </linearGradient>
+                                <linearGradient id="hoodShine" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%"  stop-color="rgba(255,255,255,.6)"/>
+                                    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                                </linearGradient>
+                            </defs>
+
+                            
+                            <rect width="400" height="250" fill="url(#bgFade)"/>
+                            <rect width="400" height="250" fill="url(#dispatchGrid)"/>
+
+                            
+                            <path d="M-10 220 Q60 200 130 215 Q210 232 280 218 Q340 208 410 226 L410 260 L-10 260 Z"
+                                  fill="#0c2742" opacity=".75"/>
+                            <path d="M-10 220 Q60 200 130 215 Q210 232 280 218 Q340 208 410 226"
+                                  stroke="rgba(120,180,230,.08)" stroke-width="1.2" fill="none"/>
+
+                            
+                            <path d="M40 110 Q70 95 110 105 Q140 113 145 140 Q140 165 105 168 Q70 170 50 155 Q35 138 40 110 Z"
+                                  fill="#1a3a2c" opacity=".55"/>
+                            <path d="M260 30 Q300 20 335 40 Q355 60 345 88 Q325 105 290 100 Q260 92 255 65 Q252 45 260 30 Z"
+                                  fill="#1a3a2c" opacity=".4"/>
+
+                            
+                            <g fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.05)" stroke-width="0.5">
+                                <rect x="160" y="50"  width="38" height="22" rx="2"/>
+                                <rect x="205" y="50"  width="32" height="22" rx="2"/>
+                                <rect x="160" y="78"  width="38" height="18" rx="2"/>
+                                <rect x="205" y="78"  width="32" height="18" rx="2"/>
+                                <rect x="246" y="115" width="42" height="26" rx="2"/>
+                                <rect x="293" y="115" width="34" height="26" rx="2"/>
+                                <rect x="246" y="146" width="42" height="22" rx="2"/>
+                                <rect x="293" y="146" width="34" height="22" rx="2"/>
+                                <rect x="22"  y="40"  width="36" height="20" rx="2"/>
+                                <rect x="22"  y="65"  width="36" height="22" rx="2"/>
+                                <rect x="335" y="40"  width="40" height="22" rx="2"/>
+                                <rect x="335" y="68"  width="40" height="22" rx="2"/>
+                                <rect x="55"  y="180" width="34" height="20" rx="2"/>
+                                <rect x="92"  y="180" width="38" height="20" rx="2"/>
+                                <rect x="170" y="180" width="42" height="20" rx="2"/>
+                            </g>
+
+                            
+                            <path d="M-10 95 Q90 75 200 90 Q300 105 410 90"
+                                  stroke="rgba(245,221,135,.18)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                            <path d="M-10 95 Q90 75 200 90 Q300 105 410 90"
+                                  stroke="rgba(245,221,135,.55)" stroke-width="1.4" fill="none" stroke-dasharray="6 6"/>
+
+                            
+                            <g stroke="rgba(255,255,255,.12)" stroke-width="2.2" fill="none" stroke-linecap="round">
+                                <path d="M-10 165 Q90 150 200 170 Q310 190 410 170"/>
+                                <path d="M105 -10 Q120 60 150 130 Q175 200 165 260"/>
+                                <path d="M295 -10 Q280 60 270 120 Q258 195 245 260"/>
+                            </g>
+
+                            
+                            <g stroke="rgba(255,255,255,.06)" stroke-width="1" fill="none">
+                                <path d="M-10 35  L410 35"/>
+                                <path d="M-10 130 L410 130"/>
+                                <path d="M-10 195 L410 195"/>
+                                <path d="M50  -10 L50  260"/>
+                                <path d="M210 -10 L210 260"/>
+                                <path d="M360 -10 L360 260"/>
+                            </g>
+
+                            
+                            <g fill="rgba(255,255,255,.18)" font-family="Inter, sans-serif" font-weight="600" font-size="7" letter-spacing=".15em">
+                                <text x="60"  y="155" >RIVERSIDE</text>
+                                <text x="170" y="62"  >MIDTOWN</text>
+                                <text x="270" y="60"  >EAST HILL</text>
+                                <text x="100" y="195" >DOWNTOWN</text>
+                            </g>
+
+                            
+                            <text x="160" y="245" fill="rgba(140,190,230,.45)" font-family="Inter, sans-serif" font-style="italic" font-size="8">East River</text>
+
+                            
+                            <path id="dispatchRoute" d="M 70 70 Q 160 110 200 150 Q 250 180 330 200"
+                                  stroke="url(#routeStroke)" stroke-width="3" fill="none" stroke-linecap="round"
+                                  class="route-march" />
+                            
+                            <path d="M 70 70 Q 160 110 200 150 Q 250 180 330 200"
+                                  stroke="rgba(244,196,65,.25)" stroke-width="8" fill="none" stroke-linecap="round" filter="url(#glowR)"/>
+
+                            
+                            <g>
+                                
+                                <circle cx="0" cy="0" r="28" fill="rgba(228,67,82,.55)" filter="url(#bigGlow)">
+                                    <animate attributeName="opacity" values=".85;0;.85" dur=".42s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="0" cy="0" r="28" fill="rgba(59,130,246,.55)" filter="url(#bigGlow)">
+                                    <animate attributeName="opacity" values="0;.85;0" dur=".42s" repeatCount="indefinite"/>
+                                </circle>
+
+                                
+                                <path d="M0 0 L34 -22 L34 22 Z" fill="rgba(228,67,82,.3)" filter="url(#glowR)">
+                                    <animate attributeName="opacity" values=".6;0;.6" dur=".42s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M0 0 L-34 -22 L-34 22 Z" fill="rgba(59,130,246,.3)" filter="url(#glowR)">
+                                    <animate attributeName="opacity" values="0;.6;0" dur=".42s" repeatCount="indefinite"/>
+                                </path>
+
+                                
+                                <path d="M14 -4 L34 -10 L34 10 L14 4 Z" fill="rgba(255,250,200,.18)" filter="url(#glowR)"/>
+
+                                
+                                <ellipse cx="0" cy="2.8" rx="16" ry="5" fill="rgba(0,0,0,.5)"/>
+
+                                
+                                <g>
+                                    <rect x="-10" y="-7.8" width="4" height="2.4" rx=".7" fill="#0a0a0a"/>
+                                    <rect x="-9.7" y="-7.4" width="3.4" height="1.6" rx=".3" fill="#2a2a2a"/>
+                                </g>
+                                <g>
+                                    <rect x="6" y="-7.8" width="4" height="2.4" rx=".7" fill="#0a0a0a"/>
+                                    <rect x="6.3" y="-7.4" width="3.4" height="1.6" rx=".3" fill="#2a2a2a"/>
+                                </g>
+                                <g>
+                                    <rect x="-10" y="5.4" width="4" height="2.4" rx=".7" fill="#0a0a0a"/>
+                                    <rect x="-9.7" y="5.8" width="3.4" height="1.6" rx=".3" fill="#2a2a2a"/>
+                                </g>
+                                <g>
+                                    <rect x="6" y="5.4" width="4" height="2.4" rx=".7" fill="#0a0a0a"/>
+                                    <rect x="6.3" y="5.8" width="3.4" height="1.6" rx=".3" fill="#2a2a2a"/>
+                                </g>
+
+                                
+                                <path d="M-12.5 -6 Q-14 -6 -14 -4.5 L-14 4.5 Q-14 6 -12.5 6 L11.5 6 Q14 6 14 4 L14 -4 Q14 -6 11.5 -6 Z"
+                                      fill="url(#carBody)" stroke="#1a2548" stroke-width="0.4"/>
+
+                                
+                                <path d="M5 -5.6 L13.5 -5.4 L13.5 -2 L5 -2.6 Z" fill="url(#hoodShine)" opacity=".7"/>
+
+                                
+                                <line x1="-3" y1="-6" x2="-3" y2="6" stroke="rgba(0,0,0,.18)" stroke-width=".35"/>
+                                <line x1="3"  y1="-6" x2="3"  y2="6" stroke="rgba(0,0,0,.18)" stroke-width=".35"/>
+
+                                
+                                <line x1="14" y1="0" x2="9" y2="0" stroke="rgba(0,0,0,.12)" stroke-width=".3"/>
+
+                                
+                                <rect x="2.5" y="-7"  width="2" height="1.4" rx=".4" fill="#1a2548"/>
+                                <rect x="2.5" y="5.6" width="2" height="1.4" rx=".4" fill="#1a2548"/>
+
+                                
+                                <path d="M3 -5 L8.5 -3.5 L8.5 3.5 L3 5 Z" fill="#1e3a5f"/>
+                                <path d="M3 -5 L8.5 -3.5 L8.5 -1.5 L3 -2 Z" fill="rgba(140,180,230,.45)"/>
+                                
+                                <path d="M-8.5 -3.5 L-3 -5 L-3 5 L-8.5 3.5 Z" fill="#1e3a5f"/>
+                                <path d="M-8.5 -3.5 L-3 -5 L-3 -3 L-8.5 -1.5 Z" fill="rgba(140,180,230,.4)"/>
+
+                                
+                                <rect x="-12" y="-1.4" width="24" height="2.8" fill="#0c1126"/>
+                                <text x="0" y=".7" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="1.9" fill="#fff" letter-spacing=".45">POLICE</text>
+
+                                
+                                <rect x="12.6" y="-4.8" width="1.6" height="1.8" rx=".4" fill="#fffce5"/>
+                                <rect x="12.6" y="3"    width="1.6" height="1.8" rx=".4" fill="#fffce5"/>
+                                
+                                <rect x="13" y="-1.5" width="1" height="3" rx=".2" fill="#0c1126"/>
+
+                                
+                                <rect x="-14" y="-4.8" width="1.2" height="1.8" rx=".3" fill="#a01818"/>
+                                <rect x="-14" y="3"    width="1.2" height="1.8" rx=".3" fill="#a01818"/>
+
+                                
+                                <rect x="-4" y="-3.4" width="8" height="6.8" rx="1" fill="#0c1126" stroke="#1a2548" stroke-width=".25"/>
+
+                                
+                                <g>
+                                    <circle cx="-2.6" cy="-2" r=".7" fill="#e44352" filter="url(#glowR)">
+                                        <animate attributeName="fill-opacity" values="1;.2;.2;.2;1" dur=".4s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle cx="-.85" cy="-2" r=".7" fill="#e44352" filter="url(#glowR)">
+                                        <animate attributeName="fill-opacity" values=".2;1;.2;.2;.2" dur=".4s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle cx=".85"  cy="-2" r=".7" fill="#e44352" filter="url(#glowR)">
+                                        <animate attributeName="fill-opacity" values=".2;.2;1;.2;.2" dur=".4s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle cx="2.6"  cy="-2" r=".7" fill="#e44352" filter="url(#glowR)">
+                                        <animate attributeName="fill-opacity" values=".2;.2;.2;1;.2" dur=".4s" repeatCount="indefinite"/>
+                                    </circle>
+                                </g>
+
+                                
+                                <rect x="-1" y=".1" width="2" height=".5" rx=".15" fill="#fff">
+                                    <animate attributeName="fill-opacity" values="1;0;1;0;1" dur=".22s" repeatCount="indefinite"/>
+                                </rect>
+
+                                
+                                <g>
+                                    <circle cx="-2.6" cy="2" r=".7" fill="#3b82f6" filter="url(#glowR)">
+                                        <animate attributeName="fill-opacity" values=".2;.2;.2;1;.2" dur=".4s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle cx="-.85" cy="2" r=".7" fill="#3b82f6" filter="url(#glowR)">
+                                        <animate attributeName="fill-opacity" values=".2;.2;1;.2;.2" dur=".4s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle cx=".85"  cy="2" r=".7" fill="#3b82f6" filter="url(#glowR)">
+                                        <animate attributeName="fill-opacity" values=".2;1;.2;.2;.2" dur=".4s" repeatCount="indefinite"/>
+                                    </circle>
+                                    <circle cx="2.6"  cy="2" r=".7" fill="#3b82f6" filter="url(#glowR)">
+                                        <animate attributeName="fill-opacity" values="1;.2;.2;.2;1" dur=".4s" repeatCount="indefinite"/>
+                                    </circle>
+                                </g>
+
+                                <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+                                    <mpath href="#dispatchRoute"/>
+                                </animateMotion>
+                            </g>
+
+                            
+                            <g transform="translate(330 200)">
+                                <circle r="11" fill="rgba(228,67,82,.18)"/>
+                                <circle r="7"  fill="#fff"/>
+                                <circle r="3.5" fill="#e44352"/>
+                            </g>
+                            <text x="312" y="225" fill="#fff" font-size="10" font-family="Inter, sans-serif" font-weight="700">You</text>
+
+                            
+                            <rect width="400" height="250" fill="url(#vignette)" pointer-events="none"/>
+                        </svg>
+
+                        
+                        <div class="absolute" style="left: calc(70/400 * 100%); top: calc(70/250 * 100%); transform: translate(-50%, -50%);">
+                            <div class="relative">
+                                <div class="absolute -inset-1 rounded-full bg-gold-400/30 blur-md"></div>
+                                <div class="relative w-12 h-12 rounded-full ring-2 ring-gold-300 ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-navy-800 shadow-lg">
+                                    <svg viewBox="0 0 64 64" class="w-full h-full">
+                                        <defs>
+                                            <radialGradient id="officerBg" cx="50%" cy="35%" r="65%">
+                                                <stop offset="0%"  stop-color="#3a4870"/>
+                                                <stop offset="100%" stop-color="#0c1126"/>
+                                            </radialGradient>
+                                            <linearGradient id="officerSkin" x1="0" x2="0" y1="0" y2="1">
+                                                <stop offset="0%"  stop-color="#f3d4b3"/>
+                                                <stop offset="60%" stop-color="#dcb189"/>
+                                                <stop offset="100%" stop-color="#a87a55"/>
+                                            </linearGradient>
+                                            <linearGradient id="officerCap" x1="0" x2="0" y1="0" y2="1">
+                                                <stop offset="0%" stop-color="#3a4870"/>
+                                                <stop offset="100%" stop-color="#0c1126"/>
+                                            </linearGradient>
+                                            <linearGradient id="officerUni" x1="0" x2="0" y1="0" y2="1">
+                                                <stop offset="0%" stop-color="#28335a"/>
+                                                <stop offset="100%" stop-color="#0c1126"/>
+                                            </linearGradient>
+                                            <radialGradient id="officerCheek" cx="50%" cy="50%" r="50%">
+                                                <stop offset="0%" stop-color="rgba(220,130,110,.45)"/>
+                                                <stop offset="100%" stop-color="transparent"/>
+                                            </radialGradient>
+                                        </defs>
+                                        <rect width="64" height="64" fill="url(#officerBg)"/>
+                                        <path d="M0 64 Q3 44 16 42 L48 42 Q61 44 64 64 Z" fill="url(#officerUni)"/>
+                                        <rect x="5" y="46" width="6" height="2.5" rx=".4" fill="#f4c441"/>
+                                        <rect x="53" y="46" width="6" height="2.5" rx=".4" fill="#f4c441"/>
+                                        <path d="M22 42 Q27 46 32 50 Q37 46 42 42 L40 50 L24 50 Z" fill="#0a0e1f"/>
+                                        <rect x="27" y="55" width="10" height="3" rx=".4" fill="#f4c441"/>
+                                        <path d="M27.5 38 L27.5 45 Q32 47.5 36.5 45 L36.5 38 Z" fill="url(#officerSkin)"/>
+                                        <path d="M27.5 39 Q32 41 36.5 39 L36.5 40.2 Q32 42.2 27.5 40.2 Z" fill="rgba(0,0,0,.18)"/>
+                                        <ellipse cx="32" cy="29" rx="10.5" ry="12.5" fill="url(#officerSkin)"/>
+                                        <ellipse cx="22" cy="29" rx="1.4" ry="2.4" fill="url(#officerSkin)"/>
+                                        <ellipse cx="42" cy="29" rx="1.4" ry="2.4" fill="url(#officerSkin)"/>
+                                        <ellipse cx="26" cy="32.5" rx="2.5" ry="1.4" fill="url(#officerCheek)"/>
+                                        <ellipse cx="38" cy="32.5" rx="2.5" ry="1.4" fill="url(#officerCheek)"/>
+                                        <path d="M22 24 Q32 21 42 24 Q42 28 38 28.5 L26 28.5 Q22 28 22 24 Z" fill="#3a2615"/>
+                                        <path d="M19 24 Q32 28 45 24 L45 25.6 Q32 29 19 25.6 Z" fill="#070b1a"/>
+                                        <path d="M19 24 Q19 13 32 11 Q45 13 45 24 Z" fill="url(#officerCap)"/>
+                                        <ellipse cx="32" cy="14" rx="7" ry="1.5" fill="rgba(255,255,255,.12)"/>
+                                        <rect x="20" y="22" width="24" height="2.4" fill="#070b1a"/>
+                                        <g transform="translate(32 17)">
+                                            <path d="M0 -3.4 L1 -1.1 L3.4 -.6 L1.5 1 L2 3.4 L0 2.1 L-2 3.4 L-1.5 1 L-3.4 -.6 L-1 -1.1 Z" fill="#f4c441" stroke="#9a7a14" stroke-width=".3"/>
+                                        </g>
+                                        <path d="M25 25.5 Q27 25 29 25.5" stroke="#3a2615" stroke-width="1" fill="none" stroke-linecap="round"/>
+                                        <path d="M35 25.5 Q37 25 39 25.5" stroke="#3a2615" stroke-width="1" fill="none" stroke-linecap="round"/>
+                                        <ellipse cx="27.5" cy="29.5" rx="1.7" ry="1.9" fill="#fff"/>
+                                        <ellipse cx="36.5" cy="29.5" rx="1.7" ry="1.9" fill="#fff"/>
+                                        <circle cx="27.7" cy="29.7" r="1.15" fill="#3a4870"/>
+                                        <circle cx="36.7" cy="29.7" r="1.15" fill="#3a4870"/>
+                                        <circle cx="27.8" cy="29.8" r=".55" fill="#0c1126"/>
+                                        <circle cx="36.8" cy="29.8" r=".55" fill="#0c1126"/>
+                                        <circle cx="28.1" cy="29.2" r=".3" fill="#fff"/>
+                                        <circle cx="37.1" cy="29.2" r=".3" fill="#fff"/>
+                                        <path d="M32 30.5 Q31.4 33.6 32.6 33.6" stroke="rgba(120,75,45,.45)" stroke-width=".5" fill="none" stroke-linecap="round"/>
+                                        <path d="M29 36.6 Q32 37.8 35 36.6" stroke="#6a3920" stroke-width=".9" fill="none" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="absolute left-full ml-2 top-1/2 -translate-y-1/2 whitespace-nowrap">
+                                    <p class="text-[10px] font-bold text-white leading-tight drop-shadow">Officer Marcus</p>
+                                    <p class="text-[9px] text-gold-300 leading-tight drop-shadow">en route · ★ 4.9</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="absolute" style="left: calc(330/400 * 100%); top: calc(200/250 * 100%); transform: translate(-50%, -50%);">
+                            <span class="sonar"></span>
+                            <span class="sonar sonar-2"></span>
+                            <span class="sonar sonar-3"></span>
+                        </div>
+
+                        
+                        <div class="absolute top-3 left-3 inline-flex items-center gap-2 rounded-full bg-navy-950/80 backdrop-blur border border-white/10 px-3 py-1.5">
+                            <svg class="w-3.5 h-3.5 text-gold-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>
+                            <span class="text-[11px] font-semibold tracking-wider text-white">ETA <span data-dispatch-count>35</span>s</span>
+                        </div>
+                        <div class="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 backdrop-blur border border-emerald-300/30 px-3 py-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span class="text-[11px] font-semibold tracking-wider text-emerald-200">Agent locked</span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="mt-5 rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
+                        <div class="feed text-[13px] text-white/85" style="--feed-duration:8s;">
+                            <div><span class="grid place-items-center w-6 h-6 rounded-full bg-brand-600/30 text-brand-300"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/></svg></span><span><b>Locating you</b> · GPS lock acquired</span></div>
+                            <div><span class="grid place-items-center w-6 h-6 rounded-full bg-gold-400/25 text-gold-300"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M20 20l-3-3"/></svg></span><span><b>Searching agents</b> · 12 nearby in 1.2 mi</span></div>
+                            <div><span class="grid place-items-center w-6 h-6 rounded-full bg-emerald-400/25 text-emerald-300"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><span><b>Agent locked</b> · Officer Marcus, ★ 4.9</span></div>
+                            <div><span class="grid place-items-center w-6 h-6 rounded-full bg-brand-600/30 text-brand-300"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg></span><span><b>Dispatching now</b> · 4.2 mi · 35s ETA</span></div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                        <div class="flex items-center gap-4">
+                            <div class="relative w-24 h-24 shrink-0">
+                                <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
+                                    <circle cx="50" cy="50" r="44" stroke="rgba(255,255,255,.08)" stroke-width="8" fill="none"/>
+                                    <circle cx="50" cy="50" r="44" stroke="url(#countdownGrad)" stroke-width="8" fill="none" stroke-linecap="round" pathLength="276" class="ring-deplete" />
+                                    <defs>
+                                        <linearGradient id="countdownGrad" x1="0" x2="1" y1="0" y2="1">
+                                            <stop offset="0%" stop-color="#f4c441"/>
+                                            <stop offset="100%" stop-color="#e44352"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="absolute inset-0 grid place-items-center text-center">
+                                    <div>
+                                        <p class="font-display text-2xl font-semibold tracking-tight"><span data-dispatch-count>35</span></p>
+                                        <p class="text-[9px] uppercase tracking-[.18em] text-white/60">seconds</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase tracking-[.18em] text-white/50 font-semibold">Case</p>
+                                <p class="text-sm font-semibold mt-0.5">Gender Violence</p>
+                                <p class="text-[11px] text-white/60 mt-0.5">Altagracia St #14 · Alcarrizos</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                                                            <div class="rounded-xl bg-white/[0.04] border border-white/10 p-2.5">
+                                    <p class="text-[9px] uppercase tracking-[.18em] text-white/50">Distance</p>
+                                    <p class="text-xs font-semibold mt-0.5">4.2 mi</p>
+                                </div>
+                                                            <div class="rounded-xl bg-white/[0.04] border border-white/10 p-2.5">
+                                    <p class="text-[9px] uppercase tracking-[.18em] text-white/50">Duration</p>
+                                    <p class="text-xs font-semibold mt-0.5">4 m</p>
+                                </div>
+                                                            <div class="rounded-xl bg-white/[0.04] border border-white/10 p-2.5">
+                                    <p class="text-[9px] uppercase tracking-[.18em] text-white/50">Driving</p>
+                                    <p class="text-xs font-semibold mt-0.5">4 m</p>
+                                </div>
+                                                            <div class="rounded-xl bg-white/[0.04] border border-white/10 p-2.5">
+                                    <p class="text-[9px] uppercase tracking-[.18em] text-white/50">Walking</p>
+                                    <p class="text-xs font-semibold mt-0.5">12 m</p>
+                                </div>
+                                                    </div>
+                    </div>
+
+                    
+                    <div class="mt-5 rounded-md border border-brand-500/30 bg-brand-600/10 px-4 py-3 flex items-center justify-between">
+                        <div>
+                            <p class="text-[10px] uppercase tracking-[.18em] text-brand-300 font-semibold">Agents in assistance</p>
+                            <p class="text-sm font-semibold mt-0.5">3 nearby · +10 backing up</p>
+                        </div>
+                        <div class="flex -space-x-2">
+                                                                                        <span class="agent-pop w-9 h-9 rounded-full ring-2 ring-navy-950 overflow-hidden bg-white/10" style="animation-delay: 0.25s">
+                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&amp;h=80&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="w-full h-full object-cover" />
+                                </span>
+                                                            <span class="agent-pop w-9 h-9 rounded-full ring-2 ring-navy-950 overflow-hidden bg-white/10" style="animation-delay: 0.5s">
+                                    <img src="https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=80&amp;h=80&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="w-full h-full object-cover" />
+                                </span>
+                                                            <span class="agent-pop w-9 h-9 rounded-full ring-2 ring-navy-950 overflow-hidden bg-white/10" style="animation-delay: 0.75s">
+                                    <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=80&amp;h=80&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="w-full h-full object-cover" />
+                                </span>
+                                                            <span class="agent-pop w-9 h-9 rounded-full ring-2 ring-navy-950 overflow-hidden bg-white/10" style="animation-delay: 1s">
+                                    <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?w=80&amp;h=80&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="w-full h-full object-cover" />
+                                </span>
+                                                        <span class="agent-pop w-9 h-9 rounded-full ring-2 ring-navy-950 bg-white/10 grid place-items-center text-[10px] font-bold text-white" style="animation-delay: 1.25s">+10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </div>
 
 
