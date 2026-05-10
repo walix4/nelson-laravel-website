@@ -943,6 +943,8 @@
                                     ['id'=>'dispatchRoute5', 'd'=>'M 60 210 L 60 130 Q 60 125 65 125 L 200 125',                                                  'sc'=>'rgba(228,67,82,.7)',  'gc'=>'rgba(228,67,82,.18)'],
                                     // Mosley (west → center): south, right, north — block detour
                                     ['id'=>'dispatchRoute6', 'd'=>'M 20 125 L 20 165 Q 20 170 25 170 L 145 170 Q 150 170 150 165 L 150 130 Q 150 125 155 125 L 200 125','sc'=>'rgba(59,130,246,.7)', 'gc'=>'rgba(59,130,246,.18)'],
+                                    // Reyes (south → center): straight up the avenue to the victim
+                                    ['id'=>'dispatchRoute7', 'd'=>'M 200 235 L 200 200 Q 200 195 195 195 L 165 195 Q 160 195 160 190 L 160 145 Q 160 140 165 140 L 195 140 Q 200 140 200 135 L 200 125','sc'=>'rgba(244,196,65,.7)', 'gc'=>'rgba(244,196,65,.18)'],
                                 ];
                             @endphp
                             @foreach ($routes as $r)
@@ -957,6 +959,7 @@
                             @include('partials.police-cruiser', ['mpath'=>'dispatchRoute4', 'dur'=>'7s',   'scale'=>'0.55'])
                             @include('partials.police-cruiser', ['mpath'=>'dispatchRoute5', 'dur'=>'7.5s', 'scale'=>'0.55'])
                             @include('partials.police-cruiser', ['mpath'=>'dispatchRoute6', 'dur'=>'8s',   'scale'=>'0.55'])
+                            @include('partials.police-cruiser', ['mpath'=>'dispatchRoute7', 'dur'=>'6.8s', 'scale'=>'0.55'])
 
 
                             {{-- victim destination — pulsing red halo at center (200,125), avatar overlay sits on top --}}
@@ -981,6 +984,7 @@
                         @include('partials.officer-avatar', ['key' => 'I', 'x' => 340, 'y' => 210, 'name' => 'Officer Pierce',  'rating' => '4.6', 'accent' => 'gold',  'labelSide' => 'left'])
                         @include('partials.officer-avatar', ['key' => 'P', 'x' => 60,  'y' => 210, 'name' => 'Officer Pollock', 'rating' => '4.8', 'accent' => 'brand', 'labelSide' => 'right'])
                         @include('partials.officer-avatar', ['key' => 'O', 'x' => 20,  'y' => 125, 'name' => 'Officer Mosley',  'rating' => '4.7', 'accent' => 'blue',  'labelSide' => 'right'])
+                        @include('partials.officer-avatar', ['key' => 'R', 'x' => 200, 'y' => 235, 'name' => 'Officer Reyes',   'rating' => '4.8', 'accent' => 'gold',  'labelSide' => 'right'])
 
                         {{-- Victim avatar — at the map center, ringed in red --}}
                         <div class="absolute z-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
@@ -989,67 +993,103 @@
                                 <div class="relative w-14 h-14 rounded-full ring-[3px] ring-brand-500 ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-navy-800 shadow-lg shadow-brand-600/40">
                                     <svg viewBox="0 0 64 64" class="w-full h-full">
                                         <defs>
-                                            <radialGradient id="victimBg" cx="50%" cy="35%" r="65%">
-                                                <stop offset="0%"  stop-color="#4a3848"/>
-                                                <stop offset="100%" stop-color="#1a1224"/>
+                                            <radialGradient id="victimBg" cx="50%" cy="30%" r="70%">
+                                                <stop offset="0%"  stop-color="#5a4458"/>
+                                                <stop offset="60%" stop-color="#2a1d2e"/>
+                                                <stop offset="100%" stop-color="#140a18"/>
                                             </radialGradient>
                                             <linearGradient id="victimSkin" x1="0" x2="0" y1="0" y2="1">
-                                                <stop offset="0%"  stop-color="#f6dbc1"/>
-                                                <stop offset="60%" stop-color="#e2b896"/>
-                                                <stop offset="100%" stop-color="#b08562"/>
+                                                <stop offset="0%"  stop-color="#fce0c5"/>
+                                                <stop offset="55%" stop-color="#ebc09c"/>
+                                                <stop offset="100%" stop-color="#bd8a64"/>
                                             </linearGradient>
                                             <linearGradient id="victimHair" x1="0" x2="0" y1="0" y2="1">
-                                                <stop offset="0%" stop-color="#3a2418"/>
-                                                <stop offset="100%" stop-color="#1a0d07"/>
+                                                <stop offset="0%"  stop-color="#5a3826"/>
+                                                <stop offset="55%" stop-color="#3a2418"/>
+                                                <stop offset="100%" stop-color="#1c0f08"/>
                                             </linearGradient>
                                             <linearGradient id="victimShirt" x1="0" x2="0" y1="0" y2="1">
-                                                <stop offset="0%" stop-color="#e44352"/>
+                                                <stop offset="0%" stop-color="#ec5564"/>
                                                 <stop offset="100%" stop-color="#a01828"/>
                                             </linearGradient>
                                             <radialGradient id="victimCheek" cx="50%" cy="50%" r="50%">
-                                                <stop offset="0%" stop-color="rgba(220,130,135,.55)"/>
+                                                <stop offset="0%" stop-color="rgba(228,130,140,.6)"/>
                                                 <stop offset="100%" stop-color="transparent"/>
                                             </radialGradient>
+                                            <linearGradient id="victimLip" x1="0" x2="0" y1="0" y2="1">
+                                                <stop offset="0%"  stop-color="#d44455"/>
+                                                <stop offset="100%" stop-color="#9a2030"/>
+                                            </linearGradient>
                                         </defs>
                                         <rect width="64" height="64" fill="url(#victimBg)"/>
-                                        {{-- shoulders + shirt --}}
-                                        <path d="M0 64 Q3 44 16 42 L48 42 Q61 44 64 64 Z" fill="url(#victimShirt)"/>
-                                        {{-- shirt collar V-neck hint --}}
-                                        <path d="M28 42 L32 50 L36 42 Z" fill="rgba(0,0,0,.18)"/>
-                                        {{-- neck --}}
-                                        <path d="M27.5 38 L27.5 44 Q32 47 36.5 44 L36.5 38 Z" fill="url(#victimSkin)"/>
-                                        {{-- hair back layer (long, falls over shoulders) --}}
-                                        <path d="M16 44 Q14 30 18 22 Q20 14 32 12 Q44 14 46 22 Q50 30 48 44 L46 46 Q44 36 42 32 L42 44 L22 44 L22 32 Q20 36 18 46 Z" fill="url(#victimHair)"/>
-                                        {{-- face --}}
-                                        <ellipse cx="32" cy="29" rx="10.5" ry="12.5" fill="url(#victimSkin)"/>
-                                        {{-- ears --}}
-                                        <ellipse cx="22" cy="29" rx="1.4" ry="2.4" fill="url(#victimSkin)"/>
-                                        <ellipse cx="42" cy="29" rx="1.4" ry="2.4" fill="url(#victimSkin)"/>
-                                        {{-- cheeks blush --}}
-                                        <ellipse cx="26" cy="32.5" rx="2.5" ry="1.4" fill="url(#victimCheek)"/>
-                                        <ellipse cx="38" cy="32.5" rx="2.5" ry="1.4" fill="url(#victimCheek)"/>
-                                        {{-- hair front bangs (sweeping side fringe) --}}
-                                        <path d="M22 22 Q28 16 36 17 Q44 19 44 24 L42 25 Q38 19 32 19 Q26 19 24 25 Z" fill="url(#victimHair)"/>
-                                        {{-- side hair strand --}}
-                                        <path d="M21 23 Q19 32 22 42 L24 42 Q23 32 24 26 Z" fill="url(#victimHair)"/>
-                                        <path d="M43 23 Q45 32 42 42 L40 42 Q41 32 40 26 Z" fill="url(#victimHair)"/>
-                                        {{-- eyebrows --}}
-                                        <path d="M25.5 26 Q27.5 25.2 29.5 26" stroke="#3a2418" stroke-width=".9" fill="none" stroke-linecap="round"/>
-                                        <path d="M34.5 26 Q36.5 25.2 38.5 26" stroke="#3a2418" stroke-width=".9" fill="none" stroke-linecap="round"/>
-                                        {{-- eyes --}}
-                                        <ellipse cx="27.5" cy="29.8" rx="1.7" ry="1.9" fill="#fff"/>
-                                        <ellipse cx="36.5" cy="29.8" rx="1.7" ry="1.9" fill="#fff"/>
-                                        <circle cx="27.7" cy="30" r="1.15" fill="#5a3a28"/>
-                                        <circle cx="36.7" cy="30" r="1.15" fill="#5a3a28"/>
-                                        <circle cx="27.8" cy="30.1" r=".55" fill="#0c0608"/>
-                                        <circle cx="36.8" cy="30.1" r=".55" fill="#0c0608"/>
-                                        <circle cx="28.1" cy="29.5" r=".3" fill="#fff"/>
-                                        <circle cx="37.1" cy="29.5" r=".3" fill="#fff"/>
-                                        {{-- nose --}}
-                                        <path d="M32 30.8 Q31.4 33.6 32.6 33.6" stroke="rgba(120,75,45,.45)" stroke-width=".5" fill="none" stroke-linecap="round"/>
-                                        {{-- lips --}}
-                                        <path d="M29 36.6 Q32 38.2 35 36.6" stroke="#9a2a35" stroke-width="1" fill="none" stroke-linecap="round"/>
-                                        <path d="M29 36.4 Q32 35.4 35 36.4 Q32 38.2 29 36.4 Z" fill="#c43948"/>
+
+                                        {{-- Long hair back-layer cascading over shoulders --}}
+                                        <path d="M14 64 Q12 50 12 38 Q12 22 18 14 Q24 8 32 8 Q40 8 46 14 Q52 22 52 38 Q52 50 50 64 L46 64 Q44 52 44 42 Q44 36 42 32 L42 46 L22 46 L22 32 Q20 36 20 42 Q20 52 18 64 Z" fill="url(#victimHair)"/>
+
+                                        {{-- Shoulders + red top --}}
+                                        <path d="M2 64 Q4 46 18 44 L46 44 Q60 46 62 64 Z" fill="url(#victimShirt)"/>
+                                        {{-- Subtle shirt fold --}}
+                                        <path d="M4 60 Q14 50 22 48 L42 48 Q50 50 60 60 L60 64 L4 64 Z" fill="rgba(255,255,255,.05)"/>
+                                        {{-- V-neck collar shadow --}}
+                                        <path d="M28 44 Q32 51 36 44 Z" fill="rgba(0,0,0,.22)"/>
+
+                                        {{-- Neck --}}
+                                        <path d="M27 38 L27 45 Q32 48 37 45 L37 38 Z" fill="url(#victimSkin)"/>
+                                        {{-- Neck shadow line --}}
+                                        <path d="M27 39.5 Q32 41.5 37 39.5 L37 40.7 Q32 42.7 27 40.7 Z" fill="rgba(0,0,0,.16)"/>
+
+                                        {{-- Face oval --}}
+                                        <ellipse cx="32" cy="28" rx="10.5" ry="12.8" fill="url(#victimSkin)"/>
+                                        {{-- Subtle face shadow on right side --}}
+                                        <path d="M32 16 Q40 18 42 28 Q40 38 32 40 Z" fill="rgba(0,0,0,.06)"/>
+
+                                        {{-- Ears --}}
+                                        <ellipse cx="22" cy="28" rx="1.4" ry="2.4" fill="url(#victimSkin)"/>
+                                        <ellipse cx="42" cy="28" rx="1.4" ry="2.4" fill="url(#victimSkin)"/>
+
+                                        {{-- Hair front: side-swept bangs covering forehead --}}
+                                        <path d="M21 23 Q22 14 32 10 Q42 14 43 23 Q42 16 36 18 Q30 22 24 26 Q22 26 21 23 Z" fill="url(#victimHair)"/>
+                                        {{-- Bangs detail (sweeping fringe) --}}
+                                        <path d="M22 21 Q26 18 32 19 Q38 18 42 22 Q40 24 36 23 Q32 22 28 24 Q24 25 22 21 Z" fill="url(#victimHair)" opacity=".6"/>
+                                        {{-- Side hair strands flowing past face --}}
+                                        <path d="M20 24 Q18 34 21 44 L23 44 Q22 34 23 26 Z" fill="url(#victimHair)"/>
+                                        <path d="M44 24 Q46 34 43 44 L41 44 Q42 34 41 26 Z" fill="url(#victimHair)"/>
+
+                                        {{-- Cheeks (soft blush) --}}
+                                        <ellipse cx="26" cy="32" rx="2.6" ry="1.5" fill="url(#victimCheek)"/>
+                                        <ellipse cx="38" cy="32" rx="2.6" ry="1.5" fill="url(#victimCheek)"/>
+
+                                        {{-- Eyebrows (gentle curve) --}}
+                                        <path d="M25 25.5 Q27.5 24.4 30 25.5" stroke="#3a2418" stroke-width="1" fill="none" stroke-linecap="round"/>
+                                        <path d="M34 25.5 Q36.5 24.4 39 25.5" stroke="#3a2418" stroke-width="1" fill="none" stroke-linecap="round"/>
+
+                                        {{-- Eyes — slightly almond-shaped with eyelashes --}}
+                                        <path d="M25.5 28.4 Q27.5 27.4 29.5 28.4 Q27.5 30 25.5 28.4 Z" fill="#fff"/>
+                                        <path d="M34.5 28.4 Q36.5 27.4 38.5 28.4 Q36.5 30 34.5 28.4 Z" fill="#fff"/>
+                                        <circle cx="27.5" cy="28.6" r="1.05" fill="#4a3a25"/>
+                                        <circle cx="36.5" cy="28.6" r="1.05" fill="#4a3a25"/>
+                                        <circle cx="27.5" cy="28.7" r=".55" fill="#0c0608"/>
+                                        <circle cx="36.5" cy="28.7" r=".55" fill="#0c0608"/>
+                                        <circle cx="27.8" cy="28.3" r=".3" fill="#fff"/>
+                                        <circle cx="36.8" cy="28.3" r=".3" fill="#fff"/>
+                                        {{-- Eyelashes (top) --}}
+                                        <path d="M25.5 27.8 Q27.5 27.1 29.5 27.8" stroke="#1c0f08" stroke-width=".4" fill="none" stroke-linecap="round"/>
+                                        <path d="M34.5 27.8 Q36.5 27.1 38.5 27.8" stroke="#1c0f08" stroke-width=".4" fill="none" stroke-linecap="round"/>
+
+                                        {{-- Nose: subtle bridge + tip shadow --}}
+                                        <path d="M32 30 Q31.4 33.4 32.6 33.4" stroke="rgba(110,75,45,.45)" stroke-width=".5" fill="none" stroke-linecap="round"/>
+                                        <ellipse cx="31.4" cy="33.6" rx=".5" ry=".3" fill="rgba(0,0,0,.1)"/>
+                                        <ellipse cx="32.6" cy="33.6" rx=".5" ry=".3" fill="rgba(0,0,0,.1)"/>
+
+                                        {{-- Lips (full, soft smile) --}}
+                                        <path d="M28.5 36.5 Q32 35.5 35.5 36.5 Q35.5 37 35 37.4 Q32 39 29 37.4 Q28.5 37 28.5 36.5 Z" fill="url(#victimLip)"/>
+                                        <path d="M29 36.7 Q32 36.1 35 36.7" stroke="rgba(0,0,0,.18)" stroke-width=".25" fill="none" stroke-linecap="round"/>
+                                        {{-- Lip highlight --}}
+                                        <ellipse cx="31.5" cy="36.4" rx="1.4" ry=".25" fill="rgba(255,255,255,.4)"/>
+
+                                        {{-- Earring shimmer --}}
+                                        <circle cx="22" cy="31.5" r=".55" fill="#f4c441"/>
+                                        <circle cx="42" cy="31.5" r=".55" fill="#f4c441"/>
                                     </svg>
                                 </div>
                                 <div class="absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap text-center">
