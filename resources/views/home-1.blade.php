@@ -92,7 +92,7 @@
 
         {{-- LEFT: hands + phone photograph (bigger + left-bleed) --}}
         <div class="order-2 lg:order-1 lg:col-span-7 relative">
-            <div class="reveal reveal-left relative w-full max-w-[560px] sm:max-w-[680px] lg:max-w-none mx-auto lg:mx-0 lg:-ml-24 xl:-ml-48">
+            <div class="reveal reveal-left relative w-full max-w-[560px] sm:max-w-[680px] lg:max-w-none mx-auto lg:mx-0 lg:-ml-12 xl:-ml-20">
                 {{-- Soft pedestal --}}
                 <div class="absolute inset-x-10 -bottom-2 h-8 sm:h-10 rounded-[50%] bg-navy-900/15 blur-2xl"></div>
 
@@ -113,7 +113,7 @@
                 </div>
 
                 {{-- Registry notification card (just above the phone, top-left of the device) --}}
-                <div class="reveal reveal-delay-4 absolute z-20 flex items-center gap-3 rounded-md bg-white border border-ink-100 px-3 py-2 sm:px-4 sm:py-3 shadow-lg" style="top:8%; left:2%;">
+                <div class="reveal reveal-delay-4 absolute z-20 flex items-center gap-3 rounded-md bg-white border border-ink-100 px-3 py-2 sm:px-4 sm:py-3 shadow-lg" style="top:12%; left:14%;">
                     <span class="grid place-items-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-navy-900 text-white">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5" stroke-width="2"/></svg>
                     </span>
