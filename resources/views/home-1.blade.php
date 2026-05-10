@@ -1102,13 +1102,13 @@
                             {{-- Third police cruiser — Officer Pollock, route 3 --}}
                             @include('partials.police-cruiser', ['mpath' => 'dispatchRoute3', 'dur' => '8s'])
 
-                            {{-- user destination pin --}}
+                            {{-- user destination — small target halo (avatar overlay sits on top in HTML) --}}
                             <g transform="translate(330 200)">
-                                <circle r="11" fill="rgba(228,67,82,.18)"/>
-                                <circle r="7"  fill="#fff"/>
-                                <circle r="3.5" fill="#e44352"/>
+                                <circle r="22" fill="rgba(228,67,82,.12)">
+                                    <animate attributeName="r" values="22;28;22" dur="2.4s" repeatCount="indefinite"/>
+                                    <animate attributeName="opacity" values=".55;.15;.55" dur="2.4s" repeatCount="indefinite"/>
+                                </circle>
                             </g>
-                            <text x="312" y="225" fill="#fff" font-size="10" font-family="Inter, sans-serif" font-weight="700">You</text>
 
                             {{-- Vignette top --}}
                             <rect width="400" height="250" fill="url(#vignette)" pointer-events="none"/>
@@ -1190,6 +1190,20 @@
 
                         {{-- Officer Pollock — third responder, bottom-left start --}}
                         @include('partials.officer-avatar', ['key' => 'P', 'x' => 40, 'y' => 215, 'name' => 'Officer Pollock', 'rating' => '4.8', 'accent' => 'blue', 'labelSide' => 'right'])
+
+                        {{-- Victim — at the user destination pin, red ring --}}
+                        <div class="absolute z-10" style="left: calc(330/400 * 100%); top: calc(200/250 * 100%); transform: translate(-50%, -50%);">
+                            <div class="relative">
+                                <div class="absolute -inset-1 rounded-full bg-brand-500/50 blur-md animate-pulse"></div>
+                                <div class="relative w-12 h-12 rounded-full ring-2 ring-brand-500 ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-navy-800 shadow-lg">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&q=80" alt="Victim" class="w-full h-full object-cover" loading="lazy" />
+                                </div>
+                                <div class="absolute right-full mr-2 top-1/2 -translate-y-1/2 whitespace-nowrap text-right">
+                                    <p class="text-[10px] font-bold text-white leading-tight drop-shadow">You</p>
+                                    <p class="text-[9px] text-brand-300 leading-tight drop-shadow">awaiting agent</p>
+                                </div>
+                            </div>
+                        </div>
 
                         {{-- Sonar rings on user destination --}}
                         <div class="absolute" style="left: calc(330/400 * 100%); top: calc(200/250 * 100%); transform: translate(-50%, -50%);">
