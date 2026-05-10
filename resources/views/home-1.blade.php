@@ -1621,7 +1621,7 @@
             doubleClickZoom: false, touchZoom: false, boxZoom: false, keyboard: false,
             attributionControl: false
         }).setView(NEWARK, 13);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             subdomains:'abcd', maxZoom: 19
         }).addTo(dispatchMap);
         dispatchMapInited = true;
