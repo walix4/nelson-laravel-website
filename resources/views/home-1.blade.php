@@ -32,23 +32,23 @@
 {{-- =======================================================================
      NAV
 ========================================================================--}}
-<header data-nav class="fixed inset-x-0 top-0 z-50 bg-brand-600 text-white shadow-md">
+<header data-nav class="fixed inset-x-0 top-0 z-50 bg-[#f9eaea] text-navy-900 shadow-md">
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
         <div class="flex-1 flex items-center">
             <a href="#top" class="flex items-center gap-3 group">
                 <span class="grid place-items-center h-11 w-11 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
                     <img src="/images/auxilio-shield.png" alt="" class="h-9 w-auto" />
                 </span>
-                <img src="/images/auxilio-logo-white.png" alt="Auxilio" class="h-5 sm:h-6 w-auto" />
+                <img src="/images/auxilio-logo.png" alt="Auxilio" class="h-5 sm:h-6 w-auto" />
             </a>
         </div>
 
-        <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-white/90 shrink-0 whitespace-nowrap">
-            <li><a data-route href="#/"                 class="nav-link hover:text-white transition">Home</a></li>
-            <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
-            <li><a data-route href="#/sex-offender-map" class="nav-link hover:text-white transition">Sex Offender Map</a></li>
-            <li><a data-nav-link href="#walkthrough"    class="nav-link hover:text-white transition">Walkthrough</a></li>
-            <li><a data-nav-link href="#voices"         class="nav-link hover:text-white transition">Voices</a></li>
+        <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-navy-900/90 shrink-0 whitespace-nowrap">
+            <li><a data-route href="#/"                 class="nav-link hover:text-brand-600 transition">Home</a></li>
+            <li><a data-route href="#/crime-map"        class="nav-link hover:text-brand-600 transition">Crime Map</a></li>
+            <li><a data-route href="#/sex-offender-map" class="nav-link hover:text-brand-600 transition">Sex Offender Map</a></li>
+            <li><a data-nav-link href="#walkthrough"    class="nav-link hover:text-brand-600 transition">Walkthrough</a></li>
+            <li><a data-nav-link href="#voices"         class="nav-link hover:text-brand-600 transition">Voices</a></li>
         </ul>
 
         <div class="flex-1 flex items-center justify-end">
