@@ -127,6 +127,10 @@ if (submitLock && submitBtn) {
 
     const onScroll = () => {
         if (unlocked) return;
+        // Skip entirely if the submit-lock element is hidden (e.g. on a non-home view).
+        // Without this, getBoundingClientRect returns 0,0,0,0 for display:none, which
+        // wrongly satisfies rect.top <= 0 and locks scroll on every other page.
+        if (!submitLock.offsetParent) return;
         if (locked) {
             // Keep the page pinned at lockedY
             if (Math.abs(window.scrollY - lockedY) > 1) window.scrollTo(0, lockedY);

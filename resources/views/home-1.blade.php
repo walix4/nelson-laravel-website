@@ -1259,23 +1259,23 @@
      HOW IT WORKS VIEW
 ============================================================--}}
 <div data-view="how-it-works" class="hidden">
-    <section class="relative overflow-hidden bg-white">
+    <section class="relative overflow-hidden hero-bg">
         <div class="pointer-events-none absolute inset-0 -z-10">
             <div class="absolute -top-24 right-1/4 w-[500px] h-[500px] rounded-full bg-brand-100/40 blur-3xl"></div>
             <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-gold-100/50 blur-3xl"></div>
         </div>
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
-            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
                 <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">How it works</span>
             </div>
-            <h1 class="mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+            <h1 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
                 How <span class="text-brand-600">Auxilio</span> works.
             </h1>
-            <p class="mt-4 text-lg text-navy-700/80 max-w-2xl">
+            <p class="reveal reveal-delay-2 mt-4 text-lg text-navy-700/80 max-w-2xl">
                 From siren to signal in three taps. Here's the journey from the moment you sense danger to the moment a verified Super Agent arrives.
             </p>
 
-            <div class="mt-12 grid md:grid-cols-3 gap-6">
+            <div class="reveal stagger mt-12 grid md:grid-cols-3 gap-6">
                 @foreach ([
                     ['n'=>'01','t'=>'Tap to alert','b'=>'Open Auxilio User and trigger one-tap SOS — your live location, profile and trusted contacts are pushed to dispatch instantly.','c'=>'bg-brand-50 text-brand-600'],
                     ['n'=>'02','t'=>'Capture the report','b'=>'Five guided steps — categorize, describe the suspect, log the vehicle, drop in evidence, and build a sketch. Skip what you don\'t know; Auxilio fills in the rest.','c'=>'bg-gold-100 text-gold-600'],
@@ -1290,7 +1290,7 @@
             </div>
 
             <div class="mt-16 grid lg:grid-cols-2 gap-8 items-center">
-                <div>
+                <div class="reveal reveal-left">
                     <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-600">Behind the curtain</p>
                     <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">Verified people. Encrypted pipes.</h2>
                     <p class="mt-4 text-navy-700/80 leading-relaxed">
@@ -1307,7 +1307,7 @@
                         @endforeach
                     </ul>
                 </div>
-                <div class="relative rounded-md bg-navy-950 text-white p-8 lg:p-10 overflow-hidden">
+                <div class="reveal reveal-right relative rounded-md bg-navy-950 text-white p-8 lg:p-10 overflow-hidden">
                     <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-brand-600/30 blur-3xl"></div>
                     <p class="relative text-xs font-bold uppercase tracking-[.2em] text-brand-300">Sample dispatch</p>
                     <p class="relative mt-3 font-display text-3xl font-bold">Case #A-7421</p>
@@ -1333,25 +1333,25 @@
      AGENT APP VIEW
 ============================================================--}}
 <div data-view="agent-app" class="hidden">
-    <section class="relative overflow-hidden bg-white">
+    <section class="relative overflow-hidden hero-bg">
         <div class="pointer-events-none absolute inset-0 -z-10">
             <div class="absolute -top-32 left-1/4 w-[520px] h-[520px] rounded-full bg-navy-100/60 blur-3xl"></div>
             <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-brand-100/40 blur-3xl"></div>
         </div>
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
-            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
                 <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">Agent App</span>
             </div>
             <div class="mt-3 grid lg:grid-cols-12 gap-10 items-center">
                 <div class="lg:col-span-7">
-                    <span class="inline-flex items-center gap-2 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5">For Super Agents</span>
-                    <h1 class="mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+                    <span class="reveal reveal-delay-1 inline-flex items-center gap-2 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5">For Super Agents</span>
+                    <h1 class="reveal reveal-delay-2 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
                         Auxilio <span class="text-brand-600">Agent</span>.
                     </h1>
-                    <p class="mt-4 text-lg text-navy-700/80 max-w-xl">
+                    <p class="reveal reveal-delay-3 mt-4 text-lg text-navy-700/80 max-w-xl">
                         The companion app for verified responders. Accept calls, file reports, run live dispatch — all from the same phone.
                     </p>
-                    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3" style="max-width:380px;">
+                    <div class="reveal reveal-delay-4 mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3" style="max-width:380px;">
                         <a href="#" class="group inline-flex items-center justify-center gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
                             <img src="/images/app-store.svg" alt="" class="w-7 h-7 shrink-0" />
                             <div class="text-left whitespace-nowrap leading-tight">
@@ -1368,8 +1368,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="lg:col-span-5">
-                    <div class="relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.6)]">
+                <div class="reveal reveal-right lg:col-span-5">
+                    <div class="relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.6)] float-slow">
                         <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
                         <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
                             <img src="/images/screen-assigning.png" alt="Auxilio Agent app" class="absolute inset-0 w-full h-full object-cover object-top" />
@@ -1378,7 +1378,7 @@
                 </div>
             </div>
 
-            <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="reveal stagger mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ([
                     ['t'=>'Live dispatch queue','b'=>'See incoming reports filtered by distance and category. Accept or pass with one tap.'],
                     ['t'=>'Auto-routed cases','b'=>'The system pings the closest qualified agent first. No bidding, no fighting for jobs.'],
@@ -1394,7 +1394,7 @@
                 @endforeach
             </div>
 
-            <div class="mt-16 rounded-md bg-gradient-to-br from-navy-950 to-navy-900 text-white p-8 lg:p-12 text-center">
+            <div class="reveal mt-16 rounded-md bg-gradient-to-br from-navy-950 to-navy-900 text-white p-8 lg:p-12 text-center">
                 <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-300">Become an agent</p>
                 <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl">Apply to join the network.</h2>
                 <p class="mt-3 max-w-xl mx-auto text-navy-200/90">Licensed security, off-duty law enforcement, and certified responders welcome. We handle vetting; you handle the call.</p>
@@ -1410,23 +1410,23 @@
      ABOUT US VIEW
 ============================================================--}}
 <div data-view="about" class="hidden">
-    <section class="relative overflow-hidden bg-white">
+    <section class="relative overflow-hidden hero-bg">
         <div class="pointer-events-none absolute inset-0 -z-10">
             <div class="absolute -top-32 left-1/3 w-[520px] h-[520px] rounded-full bg-brand-100/40 blur-3xl"></div>
             <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-gold-100/50 blur-3xl"></div>
         </div>
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
-            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
                 <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">About us</span>
             </div>
-            <h1 class="mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+            <h1 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
                 Built for the people <span class="text-brand-600">we love.</span>
             </h1>
-            <p class="mt-4 text-lg text-navy-700/80 max-w-2xl">
+            <p class="reveal reveal-delay-2 mt-4 text-lg text-navy-700/80 max-w-2xl">
                 Auxilio started after a near-miss in our own family. We couldn't find a way to summon real, accountable help fast enough. So we built one.
             </p>
 
-            <div class="mt-12 grid md:grid-cols-3 gap-6">
+            <div class="reveal stagger mt-12 grid md:grid-cols-3 gap-6">
                 @foreach ([
                     ['k'=>'500K+','v'=>'Citizens covered'],
                     ['k'=>'1,200+','v'=>'Verified Super Agents'],
@@ -1440,14 +1440,14 @@
             </div>
 
             <div class="mt-16 grid lg:grid-cols-2 gap-12 items-start">
-                <div>
+                <div class="reveal reveal-left">
                     <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-600">Our mission</p>
                     <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">Make safety <em class="not-italic text-brand-600">accessible</em>, not aspirational.</h2>
                     <p class="mt-4 text-navy-700/80 leading-relaxed">
                         911 is a finite resource. Private security is a privilege. We're building a third lane — citizen-grade response, vetted operators, and transparent pricing — so help is no longer a question of who you know or what you can pay.
                     </p>
                 </div>
-                <div>
+                <div class="reveal reveal-right">
                     <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-600">Our values</p>
                     <ul class="mt-4 space-y-4">
                         @foreach ([['Accountability','Every dispatch is logged, signed, and auditable. No anonymous responders.'],['Privacy first','Location data lives only as long as the case does.'],['Calm by default','Our app should be boring 99% of the time. The 1% is what we trained for.'],['Open to oversight','We invite local LE, civic groups, and journalists into our process.']] as $v)
@@ -1464,9 +1464,9 @@
             </div>
 
             <div class="mt-16">
-                <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-600 text-center">Leadership</p>
-                <h2 class="mt-3 text-center font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">The people behind it.</h2>
-                <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <p class="reveal text-xs font-bold uppercase tracking-[.2em] text-brand-600 text-center">Leadership</p>
+                <h2 class="reveal reveal-delay-1 mt-3 text-center font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">The people behind it.</h2>
+                <div class="reveal stagger mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     @foreach ([
                         ['n'=>'Marcus Holloway','r'=>'Co-founder & CEO','p'=>'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=320&h=320&fit=crop&q=80'],
                         ['n'=>'Priya Shah','r'=>'Co-founder & CTO','p'=>'https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=320&h=320&fit=crop&q=80'],
@@ -1489,24 +1489,24 @@
      CONTACT US VIEW
 ============================================================--}}
 <div data-view="contact" class="hidden">
-    <section class="relative overflow-hidden bg-white">
+    <section class="relative overflow-hidden hero-bg">
         <div class="pointer-events-none absolute inset-0 -z-10">
             <div class="absolute -top-32 right-1/4 w-[520px] h-[520px] rounded-full bg-navy-100/60 blur-3xl"></div>
             <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-brand-100/40 blur-3xl"></div>
         </div>
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
-            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
                 <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">Contact us</span>
             </div>
-            <h1 class="mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+            <h1 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
                 Talk to <span class="text-brand-600">us.</span>
             </h1>
-            <p class="mt-4 text-lg text-navy-700/80 max-w-2xl">
+            <p class="reveal reveal-delay-2 mt-4 text-lg text-navy-700/80 max-w-2xl">
                 Press, partnerships, agent applications, or just questions — drop us a line and a real human will reply within one business day.
             </p>
 
             <div class="mt-12 grid lg:grid-cols-12 gap-10">
-                <div class="lg:col-span-5 space-y-4">
+                <div class="reveal reveal-left lg:col-span-5 space-y-4">
                     @foreach ([
                         ['i'=>'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z','t'=>'Email','v'=>'support@auxilionetwork.com','h'=>'mailto:support@auxilionetwork.com'],
                         ['i'=>'M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z','t'=>'Phone','v'=>'(704) 555-0127','h'=>'tel:+17045550127'],
@@ -1524,7 +1524,7 @@
                     @endforeach
                 </div>
 
-                <form action="#contact" method="POST" class="lg:col-span-7 rounded-md border border-ink-100 bg-white p-7 shadow-sm space-y-5">
+                <form action="#contact" method="POST" class="reveal reveal-right lg:col-span-7 rounded-md border border-ink-100 bg-white p-7 shadow-sm space-y-5">
                     <div class="grid sm:grid-cols-2 gap-5">
                         <label class="block">
                             <span class="text-xs font-bold uppercase tracking-wider text-navy-900">Your name</span>
@@ -1854,6 +1854,14 @@
         return 'home';
     }
     function showView(view) {
+        // Always close modal + reset body scroll on view change
+        var modal = document.getElementById('incident-modal');
+        if (modal) {
+            modal.removeAttribute('data-open');
+            modal.classList.add('hidden');
+        }
+        document.body.style.overflow = '';
+
         var views = document.querySelectorAll('[data-view]');
         for (var i = 0; i < views.length; i++) {
             if (views[i].getAttribute('data-view') === view) views[i].classList.remove('hidden');
@@ -1862,6 +1870,11 @@
         currentView = view;
         if (view === 'crime-map') initCrimeMap();
         if (view === 'sex-offender-map') initSOMap();
+        // Re-trigger reveal animations on the now-visible view
+        document.querySelectorAll('[data-view="'+view+'"] .reveal').forEach(function(el){
+            el.classList.remove('is-visible');
+            requestAnimationFrame(function(){ el.classList.add('is-visible'); });
+        });
     }
     function applyRoute() {
         showView(getRoute());
