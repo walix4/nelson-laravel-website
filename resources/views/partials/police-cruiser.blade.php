@@ -4,10 +4,10 @@
     <g transform="scale({{ $scale ?? '0.65' }})">
 
     {{-- Siren halos (alternating red / blue, soft-blurred) --}}
-    <circle cx="0" cy="0" r="22" fill="rgba(228,67,82,.55)" filter="url(#bigGlow)">
+    <circle cx="0" cy="0" r="22" fill="rgba(228,67,82,.55)">
         <animate attributeName="opacity" values=".85;0;.85" dur=".42s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="0" cy="0" r="22" fill="rgba(59,130,246,.55)" filter="url(#bigGlow)">
+    <circle cx="0" cy="0" r="22" fill="rgba(59,130,246,.55)">
         <animate attributeName="opacity" values="0;.85;0" dur=".42s" repeatCount="indefinite"/>
     </circle>
 
