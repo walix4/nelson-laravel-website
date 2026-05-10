@@ -797,40 +797,20 @@
             <div class="absolute bottom-0 right-1/4 w-[420px] h-[420px] rounded-full bg-gold-500/30 blur-3xl"></div>
         </div>
 
-        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-6 reveal reveal-left">
-                <p class="text-xs font-semibold uppercase tracking-[.2em] text-brand-400">Live Agent Dispatch</p>
-                <h2 class="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight">
-                    A verified agent, <span class="text-gold-400">on the way</span> in seconds.
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
+            {{-- Compact intro, centered --}}
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-brand-400">Live Agent Dispatch</p>
+                <h2 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight">
+                    A verified agent, <span class="text-gold-400">on the way</span>.
                 </h2>
-                <p class="mt-5 text-lg text-navy-200/80 leading-relaxed max-w-xl">
-                    The moment you confirm an emergency, Auxilio searches nearby Super Agents, locks in the closest match, and shows you the countdown — distance, duration, ETA — until they arrive.
+                <p class="reveal reveal-delay-2 mt-4 text-base sm:text-lg text-navy-200/80">
+                    Closest match locked. Watch the countdown — distance, duration, ETA — until they arrive.
                 </p>
-
-                <ul class="mt-8 stagger space-y-3">
-                    @php
-                        $bullets = [
-                            ['title' => 'Verified Super Agents', 'body' => 'Background-checked, trained, and rated by the community.'],
-                            ['title' => 'Live ETA &amp; metrics', 'body' => 'Distance, duration, driving and walking times — refreshed continuously.'],
-                            ['title' => 'Trusted contacts loop', 'body' => 'Loved ones can watch the same dispatch — no extra setup.'],
-                        ];
-                    @endphp
-                    @foreach ($bullets as $b)
-                        <li class="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition">
-                            <span class="grid place-items-center shrink-0 w-9 h-9 rounded-xl bg-brand-600 text-white">
-                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                            </span>
-                            <div>
-                                <p class="font-semibold">{!! $b['title'] !!}</p>
-                                <p class="text-sm text-navy-200/80 mt-0.5">{!! $b['body'] !!}</p>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
             </div>
 
-            {{-- Live dispatch panel --}}
-            <div class="lg:col-span-6 reveal reveal-right">
+            {{-- Big centered live dispatch panel --}}
+            <div class="reveal reveal-delay-3 mt-12 max-w-5xl mx-auto">
                 <div data-dispatch data-dispatch-start="35" class="relative rounded-[28px] border border-white/10 bg-white/[0.04] backdrop-blur p-6 lg:p-8 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)] overflow-hidden">
                     <div class="absolute -inset-px rounded-[28px] bg-gradient-to-tr from-brand-600/20 via-transparent to-gold-400/20 -z-10"></div>
 
