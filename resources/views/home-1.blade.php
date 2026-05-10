@@ -141,72 +141,52 @@
             </div>
         </div>
 
-        {{-- RIGHT: dotted world/US map + animated role tags --}}
+        {{-- RIGHT: realistic dotted world map + animated role tags --}}
         <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-right relative aspect-[1.15/1] w-full max-w-[640px] mx-auto">
+            <div class="reveal reveal-right relative w-full max-w-[680px] mx-auto" style="aspect-ratio: 1.8 / 1;">
 
-                {{-- dotted world map (inline SVG: dots arranged in continental shapes) --}}
-                <svg viewBox="0 0 600 480" class="absolute inset-0 w-full h-full" aria-hidden="true">
-                    <defs>
-                        <pattern id="dotPat" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                            <circle cx="5" cy="5" r="1.4" fill="#cbd5e1"/>
-                        </pattern>
-                        <pattern id="dotPatActive" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                            <circle cx="5" cy="5" r="1.6" fill="#94a3b8"/>
-                        </pattern>
-                    </defs>
+                {{-- the actual dotted world map: CSS dot pattern masked by world silhouette SVG --}}
+                <div class="world-dotmap absolute inset-0 w-full h-full" aria-hidden="true"></div>
 
-                    {{-- North America --}}
-                    <path fill="url(#dotPatActive)" d="M60,90 C90,70 140,68 180,80 C220,75 240,95 250,130 C245,160 230,175 215,195 C200,220 175,240 145,235 C115,232 90,215 75,190 C55,165 50,135 60,110 Z"/>
-                    {{-- South America --}}
-                    <path fill="url(#dotPat)" d="M170,260 C195,250 220,260 230,290 C240,330 230,370 215,400 C200,425 180,432 165,420 C150,400 145,365 150,330 C155,300 162,275 170,260 Z"/>
-                    {{-- Europe --}}
-                    <path fill="url(#dotPat)" d="M285,90 C310,80 340,82 360,95 C375,110 372,135 360,150 C340,165 310,168 290,160 C275,148 270,125 275,108 Z"/>
-                    {{-- Africa --}}
-                    <path fill="url(#dotPatActive)" d="M295,170 C325,158 360,170 375,200 C390,240 388,290 370,330 C355,360 330,375 310,365 C285,348 275,310 280,270 C285,225 290,195 295,170 Z"/>
-                    {{-- Asia (large blob) --}}
-                    <path fill="url(#dotPatActive)" d="M395,80 C440,68 500,72 540,95 C560,118 560,150 545,180 C520,210 480,225 435,222 C405,215 388,195 385,165 C383,135 388,105 395,85 Z"/>
-                    {{-- India / SE Asia --}}
-                    <path fill="url(#dotPat)" d="M430,210 C455,205 478,215 482,238 C480,262 460,275 440,272 C422,265 418,242 425,222 Z"/>
-                    {{-- Australia --}}
-                    <path fill="url(#dotPat)" d="M488,338 C515,332 545,340 555,360 C560,380 545,395 520,397 C495,395 478,382 478,365 C480,352 482,344 488,340 Z"/>
-
-                    {{-- Connection lines from center hub to pins --}}
+                {{-- connection lines: full-bleed SVG sized to container, lines from center hub (50%,50%) to each pin --}}
+                <svg viewBox="0 0 1000 555" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
                     <g stroke="#FB0606" stroke-width="1.4" fill="none" opacity=".55">
-                        <line class="map-line" x1="305" y1="245" x2="155" y2="135"/>
-                        <line class="map-line" x1="305" y1="245" x2="455" y2="125"/>
-                        <line class="map-line" x1="305" y1="245" x2="195" y2="335"/>
-                        <line class="map-line" x1="305" y1="245" x2="335" y2="270"/>
-                        <line class="map-line" x1="305" y1="245" x2="510" y2="365"/>
-                        <line class="map-line" x1="305" y1="245" x2="475" y2="240"/>
+                        {{-- coordinates match pin positions below (same percent → multiplied by viewBox) --}}
+                        <line class="map-line" x1="500" y1="277" x2="220" y2="200"/>   {{-- → North America (Police Officer) --}}
+                        <line class="map-line" x1="500" y1="277" x2="520" y2="166"/>   {{-- → Europe (911 Dispatch) --}}
+                        <line class="map-line" x1="500" y1="277" x2="280" y2="416"/>   {{-- → South America (Super Agent) --}}
+                        <line class="map-line" x1="500" y1="277" x2="540" y2="333"/>   {{-- → Africa (First Responder) --}}
+                        <line class="map-line" x1="500" y1="277" x2="780" y2="222"/>   {{-- → Asia (Trusted Contact) --}}
+                        <line class="map-line" x1="500" y1="277" x2="850" y2="416"/>   {{-- → Australia (EMT) --}}
                     </g>
                 </svg>
 
                 {{-- Center HUB (Auxilio core) --}}
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                    <div class="grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.55)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
+                    <div class="relative grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.55)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
                         <svg class="w-7 h-7" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
                         </svg>
+                        <span class="absolute inset-0 rounded-full map-pin" aria-hidden="true"></span>
                     </div>
-                    <span class="absolute inset-0 rounded-full map-pin" aria-hidden="true"></span>
                 </div>
 
-                {{-- Pin + role tag clusters (absolute positioned over the SVG map) --}}
+                {{-- Pin + role tag clusters (absolute positioned at real continent locations) --}}
                 @php
+                    // top/left % computed against the 1.8:1 container — chosen so dots sit on actual continents
                     $pins = [
-                        ['top'=>'24%','left'=>'24%','label'=>'Police Officer',   'delay'=>'0s',  'side'=>'left'],
-                        ['top'=>'20%','left'=>'72%','label'=>'911 Dispatch',     'delay'=>'1.5s','side'=>'right'],
-                        ['top'=>'68%','left'=>'30%','label'=>'Super Agent',      'delay'=>'3s',  'side'=>'left'],
-                        ['top'=>'52%','left'=>'56%','label'=>'First Responder',  'delay'=>'4.5s','side'=>'right'],
-                        ['top'=>'76%','left'=>'82%','label'=>'Trusted Contact',  'delay'=>'6s',  'side'=>'left'],
-                        ['top'=>'46%','left'=>'78%','label'=>'EMT',              'delay'=>'7.5s','side'=>'right'],
+                        ['top'=>'36%','left'=>'22%','label'=>'Police Officer',   'delay'=>'0s',  'side'=>'right'], // North America
+                        ['top'=>'30%','left'=>'52%','label'=>'911 Dispatch',     'delay'=>'1.5s','side'=>'left'],  // Europe
+                        ['top'=>'75%','left'=>'28%','label'=>'Super Agent',      'delay'=>'3s',  'side'=>'right'], // South America
+                        ['top'=>'60%','left'=>'54%','label'=>'First Responder',  'delay'=>'4.5s','side'=>'right'], // Africa
+                        ['top'=>'40%','left'=>'78%','label'=>'Trusted Contact',  'delay'=>'6s',  'side'=>'left'],  // Asia
+                        ['top'=>'75%','left'=>'85%','label'=>'EMT',              'delay'=>'7.5s','side'=>'left'],  // Australia
                     ];
                 @endphp
                 @foreach ($pins as $p)
-                    <div class="absolute z-10" style="top:{{ $p['top'] }};left:{{ $p['left'] }};">
+                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:{{ $p['top'] }};left:{{ $p['left'] }};">
                         {{-- pin dot --}}
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white" style="background:#FB0606;"></span>
+                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)]" style="background:#FB0606;"></span>
                         {{-- role label --}}
                         <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 {{ $p['side']==='right' ? 'left-5 top-1/2 -translate-y-1/2' : 'right-5 top-1/2 -translate-y-1/2' }}" style="animation-delay:{{ $p['delay'] }};">
                             {{ $p['label'] }}
@@ -337,17 +317,25 @@
         <div class="lg:col-span-6">
             <div class="reveal reveal-right grid grid-cols-2 gap-4">
                 @php
-                    $faces = [
-                        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=560&h=560&fit=crop&q=80',
-                        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=560&h=560&fit=crop&q=80',
-                        'https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=560&h=560&fit=crop&q=80',
-                        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=560&h=560&fit=crop&q=80',
+                    $scenes = [
+                        ['src'=>'/images/about/robbery.jpg',  'tag'=>'Robbery',          'meta'=>'Alert dispatched · 0:18s'],
+                        ['src'=>'/images/about/break-in.jpg', 'tag'=>'Vehicle Break-in', 'meta'=>'Agent en-route · ETA 4m'],
+                        ['src'=>'/images/about/roadside.jpg', 'tag'=>'Roadside Help',    'meta'=>'Verified responder · cleared'],
+                        ['src'=>'/images/about/accident.jpg', 'tag'=>'Collision',       'meta'=>'EMT + PD notified · 0:09s'],
                     ];
                 @endphp
-                @foreach ($faces as $i => $face)
-                    <div class="relative aspect-square rounded-2xl overflow-hidden shadow-xl {{ $i % 2 ? 'mt-10' : '' }}">
-                        <img src="{{ $face }}" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
+                @foreach ($scenes as $i => $s)
+                    <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-xl {{ $i % 2 ? 'mt-10' : '' }}">
+                        <img src="{{ $s['src'] }}" alt="{{ $s['tag'] }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/15 to-transparent"></div>
+                        <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full text-white px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase shadow-md" style="background:#FB0606;">
+                            <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-white"></span>
+                            {{ $s['tag'] }}
+                        </span>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <p class="text-[11px] font-semibold uppercase tracking-[.14em] text-white/70">Auxilio resolved</p>
+                            <p class="mt-0.5 text-sm font-bold text-white truncate">{{ $s['meta'] }}</p>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -402,48 +390,264 @@
 </section>
 
 {{-- =======================================================================
-     FEATURES — "The intelligent network behind safer streets"
+     FEATURES — Efficiency-Metrics card style: 4 big metric cards w/ AI hover
 ========================================================================--}}
-<section id="features" class="relative py-24 lg:py-32 bg-white">
-    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+<section id="features" class="relative py-24 lg:py-32 bg-white overflow-hidden">
+    {{-- subtle ambient AI grid background --}}
+    <div class="pointer-events-none absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(#0c1126 1px, transparent 1px), linear-gradient(90deg, #0c1126 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse at center, #000 0%, transparent 75%);"></div>
+
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-brand-600">Features</p>
-            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-navy-900">
-                The intelligent network behind <span class="text-brand-600">safer streets.</span>
+            <p class="reveal inline-flex items-center gap-2 text-sm font-medium text-navy-900/70">
+                <span class="grid place-items-center w-5 h-5 rounded-full" style="background:#FB0606;">
+                    <svg class="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
+                </span>
+                Auxilio AI · Safety Metrics
+            </p>
+            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[64px] leading-[1.02] tracking-tight text-navy-950">
+                Efficiency Metrics
             </h2>
-            <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-700/80 leading-relaxed">
-                Nine capabilities, one continuous safety fabric. Each feature talks to the next — alerts inform geofences, geofences trigger Alert shortcuts, Alerts route to verified responders.
+            <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-900/65 leading-relaxed">
+                At Auxilio, we harness real-time intelligence and verified responders to redefine personal safety.
             </p>
         </div>
 
         @php
-            $features = [
-                ['title' => 'Real-Time Safety Alerts',  'body' => 'Instant push notifications the moment something happens near you, your home, or the people you care about.', 'icon' => 'bell'],
-                ['title' => 'Quick Alert for Instant Help', 'body' => 'One tap alerts trusted agents or emergency responders with your location, situation, and identity — when seconds matter.',  'icon' => 'sos'],
-                ['title' => 'Track &amp; Share Location', 'body' => 'Let your loved ones or verified security agents monitor your location in real time — never alone on the way home.',     'icon' => 'location'],
-                ['title' => 'Verified Super Agents',     'body' => 'A trained, background-checked network of safety agents who can respond, escort, or coordinate help on your behalf.',                'icon' => 'shield'],
-                ['title' => 'Live Crime Map',            'body' => 'A live, color-coded map of incidents reported around you — searchable, filterable, and refreshed as events come in.',          'icon' => 'map'],
-                ['title' => 'Categorized Reporting',     'body' => 'Report incidents with the right urgency and category — Sexual Crimes, Robbery, Physical Violence, Homicides — in seconds.',         'icon' => 'feed'],
-                ['title' => 'Suspect Sketch Builder',    'body' => 'Help responders identify a suspect with a guided sketch composer — features, build, clothing — all from your phone.',              'icon' => 'sketch'],
-                ['title' => 'Case Progress Tracking',    'body' => 'Watch your case move with a live completion bar, agent ETA, and distance / duration metrics — no more wondering what&rsquo;s next.', 'icon' => 'progress'],
-                ['title' => 'Trusted Community Watch',   'body' => 'Privately share live updates with neighbors and trusted contacts — turn your block into an always-on safety network.',             'icon' => 'people'],
+            $metrics = [
+                [
+                    'big'   => '30s',
+                    'label' => 'Avg Alert Time',
+                    'body'  => 'From incident to verified responder lock screen in under thirty seconds.',
+                    'bg'    => '#fdf6d8',  // pastel yellow
+                    'fg'    => '#FB0606',
+                    'glyph' => 'M13 2L3 14h7l-1 8 10-12h-7l1-8z',
+                ],
+                [
+                    'big'   => '24/7',
+                    'label' => 'Verified Agents',
+                    'body'  => 'Background-checked Super Agents on standby, ready to respond on your behalf.',
+                    'bg'    => '#eef1f6',  // pastel gray
+                    'fg'    => '#FB0606',
+                    'glyph' => 'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z',
+                ],
+                [
+                    'big'   => '1M+',
+                    'label' => 'Crimes Mapped',
+                    'body'  => 'A live, AI-classified crime feed across 40+ states — refreshed as events come in.',
+                    'bg'    => '#e7eeff',  // pastel blue
+                    'fg'    => '#FB0606',
+                    'glyph' => 'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z',
+                ],
+                [
+                    'big'   => '100%',
+                    'label' => 'Privacy by Design',
+                    'body'  => 'End-to-end encrypted location sharing — opt-in, revocable, and never sold.',
+                    'bg'    => '#f1f1f3',  // pastel neutral
+                    'fg'    => '#FB0606',
+                    'glyph' => 'M6 10V8a6 6 0 1112 0v2M5 10h14v10H5z',
+                ],
             ];
         @endphp
 
-        <div class="mt-14 stagger grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-100 rounded-2xl overflow-hidden border border-ink-100">
-            @foreach ($features as $i => $f)
-                <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            {!! $icons[$f['icon']] !!}
+        <div class="mt-14 stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            @foreach ($metrics as $m)
+                <article class="metric-card group relative rounded-3xl p-7 lg:p-8 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-18px_rgba(12,17,38,.22)]" style="background:{{ $m['bg'] }}; min-height:380px;">
+
+                    {{-- AI sparkle — appears on hover --}}
+                    <span class="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
+                        <svg class="w-5 h-5 metric-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:{{ $m['fg'] }};">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>
                         </svg>
                     </span>
-                    <h3 class="mt-6 text-xl font-semibold tracking-tight text-navy-900">{!! $f['title'] !!}</h3>
-                    <p class="mt-2.5 text-navy-700/80 leading-relaxed">{!! $f['body'] !!}</p>
-                    <span class="absolute top-8 right-8 text-xs font-mono text-ink-300">0{{ $i + 1 }}</span>
-                    <span class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-brand-600 group-hover:w-full transition-all duration-500"></span>
+
+                    {{-- soft hover glow --}}
+                    <span class="pointer-events-none absolute -inset-12 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700" style="background:radial-gradient(circle, {{ $m['fg'] }}22 0%, transparent 60%);"></span>
+
+                    <div class="relative h-full flex flex-col">
+                        {{-- Big number --}}
+                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:{{ $m['fg'] }};">
+                            {{ $m['big'] }}
+                        </p>
+                        {{-- Label --}}
+                        <h3 class="mt-3 font-display font-bold text-lg lg:text-xl tracking-tight text-navy-950">
+                            {{ $m['label'] }}
+                        </h3>
+
+                        {{-- pulsing data line, AI feel --}}
+                        <div class="mt-4 relative h-0.5 w-12 rounded-full overflow-hidden" style="background:rgba(12,17,38,.10);">
+                            <span class="absolute inset-y-0 left-0 w-1/2 metric-pulse-line" style="background:{{ $m['fg'] }};"></span>
+                        </div>
+
+                        {{-- spacer --}}
+                        <div class="flex-1"></div>
+
+                        {{-- Description (bottom) --}}
+                        <p class="mt-6 text-sm text-navy-900/65 leading-relaxed">
+                            {{ $m['body'] }}
+                        </p>
+
+                        {{-- inline glyph that slides in on hover --}}
+                        <div class="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] opacity-60 group-hover:opacity-100 transition-all duration-500" style="color:{{ $m['fg'] }};">
+                            <svg class="w-4 h-4 transition-transform duration-500 group-hover:rotate-[12deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $m['glyph'] }}"/></svg>
+                            <span class="transition-transform duration-500 group-hover:translate-x-1">Learn more</span>
+                            <svg class="w-3.5 h-3.5 -ml-0.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                        </div>
+                    </div>
                 </article>
             @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- =======================================================================
+     PEOPLE SAFETY AI — How Auxilio AI solves crime & emergencies
+========================================================================--}}
+<section class="relative py-24 lg:py-32 bg-white overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 ai-grid-bg opacity-60"></div>
+
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+        {{-- LEFT: copy --}}
+        <div class="lg:col-span-5">
+            <p class="reveal inline-flex items-center gap-2 text-sm font-medium text-navy-900/70">
+                <span class="grid place-items-center w-5 h-5 rounded-full" style="background:#FB0606;">
+                    <svg class="w-3 h-3 text-white" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+                </span>
+                AI for People Safety
+            </p>
+
+            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] leading-[1.04] tracking-tight text-navy-950">
+                Crime &amp; emergencies, <span style="color:#FB0606;">solved in real time.</span>
+            </h2>
+
+            <p class="reveal reveal-delay-2 mt-6 text-lg text-navy-900/65 leading-relaxed">
+                Auxilio AI listens to live signals across your city — incident reports, registry updates, agent locations, panic Alerts — and stitches them into a single response in under thirty seconds. No more refreshing the news. No more guessing whether help is coming.
+            </p>
+
+            @php
+                $aiSteps = [
+                    ['n'=>'01','t'=>'Detect','d'=>'AI ingests reports, sensor data, and Alerts the moment they happen.'],
+                    ['n'=>'02','t'=>'Classify','d'=>'Severity, category, and risk-zone are scored automatically — no triage delay.'],
+                    ['n'=>'03','t'=>'Dispatch','d'=>'The closest verified Super Agent or 911 link is routed instantly.'],
+                ];
+            @endphp
+            <ul class="reveal reveal-delay-3 mt-8 space-y-4">
+                @foreach ($aiSteps as $step)
+                    <li class="flex items-start gap-4">
+                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full text-xs font-bold text-white shadow-[0_8px_18px_-6px_rgba(251,6,6,.5)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">{{ $step['n'] }}</span>
+                        <div class="pt-0.5">
+                            <p class="font-display font-bold text-base text-navy-950">{{ $step['t'] }}</p>
+                            <p class="mt-0.5 text-sm text-navy-900/65 leading-relaxed">{{ $step['d'] }}</p>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+
+            <a href="#download" class="reveal reveal-delay-4 mt-9 inline-flex items-center gap-2 rounded-xl text-white px-6 py-3 text-sm font-semibold shadow-[0_18px_38px_-12px_rgba(251,6,6,.5)] hover:-translate-y-0.5 transition" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                See it in action
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+            </a>
+        </div>
+
+        {{-- RIGHT: animated AI dashboard --}}
+        <div class="lg:col-span-7 relative">
+            <div class="reveal reveal-right relative rounded-3xl p-6 lg:p-8 shadow-[0_50px_120px_-40px_rgba(12,17,38,.35)] border border-ink-100 overflow-hidden" style="background:linear-gradient(180deg,#fafbff 0%,#ffffff 60%);">
+
+                {{-- floating AI Powered chip --}}
+                <div class="absolute -top-3 right-6 lg:right-10 z-30">
+                    <div class="ai-chip-float inline-flex items-center gap-1.5 rounded-full text-white px-4 py-2 text-xs font-semibold shadow-[0_18px_30px_-10px_rgba(251,6,6,.6)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
+                        AI Powered
+                    </div>
+                </div>
+
+                {{-- header strip --}}
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.16em] text-navy-900/55">
+                        <span class="relative flex w-2 h-2">
+                            <span class="absolute inline-flex w-2 h-2 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                            <span class="relative inline-flex w-2 h-2 rounded-full" style="background:#FB0606;"></span>
+                        </span>
+                        Live Incident Stream
+                    </div>
+                    <span class="text-[10px] font-mono text-navy-900/45">NEWARK · SECTOR 4</span>
+                </div>
+
+                {{-- two-card row --}}
+                <div class="mt-5 grid grid-cols-2 gap-4">
+                    {{-- card A: bar chart --}}
+                    <div class="rounded-2xl p-5 border border-ink-100 shadow-sm" style="background:#fff;">
+                        <div class="flex items-center justify-between">
+                            <span class="grid place-items-center w-8 h-8 rounded-md" style="background:#fef2f3;">
+                                <svg class="w-4 h-4" style="color:#FB0606;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19V9M10 19V5M16 19v-7M22 19v-3"/></svg>
+                            </span>
+                            <svg class="w-3.5 h-3.5 text-navy-900/35" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+                        </div>
+                        <p class="mt-4 font-display font-extrabold text-2xl tracking-tight text-navy-950">1,284</p>
+                        <p class="text-xs text-navy-900/55">Alerts processed today</p>
+                        <div class="mt-4 flex items-end gap-1.5 h-16">
+                            @php $heights = [0.4,0.7,0.55,0.85,0.65,0.92,0.75,0.6,1,0.78]; @endphp
+                            @foreach ($heights as $i => $h)
+                                <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:{{ $h * 100 }}%; animation-delay:{{ $i * 0.18 }}s;"></span>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    {{-- card B: ring progress --}}
+                    <div class="rounded-2xl p-5 border border-ink-100 shadow-sm" style="background:#fff;">
+                        <div class="flex items-center justify-between">
+                            <span class="grid place-items-center w-8 h-8 rounded-md" style="background:#fef9e7;">
+                                <svg class="w-4 h-4" style="color:#FB0606;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+                            </span>
+                            <svg class="w-3.5 h-3.5 text-navy-900/35" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+                        </div>
+                        <p class="mt-4 font-display font-extrabold text-2xl tracking-tight text-navy-950">98%</p>
+                        <p class="text-xs text-navy-900/55">Cases auto-classified</p>
+                        <div class="mt-3 grid place-items-center">
+                            <svg viewBox="0 0 80 80" class="w-20 h-20 -rotate-90">
+                                <circle cx="40" cy="40" r="34" fill="none" stroke="#f1f1f3" stroke-width="6"/>
+                                <circle class="ai-ring-spin" cx="40" cy="40" r="34" fill="none" stroke="#FB0606" stroke-width="6" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- live incident feed (cycling) --}}
+                <div class="mt-5 rounded-2xl p-4 border border-ink-100" style="background:#fbfcff;">
+                    <p class="text-[10px] uppercase tracking-[.18em] font-semibold text-navy-900/50">AI-classified incidents</p>
+                    <div class="relative mt-3 h-12 overflow-hidden">
+                        @php
+                            $incidents = [
+                                ['tag'=>'ROBBERY',  'msg'=>'AI flagged: armed robbery, 870 Broadway',   'dot'=>'#FB0606'],
+                                ['tag'=>'DOMESTIC', 'msg'=>'AI flagged: domestic disturbance, Sector 4', 'dot'=>'#FB0606'],
+                                ['tag'=>'COLLISION','msg'=>'AI flagged: vehicle collision, EMT routed', 'dot'=>'#FB0606'],
+                                ['tag'=>'BREAK-IN', 'msg'=>'AI flagged: vehicle break-in, agent en-route','dot'=>'#FB0606'],
+                            ];
+                        @endphp
+                        @foreach ($incidents as $i => $inc)
+                            <div class="ai-incident absolute inset-0 flex items-center gap-3" style="animation-delay:{{ $i * 3 }}s;">
+                                <span class="grid place-items-center w-8 h-8 rounded-md text-white text-[10px] font-bold uppercase tracking-wider shrink-0" style="background:{{ $inc['dot'] }};">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M5 19h14l-7-14z"/></svg>
+                                </span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[11px] uppercase font-bold tracking-wider" style="color:{{ $inc['dot'] }};">{{ $inc['tag'] }}</p>
+                                    <p class="text-sm font-semibold text-navy-950 truncate">{{ $inc['msg'] }}</p>
+                                </div>
+                                <svg class="w-4 h-4 text-navy-900/30 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                {{-- bottom trust strip --}}
+                <div class="mt-5 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[.14em] text-navy-900/55">
+                    <span class="inline-flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5" style="color:#FB0606;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        Verified by 911 Dispatch
+                    </span>
+                    <span class="font-mono normal-case tracking-normal text-navy-900/45">v2.4 · model: aux-resp-3</span>
+                </div>
+            </div>
         </div>
     </div>
 </section>

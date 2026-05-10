@@ -335,6 +335,21 @@
         opacity: 0;
     }
 
+    /* ---------- Realistic dotted world map (CSS dot pattern + SVG silhouette mask) ---------- */
+    .world-dotmap {
+        background-image: radial-gradient(circle, #94a3b8 1.5px, transparent 1.6px);
+        background-size: 9px 9px;
+        background-position: 0 0;
+        -webkit-mask-image: url('../../images/world-map.svg');
+        mask-image: url('../../images/world-map.svg');
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+    }
+
     /* ---------- Hero dotted-map role tags (cycle in/out) ---------- */
     .role-tag {
         opacity: 0;
@@ -360,6 +375,54 @@
     }
     @keyframes mapLineDraw {
         to { stroke-dashoffset: -40; }
+    }
+
+    /* ---------- Feature metric-card pulse line ---------- */
+    .metric-pulse-line {
+        animation: metricPulseLine 2.4s cubic-bezier(.4,0,.2,1) infinite;
+    }
+    @keyframes metricPulseLine {
+        0%   { transform: translateX(-100%); }
+        100% { transform: translateX(200%); }
+    }
+    .metric-sparkle { animation: metricSparkleSpin 6s linear infinite; transform-origin: center; }
+    @keyframes metricSparkleSpin { to { transform: rotate(360deg); } }
+
+    /* ---------- People-Safety AI section animations ---------- */
+    .ai-chip-float { animation: aiChipFloat 4s ease-in-out infinite; }
+    @keyframes aiChipFloat {
+        0%, 100% { transform: translateY(0) rotate(-2deg); }
+        50%      { transform: translateY(-8px) rotate(2deg); }
+    }
+    .ai-bar { animation: aiBarRise 1.4s cubic-bezier(.2,.7,.2,1) infinite alternate; transform-origin: bottom; }
+    @keyframes aiBarRise {
+        from { transform: scaleY(.35); }
+        to   { transform: scaleY(1); }
+    }
+    .ai-ring-spin {
+        stroke-dasharray: 220;
+        animation: aiRingSpin 4s ease-in-out infinite;
+    }
+    @keyframes aiRingSpin {
+        0%   { stroke-dashoffset: 220; }
+        50%  { stroke-dashoffset: 60;  }
+        100% { stroke-dashoffset: 220; }
+    }
+    .ai-incident {
+        opacity: 0;
+        transform: translateX(20px);
+        animation: aiIncident 12s ease-in-out infinite;
+    }
+    @keyframes aiIncident {
+        0%, 100% { opacity: 0; transform: translateX(20px); }
+        4%, 28%  { opacity: 1; transform: translateX(0); }
+        32%      { opacity: 0; transform: translateX(-20px); }
+    }
+    .ai-grid-bg {
+        background-image:
+            linear-gradient(rgba(12,17,38,.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(12,17,38,.04) 1px, transparent 1px);
+        background-size: 24px 24px;
     }
 
     /* ---------- Police badge marquee (slower, infinite) ---------- */
