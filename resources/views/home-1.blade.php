@@ -663,39 +663,57 @@
     {{-- =======================================================================
          REPORT FLOW — 5-step capture (moved from home)
     ========================================================================--}}
-    <section id="how" class="relative bg-navy-950 text-white overflow-hidden">
-        <div class="pointer-events-none absolute inset-0 -z-0 opacity-30">
-            <div class="absolute top-1/4 -left-32 w-[520px] h-[520px] rounded-full bg-brand-600/40 blur-3xl"></div>
-            <div class="absolute bottom-0 -right-32 w-[500px] h-[500px] rounded-full bg-gold-500/25 blur-3xl"></div>
+    <section id="how" class="relative overflow-hidden bg-white">
+        {{-- Header band (white) --}}
+        <div class="relative bg-white text-navy-900">
+            <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-24">
+                <div class="max-w-3xl">
+                    <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-brand-600">Create emergency · 5 steps</p>
+                    <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight">
+                        From siren <span class="text-brand-600">to signal</span> in seconds.
+                    </h2>
+                    <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-700/80 leading-relaxed max-w-2xl">
+                        Five guided steps. Each captures exactly the detail responders need — and skips what you don't have. Tap through and Auxilio takes care of the rest.
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-24 lg:py-32">
-            <div class="max-w-3xl">
-                <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-brand-400">Create emergency · 5 steps</p>
-                <h2 class="reveal reveal-delay-1 mt-4 font-display text-4xl sm:text-5xl lg:text-6xl tracking-tight">
-                    From siren <span class="text-gold-400">to signal</span> in seconds.
-                </h2>
-                <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-200/80 leading-relaxed max-w-2xl">
-                    Five guided steps. Each captures exactly the detail responders need — and skips what you don't have. Tap through and Auxilio takes care of the rest.
-                </p>
-            </div>
+        @php
+            $flow = [
+                ['n' => '01', 'tag' => 'Categorize', 'title' => 'Pick the urgency &amp; category.',                          'body' => 'Choose Urgent or Regular, then tap the type — Sexual Crimes, Robbery, Physical Violence, or Homicide. Auxilio routes the priority for you.', 'img' => '/images/screen-categorize.png', 'pills' => ['Urgent','Regular'], 'chips' => ['Sexual Crimes','Robbery','Physical Violence','Homicide']],
+                ['n' => '02', 'tag' => 'Describe',   'title' => 'Capture the suspect — guided.',                            'body' => 'Step-through dropdowns for Race, Age, Hair, Height, Weight, Build, Teeth, Face Color and more. Skip what you don\'t know — Auxilio fills in the rest.', 'img' => '/images/screen-suspect.png', 'chips' => ['Race','Age','Hair','Height','Weight','Build','Face Color']],
+                ['n' => '03', 'tag' => 'Vehicle',    'title' => 'Add vehicle details if you saw one.',                       'body' => 'Car, motorcycle, e-scooter — whatever was involved. License plate, make, model, color, body style. Skip cleanly if it doesn\'t apply.', 'img' => '/images/screen-vehicle.png', 'chips' => ['Type','License Plate','Make','Model','Color','Body Style']],
+                ['n' => '04', 'tag' => 'Evidence',   'title' => 'Drop in evidence on the spot.',                             'body' => 'Record video, capture audio, or upload up to six photos. Add a description in your own words — everything is encrypted on send.', 'img' => '/images/screen-evidence.png', 'chips' => ['Record Video','Record Audio','Upload Photos','Description']],
+                ['n' => '05', 'tag' => 'Sketch',     'title' => 'Build a suspect sketch.', 'body' => 'Tap through guided options for body, skin, hair, face, eyes and accessories. Auxilio composes a recognizable sketch in under a minute and ships it with the report.', 'img' => '/images/screen-sketch.png', 'chips' => ['Body','Skin','Hair','Facial Hair','Eyes','Nose','Jaw','Face','Head Wear','Glasses']],
+            ];
+        @endphp
 
+        @foreach ($flow as $i => $f)
             @php
-                $flow = [
-                    ['n' => '01', 'tag' => 'Categorize', 'title' => 'Pick the urgency &amp; category.',                          'body' => 'Choose Urgent or Regular, then tap the type — Sexual Crimes, Robbery, Physical Violence, or Homicide. Auxilio routes the priority for you.', 'img' => '/images/screen-categorize.png', 'pills' => ['Urgent','Regular'], 'chips' => ['Sexual Crimes','Robbery','Physical Violence','Homicide']],
-                    ['n' => '02', 'tag' => 'Describe',   'title' => 'Capture the suspect — guided.',                            'body' => 'Step-through dropdowns for Race, Age, Hair, Height, Weight, Build, Teeth, Face Color and more. Skip what you don\'t know — Auxilio fills in the rest.', 'img' => '/images/screen-suspect.png', 'chips' => ['Race','Age','Hair','Height','Weight','Build','Face Color']],
-                    ['n' => '03', 'tag' => 'Vehicle',    'title' => 'Add vehicle details if you saw one.',                       'body' => 'Car, motorcycle, e-scooter — whatever was involved. License plate, make, model, color, body style. Skip cleanly if it doesn\'t apply.', 'img' => '/images/screen-vehicle.png', 'chips' => ['Type','License Plate','Make','Model','Color','Body Style']],
-                    ['n' => '04', 'tag' => 'Evidence',   'title' => 'Drop in evidence on the spot.',                             'body' => 'Record video, capture audio, or upload up to six photos. Add a description in your own words — everything is encrypted on send.', 'img' => '/images/screen-evidence.png', 'chips' => ['Record Video','Record Audio','Upload Photos','Description']],
-                    ['n' => '05', 'tag' => 'Sketch',     'title' => 'Build a suspect <span class="text-gold-400">sketch</span>.', 'body' => 'Tap through guided options for body, skin, hair, face, eyes and accessories. Auxilio composes a recognizable sketch in under a minute and ships it with the report.', 'img' => '/images/screen-sketch.png', 'chips' => ['Body','Skin','Hair','Facial Hair','Eyes','Nose','Jaw','Face','Head Wear','Glasses']],
-                ];
+                $reverse = $i % 2 === 1;
+                $isDark  = $i % 2 === 1;     // step 2 & 4 are dark, 1/3/5 are white
+                $rowBg   = $isDark ? 'bg-navy-950 text-white' : 'bg-white text-navy-900';
+                $numCol  = $isDark ? 'text-brand-400' : 'text-brand-600';
+                $tagPill = $isDark ? 'bg-brand-600/20 border border-brand-500/40 text-brand-200' : 'bg-brand-50 border border-brand-200 text-brand-700';
+                $bodyCol = $isDark ? 'text-navy-200/80' : 'text-navy-700/80';
+                $chipCol = $isDark ? 'bg-white/5 border border-white/10 text-white/80' : 'bg-ink-50 border border-ink-200 text-navy-700';
+                $phoneShadow = $isDark ? 'shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)]' : 'shadow-[0_30px_60px_-20px_rgba(12,17,38,.35)]';
+                $titleAccent = $isDark ? 'text-gold-400' : 'text-brand-600';
             @endphp
 
-            <div class="mt-16 lg:mt-20 space-y-20 lg:space-y-28">
-                @foreach ($flow as $i => $f)
-                    @php $reverse = $i % 2 === 1; @endphp
+            <div class="relative {{ $rowBg }} overflow-hidden">
+                @if ($isDark)
+                    <div class="pointer-events-none absolute inset-0 -z-0 opacity-30">
+                        <div class="absolute top-1/4 -left-32 w-[420px] h-[420px] rounded-full bg-brand-600/30 blur-3xl"></div>
+                        <div class="absolute bottom-0 -right-32 w-[400px] h-[400px] rounded-full bg-gold-500/20 blur-3xl"></div>
+                    </div>
+                @endif
+
+                <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
                     <article class="grid lg:grid-cols-12 gap-10 items-center">
                         <div class="lg:col-span-5 {{ $reverse ? 'lg:order-2' : '' }} reveal {{ $reverse ? 'reveal-right' : 'reveal-left' }}">
-                            <div class="relative mx-auto max-w-[280px] lg:max-w-[320px] aspect-[9/19] rounded-[44px] bg-navy-900 p-3 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)] ring-1 ring-white/5">
+                            <div class="relative mx-auto max-w-[280px] lg:max-w-[320px] aspect-[9/19] rounded-[44px] bg-navy-900 p-3 {{ $phoneShadow }} ring-1 ring-white/5">
                                 <div class="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-6 rounded-full bg-navy-900 z-20"></div>
                                 <div class="relative w-full h-full rounded-[32px] overflow-hidden bg-white">
                                     <img src="{{ $f['img'] }}" alt="{{ $f['title'] }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-top" />
@@ -705,30 +723,30 @@
                         </div>
 
                         <div class="lg:col-span-7 {{ $reverse ? 'lg:order-1 lg:pr-12' : 'lg:pl-8' }} reveal {{ $reverse ? 'reveal-left' : 'reveal-right' }}">
-                            <div class="flex items-center gap-3 text-brand-400">
-                                <span class="font-display text-5xl lg:text-6xl tracking-tight">{{ $f['n'] }}</span>
-                                <span class="text-[11px] font-bold uppercase tracking-[.22em] rounded-full bg-brand-600/20 border border-brand-500/40 text-brand-200 px-3 py-1">{{ $f['tag'] }}</span>
+                            <div class="flex items-center gap-3 {{ $numCol }}">
+                                <span class="font-display text-5xl lg:text-6xl tracking-tight font-extrabold">{{ $f['n'] }}</span>
+                                <span class="text-[11px] font-bold uppercase tracking-[.22em] rounded-full {{ $tagPill }} px-3 py-1">{{ $f['tag'] }}</span>
                             </div>
-                            <h3 class="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight">{!! $f['title'] !!}</h3>
-                            <p class="mt-4 text-lg text-navy-200/80 leading-relaxed max-w-xl">{{ $f['body'] }}</p>
+                            <h3 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight">{!! str_replace('sketch', '<span class="'.$titleAccent.'">sketch</span>', $f['title']) !!}</h3>
+                            <p class="mt-4 text-lg {{ $bodyCol }} leading-relaxed max-w-xl">{{ $f['body'] }}</p>
 
                             @if (!empty($f['pills']))
-                                <div class="mt-6 inline-flex rounded-full bg-white/5 border border-white/10 p-1">
+                                <div class="mt-6 inline-flex rounded-full {{ $isDark ? 'bg-white/5 border border-white/10' : 'bg-ink-50 border border-ink-200' }} p-1">
                                     <span class="px-4 py-1.5 rounded-full bg-brand-600 text-white text-xs font-semibold">{{ $f['pills'][0] }}</span>
-                                    <span class="px-4 py-1.5 rounded-full text-white/60 text-xs font-medium">{{ $f['pills'][1] }}</span>
+                                    <span class="px-4 py-1.5 rounded-full {{ $isDark ? 'text-white/60' : 'text-navy-700/60' }} text-xs font-medium">{{ $f['pills'][1] }}</span>
                                 </div>
                             @endif
 
                             <div class="mt-5 flex flex-wrap gap-2">
                                 @foreach ($f['chips'] as $chip)
-                                    <span class="text-xs font-medium text-white/80 rounded-full bg-white/5 border border-white/10 px-3 py-1.5">{{ $chip }}</span>
+                                    <span class="text-xs font-medium {{ $chipCol }} rounded-full px-3 py-1.5">{{ $chip }}</span>
                                 @endforeach
                             </div>
                         </div>
                     </article>
-                @endforeach
+                </div>
             </div>
-        </div>
+        @endforeach
     </section>
 
     {{-- Submit Emergency CTA — bridges 5-step to dispatch --}}
