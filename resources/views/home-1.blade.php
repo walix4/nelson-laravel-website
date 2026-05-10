@@ -823,9 +823,10 @@
                         <span class="text-[11px] font-mono text-white/50">AUX.DISPATCH · UNIT 04</span>
                     </div>
 
-                    {{-- Live map with rich realistic navigation styling + sonar + route + officer avatar --}}
-                    <div class="relative mt-6 aspect-[16/10] rounded-md border border-white/10 bg-[#0d1429] overflow-hidden">
-                        <svg viewBox="0 0 400 250" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+                    {{-- Live map: real Newark base (CartoDB Positron) with SVG overlay for routes + cruisers --}}
+                    <div class="relative mt-6 aspect-[16/10] rounded-md border border-white/10 bg-ink-100 overflow-hidden">
+                        <div id="dispatch-leaflet" class="absolute inset-0 w-full h-full"></div>
+                        <svg viewBox="0 0 400 250" class="absolute inset-0 w-full h-full pointer-events-none z-10" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
                             <defs>
                                 <pattern id="dispatchGrid" width="40" height="40" patternUnits="userSpaceOnUse">
                                     <path d="M40 0H0V40" stroke="rgba(255,255,255,.04)" stroke-width="1" fill="none"/>
@@ -859,74 +860,7 @@
                                 </linearGradient>
                             </defs>
 
-                            {{-- Base map fill --}}
-                            <rect width="400" height="250" fill="url(#bgFade)"/>
-                            <rect width="400" height="250" fill="url(#dispatchGrid)"/>
-
-                            {{-- River / water bodies (subtle teal) --}}
-                            <path d="M-10 220 Q60 200 130 215 Q210 232 280 218 Q340 208 410 226 L410 260 L-10 260 Z"
-                                  fill="#0c2742" opacity=".75"/>
-                            <path d="M-10 220 Q60 200 130 215 Q210 232 280 218 Q340 208 410 226"
-                                  stroke="rgba(120,180,230,.08)" stroke-width="1.2" fill="none"/>
-
-                            {{-- Park / green zones --}}
-                            <path d="M40 110 Q70 95 110 105 Q140 113 145 140 Q140 165 105 168 Q70 170 50 155 Q35 138 40 110 Z"
-                                  fill="#1a3a2c" opacity=".55"/>
-                            <path d="M260 30 Q300 20 335 40 Q355 60 345 88 Q325 105 290 100 Q260 92 255 65 Q252 45 260 30 Z"
-                                  fill="#1a3a2c" opacity=".4"/>
-
-                            {{-- Block tiles (give the map "city" texture) --}}
-                            <g fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.05)" stroke-width="0.5">
-                                <rect x="160" y="50"  width="38" height="22" rx="2"/>
-                                <rect x="205" y="50"  width="32" height="22" rx="2"/>
-                                <rect x="160" y="78"  width="38" height="18" rx="2"/>
-                                <rect x="205" y="78"  width="32" height="18" rx="2"/>
-                                <rect x="246" y="115" width="42" height="26" rx="2"/>
-                                <rect x="293" y="115" width="34" height="26" rx="2"/>
-                                <rect x="246" y="146" width="42" height="22" rx="2"/>
-                                <rect x="293" y="146" width="34" height="22" rx="2"/>
-                                <rect x="22"  y="40"  width="36" height="20" rx="2"/>
-                                <rect x="22"  y="65"  width="36" height="22" rx="2"/>
-                                <rect x="335" y="40"  width="40" height="22" rx="2"/>
-                                <rect x="335" y="68"  width="40" height="22" rx="2"/>
-                                <rect x="55"  y="180" width="34" height="20" rx="2"/>
-                                <rect x="92"  y="180" width="38" height="20" rx="2"/>
-                                <rect x="170" y="180" width="42" height="20" rx="2"/>
-                            </g>
-
-                            {{-- Highway (thicker, lighter) --}}
-                            <path d="M-10 95 Q90 75 200 90 Q300 105 410 90"
-                                  stroke="rgba(245,221,135,.18)" stroke-width="6" fill="none" stroke-linecap="round"/>
-                            <path d="M-10 95 Q90 75 200 90 Q300 105 410 90"
-                                  stroke="rgba(245,221,135,.55)" stroke-width="1.4" fill="none" stroke-dasharray="6 6"/>
-
-                            {{-- Major streets --}}
-                            <g stroke="rgba(255,255,255,.12)" stroke-width="2.2" fill="none" stroke-linecap="round">
-                                <path d="M-10 165 Q90 150 200 170 Q310 190 410 170"/>
-                                <path d="M105 -10 Q120 60 150 130 Q175 200 165 260"/>
-                                <path d="M295 -10 Q280 60 270 120 Q258 195 245 260"/>
-                            </g>
-
-                            {{-- Minor street network --}}
-                            <g stroke="rgba(255,255,255,.06)" stroke-width="1" fill="none">
-                                <path d="M-10 35  L410 35"/>
-                                <path d="M-10 130 L410 130"/>
-                                <path d="M-10 195 L410 195"/>
-                                <path d="M50  -10 L50  260"/>
-                                <path d="M210 -10 L210 260"/>
-                                <path d="M360 -10 L360 260"/>
-                            </g>
-
-                            {{-- Subtle area labels --}}
-                            <g fill="rgba(255,255,255,.18)" font-family="Inter, sans-serif" font-weight="600" font-size="7" letter-spacing=".15em">
-                                <text x="60"  y="155" >RIVERSIDE</text>
-                                <text x="170" y="62"  >MIDTOWN</text>
-                                <text x="270" y="60"  >EAST HILL</text>
-                                <text x="100" y="195" >DOWNTOWN</text>
-                            </g>
-
-                            {{-- River label --}}
-                            <text x="160" y="245" fill="rgba(140,190,230,.45)" font-family="Inter, sans-serif" font-style="italic" font-size="8">East River</text>
+                            {{-- (Base map, water, parks, streets and area labels are now provided by the Leaflet layer beneath.) --}}
 
                             {{-- 6 multi-segment street-grid routes (ride-hailing style) — each officer takes a different path with right-angle turns --}}
                             @php
@@ -967,8 +901,6 @@
                                 </circle>
                             </g>
 
-                            {{-- Vignette top --}}
-                            <rect width="400" height="250" fill="url(#vignette)" pointer-events="none"/>
                         </svg>
 
                         {{-- 6 named officer avatars at the perimeter, converging on the victim at center --}}
@@ -1673,6 +1605,24 @@
         crimeMapInited = true;
         setTimeout(function(){ crimeMap.invalidateSize(); }, 100);
     }
+    var dispatchMapInited = false, dispatchMap;
+    function initDispatchMap() {
+        var el = document.getElementById('dispatch-leaflet');
+        if (!el) return;
+        if (dispatchMapInited) { setTimeout(function(){ dispatchMap && dispatchMap.invalidateSize(); }, 100); return; }
+        if (typeof L === 'undefined') { setTimeout(initDispatchMap, 150); return; }
+        dispatchMap = L.map(el, {
+            scrollWheelZoom: false, zoomControl: false, dragging: false,
+            doubleClickZoom: false, touchZoom: false, boxZoom: false, keyboard: false,
+            attributionControl: false
+        }).setView(NEWARK, 13);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            subdomains:'abcd', maxZoom: 19
+        }).addTo(dispatchMap);
+        dispatchMapInited = true;
+        setTimeout(function(){ dispatchMap.invalidateSize(); }, 120);
+    }
+
     function initSOMap() {
         if (soMapInited) { setTimeout(function(){ soMap && soMap.invalidateSize(); }, 100); return; }
         if (typeof L === 'undefined') { setTimeout(initSOMap, 100); return; }
@@ -1775,12 +1725,12 @@
             var dispatchSec = document.querySelector('[data-dispatch-section]');
             if (dispatchSec) {
                 dispatchSec.classList.remove('hidden');
-                // Replay any reveal animations inside the dispatch section
                 dispatchSec.querySelectorAll('.reveal').forEach(function(el){
                     el.classList.remove('is-visible');
                     requestAnimationFrame(function(){ el.classList.add('is-visible'); });
                 });
                 setTimeout(function(){ dispatchSec.scrollIntoView({ behavior:'smooth', block:'start' }); }, 80);
+                setTimeout(initDispatchMap, 250);
             }
             return;
         }
