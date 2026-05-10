@@ -37,7 +37,7 @@
         <div class="flex-1 flex items-center">
             <a href="#top" class="flex items-center gap-3 group">
                 <span class="grid place-items-center h-11 w-11 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
-                    <img src="/images/auxilio-user.png" alt="" class="h-9 w-auto" />
+                    <img src="/images/auxilio-shield.png" alt="" class="h-9 w-auto" />
                 </span>
                 <img src="/images/auxilio-logo-white.png" alt="Auxilio" class="h-5 sm:h-6 w-auto" />
             </a>
@@ -1273,7 +1273,7 @@
             <div class="lg:col-span-5">
                 <a href="#top" class="inline-flex items-center gap-3 group">
                     <span class="grid place-items-center h-12 w-12 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
-                        <img src="/images/auxilio-user.png" alt="" class="h-10 w-auto" />
+                        <img src="/images/auxilio-shield.png" alt="" class="h-10 w-auto" />
                     </span>
                     <img src="/images/auxilio-logo-white.png" alt="Auxilio" class="h-6 w-auto" />
                 </a>
