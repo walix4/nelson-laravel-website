@@ -931,20 +931,14 @@
                             {{-- 6 multi-segment street-grid routes (ride-hailing style) — each officer takes a different path with right-angle turns --}}
                             @php
                                 $routes = [
-                                    // Marcus (top-left → center): right along top, then down
-                                    ['id'=>'dispatchRoute',  'd'=>'M 60 40 L 195 40 Q 200 40 200 45 L 200 125',                                                   'sc'=>'url(#routeStroke)',   'gc'=>'rgba(244,196,65,.22)'],
-                                    // Diaz (top-right → center): down, then left, then down — 3 turns
-                                    ['id'=>'dispatchRoute2', 'd'=>'M 340 40 L 340 75 Q 340 80 335 80 L 265 80 Q 260 80 260 85 L 260 120 Q 260 125 255 125 L 200 125','sc'=>'rgba(228,67,82,.7)',  'gc'=>'rgba(228,67,82,.18)'],
-                                    // Holland (east → center): straight west to victim
-                                    ['id'=>'dispatchRoute3', 'd'=>'M 380 125 L 200 125','sc'=>'rgba(59,130,246,.7)', 'gc'=>'rgba(59,130,246,.18)'],
-                                    // Pierce (bottom-right → center): up, then left, up
-                                    ['id'=>'dispatchRoute4', 'd'=>'M 340 210 L 340 175 Q 340 170 335 170 L 265 170 Q 260 170 260 165 L 260 130 Q 260 125 255 125 L 200 125','sc'=>'rgba(244,196,65,.7)', 'gc'=>'rgba(244,196,65,.18)'],
-                                    // Pollock (bottom-left → center): straight up, then right
-                                    ['id'=>'dispatchRoute5', 'd'=>'M 60 210 L 60 130 Q 60 125 65 125 L 200 125',                                                  'sc'=>'rgba(228,67,82,.7)',  'gc'=>'rgba(228,67,82,.18)'],
-                                    // Mosley (west → center): straight east to victim
-                                    ['id'=>'dispatchRoute6', 'd'=>'M 20 125 L 200 125','sc'=>'rgba(59,130,246,.7)', 'gc'=>'rgba(59,130,246,.18)'],
-                                    // Reyes (south → center): straight up the avenue to the victim
-                                    ['id'=>'dispatchRoute7', 'd'=>'M 200 235 L 200 125', 'sc'=>'rgba(244,196,65,.7)', 'gc'=>'rgba(244,196,65,.18)'],
+                                    // All 7 officers drive straight to the victim — no detours.
+                                    ['id'=>'dispatchRoute',  'd'=>'M 60 40 L 200 125',  'sc'=>'url(#routeStroke)',  'gc'=>'rgba(244,196,65,.22)'],  // Marcus  (NW)
+                                    ['id'=>'dispatchRoute2', 'd'=>'M 340 40 L 200 125', 'sc'=>'rgba(228,67,82,.7)', 'gc'=>'rgba(228,67,82,.18)'],  // Diaz    (NE)
+                                    ['id'=>'dispatchRoute3', 'd'=>'M 380 125 L 200 125','sc'=>'rgba(59,130,246,.7)','gc'=>'rgba(59,130,246,.18)'],  // Holland (E)
+                                    ['id'=>'dispatchRoute4', 'd'=>'M 340 210 L 200 125','sc'=>'rgba(244,196,65,.7)','gc'=>'rgba(244,196,65,.18)'],  // Pierce  (SE)
+                                    ['id'=>'dispatchRoute5', 'd'=>'M 60 210 L 200 125', 'sc'=>'rgba(228,67,82,.7)', 'gc'=>'rgba(228,67,82,.18)'],  // Pollock (SW)
+                                    ['id'=>'dispatchRoute6', 'd'=>'M 20 125 L 200 125', 'sc'=>'rgba(59,130,246,.7)','gc'=>'rgba(59,130,246,.18)'],  // Mosley  (W)
+                                    ['id'=>'dispatchRoute7', 'd'=>'M 200 235 L 200 125','sc'=>'rgba(244,196,65,.7)','gc'=>'rgba(244,196,65,.18)'],  // Reyes   (S)
                                 ];
                             @endphp
                             @foreach ($routes as $r)
