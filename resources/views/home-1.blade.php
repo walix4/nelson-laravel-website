@@ -746,7 +746,7 @@
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] rounded-full bg-brand-600/30 blur-3xl"></div>
             <div class="absolute top-10 right-1/4 w-[280px] h-[280px] rounded-full bg-gold-500/20 blur-3xl"></div>
         </div>
-        <div class="relative mx-auto max-w-3xl px-5 sm:px-8 pt-28 pb-32 lg:pt-36 lg:pb-40 text-center text-white">
+        <div class="relative mx-auto max-w-3xl px-5 sm:px-8 pt-40 pb-32 lg:pt-52 lg:pb-40 text-center text-white">
             <span class="reveal inline-flex items-center gap-2 rounded-full bg-emerald-500/15 border border-emerald-400/30 px-4 py-2 text-[11px] font-bold uppercase tracking-[.2em] text-emerald-300">
                 <span class="grid place-items-center w-5 h-5 rounded-full bg-emerald-400/30 text-emerald-200 shrink-0">
                     <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
