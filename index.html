@@ -9,7 +9,7 @@
     <title>Auxilio User — Your Safety, Your Control</title>
     <link rel="icon" type="image/png" href="images/auxilio-user.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="preload" as="style" href="build/assets/app-BdZIMlZy.css" /><link rel="modulepreload" as="script" href="build/assets/app-CkiRmKRj.js" /><link rel="stylesheet" href="build/assets/app-BdZIMlZy.css" /><script type="module" src="build/assets/app-CkiRmKRj.js"></script>    <style>
+    <link rel="preload" as="style" href="build/assets/app-1R3ooPfO.css" /><link rel="modulepreload" as="script" href="build/assets/app-CkiRmKRj.js" /><link rel="stylesheet" href="build/assets/app-1R3ooPfO.css" /><script type="module" src="build/assets/app-CkiRmKRj.js"></script>    <style>
         [data-nav].is-scrolled {
             box-shadow: 0 8px 24px -12px rgba(116, 25, 33, .45);
         }
@@ -40,12 +40,14 @@
             </a>
         </div>
 
-        <ul class="hidden md:flex items-center gap-8 text-sm font-medium text-white/90 shrink-0 whitespace-nowrap">
+        <ul class="hidden md:flex items-center gap-6 lg:gap-7 text-sm font-medium text-white/90 shrink-0 whitespace-nowrap">
             <li><a data-route href="#/"                 class="nav-link hover:text-white transition">Home</a></li>
             <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
             <li><a data-route href="#/sex-offender-map" class="nav-link hover:text-white transition">Sex Offender Map</a></li>
-            <li><a data-nav-link href="#walkthrough"    class="nav-link hover:text-white transition">Walkthrough</a></li>
-            <li><a data-nav-link href="#voices"         class="nav-link hover:text-white transition">Voices</a></li>
+            <li><a data-route href="#/how-it-works"     class="nav-link hover:text-white transition">How it works</a></li>
+            <li><a data-route href="#/agent-app"        class="nav-link hover:text-white transition">Agent App</a></li>
+            <li><a data-route href="#/about"            class="nav-link hover:text-white transition">About us</a></li>
+            <li><a data-route href="#/contact"          class="nav-link hover:text-white transition">Contact us</a></li>
         </ul>
 
         <div class="flex-1 flex items-center justify-end">
@@ -61,8 +63,10 @@
             <li><a data-route href="#/">Home</a></li>
             <li><a data-route href="#/crime-map">Crime Map</a></li>
             <li><a data-route href="#/sex-offender-map">Sex Offender Map</a></li>
-            <li><a href="#walkthrough">Walkthrough</a></li>
-            <li><a href="#voices">Voices</a></li>
+            <li><a data-route href="#/how-it-works">How it works</a></li>
+            <li><a data-route href="#/agent-app">Agent App</a></li>
+            <li><a data-route href="#/about">About us</a></li>
+            <li><a data-route href="#/contact">Contact us</a></li>
         </ul>
     </div>
 </header>
@@ -1447,7 +1451,7 @@
         
         <div class="lg:col-span-7">
             <form action="#contact" method="POST" class="reveal reveal-right relative rounded-lg border border-white/10 bg-navy-900 p-8 lg:p-10 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)]">
-                <input type="hidden" name="_token" value="o9gLzfn3hCX7ZJjvAbfs3vXStKQfuvDWLarOJLE2" autocomplete="off">
+                <input type="hidden" name="_token" value="TrMp16rAJ03mRpenXM4qvjiMQR8zwapDOvtCbfyn" autocomplete="off">
                 <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.2em] text-gold-300">
                     <span class="grid place-items-center w-7 h-7 rounded-full bg-gold-300/15 ring-1 ring-gold-300/30">
                         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -1549,6 +1553,394 @@
                 <span class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Registered Sex Offender</span>
                 <span class="text-ink-300">·</span>
                 <span class="text-xs text-ink-500">State Registry</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<div data-view="how-it-works" class="hidden">
+    <section class="relative overflow-hidden bg-white">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute -top-24 right-1/4 w-[500px] h-[500px] rounded-full bg-brand-100/40 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-gold-100/50 blur-3xl"></div>
+        </div>
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
+            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">How it works</span>
+            </div>
+            <h1 class="mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+                How <span class="text-brand-600">Auxilio</span> works.
+            </h1>
+            <p class="mt-4 text-lg text-navy-700/80 max-w-2xl">
+                From siren to signal in three taps. Here's the journey from the moment you sense danger to the moment a verified Super Agent arrives.
+            </p>
+
+            <div class="mt-12 grid md:grid-cols-3 gap-6">
+                                    <div class="relative rounded-md border border-ink-100 bg-white p-7 shadow-sm hover:shadow-lg transition">
+                        <span class="grid place-items-center w-12 h-12 rounded-md font-display text-xl font-bold bg-brand-50 text-brand-600">01</span>
+                        <h3 class="mt-5 text-xl font-bold text-navy-900">Tap to alert</h3>
+                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">Open Auxilio User and trigger one-tap SOS — your live location, profile and trusted contacts are pushed to dispatch instantly.</p>
+                    </div>
+                                    <div class="relative rounded-md border border-ink-100 bg-white p-7 shadow-sm hover:shadow-lg transition">
+                        <span class="grid place-items-center w-12 h-12 rounded-md font-display text-xl font-bold bg-gold-100 text-gold-600">02</span>
+                        <h3 class="mt-5 text-xl font-bold text-navy-900">Capture the report</h3>
+                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">Five guided steps — categorize, describe the suspect, log the vehicle, drop in evidence, and build a sketch. Skip what you don&#039;t know; Auxilio fills in the rest.</p>
+                    </div>
+                                    <div class="relative rounded-md border border-ink-100 bg-white p-7 shadow-sm hover:shadow-lg transition">
+                        <span class="grid place-items-center w-12 h-12 rounded-md font-display text-xl font-bold bg-emerald-100 text-emerald-600">03</span>
+                        <h3 class="mt-5 text-xl font-bold text-navy-900">Verified responder arrives</h3>
+                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">The closest Super Agent is auto-dispatched. Watch their ETA, distance and live route on your map until they reach you.</p>
+                    </div>
+                            </div>
+
+            <div class="mt-16 grid lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-600">Behind the curtain</p>
+                    <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">Verified people. Encrypted pipes.</h2>
+                    <p class="mt-4 text-navy-700/80 leading-relaxed">
+                        Every report is signed by a real, vetted Super Agent. Evidence is encrypted on-device before upload. Your location is shared only with the agent who accepts your case — and revoked the second the case closes.
+                    </p>
+                    <ul class="mt-6 space-y-3 text-sm">
+                                                    <li class="flex items-start gap-3">
+                                <span class="mt-0.5 grid place-items-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <span class="text-navy-800">Background-checked Super Agents on every dispatch</span>
+                            </li>
+                                                    <li class="flex items-start gap-3">
+                                <span class="mt-0.5 grid place-items-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <span class="text-navy-800">End-to-end encryption on photos, audio, and video</span>
+                            </li>
+                                                    <li class="flex items-start gap-3">
+                                <span class="mt-0.5 grid place-items-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <span class="text-navy-800">Auto-shred of location data after case closure</span>
+                            </li>
+                                                    <li class="flex items-start gap-3">
+                                <span class="mt-0.5 grid place-items-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-600">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <span class="text-navy-800">Audit log on every status change</span>
+                            </li>
+                                            </ul>
+                </div>
+                <div class="relative rounded-md bg-navy-950 text-white p-8 lg:p-10 overflow-hidden">
+                    <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-brand-600/30 blur-3xl"></div>
+                    <p class="relative text-xs font-bold uppercase tracking-[.2em] text-brand-300">Sample dispatch</p>
+                    <p class="relative mt-3 font-display text-3xl font-bold">Case #A-7421</p>
+                    <p class="relative mt-1 text-navy-300 text-sm">Newark, NJ · Sexual Crime · Tier 2</p>
+                    <div class="relative mt-6 space-y-3 text-sm">
+                                                    <div class="flex items-start gap-3 border-l-2 border-brand-500/40 pl-3">
+                                <span class="font-mono text-[11px] text-brand-300 shrink-0">09:14:02</span>
+                                <div>
+                                    <p class="font-semibold">Report submitted by victim</p>
+                                    <p class="text-navy-300 text-xs">Photos × 4, audio × 1</p>
+                                </div>
+                            </div>
+                                                    <div class="flex items-start gap-3 border-l-2 border-brand-500/40 pl-3">
+                                <span class="font-mono text-[11px] text-brand-300 shrink-0">09:14:08</span>
+                                <div>
+                                    <p class="font-semibold">Auto-dispatch · 3 agents pinged</p>
+                                    <p class="text-navy-300 text-xs">Closest match: Agent J. Holland — 0.7 mi</p>
+                                </div>
+                            </div>
+                                                    <div class="flex items-start gap-3 border-l-2 border-brand-500/40 pl-3">
+                                <span class="font-mono text-[11px] text-brand-300 shrink-0">09:14:53</span>
+                                <div>
+                                    <p class="font-semibold">Agent accepted — en route</p>
+                                    <p class="text-navy-300 text-xs">ETA 4 min</p>
+                                </div>
+                            </div>
+                                                    <div class="flex items-start gap-3 border-l-2 border-brand-500/40 pl-3">
+                                <span class="font-mono text-[11px] text-brand-300 shrink-0">09:18:11</span>
+                                <div>
+                                    <p class="font-semibold">On scene</p>
+                                    <p class="text-navy-300 text-xs">Status: Active assist</p>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<div data-view="agent-app" class="hidden">
+    <section class="relative overflow-hidden bg-white">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute -top-32 left-1/4 w-[520px] h-[520px] rounded-full bg-navy-100/60 blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-brand-100/40 blur-3xl"></div>
+        </div>
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
+            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">Agent App</span>
+            </div>
+            <div class="mt-3 grid lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-7">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5">For Super Agents</span>
+                    <h1 class="mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+                        Auxilio <span class="text-brand-600">Agent</span>.
+                    </h1>
+                    <p class="mt-4 text-lg text-navy-700/80 max-w-xl">
+                        The companion app for verified responders. Accept calls, file reports, run live dispatch — all from the same phone.
+                    </p>
+                    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3" style="max-width:380px;">
+                        <a href="#" class="group inline-flex items-center justify-center gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
+                            <img src="images/app-store.svg" alt="" class="w-7 h-7 shrink-0" />
+                            <div class="text-left whitespace-nowrap leading-tight">
+                                <p class="text-[10px] uppercase tracking-wider text-white/80">Download on the</p>
+                                <p class="text-sm font-semibold -mt-0.5">App Store</p>
+                            </div>
+                        </a>
+                        <a href="#" class="group inline-flex items-center justify-center gap-3 rounded-md bg-navy-900 hover:bg-navy-800 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
+                            <img src="images/google-play.svg" alt="" class="w-7 h-7 shrink-0" />
+                            <div class="text-left whitespace-nowrap leading-tight">
+                                <p class="text-[10px] uppercase tracking-wider text-white/80">Get it on</p>
+                                <p class="text-sm font-semibold -mt-0.5">Google Play</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.6)]">
+                        <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                        <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                            <img src="images/screen-assigning.png" alt="Auxilio Agent app" class="absolute inset-0 w-full h-full object-cover object-top" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    <div class="rounded-md border border-ink-100 bg-white p-6 shadow-sm hover:shadow-lg transition">
+                        <h3 class="text-base font-bold text-navy-900">Live dispatch queue</h3>
+                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">See incoming reports filtered by distance and category. Accept or pass with one tap.</p>
+                    </div>
+                                    <div class="rounded-md border border-ink-100 bg-white p-6 shadow-sm hover:shadow-lg transition">
+                        <h3 class="text-base font-bold text-navy-900">Auto-routed cases</h3>
+                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">The system pings the closest qualified agent first. No bidding, no fighting for jobs.</p>
+                    </div>
+                                    <div class="rounded-md border border-ink-100 bg-white p-6 shadow-sm hover:shadow-lg transition">
+                        <h3 class="text-base font-bold text-navy-900">In-app evidence locker</h3>
+                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">Photos, audio, sketches, and victim statements are unlocked the moment you accept.</p>
+                    </div>
+                                    <div class="rounded-md border border-ink-100 bg-white p-6 shadow-sm hover:shadow-lg transition">
+                        <h3 class="text-base font-bold text-navy-900">Status &amp; ETA broadcast</h3>
+                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">The victim sees you en route in real time. Update status with one swipe.</p>
+                    </div>
+                                    <div class="rounded-md border border-ink-100 bg-white p-6 shadow-sm hover:shadow-lg transition">
+                        <h3 class="text-base font-bold text-navy-900">Background-check baked in</h3>
+                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">Apply once. We verify license, insurance, and clearance — you&#039;re on the platform in under 72 hours.</p>
+                    </div>
+                                    <div class="rounded-md border border-ink-100 bg-white p-6 shadow-sm hover:shadow-lg transition">
+                        <h3 class="text-base font-bold text-navy-900">Earnings dashboard</h3>
+                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">Per-case payout, weekly summary, and tax-ready exports. Always know what you cleared.</p>
+                    </div>
+                            </div>
+
+            <div class="mt-16 rounded-md bg-gradient-to-br from-navy-950 to-navy-900 text-white p-8 lg:p-12 text-center">
+                <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-300">Become an agent</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl">Apply to join the network.</h2>
+                <p class="mt-3 max-w-xl mx-auto text-navy-200/90">Licensed security, off-duty law enforcement, and certified responders welcome. We handle vetting; you handle the call.</p>
+                <a data-route href="#/contact" class="mt-6 inline-flex items-center gap-2 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold px-6 py-3 transition">Start application
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<div data-view="about" class="hidden">
+    <section class="relative overflow-hidden bg-white">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute -top-32 left-1/3 w-[520px] h-[520px] rounded-full bg-brand-100/40 blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-gold-100/50 blur-3xl"></div>
+        </div>
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
+            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">About us</span>
+            </div>
+            <h1 class="mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+                Built for the people <span class="text-brand-600">we love.</span>
+            </h1>
+            <p class="mt-4 text-lg text-navy-700/80 max-w-2xl">
+                Auxilio started after a near-miss in our own family. We couldn't find a way to summon real, accountable help fast enough. So we built one.
+            </p>
+
+            <div class="mt-12 grid md:grid-cols-3 gap-6">
+                                    <div class="rounded-md border border-ink-100 bg-white p-7 shadow-sm">
+                        <p class="font-display text-4xl font-extrabold text-brand-600">500K+</p>
+                        <p class="mt-1 text-sm text-navy-700/80 uppercase tracking-wider font-semibold">Citizens covered</p>
+                    </div>
+                                    <div class="rounded-md border border-ink-100 bg-white p-7 shadow-sm">
+                        <p class="font-display text-4xl font-extrabold text-brand-600">1,200+</p>
+                        <p class="mt-1 text-sm text-navy-700/80 uppercase tracking-wider font-semibold">Verified Super Agents</p>
+                    </div>
+                                    <div class="rounded-md border border-ink-100 bg-white p-7 shadow-sm">
+                        <p class="font-display text-4xl font-extrabold text-brand-600">&lt; 4 min</p>
+                        <p class="mt-1 text-sm text-navy-700/80 uppercase tracking-wider font-semibold">Median response time</p>
+                    </div>
+                            </div>
+
+            <div class="mt-16 grid lg:grid-cols-2 gap-12 items-start">
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-600">Our mission</p>
+                    <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">Make safety <em class="not-italic text-brand-600">accessible</em>, not aspirational.</h2>
+                    <p class="mt-4 text-navy-700/80 leading-relaxed">
+                        911 is a finite resource. Private security is a privilege. We're building a third lane — citizen-grade response, vetted operators, and transparent pricing — so help is no longer a question of who you know or what you can pay.
+                    </p>
+                </div>
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-600">Our values</p>
+                    <ul class="mt-4 space-y-4">
+                                                    <li class="flex gap-4">
+                                <span class="grid place-items-center w-9 h-9 rounded-md bg-brand-50 text-brand-600 shrink-0 text-sm font-extrabold">1</span>
+                                <div>
+                                    <p class="font-bold text-navy-900">Accountability</p>
+                                    <p class="text-sm text-navy-700/80">Every dispatch is logged, signed, and auditable. No anonymous responders.</p>
+                                </div>
+                            </li>
+                                                    <li class="flex gap-4">
+                                <span class="grid place-items-center w-9 h-9 rounded-md bg-brand-50 text-brand-600 shrink-0 text-sm font-extrabold">2</span>
+                                <div>
+                                    <p class="font-bold text-navy-900">Privacy first</p>
+                                    <p class="text-sm text-navy-700/80">Location data lives only as long as the case does.</p>
+                                </div>
+                            </li>
+                                                    <li class="flex gap-4">
+                                <span class="grid place-items-center w-9 h-9 rounded-md bg-brand-50 text-brand-600 shrink-0 text-sm font-extrabold">3</span>
+                                <div>
+                                    <p class="font-bold text-navy-900">Calm by default</p>
+                                    <p class="text-sm text-navy-700/80">Our app should be boring 99% of the time. The 1% is what we trained for.</p>
+                                </div>
+                            </li>
+                                                    <li class="flex gap-4">
+                                <span class="grid place-items-center w-9 h-9 rounded-md bg-brand-50 text-brand-600 shrink-0 text-sm font-extrabold">4</span>
+                                <div>
+                                    <p class="font-bold text-navy-900">Open to oversight</p>
+                                    <p class="text-sm text-navy-700/80">We invite local LE, civic groups, and journalists into our process.</p>
+                                </div>
+                            </li>
+                                            </ul>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-600 text-center">Leadership</p>
+                <h2 class="mt-3 text-center font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">The people behind it.</h2>
+                <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                            <div class="rounded-md border border-ink-100 bg-white p-5 text-center shadow-sm hover:shadow-lg transition">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=320&amp;h=320&amp;fit=crop&amp;q=80" alt="Marcus Holloway" class="w-24 h-24 mx-auto rounded-full object-cover ring-4 ring-brand-50" loading="lazy" />
+                            <p class="mt-4 font-bold text-navy-900">Marcus Holloway</p>
+                            <p class="text-xs text-ink-500 uppercase tracking-wider mt-1">Co-founder &amp; CEO</p>
+                        </div>
+                                            <div class="rounded-md border border-ink-100 bg-white p-5 text-center shadow-sm hover:shadow-lg transition">
+                            <img src="https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=320&amp;h=320&amp;fit=crop&amp;q=80" alt="Priya Shah" class="w-24 h-24 mx-auto rounded-full object-cover ring-4 ring-brand-50" loading="lazy" />
+                            <p class="mt-4 font-bold text-navy-900">Priya Shah</p>
+                            <p class="text-xs text-ink-500 uppercase tracking-wider mt-1">Co-founder &amp; CTO</p>
+                        </div>
+                                            <div class="rounded-md border border-ink-100 bg-white p-5 text-center shadow-sm hover:shadow-lg transition">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=320&amp;h=320&amp;fit=crop&amp;q=80" alt="James Pierce" class="w-24 h-24 mx-auto rounded-full object-cover ring-4 ring-brand-50" loading="lazy" />
+                            <p class="mt-4 font-bold text-navy-900">James Pierce</p>
+                            <p class="text-xs text-ink-500 uppercase tracking-wider mt-1">Head of Operations</p>
+                        </div>
+                                            <div class="rounded-md border border-ink-100 bg-white p-5 text-center shadow-sm hover:shadow-lg transition">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=320&amp;h=320&amp;fit=crop&amp;q=80" alt="Lena Brooks" class="w-24 h-24 mx-auto rounded-full object-cover ring-4 ring-brand-50" loading="lazy" />
+                            <p class="mt-4 font-bold text-navy-900">Lena Brooks</p>
+                            <p class="text-xs text-ink-500 uppercase tracking-wider mt-1">Head of Trust &amp; Safety</p>
+                        </div>
+                                    </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<div data-view="contact" class="hidden">
+    <section class="relative overflow-hidden bg-white">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute -top-32 right-1/4 w-[520px] h-[520px] rounded-full bg-navy-100/60 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-brand-100/40 blur-3xl"></div>
+        </div>
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
+            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">Contact us</span>
+            </div>
+            <h1 class="mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+                Talk to <span class="text-brand-600">us.</span>
+            </h1>
+            <p class="mt-4 text-lg text-navy-700/80 max-w-2xl">
+                Press, partnerships, agent applications, or just questions — drop us a line and a real human will reply within one business day.
+            </p>
+
+            <div class="mt-12 grid lg:grid-cols-12 gap-10">
+                <div class="lg:col-span-5 space-y-4">
+                                            <a href="mailto:support@auxilionetwork.com" class="flex items-start gap-4 rounded-md border border-ink-100 bg-white p-5 hover:shadow-lg transition">
+                            <span class="grid place-items-center w-11 h-11 rounded-md bg-brand-50 text-brand-600 shrink-0">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </span>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-ink-500">Email</p>
+                                <p class="mt-1 font-semibold text-navy-900">support@auxilionetwork.com</p>
+                            </div>
+                        </a>
+                                            <a href="tel:+17045550127" class="flex items-start gap-4 rounded-md border border-ink-100 bg-white p-5 hover:shadow-lg transition">
+                            <span class="grid place-items-center w-11 h-11 rounded-md bg-brand-50 text-brand-600 shrink-0">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>
+                            </span>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-ink-500">Phone</p>
+                                <p class="mt-1 font-semibold text-navy-900">(704) 555-0127</p>
+                            </div>
+                        </a>
+                                            <a href="#" class="flex items-start gap-4 rounded-md border border-ink-100 bg-white p-5 hover:shadow-lg transition">
+                            <span class="grid place-items-center w-11 h-11 rounded-md bg-brand-50 text-brand-600 shrink-0">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/></svg>
+                            </span>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-ink-500">Headquarters</p>
+                                <p class="mt-1 font-semibold text-navy-900">1 Mission Way, San Francisco, CA 94103</p>
+                            </div>
+                        </a>
+                                    </div>
+
+                <form action="#contact" method="POST" class="lg:col-span-7 rounded-md border border-ink-100 bg-white p-7 shadow-sm space-y-5">
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <label class="block">
+                            <span class="text-xs font-bold uppercase tracking-wider text-navy-900">Your name</span>
+                            <input type="text" name="name" required class="mt-1.5 w-full rounded-md border border-ink-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100 transition" placeholder="Jane Doe" />
+                        </label>
+                        <label class="block">
+                            <span class="text-xs font-bold uppercase tracking-wider text-navy-900">Email</span>
+                            <input type="email" name="email" required class="mt-1.5 w-full rounded-md border border-ink-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100 transition" placeholder="you@example.com" />
+                        </label>
+                    </div>
+                    <label class="block">
+                        <span class="text-xs font-bold uppercase tracking-wider text-navy-900">Topic</span>
+                        <select name="topic" class="mt-1.5 w-full rounded-md border border-ink-200 px-4 py-3 text-sm bg-white focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100 transition">
+                            <option>General question</option>
+                            <option>Become a Super Agent</option>
+                            <option>Partnership / press</option>
+                            <option>Bug report</option>
+                            <option>Account help</option>
+                        </select>
+                    </label>
+                    <label class="block">
+                        <span class="text-xs font-bold uppercase tracking-wider text-navy-900">Message</span>
+                        <textarea name="message" rows="5" required class="mt-1.5 w-full rounded-md border border-ink-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100 transition" placeholder="Tell us what's on your mind…"></textarea>
+                    </label>
+                    <button type="submit" class="inline-flex items-center gap-2 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold px-6 py-3 transition">
+                        Send message
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                    </button>
+                    <p class="text-xs text-ink-500">By submitting you agree to our privacy policy. We never share your details.</p>
+                </form>
             </div>
         </div>
     </section>
@@ -1841,7 +2233,8 @@
 
     function getRoute() {
         var h = (window.location.hash || '').replace(/^#\//, '');
-        if (h === 'crime-map' || h === 'sex-offender-map') return h;
+        var allowed = ['crime-map','sex-offender-map','how-it-works','agent-app','about','contact'];
+        if (allowed.indexOf(h) !== -1) return h;
         return 'home';
     }
     function showView(view) {
