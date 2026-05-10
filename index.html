@@ -688,7 +688,7 @@
         
         <div class="lg:col-span-7">
             <form action="#contact" method="POST" class="reveal reveal-right relative rounded-lg border border-white/10 bg-navy-900 p-8 lg:p-10 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)]">
-                <input type="hidden" name="_token" value="xGpmQyQQiZ5e0CH9cqqI3RjCX4H0HbXWkkIxkxhi" autocomplete="off">
+                <input type="hidden" name="_token" value="ZyBS9qD88rcXT5R3b659nOGtYWM5IFFHJT7aboC5" autocomplete="off">
                 <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.2em] text-gold-300">
                     <span class="grid place-items-center w-7 h-7 rounded-full bg-gold-300/15 ring-1 ring-gold-300/30">
                         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -1120,8 +1120,9 @@
                     </div>
 
                     
-                    <div class="relative mt-6 aspect-[16/10] rounded-md border border-white/10 bg-[#0d1429] overflow-hidden">
-                        <svg viewBox="0 0 400 250" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+                    <div class="relative mt-6 aspect-[16/10] rounded-md border border-white/10 bg-ink-100 overflow-hidden">
+                        <div id="dispatch-leaflet" class="absolute inset-0 w-full h-full"></div>
+                        <svg viewBox="0 0 400 250" class="absolute inset-0 w-full h-full pointer-events-none z-10" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
                             <defs>
                                 <pattern id="dispatchGrid" width="40" height="40" patternUnits="userSpaceOnUse">
                                     <path d="M40 0H0V40" stroke="rgba(255,255,255,.04)" stroke-width="1" fill="none"/>
@@ -1156,73 +1157,6 @@
                             </defs>
 
                             
-                            <rect width="400" height="250" fill="url(#bgFade)"/>
-                            <rect width="400" height="250" fill="url(#dispatchGrid)"/>
-
-                            
-                            <path d="M-10 220 Q60 200 130 215 Q210 232 280 218 Q340 208 410 226 L410 260 L-10 260 Z"
-                                  fill="#0c2742" opacity=".75"/>
-                            <path d="M-10 220 Q60 200 130 215 Q210 232 280 218 Q340 208 410 226"
-                                  stroke="rgba(120,180,230,.08)" stroke-width="1.2" fill="none"/>
-
-                            
-                            <path d="M40 110 Q70 95 110 105 Q140 113 145 140 Q140 165 105 168 Q70 170 50 155 Q35 138 40 110 Z"
-                                  fill="#1a3a2c" opacity=".55"/>
-                            <path d="M260 30 Q300 20 335 40 Q355 60 345 88 Q325 105 290 100 Q260 92 255 65 Q252 45 260 30 Z"
-                                  fill="#1a3a2c" opacity=".4"/>
-
-                            
-                            <g fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.05)" stroke-width="0.5">
-                                <rect x="160" y="50"  width="38" height="22" rx="2"/>
-                                <rect x="205" y="50"  width="32" height="22" rx="2"/>
-                                <rect x="160" y="78"  width="38" height="18" rx="2"/>
-                                <rect x="205" y="78"  width="32" height="18" rx="2"/>
-                                <rect x="246" y="115" width="42" height="26" rx="2"/>
-                                <rect x="293" y="115" width="34" height="26" rx="2"/>
-                                <rect x="246" y="146" width="42" height="22" rx="2"/>
-                                <rect x="293" y="146" width="34" height="22" rx="2"/>
-                                <rect x="22"  y="40"  width="36" height="20" rx="2"/>
-                                <rect x="22"  y="65"  width="36" height="22" rx="2"/>
-                                <rect x="335" y="40"  width="40" height="22" rx="2"/>
-                                <rect x="335" y="68"  width="40" height="22" rx="2"/>
-                                <rect x="55"  y="180" width="34" height="20" rx="2"/>
-                                <rect x="92"  y="180" width="38" height="20" rx="2"/>
-                                <rect x="170" y="180" width="42" height="20" rx="2"/>
-                            </g>
-
-                            
-                            <path d="M-10 95 Q90 75 200 90 Q300 105 410 90"
-                                  stroke="rgba(245,221,135,.18)" stroke-width="6" fill="none" stroke-linecap="round"/>
-                            <path d="M-10 95 Q90 75 200 90 Q300 105 410 90"
-                                  stroke="rgba(245,221,135,.55)" stroke-width="1.4" fill="none" stroke-dasharray="6 6"/>
-
-                            
-                            <g stroke="rgba(255,255,255,.12)" stroke-width="2.2" fill="none" stroke-linecap="round">
-                                <path d="M-10 165 Q90 150 200 170 Q310 190 410 170"/>
-                                <path d="M105 -10 Q120 60 150 130 Q175 200 165 260"/>
-                                <path d="M295 -10 Q280 60 270 120 Q258 195 245 260"/>
-                            </g>
-
-                            
-                            <g stroke="rgba(255,255,255,.06)" stroke-width="1" fill="none">
-                                <path d="M-10 35  L410 35"/>
-                                <path d="M-10 130 L410 130"/>
-                                <path d="M-10 195 L410 195"/>
-                                <path d="M50  -10 L50  260"/>
-                                <path d="M210 -10 L210 260"/>
-                                <path d="M360 -10 L360 260"/>
-                            </g>
-
-                            
-                            <g fill="rgba(255,255,255,.18)" font-family="Inter, sans-serif" font-weight="600" font-size="7" letter-spacing=".15em">
-                                <text x="60"  y="155" >RIVERSIDE</text>
-                                <text x="170" y="62"  >MIDTOWN</text>
-                                <text x="270" y="60"  >EAST HILL</text>
-                                <text x="100" y="195" >DOWNTOWN</text>
-                            </g>
-
-                            
-                            <text x="160" y="245" fill="rgba(140,190,230,.45)" font-family="Inter, sans-serif" font-style="italic" font-size="8">East River</text>
 
                             
                                                                                         <path d="M 60 40 L 195 40 Q 200 40 200 45 L 200 125" stroke="rgba(244,196,65,.22)" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#glowR)"/>
@@ -1849,8 +1783,6 @@
                                 </circle>
                             </g>
 
-                            
-                            <rect width="400" height="250" fill="url(#vignette)" pointer-events="none"/>
                         </svg>
 
                         
@@ -3084,6 +3016,24 @@
         crimeMapInited = true;
         setTimeout(function(){ crimeMap.invalidateSize(); }, 100);
     }
+    var dispatchMapInited = false, dispatchMap;
+    function initDispatchMap() {
+        var el = document.getElementById('dispatch-leaflet');
+        if (!el) return;
+        if (dispatchMapInited) { setTimeout(function(){ dispatchMap && dispatchMap.invalidateSize(); }, 100); return; }
+        if (typeof L === 'undefined') { setTimeout(initDispatchMap, 150); return; }
+        dispatchMap = L.map(el, {
+            scrollWheelZoom: false, zoomControl: false, dragging: false,
+            doubleClickZoom: false, touchZoom: false, boxZoom: false, keyboard: false,
+            attributionControl: false
+        }).setView(NEWARK, 13);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            subdomains:'abcd', maxZoom: 19
+        }).addTo(dispatchMap);
+        dispatchMapInited = true;
+        setTimeout(function(){ dispatchMap.invalidateSize(); }, 120);
+    }
+
     function initSOMap() {
         if (soMapInited) { setTimeout(function(){ soMap && soMap.invalidateSize(); }, 100); return; }
         if (typeof L === 'undefined') { setTimeout(initSOMap, 100); return; }
@@ -3186,12 +3136,12 @@
             var dispatchSec = document.querySelector('[data-dispatch-section]');
             if (dispatchSec) {
                 dispatchSec.classList.remove('hidden');
-                // Replay any reveal animations inside the dispatch section
                 dispatchSec.querySelectorAll('.reveal').forEach(function(el){
                     el.classList.remove('is-visible');
                     requestAnimationFrame(function(){ el.classList.add('is-visible'); });
                 });
                 setTimeout(function(){ dispatchSec.scrollIntoView({ behavior:'smooth', block:'start' }); }, 80);
+                setTimeout(initDispatchMap, 250);
             }
             return;
         }
