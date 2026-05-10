@@ -982,12 +982,75 @@
                         @include('partials.officer-avatar', ['key' => 'P', 'x' => 60,  'y' => 210, 'name' => 'Officer Pollock', 'rating' => '4.8', 'accent' => 'brand', 'labelSide' => 'right'])
                         @include('partials.officer-avatar', ['key' => 'O', 'x' => 20,  'y' => 125, 'name' => 'Officer Mosley',  'rating' => '4.7', 'accent' => 'blue',  'labelSide' => 'right'])
 
-                        {{-- Victim — at the map center, ringed in red --}}
+                        {{-- Victim avatar — at the map center, ringed in red --}}
                         <div class="absolute z-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
                             <div class="relative">
                                 <div class="absolute -inset-2 rounded-full bg-brand-500/50 blur-md animate-pulse"></div>
                                 <div class="relative w-14 h-14 rounded-full ring-[3px] ring-brand-500 ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-navy-800 shadow-lg shadow-brand-600/40">
-                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160&h=160&fit=crop&q=80" alt="Victim" class="w-full h-full object-cover" loading="lazy" />
+                                    <svg viewBox="0 0 64 64" class="w-full h-full">
+                                        <defs>
+                                            <radialGradient id="victimBg" cx="50%" cy="35%" r="65%">
+                                                <stop offset="0%"  stop-color="#4a3848"/>
+                                                <stop offset="100%" stop-color="#1a1224"/>
+                                            </radialGradient>
+                                            <linearGradient id="victimSkin" x1="0" x2="0" y1="0" y2="1">
+                                                <stop offset="0%"  stop-color="#f6dbc1"/>
+                                                <stop offset="60%" stop-color="#e2b896"/>
+                                                <stop offset="100%" stop-color="#b08562"/>
+                                            </linearGradient>
+                                            <linearGradient id="victimHair" x1="0" x2="0" y1="0" y2="1">
+                                                <stop offset="0%" stop-color="#3a2418"/>
+                                                <stop offset="100%" stop-color="#1a0d07"/>
+                                            </linearGradient>
+                                            <linearGradient id="victimShirt" x1="0" x2="0" y1="0" y2="1">
+                                                <stop offset="0%" stop-color="#e44352"/>
+                                                <stop offset="100%" stop-color="#a01828"/>
+                                            </linearGradient>
+                                            <radialGradient id="victimCheek" cx="50%" cy="50%" r="50%">
+                                                <stop offset="0%" stop-color="rgba(220,130,135,.55)"/>
+                                                <stop offset="100%" stop-color="transparent"/>
+                                            </radialGradient>
+                                        </defs>
+                                        <rect width="64" height="64" fill="url(#victimBg)"/>
+                                        {{-- shoulders + shirt --}}
+                                        <path d="M0 64 Q3 44 16 42 L48 42 Q61 44 64 64 Z" fill="url(#victimShirt)"/>
+                                        {{-- shirt collar V-neck hint --}}
+                                        <path d="M28 42 L32 50 L36 42 Z" fill="rgba(0,0,0,.18)"/>
+                                        {{-- neck --}}
+                                        <path d="M27.5 38 L27.5 44 Q32 47 36.5 44 L36.5 38 Z" fill="url(#victimSkin)"/>
+                                        {{-- hair back layer (long, falls over shoulders) --}}
+                                        <path d="M16 44 Q14 30 18 22 Q20 14 32 12 Q44 14 46 22 Q50 30 48 44 L46 46 Q44 36 42 32 L42 44 L22 44 L22 32 Q20 36 18 46 Z" fill="url(#victimHair)"/>
+                                        {{-- face --}}
+                                        <ellipse cx="32" cy="29" rx="10.5" ry="12.5" fill="url(#victimSkin)"/>
+                                        {{-- ears --}}
+                                        <ellipse cx="22" cy="29" rx="1.4" ry="2.4" fill="url(#victimSkin)"/>
+                                        <ellipse cx="42" cy="29" rx="1.4" ry="2.4" fill="url(#victimSkin)"/>
+                                        {{-- cheeks blush --}}
+                                        <ellipse cx="26" cy="32.5" rx="2.5" ry="1.4" fill="url(#victimCheek)"/>
+                                        <ellipse cx="38" cy="32.5" rx="2.5" ry="1.4" fill="url(#victimCheek)"/>
+                                        {{-- hair front bangs (sweeping side fringe) --}}
+                                        <path d="M22 22 Q28 16 36 17 Q44 19 44 24 L42 25 Q38 19 32 19 Q26 19 24 25 Z" fill="url(#victimHair)"/>
+                                        {{-- side hair strand --}}
+                                        <path d="M21 23 Q19 32 22 42 L24 42 Q23 32 24 26 Z" fill="url(#victimHair)"/>
+                                        <path d="M43 23 Q45 32 42 42 L40 42 Q41 32 40 26 Z" fill="url(#victimHair)"/>
+                                        {{-- eyebrows --}}
+                                        <path d="M25.5 26 Q27.5 25.2 29.5 26" stroke="#3a2418" stroke-width=".9" fill="none" stroke-linecap="round"/>
+                                        <path d="M34.5 26 Q36.5 25.2 38.5 26" stroke="#3a2418" stroke-width=".9" fill="none" stroke-linecap="round"/>
+                                        {{-- eyes --}}
+                                        <ellipse cx="27.5" cy="29.8" rx="1.7" ry="1.9" fill="#fff"/>
+                                        <ellipse cx="36.5" cy="29.8" rx="1.7" ry="1.9" fill="#fff"/>
+                                        <circle cx="27.7" cy="30" r="1.15" fill="#5a3a28"/>
+                                        <circle cx="36.7" cy="30" r="1.15" fill="#5a3a28"/>
+                                        <circle cx="27.8" cy="30.1" r=".55" fill="#0c0608"/>
+                                        <circle cx="36.8" cy="30.1" r=".55" fill="#0c0608"/>
+                                        <circle cx="28.1" cy="29.5" r=".3" fill="#fff"/>
+                                        <circle cx="37.1" cy="29.5" r=".3" fill="#fff"/>
+                                        {{-- nose --}}
+                                        <path d="M32 30.8 Q31.4 33.6 32.6 33.6" stroke="rgba(120,75,45,.45)" stroke-width=".5" fill="none" stroke-linecap="round"/>
+                                        {{-- lips --}}
+                                        <path d="M29 36.6 Q32 38.2 35 36.6" stroke="#9a2a35" stroke-width="1" fill="none" stroke-linecap="round"/>
+                                        <path d="M29 36.4 Q32 35.4 35 36.4 Q32 38.2 29 36.4 Z" fill="#c43948"/>
+                                    </svg>
                                 </div>
                                 <div class="absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap text-center">
                                     <p class="text-[11px] font-bold text-white leading-tight drop-shadow">You</p>
