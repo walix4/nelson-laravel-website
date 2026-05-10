@@ -146,7 +146,7 @@
             {{-- store buttons (App Store red, Google Play navy — equal-sized) --}}
             <div class="reveal reveal-delay-4 mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3" style="max-width:380px;">
                 {{-- Apple App Store --}}
-                <a href="#" class="group inline-flex items-center justify-center gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 shadow-sm hover:shadow-lg transition">
+                <a href="#" class="group inline-flex items-center justify-center gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
                     <img src="/images/app-store.svg" alt="" class="w-7 h-7 shrink-0" />
                     <div class="text-left whitespace-nowrap leading-tight">
                         <p class="text-[10px] uppercase tracking-wider text-white/80">Download on the</p>
@@ -154,7 +154,7 @@
                     </div>
                 </a>
                 {{-- Google Play --}}
-                <a href="#" class="group inline-flex items-center justify-center gap-3 rounded-md bg-navy-900 hover:bg-navy-800 text-white px-4 py-2.5 shadow-sm hover:shadow-lg transition">
+                <a href="#" class="group inline-flex items-center justify-center gap-3 rounded-md bg-navy-900 hover:bg-navy-800 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
                     <img src="/images/google-play.svg" alt="" class="w-7 h-7 shrink-0" />
                     <div class="text-left whitespace-nowrap leading-tight">
                         <p class="text-[10px] uppercase tracking-wider text-white/80">Get it on</p>
