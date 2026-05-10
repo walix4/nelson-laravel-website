@@ -9,7 +9,7 @@
     <title>Auxilio User — Your Safety, Your Control</title>
     <link rel="icon" type="image/png" href="images/auxilio-user.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="preload" as="style" href="build/assets/app-COdUKnZR.css" /><link rel="modulepreload" as="script" href="build/assets/app-CglRbuVp.js" /><link rel="stylesheet" href="build/assets/app-COdUKnZR.css" /><script type="module" src="build/assets/app-CglRbuVp.js"></script>    <style>
+    <link rel="preload" as="style" href="build/assets/app-CM4OL9rh.css" /><link rel="modulepreload" as="script" href="build/assets/app-CglRbuVp.js" /><link rel="stylesheet" href="build/assets/app-CM4OL9rh.css" /><script type="module" src="build/assets/app-CglRbuVp.js"></script>    <style>
         [data-nav].is-scrolled {
             box-shadow: 0 8px 24px -12px rgba(116, 25, 33, .45);
         }
@@ -122,89 +122,68 @@
 
         
         <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-right relative aspect-[1.15/1] w-full max-w-[640px] mx-auto">
+            <div class="reveal reveal-right relative w-full max-w-[680px] mx-auto" style="aspect-ratio: 1.8 / 1;">
 
                 
-                <svg viewBox="0 0 600 480" class="absolute inset-0 w-full h-full" aria-hidden="true">
-                    <defs>
-                        <pattern id="dotPat" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                            <circle cx="5" cy="5" r="1.4" fill="#cbd5e1"/>
-                        </pattern>
-                        <pattern id="dotPatActive" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                            <circle cx="5" cy="5" r="1.6" fill="#94a3b8"/>
-                        </pattern>
-                    </defs>
+                <div class="world-dotmap absolute inset-0 w-full h-full" aria-hidden="true"></div>
 
-                    
-                    <path fill="url(#dotPatActive)" d="M60,90 C90,70 140,68 180,80 C220,75 240,95 250,130 C245,160 230,175 215,195 C200,220 175,240 145,235 C115,232 90,215 75,190 C55,165 50,135 60,110 Z"/>
-                    
-                    <path fill="url(#dotPat)" d="M170,260 C195,250 220,260 230,290 C240,330 230,370 215,400 C200,425 180,432 165,420 C150,400 145,365 150,330 C155,300 162,275 170,260 Z"/>
-                    
-                    <path fill="url(#dotPat)" d="M285,90 C310,80 340,82 360,95 C375,110 372,135 360,150 C340,165 310,168 290,160 C275,148 270,125 275,108 Z"/>
-                    
-                    <path fill="url(#dotPatActive)" d="M295,170 C325,158 360,170 375,200 C390,240 388,290 370,330 C355,360 330,375 310,365 C285,348 275,310 280,270 C285,225 290,195 295,170 Z"/>
-                    
-                    <path fill="url(#dotPatActive)" d="M395,80 C440,68 500,72 540,95 C560,118 560,150 545,180 C520,210 480,225 435,222 C405,215 388,195 385,165 C383,135 388,105 395,85 Z"/>
-                    
-                    <path fill="url(#dotPat)" d="M430,210 C455,205 478,215 482,238 C480,262 460,275 440,272 C422,265 418,242 425,222 Z"/>
-                    
-                    <path fill="url(#dotPat)" d="M488,338 C515,332 545,340 555,360 C560,380 545,395 520,397 C495,395 478,382 478,365 C480,352 482,344 488,340 Z"/>
-
-                    
+                
+                <svg viewBox="0 0 1000 555" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
                     <g stroke="#FB0606" stroke-width="1.4" fill="none" opacity=".55">
-                        <line class="map-line" x1="305" y1="245" x2="155" y2="135"/>
-                        <line class="map-line" x1="305" y1="245" x2="455" y2="125"/>
-                        <line class="map-line" x1="305" y1="245" x2="195" y2="335"/>
-                        <line class="map-line" x1="305" y1="245" x2="335" y2="270"/>
-                        <line class="map-line" x1="305" y1="245" x2="510" y2="365"/>
-                        <line class="map-line" x1="305" y1="245" x2="475" y2="240"/>
+                        
+                        <line class="map-line" x1="500" y1="277" x2="220" y2="200"/>   
+                        <line class="map-line" x1="500" y1="277" x2="520" y2="166"/>   
+                        <line class="map-line" x1="500" y1="277" x2="280" y2="416"/>   
+                        <line class="map-line" x1="500" y1="277" x2="540" y2="333"/>   
+                        <line class="map-line" x1="500" y1="277" x2="780" y2="222"/>   
+                        <line class="map-line" x1="500" y1="277" x2="850" y2="416"/>   
                     </g>
                 </svg>
 
                 
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                    <div class="grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.55)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
+                    <div class="relative grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.55)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
                         <svg class="w-7 h-7" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
                         </svg>
+                        <span class="absolute inset-0 rounded-full map-pin" aria-hidden="true"></span>
                     </div>
-                    <span class="absolute inset-0 rounded-full map-pin" aria-hidden="true"></span>
                 </div>
 
                 
-                                                    <div class="absolute z-10" style="top:24%;left:24%;">
+                                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:36%;left:22%;">
                         
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white" style="background:#FB0606;"></span>
+                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)]" style="background:#FB0606;"></span>
                         
-                        <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 right-5 top-1/2 -translate-y-1/2" style="animation-delay:0s;">
+                        <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 left-5 top-1/2 -translate-y-1/2" style="animation-delay:0s;">
                             Police Officer
-                            
-                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -right-1 border-r border-t"></span>
-                        </span>
-                    </div>
-                                    <div class="absolute z-10" style="top:20%;left:72%;">
-                        
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white" style="background:#FB0606;"></span>
-                        
-                        <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 left-5 top-1/2 -translate-y-1/2" style="animation-delay:1.5s;">
-                            911 Dispatch
                             
                             <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -left-1 border-l border-b"></span>
                         </span>
                     </div>
-                                    <div class="absolute z-10" style="top:68%;left:30%;">
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:30%;left:52%;">
                         
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white" style="background:#FB0606;"></span>
+                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)]" style="background:#FB0606;"></span>
                         
-                        <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 right-5 top-1/2 -translate-y-1/2" style="animation-delay:3s;">
-                            Super Agent
+                        <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 right-5 top-1/2 -translate-y-1/2" style="animation-delay:1.5s;">
+                            911 Dispatch
                             
                             <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -right-1 border-r border-t"></span>
                         </span>
                     </div>
-                                    <div class="absolute z-10" style="top:52%;left:56%;">
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:75%;left:28%;">
                         
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white" style="background:#FB0606;"></span>
+                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)]" style="background:#FB0606;"></span>
+                        
+                        <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 left-5 top-1/2 -translate-y-1/2" style="animation-delay:3s;">
+                            Super Agent
+                            
+                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -left-1 border-l border-b"></span>
+                        </span>
+                    </div>
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:60%;left:54%;">
+                        
+                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)]" style="background:#FB0606;"></span>
                         
                         <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 left-5 top-1/2 -translate-y-1/2" style="animation-delay:4.5s;">
                             First Responder
@@ -212,9 +191,9 @@
                             <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -left-1 border-l border-b"></span>
                         </span>
                     </div>
-                                    <div class="absolute z-10" style="top:76%;left:82%;">
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:40%;left:78%;">
                         
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white" style="background:#FB0606;"></span>
+                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)]" style="background:#FB0606;"></span>
                         
                         <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 right-5 top-1/2 -translate-y-1/2" style="animation-delay:6s;">
                             Trusted Contact
@@ -222,14 +201,14 @@
                             <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -right-1 border-r border-t"></span>
                         </span>
                     </div>
-                                    <div class="absolute z-10" style="top:46%;left:78%;">
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:75%;left:85%;">
                         
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white" style="background:#FB0606;"></span>
+                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)]" style="background:#FB0606;"></span>
                         
-                        <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 left-5 top-1/2 -translate-y-1/2" style="animation-delay:7.5s;">
+                        <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 right-5 top-1/2 -translate-y-1/2" style="animation-delay:7.5s;">
                             EMT
                             
-                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -left-1 border-l border-b"></span>
+                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -right-1 border-r border-t"></span>
                         </span>
                     </div>
                             </div>
@@ -876,21 +855,53 @@
 
         <div class="lg:col-span-6">
             <div class="reveal reveal-right grid grid-cols-2 gap-4">
-                                                    <div class="relative aspect-square rounded-2xl overflow-hidden shadow-xl ">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=560&amp;h=560&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
+                                                    <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-xl ">
+                        <img src="images/about/robbery.jpg" alt="Robbery" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/15 to-transparent"></div>
+                        <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full text-white px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase shadow-md" style="background:#FB0606;">
+                            <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-white"></span>
+                            Robbery
+                        </span>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <p class="text-[11px] font-semibold uppercase tracking-[.14em] text-white/70">Auxilio resolved</p>
+                            <p class="mt-0.5 text-sm font-bold text-white truncate">Alert dispatched · 0:18s</p>
+                        </div>
                     </div>
-                                    <div class="relative aspect-square rounded-2xl overflow-hidden shadow-xl mt-10">
-                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=560&amp;h=560&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
+                                    <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-xl mt-10">
+                        <img src="images/about/break-in.jpg" alt="Vehicle Break-in" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/15 to-transparent"></div>
+                        <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full text-white px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase shadow-md" style="background:#FB0606;">
+                            <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-white"></span>
+                            Vehicle Break-in
+                        </span>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <p class="text-[11px] font-semibold uppercase tracking-[.14em] text-white/70">Auxilio resolved</p>
+                            <p class="mt-0.5 text-sm font-bold text-white truncate">Agent en-route · ETA 4m</p>
+                        </div>
                     </div>
-                                    <div class="relative aspect-square rounded-2xl overflow-hidden shadow-xl ">
-                        <img src="https://images.unsplash.com/photo-1573497019418-b400bb3ab074?w=560&amp;h=560&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
+                                    <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-xl ">
+                        <img src="images/about/roadside.jpg" alt="Roadside Help" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/15 to-transparent"></div>
+                        <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full text-white px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase shadow-md" style="background:#FB0606;">
+                            <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-white"></span>
+                            Roadside Help
+                        </span>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <p class="text-[11px] font-semibold uppercase tracking-[.14em] text-white/70">Auxilio resolved</p>
+                            <p class="mt-0.5 text-sm font-bold text-white truncate">Verified responder · cleared</p>
+                        </div>
                     </div>
-                                    <div class="relative aspect-square rounded-2xl overflow-hidden shadow-xl mt-10">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=560&amp;h=560&amp;fit=crop&amp;q=80" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
+                                    <div class="group relative aspect-square rounded-2xl overflow-hidden shadow-xl mt-10">
+                        <img src="images/about/accident.jpg" alt="Collision" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/15 to-transparent"></div>
+                        <span class="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full text-white px-2.5 py-1 text-[10px] font-bold tracking-wider uppercase shadow-md" style="background:#FB0606;">
+                            <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-white"></span>
+                            Collision
+                        </span>
+                        <div class="absolute bottom-3 left-3 right-3">
+                            <p class="text-[11px] font-semibold uppercase tracking-[.14em] text-white/70">Auxilio resolved</p>
+                            <p class="mt-0.5 text-sm font-bold text-white truncate">EMT + PD notified · 0:09s</p>
+                        </div>
                     </div>
                             </div>
         </div>
@@ -959,120 +970,383 @@
 </section>
 
 
-<section id="features" class="relative py-24 lg:py-32 bg-white">
-    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+<section id="features" class="relative py-24 lg:py-32 bg-white overflow-hidden">
+    
+    <div class="pointer-events-none absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(#0c1126 1px, transparent 1px), linear-gradient(90deg, #0c1126 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse at center, #000 0%, transparent 75%);"></div>
+
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div class="max-w-3xl mx-auto text-center">
-            <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-brand-600">Features</p>
-            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-navy-900">
-                The intelligent network behind <span class="text-brand-600">safer streets.</span>
+            <p class="reveal inline-flex items-center gap-2 text-sm font-medium text-navy-900/70">
+                <span class="grid place-items-center w-5 h-5 rounded-full" style="background:#FB0606;">
+                    <svg class="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
+                </span>
+                Auxilio AI · Safety Metrics
+            </p>
+            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[64px] leading-[1.02] tracking-tight text-navy-950">
+                Efficiency Metrics
             </h2>
-            <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-700/80 leading-relaxed">
-                Nine capabilities, one continuous safety fabric. Each feature talks to the next — alerts inform geofences, geofences trigger Alert shortcuts, Alerts route to verified responders.
+            <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-900/65 leading-relaxed">
+                At Auxilio, we harness real-time intelligence and verified responders to redefine personal safety.
             </p>
         </div>
 
         
-        <div class="mt-14 stagger grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-100 rounded-2xl overflow-hidden border border-ink-100">
-                            <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+        <div class="mt-14 stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                            <article class="metric-card group relative rounded-3xl p-7 lg:p-8 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-18px_rgba(12,17,38,.22)]" style="background:#fdf6d8; min-height:380px;">
+
+                    
+                    <span class="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
+                        <svg class="w-5 h-5 metric-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:#FB0606;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>
                         </svg>
                     </span>
-                    <h3 class="mt-6 text-xl font-semibold tracking-tight text-navy-900">Real-Time Safety Alerts</h3>
-                    <p class="mt-2.5 text-navy-700/80 leading-relaxed">Instant push notifications the moment something happens near you, your home, or the people you care about.</p>
-                    <span class="absolute top-8 right-8 text-xs font-mono text-ink-300">01</span>
-                    <span class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-brand-600 group-hover:w-full transition-all duration-500"></span>
+
+                    
+                    <span class="pointer-events-none absolute -inset-12 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700" style="background:radial-gradient(circle, #FB060622 0%, transparent 60%);"></span>
+
+                    <div class="relative h-full flex flex-col">
+                        
+                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;">
+                            30s
+                        </p>
+                        
+                        <h3 class="mt-3 font-display font-bold text-lg lg:text-xl tracking-tight text-navy-950">
+                            Avg Alert Time
+                        </h3>
+
+                        
+                        <div class="mt-4 relative h-0.5 w-12 rounded-full overflow-hidden" style="background:rgba(12,17,38,.10);">
+                            <span class="absolute inset-y-0 left-0 w-1/2 metric-pulse-line" style="background:#FB0606;"></span>
+                        </div>
+
+                        
+                        <div class="flex-1"></div>
+
+                        
+                        <p class="mt-6 text-sm text-navy-900/65 leading-relaxed">
+                            From incident to verified responder lock screen in under thirty seconds.
+                        </p>
+
+                        
+                        <div class="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] opacity-60 group-hover:opacity-100 transition-all duration-500" style="color:#FB0606;">
+                            <svg class="w-4 h-4 transition-transform duration-500 group-hover:rotate-[12deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                            <span class="transition-transform duration-500 group-hover:translate-x-1">Learn more</span>
+                            <svg class="w-3.5 h-3.5 -ml-0.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                        </div>
+                    </div>
                 </article>
-                            <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l6 6m0-6l-6 6"/>
+                            <article class="metric-card group relative rounded-3xl p-7 lg:p-8 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-18px_rgba(12,17,38,.22)]" style="background:#eef1f6; min-height:380px;">
+
+                    
+                    <span class="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
+                        <svg class="w-5 h-5 metric-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:#FB0606;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>
                         </svg>
                     </span>
-                    <h3 class="mt-6 text-xl font-semibold tracking-tight text-navy-900">Quick Alert for Instant Help</h3>
-                    <p class="mt-2.5 text-navy-700/80 leading-relaxed">One tap alerts trusted agents or emergency responders with your location, situation, and identity — when seconds matter.</p>
-                    <span class="absolute top-8 right-8 text-xs font-mono text-ink-300">02</span>
-                    <span class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-brand-600 group-hover:w-full transition-all duration-500"></span>
+
+                    
+                    <span class="pointer-events-none absolute -inset-12 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700" style="background:radial-gradient(circle, #FB060622 0%, transparent 60%);"></span>
+
+                    <div class="relative h-full flex flex-col">
+                        
+                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;">
+                            24/7
+                        </p>
+                        
+                        <h3 class="mt-3 font-display font-bold text-lg lg:text-xl tracking-tight text-navy-950">
+                            Verified Agents
+                        </h3>
+
+                        
+                        <div class="mt-4 relative h-0.5 w-12 rounded-full overflow-hidden" style="background:rgba(12,17,38,.10);">
+                            <span class="absolute inset-y-0 left-0 w-1/2 metric-pulse-line" style="background:#FB0606;"></span>
+                        </div>
+
+                        
+                        <div class="flex-1"></div>
+
+                        
+                        <p class="mt-6 text-sm text-navy-900/65 leading-relaxed">
+                            Background-checked Super Agents on standby, ready to respond on your behalf.
+                        </p>
+
+                        
+                        <div class="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] opacity-60 group-hover:opacity-100 transition-all duration-500" style="color:#FB0606;">
+                            <svg class="w-4 h-4 transition-transform duration-500 group-hover:rotate-[12deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+                            <span class="transition-transform duration-500 group-hover:translate-x-1">Learn more</span>
+                            <svg class="w-3.5 h-3.5 -ml-0.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                        </div>
+                    </div>
                 </article>
-                            <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/>
+                            <article class="metric-card group relative rounded-3xl p-7 lg:p-8 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-18px_rgba(12,17,38,.22)]" style="background:#e7eeff; min-height:380px;">
+
+                    
+                    <span class="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
+                        <svg class="w-5 h-5 metric-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:#FB0606;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>
                         </svg>
                     </span>
-                    <h3 class="mt-6 text-xl font-semibold tracking-tight text-navy-900">Track &amp; Share Location</h3>
-                    <p class="mt-2.5 text-navy-700/80 leading-relaxed">Let your loved ones or verified security agents monitor your location in real time — never alone on the way home.</p>
-                    <span class="absolute top-8 right-8 text-xs font-mono text-ink-300">03</span>
-                    <span class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-brand-600 group-hover:w-full transition-all duration-500"></span>
+
+                    
+                    <span class="pointer-events-none absolute -inset-12 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700" style="background:radial-gradient(circle, #FB060622 0%, transparent 60%);"></span>
+
+                    <div class="relative h-full flex flex-col">
+                        
+                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;">
+                            1M+
+                        </p>
+                        
+                        <h3 class="mt-3 font-display font-bold text-lg lg:text-xl tracking-tight text-navy-950">
+                            Crimes Mapped
+                        </h3>
+
+                        
+                        <div class="mt-4 relative h-0.5 w-12 rounded-full overflow-hidden" style="background:rgba(12,17,38,.10);">
+                            <span class="absolute inset-y-0 left-0 w-1/2 metric-pulse-line" style="background:#FB0606;"></span>
+                        </div>
+
+                        
+                        <div class="flex-1"></div>
+
+                        
+                        <p class="mt-6 text-sm text-navy-900/65 leading-relaxed">
+                            A live, AI-classified crime feed across 40+ states — refreshed as events come in.
+                        </p>
+
+                        
+                        <div class="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] opacity-60 group-hover:opacity-100 transition-all duration-500" style="color:#FB0606;">
+                            <svg class="w-4 h-4 transition-transform duration-500 group-hover:rotate-[12deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/></svg>
+                            <span class="transition-transform duration-500 group-hover:translate-x-1">Learn more</span>
+                            <svg class="w-3.5 h-3.5 -ml-0.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                        </div>
+                    </div>
                 </article>
-                            <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l2 2 3.5-4"/>
+                            <article class="metric-card group relative rounded-3xl p-7 lg:p-8 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-18px_rgba(12,17,38,.22)]" style="background:#f1f1f3; min-height:380px;">
+
+                    
+                    <span class="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
+                        <svg class="w-5 h-5 metric-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:#FB0606;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>
                         </svg>
                     </span>
-                    <h3 class="mt-6 text-xl font-semibold tracking-tight text-navy-900">Verified Super Agents</h3>
-                    <p class="mt-2.5 text-navy-700/80 leading-relaxed">A trained, background-checked network of safety agents who can respond, escort, or coordinate help on your behalf.</p>
-                    <span class="absolute top-8 right-8 text-xs font-mono text-ink-300">04</span>
-                    <span class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-brand-600 group-hover:w-full transition-all duration-500"></span>
-                </article>
-                            <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 6l-6 2v12l6-2 6 2 6-2V6l-6 2-6-2zM9 6v12m6-10v12"/>
-                        </svg>
-                    </span>
-                    <h3 class="mt-6 text-xl font-semibold tracking-tight text-navy-900">Live Crime Map</h3>
-                    <p class="mt-2.5 text-navy-700/80 leading-relaxed">A live, color-coded map of incidents reported around you — searchable, filterable, and refreshed as events come in.</p>
-                    <span class="absolute top-8 right-8 text-xs font-mono text-ink-300">05</span>
-                    <span class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-brand-600 group-hover:w-full transition-all duration-500"></span>
-                </article>
-                            <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v4H4zM4 12h10v4H4zM4 20h7"/>
-                        </svg>
-                    </span>
-                    <h3 class="mt-6 text-xl font-semibold tracking-tight text-navy-900">Categorized Reporting</h3>
-                    <p class="mt-2.5 text-navy-700/80 leading-relaxed">Report incidents with the right urgency and category — Sexual Crimes, Robbery, Physical Violence, Homicides — in seconds.</p>
-                    <span class="absolute top-8 right-8 text-xs font-mono text-ink-300">06</span>
-                    <span class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-brand-600 group-hover:w-full transition-all duration-500"></span>
-                </article>
-                            <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M14 6l3 3"/>
-                        </svg>
-                    </span>
-                    <h3 class="mt-6 text-xl font-semibold tracking-tight text-navy-900">Suspect Sketch Builder</h3>
-                    <p class="mt-2.5 text-navy-700/80 leading-relaxed">Help responders identify a suspect with a guided sketch composer — features, build, clothing — all from your phone.</p>
-                    <span class="absolute top-8 right-8 text-xs font-mono text-ink-300">07</span>
-                    <span class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-brand-600 group-hover:w-full transition-all duration-500"></span>
-                </article>
-                            <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-9-9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/>
-                        </svg>
-                    </span>
-                    <h3 class="mt-6 text-xl font-semibold tracking-tight text-navy-900">Case Progress Tracking</h3>
-                    <p class="mt-2.5 text-navy-700/80 leading-relaxed">Watch your case move with a live completion bar, agent ETA, and distance / duration metrics — no more wondering what&rsquo;s next.</p>
-                    <span class="absolute top-8 right-8 text-xs font-mono text-ink-300">08</span>
-                    <span class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-brand-600 group-hover:w-full transition-all duration-500"></span>
-                </article>
-                            <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0"/>
-                        </svg>
-                    </span>
-                    <h3 class="mt-6 text-xl font-semibold tracking-tight text-navy-900">Trusted Community Watch</h3>
-                    <p class="mt-2.5 text-navy-700/80 leading-relaxed">Privately share live updates with neighbors and trusted contacts — turn your block into an always-on safety network.</p>
-                    <span class="absolute top-8 right-8 text-xs font-mono text-ink-300">09</span>
-                    <span class="pointer-events-none absolute bottom-0 left-0 h-0.5 w-0 bg-brand-600 group-hover:w-full transition-all duration-500"></span>
+
+                    
+                    <span class="pointer-events-none absolute -inset-12 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700" style="background:radial-gradient(circle, #FB060622 0%, transparent 60%);"></span>
+
+                    <div class="relative h-full flex flex-col">
+                        
+                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;">
+                            100%
+                        </p>
+                        
+                        <h3 class="mt-3 font-display font-bold text-lg lg:text-xl tracking-tight text-navy-950">
+                            Privacy by Design
+                        </h3>
+
+                        
+                        <div class="mt-4 relative h-0.5 w-12 rounded-full overflow-hidden" style="background:rgba(12,17,38,.10);">
+                            <span class="absolute inset-y-0 left-0 w-1/2 metric-pulse-line" style="background:#FB0606;"></span>
+                        </div>
+
+                        
+                        <div class="flex-1"></div>
+
+                        
+                        <p class="mt-6 text-sm text-navy-900/65 leading-relaxed">
+                            End-to-end encrypted location sharing — opt-in, revocable, and never sold.
+                        </p>
+
+                        
+                        <div class="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] opacity-60 group-hover:opacity-100 transition-all duration-500" style="color:#FB0606;">
+                            <svg class="w-4 h-4 transition-transform duration-500 group-hover:rotate-[12deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 10V8a6 6 0 1112 0v2M5 10h14v10H5z"/></svg>
+                            <span class="transition-transform duration-500 group-hover:translate-x-1">Learn more</span>
+                            <svg class="w-3.5 h-3.5 -ml-0.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                        </div>
+                    </div>
                 </article>
                     </div>
+    </div>
+</section>
+
+
+<section class="relative py-24 lg:py-32 bg-white overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 ai-grid-bg opacity-60"></div>
+
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+        
+        <div class="lg:col-span-5">
+            <p class="reveal inline-flex items-center gap-2 text-sm font-medium text-navy-900/70">
+                <span class="grid place-items-center w-5 h-5 rounded-full" style="background:#FB0606;">
+                    <svg class="w-3 h-3 text-white" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+                </span>
+                AI for People Safety
+            </p>
+
+            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] leading-[1.04] tracking-tight text-navy-950">
+                Crime &amp; emergencies, <span style="color:#FB0606;">solved in real time.</span>
+            </h2>
+
+            <p class="reveal reveal-delay-2 mt-6 text-lg text-navy-900/65 leading-relaxed">
+                Auxilio AI listens to live signals across your city — incident reports, registry updates, agent locations, panic Alerts — and stitches them into a single response in under thirty seconds. No more refreshing the news. No more guessing whether help is coming.
+            </p>
+
+                        <ul class="reveal reveal-delay-3 mt-8 space-y-4">
+                                    <li class="flex items-start gap-4">
+                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full text-xs font-bold text-white shadow-[0_8px_18px_-6px_rgba(251,6,6,.5)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">01</span>
+                        <div class="pt-0.5">
+                            <p class="font-display font-bold text-base text-navy-950">Detect</p>
+                            <p class="mt-0.5 text-sm text-navy-900/65 leading-relaxed">AI ingests reports, sensor data, and Alerts the moment they happen.</p>
+                        </div>
+                    </li>
+                                    <li class="flex items-start gap-4">
+                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full text-xs font-bold text-white shadow-[0_8px_18px_-6px_rgba(251,6,6,.5)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">02</span>
+                        <div class="pt-0.5">
+                            <p class="font-display font-bold text-base text-navy-950">Classify</p>
+                            <p class="mt-0.5 text-sm text-navy-900/65 leading-relaxed">Severity, category, and risk-zone are scored automatically — no triage delay.</p>
+                        </div>
+                    </li>
+                                    <li class="flex items-start gap-4">
+                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full text-xs font-bold text-white shadow-[0_8px_18px_-6px_rgba(251,6,6,.5)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">03</span>
+                        <div class="pt-0.5">
+                            <p class="font-display font-bold text-base text-navy-950">Dispatch</p>
+                            <p class="mt-0.5 text-sm text-navy-900/65 leading-relaxed">The closest verified Super Agent or 911 link is routed instantly.</p>
+                        </div>
+                    </li>
+                            </ul>
+
+            <a href="#download" class="reveal reveal-delay-4 mt-9 inline-flex items-center gap-2 rounded-xl text-white px-6 py-3 text-sm font-semibold shadow-[0_18px_38px_-12px_rgba(251,6,6,.5)] hover:-translate-y-0.5 transition" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                See it in action
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+            </a>
+        </div>
+
+        
+        <div class="lg:col-span-7 relative">
+            <div class="reveal reveal-right relative rounded-3xl p-6 lg:p-8 shadow-[0_50px_120px_-40px_rgba(12,17,38,.35)] border border-ink-100 overflow-hidden" style="background:linear-gradient(180deg,#fafbff 0%,#ffffff 60%);">
+
+                
+                <div class="absolute -top-3 right-6 lg:right-10 z-30">
+                    <div class="ai-chip-float inline-flex items-center gap-1.5 rounded-full text-white px-4 py-2 text-xs font-semibold shadow-[0_18px_30px_-10px_rgba(251,6,6,.6)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
+                        AI Powered
+                    </div>
+                </div>
+
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.16em] text-navy-900/55">
+                        <span class="relative flex w-2 h-2">
+                            <span class="absolute inline-flex w-2 h-2 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                            <span class="relative inline-flex w-2 h-2 rounded-full" style="background:#FB0606;"></span>
+                        </span>
+                        Live Incident Stream
+                    </div>
+                    <span class="text-[10px] font-mono text-navy-900/45">NEWARK · SECTOR 4</span>
+                </div>
+
+                
+                <div class="mt-5 grid grid-cols-2 gap-4">
+                    
+                    <div class="rounded-2xl p-5 border border-ink-100 shadow-sm" style="background:#fff;">
+                        <div class="flex items-center justify-between">
+                            <span class="grid place-items-center w-8 h-8 rounded-md" style="background:#fef2f3;">
+                                <svg class="w-4 h-4" style="color:#FB0606;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19V9M10 19V5M16 19v-7M22 19v-3"/></svg>
+                            </span>
+                            <svg class="w-3.5 h-3.5 text-navy-900/35" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+                        </div>
+                        <p class="mt-4 font-display font-extrabold text-2xl tracking-tight text-navy-950">1,284</p>
+                        <p class="text-xs text-navy-900/55">Alerts processed today</p>
+                        <div class="mt-4 flex items-end gap-1.5 h-16">
+                                                                                        <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:40%; animation-delay:0s;"></span>
+                                                            <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:70%; animation-delay:0.18s;"></span>
+                                                            <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:55%; animation-delay:0.36s;"></span>
+                                                            <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:85%; animation-delay:0.54s;"></span>
+                                                            <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:65%; animation-delay:0.72s;"></span>
+                                                            <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:92%; animation-delay:0.9s;"></span>
+                                                            <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:75%; animation-delay:1.08s;"></span>
+                                                            <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:60%; animation-delay:1.26s;"></span>
+                                                            <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:100%; animation-delay:1.44s;"></span>
+                                                            <span class="ai-bar block flex-1 rounded-t" style="background:#FB0606; height:78%; animation-delay:1.62s;"></span>
+                                                    </div>
+                    </div>
+
+                    
+                    <div class="rounded-2xl p-5 border border-ink-100 shadow-sm" style="background:#fff;">
+                        <div class="flex items-center justify-between">
+                            <span class="grid place-items-center w-8 h-8 rounded-md" style="background:#fef9e7;">
+                                <svg class="w-4 h-4" style="color:#FB0606;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+                            </span>
+                            <svg class="w-3.5 h-3.5 text-navy-900/35" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>
+                        </div>
+                        <p class="mt-4 font-display font-extrabold text-2xl tracking-tight text-navy-950">98%</p>
+                        <p class="text-xs text-navy-900/55">Cases auto-classified</p>
+                        <div class="mt-3 grid place-items-center">
+                            <svg viewBox="0 0 80 80" class="w-20 h-20 -rotate-90">
+                                <circle cx="40" cy="40" r="34" fill="none" stroke="#f1f1f3" stroke-width="6"/>
+                                <circle class="ai-ring-spin" cx="40" cy="40" r="34" fill="none" stroke="#FB0606" stroke-width="6" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="mt-5 rounded-2xl p-4 border border-ink-100" style="background:#fbfcff;">
+                    <p class="text-[10px] uppercase tracking-[.18em] font-semibold text-navy-900/50">AI-classified incidents</p>
+                    <div class="relative mt-3 h-12 overflow-hidden">
+                                                                            <div class="ai-incident absolute inset-0 flex items-center gap-3" style="animation-delay:0s;">
+                                <span class="grid place-items-center w-8 h-8 rounded-md text-white text-[10px] font-bold uppercase tracking-wider shrink-0" style="background:#FB0606;">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M5 19h14l-7-14z"/></svg>
+                                </span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[11px] uppercase font-bold tracking-wider" style="color:#FB0606;">ROBBERY</p>
+                                    <p class="text-sm font-semibold text-navy-950 truncate">AI flagged: armed robbery, 870 Broadway</p>
+                                </div>
+                                <svg class="w-4 h-4 text-navy-900/30 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                                                    <div class="ai-incident absolute inset-0 flex items-center gap-3" style="animation-delay:3s;">
+                                <span class="grid place-items-center w-8 h-8 rounded-md text-white text-[10px] font-bold uppercase tracking-wider shrink-0" style="background:#FB0606;">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M5 19h14l-7-14z"/></svg>
+                                </span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[11px] uppercase font-bold tracking-wider" style="color:#FB0606;">DOMESTIC</p>
+                                    <p class="text-sm font-semibold text-navy-950 truncate">AI flagged: domestic disturbance, Sector 4</p>
+                                </div>
+                                <svg class="w-4 h-4 text-navy-900/30 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                                                    <div class="ai-incident absolute inset-0 flex items-center gap-3" style="animation-delay:6s;">
+                                <span class="grid place-items-center w-8 h-8 rounded-md text-white text-[10px] font-bold uppercase tracking-wider shrink-0" style="background:#FB0606;">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M5 19h14l-7-14z"/></svg>
+                                </span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[11px] uppercase font-bold tracking-wider" style="color:#FB0606;">COLLISION</p>
+                                    <p class="text-sm font-semibold text-navy-950 truncate">AI flagged: vehicle collision, EMT routed</p>
+                                </div>
+                                <svg class="w-4 h-4 text-navy-900/30 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                                                    <div class="ai-incident absolute inset-0 flex items-center gap-3" style="animation-delay:9s;">
+                                <span class="grid place-items-center w-8 h-8 rounded-md text-white text-[10px] font-bold uppercase tracking-wider shrink-0" style="background:#FB0606;">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 4h.01M5 19h14l-7-14z"/></svg>
+                                </span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[11px] uppercase font-bold tracking-wider" style="color:#FB0606;">BREAK-IN</p>
+                                    <p class="text-sm font-semibold text-navy-950 truncate">AI flagged: vehicle break-in, agent en-route</p>
+                                </div>
+                                <svg class="w-4 h-4 text-navy-900/30 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                                            </div>
+                </div>
+
+                
+                <div class="mt-5 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[.14em] text-navy-900/55">
+                    <span class="inline-flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5" style="color:#FB0606;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        Verified by 911 Dispatch
+                    </span>
+                    <span class="font-mono normal-case tracking-normal text-navy-900/45">v2.4 · model: aux-resp-3</span>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
