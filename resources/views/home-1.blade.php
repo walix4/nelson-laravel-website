@@ -59,7 +59,7 @@
         </div>
     </nav>
 
-    <div id="mobile-menu" data-menu-panel class="md:hidden absolute inset-x-4 top-[72px] rounded-2xl bg-white border border-ink-100 shadow-xl p-6">
+    <div id="mobile-menu" data-menu-panel class="md:hidden absolute inset-x-4 top-[72px] rounded-md bg-white border border-ink-100 shadow-xl p-6">
         <ul class="flex flex-col gap-4 text-base font-medium text-navy-800">
             <li><a data-route href="#/">Home</a></li>
             <li><a data-route href="#/crime-map">Crime Map</a></li>
@@ -113,7 +113,7 @@
                 </div>
 
                 {{-- Registry notification card (bottom-right) --}}
-                <div class="reveal reveal-delay-4 absolute -bottom-2 right-2 sm:bottom-4 sm:right-4 z-20 flex items-center gap-3 rounded-2xl bg-white border border-ink-100 px-3 py-2 sm:px-4 sm:py-3 shadow-lg">
+                <div class="reveal reveal-delay-4 absolute -bottom-2 right-2 sm:bottom-4 sm:right-4 z-20 flex items-center gap-3 rounded-md bg-white border border-ink-100 px-3 py-2 sm:px-4 sm:py-3 shadow-lg">
                     <span class="grid place-items-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-navy-900 text-white">
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5" stroke-width="2"/></svg>
                     </span>
@@ -146,18 +146,18 @@
             {{-- store buttons --}}
             <div class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center gap-3">
                 {{-- Google Play --}}
-                <a href="#" class="group inline-flex items-center gap-3 rounded-2xl bg-navy-900 hover:bg-navy-800 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
+                <a href="#" class="group inline-flex items-center gap-3 rounded-md bg-blue-600 hover:bg-blue-700 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
                     <img src="/images/google-play.svg" alt="" class="w-7 h-7" />
                     <div class="text-left">
-                        <p class="text-[10px] uppercase tracking-[.18em] text-white/70">Get it on</p>
+                        <p class="text-[10px] uppercase tracking-[.18em] text-white/80">Get it on</p>
                         <p class="text-base font-semibold leading-none -mt-0.5">Google Play</p>
                     </div>
                 </a>
                 {{-- Apple App Store --}}
-                <a href="#" class="group inline-flex items-center gap-3 rounded-2xl bg-navy-900 hover:bg-navy-800 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
+                <a href="#" class="group inline-flex items-center gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
                     <img src="/images/app-store.svg" alt="" class="w-7 h-7" />
                     <div class="text-left">
-                        <p class="text-[10px] uppercase tracking-[.18em] text-white/70">Download on the</p>
+                        <p class="text-[10px] uppercase tracking-[.18em] text-white/80">Download on the</p>
                         <p class="text-base font-semibold leading-none -mt-0.5">App Store</p>
                     </div>
                 </a>
@@ -388,7 +388,7 @@
                     ];
                 @endphp
                 @foreach ($bullets as $b)
-                    <li class="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition">
+                    <li class="flex items-start gap-4 rounded-md border border-white/10 bg-white/[0.03] p-4 hover:bg-white/[0.06] transition">
                         <span class="grid place-items-center shrink-0 w-9 h-9 rounded-xl bg-brand-600 text-white">
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                         </span>
@@ -416,7 +416,7 @@
                 </div>
 
                 {{-- Live map with rich realistic navigation styling + sonar + route + officer avatar --}}
-                <div class="relative mt-6 aspect-[16/10] rounded-2xl border border-white/10 bg-[#0d1429] overflow-hidden">
+                <div class="relative mt-6 aspect-[16/10] rounded-md border border-white/10 bg-[#0d1429] overflow-hidden">
                     <svg viewBox="0 0 400 250" class="absolute inset-0 w-full h-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
                         <defs>
                             <pattern id="dispatchGrid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -756,7 +756,7 @@
                 </div>
 
                 {{-- Live status feed (cycling messages) --}}
-                <div class="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                <div class="mt-5 rounded-md border border-white/10 bg-white/[0.03] px-4 py-3">
                     <div class="feed text-[13px] text-white/85" style="--feed-duration:8s;">
                         <div><span class="grid place-items-center w-6 h-6 rounded-full bg-brand-600/30 text-brand-300"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/></svg></span><span><b>Locating you</b> · GPS lock acquired</span></div>
                         <div><span class="grid place-items-center w-6 h-6 rounded-full bg-gold-400/25 text-gold-300"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M20 20l-3-3"/></svg></span><span><b>Searching agents</b> · 12 nearby in 1.2 mi</span></div>
@@ -803,7 +803,7 @@
                 </div>
 
                 {{-- Agents joining (slide-in) --}}
-                <div class="mt-5 rounded-2xl border border-brand-500/30 bg-brand-600/10 px-4 py-3 flex items-center justify-between">
+                <div class="mt-5 rounded-md border border-brand-500/30 bg-brand-600/10 px-4 py-3 flex items-center justify-between">
                     <div>
                         <p class="text-[10px] uppercase tracking-[.18em] text-brand-300 font-semibold">Agents in assistance</p>
                         <p class="text-sm font-semibold mt-0.5">3 nearby · +10 backing up</p>
@@ -894,10 +894,10 @@
             ];
         @endphp
 
-        <div class="mt-14 stagger grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-100 rounded-3xl overflow-hidden border border-ink-100">
+        <div class="mt-14 stagger grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-100 rounded-lg overflow-hidden border border-ink-100">
             @foreach ($features as $i => $f)
                 <article class="group relative bg-white p-8 lg:p-10 hover:bg-brand-50/30 transition-colors">
-                    <span class="grid place-items-center w-12 h-12 rounded-2xl bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
+                    <span class="grid place-items-center w-12 h-12 rounded-md bg-navy-900 text-white group-hover:bg-brand-600 group-hover:rotate-[-6deg] transition">
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                             {!! $icons[$f['icon']] !!}
                         </svg>
@@ -963,7 +963,7 @@
         @endphp
         <div class="mt-14 stagger grid lg:grid-cols-3 gap-6">
             @foreach ($reviews as $r)
-                <figure class="group relative flex flex-col rounded-3xl bg-white p-8 border border-ink-100 hover:-translate-y-1 hover:shadow-xl transition">
+                <figure class="group relative flex flex-col rounded-lg bg-white p-8 border border-ink-100 hover:-translate-y-1 hover:shadow-xl transition">
                     <svg class="w-10 h-10 text-brand-600/15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 7H5a2 2 0 00-2 2v3a2 2 0 002 2h2v3l4-3v-7H9zm10 0h-4a2 2 0 00-2 2v3a2 2 0 002 2h2v3l4-3v-7h-2z"/></svg>
                     <blockquote class="mt-4 text-navy-800 leading-relaxed flex-1">{{ $r['body'] }}</blockquote>
                     <figcaption class="mt-6 flex items-center gap-3 pt-6 border-t border-ink-100">
@@ -1032,7 +1032,7 @@
         @endphp
         <div class="mt-14 stagger grid md:grid-cols-3 gap-6">
             @foreach ($posts as $p)
-                <a href="#" class="group block rounded-3xl overflow-hidden border border-ink-100 bg-white hover:-translate-y-1 hover:shadow-xl transition">
+                <a href="#" class="group block rounded-lg overflow-hidden border border-ink-100 bg-white hover:-translate-y-1 hover:shadow-xl transition">
                     <div class="aspect-[16/10] relative overflow-hidden bg-ink-100">
                         <img src="{{ $p['img'] }}" alt="{{ $p['alt'] }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-gradient-to-t from-navy-950/40 via-transparent to-transparent"></div>
@@ -1078,14 +1078,14 @@
 
             {{-- Big premium store buttons --}}
             <div class="reveal reveal-delay-3 mt-8 flex flex-col sm:flex-row gap-3">
-                <a href="#" class="group flex items-center gap-3 rounded-2xl bg-white text-navy-900 px-6 py-4 shadow-[0_20px_40px_-15px_rgba(0,0,0,.4)] hover:-translate-y-0.5 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,.5)] transition">
+                <a href="#" class="group flex items-center gap-3 rounded-md bg-white text-navy-900 px-6 py-4 shadow-[0_20px_40px_-15px_rgba(0,0,0,.4)] hover:-translate-y-0.5 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,.5)] transition">
                     <img src="/images/app-store.svg" alt="" class="w-8 h-8" />
                     <div class="text-left">
                         <p class="text-[10px] uppercase tracking-[.18em] text-ink-500">Download on the</p>
                         <p class="text-base font-bold leading-none mt-0.5">App Store</p>
                     </div>
                 </a>
-                <a href="#" class="group flex items-center gap-3 rounded-2xl bg-white text-navy-900 px-6 py-4 shadow-[0_20px_40px_-15px_rgba(0,0,0,.4)] hover:-translate-y-0.5 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,.5)] transition">
+                <a href="#" class="group flex items-center gap-3 rounded-md bg-white text-navy-900 px-6 py-4 shadow-[0_20px_40px_-15px_rgba(0,0,0,.4)] hover:-translate-y-0.5 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,.5)] transition">
                     <img src="/images/google-play.svg" alt="" class="w-8 h-8" />
                     <div class="text-left">
                         <p class="text-[10px] uppercase tracking-[.18em] text-ink-500">Get it on</p>
@@ -1112,15 +1112,15 @@
 
             {{-- Reach us cards --}}
             <div class="reveal reveal-delay-5 mt-8 grid sm:grid-cols-3 gap-3">
-                <a href="tel:+17045550127" class="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur p-4 hover:bg-white/[0.08] transition">
+                <a href="tel:+17045550127" class="rounded-md border border-white/10 bg-white/[0.04] backdrop-blur p-4 hover:bg-white/[0.08] transition">
                     <p class="text-[10px] uppercase tracking-[.18em] text-white/50 font-semibold">Sales</p>
                     <p class="mt-1 text-sm font-semibold text-white">(704) 555-0127</p>
                 </a>
-                <a href="mailto:support@auxilionetwork.com" class="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur p-4 hover:bg-white/[0.08] transition">
+                <a href="mailto:support@auxilionetwork.com" class="rounded-md border border-white/10 bg-white/[0.04] backdrop-blur p-4 hover:bg-white/[0.08] transition">
                     <p class="text-[10px] uppercase tracking-[.18em] text-white/50 font-semibold">Support</p>
                     <p class="mt-1 text-sm font-semibold text-white truncate">support@auxilio…</p>
                 </a>
-                <div class="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur p-4">
+                <div class="rounded-md border border-white/10 bg-white/[0.04] backdrop-blur p-4">
                     <p class="text-[10px] uppercase tracking-[.18em] text-white/50 font-semibold">HQ</p>
                     <p class="mt-1 text-sm font-semibold text-white">San Francisco</p>
                 </div>
@@ -1129,7 +1129,7 @@
 
         {{-- RIGHT: glass form card with gold/red trim --}}
         <div class="lg:col-span-7">
-            <form action="/contact" method="POST" class="reveal reveal-right relative rounded-3xl border border-white/10 bg-navy-900 p-8 lg:p-10 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)]">
+            <form action="/contact" method="POST" class="reveal reveal-right relative rounded-lg border border-white/10 bg-navy-900 p-8 lg:p-10 shadow-[0_40px_80px_-20px_rgba(0,0,0,.6)]">
                 @csrf
 
                 <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.2em] text-gold-300">
@@ -1142,7 +1142,7 @@
                 <p class="mt-2 text-sm text-white/55 leading-relaxed">Tell us where you are and what you're trying to solve — we'll point you to the right thing in the app, or get a human on the line.</p>
 
                 @if (session('contact_status'))
-                    <div class="mt-6 flex items-start gap-3 rounded-2xl border border-emerald-300/40 bg-emerald-400/10 p-4 text-sm text-emerald-100">
+                    <div class="mt-6 flex items-start gap-3 rounded-md border border-emerald-300/40 bg-emerald-400/10 p-4 text-sm text-emerald-100">
                         <svg class="w-5 h-5 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                         {{ session('contact_status') }}
                     </div>
@@ -1211,7 +1211,7 @@
 
         {{-- Legend (bottom) --}}
         <div class="absolute bottom-4 left-4 right-4 z-[500] flex justify-center pointer-events-none">
-            <div class="pointer-events-auto inline-flex flex-wrap gap-2 rounded-2xl bg-white/95 backdrop-blur shadow-lg ring-1 ring-ink-100 p-2">
+            <div class="pointer-events-auto inline-flex flex-wrap gap-2 rounded-md bg-white/95 backdrop-blur shadow-lg ring-1 ring-ink-100 p-2">
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> SC</span>
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-orange-500"></span> RC</span>
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-red-600"></span> H</span>
@@ -1242,7 +1242,7 @@
         </div>
 
         <div class="absolute bottom-4 left-4 right-4 z-[500] flex justify-center pointer-events-none">
-            <div class="pointer-events-auto inline-flex items-center gap-2 rounded-2xl bg-white/95 backdrop-blur shadow-lg ring-1 ring-ink-100 px-3 py-2">
+            <div class="pointer-events-auto inline-flex items-center gap-2 rounded-md bg-white/95 backdrop-blur shadow-lg ring-1 ring-ink-100 px-3 py-2">
                 <span class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700"><span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Registered Sex Offender</span>
                 <span class="text-ink-300">·</span>
                 <span class="text-xs text-ink-500">State Registry</span>
@@ -1612,7 +1612,7 @@
         var body = document.getElementById('incident-modal-body');
         if (!body) return;
         var html = '';
-        html += '<div class="flex items-start gap-4 rounded-2xl border border-ink-100 bg-white p-4 shadow-sm">';
+        html += '<div class="flex items-start gap-4 rounded-md border border-ink-100 bg-white p-4 shadow-sm">';
         html += '  <img src="'+p.photo+'" alt="'+p.name+'" class="w-20 h-20 rounded-xl object-cover" loading="lazy" />';
         html += '  <div class="text-sm leading-relaxed flex-1 min-w-0">';
         html += '    <p class="font-bold text-navy-900 flex items-center gap-1.5">'+p.name+' <span class="inline-flex w-2 h-2 rounded-full bg-blue-500"></span></p>';
