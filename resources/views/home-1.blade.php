@@ -944,7 +944,7 @@
                                     // Mosley (west → center): south, right, north — block detour
                                     ['id'=>'dispatchRoute6', 'd'=>'M 20 125 L 20 165 Q 20 170 25 170 L 145 170 Q 150 170 150 165 L 150 130 Q 150 125 155 125 L 200 125','sc'=>'rgba(59,130,246,.7)', 'gc'=>'rgba(59,130,246,.18)'],
                                     // Reyes (south → center): straight up the avenue to the victim
-                                    ['id'=>'dispatchRoute7', 'd'=>'M 200 235 L 200 200 Q 200 195 195 195 L 165 195 Q 160 195 160 190 L 160 145 Q 160 140 165 140 L 195 140 Q 200 140 200 135 L 200 125','sc'=>'rgba(244,196,65,.7)', 'gc'=>'rgba(244,196,65,.18)'],
+                                    ['id'=>'dispatchRoute7', 'd'=>'M 200 235 L 200 125', 'sc'=>'rgba(244,196,65,.7)', 'gc'=>'rgba(244,196,65,.18)'],
                                 ];
                             @endphp
                             @foreach ($routes as $r)
