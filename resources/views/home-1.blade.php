@@ -39,7 +39,7 @@
                 <span class="grid place-items-center h-11 w-11 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
                     <img src="/images/auxilio-user.png" alt="" class="h-9 w-auto" />
                 </span>
-                <img src="/images/auxilio-logo.png" alt="Auxilio" class="h-5 sm:h-6 w-auto brightness-0 invert" />
+                <img src="/images/auxilio-logo-white.png" alt="Auxilio" class="h-5 sm:h-6 w-auto" />
             </a>
         </div>
 
@@ -1276,7 +1276,7 @@
                     <span class="grid place-items-center h-12 w-12 rounded-md bg-white shadow-sm transition-transform group-hover:rotate-[-4deg]">
                         <img src="/images/auxilio-user.png" alt="" class="h-10 w-auto" />
                     </span>
-                    <img src="/images/auxilio-logo.png" alt="Auxilio" class="h-6 w-auto brightness-0 invert" />
+                    <img src="/images/auxilio-logo-white.png" alt="Auxilio" class="h-6 w-auto" />
                 </a>
                 <p class="mt-5 max-w-md text-navy-300/80 leading-relaxed">
                     Real-time alerts, one-tap SOS, verified Super Agents, and live case tracking — Auxilio User is a personal safety companion built for the people you love.
