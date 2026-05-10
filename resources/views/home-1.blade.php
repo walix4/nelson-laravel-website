@@ -144,11 +144,11 @@
             </p>
 
             {{-- store buttons --}}
-            <div class="reveal reveal-delay-4 mt-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-[280px]">
+            <div class="reveal reveal-delay-4 mt-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-[320px]">
                 {{-- Google Play --}}
                 <a href="#" class="group inline-flex items-center justify-start gap-2 rounded-md bg-navy-900 hover:bg-navy-800 text-white px-3 py-2.5 shadow-sm hover:shadow-lg transition">
                     <img src="/images/google-play.svg" alt="" class="w-6 h-6 shrink-0" />
-                    <div class="text-left">
+                    <div class="text-left whitespace-nowrap">
                         <p class="text-[10px] uppercase tracking-[.18em] text-white/80">Get it on</p>
                         <p class="text-base font-semibold leading-none -mt-0.5">Google Play</p>
                     </div>
@@ -156,7 +156,7 @@
                 {{-- Apple App Store --}}
                 <a href="#" class="group inline-flex items-center justify-start gap-2 rounded-md bg-red-600 hover:bg-red-700 text-white px-3 py-2.5 shadow-sm hover:shadow-lg transition">
                     <img src="/images/app-store.svg" alt="" class="w-6 h-6 shrink-0" />
-                    <div class="text-left">
+                    <div class="text-left whitespace-nowrap">
                         <p class="text-[10px] uppercase tracking-[.18em] text-white/80">Get it on</p>
                         <p class="text-base font-semibold leading-none -mt-0.5">App Store</p>
                     </div>
@@ -1080,14 +1080,14 @@
             <div class="reveal reveal-delay-3 mt-8 flex flex-col sm:flex-row gap-3">
                 <a href="#" class="group flex items-center gap-3 rounded-md bg-white text-navy-900 px-6 py-4 shadow-[0_20px_40px_-15px_rgba(0,0,0,.4)] hover:-translate-y-0.5 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,.5)] transition">
                     <img src="/images/app-store.svg" alt="" class="w-8 h-8" />
-                    <div class="text-left">
+                    <div class="text-left whitespace-nowrap">
                         <p class="text-[10px] uppercase tracking-[.18em] text-ink-500">Download on the</p>
                         <p class="text-base font-bold leading-none mt-0.5">App Store</p>
                     </div>
                 </a>
                 <a href="#" class="group flex items-center gap-3 rounded-md bg-white text-navy-900 px-6 py-4 shadow-[0_20px_40px_-15px_rgba(0,0,0,.4)] hover:-translate-y-0.5 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,.5)] transition">
                     <img src="/images/google-play.svg" alt="" class="w-8 h-8" />
-                    <div class="text-left">
+                    <div class="text-left whitespace-nowrap">
                         <p class="text-[10px] uppercase tracking-[.18em] text-ink-500">Get it on</p>
                         <p class="text-base font-bold leading-none mt-0.5">Google Play</p>
                     </div>
