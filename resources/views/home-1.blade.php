@@ -128,7 +128,7 @@
         {{-- RIGHT: heading + CTAs --}}
         <div class="order-1 lg:order-2 lg:col-span-5 lg:pl-2">
             <div>
-            <h1 class="reveal reveal-delay-1 font-display text-3xl sm:text-4xl lg:text-[40px] xl:text-[48px] leading-[1.1] tracking-tight text-navy-900">
+            <h1 class="reveal reveal-delay-1 font-display font-extrabold text-3xl sm:text-4xl lg:text-[40px] xl:text-[48px] leading-[1.1] tracking-tight text-navy-900">
                 Designed for<br/>
                 safety of the families,<br/>
                 <span class="text-brand-600">making it accessible</span><br/>
