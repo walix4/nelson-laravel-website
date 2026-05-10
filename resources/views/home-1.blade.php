@@ -655,21 +655,6 @@
          REPORT FLOW — 5-step capture (moved from home)
     ========================================================================--}}
     <section id="how" class="relative overflow-hidden bg-white">
-        {{-- Header band (white) --}}
-        <div class="relative bg-white text-navy-900">
-            <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-24">
-                <div class="max-w-3xl">
-                    <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-brand-600">Create emergency · 5 steps</p>
-                    <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight">
-                        From siren <span class="text-brand-600">to signal</span> in seconds.
-                    </h2>
-                    <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-700/80 leading-relaxed max-w-2xl">
-                        Five guided steps. Each captures exactly the detail responders need — and skips what you don't have. Tap through and Auxilio takes care of the rest.
-                    </p>
-                </div>
-            </div>
-        </div>
-
         @php
             $flow = [
                 ['n' => '01', 'tag' => 'Categorize', 'title' => 'Pick the urgency &amp; category.',                          'body' => 'Choose Urgent or Regular, then tap the type — Sexual Crimes, Robbery, Physical Violence, or Homicide. Auxilio routes the priority for you.', 'img' => '/images/screen-categorize.png', 'pills' => ['Urgent','Regular'], 'chips' => ['Sexual Crimes','Robbery','Physical Violence','Homicide']],
