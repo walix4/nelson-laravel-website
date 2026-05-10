@@ -10,10 +10,14 @@
     $labelSide = $labelSide ?? 'right';
     $rating = $rating ?? '4.9';
 @endphp
-<div class="absolute" style="left: calc({{ $x }}/400 * 100%); top: calc({{ $y }}/250 * 100%); transform: translate(-50%, -50%);">
+@php
+    $glowHex = match($accent) { 'brand' => 'rgba(228,67,82,.5)', 'blue' => 'rgba(59,130,246,.5)', default => 'rgba(244,196,65,.45)' };
+    $ringHex = match($accent) { 'brand' => '#f06f7c', 'blue' => '#60a5fa', default => '#fcd34d' };
+@endphp
+<div class="absolute" style="left: calc({{ $x }}/400 * 100%); top: calc({{ $y }}/250 * 100%); transform: translate(-50%, -50%); z-index: 30;">
     <div class="relative">
-        <div class="absolute -inset-1 rounded-full bg-{{ $glowColor }} blur-md"></div>
-        <div class="relative w-12 h-12 rounded-full ring-2 ring-{{ $ringColor }} ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-navy-800 shadow-lg">
+        <div class="absolute -inset-1 rounded-full blur-md" style="background:{{ $glowHex }};"></div>
+        <div class="relative w-12 h-12 rounded-full ring-offset-2 ring-offset-[#0d1429] overflow-hidden bg-navy-800 shadow-lg" style="box-shadow: 0 0 0 2px {{ $ringHex }}, 0 4px 12px rgba(0,0,0,.4);">
             <svg viewBox="0 0 64 64" class="w-full h-full">
                 <defs>
                     <radialGradient id="officerBg{{ $key }}" cx="50%" cy="35%" r="65%">
