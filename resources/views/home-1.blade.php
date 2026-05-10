@@ -144,7 +144,7 @@
             </p>
 
             {{-- store buttons --}}
-            <div class="reveal reveal-delay-4 mt-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-[320px]">
+            <div class="reveal reveal-delay-4 mt-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5" style="max-width:340px;">
                 {{-- Google Play --}}
                 <a href="#" class="group inline-flex items-center justify-start gap-2 rounded-md bg-navy-900 hover:bg-navy-800 text-white px-3 py-2.5 shadow-sm hover:shadow-lg transition">
                     <img src="/images/google-play.svg" alt="" class="w-6 h-6 shrink-0" />
