@@ -32,7 +32,7 @@
 {{-- =======================================================================
      NAV
 ========================================================================--}}
-<header data-nav class="fixed inset-x-0 top-0 z-50 bg-[#fc0404] text-white shadow-md">
+<header data-nav style="background-color:#fc0404" class="fixed inset-x-0 top-0 z-50 text-white">
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
         <div class="flex-1 flex items-center">
             <a href="#top" class="flex items-center gap-3 group">
