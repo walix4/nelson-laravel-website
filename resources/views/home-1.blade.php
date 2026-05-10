@@ -106,8 +106,8 @@
                     @include('partials.hero-hands')
                 </div>
 
-                {{-- SOS · LIVE pill (top-right) --}}
-                <div class="reveal reveal-delay-2 absolute top-1 right-1 sm:top-3 sm:right-3 z-20 inline-flex items-center gap-2 rounded-full bg-red-600 text-white px-3 py-1.5 shadow-lg shadow-red-600/40 sos-glow">
+                {{-- SOS · LIVE pill (top-right of phone) --}}
+                <div class="reveal reveal-delay-2 absolute z-20 inline-flex items-center gap-2 rounded-full bg-red-600 text-white px-3 py-1.5 shadow-lg shadow-red-600/40 sos-glow" style="top:8%; right:22%;">
                     <span class="relative inline-flex w-1.5 h-1.5 rounded-full bg-white pulse-dot text-white"></span>
                     <span class="text-[11px] font-bold tracking-widest uppercase">SOS · Live</span>
                 </div>
