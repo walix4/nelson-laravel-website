@@ -141,12 +141,17 @@
             </div>
         </div>
 
-        {{-- RIGHT: 3D Orbital scene — concentric rings + central hub + role nodes --}}
+        {{-- RIGHT: 3D Orbital scene over dotted world map backdrop --}}
         <div class="lg:col-span-6 relative">
             <div class="reveal reveal-right orbit-scene relative w-full max-w-[680px] mx-auto" style="aspect-ratio: 1 / 1;">
 
                 {{-- ambient glow halo --}}
                 <div class="absolute inset-0 -z-10 rounded-full blur-3xl opacity-70" style="background:radial-gradient(circle, rgba(251,6,6,.18) 0%, rgba(244,196,65,.12) 40%, transparent 70%);"></div>
+
+                {{-- DOTTED WORLD MAP BACKDROP — sits behind the orbital scene --}}
+                <div class="absolute inset-0 opacity-65" aria-hidden="true">
+                    <div class="world-dotmap absolute inset-0" style="background-size: 9px 9px;"></div>
+                </div>
 
                 {{-- 3D-tilted stage --}}
                 <div class="orbit-stage absolute inset-0">
