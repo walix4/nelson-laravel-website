@@ -9,7 +9,7 @@
     <title>Auxilio User — Your Safety, Your Control</title>
     <link rel="icon" type="image/png" href="images/auxilio-user.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="preload" as="style" href="build/assets/app-AvS4AbNx.css" /><link rel="modulepreload" as="script" href="build/assets/app-D5TF93Nr.js" /><link rel="stylesheet" href="build/assets/app-AvS4AbNx.css" /><script type="module" src="build/assets/app-D5TF93Nr.js"></script>    <style>
+    <link rel="preload" as="style" href="build/assets/app-C5qSvGDY.css" /><link rel="modulepreload" as="script" href="build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="build/assets/app-C5qSvGDY.css" /><script type="module" src="build/assets/app-C2cgr6mz.js"></script>    <style>
         [data-nav].is-scrolled {
             box-shadow: 0 8px 24px -12px rgba(116, 25, 33, .45);
         }
@@ -90,7 +90,7 @@
         <div class="absolute -bottom-40 -right-20 w-[600px] h-[600px] rounded-full blur-3xl opacity-60" style="background: radial-gradient(circle, rgba(251,6,6,.10) 0%, transparent 65%);"></div>
     </div>
 
-    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-14 sm:pt-20 lg:pt-24 pb-16 sm:pb-20 lg:pb-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-16 sm:pt-24 lg:pt-32 pb-20 sm:pb-28 lg:pb-36 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center min-h-[88vh]">
 
         
         <div class="lg:col-span-6">
@@ -122,105 +122,114 @@
 
         
         <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-right relative w-full max-w-[640px] mx-auto" style="aspect-ratio: 1 / 1;">
+            <div class="reveal reveal-right orbit-scene relative w-full max-w-[680px] mx-auto" style="aspect-ratio: 1 / 1;">
 
                 
-                <div class="absolute inset-0 -z-10 rounded-full blur-3xl opacity-60" style="background:radial-gradient(circle, rgba(244,196,65,.30) 0%, transparent 65%);"></div>
+                <div class="absolute inset-0 -z-10 rounded-full blur-3xl opacity-70" style="background:radial-gradient(circle, rgba(251,6,6,.18) 0%, rgba(244,196,65,.12) 40%, transparent 70%);"></div>
 
                 
-                <div class="globe-orb absolute inset-0">
+                <div class="orbit-stage absolute inset-0">
+
                     
-                    <div class="world-dotmap absolute inset-0" aria-hidden="true" style="background-size: 11px 11px; -webkit-mask-size: 200% 200%; mask-size: 200% 200%; -webkit-mask-position: 36% 50%; mask-position: 36% 50%;"></div>
+                    <div class="orbit-ring r-1"></div>
+                    <div class="orbit-ring r-2"></div>
+                    <div class="orbit-ring r-3"></div>
+                    <div class="orbit-ring r-4"></div>
+
                     
-                    <div class="globe-shade"></div>
-                    <div class="globe-rim"></div>
-                </div>
-
-                
-                <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none z-[5]" aria-hidden="true">
-                    <g stroke="#FB0606" stroke-width="1.4" fill="none" opacity=".55">
-                        
-                        <line class="map-line" x1="500" y1="500" x2="220" y2="320"/>   
-                        <line class="map-line" x1="500" y1="500" x2="500" y2="240"/>   
-                        <line class="map-line" x1="500" y1="500" x2="710" y2="300"/>   
-                        <line class="map-line" x1="500" y1="500" x2="640" y2="540"/>   
-                        <line class="map-line" x1="500" y1="500" x2="320" y2="730"/>   
-                        <line class="map-line" x1="500" y1="500" x2="780" y2="760"/>   
-                    </g>
-                </svg>
-
-                
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                    <div class="relative grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.55)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
-                        <svg class="w-7 h-7" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
+                    <div class="orbit-hub">
+                        <svg class="w-1/2 h-1/2 relative z-10" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
                         </svg>
-                        <span class="absolute inset-0 rounded-full map-pin" aria-hidden="true"></span>
                     </div>
-                </div>
 
-                
-                                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:32%;left:22%;">
-                        
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)] pin-dot-cycle" style="background:#FB0606; animation-delay:0s;"></span>
-                        
-                        <span class="role-tag  absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 left-5 top-1/2 -translate-y-1/2" style="animation-delay:0s;">
-                            Police Officer
-                            
-                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -left-1 border-l border-b"></span>
-                        </span>
-                    </div>
-                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:24%;left:50%;">
-                        
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)] pin-dot-cycle" style="background:#FB0606; animation-delay:1.5s;"></span>
-                        
-                        <span class="role-tag  absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 left-5 top-1/2 -translate-y-1/2" style="animation-delay:1.5s;">
-                            911 Dispatch
-                            
-                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -left-1 border-l border-b"></span>
-                        </span>
-                    </div>
-                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:30%;left:71%;">
-                        
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)] pin-dot-cycle" style="background:#FB0606; animation-delay:3s;"></span>
-                        
-                        <span class="role-tag role-tag-left absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 right-5 top-1/2 -translate-y-1/2" style="animation-delay:3s;">
-                            First Responder
-                            
-                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -right-1 border-r border-t"></span>
-                        </span>
-                    </div>
-                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:54%;left:64%;">
-                        
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)] pin-dot-cycle" style="background:#FB0606; animation-delay:4.5s;"></span>
-                        
-                        <span class="role-tag role-tag-left absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 right-5 top-1/2 -translate-y-1/2" style="animation-delay:4.5s;">
-                            Trusted Contact
-                            
-                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -right-1 border-r border-t"></span>
-                        </span>
-                    </div>
-                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:73%;left:32%;">
-                        
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)] pin-dot-cycle" style="background:#FB0606; animation-delay:6s;"></span>
-                        
-                        <span class="role-tag  absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 left-5 top-1/2 -translate-y-1/2" style="animation-delay:6s;">
-                            Super Agent
-                            
-                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -left-1 border-l border-b"></span>
-                        </span>
-                    </div>
-                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:76%;left:78%;">
-                        
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)] pin-dot-cycle" style="background:#FB0606; animation-delay:7.5s;"></span>
-                        
-                        <span class="role-tag role-tag-left absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 right-5 top-1/2 -translate-y-1/2" style="animation-delay:7.5s;">
-                            EMT
-                            
-                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 -right-1 border-r border-t"></span>
-                        </span>
-                    </div>
+                    
+                    
+                    
+                    <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none">
+                                                                                <line class="orbit-line" x1="50" y1="50" x2="8.65352468542" y2="34.951113693671"/>
+                                                                                <line class="orbit-line" x1="50" y1="50" x2="50" y2="4"/>
+                                                                                <line class="orbit-line" x1="50" y1="50" x2="91.34647531458" y2="34.951113693671"/>
+                                                                                <line class="orbit-line" x1="50" y1="50" x2="93.225860556152" y2="65.732926592981"/>
+                                                                                <line class="orbit-line" x1="50" y1="50" x2="50" y2="96"/>
+                                                                                <line class="orbit-line" x1="50" y1="50" x2="8.65352468542" y2="65.048886306329"/>
+                                            </svg>
+
+                    
+                                                                    <div class="orbit-node" style="top:34.951113693671%; left:8.65352468542%; animation-delay:0s;">
+                            <div class="orbit-node-card">
+                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+                                </span>
+                                <span class="text-xs font-bold text-navy-950">Police Officer</span>
+                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                                </span>
                             </div>
+                        </div>
+                                                                    <div class="orbit-node" style="top:4%; left:50%; animation-delay:1.5s;">
+                            <div class="orbit-node-card">
+                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                </span>
+                                <span class="text-xs font-bold text-navy-950">911 Dispatch</span>
+                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                                </span>
+                            </div>
+                        </div>
+                                                                    <div class="orbit-node" style="top:34.951113693671%; left:91.34647531458%; animation-delay:3s;">
+                            <div class="orbit-node-card">
+                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                                </span>
+                                <span class="text-xs font-bold text-navy-950">First Responder</span>
+                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                                </span>
+                            </div>
+                        </div>
+                                                                    <div class="orbit-node" style="top:65.732926592981%; left:93.225860556152%; animation-delay:4.5s;">
+                            <div class="orbit-node-card">
+                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0"/></svg>
+                                </span>
+                                <span class="text-xs font-bold text-navy-950">Super Agent</span>
+                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                                </span>
+                            </div>
+                        </div>
+                                                                    <div class="orbit-node" style="top:96%; left:50%; animation-delay:6s;">
+                            <div class="orbit-node-card">
+                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.7A8.99 8.99 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                                </span>
+                                <span class="text-xs font-bold text-navy-950">Trusted Contact</span>
+                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                                </span>
+                            </div>
+                        </div>
+                                                                    <div class="orbit-node" style="top:65.048886306329%; left:8.65352468542%; animation-delay:7.5s;">
+                            <div class="orbit-node-card">
+                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <span class="text-xs font-bold text-navy-950">EMT</span>
+                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                                </span>
+                            </div>
+                        </div>
+                                    </div>
+            </div>
         </div>
     </div>
 </section>
@@ -1015,7 +1024,7 @@
 
                     <div class="relative h-full flex flex-col">
                         
-                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;">
+                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;" data-counter data-counter-format="seconds" data-counter-to="30" data-counter-final="30s">
                             30s
                         </p>
                         
@@ -1058,7 +1067,7 @@
 
                     <div class="relative h-full flex flex-col">
                         
-                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;">
+                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;" data-counter data-counter-format="schedule" data-counter-to="24" data-counter-final="24/7">
                             24/7
                         </p>
                         
@@ -1101,7 +1110,7 @@
 
                     <div class="relative h-full flex flex-col">
                         
-                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;">
+                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;" data-counter data-counter-format="millions" data-counter-to="1000000" data-counter-final="1M+">
                             1M+
                         </p>
                         
@@ -1144,7 +1153,7 @@
 
                     <div class="relative h-full flex flex-col">
                         
-                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;">
+                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:#FB0606;" data-counter data-counter-format="percent" data-counter-to="100" data-counter-final="100%">
                             100%
                         </p>
                         
@@ -1235,10 +1244,16 @@
             <div class="reveal reveal-right relative rounded-3xl p-6 lg:p-8 shadow-[0_50px_120px_-40px_rgba(12,17,38,.35)] border border-ink-100 overflow-hidden" style="background:linear-gradient(180deg,#fafbff 0%,#ffffff 60%);">
 
                 
-                <div class="absolute -top-3 right-6 lg:right-10 z-30">
-                    <div class="ai-chip-float inline-flex items-center gap-1.5 rounded-full text-white px-4 py-2 text-xs font-semibold shadow-[0_18px_30px_-10px_rgba(251,6,6,.6)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
-                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
+                <div class="absolute -top-5 right-6 lg:right-10 z-30">
+                    
+                    <span class="ai-chip-halo absolute inset-0 rounded-full blur-xl -z-10" aria-hidden="true" style="background:#FB0606;"></span>
+                    <div class="ai-chip-float relative inline-flex items-center gap-2 rounded-full text-white px-5 py-2.5 text-sm font-bold ring-4 ring-white shadow-[0_22px_40px_-10px_rgba(251,6,6,.75)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                        <svg class="w-4 h-4 metric-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
                         AI Powered
+                        <span class="relative flex w-2 h-2" aria-hidden="true">
+                            <span class="absolute inline-flex w-2 h-2 rounded-full bg-white opacity-70 animate-ping"></span>
+                            <span class="relative inline-flex w-2 h-2 rounded-full bg-white"></span>
+                        </span>
                     </div>
                 </div>
 
@@ -1647,9 +1662,10 @@
                     <summary class="flex items-center justify-between gap-5 cursor-pointer px-6 sm:px-8 py-5 list-none select-none">
                         
                         <div class="flex items-center gap-4 min-w-0">
-                            <span class="hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 transition-all duration-300 group-hover:border-transparent group-open:border-transparent" style="background:#fbfcff;">
-                                <svg class="w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
-                                <span class="absolute inset-0 rounded-xl opacity-0 group-open:opacity-100 transition-opacity duration-300 -z-10" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                            <span class="relative hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 overflow-hidden transition-all duration-300 group-hover:border-brand-200 group-open:border-transparent" style="background:#fbfcff;">
+                                
+                                <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                                <svg class="relative z-10 w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
                             </span>
                             <div class="min-w-0">
                                 <span class="block text-[10px] font-bold uppercase tracking-[.18em] text-navy-900/45 group-open:text-brand-600 transition-colors">
@@ -1662,9 +1678,10 @@
                         </div>
 
                         
-                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:!border-transparent group-open:!text-white" style="background:#fff;">
-                            <span class="absolute inset-0 rounded-full opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
-                            <svg class="relative w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                        <span class="relative grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 overflow-hidden text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:border-transparent group-open:!text-white" style="background:#fff;">
+                            
+                            <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
+                            <svg class="relative z-10 w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </span>
                     </summary>
 
@@ -1685,9 +1702,10 @@
                     <summary class="flex items-center justify-between gap-5 cursor-pointer px-6 sm:px-8 py-5 list-none select-none">
                         
                         <div class="flex items-center gap-4 min-w-0">
-                            <span class="hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 transition-all duration-300 group-hover:border-transparent group-open:border-transparent" style="background:#fbfcff;">
-                                <svg class="w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
-                                <span class="absolute inset-0 rounded-xl opacity-0 group-open:opacity-100 transition-opacity duration-300 -z-10" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                            <span class="relative hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 overflow-hidden transition-all duration-300 group-hover:border-brand-200 group-open:border-transparent" style="background:#fbfcff;">
+                                
+                                <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                                <svg class="relative z-10 w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
                             </span>
                             <div class="min-w-0">
                                 <span class="block text-[10px] font-bold uppercase tracking-[.18em] text-navy-900/45 group-open:text-brand-600 transition-colors">
@@ -1700,9 +1718,10 @@
                         </div>
 
                         
-                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:!border-transparent group-open:!text-white" style="background:#fff;">
-                            <span class="absolute inset-0 rounded-full opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
-                            <svg class="relative w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                        <span class="relative grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 overflow-hidden text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:border-transparent group-open:!text-white" style="background:#fff;">
+                            
+                            <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
+                            <svg class="relative z-10 w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </span>
                     </summary>
 
@@ -1723,9 +1742,10 @@
                     <summary class="flex items-center justify-between gap-5 cursor-pointer px-6 sm:px-8 py-5 list-none select-none">
                         
                         <div class="flex items-center gap-4 min-w-0">
-                            <span class="hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 transition-all duration-300 group-hover:border-transparent group-open:border-transparent" style="background:#fbfcff;">
-                                <svg class="w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/></svg>
-                                <span class="absolute inset-0 rounded-xl opacity-0 group-open:opacity-100 transition-opacity duration-300 -z-10" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                            <span class="relative hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 overflow-hidden transition-all duration-300 group-hover:border-brand-200 group-open:border-transparent" style="background:#fbfcff;">
+                                
+                                <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                                <svg class="relative z-10 w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/></svg>
                             </span>
                             <div class="min-w-0">
                                 <span class="block text-[10px] font-bold uppercase tracking-[.18em] text-navy-900/45 group-open:text-brand-600 transition-colors">
@@ -1738,9 +1758,10 @@
                         </div>
 
                         
-                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:!border-transparent group-open:!text-white" style="background:#fff;">
-                            <span class="absolute inset-0 rounded-full opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
-                            <svg class="relative w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                        <span class="relative grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 overflow-hidden text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:border-transparent group-open:!text-white" style="background:#fff;">
+                            
+                            <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
+                            <svg class="relative z-10 w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </span>
                     </summary>
 
@@ -1761,9 +1782,10 @@
                     <summary class="flex items-center justify-between gap-5 cursor-pointer px-6 sm:px-8 py-5 list-none select-none">
                         
                         <div class="flex items-center gap-4 min-w-0">
-                            <span class="hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 transition-all duration-300 group-hover:border-transparent group-open:border-transparent" style="background:#fbfcff;">
-                                <svg class="w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v4H4zM4 12h10v4H4zM4 20h7"/></svg>
-                                <span class="absolute inset-0 rounded-xl opacity-0 group-open:opacity-100 transition-opacity duration-300 -z-10" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                            <span class="relative hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 overflow-hidden transition-all duration-300 group-hover:border-brand-200 group-open:border-transparent" style="background:#fbfcff;">
+                                
+                                <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                                <svg class="relative z-10 w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v4H4zM4 12h10v4H4zM4 20h7"/></svg>
                             </span>
                             <div class="min-w-0">
                                 <span class="block text-[10px] font-bold uppercase tracking-[.18em] text-navy-900/45 group-open:text-brand-600 transition-colors">
@@ -1776,9 +1798,10 @@
                         </div>
 
                         
-                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:!border-transparent group-open:!text-white" style="background:#fff;">
-                            <span class="absolute inset-0 rounded-full opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
-                            <svg class="relative w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                        <span class="relative grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 overflow-hidden text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:border-transparent group-open:!text-white" style="background:#fff;">
+                            
+                            <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
+                            <svg class="relative z-10 w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </span>
                     </summary>
 
@@ -1799,9 +1822,10 @@
                     <summary class="flex items-center justify-between gap-5 cursor-pointer px-6 sm:px-8 py-5 list-none select-none">
                         
                         <div class="flex items-center gap-4 min-w-0">
-                            <span class="hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 transition-all duration-300 group-hover:border-transparent group-open:border-transparent" style="background:#fbfcff;">
-                                <svg class="w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0"/></svg>
-                                <span class="absolute inset-0 rounded-xl opacity-0 group-open:opacity-100 transition-opacity duration-300 -z-10" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                            <span class="relative hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 overflow-hidden transition-all duration-300 group-hover:border-brand-200 group-open:border-transparent" style="background:#fbfcff;">
+                                
+                                <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                                <svg class="relative z-10 w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0"/></svg>
                             </span>
                             <div class="min-w-0">
                                 <span class="block text-[10px] font-bold uppercase tracking-[.18em] text-navy-900/45 group-open:text-brand-600 transition-colors">
@@ -1814,9 +1838,10 @@
                         </div>
 
                         
-                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:!border-transparent group-open:!text-white" style="background:#fff;">
-                            <span class="absolute inset-0 rounded-full opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
-                            <svg class="relative w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                        <span class="relative grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 overflow-hidden text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:border-transparent group-open:!text-white" style="background:#fff;">
+                            
+                            <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
+                            <svg class="relative z-10 w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </span>
                     </summary>
 
@@ -1837,9 +1862,10 @@
                     <summary class="flex items-center justify-between gap-5 cursor-pointer px-6 sm:px-8 py-5 list-none select-none">
                         
                         <div class="flex items-center gap-4 min-w-0">
-                            <span class="hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 transition-all duration-300 group-hover:border-transparent group-open:border-transparent" style="background:#fbfcff;">
-                                <svg class="w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2zM12 18h.01"/></svg>
-                                <span class="absolute inset-0 rounded-xl opacity-0 group-open:opacity-100 transition-opacity duration-300 -z-10" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                            <span class="relative hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 overflow-hidden transition-all duration-300 group-hover:border-brand-200 group-open:border-transparent" style="background:#fbfcff;">
+                                
+                                <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                                <svg class="relative z-10 w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2zM12 18h.01"/></svg>
                             </span>
                             <div class="min-w-0">
                                 <span class="block text-[10px] font-bold uppercase tracking-[.18em] text-navy-900/45 group-open:text-brand-600 transition-colors">
@@ -1852,9 +1878,10 @@
                         </div>
 
                         
-                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:!border-transparent group-open:!text-white" style="background:#fff;">
-                            <span class="absolute inset-0 rounded-full opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
-                            <svg class="relative w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                        <span class="relative grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 overflow-hidden text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:border-transparent group-open:!text-white" style="background:#fff;">
+                            
+                            <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
+                            <svg class="relative z-10 w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </span>
                     </summary>
 
@@ -1875,9 +1902,10 @@
                     <summary class="flex items-center justify-between gap-5 cursor-pointer px-6 sm:px-8 py-5 list-none select-none">
                         
                         <div class="flex items-center gap-4 min-w-0">
-                            <span class="hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 transition-all duration-300 group-hover:border-transparent group-open:border-transparent" style="background:#fbfcff;">
-                                <svg class="w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 10V8a6 6 0 1112 0v2M5 10h14v10H5z"/></svg>
-                                <span class="absolute inset-0 rounded-xl opacity-0 group-open:opacity-100 transition-opacity duration-300 -z-10" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                            <span class="relative hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 overflow-hidden transition-all duration-300 group-hover:border-brand-200 group-open:border-transparent" style="background:#fbfcff;">
+                                
+                                <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                                <svg class="relative z-10 w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 10V8a6 6 0 1112 0v2M5 10h14v10H5z"/></svg>
                             </span>
                             <div class="min-w-0">
                                 <span class="block text-[10px] font-bold uppercase tracking-[.18em] text-navy-900/45 group-open:text-brand-600 transition-colors">
@@ -1890,9 +1918,10 @@
                         </div>
 
                         
-                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:!border-transparent group-open:!text-white" style="background:#fff;">
-                            <span class="absolute inset-0 rounded-full opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
-                            <svg class="relative w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                        <span class="relative grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 overflow-hidden text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:border-transparent group-open:!text-white" style="background:#fff;">
+                            
+                            <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
+                            <svg class="relative z-10 w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </span>
                     </summary>
 
@@ -1913,9 +1942,10 @@
                     <summary class="flex items-center justify-between gap-5 cursor-pointer px-6 sm:px-8 py-5 list-none select-none">
                         
                         <div class="flex items-center gap-4 min-w-0">
-                            <span class="hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 transition-all duration-300 group-hover:border-transparent group-open:border-transparent" style="background:#fbfcff;">
-                                <svg class="w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg>
-                                <span class="absolute inset-0 rounded-xl opacity-0 group-open:opacity-100 transition-opacity duration-300 -z-10" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                            <span class="relative hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 overflow-hidden transition-all duration-300 group-hover:border-brand-200 group-open:border-transparent" style="background:#fbfcff;">
+                                
+                                <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                                <svg class="relative z-10 w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg>
                             </span>
                             <div class="min-w-0">
                                 <span class="block text-[10px] font-bold uppercase tracking-[.18em] text-navy-900/45 group-open:text-brand-600 transition-colors">
@@ -1928,9 +1958,10 @@
                         </div>
 
                         
-                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:!border-transparent group-open:!text-white" style="background:#fff;">
-                            <span class="absolute inset-0 rounded-full opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
-                            <svg class="relative w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                        <span class="relative grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 overflow-hidden text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:border-transparent group-open:!text-white" style="background:#fff;">
+                            
+                            <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
+                            <svg class="relative z-10 w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </span>
                     </summary>
 
