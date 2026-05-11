@@ -141,80 +141,53 @@
             </div>
         </div>
 
-        {{-- RIGHT: 3D Orbital scene over dotted world map backdrop --}}
+        {{-- RIGHT: dotted world map with role cards positioned on continents --}}
         <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-right orbit-scene relative w-full max-w-[680px] mx-auto" style="aspect-ratio: 1 / 1;">
+            <div class="reveal reveal-right relative w-full max-w-[720px] mx-auto" style="aspect-ratio: 1.55 / 1;">
 
                 {{-- ambient glow halo --}}
-                <div class="absolute inset-0 -z-10 rounded-full blur-3xl opacity-70" style="background:radial-gradient(circle, rgba(251,6,6,.18) 0%, rgba(244,196,65,.12) 40%, transparent 70%);"></div>
+                <div class="absolute inset-0 -z-10 blur-3xl opacity-70" style="background:radial-gradient(ellipse at center, rgba(251,6,6,.16) 0%, rgba(244,196,65,.10) 45%, transparent 75%);"></div>
 
-                {{-- DOTTED WORLD MAP BACKDROP — sits behind the orbital scene --}}
-                <div class="absolute inset-0 opacity-65" aria-hidden="true">
-                    <div class="world-dotmap absolute inset-0" style="background-size: 9px 9px;"></div>
-                </div>
+                {{-- DOTTED WORLD MAP --}}
+                <div class="world-dotmap absolute inset-0" aria-hidden="true" style="background-size: 9px 9px;"></div>
 
-                {{-- 3D-tilted stage --}}
-                <div class="orbit-stage absolute inset-0">
+                @php
+                    // top/left % positioned to land on visible continents
+                    $nodes = [
+                        ['top'=>'34%','left'=>'18%','label'=>'Police Officer',   'icon'=>'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z'],
+                        ['top'=>'18%','left'=>'48%','label'=>'911 Dispatch',     'icon'=>'M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9'],
+                        ['top'=>'30%','left'=>'80%','label'=>'First Responder',  'icon'=>'M13 2L3 14h7l-1 8 10-12h-7l1-8z'],
+                        ['top'=>'62%','left'=>'82%','label'=>'Super Agent',      'icon'=>'M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0'],
+                        ['top'=>'82%','left'=>'52%','label'=>'Trusted Contact',  'icon'=>'M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.7A8.99 8.99 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z'],
+                        ['top'=>'66%','left'=>'12%','label'=>'EMT',              'icon'=>'M5 13l4 4L19 7'],
+                    ];
+                @endphp
 
-                    {{-- concentric orbit rings (slow rotation) --}}
-                    <div class="orbit-ring r-1"></div>
-                    <div class="orbit-ring r-2"></div>
-                    <div class="orbit-ring r-3"></div>
-                    <div class="orbit-ring r-4"></div>
-
-                    {{-- Center hub — glassy orb with Auxilio shield --}}
-                    <div class="orbit-hub">
-                        <svg class="w-1/2 h-1/2 relative z-10" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
+                {{-- Center Auxilio hub (flat, sits over the map) --}}
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                    <div class="relative grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.5)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
+                        <svg class="w-7 h-7" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
                         </svg>
+                        <span class="absolute inset-0 rounded-full map-pin" aria-hidden="true"></span>
                     </div>
-
-                    {{-- Connection lines + node cards layer (above rings, below interactivity) --}}
-                    @php
-                        // Each node: angle in degrees (0=right, 90=down), distance % from center, label, icon SVG path
-                        $nodes = [
-                            ['ang'=>200, 'dist'=>44, 'label'=>'Police Officer',  'icon'=>'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z',                                       'delay'=>'0s'],
-                            ['ang'=>270, 'dist'=>46, 'label'=>'911 Dispatch',    'icon'=>'M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9', 'delay'=>'1.5s'],
-                            ['ang'=>340, 'dist'=>44, 'label'=>'First Responder','icon'=>'M13 2L3 14h7l-1 8 10-12h-7l1-8z',                                                          'delay'=>'3s'],
-                            ['ang'=>20,  'dist'=>46, 'label'=>'Super Agent',     'icon'=>'M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0',                                       'delay'=>'4.5s'],
-                            ['ang'=>90,  'dist'=>46, 'label'=>'Trusted Contact', 'icon'=>'M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.7A8.99 8.99 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z', 'delay'=>'6s'],
-                            ['ang'=>160, 'dist'=>44, 'label'=>'EMT',             'icon'=>'M5 13l4 4L19 7',                                                                            'delay'=>'7.5s'],
-                        ];
-                    @endphp
-
-                    {{-- Connection lines: SVG full-bleed, lines from (50%,50%) to each node --}}
-                    <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none">
-                        @foreach ($nodes as $n)
-                            @php
-                                $rad = deg2rad($n['ang']);
-                                $x2 = 50 + cos($rad) * $n['dist'];
-                                $y2 = 50 + sin($rad) * $n['dist'];
-                            @endphp
-                            <line class="orbit-line" x1="50" y1="50" x2="{{ $x2 }}" y2="{{ $y2 }}"/>
-                        @endforeach
-                    </svg>
-
-                    {{-- Node cards positioned around the orbit --}}
-                    @foreach ($nodes as $n)
-                        @php
-                            $rad = deg2rad($n['ang']);
-                            $top = 50 + sin($rad) * $n['dist'];
-                            $left = 50 + cos($rad) * $n['dist'];
-                        @endphp
-                        <div class="orbit-node" style="top:{{ $top }}%; left:{{ $left }}%; animation-delay:{{ $n['delay'] }};">
-                            <div class="orbit-node-card">
-                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $n['icon'] }}"/></svg>
-                                </span>
-                                <span class="text-xs font-bold text-navy-950">{{ $n['label'] }}</span>
-                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
-                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
-                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
-                                </span>
-                            </div>
-                        </div>
-                    @endforeach
                 </div>
+
+                {{-- Role node cards on continents --}}
+                @foreach ($nodes as $i => $n)
+                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2 orbit-node" style="top:{{ $n['top'] }}; left:{{ $n['left'] }}; animation-delay:{{ $i * 0.5 }}s;">
+                        <div class="orbit-node-card">
+                            <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $n['icon'] }}"/></svg>
+                            </span>
+                            <span class="text-xs font-bold text-navy-950">{{ $n['label'] }}</span>
+                            <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                            </span>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
