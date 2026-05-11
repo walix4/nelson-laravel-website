@@ -337,7 +337,7 @@
 
     /* ---------- Realistic dotted world map (CSS dot pattern + SVG silhouette mask) ---------- */
     .world-dotmap {
-        background-image: radial-gradient(circle, #94a3b8 1.5px, transparent 1.6px);
+        background-image: radial-gradient(circle, #94a3b8 1.4px, transparent 1.5px);
         background-size: 9px 9px;
         background-position: 0 0;
         -webkit-mask-image: url('../../images/world-map.svg');
@@ -350,18 +350,73 @@
         mask-position: center;
     }
 
-    /* ---------- Hero dotted-map role tags (cycle in/out) ---------- */
+    /* ---------- 3D dotted GLOBE (orb-shaped, slow spin, spherical shading) ---------- */
+    .globe-orb {
+        position: relative;
+        clip-path: circle(50% at 50% 50%);
+        -webkit-clip-path: circle(50% at 50% 50%);
+        overflow: hidden;
+        isolation: isolate;
+    }
+    /* The map track is 200% wide so we can slide it horizontally for "rotation" */
+    .globe-track {
+        position: absolute;
+        inset: 0;
+        width: 200%;
+        height: 100%;
+        display: flex;
+        animation: globeSpin 60s linear infinite;
+        will-change: transform;
+    }
+    .globe-track > .world-dotmap {
+        position: relative;
+        width: 50%;
+        height: 100%;
+    }
+    @keyframes globeSpin {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+    }
+    /* Spherical shading: bright top-left, dark right edge */
+    .globe-shade {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+            radial-gradient(circle at 30% 25%, rgba(255,255,255,.35) 0%, transparent 35%),
+            radial-gradient(circle at 70% 75%, rgba(12,17,38,.18) 0%, transparent 60%);
+        mix-blend-mode: soft-light;
+        z-index: 2;
+    }
+    .globe-rim {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        border-radius: 50%;
+        box-shadow:
+            inset 0 0 60px rgba(12,17,38,.10),
+            inset -10px -20px 50px rgba(12,17,38,.12);
+        z-index: 3;
+    }
+
+    /* ---------- Lottie-style role tag: grows from 0 → full → fades out ---------- */
     .role-tag {
         opacity: 0;
-        transform: translateY(6px) scale(.92);
-        animation: roleTagCycle 9s ease-in-out infinite;
+        transform: translateY(0) scale(.05);
+        transform-origin: left center;
+        animation: roleTagCycle 9s cubic-bezier(.22,1,.36,1) infinite;
         will-change: opacity, transform;
     }
+    .role-tag.role-tag-left { transform-origin: right center; }
     @keyframes roleTagCycle {
-        0%, 100% { opacity: 0; transform: translateY(6px) scale(.92); }
-        8%, 28%  { opacity: 1; transform: translateY(0) scale(1); }
-        36%      { opacity: 0; transform: translateY(-4px) scale(.96); }
+        0%   { opacity: 0; transform: scale(.05); }
+        10%  { opacity: 1; transform: scale(1.04); }
+        14%  {              transform: scale(1);    }
+        30%  { opacity: 1; transform: scale(1);    }
+        38%  { opacity: 0; transform: scale(.6);   }
+        100% { opacity: 0; transform: scale(.05);  }
     }
+
     .map-pin {
         animation: mapPinPulse 2.4s ease-in-out infinite;
     }
@@ -376,6 +431,37 @@
     @keyframes mapLineDraw {
         to { stroke-dashoffset: -40; }
     }
+    /* Pin dot with subtle scale-in cycle (matches role-tag rhythm) */
+    .pin-dot-cycle {
+        animation: pinDotCycle 9s ease-in-out infinite;
+        transform-origin: center;
+    }
+    @keyframes pinDotCycle {
+        0%, 100% { transform: scale(.4); opacity: .35; }
+        12%, 32% { transform: scale(1);  opacity: 1;   }
+        40%      { transform: scale(.8); opacity: .5;  }
+    }
+
+    /* ---------- FAQ filter chips ---------- */
+    .faq-chip { transition: all .25s cubic-bezier(.4,0,.2,1); }
+    .faq-chip.is-active {
+        background: linear-gradient(135deg, #FB0606 0%, #c8202f 100%);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 10px 22px -10px rgba(251,6,6,.55);
+    }
+    /* Smooth FAQ open/close */
+    details[data-faq] > .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height .55s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
+    }
+    details[data-faq][open] > .faq-answer {
+        max-height: 600px;
+        opacity: 1;
+    }
+    details[data-faq] > summary::-webkit-details-marker { display: none; }
 
     /* ---------- Feature metric-card pulse line ---------- */
     .metric-pulse-line {

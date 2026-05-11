@@ -141,27 +141,36 @@
             </div>
         </div>
 
-        {{-- RIGHT: realistic dotted world map + animated role tags --}}
+        {{-- RIGHT: 3D dotted GLOBE (orb-shaped, Africa-centric) + Lottie-style role tags --}}
         <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-right relative w-full max-w-[680px] mx-auto" style="aspect-ratio: 1.8 / 1;">
+            <div class="reveal reveal-right relative w-full max-w-[640px] mx-auto" style="aspect-ratio: 1 / 1;">
 
-                {{-- the actual dotted world map: CSS dot pattern masked by world silhouette SVG --}}
-                <div class="world-dotmap absolute inset-0 w-full h-full" aria-hidden="true"></div>
+                {{-- soft halo behind globe --}}
+                <div class="absolute inset-0 -z-10 rounded-full blur-3xl opacity-60" style="background:radial-gradient(circle, rgba(244,196,65,.30) 0%, transparent 65%);"></div>
 
-                {{-- connection lines: full-bleed SVG sized to container, lines from center hub (50%,50%) to each pin --}}
-                <svg viewBox="0 0 1000 555" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+                {{-- the GLOBE: circular orb showing dotted continents (Africa-Europe centered), with spherical shading --}}
+                <div class="globe-orb absolute inset-0">
+                    {{-- world dotmap zoomed + offset so Africa/Europe sit in the visible orb --}}
+                    <div class="world-dotmap absolute inset-0" aria-hidden="true" style="background-size: 11px 11px; -webkit-mask-size: 200% 200%; mask-size: 200% 200%; -webkit-mask-position: 36% 50%; mask-position: 36% 50%;"></div>
+                    {{-- spherical highlight + shadow for 3D feel --}}
+                    <div class="globe-shade"></div>
+                    <div class="globe-rim"></div>
+                </div>
+
+                {{-- connection lines from center hub to each pin (overlay, full-bleed) --}}
+                <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none z-[5]" aria-hidden="true">
                     <g stroke="#FB0606" stroke-width="1.4" fill="none" opacity=".55">
-                        {{-- coordinates match pin positions below (same percent → multiplied by viewBox) --}}
-                        <line class="map-line" x1="500" y1="277" x2="220" y2="200"/>   {{-- → North America (Police Officer) --}}
-                        <line class="map-line" x1="500" y1="277" x2="520" y2="166"/>   {{-- → Europe (911 Dispatch) --}}
-                        <line class="map-line" x1="500" y1="277" x2="280" y2="416"/>   {{-- → South America (Super Agent) --}}
-                        <line class="map-line" x1="500" y1="277" x2="540" y2="333"/>   {{-- → Africa (First Responder) --}}
-                        <line class="map-line" x1="500" y1="277" x2="780" y2="222"/>   {{-- → Asia (Trusted Contact) --}}
-                        <line class="map-line" x1="500" y1="277" x2="850" y2="416"/>   {{-- → Australia (EMT) --}}
+                        {{-- coords (×10) match pin %s below --}}
+                        <line class="map-line" x1="500" y1="500" x2="220" y2="320"/>   {{-- → Police Officer (NA, partial edge) --}}
+                        <line class="map-line" x1="500" y1="500" x2="500" y2="240"/>   {{-- → 911 Dispatch (Europe) --}}
+                        <line class="map-line" x1="500" y1="500" x2="710" y2="300"/>   {{-- → First Responder (Asia) --}}
+                        <line class="map-line" x1="500" y1="500" x2="640" y2="540"/>   {{-- → Trusted Contact (M.East) --}}
+                        <line class="map-line" x1="500" y1="500" x2="320" y2="730"/>   {{-- → Super Agent (S.America edge) --}}
+                        <line class="map-line" x1="500" y1="500" x2="780" y2="760"/>   {{-- → EMT (Australia edge) --}}
                     </g>
                 </svg>
 
-                {{-- Center HUB (Auxilio core) --}}
+                {{-- Center HUB (Auxilio core) — sits on the globe sphere --}}
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                     <div class="relative grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.55)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
                         <svg class="w-7 h-7" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
@@ -171,24 +180,24 @@
                     </div>
                 </div>
 
-                {{-- Pin + role tag clusters (absolute positioned at real continent locations) --}}
+                {{-- Pins + Lottie-style role tags on visible continents --}}
                 @php
-                    // top/left % computed against the 1.8:1 container — chosen so dots sit on actual continents
+                    // top/left % chosen so dots sit on visible continents in the Africa-centric orb
                     $pins = [
-                        ['top'=>'36%','left'=>'22%','label'=>'Police Officer',   'delay'=>'0s',  'side'=>'right'], // North America
-                        ['top'=>'30%','left'=>'52%','label'=>'911 Dispatch',     'delay'=>'1.5s','side'=>'left'],  // Europe
-                        ['top'=>'75%','left'=>'28%','label'=>'Super Agent',      'delay'=>'3s',  'side'=>'right'], // South America
-                        ['top'=>'60%','left'=>'54%','label'=>'First Responder',  'delay'=>'4.5s','side'=>'right'], // Africa
-                        ['top'=>'40%','left'=>'78%','label'=>'Trusted Contact',  'delay'=>'6s',  'side'=>'left'],  // Asia
-                        ['top'=>'75%','left'=>'85%','label'=>'EMT',              'delay'=>'7.5s','side'=>'left'],  // Australia
+                        ['top'=>'32%','left'=>'22%','label'=>'Police Officer',   'delay'=>'0s',  'side'=>'right'], // NA edge (left)
+                        ['top'=>'24%','left'=>'50%','label'=>'911 Dispatch',     'delay'=>'1.5s','side'=>'right'], // Europe (top)
+                        ['top'=>'30%','left'=>'71%','label'=>'First Responder',  'delay'=>'3s',  'side'=>'left'],  // Asia (top-right)
+                        ['top'=>'54%','left'=>'64%','label'=>'Trusted Contact',  'delay'=>'4.5s','side'=>'left'],  // Middle East
+                        ['top'=>'73%','left'=>'32%','label'=>'Super Agent',      'delay'=>'6s',  'side'=>'right'], // SA edge (bottom-left)
+                        ['top'=>'76%','left'=>'78%','label'=>'EMT',              'delay'=>'7.5s','side'=>'left'],  // Australia edge (bottom-right)
                     ];
                 @endphp
                 @foreach ($pins as $p)
                     <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:{{ $p['top'] }};left:{{ $p['left'] }};">
-                        {{-- pin dot --}}
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)]" style="background:#FB0606;"></span>
-                        {{-- role label --}}
-                        <span class="role-tag absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 {{ $p['side']==='right' ? 'left-5 top-1/2 -translate-y-1/2' : 'right-5 top-1/2 -translate-y-1/2' }}" style="animation-delay:{{ $p['delay'] }};">
+                        {{-- pin dot (cycles in sync with role tag) --}}
+                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)] pin-dot-cycle" style="background:#FB0606; animation-delay:{{ $p['delay'] }};"></span>
+                        {{-- Lottie-style role label: scales from 0 → 1 → fades out --}}
+                        <span class="role-tag {{ $p['side']==='right' ? '' : 'role-tag-left' }} absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 {{ $p['side']==='right' ? 'left-5 top-1/2 -translate-y-1/2' : 'right-5 top-1/2 -translate-y-1/2' }}" style="animation-delay:{{ $p['delay'] }};">
                             {{ $p['label'] }}
                             {{-- speech-bubble tail --}}
                             <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 {{ $p['side']==='right' ? '-left-1 border-l border-b' : '-right-1 border-r border-t' }}"></span>
@@ -653,17 +662,17 @@
 </section>
 
 {{-- =======================================================================
-     WHY CHOOSE — 4-col cards on dark
+     WHY CHOOSE — 4-col cards on light
 ========================================================================--}}
-<section class="relative py-24 lg:py-32 overflow-hidden" style="background:#FB0606;">
-    <div class="pointer-events-none absolute inset-0 -z-0 opacity-60">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[600px] rounded-full blur-3xl" style="background:radial-gradient(ellipse,rgba(0,0,0,.35) 0%,transparent 60%);"></div>
+<section class="relative py-24 lg:py-32 overflow-hidden bg-white">
+    <div class="pointer-events-none absolute inset-0 -z-0 opacity-50">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[600px] rounded-full blur-3xl" style="background:radial-gradient(ellipse,rgba(251,6,6,.10) 0%,transparent 60%);"></div>
     </div>
     <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div class="max-w-3xl">
-            <p class="reveal text-xs font-semibold uppercase tracking-[.2em]" style="color:#f4c441;">Why choose Auxilio?</p>
-            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-white">
-                A safety stack designed to <span style="color:#f4c441;">act,</span> not just inform.
+            <p class="reveal text-xs font-semibold uppercase tracking-[.2em]" style="color:#FB0606;">Why choose Auxilio?</p>
+            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-navy-950">
+                A safety stack designed to <span style="color:#FB0606;">act,</span> not just inform.
             </h2>
         </div>
 
@@ -677,15 +686,15 @@
         @endphp
         <div class="mt-14 stagger grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             @foreach ($whys as $w)
-                <article class="group relative rounded-2xl border border-white/10 p-7 transition hover:-translate-y-1" style="background:linear-gradient(180deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,.01) 100%);">
+                <article class="group relative rounded-2xl border border-ink-100 bg-white p-7 transition hover:-translate-y-1 hover:shadow-[0_28px_60px_-18px_rgba(12,17,38,.18)]">
                     <span class="grid place-items-center w-12 h-12 rounded-md text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                             {!! $icons[$w['icon']] !!}
                         </svg>
                     </span>
-                    <h3 class="mt-5 text-lg font-bold text-white">{{ $w['title'] }}</h3>
-                    <p class="mt-2 text-sm text-white/60 leading-relaxed">{!! $w['body'] !!}</p>
-                    <a href="#download" class="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[.14em] transition" style="color:#f4c441;">
+                    <h3 class="mt-5 text-lg font-bold text-navy-950">{{ $w['title'] }}</h3>
+                    <p class="mt-2 text-sm text-navy-900/65 leading-relaxed">{!! $w['body'] !!}</p>
+                    <a href="#download" class="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[.14em] transition" style="color:#FB0606;">
                         Talk to Auxilio
                         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
                     </a>
@@ -814,41 +823,115 @@
 </section>
 
 {{-- =======================================================================
-     FAQ — accordion
+     FAQ — interactive accordion w/ category icons + animated reveal
 ========================================================================--}}
-<section class="relative py-24 lg:py-32 bg-white">
-    <div class="mx-auto max-w-4xl px-5 sm:px-8">
-        <div class="text-center">
-            <p class="reveal text-xs font-semibold uppercase tracking-[.2em] text-brand-600">FAQ</p>
-            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] leading-[1.05] tracking-tight text-navy-900">
-                Frequently asked questions.
+<section class="relative py-24 lg:py-32 overflow-hidden" style="background:linear-gradient(180deg,#ffffff 0%,#fbfcff 50%,#ffffff 100%);">
+    {{-- ambient brand glow --}}
+    <div class="pointer-events-none absolute inset-0 -z-0 opacity-40">
+        <div class="absolute top-1/3 -left-40 w-[520px] h-[520px] rounded-full blur-3xl" style="background:radial-gradient(circle,rgba(251,6,6,.10) 0%,transparent 65%);"></div>
+        <div class="absolute -bottom-40 -right-40 w-[560px] h-[560px] rounded-full blur-3xl" style="background:radial-gradient(circle,rgba(244,196,65,.12) 0%,transparent 65%);"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-5xl px-5 sm:px-8">
+
+        <div class="text-center max-w-2xl mx-auto">
+            <p class="reveal inline-flex items-center gap-2 text-sm font-medium text-navy-900/70">
+                <span class="grid place-items-center w-5 h-5 rounded-full" style="background:#FB0606;">
+                    <svg class="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 9a2.5 2.5 0 115 0c0 1.5-2.5 1.8-2.5 3.5M12 17h.01"/></svg>
+                </span>
+                Frequently asked
+            </p>
+            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] leading-[1.04] tracking-tight text-navy-950">
+                Everything you wanted to <span style="color:#FB0606;">ask.</span>
             </h2>
+            <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-900/65 leading-relaxed">
+                Real answers from the team building Auxilio. Tap any question to expand — or use the filter to jump to a topic.
+            </p>
+        </div>
+
+        {{-- Category filter chips --}}
+        @php
+            $faqCats = ['All','Pricing','Speed','Privacy','Network','Devices','Data'];
+        @endphp
+        <div class="reveal reveal-delay-3 mt-10 flex flex-wrap items-center justify-center gap-2" data-faq-filter>
+            @foreach ($faqCats as $i => $c)
+                <button type="button" data-faq-cat="{{ $c }}" class="faq-chip inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[.14em] text-navy-900/70 hover:border-brand-300 hover:text-brand-600 transition {{ $i===0 ? 'is-active' : '' }}">
+                    {{ $c }}
+                </button>
+            @endforeach
         </div>
 
         @php
             $faqs = [
-                ['q'=>'Is Auxilio free to use?','a'=>'Yes — every core safety feature (alerts, SOS, registry, live crime map) is free forever. We never paywall an emergency. Premium plans add concierge agents, family routing, and advanced geofences.'],
-                ['q'=>'How fast does an SOS reach a responder?','a'=>'Median time from tap to verified responder dispatch is under 30 seconds. Your location, identity, and situation are sent simultaneously to your authorized contacts and the closest available Super Agent.'],
-                ['q'=>'Who can see my location?','a'=>'Only the people you explicitly authorize. Sharing is opt-in, time-bound, and revocable in one tap. We do not sell, monetize, or share your location with anyone — including agencies — without your express consent.'],
-                ['q'=>'Where does the offender data come from?','a'=>'We pull from the National Sex Offender Public Website (NSOPW) and individual state registries (e.g., Megan&rsquo;s Law). Data is auto-refreshed; you don&rsquo;t do manual lookups.'],
-                ['q'=>'Are Super Agents actually trained?','a'=>'Yes. Every Super Agent is background-checked, identity-verified, and trained in de-escalation, first response, and case handoff. Each has a public badge number you can verify in-app.'],
-                ['q'=>'What devices does Auxilio support?','a'=>'iOS 15+ and Android 10+. Companion experiences are available on Apple Watch and Wear OS for silent SOS without unlocking the phone.'],
+                ['cat'=>'Pricing','icon'=>'M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6','q'=>'Is Auxilio free to use?','a'=>'Yes — every core safety feature (alerts, SOS, registry, live crime map) is free forever. We never paywall an emergency. Premium plans add concierge agents, family routing, and advanced geofences for $4.99/mo.'],
+                ['cat'=>'Speed','icon'=>'M13 2L3 14h7l-1 8 10-12h-7l1-8z','q'=>'How fast does an SOS reach a responder?','a'=>'Median time from tap to verified responder dispatch is under 30 seconds. Your location, identity, and situation are sent simultaneously to your authorized contacts and the closest available Super Agent.'],
+                ['cat'=>'Privacy','icon'=>'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z','q'=>'Who can see my location?','a'=>'Only the people you explicitly authorize. Sharing is opt-in, time-bound, and revocable in one tap. We do not sell, monetize, or share your location with anyone — including agencies — without your express consent.'],
+                ['cat'=>'Data','icon'=>'M4 4h16v4H4zM4 12h10v4H4zM4 20h7','q'=>'Where does the offender data come from?','a'=>'We pull from the National Sex Offender Public Website (NSOPW) and individual state registries (e.g., Megan&rsquo;s Law). Data is auto-refreshed nightly; you don&rsquo;t do manual lookups.'],
+                ['cat'=>'Network','icon'=>'M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0','q'=>'Are Super Agents actually trained?','a'=>'Yes. Every Super Agent is background-checked, identity-verified, and trained in de-escalation, first response, and case handoff. Each has a public badge number you can verify in-app, and a 4.8+ rating threshold.'],
+                ['cat'=>'Devices','icon'=>'M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2zM12 18h.01','q'=>'What devices does Auxilio support?','a'=>'iOS 15+ and Android 10+. Companion experiences are available on Apple Watch and Wear OS for silent SOS without unlocking the phone. Web dashboard for family administrators on any modern browser.'],
+                ['cat'=>'Privacy','icon'=>'M6 10V8a6 6 0 1112 0v2M5 10h14v10H5z','q'=>'Can I delete my data anytime?','a'=>'Yes. One tap in Settings → Account permanently deletes your profile, history, location traces, and any media you uploaded. We&rsquo;re GDPR &amp; CCPA compliant by default — even if you&rsquo;re not in the EU or California.'],
+                ['cat'=>'Network','icon'=>'M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z','q'=>'What if there&rsquo;s no agent near me?','a'=>'Auxilio always falls back to 911 dispatch via our verified Public Safety Answering Point (PSAP) bridge in supported regions. You&rsquo;re never left waiting — the system routes to whichever responder is fastest.'],
             ];
         @endphp
-        <div class="mt-12 space-y-3">
+
+        <div class="mt-10 space-y-3" data-faq-list>
             @foreach ($faqs as $i => $f)
-                <details data-faq class="group rounded-2xl border border-ink-100 bg-white overflow-hidden hover:border-brand-200 transition">
-                    <summary class="flex items-center justify-between gap-4 cursor-pointer px-6 py-5 list-none">
-                        <h3 class="font-semibold text-navy-900 text-base sm:text-lg">{{ $f['q'] }}</h3>
-                        <span class="grid place-items-center shrink-0 w-9 h-9 rounded-full bg-ink-50 text-navy-900 group-open:bg-brand-600 group-open:text-white transition">
-                            <svg class="w-4 h-4 transition-transform group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                <details data-faq data-faq-item="{{ $f['cat'] }}" class="faq-item group relative rounded-2xl border border-ink-100 bg-white overflow-hidden transition-all duration-300 hover:border-brand-300 hover:shadow-[0_18px_40px_-16px_rgba(251,6,6,.18)]" {{ $i===0 ? 'open' : '' }}>
+                    {{-- left red accent bar slides in when open --}}
+                    <span class="pointer-events-none absolute left-0 top-0 bottom-0 w-1 origin-top scale-y-0 group-open:scale-y-100 transition-transform duration-500" style="background:linear-gradient(180deg,#FB0606,#c8202f);"></span>
+
+                    <summary class="flex items-center justify-between gap-5 cursor-pointer px-6 sm:px-8 py-5 list-none select-none">
+                        {{-- left: number + category icon + question --}}
+                        <div class="flex items-center gap-4 min-w-0">
+                            <span class="hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 transition-all duration-300 group-hover:border-transparent group-open:border-transparent" style="background:#fbfcff;">
+                                <svg class="w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $f['icon'] }}"/></svg>
+                                <span class="absolute inset-0 rounded-xl opacity-0 group-open:opacity-100 transition-opacity duration-300 -z-10" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                            </span>
+                            <div class="min-w-0">
+                                <span class="block text-[10px] font-bold uppercase tracking-[.18em] text-navy-900/45 group-open:text-brand-600 transition-colors">
+                                    Q{{ str_pad($i+1, 2, '0', STR_PAD_LEFT) }} · {{ $f['cat'] }}
+                                </span>
+                                <h3 class="mt-0.5 font-display font-bold text-navy-950 text-base sm:text-lg leading-snug">
+                                    {{ $f['q'] }}
+                                </h3>
+                            </div>
+                        </div>
+
+                        {{-- expand icon: animated +/× — uses HEADER red #FB0606 when open --}}
+                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:!border-transparent group-open:!text-white" style="background:#fff;">
+                            <span class="absolute inset-0 rounded-full opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
+                            <svg class="relative w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 -mt-1 text-navy-700/80 leading-relaxed text-[15px]">
-                        {!! $f['a'] !!}
+
+                    <div class="faq-answer px-6 sm:px-8 pb-7 pt-1 pl-6 sm:pl-[5.25rem] text-navy-900/70 leading-relaxed text-[15px]">
+                        <div class="border-t border-ink-100 pt-4">
+                            {!! $f['a'] !!}
+                            <div class="mt-4 flex items-center gap-2 text-xs font-semibold" style="color:#FB0606;">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                Verified by the Auxilio team
+                            </div>
+                        </div>
                     </div>
                 </details>
             @endforeach
+        </div>
+
+        {{-- Still have questions? --}}
+        <div class="reveal mt-10 flex flex-col sm:flex-row items-center justify-between gap-5 rounded-2xl border border-ink-100 bg-white p-6 sm:p-7 shadow-sm">
+            <div class="flex items-center gap-4">
+                <span class="grid place-items-center w-12 h-12 rounded-xl text-white shadow-[0_10px_22px_-8px_rgba(251,6,6,.55)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.7A8.99 8.99 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                </span>
+                <div>
+                    <p class="font-display font-bold text-navy-950">Still have questions?</p>
+                    <p class="text-sm text-navy-900/60">Talk to a real human — we usually reply in under an hour.</p>
+                </div>
+            </div>
+            <a data-route href="#/contact" class="inline-flex items-center gap-2 rounded-xl text-white px-5 py-3 text-sm font-semibold transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                Contact the team
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+            </a>
         </div>
     </div>
 </section>

@@ -234,3 +234,20 @@ if (parallaxNodes.length) {
         }
     }, { passive: true });
 }
+
+// ---------- FAQ filter chips ----------
+const faqChips = document.querySelectorAll('[data-faq-cat]');
+const faqItems = document.querySelectorAll('[data-faq-item]');
+if (faqChips.length && faqItems.length) {
+    faqChips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+            const cat = chip.getAttribute('data-faq-cat');
+            faqChips.forEach((c) => c.classList.toggle('is-active', c === chip));
+            faqItems.forEach((item) => {
+                const itemCat = item.getAttribute('data-faq-item');
+                const show = cat === 'All' || itemCat === cat;
+                item.style.display = show ? '' : 'none';
+            });
+        });
+    });
+}
