@@ -9,7 +9,7 @@
     <title>Auxilio User — Your Safety, Your Control</title>
     <link rel="icon" type="image/png" href="images/auxilio-user.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="preload" as="style" href="build/assets/app-v7Qi-rR3.css" /><link rel="modulepreload" as="script" href="build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="build/assets/app-v7Qi-rR3.css" /><script type="module" src="build/assets/app-C2cgr6mz.js"></script>    <style>
+    <link rel="preload" as="style" href="build/assets/app-DSXlAz89.css" /><link rel="modulepreload" as="script" href="build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="build/assets/app-DSXlAz89.css" /><script type="module" src="build/assets/app-C2cgr6mz.js"></script>    <style>
         [data-nav].is-scrolled {
             box-shadow: 0 8px 24px -12px rgba(116, 25, 33, .45);
         }
@@ -122,119 +122,99 @@
 
         
         <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-right orbit-scene relative w-full max-w-[680px] mx-auto" style="aspect-ratio: 1 / 1;">
+            <div class="reveal reveal-right relative w-full max-w-[720px] mx-auto" style="aspect-ratio: 1.55 / 1;">
 
                 
-                <div class="absolute inset-0 -z-10 rounded-full blur-3xl opacity-70" style="background:radial-gradient(circle, rgba(251,6,6,.18) 0%, rgba(244,196,65,.12) 40%, transparent 70%);"></div>
+                <div class="absolute inset-0 -z-10 blur-3xl opacity-70" style="background:radial-gradient(ellipse at center, rgba(251,6,6,.16) 0%, rgba(244,196,65,.10) 45%, transparent 75%);"></div>
 
                 
-                <div class="absolute inset-0 opacity-65" aria-hidden="true">
-                    <div class="world-dotmap absolute inset-0" style="background-size: 9px 9px;"></div>
+                <div class="world-dotmap absolute inset-0" aria-hidden="true" style="background-size: 9px 9px;"></div>
+
+                
+                
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                    <div class="relative grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.5)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
+                        <svg class="w-7 h-7" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+                        </svg>
+                        <span class="absolute inset-0 rounded-full map-pin" aria-hidden="true"></span>
+                    </div>
                 </div>
 
                 
-                <div class="orbit-stage absolute inset-0">
-
-                    
-                    <div class="orbit-ring r-1"></div>
-                    <div class="orbit-ring r-2"></div>
-                    <div class="orbit-ring r-3"></div>
-                    <div class="orbit-ring r-4"></div>
-
-                    
-                    <div class="orbit-hub">
-                        <svg class="w-1/2 h-1/2 relative z-10" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
-                        </svg>
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2 orbit-node" style="top:34%; left:18%; animation-delay:0s;">
+                        <div class="orbit-node-card">
+                            <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
+                            </span>
+                            <span class="text-xs font-bold text-navy-950">Police Officer</span>
+                            <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                            </span>
+                        </div>
                     </div>
-
-                    
-                    
-                    
-                    <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none">
-                                                                                <line class="orbit-line" x1="50" y1="50" x2="8.65352468542" y2="34.951113693671"/>
-                                                                                <line class="orbit-line" x1="50" y1="50" x2="50" y2="4"/>
-                                                                                <line class="orbit-line" x1="50" y1="50" x2="91.34647531458" y2="34.951113693671"/>
-                                                                                <line class="orbit-line" x1="50" y1="50" x2="93.225860556152" y2="65.732926592981"/>
-                                                                                <line class="orbit-line" x1="50" y1="50" x2="50" y2="96"/>
-                                                                                <line class="orbit-line" x1="50" y1="50" x2="8.65352468542" y2="65.048886306329"/>
-                                            </svg>
-
-                    
-                                                                    <div class="orbit-node" style="top:34.951113693671%; left:8.65352468542%; animation-delay:0s;">
-                            <div class="orbit-node-card">
-                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
-                                </span>
-                                <span class="text-xs font-bold text-navy-950">Police Officer</span>
-                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
-                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
-                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
-                                </span>
-                            </div>
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2 orbit-node" style="top:18%; left:48%; animation-delay:0.5s;">
+                        <div class="orbit-node-card">
+                            <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            </span>
+                            <span class="text-xs font-bold text-navy-950">911 Dispatch</span>
+                            <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                            </span>
                         </div>
-                                                                    <div class="orbit-node" style="top:4%; left:50%; animation-delay:1.5s;">
-                            <div class="orbit-node-card">
-                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-                                </span>
-                                <span class="text-xs font-bold text-navy-950">911 Dispatch</span>
-                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
-                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
-                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
-                                </span>
-                            </div>
+                    </div>
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2 orbit-node" style="top:30%; left:80%; animation-delay:1s;">
+                        <div class="orbit-node-card">
+                            <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+                            </span>
+                            <span class="text-xs font-bold text-navy-950">First Responder</span>
+                            <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                            </span>
                         </div>
-                                                                    <div class="orbit-node" style="top:34.951113693671%; left:91.34647531458%; animation-delay:3s;">
-                            <div class="orbit-node-card">
-                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
-                                </span>
-                                <span class="text-xs font-bold text-navy-950">First Responder</span>
-                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
-                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
-                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
-                                </span>
-                            </div>
+                    </div>
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2 orbit-node" style="top:62%; left:82%; animation-delay:1.5s;">
+                        <div class="orbit-node-card">
+                            <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0"/></svg>
+                            </span>
+                            <span class="text-xs font-bold text-navy-950">Super Agent</span>
+                            <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                            </span>
                         </div>
-                                                                    <div class="orbit-node" style="top:65.732926592981%; left:93.225860556152%; animation-delay:4.5s;">
-                            <div class="orbit-node-card">
-                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0"/></svg>
-                                </span>
-                                <span class="text-xs font-bold text-navy-950">Super Agent</span>
-                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
-                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
-                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
-                                </span>
-                            </div>
+                    </div>
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2 orbit-node" style="top:82%; left:52%; animation-delay:2s;">
+                        <div class="orbit-node-card">
+                            <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.7A8.99 8.99 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                            </span>
+                            <span class="text-xs font-bold text-navy-950">Trusted Contact</span>
+                            <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                            </span>
                         </div>
-                                                                    <div class="orbit-node" style="top:96%; left:50%; animation-delay:6s;">
-                            <div class="orbit-node-card">
-                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.7A8.99 8.99 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                                </span>
-                                <span class="text-xs font-bold text-navy-950">Trusted Contact</span>
-                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
-                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
-                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
-                                </span>
-                            </div>
+                    </div>
+                                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2 orbit-node" style="top:66%; left:12%; animation-delay:2.5s;">
+                        <div class="orbit-node-card">
+                            <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            </span>
+                            <span class="text-xs font-bold text-navy-950">EMT</span>
+                            <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                            </span>
                         </div>
-                                                                    <div class="orbit-node" style="top:65.048886306329%; left:8.65352468542%; animation-delay:7.5s;">
-                            <div class="orbit-node-card">
-                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
-                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                                </span>
-                                <span class="text-xs font-bold text-navy-950">EMT</span>
-                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
-                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
-                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
-                                </span>
+                    </div>
                             </div>
-                        </div>
-                                    </div>
-            </div>
         </div>
     </div>
 </section>
