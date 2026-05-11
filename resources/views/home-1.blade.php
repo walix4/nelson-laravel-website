@@ -2183,105 +2183,94 @@
 </script>
 
 {{-- =======================================================================
-     LIVE CHAT — floating launcher + dialog (bottom-right)
+     LIVE CHAT — simple click-to-open widget (bottom-right)
 ========================================================================--}}
 <style>
     #chat-launcher { transition: transform .25s ease, box-shadow .25s ease; }
-    #chat-launcher:hover { transform: translateY(-2px) scale(1.04); }
-    #chat-launcher .pulse {
-        position:absolute; inset:0; border-radius:9999px;
-        box-shadow: 0 0 0 0 rgba(251,6,6,.55);
-        animation: chat-pulse 2s cubic-bezier(.4,0,.6,1) infinite;
-    }
-    @keyframes chat-pulse { 0%{box-shadow:0 0 0 0 rgba(251,6,6,.55);} 70%{box-shadow:0 0 0 18px rgba(251,6,6,0);} 100%{box-shadow:0 0 0 0 rgba(251,6,6,0);} }
+    #chat-launcher:hover { transform: translateY(-2px) scale(1.05); }
     #chat-dialog {
-        transform: translateY(20px) scale(.96);
+        transform: translateY(16px) scale(.97);
         opacity: 0; pointer-events: none;
-        transition: transform .28s cubic-bezier(.16,1,.3,1), opacity .2s ease;
+        transition: transform .25s cubic-bezier(.16,1,.3,1), opacity .18s ease;
     }
     #chat-dialog.is-open { transform: none; opacity: 1; pointer-events: auto; }
-    .chat-row:hover { background:#f6f7fb; }
-    .chat-row.is-active { background:#eef2f8; }
-    .chat-bubble { max-width: 78%; padding:9px 13px; border-radius:14px; font-size:13.5px; line-height:1.4; }
+    .chat-bubble { max-width: 80%; padding:9px 13px; border-radius:14px; font-size:13.5px; line-height:1.45; }
     .bubble-them { background:#f1f3f7; color:#0c1126; border-bottom-left-radius:4px; }
     .bubble-me { background:#FB0606; color:#fff; border-bottom-right-radius:4px; }
     .typing-dot { display:inline-block; width:6px; height:6px; margin:0 1px; border-radius:9999px; background:#9aa3b2; animation: typing 1.2s infinite; }
     .typing-dot:nth-child(2){ animation-delay:.15s; } .typing-dot:nth-child(3){ animation-delay:.3s; }
     @keyframes typing { 0%,60%,100%{ transform: translateY(0); opacity:.4;} 30%{ transform: translateY(-4px); opacity:1;} }
     #chat-thread::-webkit-scrollbar { width:6px; } #chat-thread::-webkit-scrollbar-thumb { background:#d6dae3; border-radius:9999px; }
-    #chat-list::-webkit-scrollbar { width:6px; } #chat-list::-webkit-scrollbar-thumb { background:#d6dae3; border-radius:9999px; }
+    .chat-topo {
+        background-image:
+            radial-gradient(circle at 22% 18%, rgba(251,6,6,.05) 0, transparent 38%),
+            radial-gradient(circle at 78% 82%, rgba(12,17,38,.04) 0, transparent 42%),
+            repeating-radial-gradient(circle at 50% 50%, rgba(251,6,6,.045) 0 1px, transparent 1px 22px),
+            repeating-radial-gradient(circle at 50% 50%, rgba(12,17,38,.035) 0 1px, transparent 1px 44px);
+    }
 </style>
 
 {{-- Floating launcher button --}}
 <button id="chat-launcher" type="button" aria-label="Open live chat"
         class="fixed bottom-6 right-6 z-[9998] grid place-items-center w-14 h-14 rounded-full text-white shadow-[0_18px_38px_-10px_rgba(251,6,6,.55)]"
         style="background:linear-gradient(135deg,#FB0606 0%,#c8202f 100%);">
-    <span class="pulse" aria-hidden="true"></span>
-    <svg class="w-6 h-6 relative" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+    {{-- chat icon (shown when closed) --}}
+    <svg id="chat-icon-open" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a8.5 8.5 0 01-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1121 12z"/>
     </svg>
-    <span id="chat-launcher-badge" class="absolute -top-1 -right-1 grid place-items-center min-w-[20px] h-5 px-1 text-[11px] font-bold rounded-full bg-white text-[#FB0606] border-2 border-white shadow">3</span>
+    {{-- close icon (shown when open) --}}
+    <svg id="chat-icon-close" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M18 6L6 18M6 6l12 12"/>
+    </svg>
 </button>
 
 {{-- Chat dialog --}}
 <div id="chat-dialog" role="dialog" aria-modal="false" aria-labelledby="chat-title"
-     class="fixed bottom-24 right-6 z-[9998] w-[min(720px,calc(100vw-2rem))] h-[min(560px,calc(100vh-8rem))] rounded-2xl bg-white border border-ink-100 shadow-[0_30px_60px_-15px_rgba(12,17,38,.35)] overflow-hidden flex">
+     class="fixed bottom-24 right-6 z-[9998] w-[min(380px,calc(100vw-2rem))] h-[min(560px,calc(100vh-8rem))] rounded-2xl bg-white border border-ink-100 shadow-[0_30px_60px_-15px_rgba(12,17,38,.35)] overflow-hidden flex flex-col">
 
-    {{-- LEFT: conversation list --}}
-    <aside class="hidden sm:flex flex-col w-[260px] border-r border-ink-100 bg-[#fafbfd]">
-        <div class="px-4 py-3 border-b border-ink-100 flex items-center justify-between">
+    {{-- Header --}}
+    <header class="flex items-center justify-between px-5 py-4 text-white" style="background:#FB0606;">
+        <div class="flex items-center gap-2.5">
+            <span class="grid place-items-center w-8 h-8 rounded-full bg-white/15 backdrop-blur-sm">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a8.5 8.5 0 01-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1121 12z"/></svg>
+            </span>
             <div>
-                <p id="chat-title" class="text-sm font-semibold text-navy-950">Live chats</p>
-                <p class="text-[11px] text-ink-500">5 active · 2 waiting</p>
-            </div>
-            <span class="grid place-items-center w-7 h-7 rounded-full text-[11px] font-bold text-white" style="background:#16a34a;">5</span>
-        </div>
-        <div class="px-3 py-2">
-            <div class="relative">
-                <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.3-4.3M10 18a8 8 0 100-16 8 8 0 000 16z"/></svg>
-                <input type="text" placeholder="Search conversations" class="w-full pl-8 pr-2 py-2 text-xs rounded-md bg-white border border-ink-100 focus:outline-none focus:ring-2 focus:ring-[#FB0606]/30"/>
-            </div>
-        </div>
-        <ul id="chat-list" class="flex-1 overflow-y-auto px-1.5 pb-3 space-y-0.5"></ul>
-    </aside>
-
-    {{-- RIGHT: active thread --}}
-    <section class="flex-1 flex flex-col min-w-0">
-        {{-- Header --}}
-        <header class="flex items-center gap-3 px-4 py-3 border-b border-ink-100 bg-white">
-            <button id="chat-back" type="button" class="sm:hidden grid place-items-center w-8 h-8 rounded-md hover:bg-ink-50">
-                <svg class="w-5 h-5 text-navy-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
-            </button>
-            <div id="chat-active-avatar" class="relative grid place-items-center w-10 h-10 rounded-full text-white font-bold text-sm" style="background:#1a2548;">SD</div>
-            <div class="flex-1 min-w-0">
-                <p id="chat-active-name" class="text-sm font-semibold text-navy-950 truncate">Sarah Daniels</p>
-                <p class="text-[11px] flex items-center gap-1.5 text-ink-500">
-                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                    <span id="chat-active-status">Active now · Dispatch #4821</span>
+                <p id="chat-title" class="text-[15px] font-semibold leading-tight">Auxilio Support</p>
+                <p class="text-[11px] text-white/80 flex items-center gap-1.5 mt-0.5">
+                    <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-300"></span>
+                    Typically replies in a few minutes
                 </p>
             </div>
-            <button type="button" class="grid place-items-center w-8 h-8 rounded-md hover:bg-ink-50" title="Call">
-                <svg class="w-4 h-4 text-navy-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7a2 2 0 011.72 2.03z"/></svg>
-            </button>
-            <button id="chat-close" type="button" class="grid place-items-center w-8 h-8 rounded-md hover:bg-ink-50" aria-label="Close chat">
-                <svg class="w-4 h-4 text-navy-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6L6 18M6 6l12 12"/></svg>
-            </button>
-        </header>
+        </div>
+        <button id="chat-close" type="button" class="grid place-items-center w-8 h-8 rounded-md hover:bg-white/10" aria-label="Close chat">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+    </header>
 
-        {{-- Messages --}}
-        <div id="chat-thread" class="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-[#fafbfd]"></div>
+    {{-- Messages --}}
+    <div id="chat-thread" class="chat-topo flex-1 overflow-y-auto px-4 py-5 space-y-3 bg-white relative">
+        <div id="chat-empty" class="absolute inset-0 grid place-items-center text-center px-6 pointer-events-none">
+            <div>
+                <div class="mx-auto mb-3 grid place-items-center w-12 h-12 rounded-full bg-[#FB0606]/10">
+                    <svg class="w-5 h-5 text-[#FB0606]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a8.5 8.5 0 01-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1121 12z"/></svg>
+                </div>
+                <p class="text-[13.5px] text-ink-500">No messages yet. Say hi! 👋</p>
+            </div>
+        </div>
+    </div>
 
-        {{-- Composer --}}
-        <form id="chat-form" class="flex items-center gap-2 px-3 py-3 border-t border-ink-100 bg-white">
-            <button type="button" class="grid place-items-center w-9 h-9 rounded-md hover:bg-ink-50" title="Attach">
-                <svg class="w-4 h-4 text-navy-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.44 11.05l-9.19 9.19a6 6 0 11-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 11-2.83-2.83l8.49-8.48"/></svg>
-            </button>
-            <input id="chat-input" type="text" autocomplete="off" placeholder="Type a message…" class="flex-1 px-3 py-2 text-sm rounded-md border border-ink-100 focus:outline-none focus:ring-2 focus:ring-[#FB0606]/30"/>
-            <button type="submit" class="grid place-items-center w-9 h-9 rounded-md text-white" style="background:#FB0606;" aria-label="Send">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-            </button>
-        </form>
-    </section>
+    {{-- Composer --}}
+    <form id="chat-form" class="flex items-center gap-2 px-3 py-3 border-t border-ink-100 bg-white">
+        <input id="chat-input" type="text" autocomplete="off" placeholder="Type your message…" class="flex-1 px-3 py-2.5 text-sm rounded-md border border-ink-100 focus:outline-none focus:ring-2 focus:ring-[#FB0606]/30"/>
+        <button type="submit" class="grid place-items-center w-10 h-10 rounded-md text-white shrink-0" style="background:#FB0606;" aria-label="Send">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+    </form>
+
+    {{-- Footer --}}
+    <div class="px-4 py-2 text-center text-[11px] text-ink-400 bg-[#fafbfd] border-t border-ink-100">
+        Powered by <span class="font-semibold text-ink-600">Auxilio AI</span>
+    </div>
 </div>
 
 <script>
@@ -2289,157 +2278,84 @@
     var launcher = document.getElementById('chat-launcher');
     var dialog   = document.getElementById('chat-dialog');
     var closeBtn = document.getElementById('chat-close');
-    var listEl   = document.getElementById('chat-list');
     var threadEl = document.getElementById('chat-thread');
-    var nameEl   = document.getElementById('chat-active-name');
-    var statusEl = document.getElementById('chat-active-status');
-    var avatarEl = document.getElementById('chat-active-avatar');
+    var emptyEl  = document.getElementById('chat-empty');
     var form     = document.getElementById('chat-form');
     var input    = document.getElementById('chat-input');
-    var badge    = document.getElementById('chat-launcher-badge');
-
-    var chats = [
-        { id:'c1', name:'Sarah Daniels',  initials:'SD', color:'#1a2548', tag:'Dispatch #4821', status:'Active now · Dispatch #4821', unread:0, preview:'Officer is 2 minutes out…', time:'now',
-          messages:[
-              { from:'them', text:"Hi! I just hit the panic button by mistake.", time:'2:14 PM' },
-              { from:'me',   text:"No worries — I see your alert. Are you safe right now?", time:'2:14 PM' },
-              { from:'them', text:"Yes, totally safe. Sorry about that 😅", time:'2:15 PM' },
-              { from:'me',   text:"All good. I'm cancelling the dispatch. An officer was 2 minutes out — they'll stand down now.", time:'2:15 PM' },
-              { from:'them', text:"Thank you so much!", time:'2:16 PM' },
-          ]
-        },
-        { id:'c2', name:'Marcus Lee',     initials:'ML', color:'#0c4a6e', tag:'Super Agent',    status:'Super Agent · En-route', unread:2, preview:'On my way, ETA 4m', time:'1m',
-          messages:[
-              { from:'them', text:"Got your ping — what's the situation?", time:'2:11 PM' },
-              { from:'me',   text:"Possible break-in reported at 412 Pine St. Resident is hiding upstairs.", time:'2:11 PM' },
-              { from:'them', text:"Copy. On my way, ETA 4m.", time:'2:12 PM' },
-              { from:'them', text:"Approaching the block now.", time:'2:13 PM' },
-          ]
-        },
-        { id:'c3', name:'Auxilio Support',initials:'AX', color:'#FB0606', tag:'Support',        status:'Support team', unread:1, preview:'Quick question about your plan', time:'5m',
-          messages:[
-              { from:'them', text:"Hey there! Saw you upgraded to Family last week — anything we can help set up?", time:'1:58 PM' },
-              { from:'them', text:"Quick question about your plan: do you want the kids on auto check-in?", time:'2:09 PM' },
-          ]
-        },
-        { id:'c4', name:'Priya Sharma',   initials:'PS', color:'#7c2d12', tag:'Trusted Contact',status:'Trusted Contact', unread:0, preview:"I'm home, all good 👍", time:'12m',
-          messages:[
-              { from:'me',   text:"Got the late-night check-in alert — you good?", time:'1:50 PM' },
-              { from:'them', text:"I'm home, all good 👍", time:'2:02 PM' },
-          ]
-        },
-        { id:'c5', name:'Officer R. Hayes',initials:'RH',color:'#1e3a8a', tag:'NYPD',           status:'NYPD · Verified', unread:0, preview:'Report filed, case #C-99281', time:'1h',
-          messages:[
-              { from:'them', text:"Following up on this morning's incident.", time:'1:01 PM' },
-              { from:'them', text:"Report filed, case #C-99281.", time:'1:02 PM' },
-              { from:'me',   text:"Thanks officer, really appreciate it.", time:'1:05 PM' },
-          ]
-        },
-    ];
-
-    var activeId = chats[0].id;
+    var iconOpen = document.getElementById('chat-icon-open');
+    var iconClose= document.getElementById('chat-icon-close');
 
     function escapeHtml(s){ return s.replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]; }); }
 
-    function renderList(){
-        listEl.innerHTML = chats.map(function(c){
-            var active = c.id === activeId ? 'is-active' : '';
-            var badgeHtml = c.unread ? '<span class="ml-auto grid place-items-center min-w-[18px] h-[18px] px-1 rounded-full text-[10px] font-bold text-white" style="background:#FB0606;">'+c.unread+'</span>' : '<span class="ml-auto text-[10px] text-ink-400">'+c.time+'</span>';
-            return '<li><button type="button" data-chat-id="'+c.id+'" class="chat-row '+active+' w-full text-left px-2.5 py-2 rounded-md flex items-start gap-2.5">'
-                +    '<span class="grid place-items-center shrink-0 w-9 h-9 rounded-full text-white text-[11px] font-bold" style="background:'+c.color+';">'+c.initials+'</span>'
-                +    '<span class="flex-1 min-w-0">'
-                +      '<span class="flex items-center gap-1.5"><span class="text-[13px] font-semibold text-navy-950 truncate">'+escapeHtml(c.name)+'</span>'+badgeHtml+'</span>'
-                +      '<span class="block text-[11px] text-ink-500 truncate mt-0.5">'+escapeHtml(c.preview)+'</span>'
-                +    '</span>'
-                +'</button></li>';
-        }).join('');
-    }
-
-    function renderThread(){
-        var c = chats.find(function(x){ return x.id === activeId; });
-        if (!c) return;
-        nameEl.textContent   = c.name;
-        statusEl.textContent = c.status;
-        avatarEl.textContent = c.initials;
-        avatarEl.style.background = c.color;
-
-        threadEl.innerHTML = c.messages.map(function(m){
-            if (m.from === 'me') {
-                return '<div class="flex justify-end"><div class="chat-bubble bubble-me">'+escapeHtml(m.text)+'<div class="text-[10px] mt-1 opacity-80 text-right">'+escapeHtml(m.time)+'</div></div></div>';
-            }
-            return '<div class="flex items-end gap-2"><span class="grid place-items-center shrink-0 w-7 h-7 rounded-full text-white text-[10px] font-bold" style="background:'+c.color+';">'+c.initials+'</span><div class="chat-bubble bubble-them">'+escapeHtml(m.text)+'<div class="text-[10px] mt-1 text-ink-500">'+escapeHtml(m.time)+'</div></div></div>';
-        }).join('');
+    function appendBubble(from, text){
+        if (emptyEl && !emptyEl.classList.contains('hidden')) emptyEl.classList.add('hidden');
+        var time = new Date().toLocaleTimeString([], { hour:'numeric', minute:'2-digit' });
+        var html;
+        if (from === 'me') {
+            html = '<div class="flex justify-end"><div class="chat-bubble bubble-me">'+escapeHtml(text)+'<div class="text-[10px] mt-1 opacity-80 text-right">'+escapeHtml(time)+'</div></div></div>';
+        } else {
+            html = '<div class="flex items-end gap-2"><span class="grid place-items-center shrink-0 w-7 h-7 rounded-full text-white text-[10px] font-bold" style="background:#FB0606;">A</span><div class="chat-bubble bubble-them">'+escapeHtml(text)+'<div class="text-[10px] mt-1 text-ink-500">'+escapeHtml(time)+'</div></div></div>';
+        }
+        threadEl.insertAdjacentHTML('beforeend', html);
         threadEl.scrollTop = threadEl.scrollHeight;
     }
 
-    function updateBadge(){
-        var n = chats.reduce(function(s,c){ return s + (c.unread||0); }, 0);
-        if (n > 0) { badge.style.display = ''; badge.textContent = n; } else { badge.style.display = 'none'; }
+    function showTyping(){
+        if (emptyEl && !emptyEl.classList.contains('hidden')) emptyEl.classList.add('hidden');
+        var id = 'typ-' + Date.now();
+        threadEl.insertAdjacentHTML('beforeend',
+            '<div id="'+id+'" class="flex items-end gap-2">'
+            +'<span class="grid place-items-center shrink-0 w-7 h-7 rounded-full text-white text-[10px] font-bold" style="background:#FB0606;">A</span>'
+            +'<div class="chat-bubble bubble-them"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>'
+            +'</div>'
+        );
+        threadEl.scrollTop = threadEl.scrollHeight;
+        return id;
     }
 
-    function openDialog(){ dialog.classList.add('is-open'); setTimeout(function(){ input.focus(); }, 200); }
-    function closeDialog(){ dialog.classList.remove('is-open'); }
+    function openDialog(){
+        dialog.classList.add('is-open');
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        setTimeout(function(){ input.focus(); }, 200);
+    }
+    function closeDialog(){
+        dialog.classList.remove('is-open');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+    }
 
     launcher.addEventListener('click', function(){
         if (dialog.classList.contains('is-open')) closeDialog(); else openDialog();
     });
     closeBtn.addEventListener('click', closeDialog);
 
-    listEl.addEventListener('click', function(e){
-        var btn = e.target.closest('[data-chat-id]');
-        if (!btn) return;
-        activeId = btn.getAttribute('data-chat-id');
-        var c = chats.find(function(x){ return x.id === activeId; });
-        if (c && c.unread) { c.unread = 0; updateBadge(); }
-        renderList();
-        renderThread();
-    });
-
     form.addEventListener('submit', function(e){
         e.preventDefault();
         var v = input.value.trim();
         if (!v) return;
-        var c = chats.find(function(x){ return x.id === activeId; });
-        if (!c) return;
-        var now = new Date();
-        var time = now.toLocaleTimeString([], { hour:'numeric', minute:'2-digit' });
-        c.messages.push({ from:'me', text:v, time:time });
-        c.preview = 'You: ' + v;
+        appendBubble('me', v);
         input.value = '';
-        renderList();
-        renderThread();
 
-        // simulated reply
         setTimeout(function(){
-            var typingId = 'typ-' + Date.now();
-            threadEl.insertAdjacentHTML('beforeend',
-                '<div id="'+typingId+'" class="flex items-end gap-2">'
-                +'<span class="grid place-items-center shrink-0 w-7 h-7 rounded-full text-white text-[10px] font-bold" style="background:'+c.color+';">'+c.initials+'</span>'
-                +'<div class="chat-bubble bubble-them"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>'
-                +'</div>'
-            );
-            threadEl.scrollTop = threadEl.scrollHeight;
+            var id = showTyping();
             setTimeout(function(){
-                var t = document.getElementById(typingId);
+                var t = document.getElementById(id);
                 if (t) t.remove();
-                var replies = ['Got it — thanks!', 'Understood, standing by.', 'Copy that.', "On it 👍"];
-                var reply = replies[Math.floor(Math.random()*replies.length)];
-                var rTime = new Date().toLocaleTimeString([], { hour:'numeric', minute:'2-digit' });
-                c.messages.push({ from:'them', text:reply, time:rTime });
-                c.preview = reply;
-                renderList();
-                renderThread();
+                var replies = [
+                    "Thanks for reaching out! A support agent will jump in shortly.",
+                    "Got it — let me pull up your account.",
+                    "Happy to help with that 👍",
+                    "Could you share a bit more detail so we can route you to the right team?"
+                ];
+                appendBubble('them', replies[Math.floor(Math.random()*replies.length)]);
             }, 1100);
-        }, 600);
+        }, 500);
     });
 
     document.addEventListener('keydown', function(e){
         if (e.key === 'Escape' && dialog.classList.contains('is-open')) closeDialog();
     });
-
-    renderList();
-    renderThread();
-    updateBadge();
 })();
 </script>
 </body>
