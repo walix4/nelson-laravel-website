@@ -2235,7 +2235,7 @@
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a8.5 8.5 0 01-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1121 12z"/></svg>
             </span>
             <div>
-                <p id="chat-title" class="text-[15px] font-semibold leading-tight">Auxilio Support</p>
+                <p id="chat-title" class="text-[15px] font-semibold leading-tight">Auxilio AI Support</p>
                 <p class="text-[11px] text-white/80 flex items-center gap-1.5 mt-0.5">
                     <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-300"></span>
                     Typically replies in a few minutes
