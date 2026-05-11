@@ -235,6 +235,64 @@ if (parallaxNodes.length) {
     }, { passive: true });
 }
 
+// ---------- Count-up animation for metric numbers ----------
+(() => {
+    const counters = document.querySelectorAll('[data-counter]');
+    if (!counters.length) return;
+
+    const formatters = {
+        seconds:  (n) => Math.round(n) + 's',
+        schedule: (n) => Math.round(n) + '/7',
+        percent:  (n) => Math.round(n) + '%',
+        millions: (n) => {
+            if (n >= 1000000) return '1M+';
+            if (n >= 1000)    return Math.round(n / 1000) + 'K';
+            return Math.round(n).toString();
+        },
+    };
+    const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reset to "0" form on load (so the count-up starts visibly from zero)
+    counters.forEach((el) => {
+        const fmtName = el.dataset.counterFormat;
+        const fmt = formatters[fmtName];
+        if (fmt && !reduceMotion) el.textContent = fmt(0);
+    });
+
+    if (reduceMotion) return;
+
+    const animate = (el) => {
+        const target = parseFloat(el.dataset.counterTo);
+        const fmt = formatters[el.dataset.counterFormat] || ((n) => Math.round(n).toString());
+        const finalText = el.dataset.counterFinal;
+        const duration = 1400;
+        const start = performance.now();
+        const tick = (now) => {
+            const t = Math.min((now - start) / duration, 1);
+            const v = easeOutExpo(t) * target;
+            el.textContent = fmt(v);
+            if (t < 1) {
+                requestAnimationFrame(tick);
+            } else if (finalText) {
+                // Snap to final canonical text (avoids "999K" instead of "1M+")
+                el.textContent = finalText;
+            }
+        };
+        requestAnimationFrame(tick);
+    };
+
+    const counterObs = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+            if (entry.isIntersecting && !entry.target.dataset.counted) {
+                entry.target.dataset.counted = '1';
+                animate(entry.target);
+            }
+        }
+    }, { threshold: 0.4 });
+    counters.forEach((el) => counterObs.observe(el));
+})();
+
 // ---------- FAQ filter chips ----------
 const faqChips = document.querySelectorAll('[data-faq-cat]');
 const faqItems = document.querySelectorAll('[data-faq-item]');

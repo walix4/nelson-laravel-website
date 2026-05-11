@@ -111,7 +111,7 @@
         <div class="absolute -bottom-40 -right-20 w-[600px] h-[600px] rounded-full blur-3xl opacity-60" style="background: radial-gradient(circle, rgba(251,6,6,.10) 0%, transparent 65%);"></div>
     </div>
 
-    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-14 sm:pt-20 lg:pt-24 pb-16 sm:pb-20 lg:pb-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-16 sm:pt-24 lg:pt-32 pb-20 sm:pb-28 lg:pb-36 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center min-h-[88vh]">
 
         {{-- LEFT: copy + CTAs --}}
         <div class="lg:col-span-6">
@@ -141,69 +141,75 @@
             </div>
         </div>
 
-        {{-- RIGHT: 3D dotted GLOBE (orb-shaped, Africa-centric) + Lottie-style role tags --}}
+        {{-- RIGHT: 3D Orbital scene — concentric rings + central hub + role nodes --}}
         <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-right relative w-full max-w-[640px] mx-auto" style="aspect-ratio: 1 / 1;">
+            <div class="reveal reveal-right orbit-scene relative w-full max-w-[680px] mx-auto" style="aspect-ratio: 1 / 1;">
 
-                {{-- soft halo behind globe --}}
-                <div class="absolute inset-0 -z-10 rounded-full blur-3xl opacity-60" style="background:radial-gradient(circle, rgba(244,196,65,.30) 0%, transparent 65%);"></div>
+                {{-- ambient glow halo --}}
+                <div class="absolute inset-0 -z-10 rounded-full blur-3xl opacity-70" style="background:radial-gradient(circle, rgba(251,6,6,.18) 0%, rgba(244,196,65,.12) 40%, transparent 70%);"></div>
 
-                {{-- the GLOBE: circular orb showing dotted continents (Africa-Europe centered), with spherical shading --}}
-                <div class="globe-orb absolute inset-0">
-                    {{-- world dotmap zoomed + offset so Africa/Europe sit in the visible orb --}}
-                    <div class="world-dotmap absolute inset-0" aria-hidden="true" style="background-size: 11px 11px; -webkit-mask-size: 200% 200%; mask-size: 200% 200%; -webkit-mask-position: 36% 50%; mask-position: 36% 50%;"></div>
-                    {{-- spherical highlight + shadow for 3D feel --}}
-                    <div class="globe-shade"></div>
-                    <div class="globe-rim"></div>
-                </div>
+                {{-- 3D-tilted stage --}}
+                <div class="orbit-stage absolute inset-0">
 
-                {{-- connection lines from center hub to each pin (overlay, full-bleed) --}}
-                <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none z-[5]" aria-hidden="true">
-                    <g stroke="#FB0606" stroke-width="1.4" fill="none" opacity=".55">
-                        {{-- coords (×10) match pin %s below --}}
-                        <line class="map-line" x1="500" y1="500" x2="220" y2="320"/>   {{-- → Police Officer (NA, partial edge) --}}
-                        <line class="map-line" x1="500" y1="500" x2="500" y2="240"/>   {{-- → 911 Dispatch (Europe) --}}
-                        <line class="map-line" x1="500" y1="500" x2="710" y2="300"/>   {{-- → First Responder (Asia) --}}
-                        <line class="map-line" x1="500" y1="500" x2="640" y2="540"/>   {{-- → Trusted Contact (M.East) --}}
-                        <line class="map-line" x1="500" y1="500" x2="320" y2="730"/>   {{-- → Super Agent (S.America edge) --}}
-                        <line class="map-line" x1="500" y1="500" x2="780" y2="760"/>   {{-- → EMT (Australia edge) --}}
-                    </g>
-                </svg>
+                    {{-- concentric orbit rings (slow rotation) --}}
+                    <div class="orbit-ring r-1"></div>
+                    <div class="orbit-ring r-2"></div>
+                    <div class="orbit-ring r-3"></div>
+                    <div class="orbit-ring r-4"></div>
 
-                {{-- Center HUB (Auxilio core) — sits on the globe sphere --}}
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                    <div class="relative grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.55)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
-                        <svg class="w-7 h-7" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
+                    {{-- Center hub — glassy orb with Auxilio shield --}}
+                    <div class="orbit-hub">
+                        <svg class="w-1/2 h-1/2 relative z-10" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
                         </svg>
-                        <span class="absolute inset-0 rounded-full map-pin" aria-hidden="true"></span>
                     </div>
-                </div>
 
-                {{-- Pins + Lottie-style role tags on visible continents --}}
-                @php
-                    // top/left % chosen so dots sit on visible continents in the Africa-centric orb
-                    $pins = [
-                        ['top'=>'32%','left'=>'22%','label'=>'Police Officer',   'delay'=>'0s',  'side'=>'right'], // NA edge (left)
-                        ['top'=>'24%','left'=>'50%','label'=>'911 Dispatch',     'delay'=>'1.5s','side'=>'right'], // Europe (top)
-                        ['top'=>'30%','left'=>'71%','label'=>'First Responder',  'delay'=>'3s',  'side'=>'left'],  // Asia (top-right)
-                        ['top'=>'54%','left'=>'64%','label'=>'Trusted Contact',  'delay'=>'4.5s','side'=>'left'],  // Middle East
-                        ['top'=>'73%','left'=>'32%','label'=>'Super Agent',      'delay'=>'6s',  'side'=>'right'], // SA edge (bottom-left)
-                        ['top'=>'76%','left'=>'78%','label'=>'EMT',              'delay'=>'7.5s','side'=>'left'],  // Australia edge (bottom-right)
-                    ];
-                @endphp
-                @foreach ($pins as $p)
-                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2" style="top:{{ $p['top'] }};left:{{ $p['left'] }};">
-                        {{-- pin dot (cycles in sync with role tag) --}}
-                        <span class="block w-3 h-3 rounded-full ring-4 ring-white shadow-[0_4px_10px_rgba(251,6,6,.4)] pin-dot-cycle" style="background:#FB0606; animation-delay:{{ $p['delay'] }};"></span>
-                        {{-- Lottie-style role label: scales from 0 → 1 → fades out --}}
-                        <span class="role-tag {{ $p['side']==='right' ? '' : 'role-tag-left' }} absolute whitespace-nowrap rounded-md bg-white px-3 py-1.5 text-xs font-semibold text-navy-950 shadow-[0_12px_28px_-10px_rgba(12,17,38,.35)] border border-ink-100 {{ $p['side']==='right' ? 'left-5 top-1/2 -translate-y-1/2' : 'right-5 top-1/2 -translate-y-1/2' }}" style="animation-delay:{{ $p['delay'] }};">
-                            {{ $p['label'] }}
-                            {{-- speech-bubble tail --}}
-                            <span class="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-white border-ink-100 rotate-45 {{ $p['side']==='right' ? '-left-1 border-l border-b' : '-right-1 border-r border-t' }}"></span>
-                        </span>
-                    </div>
-                @endforeach
+                    {{-- Connection lines + node cards layer (above rings, below interactivity) --}}
+                    @php
+                        // Each node: angle in degrees (0=right, 90=down), distance % from center, label, icon SVG path
+                        $nodes = [
+                            ['ang'=>200, 'dist'=>44, 'label'=>'Police Officer',  'icon'=>'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z',                                       'delay'=>'0s'],
+                            ['ang'=>270, 'dist'=>46, 'label'=>'911 Dispatch',    'icon'=>'M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9', 'delay'=>'1.5s'],
+                            ['ang'=>340, 'dist'=>44, 'label'=>'First Responder','icon'=>'M13 2L3 14h7l-1 8 10-12h-7l1-8z',                                                          'delay'=>'3s'],
+                            ['ang'=>20,  'dist'=>46, 'label'=>'Super Agent',     'icon'=>'M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0',                                       'delay'=>'4.5s'],
+                            ['ang'=>90,  'dist'=>46, 'label'=>'Trusted Contact', 'icon'=>'M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.7A8.99 8.99 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z', 'delay'=>'6s'],
+                            ['ang'=>160, 'dist'=>44, 'label'=>'EMT',             'icon'=>'M5 13l4 4L19 7',                                                                            'delay'=>'7.5s'],
+                        ];
+                    @endphp
+
+                    {{-- Connection lines: SVG full-bleed, lines from (50%,50%) to each node --}}
+                    <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute inset-0 w-full h-full pointer-events-none">
+                        @foreach ($nodes as $n)
+                            @php
+                                $rad = deg2rad($n['ang']);
+                                $x2 = 50 + cos($rad) * $n['dist'];
+                                $y2 = 50 + sin($rad) * $n['dist'];
+                            @endphp
+                            <line class="orbit-line" x1="50" y1="50" x2="{{ $x2 }}" y2="{{ $y2 }}"/>
+                        @endforeach
+                    </svg>
+
+                    {{-- Node cards positioned around the orbit --}}
+                    @foreach ($nodes as $n)
+                        @php
+                            $rad = deg2rad($n['ang']);
+                            $top = 50 + sin($rad) * $n['dist'];
+                            $left = 50 + cos($rad) * $n['dist'];
+                        @endphp
+                        <div class="orbit-node" style="top:{{ $top }}%; left:{{ $left }}%; animation-delay:{{ $n['delay'] }};">
+                            <div class="orbit-node-card">
+                                <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $n['icon'] }}"/></svg>
+                                </span>
+                                <span class="text-xs font-bold text-navy-950">{{ $n['label'] }}</span>
+                                <span class="relative inline-flex w-1.5 h-1.5 ml-1">
+                                    <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
+                                    <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                                </span>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
@@ -424,36 +430,44 @@
         @php
             $metrics = [
                 [
-                    'big'   => '30s',
-                    'label' => 'Avg Alert Time',
-                    'body'  => 'From incident to verified responder lock screen in under thirty seconds.',
-                    'bg'    => '#fdf6d8',  // pastel yellow
-                    'fg'    => '#FB0606',
-                    'glyph' => 'M13 2L3 14h7l-1 8 10-12h-7l1-8z',
+                    'big'    => '30s',
+                    'label'  => 'Avg Alert Time',
+                    'body'   => 'From incident to verified responder lock screen in under thirty seconds.',
+                    'bg'     => '#fdf6d8',  // pastel yellow
+                    'fg'     => '#FB0606',
+                    'glyph'  => 'M13 2L3 14h7l-1 8 10-12h-7l1-8z',
+                    'count'  => 'seconds',
+                    'target' => 30,
                 ],
                 [
-                    'big'   => '24/7',
-                    'label' => 'Verified Agents',
-                    'body'  => 'Background-checked Super Agents on standby, ready to respond on your behalf.',
-                    'bg'    => '#eef1f6',  // pastel gray
-                    'fg'    => '#FB0606',
-                    'glyph' => 'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z',
+                    'big'    => '24/7',
+                    'label'  => 'Verified Agents',
+                    'body'   => 'Background-checked Super Agents on standby, ready to respond on your behalf.',
+                    'bg'     => '#eef1f6',  // pastel gray
+                    'fg'     => '#FB0606',
+                    'glyph'  => 'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z',
+                    'count'  => 'schedule',
+                    'target' => 24,
                 ],
                 [
-                    'big'   => '1M+',
-                    'label' => 'Crimes Mapped',
-                    'body'  => 'A live, AI-classified crime feed across 40+ states — refreshed as events come in.',
-                    'bg'    => '#e7eeff',  // pastel blue
-                    'fg'    => '#FB0606',
-                    'glyph' => 'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z',
+                    'big'    => '1M+',
+                    'label'  => 'Crimes Mapped',
+                    'body'   => 'A live, AI-classified crime feed across 40+ states — refreshed as events come in.',
+                    'bg'     => '#e7eeff',  // pastel blue
+                    'fg'     => '#FB0606',
+                    'glyph'  => 'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z',
+                    'count'  => 'millions',
+                    'target' => 1000000,
                 ],
                 [
-                    'big'   => '100%',
-                    'label' => 'Privacy by Design',
-                    'body'  => 'End-to-end encrypted location sharing — opt-in, revocable, and never sold.',
-                    'bg'    => '#f1f1f3',  // pastel neutral
-                    'fg'    => '#FB0606',
-                    'glyph' => 'M6 10V8a6 6 0 1112 0v2M5 10h14v10H5z',
+                    'big'    => '100%',
+                    'label'  => 'Privacy by Design',
+                    'body'   => 'End-to-end encrypted location sharing — opt-in, revocable, and never sold.',
+                    'bg'     => '#f1f1f3',  // pastel neutral
+                    'fg'     => '#FB0606',
+                    'glyph'  => 'M6 10V8a6 6 0 1112 0v2M5 10h14v10H5z',
+                    'count'  => 'percent',
+                    'target' => 100,
                 ],
             ];
         @endphp
@@ -473,8 +487,8 @@
                     <span class="pointer-events-none absolute -inset-12 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700" style="background:radial-gradient(circle, {{ $m['fg'] }}22 0%, transparent 60%);"></span>
 
                     <div class="relative h-full flex flex-col">
-                        {{-- Big number --}}
-                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:{{ $m['fg'] }};">
+                        {{-- Big number — count-up on scroll into view --}}
+                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:{{ $m['fg'] }};" data-counter data-counter-format="{{ $m['count'] }}" data-counter-to="{{ $m['target'] }}" data-counter-final="{{ $m['big'] }}">
                             {{ $m['big'] }}
                         </p>
                         {{-- Label --}}
@@ -562,11 +576,17 @@
         <div class="lg:col-span-7 relative">
             <div class="reveal reveal-right relative rounded-3xl p-6 lg:p-8 shadow-[0_50px_120px_-40px_rgba(12,17,38,.35)] border border-ink-100 overflow-hidden" style="background:linear-gradient(180deg,#fafbff 0%,#ffffff 60%);">
 
-                {{-- floating AI Powered chip --}}
-                <div class="absolute -top-3 right-6 lg:right-10 z-30">
-                    <div class="ai-chip-float inline-flex items-center gap-1.5 rounded-full text-white px-4 py-2 text-xs font-semibold shadow-[0_18px_30px_-10px_rgba(251,6,6,.6)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
-                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
+                {{-- floating AI Powered chip — highlighted with white ring + glow halo --}}
+                <div class="absolute -top-5 right-6 lg:right-10 z-30">
+                    {{-- pulsing glow halo behind chip --}}
+                    <span class="ai-chip-halo absolute inset-0 rounded-full blur-xl -z-10" aria-hidden="true" style="background:#FB0606;"></span>
+                    <div class="ai-chip-float relative inline-flex items-center gap-2 rounded-full text-white px-5 py-2.5 text-sm font-bold ring-4 ring-white shadow-[0_22px_40px_-10px_rgba(251,6,6,.75)]" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                        <svg class="w-4 h-4 metric-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
                         AI Powered
+                        <span class="relative flex w-2 h-2" aria-hidden="true">
+                            <span class="absolute inline-flex w-2 h-2 rounded-full bg-white opacity-70 animate-ping"></span>
+                            <span class="relative inline-flex w-2 h-2 rounded-full bg-white"></span>
+                        </span>
                     </div>
                 </div>
 
@@ -883,9 +903,10 @@
                     <summary class="flex items-center justify-between gap-5 cursor-pointer px-6 sm:px-8 py-5 list-none select-none">
                         {{-- left: number + category icon + question --}}
                         <div class="flex items-center gap-4 min-w-0">
-                            <span class="hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 transition-all duration-300 group-hover:border-transparent group-open:border-transparent" style="background:#fbfcff;">
-                                <svg class="w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $f['icon'] }}"/></svg>
-                                <span class="absolute inset-0 rounded-xl opacity-0 group-open:opacity-100 transition-opacity duration-300 -z-10" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                            <span class="relative hidden sm:grid place-items-center shrink-0 w-11 h-11 rounded-xl border border-ink-100 overflow-hidden transition-all duration-300 group-hover:border-brand-200 group-open:border-transparent" style="background:#fbfcff;">
+                                {{-- red fill scoped to this badge only --}}
+                                <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:linear-gradient(135deg,#FB0606,#c8202f);"></span>
+                                <svg class="relative z-10 w-5 h-5 transition-colors duration-300 text-navy-900/55 group-open:!text-white group-hover:text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $f['icon'] }}"/></svg>
                             </span>
                             <div class="min-w-0">
                                 <span class="block text-[10px] font-bold uppercase tracking-[.18em] text-navy-900/45 group-open:text-brand-600 transition-colors">
@@ -898,9 +919,10 @@
                         </div>
 
                         {{-- expand icon: animated +/× — uses HEADER red #FB0606 when open --}}
-                        <span class="grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:!border-transparent group-open:!text-white" style="background:#fff;">
-                            <span class="absolute inset-0 rounded-full opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
-                            <svg class="relative w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
+                        <span class="relative grid place-items-center shrink-0 w-10 h-10 rounded-full border border-ink-100 overflow-hidden text-navy-900/70 transition-all duration-300 group-hover:border-brand-300 group-hover:text-brand-600 group-open:border-transparent group-open:!text-white" style="background:#fff;">
+                            {{-- red fill scoped to this badge only --}}
+                            <span class="absolute inset-0 opacity-0 group-open:opacity-100 transition-opacity duration-300" style="background:#FB0606;"></span>
+                            <svg class="relative z-10 w-4 h-4 transition-transform duration-500 group-open:rotate-[225deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M5 12h14"/></svg>
                         </span>
                     </summary>
 
