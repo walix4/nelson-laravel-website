@@ -1510,13 +1510,79 @@
                     </dl>
                 </div>
                 <div class="reveal reveal-right lg:col-span-5">
-                    <div class="relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.6)] float-slow">
-                        <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
-                        <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
-                            <img src="/images/screen-accept-emergency.jpg" alt="Auxilio Agente — Accept Emergency" class="absolute inset-0 w-full h-full object-cover object-top" />
+                    <div class="relative mx-auto max-w-[280px]">
+                        <span class="phone-halo"></span>
+                        <div class="phone-mock relative aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.6)] float-slow">
+                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                                <img src="/images/screen-accept-emergency.jpg" alt="Auxilio Agente — Accept Emergency" class="absolute inset-0 w-full h-full object-cover object-top" />
+                            </div>
+                        </div>
+                        {{-- Floating notification cards orbiting the hero phone --}}
+                        <div class="hidden md:flex notif-card absolute -left-16 top-12 items-center gap-2.5 rounded-md bg-white px-3 py-2 shadow-xl border border-ink-100 z-10" style="min-width:185px;">
+                            <span class="flex w-7 h-7 items-center justify-center rounded-full bg-red-600 text-white">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+                            </span>
+                            <div>
+                                <div class="font-mono text-[9px] uppercase tracking-[.16em] text-red-600 font-bold">NEW DISPATCH</div>
+                                <div class="font-display text-[12px] font-semibold text-navy-900 leading-tight">Break-in · 0.4mi</div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex notif-card-2 absolute -right-12 top-1/2 items-center gap-2.5 rounded-md bg-white px-3 py-2 shadow-xl border border-ink-100 z-10" style="min-width:170px;">
+                            <span class="flex w-7 h-7 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                            </span>
+                            <div>
+                                <div class="font-mono text-[9px] uppercase tracking-[.16em] text-emerald-700 font-bold">ACCEPTED</div>
+                                <div class="font-display text-[12px] font-semibold text-navy-900 leading-tight">ETA 2 min 14 sec</div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex notif-card-3 absolute -left-8 bottom-8 items-center gap-2.5 rounded-md bg-navy-900 text-white px-3 py-2 shadow-xl z-10" style="min-width:165px;">
+                            <span class="flex w-7 h-7 items-center justify-center rounded-full bg-gold-400 text-navy-900">
+                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </span>
+                            <div>
+                                <div class="font-mono text-[9px] uppercase tracking-[.16em] text-gold-400 font-bold">3 BACKUP</div>
+                                <div class="font-display text-[12px] font-semibold leading-tight">closing in</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ========== REAL-WORLD SCENARIOS ========== --}}
+    <section class="relative bg-white">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Built for what officers actually face</p>
+                <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                    Every call. Every shift. <span class="text-brand-600">One app.</span>
+                </h2>
+                <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed">
+                    From a midnight break-in to a freeway pile-up — Auxilio Agente brings the same context, the same speed, and the same chain-of-evidence to every scenario.
+                </p>
+            </div>
+            <div class="reveal stagger mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                @foreach ([
+                    ['img'=>'/images/about/break-in.jpg','tag'=>'01 · NIGHT','title'=>'Break-in','desc'=>'Silent dispatch · evidence capture · neighbor alerts in one flow.'],
+                    ['img'=>'/images/about/accident.jpg','tag'=>'02 · DAY','title'=>'Collision','desc'=>'Plate OCR, scene photos, witness statements pre-fill the report.'],
+                    ['img'=>'/images/about/robbery.jpg','tag'=>'03 · URGENT','title'=>'Armed robbery','desc'=>'Cohort pings 5km · backup ETA visible · pursuit-mode locked.'],
+                    ['img'=>'/images/about/roadside.jpg','tag'=>'04 · ASSIST','title'=>'Roadside','desc'=>'Citizen-flagged help → nearest officer routed in under 30s.'],
+                ] as $sc)
+                    <article class="scenario-card group relative rounded-md overflow-hidden bg-navy-900 text-white shadow-lg ring-1 ring-ink-100">
+                        <div class="relative h-56 sm:h-64 overflow-hidden">
+                            <img src="{{ $sc['img'] }}" alt="{{ $sc['title'] }}" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                            <span class="absolute top-3 left-3 rounded-md bg-red-600 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg">{{ $sc['tag'] }}</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-display text-xl font-bold text-white">{{ $sc['title'] }}</h3>
+                            <p class="mt-1.5 text-[13px] text-navy-200/90 leading-relaxed">{{ $sc['desc'] }}</p>
+                        </div>
+                    </article>
+                @endforeach
             </div>
         </div>
     </section>
@@ -1532,10 +1598,13 @@
             <div class="reveal mt-12" data-agent-carousel>
                 <div class="grid lg:grid-cols-12 gap-10 items-center">
                     <div class="lg:col-span-5">
-                        <div class="relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.5)]">
-                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
-                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
-                                <img data-onboard-img src="/images/onboard-1.jpg" alt="Onboarding step" class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-300" />
+                        <div class="relative mx-auto max-w-[280px]">
+                            <span class="phone-halo"></span>
+                            <div class="phone-mock relative aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.5)]">
+                                <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                                <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                                    <img data-onboard-img src="/images/screen-companion.png" alt="Onboarding step" class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-300" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1633,10 +1702,13 @@
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 <div class="order-2 lg:order-1 lg:col-span-5">
-                    <div class="reveal relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
-                        <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
-                        <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
-                            <img src="/images/screen-route-map.jpg" alt="Auxilio Agente — Route navigation" class="absolute inset-0 w-full h-full object-cover object-top" />
+                    <div class="reveal relative mx-auto max-w-[280px]">
+                        <span class="phone-halo"></span>
+                        <div class="phone-mock relative aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
+                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                                <img src="/images/screen-route-map.jpg" alt="Auxilio Agente — Route navigation" class="absolute inset-0 w-full h-full object-cover object-top" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1704,10 +1776,11 @@
                 </div>
                 <div class="lg:col-span-7">
                     <div class="reveal relative">
-                        <div class="relative mx-auto max-w-[420px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.5)]">
+                        <span class="phone-halo"></span>
+                        <div class="phone-mock-right relative mx-auto max-w-[420px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.5)]">
                             <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
                             <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
-                                <img src="/images/screen-cohort-map.jpg" alt="Auxilio Agente — Multi-agent cohort map" class="absolute inset-0 w-full h-full object-cover object-top" />
+                                <img src="/images/screen-assigning.png" alt="Auxilio Agente — Multi-agent cohort map" class="absolute inset-0 w-full h-full object-cover object-top" />
                             </div>
                         </div>
                         <div class="hidden md:flex absolute -left-4 top-20 items-center gap-3 rounded-md border border-ink-100 bg-white px-4 py-2.5 shadow-lg">
@@ -1739,10 +1812,13 @@
 
             <div class="mt-12 grid lg:grid-cols-12 gap-10 items-center">
                 <div class="lg:col-span-5">
-                    <div class="reveal relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
-                        <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
-                        <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
-                            <img src="/images/screen-my-network.jpg" alt="Auxilio Agente — My Network" class="absolute inset-0 w-full h-full object-cover object-top" />
+                    <div class="reveal relative mx-auto max-w-[280px]">
+                        <span class="phone-halo"></span>
+                        <div class="phone-mock relative aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
+                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                                <img src="/images/screen-my-network.jpg" alt="Auxilio Agente — My Network" class="absolute inset-0 w-full h-full object-cover object-top" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1806,10 +1882,13 @@
                     </div>
                 </div>
                 <div class="lg:col-span-5">
-                    <div class="reveal relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
-                        <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
-                        <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
-                            <img src="/images/screen-vehicle-details.jpg" alt="Auxilio Agente — Vehicle details" class="absolute inset-0 w-full h-full object-cover object-top" />
+                    <div class="reveal relative mx-auto max-w-[280px]">
+                        <span class="phone-halo"></span>
+                        <div class="phone-mock-right relative aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
+                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                                <img src="/images/screen-vehicle-details.jpg" alt="Auxilio Agente — Vehicle details" class="absolute inset-0 w-full h-full object-cover object-top" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1822,10 +1901,13 @@
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-5">
-                    <div class="reveal relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
-                        <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
-                        <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
-                            <img src="/images/screen-drawer.jpg" alt="Auxilio Agente — Officer drawer" class="absolute inset-0 w-full h-full object-cover object-top" />
+                    <div class="reveal relative mx-auto max-w-[280px]">
+                        <span class="phone-halo"></span>
+                        <div class="phone-mock relative aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
+                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                                <img src="/images/screen-drawer.jpg" alt="Auxilio Agente — Officer drawer" class="absolute inset-0 w-full h-full object-cover object-top" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1845,6 +1927,95 @@
                                 </span>
                                 <div class="font-display text-sm font-bold text-navy-900">{{ $item }}</div>
                             </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ========== A SHIFT UNFOLDS — TIMELINE ========== --}}
+    <section class="relative bg-navy-50">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">A shift unfolds</p>
+                <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                    From <span class="text-brand-600">06:00</span> to <span class="text-navy-700">06:00.</span>
+                </h2>
+                <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed">
+                    Twelve hours on the road. Twelve hours where Auxilio Agente carries the dispatch radio, the field notebook, the camera, the supervisor, and the safety net — in one badge-thin app.
+                </p>
+            </div>
+
+            <div class="mt-14 relative">
+                <span class="hidden lg:block absolute left-0 right-0 top-[140px] h-px bg-gradient-to-r from-transparent via-brand-300 to-transparent"></span>
+                <div class="reveal stagger grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    @foreach ([
+                        ['t'=>'06:00','sub'=>'Roll call','img'=>'/images/scene-dispatch.jpg','title'=>'Suit up','desc'=>'Daily briefing auto-syncs to the officer&rsquo;s feed. Hot zones, BOLO photos, and shift partner pinned to the top.'],
+                        ['t'=>'10:42','sub'=>'Patrol','img'=>'/images/scene-traffic.jpg','title'=>'Traffic stop','desc'=>'Plate OCR runs on lift. Driver record, registration status, and prior contacts pre-loaded before the officer steps out.'],
+                        ['t'=>'14:18','sub'=>'Dispatch','img'=>'/images/scene-patrol.jpg','title'=>'Active call','desc'=>'Cohort radar pings 5km. Closest officer accepts in 1.2s. Family network gets a safety ping in parallel.'],
+                        ['t'=>'22:55','sub'=>'Night beat','img'=>'/images/scene-night.jpg','title'=>'Wrap &amp; review','desc'=>'Reports auto-compile from the day&rsquo;s captures. Supervisor sign-off, eSig, archived — before clock-out.'],
+                    ] as $i => $step)
+                        <article class="relative rounded-md overflow-hidden bg-white border border-ink-100 shadow-md hover:shadow-2xl transition-shadow">
+                            <div class="relative h-44 overflow-hidden">
+                                <img src="{{ $step['img'] }}" alt="{{ $step['title'] }}" class="absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/20 to-transparent"></div>
+                                <div class="absolute top-3 left-3 inline-flex items-center gap-2 rounded-md bg-navy-950/85 backdrop-blur px-2.5 py-1">
+                                    <span class="font-mono text-[10px] uppercase tracking-[.2em] text-brand-300 font-bold">{{ $step['t'] }}</span>
+                                    <span class="w-px h-2.5 bg-white/30"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/85">{{ $step['sub'] }}</span>
+                                </div>
+                            </div>
+                            <div class="hidden lg:flex absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 items-center justify-center rounded-full bg-white shadow-md ring-2 ring-brand-200 z-10">
+                                <span class="timeline-dot block w-2.5 h-2.5 rounded-full bg-brand-600"></span>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-display text-lg font-bold text-navy-900">{{ $step['title'] }}</h3>
+                                <p class="mt-1.5 text-[13px] text-navy-700/80 leading-relaxed">{!! $step['desc'] !!}</p>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ========== OFFICER TESTIMONIALS ========== --}}
+    <section class="relative bg-white">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-12 items-end">
+                <div class="lg:col-span-5">
+                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">In their own words</p>
+                    <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                        Officers who use it <br/><span class="text-brand-600">won&rsquo;t go back.</span>
+                    </h2>
+                    <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed">
+                        Auxilio Agente is in active rotation across multiple departments — from precinct beat patrol to highway response. Here&rsquo;s what the badges that carry it every shift have to say.
+                    </p>
+                </div>
+                <div class="lg:col-span-7">
+                    <div class="reveal stagger grid sm:grid-cols-2 gap-5">
+                        @foreach ([
+                            ['img'=>'/images/officer-1.jpg','name'=>'Ofc. M. Ramos','rank'=>'Beat patrol · 8 yrs','quote'=>'I used to lose 5 minutes per call just on radio confirmations. Now I tap once and the squad already knows where I am.','accent'=>'#FB0606'],
+                            ['img'=>'/images/officer-2.jpg','name'=>'Sgt. D. Patel','rank'=>'Squad supervisor · 12 yrs','quote'=>'The cohort map changed how I deploy backup. I can see who&rsquo;s actually free instead of guessing from chatter.','accent'=>'#1d4ed8'],
+                            ['img'=>'/images/officer-3.jpg','name'=>'Cpl. A. Nguyen','rank'=>'Highway response · 6 yrs','quote'=>'Plate OCR + auto-report cut my paperwork in half. I finish a shift and the reports are done.','accent'=>'#FB0606'],
+                            ['img'=>'/images/officer-4.jpg','name'=>'Ofc. L. Coleman','rank'=>'Community policing · 4 yrs','quote'=>'My family used to worry every shift. Now they get a single safe-arrival ping when I clock in. That&rsquo;s priceless.','accent'=>'#0c1126'],
+                        ] as $q)
+                            <figure class="group relative rounded-md bg-white border border-ink-100 p-6 shadow-sm hover:shadow-xl transition">
+                                <svg class="absolute top-5 right-5 w-8 h-8 text-brand-100" viewBox="0 0 32 32" fill="currentColor"><path d="M9 8c-3.3 0-6 2.7-6 6v10h10V14H6c0-1.7 1.3-3 3-3V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-7c0-1.7 1.3-3 3-3V8z"/></svg>
+                                <blockquote class="font-display text-[15px] leading-relaxed text-navy-800 relative">
+                                    &ldquo;{{ $q['quote'] }}&rdquo;
+                                </blockquote>
+                                <figcaption class="mt-5 flex items-center gap-3 pt-4 border-t border-ink-100">
+                                    <span class="block w-11 h-11 rounded-full overflow-hidden ring-2" style="--tw-ring-color:{{ $q['accent'] }};box-shadow:0 0 0 2px {{ $q['accent'] }}">
+                                        <img src="{{ $q['img'] }}" alt="{{ $q['name'] }}" class="w-full h-full object-cover" />
+                                    </span>
+                                    <div>
+                                        <div class="font-display text-sm font-bold text-navy-900">{{ $q['name'] }}</div>
+                                        <div class="mt-0.5 font-mono text-[10px] uppercase tracking-[.18em] text-ink-500">{{ $q['rank'] }}</div>
+                                    </div>
+                                </figcaption>
+                            </figure>
                         @endforeach
                     </div>
                 </div>
@@ -1939,7 +2110,7 @@
 
         var car = document.querySelector('[data-agent-carousel]');
         if (car) {
-            var imgs = ['/images/onboard-1.jpg','/images/onboard-2.jpg','/images/onboard-3.jpg','/images/onboard-4.jpg'];
+            var imgs = ['/images/screen-companion.png','/images/screen-location.png','/images/screen-sos.png','/images/screen-map.png'];
             var img = car.querySelector('[data-onboard-img]');
             var slides = car.querySelectorAll('[data-onboard-slide]');
             var dots = car.querySelectorAll('[data-onboard-dot]');

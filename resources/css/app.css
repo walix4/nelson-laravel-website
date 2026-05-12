@@ -153,6 +153,59 @@
     .spin-slow { animation: spinSlow 36s linear infinite; }
     @keyframes spinSlow { to { transform: rotate(360deg); } }
 
+    /* ---------- Phone mockup tilt + glow halo ---------- */
+    .phone-mock {
+        transform: perspective(1400px) rotateY(-6deg) rotateX(2deg);
+        transition: transform .8s cubic-bezier(.2,.7,.2,1), box-shadow .6s ease;
+    }
+    .phone-mock:hover {
+        transform: perspective(1400px) rotateY(-2deg) rotateX(0deg) translateY(-6px);
+    }
+    .phone-mock-right { transform: perspective(1400px) rotateY(6deg) rotateX(2deg); }
+    .phone-mock-right:hover { transform: perspective(1400px) rotateY(2deg) rotateX(0deg) translateY(-6px); }
+    .phone-halo {
+        position: absolute; inset: -30%;
+        background: radial-gradient(closest-side, rgba(251,6,6,.18), rgba(251,6,6,0) 70%);
+        z-index: -1;
+        animation: haloPulse 5s ease-in-out infinite;
+        pointer-events: none;
+    }
+    @keyframes haloPulse {
+        0%, 100% { opacity: .55; transform: scale(.95); }
+        50%      { opacity: .9;  transform: scale(1.05); }
+    }
+
+    /* ---------- Notification card drift ---------- */
+    .notif-card { animation: notifDrift 7s ease-in-out infinite; will-change: transform; }
+    .notif-card-2 { animation: notifDrift 9s ease-in-out infinite -2s; }
+    .notif-card-3 { animation: notifDrift 11s ease-in-out infinite -5s; }
+    @keyframes notifDrift {
+        0%, 100% { transform: translateY(0) translateX(0); }
+        50%      { transform: translateY(-10px) translateX(4px); }
+    }
+
+    /* ---------- Scenario card hover lift ---------- */
+    .scenario-card { transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s ease; }
+    .scenario-card:hover { transform: translateY(-8px) scale(1.02); }
+    .scenario-card img { transition: transform 1.2s cubic-bezier(.2,.7,.2,1); }
+    .scenario-card:hover img { transform: scale(1.08); }
+
+    /* ---------- Shift timeline marker pulse ---------- */
+    .timeline-dot {
+        position: relative;
+    }
+    .timeline-dot::before {
+        content: '';
+        position: absolute; inset: -6px;
+        border-radius: 9999px;
+        background: rgba(251,6,6,.35);
+        animation: timelinePulse 2.4s ease-out infinite;
+    }
+    @keyframes timelinePulse {
+        0%   { transform: scale(.6); opacity: .7; }
+        100% { transform: scale(2.2); opacity: 0; }
+    }
+
     /* ---------- Hero red SOS badge ring ---------- */
     .sos-ping {
         animation: sosPing 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
