@@ -1521,6 +1521,56 @@
         </div>
     </section>
 
+    {{-- ========== ONBOARDING CAROUSEL ========== --}}
+    <section class="relative bg-navy-50">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">From box to badge</p>
+                <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">Onboarding takes <span class="text-brand-600">90 seconds.</span></h2>
+                <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed">Four screens. No paperwork. Officers are dispatch-ready before their first shift starts.</p>
+            </div>
+            <div class="reveal mt-12" data-agent-carousel>
+                <div class="grid lg:grid-cols-12 gap-10 items-center">
+                    <div class="lg:col-span-5">
+                        <div class="relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.5)]">
+                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                                <img data-onboard-img src="/images/onboard-1.jpg" alt="Onboarding step" class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-300" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7">
+                        <ul data-onboard-slides class="space-y-3">
+                            @foreach ([
+                                ['n'=>'01','h'=>'Your personal safety companion','b'=>'Real-time alerts, emergency support, and peace of mind at your fingertips.'],
+                                ['n'=>'02','h'=>'Track and share your location','b'=>"Let your loved ones or security agents monitor your location to ensure you're always safe."],
+                                ['n'=>'03','h'=>'Quick SOS for instant help','b'=>"Alert trusted agents or emergency responders with just a tap whenever you're in danger."],
+                                ['n'=>'04','h'=>'Stay coordinated in the field','b'=>"A verified responder network at the officer's fingertips, with full incident context built in."],
+                            ] as $i => $s)
+                                <li data-onboard-slide="{{ $i }}" @if($i===0) data-active class="cursor-pointer rounded-md border-2 border-brand-200 bg-white p-5 lg:p-6 shadow-lg transition" @else class="cursor-pointer rounded-md border-2 border-ink-100 bg-white p-5 lg:p-6 shadow-sm hover:border-brand-200 hover:shadow-md transition" @endif>
+                                    <div class="flex items-center gap-4">
+                                        <span class="flex w-10 h-10 shrink-0 items-center justify-center rounded-full {{ $i===0 ? 'bg-red-600 text-white' : 'bg-navy-100 text-navy-700' }} font-display font-bold">{{ $s['n'] }}</span>
+                                        <div><h3 class="font-display text-lg font-bold text-navy-900">{{ $s['h'] }}</h3><p class="mt-1 text-sm text-navy-700/80">{{ $s['b'] }}</p></div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <div class="mt-6 flex items-center gap-4">
+                            <button type="button" data-onboard-prev class="flex w-10 h-10 items-center justify-center rounded-md border border-ink-100 bg-white text-navy-900 hover:border-brand-300 hover:text-brand-600 transition" aria-label="Previous"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg></button>
+                            <button type="button" data-onboard-next class="flex w-10 h-10 items-center justify-center rounded-md border border-ink-100 bg-white text-navy-900 hover:border-brand-300 hover:text-brand-600 transition" aria-label="Next"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></button>
+                            <div class="flex items-center gap-1.5 ml-2">
+                                @for ($i = 0; $i < 4; $i++)
+                                    <span data-onboard-dot="{{ $i }}" class="w-2 h-2 rounded-full {{ $i===0 ? 'bg-red-600' : 'bg-navy-200' }} transition cursor-pointer"></span>
+                                @endfor
+                            </div>
+                            <span data-onboard-counter class="ml-auto font-mono text-[11px] uppercase tracking-[.18em] text-ink-500">01 / 04</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     {{-- ========== DISPATCH ACCEPTANCE ========== --}}
     <section class="relative bg-white">
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
@@ -1628,6 +1678,47 @@
                             </li>
                         @endforeach
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ========== LIVE COHORT MAP ========== --}}
+    <section class="relative bg-white">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Live cohort map</p>
+                    <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">See every responder in a <span class="text-brand-600">5km radius</span> in real time.</h2>
+                    <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed">Auxilio sweeps the area every 3 seconds. Squad clusters (SC) and rapid-response cars (RC) surface on a single live canvas — the officer always knows who's nearest, who's free, and who can back them up.</p>
+                    <div class="reveal reveal-delay-3 mt-6 grid grid-cols-2 gap-3">
+                        <div class="rounded-md border border-ink-100 bg-white p-4 shadow-sm">
+                            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-yellow-500 ring-2 ring-yellow-200"></span><span class="font-display text-sm font-bold text-navy-900">SC · Squad cluster</span></div>
+                            <p class="mt-1 text-[12.5px] text-navy-700/80">Two or more officers stationed within 200m of each other.</p>
+                        </div>
+                        <div class="rounded-md border border-ink-100 bg-white p-4 shadow-sm">
+                            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-red-500 ring-2 ring-red-200"></span><span class="font-display text-sm font-bold text-navy-900">RC · Rapid response</span></div>
+                            <p class="mt-1 text-[12.5px] text-navy-700/80">Mobile units in active pursuit or on-call.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7">
+                    <div class="reveal relative">
+                        <div class="relative mx-auto max-w-[420px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.5)]">
+                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                                <img src="/images/screen-cohort-map.jpg" alt="Auxilio Agente — Multi-agent cohort map" class="absolute inset-0 w-full h-full object-cover object-top" />
+                            </div>
+                        </div>
+                        <div class="hidden md:flex absolute -left-4 top-20 items-center gap-3 rounded-md border border-ink-100 bg-white px-4 py-2.5 shadow-lg">
+                            <span class="flex w-8 h-8 items-center justify-center rounded-full bg-brand-50 text-brand-600"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
+                            <div><div class="font-mono text-[9.5px] uppercase tracking-[.18em] text-ink-500">Cohort</div><div class="font-display text-sm font-bold text-navy-900">8 active in 5km</div></div>
+                        </div>
+                        <div class="hidden md:flex absolute -right-4 bottom-32 items-center gap-3 rounded-md border border-ink-100 bg-white px-4 py-2.5 shadow-lg">
+                            <span class="flex w-8 h-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-600"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>
+                            <div><div class="font-mono text-[9.5px] uppercase tracking-[.18em] text-ink-500">Avg accept</div><div class="font-display text-sm font-bold text-navy-900">1.2 sec</div></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1761,6 +1852,30 @@
         </div>
     </section>
 
+    {{-- ========== STATS ========== --}}
+    <section class="relative bg-navy-50">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">By the numbers</p>
+                <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">12,400 officers. <span class="text-brand-600">One protocol.</span></h2>
+            </div>
+            <div class="reveal mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4" data-agent-stats>
+                @foreach ([
+                    ['icon'=>'M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-3.13a4 4 0 100-8 4 4 0 000 8z','to'=>'12400','decimals'=>'0','suffix'=>'+','label'=>'Officers on platform'],
+                    ['icon'=>'M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z','to'=>'12','decimals'=>'1','suffix'=>'s','label'=>'Avg accept time'],
+                    ['icon'=>'M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z','to'=>'5','decimals'=>'0','suffix'=>'km','label'=>'Cohort radius'],
+                    ['icon'=>'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z','to'=>'998','decimals'=>'2','suffix'=>'%','label'=>'Channel uptime'],
+                ] as $s)
+                    <div class="rounded-md border border-ink-100 bg-white p-6 shadow-sm hover:shadow-lg transition group">
+                        <span class="flex w-10 h-10 items-center justify-center rounded-lg bg-brand-50 text-brand-600 group-hover:bg-brand-100 transition"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $s['icon'] }}"/></svg></span>
+                        <div class="mt-5 font-display text-4xl font-extrabold tracking-tight text-navy-900"><span data-stat-num data-stat-to="{{ $s['to'] }}" data-stat-decimals="{{ $s['decimals'] }}">0</span><span class="text-brand-600">{{ $s['suffix'] }}</span></div>
+                        <div class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-ink-500">{{ $s['label'] }}</div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     {{-- ========== CTA ========== --}}
     <section class="relative">
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
@@ -1807,6 +1922,78 @@
             </div>
         </div>
     </section>
+
+    <script>
+    (function(){
+        var car = document.querySelector('[data-agent-carousel]');
+        if (car) {
+            var imgs = ['/images/onboard-1.jpg','/images/onboard-2.jpg','/images/onboard-3.jpg','/images/onboard-4.jpg'];
+            var img = car.querySelector('[data-onboard-img]');
+            var slides = car.querySelectorAll('[data-onboard-slide]');
+            var dots = car.querySelectorAll('[data-onboard-dot]');
+            var counter = car.querySelector('[data-onboard-counter]');
+            var prev = car.querySelector('[data-onboard-prev]');
+            var next = car.querySelector('[data-onboard-next]');
+            var i = 0;
+            function go(n) {
+                i = (n + slides.length) % slides.length;
+                if (img) { img.style.opacity = '0'; setTimeout(function(){ img.src = imgs[i]; img.style.opacity = '1'; }, 150); }
+                slides.forEach(function(s, idx){
+                    if (idx === i) {
+                        s.setAttribute('data-active','');
+                        s.className = 'cursor-pointer rounded-md border-2 border-brand-200 bg-white p-5 lg:p-6 shadow-lg transition';
+                        var badge = s.querySelector('span'); if (badge) badge.className = 'flex w-10 h-10 shrink-0 items-center justify-center rounded-full bg-red-600 text-white font-display font-bold';
+                    } else {
+                        s.removeAttribute('data-active');
+                        s.className = 'cursor-pointer rounded-md border-2 border-ink-100 bg-white p-5 lg:p-6 shadow-sm hover:border-brand-200 hover:shadow-md transition';
+                        var badge2 = s.querySelector('span'); if (badge2) badge2.className = 'flex w-10 h-10 shrink-0 items-center justify-center rounded-full bg-navy-100 text-navy-700 font-display font-bold';
+                    }
+                });
+                dots.forEach(function(d, idx){ d.className = idx === i ? 'w-2 h-2 rounded-full bg-red-600 transition cursor-pointer' : 'w-2 h-2 rounded-full bg-navy-200 transition cursor-pointer'; });
+                if (counter) counter.textContent = String(i+1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
+            }
+            slides.forEach(function(s){ s.addEventListener('click', function(){ go(parseInt(s.getAttribute('data-onboard-slide'),10)); }); });
+            dots.forEach(function(d){ d.addEventListener('click', function(){ go(parseInt(d.getAttribute('data-onboard-dot'),10)); }); });
+            if (prev) prev.addEventListener('click', function(){ go(i-1); });
+            if (next) next.addEventListener('click', function(){ go(i+1); });
+            setInterval(function(){
+                var view = document.querySelector('[data-view="agent-app"]');
+                if (view && !view.classList.contains('hidden') && document.visibilityState === 'visible') go(i+1);
+            }, 5000);
+        }
+        var stats = document.querySelector('[data-agent-stats]');
+        if (stats) {
+            var nums = stats.querySelectorAll('[data-stat-num]');
+            var animated = false;
+            function animate() {
+                if (animated) return;
+                animated = true;
+                nums.forEach(function(el){
+                    var to = parseFloat(el.getAttribute('data-stat-to'));
+                    var decimals = parseInt(el.getAttribute('data-stat-decimals') || '0', 10);
+                    var duration = 1400, start = performance.now();
+                    function tick(now) {
+                        var t = Math.min((now - start) / duration, 1);
+                        var eased = 1 - Math.pow(1 - t, 3);
+                        var val = to * eased;
+                        el.textContent = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toLocaleString();
+                        if (t < 1) requestAnimationFrame(tick);
+                    }
+                    requestAnimationFrame(tick);
+                });
+            }
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function(entries){
+                    entries.forEach(function(e){ if (e.isIntersecting) { animate(); io.disconnect(); } });
+                }, { threshold: 0.3 });
+                io.observe(stats);
+            } else animate();
+            window.addEventListener('hashchange', function(){
+                if (location.hash === '#/agent-app') { animated = false; setTimeout(animate, 200); }
+            });
+        }
+    })();
+    </script>
 </div>
 
 {{-- ============================================================
