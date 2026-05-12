@@ -1453,6 +1453,7 @@
      AGENT APP VIEW
 ============================================================--}}
 <div data-view="agent-app" class="hidden">
+    {{-- ========== HERO ========== --}}
     <section class="relative overflow-hidden hero-bg">
         <div class="pointer-events-none absolute inset-0 -z-10">
             <div class="absolute -top-32 left-1/4 w-[520px] h-[520px] rounded-full bg-navy-100/60 blur-3xl"></div>
@@ -1464,12 +1465,19 @@
             </div>
             <div class="mt-3 grid lg:grid-cols-12 gap-10 items-center">
                 <div class="lg:col-span-7">
-                    <span class="reveal reveal-delay-1 inline-flex items-center gap-2 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5">For Super Agents</span>
+                    <span class="reveal reveal-delay-1 inline-flex items-center gap-2 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5">
+                        <span class="relative flex w-1.5 h-1.5">
+                            <span class="absolute inset-0 rounded-full bg-brand-600 animate-ping opacity-70"></span>
+                            <span class="relative w-1.5 h-1.5 rounded-full bg-brand-600"></span>
+                        </span>
+                        Auxilio Agente · iOS & Android
+                    </span>
                     <h1 class="reveal reveal-delay-2 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
-                        Auxilio <span class="text-brand-600">Agent</span>.
+                        The badge in <br/>
+                        <span class="text-brand-600">your pocket.</span>
                     </h1>
                     <p class="reveal reveal-delay-3 mt-4 text-lg text-navy-700/80 max-w-xl">
-                        The companion app for verified responders. Accept calls, file reports, run live dispatch — all from the same phone.
+                        Auxilio Agente turns every officer into a node in the dispatch network. Accept emergencies in one tap, navigate live to the incident, and capture everything that matters — straight from the field.
                     </p>
                     <div class="reveal reveal-delay-4 mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3" style="max-width:380px;">
                         <a href="#" class="group inline-flex items-center justify-center gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 shadow-sm hover:shadow-lg transition">
@@ -1487,40 +1495,315 @@
                             </div>
                         </a>
                     </div>
+                    <dl class="reveal reveal-delay-4 mt-10 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl">
+                        @foreach ([
+                            ['v'=>'1-tap','l'=>'accept dispatch'],
+                            ['v'=>'Live','l'=>'turn-by-turn'],
+                            ['v'=>'Encrypted','l'=>'officer channel'],
+                            ['v'=>'Offline','l'=>'incident capture'],
+                        ] as $s)
+                            <div>
+                                <dt class="font-display text-2xl font-bold tracking-tight text-navy-900">{{ $s['v'] }}</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-ink-500">{{ $s['l'] }}</dd>
+                            </div>
+                        @endforeach
+                    </dl>
                 </div>
                 <div class="reveal reveal-right lg:col-span-5">
                     <div class="relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.6)] float-slow">
                         <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
                         <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
-                            <img src="/images/screen-assigning.png" alt="Auxilio Agent app" class="absolute inset-0 w-full h-full object-cover object-top" />
+                            <img src="/images/screen-accept-emergency.jpg" alt="Auxilio Agente — Accept Emergency" class="absolute inset-0 w-full h-full object-cover object-top" />
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="reveal stagger mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ([
-                    ['t'=>'Live dispatch queue','b'=>'See incoming reports filtered by distance and category. Accept or pass with one tap.'],
-                    ['t'=>'Auto-routed cases','b'=>'The system pings the closest qualified agent first. No bidding, no fighting for jobs.'],
-                    ['t'=>'In-app evidence locker','b'=>'Photos, audio, sketches, and victim statements are unlocked the moment you accept.'],
-                    ['t'=>'Status & ETA broadcast','b'=>'The victim sees you en route in real time. Update status with one swipe.'],
-                    ['t'=>'Background-check baked in','b'=>'Apply once. We verify license, insurance, and clearance — you\'re on the platform in under 72 hours.'],
-                    ['t'=>'Earnings dashboard','b'=>'Per-case payout, weekly summary, and tax-ready exports. Always know what you cleared.'],
-                ] as $f)
-                    <div class="rounded-md border border-ink-100 bg-white p-6 shadow-sm hover:shadow-lg transition">
-                        <h3 class="text-base font-bold text-navy-900">{{ $f['t'] }}</h3>
-                        <p class="mt-2 text-sm text-navy-700/80 leading-relaxed">{{ $f['b'] }}</p>
+    {{-- ========== DISPATCH ACCEPTANCE ========== --}}
+    <section class="relative bg-white">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-5 lg:sticky lg:top-28">
+                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">01 · Accept emergency</p>
+                    <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                        From SOS to <span class="text-brand-600">accepted</span> in a single tap.
+                    </h2>
+                    <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed">
+                        Officers don't scroll through queues. The closest, best-matched responders see the same card at the same time — and the first tap wins the call. No radio round-trip, no paper log, no lag.
+                    </p>
+                    <div class="reveal reveal-delay-3 mt-6 flex flex-wrap gap-2">
+                        @foreach (['Urgent','Violence','Sexual','Robbery','Hostage','Pursuit'] as $i => $tag)
+                            <span class="rounded-md px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide {{ $i === 0 ? 'bg-red-600 text-white' : 'bg-navy-900 text-white' }}">{{ $tag }}</span>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
+
+                <div class="lg:col-span-7">
+                    <ol class="relative space-y-4">
+                        <span class="absolute left-[27px] top-4 bottom-4 w-px bg-gradient-to-b from-brand-300 via-ink-100 to-transparent"></span>
+                        @foreach ([
+                            ['t'=>'T+0.0s','h'=>'Push lands','b'=>'Encrypted dispatch packet arrives — the phone vibrates whether the screen is locked or not.'],
+                            ['t'=>'T+0.4s','h'=>'Context attached','b'=>'Victim photo, address, distance, ETA, and a 1-min acceptance window appear on the lock screen.'],
+                            ['t'=>'T+1.2s','h'=>'Threat tags','b'=>'AI-classified tags — Urgent, Violence, Sexual, Robbery — load before the officer even unlocks.'],
+                            ['t'=>'T+1 tap','h'=>'Accept Emergency','b'=>'One thumb. Channel opens, route locks, the cohort sees the officer is on the move.'],
+                        ] as $row)
+                            <li class="reveal relative flex gap-4 rounded-md border border-ink-100 bg-white p-5 lg:p-6 shadow-sm hover:shadow-lg transition">
+                                <span class="flex w-[54px] h-[54px] shrink-0 items-center justify-center rounded-xl bg-brand-50 ring-1 ring-brand-100">
+                                    <svg class="w-5 h-5 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <div class="min-w-0">
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-mono text-[10.5px] uppercase tracking-[.2em] text-brand-600">{{ $row['t'] }}</span>
+                                        <span class="h-px flex-1 bg-ink-100"></span>
+                                    </div>
+                                    <h3 class="mt-1.5 font-display text-lg font-bold text-navy-900">{{ $row['h'] }}</h3>
+                                    <p class="mt-1 text-sm text-navy-700/80 leading-relaxed">{{ $row['b'] }}</p>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ol>
+                    <div class="reveal mt-6 flex items-center gap-3 rounded-md border border-emerald-200 bg-emerald-50 px-5 py-4">
+                        <span class="flex w-9 h-9 items-center justify-center rounded-full bg-emerald-100 ring-1 ring-emerald-300">
+                            <svg class="w-4 h-4 text-emerald-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                        </span>
+                        <div>
+                            <div class="font-mono text-[10.5px] uppercase tracking-[.18em] text-emerald-700">Officer Arrived</div>
+                            <div class="font-display text-[15px] font-semibold text-navy-900">Auto-confirmed via geofence · Family network notified</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ========== TURN-BY-TURN ========== --}}
+    <section class="relative bg-navy-50">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="order-2 lg:order-1 lg:col-span-5">
+                    <div class="reveal relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
+                        <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                        <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                            <img src="/images/screen-route-map.jpg" alt="Auxilio Agente — Route navigation" class="absolute inset-0 w-full h-full object-cover object-top" />
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 lg:col-span-7">
+                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">02 · Navigate live</p>
+                    <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                        Turn-by-turn routing, <span class="text-navy-700">cohort-aware</span> the whole way.
+                    </h2>
+                    <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed max-w-xl">
+                        The map doesn't just show the incident — it shows every other Auxilio officer converging on it. One-tap call to the victim, dispatch, partner, or supervisor lives on the right rail.
+                    </p>
+                    <div class="reveal reveal-delay-3 mt-8 grid grid-cols-2 gap-3 max-w-lg">
+                        @foreach ([
+                            ['l'=>'Distance','v'=>'4.2m','i'=>'M3 12h18M3 12l4-4M3 12l4 4'],
+                            ['l'=>'Duration','v'=>'4.2m','i'=>'M12 6v6l4 2M12 21a9 9 0 100-18 9 9 0 000 18z'],
+                            ['l'=>'Driving','v'=>'4.2m','i'=>'M5 17a2 2 0 100-4 2 2 0 000 4zm14 0a2 2 0 100-4 2 2 0 000 4zM3 13l1.5-5a2 2 0 012-1.5h11a2 2 0 012 1.5L21 13M3 13h18'],
+                            ['l'=>'Walking','v'=>'4.2m','i'=>'M13 4a2 2 0 11-4 0 2 2 0 014 0zM10 22l2-7-3-2 1-5 4 2 3 4'],
+                        ] as $m)
+                            <div class="flex items-center gap-3 rounded-md border border-ink-100 bg-white px-4 py-3 shadow-sm">
+                                <span class="flex w-9 h-9 items-center justify-center rounded-lg bg-navy-900 text-white">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $m['i'] }}"/></svg>
+                                </span>
+                                <div>
+                                    <div class="font-mono text-[10px] uppercase tracking-[.18em] text-ink-500">{{ $m['l'] }}</div>
+                                    <div class="font-display text-lg font-bold text-navy-900">{{ $m['v'] }}</div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <ul class="reveal reveal-delay-4 mt-8 space-y-3 text-sm text-navy-700">
+                        @foreach ([
+                            'Real-time bearing of every responding officer on the same map.',
+                            'Right-rail quick actions: re-center, escalate, suspect intel, encrypted call.',
+                            'Auto-mute non-critical notifications once a dispatch is accepted.',
+                        ] as $bullet)
+                            <li class="flex items-start gap-2.5">
+                                <span class="mt-2 w-1.5 h-1.5 shrink-0 rounded-full bg-brand-600"></span>
+                                <span>{{ $bullet }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ========== FIELD NETWORK ========== --}}
+    <section class="relative bg-white">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">03 · Field network</p>
+                <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                    Every officer is a <span class="text-brand-600">node</span>, not a number.
+                </h2>
+                <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed">
+                    Auxilio Agente isn't a radio. It's a peer-to-peer mesh of badged responders, their networks, and the people who depend on them.
+                </p>
             </div>
 
-            <div class="reveal mt-16 rounded-md bg-gradient-to-br from-navy-950 to-navy-900 text-white p-8 lg:p-12 text-center">
-                <p class="text-xs font-bold uppercase tracking-[.2em] text-brand-300">Become an agent</p>
-                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl">Apply to join the network.</h2>
-                <p class="mt-3 max-w-xl mx-auto text-navy-200/90">Licensed security, off-duty law enforcement, and certified responders welcome. We handle vetting; you handle the call.</p>
-                <a data-route href="#/contact" class="mt-6 inline-flex items-center gap-2 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold px-6 py-3 transition">Start application
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
-                </a>
+            <div class="mt-12 grid lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-5">
+                    <div class="reveal relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
+                        <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                        <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                            <img src="/images/screen-my-network.jpg" alt="Auxilio Agente — My Network" class="absolute inset-0 w-full h-full object-cover object-top" />
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 grid gap-4">
+                    @foreach ([
+                        ['t'=>'Trusted networks','b'=>'Officers build their own circles — partners, supervisors, family, squad — and choose who sees their status, location, and shift.'],
+                        ['t'=>'Cohort awareness','b'=>'Every officer within a 5km radius of an active call appears on the map with bearing, ETA, and badge tier.'],
+                        ['t'=>'Encrypted chat','b'=>'Channel-isolated messaging keyed to incident IDs. Closes automatically when the call is resolved.'],
+                    ] as $f)
+                        <div class="reveal flex items-start gap-4 rounded-md border border-ink-100 bg-white p-5 lg:p-6 shadow-sm hover:shadow-lg transition">
+                            <span class="flex w-11 h-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 ring-1 ring-brand-100">
+                                <svg class="w-5 h-5 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-3.13a4 4 0 100-8 4 4 0 000 8z"/></svg>
+                            </span>
+                            <div>
+                                <h3 class="font-display text-lg font-bold text-navy-900">{{ $f['t'] }}</h3>
+                                <p class="mt-1.5 text-sm text-navy-700/80 leading-relaxed">{{ $f['b'] }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                    <div class="reveal mt-2 flex items-center gap-3 rounded-md border border-ink-100 bg-navy-50 px-5 py-4">
+                        <div class="flex -space-x-2">
+                            @for ($i = 0; $i < 3; $i++)
+                                <span class="flex w-8 h-8 items-center justify-center rounded-full bg-gradient-to-br from-navy-700 to-navy-900 ring-2 ring-white text-[10px] font-bold text-white">SC</span>
+                            @endfor
+                        </div>
+                        <div class="text-sm text-navy-700">
+                            <span class="font-bold text-navy-900">12 squads · 1,023 contacts</span> — built from the officer's existing roster, not a vendor's.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ========== INCIDENT CAPTURE ========== --}}
+    <section class="relative bg-navy-50">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7">
+                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">04 · Incident capture</p>
+                    <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                        The report writes itself — <span class="text-brand-600">on scene.</span>
+                    </h2>
+                    <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed max-w-xl">
+                        Plate, make, model, year, color. Three angles of the vehicle. Suspect tags applied at dispatch. Auxilio Agente captures it all in the field and pre-fills the incident report before the officer leaves the scene.
+                    </p>
+                    <div class="reveal reveal-delay-3 mt-8 grid sm:grid-cols-3 gap-3">
+                        @foreach ([
+                            ['t'=>'3-angle vehicle capture','b'=>'Front, side, back — auto-aligned and stamped with GPS + time.'],
+                            ['t'=>'Plate OCR','b'=>'Reads plates from camera, validates against AB-7368 format.'],
+                            ['t'=>'Auto-report','b'=>'Tags + vehicle + route + audio log compile into one submission.'],
+                        ] as $f)
+                            <div class="rounded-md border border-ink-100 bg-white p-4 shadow-sm">
+                                <span class="flex w-9 h-9 items-center justify-center rounded-lg bg-brand-50 ring-1 ring-brand-100">
+                                    <svg class="w-4 h-4 text-brand-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h2l2-2h6l2 2h2a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9zm9 4a3 3 0 100 6 3 3 0 000-6z"/></svg>
+                                </span>
+                                <div class="mt-3 font-display text-[15px] font-bold text-navy-900">{{ $f['t'] }}</div>
+                                <p class="mt-1 text-[13px] text-navy-700/80 leading-relaxed">{{ $f['b'] }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="lg:col-span-5">
+                    <div class="reveal relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
+                        <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                        <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                            <img src="/images/screen-vehicle-details.jpg" alt="Auxilio Agente — Vehicle details" class="absolute inset-0 w-full h-full object-cover object-top" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ========== OFFICER CONTROL ========== --}}
+    <section class="relative bg-white">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-5">
+                    <div class="reveal relative mx-auto max-w-[280px] aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.45)]">
+                        <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                        <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                            <img src="/images/screen-drawer.jpg" alt="Auxilio Agente — Officer drawer" class="absolute inset-0 w-full h-full object-cover object-top" />
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7">
+                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">05 · Officer control</p>
+                    <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                        One drawer. <span class="text-navy-700">Every shift function.</span>
+                    </h2>
+                    <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed max-w-xl">
+                        Dashboard, chat, history, contacts, networks, support — Auxilio Agente collapses every admin surface a working officer needs into a single drawer.
+                    </p>
+                    <div class="reveal reveal-delay-3 mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        @foreach (['Dashboard','Profile','Chat','History','Network','Contact','Setting','Help'] as $item)
+                            <div class="group flex flex-col items-start gap-3 rounded-md border border-ink-100 bg-white p-4 shadow-sm hover:border-brand-200 hover:shadow-lg transition">
+                                <span class="flex w-9 h-9 items-center justify-center rounded-lg bg-navy-900 text-white group-hover:bg-brand-600 transition-colors">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0h6"/></svg>
+                                </span>
+                                <div class="font-display text-sm font-bold text-navy-900">{{ $item }}</div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ========== CTA ========== --}}
+    <section class="relative">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="reveal rounded-md bg-gradient-to-br from-navy-950 to-navy-900 text-white p-8 lg:p-14 text-center overflow-hidden relative">
+                <div class="pointer-events-none absolute inset-0 -z-0">
+                    <div class="absolute left-1/2 top-1/2 w-[680px] h-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/15 blur-3xl"></div>
+                </div>
+                <div class="relative z-10">
+                    <span class="inline-flex items-center gap-2 rounded-md border border-brand-400/30 bg-brand-500/10 px-3 py-1.5 text-[11px] font-mono uppercase tracking-[.2em] text-brand-300">
+                        <span class="relative flex w-1.5 h-1.5">
+                            <span class="absolute inset-0 rounded-full bg-brand-400 animate-ping opacity-70"></span>
+                            <span class="relative w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+                        </span>
+                        Available now · iOS 16+ · Android 13+
+                    </span>
+                    <h2 class="mt-6 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl">
+                        Put Auxilio Agente on <span class="text-brand-400">every badge.</span>
+                    </h2>
+                    <p class="mt-4 max-w-xl mx-auto text-navy-200/90">Government-vetted distribution. Department-wide rollout in under 48 hours. Single sign-on against your existing officer roster.</p>
+                    <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+                        <a href="#" class="inline-flex items-center gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-5 py-3 shadow-sm hover:shadow-lg transition">
+                            <img src="/images/app-store.svg" alt="" class="w-6 h-6" />
+                            <span class="text-sm font-semibold">App Store</span>
+                        </a>
+                        <a href="#" class="inline-flex items-center gap-3 rounded-md bg-white text-navy-900 hover:bg-navy-100 px-5 py-3 shadow-sm hover:shadow-lg transition">
+                            <img src="/images/google-play.svg" alt="" class="w-6 h-6" />
+                            <span class="text-sm font-semibold">Google Play</span>
+                        </a>
+                        <a data-route href="#/contact" class="inline-flex items-center gap-2 rounded-md border border-white/20 text-white hover:bg-white/10 px-5 py-3 text-sm font-semibold transition">
+                            Department rollout
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                        </a>
+                    </div>
+                    <div class="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-mono text-[10.5px] uppercase tracking-[.18em] text-navy-300">
+                        <span>SOC 2 Type II</span>
+                        <span class="w-1 h-1 rounded-full bg-navy-500"></span>
+                        <span>CJIS Compliant</span>
+                        <span class="w-1 h-1 rounded-full bg-navy-500"></span>
+                        <span>AES-256 Channel</span>
+                        <span class="w-1 h-1 rounded-full bg-navy-500"></span>
+                        <span>Zero-trust Auth</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
