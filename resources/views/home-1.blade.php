@@ -1925,6 +1925,18 @@
 
     <script>
     (function(){
+        // Header color: navy on /agent-app, brand red elsewhere
+        var navEl = document.querySelector('header[data-nav]');
+        var RED = '#FB0606';
+        var NAVY = '#0c1126';
+        function setNav() {
+            if (!navEl) return;
+            var isAgent = (location.hash || '#/').indexOf('#/agent-app') === 0;
+            navEl.style.backgroundColor = isAgent ? NAVY : RED;
+        }
+        setNav();
+        window.addEventListener('hashchange', setNav);
+
         var car = document.querySelector('[data-agent-carousel]');
         if (car) {
             var imgs = ['/images/onboard-1.jpg','/images/onboard-2.jpg','/images/onboard-3.jpg','/images/onboard-4.jpg'];
