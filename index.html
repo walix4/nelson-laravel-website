@@ -9,7 +9,7 @@
     <title>Auxilio User — Your Safety, Your Control</title>
     <link rel="icon" type="image/png" href="images/auxilio-user.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="preload" as="style" href="build/assets/app-DvIQZIgx.css" /><link rel="modulepreload" as="script" href="build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="build/assets/app-DvIQZIgx.css" /><script type="module" src="build/assets/app-C2cgr6mz.js"></script>    <style>
+    <link rel="preload" as="style" href="build/assets/app-WldWHftF.css" /><link rel="modulepreload" as="script" href="build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="build/assets/app-WldWHftF.css" /><script type="module" src="build/assets/app-C2cgr6mz.js"></script>    <style>
         [data-nav].is-scrolled {
             box-shadow: 0 8px 24px -12px rgba(116, 25, 33, .45);
         }
@@ -51,6 +51,7 @@
             <li><a data-route href="#/sex-offender-map" class="nav-link hover:text-white transition">Sex Offender Map</a></li>
             <li><a data-route href="#/how-it-works"     class="nav-link hover:text-white transition">How it works</a></li>
             <li><a data-route href="#/agent-app"        class="nav-link hover:text-white transition">Agent App</a></li>
+            <li><a data-route href="#/citizen-app"      class="nav-link hover:text-white transition">Citizen App</a></li>
             <li><a data-route href="#/about"            class="nav-link hover:text-white transition">About us</a></li>
             <li><a data-route href="#/contact"          class="nav-link hover:text-white transition">Contact us</a></li>
         </ul>
@@ -70,6 +71,7 @@
             <li><a data-route href="#/sex-offender-map">Sex Offender Map</a></li>
             <li><a data-route href="#/how-it-works">How it works</a></li>
             <li><a data-route href="#/agent-app">Agent App</a></li>
+            <li><a data-route href="#/citizen-app">Citizen App</a></li>
             <li><a data-route href="#/about">About us</a></li>
             <li><a data-route href="#/contact">Contact us</a></li>
         </ul>
@@ -4689,6 +4691,807 @@
 </div>
 
 
+<div data-view="citizen-app" class="hidden">
+    <style>
+        [data-view="citizen-app"] .citizen-hero {
+            background:
+                radial-gradient(circle at 20% 20%, rgba(251,6,6,.18), transparent 55%),
+                radial-gradient(circle at 80% 30%, rgba(245,200,68,.16), transparent 50%),
+                linear-gradient(180deg, #0a1224 0%, #0c1730 55%, #0a1224 100%);
+        }
+        [data-view="citizen-app"] .citizen-hero::before {
+            content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+            background-image:
+                linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(circle at 50% 40%, black, transparent 70%);
+        }
+        [data-view="citizen-app"] .bento-dark {
+            background: linear-gradient(160deg, #0d1b2a 0%, #08111f 100%);
+        }
+        [data-view="citizen-app"] .bento-dark::before {
+            content:""; position:absolute; inset:0; opacity:.16; pointer-events:none;
+            background-image: radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px);
+            background-size: 18px 18px;
+        }
+        [data-view="citizen-app"] .ring-pulse {
+            position:absolute; inset:0; border-radius:9999px;
+            border:2px solid rgba(251,6,6,.55);
+            animation: ringPulse 2.4s ease-out infinite;
+        }
+        [data-view="citizen-app"] .ring-pulse.delay-1 { animation-delay:.6s; }
+        [data-view="citizen-app"] .ring-pulse.delay-2 { animation-delay:1.2s; }
+        @keyframes ringPulse {
+            0%   { transform: scale(1);   opacity:.8; }
+            70%  { transform: scale(2.2); opacity:0; }
+            100% { transform: scale(2.2); opacity:0; }
+        }
+        [data-view="citizen-app"] .float-card { animation: floatY 6s ease-in-out infinite; }
+        [data-view="citizen-app"] .float-card.delay-1 { animation-delay:.8s; }
+        [data-view="citizen-app"] .float-card.delay-2 { animation-delay:1.6s; }
+        @keyframes floatY {
+            0%,100% { transform: translateY(0); }
+            50%     { transform: translateY(-10px); }
+        }
+        [data-view="citizen-app"] .citizen-counter {
+            font-variant-numeric: tabular-nums;
+        }
+        [data-view="citizen-app"] [data-faq-item][data-open] [data-faq-icon] {
+            transform: rotate(180deg);
+        }
+        [data-view="citizen-app"] [data-faq-item] [data-faq-body] {
+            max-height: 0; opacity: 0; overflow: hidden;
+            transition: max-height .35s ease, opacity .3s ease, padding .3s ease;
+        }
+        [data-view="citizen-app"] [data-faq-item][data-open] [data-faq-body] {
+            max-height: 480px; opacity: 1;
+        }
+        [data-view="citizen-app"] .scenario-tile { transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s; }
+        [data-view="citizen-app"] .scenario-tile:hover { transform: translateY(-6px); }
+        [data-view="citizen-app"] .marquee-track {
+            display:flex; gap:1.25rem; width:max-content; animation: marquee 38s linear infinite;
+        }
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+        [data-view="citizen-app"] .step-line {
+            background: linear-gradient(180deg, #10b981 0%, #10b981 var(--p,0%), #e5e7eb var(--p,0%) 100%);
+        }
+    </style>
+
+    
+    <section class="citizen-hero relative overflow-hidden text-white">
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
+            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-white/60">
+                <a data-route href="#/" class="hover:text-white transition">Home</a><span>›</span><span class="text-white">Citizen App</span>
+            </div>
+            <div class="mt-3 grid lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-7">
+                    <span class="reveal reveal-delay-1 inline-flex items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/15 backdrop-blur text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5">
+                        <span class="relative flex w-1.5 h-1.5">
+                            <span class="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-70"></span>
+                            <span class="relative w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                        </span>
+                        Auxilio Citizen · iOS & Android
+                    </span>
+                    <h1 class="reveal reveal-delay-2 mt-5 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight">
+                        Your safety, <br/>
+                        <span style="color:#FB0606">your control.</span>
+                    </h1>
+                    <p class="reveal reveal-delay-3 mt-5 text-lg text-white/75 max-w-xl">
+                        Live crime maps, registered offender alerts, and one-tap emergency response — designed for families, accessible for every citizen. Help is never more than a thumb away.
+                    </p>
+                    <div class="reveal reveal-delay-4 mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3" style="max-width:380px;">
+                        <a href="#" class="group inline-flex items-center justify-center gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 shadow-lg hover:shadow-red-600/30 transition">
+                            <img src="images/app-store.svg" alt="" class="w-7 h-7 shrink-0" />
+                            <div class="text-left whitespace-nowrap leading-tight">
+                                <p class="text-[10px] uppercase tracking-wider text-white/80">Download on the</p>
+                                <p class="text-sm font-semibold -mt-0.5">App Store</p>
+                            </div>
+                        </a>
+                        <a href="#" class="group inline-flex items-center justify-center gap-3 rounded-md bg-white text-navy-900 hover:bg-white/90 px-5 py-3.5 shadow-lg transition">
+                            <img src="images/google-play.svg" alt="" class="w-7 h-7 shrink-0" />
+                            <div class="text-left whitespace-nowrap leading-tight">
+                                <p class="text-[10px] uppercase tracking-wider text-navy-500">Get it on</p>
+                                <p class="text-sm font-semibold -mt-0.5">Google Play</p>
+                            </div>
+                        </a>
+                    </div>
+                    <dl class="reveal reveal-delay-4 mt-10 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl">
+                                                    <div>
+                                <dt class="font-display text-2xl font-bold tracking-tight">1-tap</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/55">SOS to dispatch</dd>
+                            </div>
+                                                    <div>
+                                <dt class="font-display text-2xl font-bold tracking-tight">24/7</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/55">family monitoring</dd>
+                            </div>
+                                                    <div>
+                                <dt class="font-display text-2xl font-bold tracking-tight">Live</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/55">crime map alerts</dd>
+                            </div>
+                                                    <div>
+                                <dt class="font-display text-2xl font-bold tracking-tight">Free</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/55">forever for citizens</dd>
+                            </div>
+                                            </dl>
+                </div>
+
+                
+                <div class="reveal reveal-right lg:col-span-5">
+                    <div class="relative mx-auto max-w-[280px]">
+                        <span class="absolute -inset-6 rounded-full blur-3xl bg-red-600/20 pointer-events-none"></span>
+                        <div class="relative aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(251,6,6,.4)]">
+                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                                <img src="images/screen-sos.png" alt="Auxilio Citizen — SOS" class="absolute inset-0 w-full h-full object-cover object-top" />
+                            </div>
+                        </div>
+
+                        
+                        <div class="hidden md:flex absolute -left-12 top-20 items-center justify-center w-14 h-14 rounded-full bg-red-600 text-white shadow-2xl z-10">
+                            <span class="ring-pulse"></span>
+                            <span class="ring-pulse delay-1"></span>
+                            <span class="ring-pulse delay-2"></span>
+                            <span class="font-display font-extrabold text-sm tracking-wider">SOS</span>
+                        </div>
+
+                        <div class="hidden md:flex float-card absolute -right-16 top-16 items-center gap-2.5 rounded-md bg-white px-3 py-2.5 shadow-2xl border border-white/30 z-10" style="min-width:200px;">
+                            <span class="flex w-8 h-8 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/></svg>
+                            </span>
+                            <div>
+                                <div class="font-mono text-[9px] uppercase tracking-[.16em] text-emerald-700 font-bold">FAMILY SAFE</div>
+                                <div class="font-display text-[12px] font-semibold text-navy-900 leading-tight">All 4 members at home</div>
+                            </div>
+                        </div>
+
+                        <div class="hidden md:flex float-card delay-1 absolute -left-20 bottom-24 items-center gap-2.5 rounded-md bg-navy-900 text-white px-3 py-2.5 shadow-2xl ring-1 ring-white/10 z-10" style="min-width:200px;">
+                            <span class="flex w-8 h-8 items-center justify-center rounded-full bg-red-600 text-white">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75M2.7 16.13c-.87 1.5.22 3.37 1.95 3.37h14.7c1.73 0 2.82-1.87 1.95-3.37L13.95 3.38c-.87-1.5-3.03-1.5-3.9 0L2.7 16.13z"/></svg>
+                            </span>
+                            <div>
+                                <div class="font-mono text-[9px] uppercase tracking-[.16em] text-red-400 font-bold">ALERT · 0.3mi</div>
+                                <div class="font-display text-[12px] font-semibold leading-tight">Theft reported · Maple St</div>
+                            </div>
+                        </div>
+
+                        <div class="hidden md:flex float-card delay-2 absolute -right-12 bottom-8 items-center gap-2.5 rounded-md bg-white text-navy-900 px-3 py-2.5 shadow-2xl border border-white/30 z-10" style="min-width:190px;">
+                            <span class="flex w-8 h-8 items-center justify-center rounded-full bg-amber-100 text-amber-700">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                            </span>
+                            <div>
+                                <div class="font-mono text-[9px] uppercase tracking-[.16em] text-amber-700 font-bold">RESPONDER</div>
+                                <div class="font-display text-[12px] font-semibold leading-tight">Officer Reyes · 90s</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="reveal mt-16 overflow-hidden">
+                <p class="text-center text-[10.5px] font-mono uppercase tracking-[.28em] text-white/40 mb-5">Trusted by neighborhoods · families · school districts</p>
+                <div class="relative">
+                    <div class="marquee-track">
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">Newark PD</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">Hudson County</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">Safer Schools NJ</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">BlockWatch</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">Bergen Family Trust</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">Auxilio Network</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">Newark PD</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">Hudson County</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">Safer Schools NJ</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">BlockWatch</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">Bergen Family Trust</span>
+                                                    <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">Auxilio Network</span>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="relative bg-ink-50">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="reveal rounded-[28px] bg-white shadow-xl ring-1 ring-ink-100 p-6 sm:p-10 lg:p-14">
+                <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                    <div class="lg:col-span-5">
+                        <div class="relative">
+                            <div class="relative rounded-[22px] overflow-hidden aspect-[4/5] shadow-lg">
+                                <img src="images/citizen/family-2.jpg" alt="Family using Auxilio" class="absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/40 via-transparent to-transparent"></div>
+                            </div>
+                            <div class="absolute -bottom-5 left-4 right-4 rounded-md bg-white px-4 py-3 shadow-2xl ring-1 ring-ink-100 flex items-center gap-3">
+                                <span class="flex w-9 h-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                                </span>
+                                <div>
+                                    <div class="font-display text-sm font-bold text-navy-900">Help on the way</div>
+                                    <div class="text-[12px] text-ink-500">Responder dispatched · ETA 1m 48s</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7">
+                        <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Trusted by families nationwide</p>
+                        <h2 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                            Loved by folks in over <span class="text-brand-600">thirty cities.</span>
+                        </h2>
+                        <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed max-w-xl">
+                            Auxilio is the safety companion families count on every day. From your child's walk home to your parents' late-night drive — we keep you connected, informed, and one tap away from real help.
+                        </p>
+                        <a data-route href="#/about" class="reveal reveal-delay-3 mt-7 inline-flex items-center gap-2 rounded-full border-2 border-brand-500 text-brand-600 hover:bg-brand-50 px-6 py-2.5 text-sm font-semibold transition">
+                            About Auxilio
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </a>
+
+                        <dl data-citizen-stats class="mt-10 grid grid-cols-2 gap-x-10 gap-y-8">
+                                                            <div>
+                                    <dt class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-900 citizen-counter">
+                                        <span data-stat-num data-stat-to="500">0</span><span class="text-brand-600">K+</span>
+                                    </dt>
+                                    <dd class="mt-2 text-sm text-navy-700/80">Active Citizens Protected</dd>
+                                </div>
+                                                            <div>
+                                    <dt class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-900 citizen-counter">
+                                        <span data-stat-num data-stat-to="98">0</span><span class="text-brand-600">%</span>
+                                    </dt>
+                                    <dd class="mt-2 text-sm text-navy-700/80">Faster Family Response</dd>
+                                </div>
+                                                            <div>
+                                    <dt class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-900 citizen-counter">
+                                        <span data-stat-num data-stat-to="30">0</span><span class="text-brand-600">+</span>
+                                    </dt>
+                                    <dd class="mt-2 text-sm text-navy-700/80">Cities Live Today</dd>
+                                </div>
+                                                            <div>
+                                    <dt class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-900 citizen-counter">
+                                        <span data-stat-num data-stat-to="24">0</span><span class="text-brand-600">/7</span>
+                                    </dt>
+                                    <dd class="mt-2 text-sm text-navy-700/80">Dedicated Emergency Desk</dd>
+                                </div>
+                                                    </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="relative bg-white">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">What you get</p>
+                <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                    A safety suite that fits in <span class="text-brand-600">your pocket.</span>
+                </h2>
+                <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed">
+                    Everything you need to stay aware, stay connected, and call help when you need it — without juggling five apps.
+                </p>
+            </div>
+
+            <div class="reveal mt-14 grid lg:grid-cols-3 gap-5">
+                
+                <div class="space-y-5">
+                    <article class="bento-dark relative overflow-hidden rounded-[22px] p-7 text-white min-h-[360px] flex flex-col">
+                        <div class="relative">
+                            <h3 class="font-display text-2xl font-bold leading-tight">One-Tap SOS<br/>to Real Responders</h3>
+                            <p class="mt-3 text-sm text-white/65 leading-relaxed">Press once. We route to the closest verified agent, share your live location, and stay on the line until help arrives.</p>
+                        </div>
+                        <div class="relative mt-auto pt-6 flex items-end justify-center">
+                            <div class="relative flex items-center justify-center w-20 h-20 rounded-full bg-red-600 text-white shadow-2xl">
+                                <span class="ring-pulse"></span>
+                                <span class="ring-pulse delay-1"></span>
+                                <span class="font-display font-extrabold tracking-wider">SOS</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="bento-dark relative overflow-hidden rounded-[22px] p-7 text-white min-h-[300px] flex flex-col">
+                        <div class="relative">
+                            <h3 class="font-display text-2xl font-bold leading-tight">Real-Time Crime Map</h3>
+                            <p class="mt-3 text-sm text-white/65 leading-relaxed">Heat-mapped incidents around your home, school, and route — refreshed every few seconds.</p>
+                        </div>
+                        <div class="relative mt-auto pt-6">
+                            <div class="rounded-md bg-white/5 ring-1 ring-white/10 p-4 backdrop-blur">
+                                <div class="flex items-center justify-between text-[10.5px] font-mono uppercase tracking-[.18em] text-white/50">
+                                    <span>Newark · Live</span>
+                                    <span class="text-red-400">▲ 12 today</span>
+                                </div>
+                                <div class="mt-3 flex items-end gap-1.5 h-12">
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 20%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 40%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 28%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 55%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 72%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 48%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 90%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 62%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 75%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 55%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 68%;"></span>
+                                                                            <span class="flex-1 rounded-sm bg-gradient-to-t from-red-600 to-red-400/70" style="height: 82%;"></span>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                
+                <div class="space-y-5">
+                    <article class="relative overflow-hidden rounded-[22px] bg-white ring-1 ring-ink-100 shadow-md p-7 min-h-[420px] flex flex-col">
+                        <span class="flex w-12 h-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 ring-4 ring-emerald-50">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l2 2 3.5-4"/></svg>
+                        </span>
+                        <h3 class="mt-5 font-display text-2xl font-bold text-navy-900 leading-tight">Encrypted, Anonymous Reporting</h3>
+                        <p class="mt-3 text-[14.5px] text-navy-700/80 leading-relaxed">Report suspicious activity or share a tip — fully end-to-end encrypted. No phone number required, no identity revealed unless you choose to share.</p>
+                        <div class="mt-6 relative flex items-end justify-end">
+                            <div class="relative w-[180px] aspect-[9/19] rounded-[28px] bg-navy-950 p-2 shadow-xl">
+                                <div class="absolute top-3 left-1/2 -translate-x-1/2 w-12 h-3 rounded-full bg-navy-950 z-20"></div>
+                                <div class="relative w-full h-full rounded-[22px] overflow-hidden bg-emerald-50">
+                                    <img src="images/screen-home.png" alt="Citizen home" class="absolute inset-0 w-full h-full object-cover object-top" />
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="bento-dark relative overflow-hidden rounded-[22px] p-7 text-white min-h-[240px] flex flex-col">
+                        <div class="relative flex items-center justify-between">
+                            <h3 class="font-display text-xl font-bold leading-tight">Join 500K+<br/>Safe Citizens</h3>
+                            <div class="flex -space-x-3">
+                                <img class="w-9 h-9 rounded-full ring-2 ring-navy-950 object-cover" src="images/officer-1.jpg" alt="" />
+                                <img class="w-9 h-9 rounded-full ring-2 ring-navy-950 object-cover" src="images/officer-2.jpg" alt="" />
+                                <img class="w-9 h-9 rounded-full ring-2 ring-navy-950 object-cover" src="images/officer-3.jpg" alt="" />
+                                <span class="w-9 h-9 grid place-items-center rounded-full ring-2 ring-navy-950 bg-emerald-500 text-navy-950 font-display font-bold text-[11px]">500K</span>
+                            </div>
+                        </div>
+                        <p class="relative mt-3 text-sm text-white/65 leading-relaxed">A growing network of neighbors, families, and verified responders looking out for one another.</p>
+                        <div class="relative mt-auto pt-5 flex flex-wrap gap-2">
+                            <span class="rounded-full bg-white/[.07] ring-1 ring-white/10 px-3 py-1 text-[11px] font-mono uppercase tracking-[.16em] text-white/70">$0 Citizen Plan</span>
+                            <span class="rounded-full bg-white/[.07] ring-1 ring-white/10 px-3 py-1 text-[11px] font-mono uppercase tracking-[.16em] text-white/70">30+ Cities</span>
+                        </div>
+                    </article>
+                </div>
+
+                
+                <div class="space-y-5">
+                    <article class="relative overflow-hidden rounded-[22px] bg-white ring-1 ring-ink-100 shadow-md p-7 min-h-[420px] flex flex-col">
+                        <span class="flex w-12 h-12 items-center justify-center rounded-full bg-amber-100 text-amber-700 ring-4 ring-amber-50">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                        </span>
+                        <h3 class="mt-5 font-display text-2xl font-bold text-navy-900 leading-tight">Registered Offender Alerts</h3>
+                        <p class="mt-3 text-[14.5px] text-navy-700/80 leading-relaxed">Auxilio cross-references public registries so you'll know — quietly, accurately — which addresses to be aware of along your daily route.</p>
+                        <a data-route href="#/sex-offender-map" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 transition group">
+                            View live map
+                            <svg class="w-4 h-4 transition group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
+                        </a>
+                        <div class="mt-auto pt-5">
+                            <div class="relative rounded-md overflow-hidden ring-1 ring-ink-100">
+                                <img src="images/scene-patrol.jpg" alt="Offender map preview" class="w-full h-40 object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-white text-[11px] font-mono uppercase tracking-[.16em]">
+                                    <span class="rounded-md bg-amber-500/90 px-2 py-0.5 text-navy-950 font-bold">7 nearby</span>
+                                    <span>2 mi radius</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="relative overflow-hidden rounded-[22px] bg-gradient-to-br from-brand-600 to-red-700 text-white p-7 min-h-[240px] flex flex-col">
+                        <div class="absolute -right-12 -bottom-12 w-56 h-56 rounded-full bg-white/10 pointer-events-none"></div>
+                        <span class="flex w-11 h-11 items-center justify-center rounded-full bg-white/15 ring-1 ring-white/25">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h2l3-9 4 18 3-9h6"/></svg>
+                        </span>
+                        <h3 class="mt-4 font-display text-2xl font-bold leading-tight">AI Safety Insights</h3>
+                        <p class="mt-3 text-sm text-white/85 leading-relaxed">Personalized risk forecasts for your routes, work hours, and child's school zone — quietly powered, never creepy.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="relative bg-ink-50">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Get protected fast</p>
+                <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                    Set up your safety net in <span class="text-brand-600">four easy steps.</span>
+                </h2>
+                <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed">
+                    Most citizens are fully onboarded — verified, connected, alert-ready — in under two minutes.
+                </p>
+            </div>
+
+            <div class="reveal mt-14 grid lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-[300px] lg:sticky lg:top-28">
+                        <span class="absolute -inset-6 rounded-full blur-3xl bg-brand-100/60 pointer-events-none"></span>
+                        <div class="relative aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.5)]">
+                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
+                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
+                                <img data-citizen-step-img src="images/screen-companion.png" alt="Step" class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-300" />
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <span data-citizen-step-counter class="font-mono text-[11px] uppercase tracking-[.18em] text-ink-500">Step 01 of 04</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7">
+                    <ol data-citizen-steps class="relative space-y-2">
+                                                    <li data-citizen-step="0" data-img="images/screen-companion.png"
+                                 data-active class="cursor-pointer rounded-md bg-white border-2 border-brand-200 shadow-lg p-5 lg:p-6 transition"
+                                >
+                                <div class="flex items-start gap-4">
+                                    <span class="flex w-11 h-11 shrink-0 items-center justify-center rounded-full bg-red-600 text-white font-display font-extrabold transition">01</span>
+                                    <div class="flex-1">
+                                        <h3 class="font-display text-lg sm:text-xl font-bold text-navy-900">Create your free Citizen profile</h3>
+                                        <p class="mt-1.5 text-[14px] text-navy-700/80 leading-relaxed">Just your name, phone, and a 4-digit PIN. We never sell your data — and the citizen tier is free, forever.</p>
+                                    </div>
+                                </div>
+                            </li>
+                                                    <li data-citizen-step="1" data-img="images/screen-location.png"
+                                 class="cursor-pointer rounded-md bg-white border-2 border-transparent hover:border-brand-200 hover:shadow-md p-5 lg:p-6 transition"
+                                >
+                                <div class="flex items-start gap-4">
+                                    <span class="flex w-11 h-11 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600 ring-1 ring-brand-100 font-display font-extrabold transition">02</span>
+                                    <div class="flex-1">
+                                        <h3 class="font-display text-lg sm:text-xl font-bold text-navy-900">Verify your phone in 30 seconds</h3>
+                                        <p class="mt-1.5 text-[14px] text-navy-700/80 leading-relaxed">Standard SMS verification. Once verified, you&#039;ll receive trusted, ranked alerts and never spam.</p>
+                                    </div>
+                                </div>
+                            </li>
+                                                    <li data-citizen-step="2" data-img="images/screen-home.png"
+                                 class="cursor-pointer rounded-md bg-white border-2 border-transparent hover:border-brand-200 hover:shadow-md p-5 lg:p-6 transition"
+                                >
+                                <div class="flex items-start gap-4">
+                                    <span class="flex w-11 h-11 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600 ring-1 ring-brand-100 font-display font-extrabold transition">03</span>
+                                    <div class="flex-1">
+                                        <h3 class="font-display text-lg sm:text-xl font-bold text-navy-900">Add your family circle</h3>
+                                        <p class="mt-1.5 text-[14px] text-navy-700/80 leading-relaxed">Invite parents, partner, kids — share location in either direction with one-tap controls.</p>
+                                    </div>
+                                </div>
+                            </li>
+                                                    <li data-citizen-step="3" data-img="images/screen-sos.png"
+                                 class="cursor-pointer rounded-md bg-white border-2 border-transparent hover:border-brand-200 hover:shadow-md p-5 lg:p-6 transition"
+                                >
+                                <div class="flex items-start gap-4">
+                                    <span class="flex w-11 h-11 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600 ring-1 ring-brand-100 font-display font-extrabold transition">04</span>
+                                    <div class="flex-1">
+                                        <h3 class="font-display text-lg sm:text-xl font-bold text-navy-900">You&#039;re protected — go live the day</h3>
+                                        <p class="mt-1.5 text-[14px] text-navy-700/80 leading-relaxed">SOS is wired up, alerts are flowing, your family knows where you are when you want them to.</p>
+                                    </div>
+                                </div>
+                            </li>
+                                            </ol>
+
+                    <div class="mt-8 flex items-center gap-3">
+                        <button type="button" data-citizen-step-prev class="flex w-11 h-11 items-center justify-center rounded-md border border-ink-200 bg-white text-navy-900 hover:border-brand-300 hover:text-brand-600 transition" aria-label="Previous">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                        </button>
+                        <button type="button" data-citizen-step-next class="flex w-11 h-11 items-center justify-center rounded-md bg-red-600 hover:bg-red-700 text-white transition shadow-md" aria-label="Next">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                        <a href="#" class="ml-2 inline-flex items-center gap-2 rounded-md bg-navy-900 hover:bg-navy-800 text-white px-5 py-3 text-sm font-semibold transition">
+                            Get the app
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m0 0l-5-5m5 5l5-5"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="relative bg-white">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-10 items-end mb-12">
+                <div class="lg:col-span-7">
+                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Built for real life</p>
+                    <h2 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                        The situations no one wants <span class="text-brand-600">to face alone.</span>
+                    </h2>
+                </div>
+                <div class="lg:col-span-5">
+                    <p class="reveal reveal-delay-2 text-navy-700/80 leading-relaxed">
+                        Auxilio Citizen is calibrated for the moments that matter most — a suspicious follower at night, a medical emergency at home, or a frightened call from a child on the way back from school.
+                    </p>
+                </div>
+            </div>
+
+            <div class="reveal stagger grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                                    <article class="scenario-tile group relative rounded-md overflow-hidden bg-navy-900 text-white shadow-lg ring-1 ring-ink-100">
+                        <div class="relative h-60 sm:h-72 overflow-hidden">
+                            <img src="images/citizen/warning-lamp.jpg" alt="Walking home at night" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                            <span class="absolute top-3 left-3 rounded-md bg-red-600 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg">01 · STREET</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-display text-xl font-bold text-white">Walking home at night</h3>
+                            <p class="mt-1.5 text-[13px] text-navy-200/90 leading-relaxed">Auto-share live location with family. Auxilio listens for trouble and pre-arms SOS.</p>
+                        </div>
+                    </article>
+                                    <article class="scenario-tile group relative rounded-md overflow-hidden bg-navy-900 text-white shadow-lg ring-1 ring-ink-100">
+                        <div class="relative h-60 sm:h-72 overflow-hidden">
+                            <img src="images/citizen/theft-prep.jpg" alt="Pickpocket / theft" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                            <span class="absolute top-3 left-3 rounded-md bg-red-600 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg">02 · ALERT</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-display text-xl font-bold text-white">Pickpocket / theft</h3>
+                            <p class="mt-1.5 text-[13px] text-navy-200/90 leading-relaxed">Silent SOS, location lock, and instant officer dispatch — without lifting the phone.</p>
+                        </div>
+                    </article>
+                                    <article class="scenario-tile group relative rounded-md overflow-hidden bg-navy-900 text-white shadow-lg ring-1 ring-ink-100">
+                        <div class="relative h-60 sm:h-72 overflow-hidden">
+                            <img src="images/citizen/emergency-room.jpg" alt="Sudden medical emergency" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                            <span class="absolute top-3 left-3 rounded-md bg-red-600 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg">03 · MEDICAL</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-display text-xl font-bold text-white">Sudden medical emergency</h3>
+                            <p class="mt-1.5 text-[13px] text-navy-200/90 leading-relaxed">One tap routes paramedics + your saved medical info ahead, so the team is ready on arrival.</p>
+                        </div>
+                    </article>
+                                    <article class="scenario-tile group relative rounded-md overflow-hidden bg-navy-900 text-white shadow-lg ring-1 ring-ink-100">
+                        <div class="relative h-60 sm:h-72 overflow-hidden">
+                            <img src="images/citizen/threat-wall.jpg" alt="Domestic threat" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                            <span class="absolute top-3 left-3 rounded-md bg-red-600 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg">04 · ASSAULT</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-display text-xl font-bold text-white">Domestic threat</h3>
+                            <p class="mt-1.5 text-[13px] text-navy-200/90 leading-relaxed">A discreet panic gesture sends help and quietly records context — even when you can&#039;t talk.</p>
+                        </div>
+                    </article>
+                            </div>
+        </div>
+    </section>
+
+    
+    <section class="relative bg-ink-50">
+        <div class="mx-auto max-w-5xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Frequently asked</p>
+                <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                    Everything you wanted <span class="text-brand-600">to ask.</span>
+                </h2>
+                <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed">
+                    Real answers from our safety team. Still curious? Reach us anytime — we read every note.
+                </p>
+            </div>
+
+            <div class="reveal mt-12 space-y-3" data-citizen-faq>
+                                    <div data-faq-item  data-open  class="rounded-md bg-white ring-1 ring-ink-100 overflow-hidden shadow-sm hover:shadow-md transition">
+                        <button type="button" data-faq-toggle class="w-full flex items-center gap-5 text-left px-5 sm:px-6 py-5 group">
+                            <span class="flex w-9 h-9 shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-600 font-display font-extrabold text-sm">01</span>
+                            <span class="flex-1 font-display font-bold text-[15px] sm:text-base text-navy-900 group-hover:text-brand-600 transition">Is Auxilio Citizen actually free?</span>
+                            <span data-faq-icon class="flex w-8 h-8 shrink-0 items-center justify-center rounded-full bg-ink-50 text-navy-900 transition group-hover:bg-brand-50 group-hover:text-brand-600">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+                            </span>
+                        </button>
+                        <div data-faq-body class="px-5 sm:px-6 pl-[78px] sm:pl-[88px] text-[14.5px] text-navy-700/80 leading-relaxed pb-5">
+                            <div class="pb-5">Yes. Our citizen tier is free forever. You pay for what businesses, schools, and PDs use — never for personal safety. We don&#039;t sell your data, ever.</div>
+                        </div>
+                    </div>
+                                    <div data-faq-item  class="rounded-md bg-white ring-1 ring-ink-100 overflow-hidden shadow-sm hover:shadow-md transition">
+                        <button type="button" data-faq-toggle class="w-full flex items-center gap-5 text-left px-5 sm:px-6 py-5 group">
+                            <span class="flex w-9 h-9 shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-600 font-display font-extrabold text-sm">02</span>
+                            <span class="flex-1 font-display font-bold text-[15px] sm:text-base text-navy-900 group-hover:text-brand-600 transition">Who responds when I press the SOS button?</span>
+                            <span data-faq-icon class="flex w-8 h-8 shrink-0 items-center justify-center rounded-full bg-ink-50 text-navy-900 transition group-hover:bg-brand-50 group-hover:text-brand-600">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+                            </span>
+                        </button>
+                        <div data-faq-body class="px-5 sm:px-6 pl-[78px] sm:pl-[88px] text-[14.5px] text-navy-700/80 leading-relaxed ">
+                            <div class="pb-5">Verified Auxilio responders nearest to you receive the alert simultaneously — and the first to accept takes the call. For medical or serious threats, we also bridge directly to local 911 dispatch.</div>
+                        </div>
+                    </div>
+                                    <div data-faq-item  class="rounded-md bg-white ring-1 ring-ink-100 overflow-hidden shadow-sm hover:shadow-md transition">
+                        <button type="button" data-faq-toggle class="w-full flex items-center gap-5 text-left px-5 sm:px-6 py-5 group">
+                            <span class="flex w-9 h-9 shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-600 font-display font-extrabold text-sm">03</span>
+                            <span class="flex-1 font-display font-bold text-[15px] sm:text-base text-navy-900 group-hover:text-brand-600 transition">Can my family see my location all the time?</span>
+                            <span data-faq-icon class="flex w-8 h-8 shrink-0 items-center justify-center rounded-full bg-ink-50 text-navy-900 transition group-hover:bg-brand-50 group-hover:text-brand-600">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+                            </span>
+                        </button>
+                        <div data-faq-body class="px-5 sm:px-6 pl-[78px] sm:pl-[88px] text-[14.5px] text-navy-700/80 leading-relaxed ">
+                            <div class="pb-5">Only when you choose. You control who&#039;s in your circle, when you go live, and when you stay private. Setup takes less than 30 seconds, and you can toggle visibility per person.</div>
+                        </div>
+                    </div>
+                                    <div data-faq-item  class="rounded-md bg-white ring-1 ring-ink-100 overflow-hidden shadow-sm hover:shadow-md transition">
+                        <button type="button" data-faq-toggle class="w-full flex items-center gap-5 text-left px-5 sm:px-6 py-5 group">
+                            <span class="flex w-9 h-9 shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-600 font-display font-extrabold text-sm">04</span>
+                            <span class="flex-1 font-display font-bold text-[15px] sm:text-base text-navy-900 group-hover:text-brand-600 transition">How accurate is the crime + offender map?</span>
+                            <span data-faq-icon class="flex w-8 h-8 shrink-0 items-center justify-center rounded-full bg-ink-50 text-navy-900 transition group-hover:bg-brand-50 group-hover:text-brand-600">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+                            </span>
+                        </button>
+                        <div data-faq-body class="px-5 sm:px-6 pl-[78px] sm:pl-[88px] text-[14.5px] text-navy-700/80 leading-relaxed ">
+                            <div class="pb-5">Crime data is sourced from live municipal feeds where available, and verified citizen reports elsewhere. Offender records are pulled directly from public registries and refreshed daily.</div>
+                        </div>
+                    </div>
+                                    <div data-faq-item  class="rounded-md bg-white ring-1 ring-ink-100 overflow-hidden shadow-sm hover:shadow-md transition">
+                        <button type="button" data-faq-toggle class="w-full flex items-center gap-5 text-left px-5 sm:px-6 py-5 group">
+                            <span class="flex w-9 h-9 shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-600 font-display font-extrabold text-sm">05</span>
+                            <span class="flex-1 font-display font-bold text-[15px] sm:text-base text-navy-900 group-hover:text-brand-600 transition">What happens if I press SOS by accident?</span>
+                            <span data-faq-icon class="flex w-8 h-8 shrink-0 items-center justify-center rounded-full bg-ink-50 text-navy-900 transition group-hover:bg-brand-50 group-hover:text-brand-600">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+                            </span>
+                        </button>
+                        <div data-faq-body class="px-5 sm:px-6 pl-[78px] sm:pl-[88px] text-[14.5px] text-navy-700/80 leading-relaxed ">
+                            <div class="pb-5">You get a 5-second countdown to cancel right inside the app. If a call goes through, you can flag it as a false alarm with one tap — no penalty, no judgment. We&#039;d rather have one extra check-in than one missed call.</div>
+                        </div>
+                    </div>
+                                    <div data-faq-item  class="rounded-md bg-white ring-1 ring-ink-100 overflow-hidden shadow-sm hover:shadow-md transition">
+                        <button type="button" data-faq-toggle class="w-full flex items-center gap-5 text-left px-5 sm:px-6 py-5 group">
+                            <span class="flex w-9 h-9 shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-600 font-display font-extrabold text-sm">06</span>
+                            <span class="flex-1 font-display font-bold text-[15px] sm:text-base text-navy-900 group-hover:text-brand-600 transition">Does Auxilio work outside my city?</span>
+                            <span data-faq-icon class="flex w-8 h-8 shrink-0 items-center justify-center rounded-full bg-ink-50 text-navy-900 transition group-hover:bg-brand-50 group-hover:text-brand-600">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+                            </span>
+                        </button>
+                        <div data-faq-body class="px-5 sm:px-6 pl-[78px] sm:pl-[88px] text-[14.5px] text-navy-700/80 leading-relaxed ">
+                            <div class="pb-5">Coverage is live in 30+ cities and expanding fast. Outside coverage, SOS still bridges to local emergency services and shares your location with your family circle.</div>
+                        </div>
+                    </div>
+                            </div>
+        </div>
+    </section>
+
+    
+    <section class="relative overflow-hidden bg-navy-950 text-white">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute -top-32 -left-20 w-[420px] h-[420px] rounded-full bg-red-600/25 blur-3xl"></div>
+            <div class="absolute -bottom-32 -right-10 w-[480px] h-[480px] rounded-full bg-gold-400/15 blur-3xl"></div>
+        </div>
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-7">
+                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-red-400">Stop scrolling, start safe</p>
+                    <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight">
+                        Download Auxilio — and never <br/>
+                        <span style="color:#FB0606">walk alone</span> again.
+                    </h2>
+                    <p class="reveal reveal-delay-2 mt-5 max-w-xl text-white/75 leading-relaxed">
+                        Free for citizens. Encrypted by default. Live in 30+ cities. Your family's new safety net is one tap away.
+                    </p>
+                    <div class="reveal reveal-delay-3 mt-8 flex flex-col sm:flex-row gap-3" style="max-width:420px;">
+                        <a href="#" class="flex-1 inline-flex items-center justify-center gap-3 rounded-md bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 shadow-lg hover:shadow-red-600/30 transition">
+                            <img src="images/app-store.svg" alt="" class="w-7 h-7 shrink-0" />
+                            <div class="text-left whitespace-nowrap leading-tight">
+                                <p class="text-[10px] uppercase tracking-wider text-white/80">Download on the</p>
+                                <p class="text-sm font-semibold -mt-0.5">App Store</p>
+                            </div>
+                        </a>
+                        <a href="#" class="flex-1 inline-flex items-center justify-center gap-3 rounded-md bg-white text-navy-900 hover:bg-white/90 px-5 py-3.5 shadow-lg transition">
+                            <img src="images/google-play.svg" alt="" class="w-7 h-7 shrink-0" />
+                            <div class="text-left whitespace-nowrap leading-tight">
+                                <p class="text-[10px] uppercase tracking-wider text-navy-500">Get it on</p>
+                                <p class="text-sm font-semibold -mt-0.5">Google Play</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-5">
+                    <div class="reveal reveal-right relative max-w-md mx-auto">
+                        <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-white/10 shadow-2xl">
+                            <img src="images/citizen/family-cartoon.jpg" alt="Family" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/30 to-transparent"></div>
+                            <div class="absolute bottom-5 left-5 right-5">
+                                <div class="rounded-md bg-white/10 backdrop-blur ring-1 ring-white/15 px-4 py-3 flex items-center gap-3">
+                                    <span class="flex w-9 h-9 items-center justify-center rounded-full bg-red-600 text-white">
+                                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+                                    </span>
+                                    <div class="leading-tight">
+                                        <div class="font-mono text-[9.5px] uppercase tracking-[.18em] text-white/60">Protected</div>
+                                        <div class="font-display text-sm font-bold">All 4 family members</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    (function(){
+        /* ---- Stats counter ---- */
+        var stats = document.querySelector('[data-view="citizen-app"] [data-citizen-stats]');
+        if (stats) {
+            var nums = stats.querySelectorAll('[data-stat-num]');
+            var animated = false;
+            function animate() {
+                if (animated) return;
+                animated = true;
+                nums.forEach(function(el){
+                    var to = parseFloat(el.getAttribute('data-stat-to'));
+                    var duration = 1400, start = performance.now();
+                    function tick(now) {
+                        var t = Math.min((now - start) / duration, 1);
+                        var eased = 1 - Math.pow(1 - t, 3);
+                        var val = Math.round(to * eased);
+                        el.textContent = val.toLocaleString();
+                        if (t < 1) requestAnimationFrame(tick);
+                    }
+                    requestAnimationFrame(tick);
+                });
+            }
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function(entries){
+                    entries.forEach(function(e){ if (e.isIntersecting) { animate(); io.disconnect(); } });
+                }, { threshold: 0.3 });
+                io.observe(stats);
+            } else animate();
+            window.addEventListener('hashchange', function(){
+                if (location.hash === '#/citizen-app') { animated = false; nums.forEach(function(n){ n.textContent='0'; }); setTimeout(animate, 250); }
+            });
+        }
+
+        /* ---- 4-step onboarding carousel ---- */
+        var stepsRoot = document.querySelector('[data-view="citizen-app"] [data-citizen-steps]');
+        if (stepsRoot) {
+            var steps = Array.prototype.slice.call(stepsRoot.querySelectorAll('[data-citizen-step]'));
+            var img   = document.querySelector('[data-view="citizen-app"] [data-citizen-step-img]');
+            var counter = document.querySelector('[data-view="citizen-app"] [data-citizen-step-counter]');
+            var prev = document.querySelector('[data-view="citizen-app"] [data-citizen-step-prev]');
+            var next = document.querySelector('[data-view="citizen-app"] [data-citizen-step-next]');
+            var i = 0;
+            function go(n) {
+                i = (n + steps.length) % steps.length;
+                steps.forEach(function(s, idx){
+                    var badge = s.querySelector('span');
+                    if (idx === i) {
+                        s.setAttribute('data-active','');
+                        s.className = 'cursor-pointer rounded-md bg-white border-2 border-brand-200 shadow-lg p-5 lg:p-6 transition';
+                        if (badge) badge.className = 'flex w-11 h-11 shrink-0 items-center justify-center rounded-full bg-red-600 text-white font-display font-extrabold transition';
+                    } else {
+                        s.removeAttribute('data-active');
+                        s.className = 'cursor-pointer rounded-md bg-white border-2 border-transparent hover:border-brand-200 hover:shadow-md p-5 lg:p-6 transition';
+                        if (badge) badge.className = 'flex w-11 h-11 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600 ring-1 ring-brand-100 font-display font-extrabold transition';
+                    }
+                });
+                if (img) {
+                    var src = steps[i].getAttribute('data-img');
+                    img.style.opacity = '0';
+                    setTimeout(function(){ img.src = src; img.style.opacity = '1'; }, 180);
+                }
+                if (counter) counter.textContent = 'Step ' + String(i+1).padStart(2,'0') + ' of ' + String(steps.length).padStart(2,'0');
+            }
+            steps.forEach(function(s){ s.addEventListener('click', function(){ go(parseInt(s.getAttribute('data-citizen-step'),10)); }); });
+            if (prev) prev.addEventListener('click', function(){ go(i-1); });
+            if (next) next.addEventListener('click', function(){ go(i+1); });
+            setInterval(function(){
+                var view = document.querySelector('[data-view="citizen-app"]');
+                if (view && !view.classList.contains('hidden') && document.visibilityState === 'visible') go(i+1);
+            }, 5500);
+        }
+
+        /* ---- FAQ accordion ---- */
+        var faqRoot = document.querySelector('[data-view="citizen-app"] [data-citizen-faq]');
+        if (faqRoot) {
+            var items = faqRoot.querySelectorAll('[data-faq-item]');
+            items.forEach(function(item){
+                var btn = item.querySelector('[data-faq-toggle]');
+                if (!btn) return;
+                btn.addEventListener('click', function(){
+                    var isOpen = item.hasAttribute('data-open');
+                    items.forEach(function(o){ o.removeAttribute('data-open'); });
+                    if (!isOpen) item.setAttribute('data-open','');
+                });
+            });
+        }
+    })();
+    </script>
+</div>
+
+
 <div data-view="about" class="hidden">
     <section class="relative overflow-hidden hero-bg">
         <div class="pointer-events-none absolute inset-0 -z-10">
@@ -5166,7 +5969,7 @@
 
     function getRoute() {
         var h = (window.location.hash || '').replace(/^#\//, '');
-        var allowed = ['crime-map','sex-offender-map','how-it-works','agent-app','about','contact'];
+        var allowed = ['crime-map','sex-offender-map','how-it-works','agent-app','citizen-app','about','contact'];
         if (allowed.indexOf(h) !== -1) return h;
         return 'home';
     }
