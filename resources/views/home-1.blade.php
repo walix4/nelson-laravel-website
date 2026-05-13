@@ -1512,40 +1512,60 @@
                     </dl>
                 </div>
                 <div class="reveal reveal-right lg:col-span-5">
-                    <div class="relative mx-auto max-w-[280px]">
-                        <span class="phone-halo"></span>
-                        <div class="phone-mock relative aspect-[9/19] rounded-[40px] bg-navy-950 p-3 shadow-[0_30px_80px_-20px_rgba(12,17,38,.6)] float-slow">
-                            <div class="absolute top-5 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy-950 z-20"></div>
-                            <div class="relative w-full h-full rounded-[30px] overflow-hidden bg-white">
-                                <img src="/images/screen-accept-emergency.jpg" alt="Auxilio Agente — Accept Emergency" class="absolute inset-0 w-full h-full object-cover object-top" />
+                    <div class="relative mx-auto max-w-md">
+                        {{-- Soft brand-tinted panel with subtle grid pattern --}}
+                        <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] shadow-[0_30px_80px_-20px_rgba(251,6,6,.18)] ring-1 ring-brand-100/60"
+                             style="background:
+                                radial-gradient(circle at 30% 20%, rgba(251,6,6,.06), transparent 55%),
+                                linear-gradient(160deg, #fff5f5 0%, #fdecec 60%, #fff 100%);">
+                            <div class="absolute inset-0 pointer-events-none opacity-50"
+                                 style="background-image:
+                                    linear-gradient(rgba(251,6,6,.06) 1px, transparent 1px),
+                                    linear-gradient(90deg, rgba(251,6,6,.06) 1px, transparent 1px);
+                                    background-size: 36px 36px;
+                                    mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);"></div>
+
+                            {{-- Officer image, bottom-anchored like Fundix --}}
+                            <img src="/images/officer-hero.jpg" alt="Auxilio Officer" class="absolute inset-x-0 bottom-0 mx-auto w-[92%] h-[92%] object-cover object-top rounded-[20px] shadow-2xl" />
+                        </div>
+
+                        {{-- Small checkmark badge (like Fundix green check) --}}
+                        <span class="absolute -left-3 top-12 flex w-11 h-11 items-center justify-center rounded-full bg-white shadow-xl ring-1 ring-emerald-100 z-10">
+                            <span class="flex w-7 h-7 items-center justify-center rounded-full bg-emerald-500 text-white">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l5 5L20 7"/></svg>
+                            </span>
+                        </span>
+
+                        {{-- NEW DISPATCH card — upper left --}}
+                        <div class="hidden md:flex notif-card absolute -left-10 top-24 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl ring-1 ring-ink-100 z-10" style="min-width:220px;">
+                            <span class="flex w-10 h-10 items-center justify-center rounded-full bg-red-600 text-white shrink-0">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+                            </span>
+                            <div class="leading-tight">
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-red-600 font-bold">NEW DISPATCH</div>
+                                <div class="font-display text-[14px] font-bold text-navy-900 mt-0.5">Break-in · 0.4mi</div>
                             </div>
                         </div>
-                        {{-- Floating notification cards orbiting the hero phone --}}
-                        <div class="hidden md:flex notif-card absolute -left-16 top-12 items-center gap-2.5 rounded-md bg-white px-3 py-2 shadow-xl border border-ink-100 z-10" style="min-width:185px;">
-                            <span class="flex w-7 h-7 items-center justify-center rounded-full bg-red-600 text-white">
-                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+
+                        {{-- ACCEPTED card — middle right --}}
+                        <div class="hidden md:flex notif-card-2 absolute -right-6 top-1/3 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl ring-1 ring-ink-100 z-10" style="min-width:200px;">
+                            <span class="flex w-10 h-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 shrink-0">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
                             </span>
-                            <div>
-                                <div class="font-mono text-[9px] uppercase tracking-[.16em] text-red-600 font-bold">NEW DISPATCH</div>
-                                <div class="font-display text-[12px] font-semibold text-navy-900 leading-tight">Break-in · 0.4mi</div>
+                            <div class="leading-tight">
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-emerald-700 font-bold">ACCEPTED</div>
+                                <div class="font-display text-[14px] font-bold text-navy-900 mt-0.5">ETA 2 min 14 sec</div>
                             </div>
                         </div>
-                        <div class="hidden md:flex notif-card-2 absolute -right-12 top-1/2 items-center gap-2.5 rounded-md bg-white px-3 py-2 shadow-xl border border-ink-100 z-10" style="min-width:170px;">
-                            <span class="flex w-7 h-7 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+
+                        {{-- 3 BACKUP card — bottom left, dark style --}}
+                        <div class="hidden md:flex notif-card-3 absolute -left-6 bottom-10 items-center gap-3 rounded-2xl bg-navy-900 text-white px-4 py-3 shadow-2xl ring-1 ring-white/10 z-10" style="min-width:200px;">
+                            <span class="flex w-10 h-10 items-center justify-center rounded-full bg-gold-400 text-navy-900 shrink-0">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                             </span>
-                            <div>
-                                <div class="font-mono text-[9px] uppercase tracking-[.16em] text-emerald-700 font-bold">ACCEPTED</div>
-                                <div class="font-display text-[12px] font-semibold text-navy-900 leading-tight">ETA 2 min 14 sec</div>
-                            </div>
-                        </div>
-                        <div class="hidden md:flex notif-card-3 absolute -left-8 bottom-8 items-center gap-2.5 rounded-md bg-navy-900 text-white px-3 py-2 shadow-xl z-10" style="min-width:165px;">
-                            <span class="flex w-7 h-7 items-center justify-center rounded-full bg-gold-400 text-navy-900">
-                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            </span>
-                            <div>
-                                <div class="font-mono text-[9px] uppercase tracking-[.16em] text-gold-400 font-bold">3 BACKUP</div>
-                                <div class="font-display text-[12px] font-semibold leading-tight">closing in</div>
+                            <div class="leading-tight">
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-gold-400 font-bold">3 BACKUP</div>
+                                <div class="font-display text-[14px] font-bold mt-0.5">closing in</div>
                             </div>
                         </div>
                     </div>
