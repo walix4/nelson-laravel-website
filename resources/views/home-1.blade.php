@@ -1813,7 +1813,7 @@
     </section>
 
     {{-- ========== FIELD NETWORK ========== --}}
-    <section class="relative bg-white">
+    <section class="relative bg-navy-50">
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
             <div class="text-center max-w-2xl mx-auto">
                 <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">03 · Field network</p>
@@ -1869,7 +1869,7 @@
     </section>
 
     {{-- ========== INCIDENT CAPTURE ========== --}}
-    <section class="relative bg-navy-50">
+    <section class="relative bg-white">
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-7">
@@ -1912,7 +1912,7 @@
     </section>
 
     {{-- ========== OFFICER CONTROL ========== --}}
-    <section class="relative bg-white">
+    <section class="relative bg-navy-50">
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
             <div class="grid lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-5">
@@ -1950,7 +1950,7 @@
     </section>
 
     {{-- ========== A SHIFT UNFOLDS — TIMELINE ========== --}}
-    <section class="relative bg-navy-50">
+    <section class="relative bg-white">
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
             <div class="text-center max-w-2xl mx-auto">
                 <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">A shift unfolds</p>
@@ -1996,7 +1996,7 @@
     </section>
 
     {{-- ========== OFFICER TESTIMONIALS ========== --}}
-    <section class="relative bg-white">
+    <section class="relative bg-navy-50">
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
             <div class="grid lg:grid-cols-12 gap-12 items-end">
                 <div class="lg:col-span-5">
@@ -2039,7 +2039,7 @@
     </section>
 
     {{-- ========== STATS ========== --}}
-    <section class="relative bg-navy-50">
+    <section class="relative bg-white">
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
             <div class="text-center max-w-2xl mx-auto">
                 <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">By the numbers</p>
