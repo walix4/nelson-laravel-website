@@ -2318,19 +2318,39 @@
             background: linear-gradient(180deg, #10b981 0%, #10b981 var(--p,0%), #e5e7eb var(--p,0%) 100%);
         }
 
-        /* ---- emergency types grid ---- */
-        [data-view="citizen-app"] .em-card {
+        /* ---- emergency types gallery (auto-rotating) ---- */
+        [data-view="citizen-app"] .em-big-card {
             position: relative;
-            border-radius: 22px;
-            overflow: hidden;
-            transition: transform .55s cubic-bezier(.22,1,.36,1), box-shadow .55s;
+            transition: transform .6s cubic-bezier(.22,1,.36,1), box-shadow .6s;
             isolation: isolate;
         }
-        [data-view="citizen-app"] .em-card:hover { transform: translateY(-8px) scale(1.015); box-shadow: 0 30px 60px -25px rgba(0,0,0,.4); }
-        [data-view="citizen-app"] .em-card .em-img { transition: transform 1.2s cubic-bezier(.22,1,.36,1), filter .55s; }
-        [data-view="citizen-app"] .em-card:hover .em-img { transform: scale(1.08); filter: saturate(1.15); }
-        [data-view="citizen-app"] .em-card .em-icon { transition: transform .45s cubic-bezier(.22,1,.36,1); }
-        [data-view="citizen-app"] .em-card:hover .em-icon { transform: rotate(-8deg) scale(1.08); }
+        [data-view="citizen-app"] .em-big-card:hover { transform: translateY(-6px); box-shadow: 0 40px 70px -28px rgba(0,0,0,.45); }
+        [data-view="citizen-app"] .em-big-card .em-inner { position: relative; aspect-ratio: 4/5; overflow: hidden; }
+        [data-view="citizen-app"] .em-big-card .em-img { transition: transform 1.4s cubic-bezier(.22,1,.36,1), filter .6s; }
+        [data-view="citizen-app"] .em-big-card:hover .em-img { transform: scale(1.07); filter: saturate(1.15); }
+        [data-view="citizen-app"] .em-big-card .em-icon-chip { transition: transform .45s cubic-bezier(.22,1,.36,1); }
+        [data-view="citizen-app"] .em-big-card:hover .em-icon-chip { transform: rotate(-6deg) scale(1.06); }
+        /* fade transition between rotations */
+        [data-view="citizen-app"] [data-em-slot] { transition: opacity .55s ease; }
+        [data-view="citizen-app"] [data-em-slot].em-fade-out { opacity: 0; }
+        /* dot active state */
+        [data-view="citizen-app"] [data-em-page].is-active { background: var(--c-red); transform: scale(1.4); }
+        [data-view="citizen-app"] [data-em-page] { transition: background .25s ease, transform .25s ease; }
+        /* rich illustration backgrounds for cards without an image */
+        [data-view="citizen-app"] .em-illust-bg::before {
+            content:""; position:absolute; inset:0; opacity:.35;
+            background-image:
+              radial-gradient(circle at 25% 25%, rgba(255,255,255,.45) 1px, transparent 1.5px),
+              radial-gradient(circle at 75% 60%, rgba(255,255,255,.35) 1px, transparent 1.5px);
+            background-size: 32px 32px;
+        }
+        [data-view="citizen-app"] .em-illust-bg::after {
+            content:""; position:absolute; inset:-30%;
+            background:
+              radial-gradient(circle at 20% 20%, rgba(255,255,255,.18), transparent 45%),
+              radial-gradient(circle at 80% 80%, rgba(255,255,255,.10), transparent 45%);
+            pointer-events:none;
+        }
 
         /* ---- stagger reveal helper ---- */
         [data-view="citizen-app"] .stagger-in > * { opacity:0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
@@ -2515,8 +2535,8 @@
                             </div>
                         </div>
 
-                        {{-- HEARTBEAT mini card — bottom-left (light) --}}
-                        <div class="hidden md:flex float-card delay-1 absolute -left-10 bottom-12 items-center gap-3 rounded-2xl bg-white px-4 py-3 z-10 text-navy-900 shadow-2xl ring-1 ring-ink-100" style="min-width:200px;">
+                        {{-- HEARTBEAT mini card — bottom-left, kept well inside image bounds --}}
+                        <div class="hidden lg:flex float-card delay-1 absolute -left-10 bottom-28 items-center gap-3 rounded-2xl bg-white px-4 py-3 z-10 text-navy-900 shadow-2xl ring-1 ring-ink-100" style="min-width:200px;">
                             <span class="flex w-10 h-10 items-center justify-center rounded-full bg-rose-500 text-white shrink-0 alert-bounce">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
                             </span>
@@ -2529,8 +2549,8 @@
                 </div>
             </div>
 
-            {{-- Trust marquee --}}
-            <div class="reveal mt-20 overflow-hidden">
+            {{-- Trust marquee — extra top space to clear floating cards above --}}
+            <div class="reveal mt-32 lg:mt-40 overflow-hidden relative z-0">
                 <p class="text-center text-[10.5px] font-mono uppercase tracking-[.28em] text-ink-500 mb-5">Trusted by neighborhoods · families · school districts</p>
                 <div class="relative">
                     <div class="marquee-track">
@@ -2678,14 +2698,14 @@
         </div>
     </section>
 
-    {{-- ========== EMERGENCY TYPES — animated grid of 10 scenarios ========== --}}
+    {{-- ========== EMERGENCY TYPES — auto-rotating 3-card gallery ========== --}}
     <section id="emergency-types" class="relative overflow-hidden" style="background:linear-gradient(180deg,#fbfaf7 0%, #ffffff 100%);">
         {{-- soft ambient shapes --}}
         <span class="absolute -top-32 left-1/4 w-[420px] h-[420px] rounded-full bg-red-500/10 blur-3xl pointer-events-none"></span>
         <span class="absolute top-1/2 -right-20 w-[360px] h-[360px] rounded-full bg-amber-300/15 blur-3xl pointer-events-none"></span>
 
         <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
-            <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+            <div class="grid lg:grid-cols-12 gap-10 items-end mb-12">
                 <div class="lg:col-span-7">
                     <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Every emergency. Every family. Every time.</p>
                     <h2 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight text-navy-900">
@@ -2700,84 +2720,47 @@
                 </div>
             </div>
 
-            <div data-stagger class="stagger-in grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-                @php
-                    $emergencies = [
-                        ['key'=>'medical','title'=>'Medical Emergency','desc'=>'Heart attack, stroke, allergic reaction — paramedics dispatched with your medical info pre-loaded.','img'=>'/images/citizen/emergency-room.jpg','color'=>'rose','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/>'],
-                        ['key'=>'fire','title'=>'Fire Emergency','desc'=>'Smoke, gas leak, kitchen fire — fire teams alerted instantly with your floor plan and exits.','img'=>null,'color'=>'orange','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M12 2c1 4 5 5 5 10a5 5 0 11-10 0c0-3 2-3 2-7 1 1 2 2 3 2 0-2-1-3 0-5z"/>'],
-                        ['key'=>'theft','title'=>'Theft or Robbery','desc'=>'Silent SOS sends location, recording, and verified responders without alerting the attacker.','img'=>'/images/about/robbery.jpg','color'=>'red','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M12 1l9 4v6c0 5-3.5 9.5-9 11-5.5-1.5-9-6-9-11V5l9-4z"/>'],
-                        ['key'=>'missing-child','title'=>'Missing Child','desc'=>'Last-known location, photo, and AMBER-style alerts pushed to nearby Auxilio members.','img'=>'/images/citizen/child-distress.jpg','color'=>'amber','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 22a8 8 0 0116 0"/>'],
-                        ['key'=>'accident','title'=>'Road Accident','desc'=>'Crash detection auto-summons help, shares location, and alerts your family circle.','img'=>'/images/about/accident.jpg','color'=>'red','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M3 17h18l-2-7H5l-2 7zm2-3h14M7 17v2m10-2v2"/>'],
-                        ['key'=>'home-intrusion','title'=>'Home Intrusion','desc'=>'Door, window, or motion triggers — silent dispatch with live audio to verified responders.','img'=>'/images/about/break-in.jpg','color'=>'navy','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10h14V10"/>'],
-                        ['key'=>'natural-disaster','title'=>'Natural Disaster','desc'=>'Storms, floods, quakes — proactive alerts with shelter locations and family check-ins.','img'=>null,'color'=>'cyan','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M3 14a4 4 0 014-4h1a5 5 0 019.9-1.5A4.5 4.5 0 0119 17H5a3 3 0 01-2-3z"/>'],
-                        ['key'=>'women-safety','title'=>'Women Safety','desc'=>'Discreet panic gesture, live tracking, and trauma-informed responders — no questions asked.','img'=>'/images/citizen/abused-woman.jpg','color'=>'pink','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M12 2a4 4 0 014 4v2a4 4 0 11-8 0V6a4 4 0 014-4zM6 22a6 6 0 0112 0"/>'],
-                        ['key'=>'elderly','title'=>'Elderly Emergency','desc'=>'Fall detection, missed meds, wandering alerts — calm, dignified response designed for seniors.','img'=>null,'color'=>'violet','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M12 6V2m0 4a4 4 0 100 8 4 4 0 000-8zm-7 16l3-7 4 1 4-1 3 7"/>'],
-                        ['key'=>'sos','title'=>'General SOS','desc'=>'Anything you can\'t name in the moment. One tap reaches a real human in under 30 seconds.','img'=>'/images/citizen/warning-lamp.jpg','color'=>'red','icon'=>'<circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l6 6m0-6l-6 6"/>'],
-                    ];
-                    $colorMap = [
-                        'rose'   => ['bg'=>'from-rose-500 to-rose-700',     'chip'=>'bg-rose-500',     'soft'=>'bg-rose-50',     'text'=>'text-rose-600'],
-                        'orange' => ['bg'=>'from-orange-500 to-red-600',    'chip'=>'bg-orange-500',   'soft'=>'bg-orange-50',   'text'=>'text-orange-600'],
-                        'red'    => ['bg'=>'from-red-600 to-red-800',       'chip'=>'bg-red-600',      'soft'=>'bg-red-50',      'text'=>'text-red-600'],
-                        'amber'  => ['bg'=>'from-amber-400 to-orange-500',  'chip'=>'bg-amber-500',    'soft'=>'bg-amber-50',    'text'=>'text-amber-700'],
-                        'navy'   => ['bg'=>'from-navy-800 to-navy-950',     'chip'=>'bg-navy-900',     'soft'=>'bg-navy-50',     'text'=>'text-navy-900'],
-                        'cyan'   => ['bg'=>'from-cyan-500 to-blue-700',     'chip'=>'bg-cyan-500',     'soft'=>'bg-cyan-50',     'text'=>'text-cyan-700'],
-                        'pink'   => ['bg'=>'from-pink-500 to-rose-600',     'chip'=>'bg-pink-500',     'soft'=>'bg-pink-50',     'text'=>'text-pink-600'],
-                        'violet' => ['bg'=>'from-violet-500 to-indigo-700', 'chip'=>'bg-violet-500',   'soft'=>'bg-violet-50',   'text'=>'text-violet-600'],
-                    ];
-                @endphp
+            {{-- LIVE indicator + page label --}}
+            <div class="reveal flex items-center justify-between mb-6 gap-4 flex-wrap">
+                <div class="inline-flex items-center gap-3 rounded-full bg-white px-4 py-2 ring-1 ring-ink-100 shadow-sm">
+                    <span class="beacon"></span>
+                    <span class="font-mono text-[11px] uppercase tracking-[.18em] text-navy-900 font-bold">Live emergency feed</span>
+                    <span class="text-ink-400">·</span>
+                    <span data-em-page-label class="font-mono text-[11px] uppercase tracking-[.18em] text-brand-600 font-bold">Page 1 of 4</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button type="button" data-em-prev class="flex w-9 h-9 items-center justify-center rounded-full bg-white ring-1 ring-ink-100 text-navy-900 hover:ring-brand-300 hover:text-brand-600 transition" aria-label="Previous">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+                    <button type="button" data-em-next class="flex w-9 h-9 items-center justify-center rounded-full bg-red-600 text-white hover:bg-red-700 transition shadow-md" aria-label="Next">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
 
-                @foreach ($emergencies as $idx => $em)
-                    @php
-                        $c = $colorMap[$em['color']] ?? $colorMap['red'];
-                        $bgGrad = $c['bg'];
-                        $chip   = $c['chip'];
-                    @endphp
-                    <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
-                        <div class="relative aspect-[4/5] overflow-hidden">
-                            @if(!empty($em['img']))
-                                <img src="{{ $em['img'] }}" alt="{{ $em['title'] }}" class="em-img absolute inset-0 w-full h-full object-cover" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
-                                <div class="absolute inset-0 bg-gradient-to-br {{ $bgGrad }} opacity-25 mix-blend-multiply"></div>
-                            @else
-                                {{-- illustration card: rich gradient + icon constellation --}}
-                                <div class="absolute inset-0 bg-gradient-to-br {{ $bgGrad }}"></div>
-                                <div class="absolute inset-0 opacity-30"
-                                     style="background-image:
-                                        radial-gradient(circle at 25% 25%, rgba(255,255,255,.5) 1px, transparent 1.5px),
-                                        radial-gradient(circle at 75% 60%, rgba(255,255,255,.4) 1px, transparent 1.5px);
-                                        background-size: 32px 32px;"></div>
-                                <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
-                                <div class="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-white/10 blur-2xl"></div>
-                            @endif
+            {{-- The 3-slot gallery --}}
+            <div data-em-gallery class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                <article data-em-slot="0" class="em-big-card lush-shadow ring-1 ring-ink-100 rounded-[24px] overflow-hidden bg-white"></article>
+                <article data-em-slot="1" class="em-big-card lush-shadow ring-1 ring-ink-100 rounded-[24px] overflow-hidden bg-white"></article>
+                <article data-em-slot="2" class="em-big-card lush-shadow ring-1 ring-ink-100 rounded-[24px] overflow-hidden bg-white"></article>
+            </div>
 
-                            {{-- big icon overlay --}}
-                            <div class="absolute top-4 left-4 z-10">
-                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
-                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">{!! $em['icon'] !!}</svg>
-                                </span>
-                            </div>
-
-                            {{-- index badge --}}
-                            <span class="absolute top-4 right-4 z-10 rounded-full {{ $chip }} text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">{{ str_pad($idx+1, 2, '0', STR_PAD_LEFT) }} · TYPE</span>
-
-                            {{-- bottom content --}}
-                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
-                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">{{ $em['title'] }}</h3>
-                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">{{ $em['desc'] }}</p>
-                                <div class="mt-4 flex items-center gap-2">
-                                    <span class="beacon" style="background:#fff;"></span>
-                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                @endforeach
+            {{-- progress bar + dots --}}
+            <div class="reveal mt-8 flex items-center gap-5">
+                <div class="flex-1 h-1 rounded-full bg-ink-100 overflow-hidden">
+                    <span data-em-progress class="block h-full w-0 bg-gradient-to-r from-red-500 via-orange-500 to-amber-400 transition-[width] duration-100 ease-linear"></span>
+                </div>
+                <div class="flex items-center gap-1.5" data-em-dots>
+                    @for ($p = 0; $p < 4; $p++)
+                        <button type="button" data-em-page="{{ $p }}" class="block w-2.5 h-2.5 rounded-full bg-ink-200 hover:bg-brand-300 transition" aria-label="Page {{ $p + 1 }}"></button>
+                    @endfor
+                </div>
             </div>
 
             {{-- inline CTA strip --}}
             <div class="reveal mt-14 rounded-3xl glass-light ring-1 ring-ink-100 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-8 lush-shadow">
                 <div class="flex items-center gap-4 flex-1">
-                    <span class="flex w-14 h-14 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg " style="box-shadow:0 14px 30px -10px rgba(251,6,6,.45)">
+                    <span class="flex w-14 h-14 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg" style="box-shadow:0 14px 30px -10px rgba(251,6,6,.45)">
                         <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l6 6m0-6l-6 6"/></svg>
                     </span>
                     <div>
@@ -2791,6 +2774,22 @@
                 </a>
             </div>
         </div>
+
+        {{-- Emergency data (consumed by JS at bottom of citizen view) --}}
+        <script type="application/json" data-em-data>
+[
+{"key":"medical","title":"Medical Emergency","desc":"Heart attack, stroke, allergic reaction — paramedics dispatched with your medical info pre-loaded.","img":"/images/citizen/emergency-room.jpg","tone":"#FB0606","tone2":"#7c0606","icon":"M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"},
+{"key":"fire","title":"Fire Emergency","desc":"Smoke, gas leak, kitchen fire — fire teams alerted instantly with your floor plan and exits.","img":null,"tone":"#f97316","tone2":"#9a1a1a","icon":"M12 2c1 4 5 5 5 10a5 5 0 11-10 0c0-3 2-3 2-7 1 1 2 2 3 2 0-2-1-3 0-5z"},
+{"key":"theft","title":"Theft or Robbery","desc":"Silent SOS sends location, recording, and verified responders — without alerting the attacker.","img":"/images/about/robbery.jpg","tone":"#dc2626","tone2":"#7f1d1d","icon":"M12 1l9 4v6c0 5-3.5 9.5-9 11-5.5-1.5-9-6-9-11V5l9-4z"},
+{"key":"missing-child","title":"Missing Child","desc":"Last-known location, photo, and AMBER-style alerts pushed to nearby Auxilio members within seconds.","img":"/images/citizen/child-distress.jpg","tone":"#f59e0b","tone2":"#7c2d12","icon":"M12 12a4 4 0 100-8 4 4 0 000 8zM4 22a8 8 0 0116 0"},
+{"key":"accident","title":"Road Accident","desc":"Crash detection auto-summons help, shares location, and alerts your family circle the instant it happens.","img":"/images/about/accident.jpg","tone":"#ef4444","tone2":"#7f1d1d","icon":"M3 17h18l-2-7H5l-2 7zm2-3h14M7 17v2m10-2v2"},
+{"key":"home-intrusion","title":"Home Intrusion","desc":"Door, window, or motion triggers — silent dispatch with live audio to verified responders.","img":"/images/about/break-in.jpg","tone":"#1a2548","tone2":"#0a1224","icon":"M3 12l9-9 9 9M5 10v10h14V10"},
+{"key":"natural-disaster","title":"Natural Disaster","desc":"Storms, floods, quakes — proactive alerts with shelter locations and family check-ins.","img":null,"tone":"#0891b2","tone2":"#0c4a6e","icon":"M3 14a4 4 0 014-4h1a5 5 0 019.9-1.5A4.5 4.5 0 0119 17H5a3 3 0 01-2-3z"},
+{"key":"women-safety","title":"Women Safety","desc":"Discreet panic gesture, live tracking, and trauma-informed responders — no questions asked.","img":"/images/citizen/abused-woman.jpg","tone":"#ec4899","tone2":"#831843","icon":"M12 2a4 4 0 014 4v2a4 4 0 11-8 0V6a4 4 0 014-4zM6 22a6 6 0 0112 0"},
+{"key":"elderly","title":"Elderly Emergency","desc":"Fall detection, missed meds, wandering alerts — calm, dignified response designed for seniors.","img":null,"tone":"#8b5cf6","tone2":"#3730a3","icon":"M12 6V2m0 4a4 4 0 100 8 4 4 0 000-8zm-7 16l3-7 4 1 4-1 3 7"},
+{"key":"sos","title":"General SOS","desc":"Anything you can’t name in the moment. One tap reaches a real human in under 30 seconds.","img":"/images/citizen/warning-lamp.jpg","tone":"#FB0606","tone2":"#5a0606","icon":"M9 9l6 6m0-6l-6 6"}
+]
+        </script>
     </section>
 
     {{-- ========== STORYTELLING — Protect Your Loved Ones ========== --}}
@@ -3581,6 +3580,125 @@
                     if (!isOpen) item.setAttribute('data-open','');
                 });
             });
+        }
+
+        /* ---- Emergency Types auto-rotating 3-card gallery ---- */
+        var emRoot   = document.querySelector('[data-view="citizen-app"] #emergency-types');
+        var emGallery= emRoot && emRoot.querySelector('[data-em-gallery]');
+        var emData   = (function(){
+            try { var n = emRoot && emRoot.querySelector('[data-em-data]'); return n ? JSON.parse(n.textContent) : []; }
+            catch(e){ return []; }
+        })();
+        if (emRoot && emGallery && emData.length) {
+            var slots     = emGallery.querySelectorAll('[data-em-slot]');
+            var dots      = emRoot.querySelectorAll('[data-em-page]');
+            var pageLabel = emRoot.querySelector('[data-em-page-label]');
+            var progress  = emRoot.querySelector('[data-em-progress]');
+            var prevBtn   = emRoot.querySelector('[data-em-prev]');
+            var nextBtn   = emRoot.querySelector('[data-em-next]');
+
+            var perPage = slots.length;            // 3
+            var totalPages = Math.max(1, Math.ceil(emData.length / perPage));
+            // pad data so last page is full
+            var padded = emData.slice();
+            while (padded.length < totalPages * perPage) padded.push(emData[padded.length % emData.length]);
+
+            var page = 0;
+            var hovering = false;
+            var ROT_MS = 5500;
+            var STEP_MS = 80;
+            var elapsed = 0;
+            var rafTimer = null;
+
+            function svgIcon(d) {
+                return '<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="'+ d +'"/></svg>';
+            }
+            function escapeHtml(s){ return String(s||'').replace(/[&<>"']/g, function(c){return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]; }); }
+
+            function renderCard(em, idxGlobal) {
+                var bg = '';
+                if (em.img) {
+                    bg = ''
+                      + '<img class="em-img absolute inset-0 w-full h-full object-cover" src="'+ em.img +'" alt="'+ escapeHtml(em.title) +'" />'
+                      + '<div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(10,18,36,0) 0%, rgba(10,18,36,.45) 55%, rgba(10,18,36,.95) 100%);"></div>'
+                      + '<div class="absolute inset-0" style="background:linear-gradient(135deg, '+ em.tone +'33 0%, '+ em.tone2 +'33 100%); mix-blend-mode: multiply;"></div>';
+                } else {
+                    bg = ''
+                      + '<div class="em-illust-bg absolute inset-0" style="background:linear-gradient(135deg, '+ em.tone +' 0%, '+ em.tone2 +' 100%);"></div>'
+                      + '<div class="absolute -top-10 -right-10 w-44 h-44 rounded-full" style="background: rgba(255,255,255,.18); filter: blur(28px);"></div>'
+                      + '<div class="absolute -bottom-12 -left-10 w-40 h-40 rounded-full" style="background: rgba(255,255,255,.12); filter: blur(28px);"></div>';
+                }
+                var num = String(idxGlobal + 1).padStart(2,'0');
+                return ''
+                  + '<div class="em-inner">'
+                  +   bg
+                  +   '<div class="absolute top-4 left-4 z-10">'
+                  +     '<span class="em-icon-chip flex w-12 h-12 items-center justify-center rounded-2xl" style="background:rgba(255,255,255,.96); color:'+ em.tone +'; box-shadow:0 8px 18px -6px rgba(0,0,0,.25);">'
+                  +       svgIcon(em.icon)
+                  +     '</span>'
+                  +   '</div>'
+                  +   '<span class="absolute top-4 right-4 z-10 rounded-full text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2.5 py-1 font-bold shadow-lg" style="background:'+ em.tone +';">'+ num +' · TYPE</span>'
+                  +   '<div class="absolute inset-x-0 bottom-0 p-5 sm:p-6 z-10 text-white">'
+                  +     '<h3 class="font-display text-xl sm:text-2xl font-bold leading-tight">'+ escapeHtml(em.title) +'</h3>'
+                  +     '<p class="mt-2 text-[13px] sm:text-[13.5px] text-white/90 leading-relaxed">'+ escapeHtml(em.desc) +'</p>'
+                  +     '<div class="mt-4 flex items-center justify-between gap-3">'
+                  +       '<div class="inline-flex items-center gap-2">'
+                  +         '<span class="beacon" style="background:#fff;"></span>'
+                  +         '<span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/85 font-bold">Avg. response &lt; 4 min</span>'
+                  +       '</div>'
+                  +     '</div>'
+                  +   '</div>'
+                  + '</div>';
+            }
+
+            function setPage(p, animated) {
+                page = ((p % totalPages) + totalPages) % totalPages;
+                if (animated) slots.forEach(function(s){ s.classList.add('em-fade-out'); });
+                var apply = function() {
+                    for (var i = 0; i < perPage; i++) {
+                        var globalIdx = (page * perPage + i) % emData.length;
+                        slots[i].innerHTML = renderCard(padded[page * perPage + i], globalIdx);
+                        slots[i].classList.remove('em-fade-out');
+                    }
+                    if (pageLabel) pageLabel.textContent = 'Page ' + (page + 1) + ' of ' + totalPages;
+                    dots.forEach(function(d, i){
+                        if (i === page) d.classList.add('is-active');
+                        else d.classList.remove('is-active');
+                    });
+                };
+                if (animated) setTimeout(apply, 280);
+                else apply();
+                elapsed = 0;
+                if (progress) progress.style.width = '0%';
+            }
+
+            function tick() {
+                if (!hovering) {
+                    elapsed += STEP_MS;
+                    if (progress) progress.style.width = Math.min(100, (elapsed / ROT_MS) * 100) + '%';
+                    if (elapsed >= ROT_MS) setPage(page + 1, true);
+                }
+                rafTimer = setTimeout(tick, STEP_MS);
+            }
+
+            // wire up
+            dots.forEach(function(d){
+                d.addEventListener('click', function(){
+                    var p = parseInt(d.getAttribute('data-em-page'), 10) || 0;
+                    setPage(p, true);
+                });
+            });
+            if (prevBtn) prevBtn.addEventListener('click', function(){ setPage(page - 1, true); });
+            if (nextBtn) nextBtn.addEventListener('click', function(){ setPage(page + 1, true); });
+            emGallery.addEventListener('mouseenter', function(){ hovering = true; });
+            emGallery.addEventListener('mouseleave', function(){ hovering = false; });
+            // restart when navigating into citizen view
+            window.addEventListener('hashchange', function(){
+                if (location.hash === '#/citizen-app') setPage(0, false);
+            });
+
+            setPage(0, false);
+            tick();
         }
 
         /* ---- Scroll-triggered reveal: .stagger-in + .fade-up ---- */
