@@ -104,95 +104,126 @@
 @endphp
 
 {{-- =======================================================================
-     HERO — Nexagent-inspired LIGHT split (text left, dotted map + role tags right)
+     HERO — DARK split (text + stats left, officer photo + floating cards right)
 ========================================================================--}}
-<section class="relative overflow-hidden" style="background: linear-gradient(135deg, #f4f6fb 0%, #e9edf3 40%, #f1f3f7 70%, #f6f7fa 100%);">
-    {{-- ambient soft glow blobs --}}
-    <div class="pointer-events-none absolute inset-0 -z-0 overflow-hidden">
-        <div class="absolute -top-40 -left-40 w-[640px] h-[640px] rounded-full blur-3xl opacity-60" style="background: radial-gradient(circle, rgba(26,37,72,.14) 0%, transparent 65%);"></div>
-        <div class="absolute -bottom-40 -right-20 w-[600px] h-[600px] rounded-full blur-3xl opacity-60" style="background: radial-gradient(circle, rgba(251,6,6,.10) 0%, transparent 65%);"></div>
-    </div>
+<section class="home-hero relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 20% 0%, rgba(251,6,6,.18) 0%, transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(251,6,6,.20) 0%, transparent 55%), linear-gradient(160deg, #0a0a14 0%, #14141f 35%, #1a1a2a 65%, #100a14 100%);">
+    {{-- ambient particle/grid layer --}}
+    <div class="pointer-events-none absolute inset-0 opacity-[.06]" style="background-image: linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);"></div>
+    <span class="pointer-events-none absolute -top-32 -left-20 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(251,6,6,.22) 0%, transparent 70%);"></span>
+    <span class="pointer-events-none absolute bottom-0 -right-20 w-[560px] h-[560px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(251,6,6,.18) 0%, transparent 70%);"></span>
 
-    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-16 sm:pt-24 lg:pt-32 pb-20 sm:pb-28 lg:pb-36 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center min-h-[88vh]">
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-16 sm:pt-20 lg:pt-24 pb-20 lg:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
 
-        {{-- LEFT: copy + CTAs --}}
+        {{-- LEFT: copy + CTAs + stats --}}
         <div class="lg:col-span-6">
-            <p class="reveal inline-flex items-center gap-2 text-sm font-medium text-navy-900/70">
-                <svg class="w-4 h-4" style="color:#FB0606;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6v8a4 4 0 004 4h8m0 0l-4-4m4 4l-4 4"/></svg>
-                World&rsquo;s 1<sup class="text-[0.65em] align-super">st</sup> personal safety platform.
-            </p>
+            <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wider" style="background:rgba(251,6,6,.16); color:#fff; box-shadow: inset 0 0 0 1px rgba(251,6,6,.45);">
+                <span class="relative flex w-1.5 h-1.5">
+                    <span class="absolute inset-0 rounded-full animate-ping opacity-70" style="background:#FB0606;"></span>
+                    <span class="relative w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
+                </span>
+                Auxilio · Personal safety, all in one
+            </span>
 
-            <h1 class="reveal reveal-delay-1 mt-5 font-display font-extrabold tracking-tight text-navy-950 text-[46px] sm:text-6xl lg:text-[80px] leading-[1.02]">
-                One Tap,<br/>
-                <span style="color:#FB0606;">Total Safety</span>
+            <h1 class="reveal reveal-delay-1 mt-5 font-display font-extrabold tracking-tight text-white text-[44px] sm:text-6xl lg:text-[72px] leading-[1.02]">
+                Your safety,<br/>
+                <span style="background:linear-gradient(90deg,#FB0606 0%,#ff6b6b 60%,#ffb86b 100%); -webkit-background-clip:text; background-clip:text; color:transparent;">your control.</span>
             </h1>
 
-            <p class="reveal reveal-delay-2 mt-6 max-w-xl text-base sm:text-lg text-navy-900/65 leading-relaxed">
-                Your pocket-sized panic button, neighborhood watch and verified responder network — all in one. Built for families that refuse to wait for the news.
+            <p class="reveal reveal-delay-2 mt-6 max-w-xl text-base sm:text-lg text-white/70 leading-relaxed">
+                Live crime maps, registered offender alerts, and one-tap emergency response — designed for families, accessible for every citizen. Help is never more than a thumb away.
             </p>
 
-            <div class="reveal reveal-delay-3 mt-9 flex items-center gap-4">
-                <a href="#download" class="group relative inline-flex items-center justify-center rounded-xl text-white px-7 py-3.5 text-[15px] font-semibold shadow-[0_18px_38px_-12px_rgba(251,6,6,.55)] hover:-translate-y-0.5 transition" style="background:linear-gradient(135deg,#FB0606 0%,#c8202f 100%);">
-                    Get Auxilio
-                    <span class="pointer-events-none absolute -inset-px rounded-xl opacity-50 blur-md -z-10" style="background:#FB0606;"></span>
+            {{-- Dark App Store + Google Play download buttons --}}
+            <div class="reveal reveal-delay-3 mt-8 flex flex-wrap items-center gap-3">
+                <a href="#download" class="inline-flex items-center gap-3 rounded-xl px-5 py-3 text-white shadow-lg transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#1a1a26 0%,#0a0a14 100%); box-shadow: 0 12px 28px -10px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.08);">
+                    <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 12.5c0-2.7 2.2-4 2.3-4-1.3-1.8-3.2-2.1-3.9-2.1-1.7-.2-3.3 1-4.1 1s-2.2-1-3.6-1c-1.9 0-3.6 1.1-4.5 2.7-1.9 3.3-.5 8.2 1.4 10.9.9 1.3 2 2.8 3.4 2.7 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.6.9c1.5 0 2.4-1.3 3.3-2.6.6-.9 1.1-1.8 1.5-2.8-2.5-1-2.9-2.5-2.9-3.8zM14.6 4.7c.7-.8 1.2-2 1.1-3.1-1 0-2.3.7-3 1.5-.6.7-1.2 1.9-1.1 3 1.2 0 2.3-.6 3-1.4z"/></svg>
+                    <span class="text-left leading-tight">
+                        <span class="block text-[10px] uppercase tracking-wider text-white/70">Download on the</span>
+                        <span class="block text-lg font-display font-bold">App Store</span>
+                    </span>
                 </a>
-                <a data-route href="#/how-it-works" class="group inline-flex items-center gap-1.5 text-[15px] font-semibold text-navy-950 hover:text-brand-600 transition">
-                    Talk to Dispatch
-                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+                <a href="#download" class="inline-flex items-center gap-3 rounded-xl px-5 py-3 text-white shadow-lg transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#1a1a26 0%,#0a0a14 100%); box-shadow: 0 12px 28px -10px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.08);">
+                    <svg class="w-7 h-7" viewBox="0 0 24 24"><defs><linearGradient id="ghp-play-a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00d4ff"/><stop offset=".5" stop-color="#fbbc04"/><stop offset="1" stop-color="#ea4335"/></linearGradient></defs><path fill="url(#ghp-play-a)" d="M3 2.5v19c0 .8.9 1.3 1.6.9l16.4-9.5c.7-.4.7-1.4 0-1.8L4.6 1.6C3.9 1.2 3 1.7 3 2.5z"/></svg>
+                    <span class="text-left leading-tight">
+                        <span class="block text-[10px] uppercase tracking-wider text-white/70">Get it on</span>
+                        <span class="block text-lg font-display font-bold">Google Play</span>
+                    </span>
                 </a>
             </div>
+
+            {{-- 4-col stats --}}
+            <dl class="reveal reveal-delay-4 mt-10 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl">
+                @foreach ([
+                    ['v'=>'1-tap','l'=>'SOS to dispatch'],
+                    ['v'=>'24/7','l'=>'family monitoring'],
+                    ['v'=>'Live','l'=>'crime map alerts'],
+                    ['v'=>'Free','l'=>'forever for citizens'],
+                ] as $s)
+                    <div>
+                        <dt class="font-display text-2xl font-bold tracking-tight text-white">{{ $s['v'] }}</dt>
+                        <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/55">{{ $s['l'] }}</dd>
+                    </div>
+                @endforeach
+            </dl>
         </div>
 
-        {{-- RIGHT: dotted world map with role cards positioned on continents --}}
+        {{-- RIGHT: officer photo + floating live cards --}}
         <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-right relative w-full max-w-[720px] mx-auto" style="aspect-ratio: 1.55 / 1;">
+            <div class="reveal reveal-right relative mx-auto max-w-xl">
+                {{-- ambient warm halo --}}
+                <span class="absolute -inset-10 rounded-[44px] blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(251,6,6,.28) 0%, transparent 70%);"></span>
 
-                {{-- ambient glow halo --}}
-                <div class="absolute inset-0 -z-10 blur-3xl opacity-70" style="background:radial-gradient(ellipse at center, rgba(251,6,6,.14) 0%, rgba(26,37,72,.10) 45%, transparent 75%);"></div>
+                {{-- main officer image --}}
+                <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/10" style="box-shadow: 0 40px 80px -20px rgba(0,0,0,.6);">
+                    <img src="/images/officer-hero.jpg" alt="Auxilio verified responder" class="absolute inset-0 w-full h-full object-cover object-top" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/45 via-transparent to-transparent"></div>
+                </div>
 
-                {{-- DOTTED WORLD MAP --}}
-                <div class="world-dotmap absolute inset-0" aria-hidden="true" style="background-size: 9px 9px;"></div>
-
-                @php
-                    // top/left % positioned to land on visible continents
-                    $nodes = [
-                        ['top'=>'34%','left'=>'18%','label'=>'Police Officer',   'icon'=>'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z'],
-                        ['top'=>'18%','left'=>'48%','label'=>'911 Dispatch',     'icon'=>'M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9'],
-                        ['top'=>'30%','left'=>'80%','label'=>'First Responder',  'icon'=>'M13 2L3 14h7l-1 8 10-12h-7l1-8z'],
-                        ['top'=>'62%','left'=>'82%','label'=>'Super Agent',      'icon'=>'M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0'],
-                        ['top'=>'82%','left'=>'52%','label'=>'Trusted Contact',  'icon'=>'M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4-.8L3 20l1.4-3.7A8.99 8.99 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z'],
-                        ['top'=>'66%','left'=>'12%','label'=>'EMT',              'icon'=>'M5 13l4 4L19 7'],
-                    ];
-                @endphp
-
-                {{-- Center Auxilio hub (flat, sits over the map) --}}
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                    <div class="relative grid place-items-center w-16 h-16 rounded-full border-2 border-white shadow-[0_20px_40px_-12px_rgba(251,6,6,.5)]" style="background:linear-gradient(135deg,#fff 0%,#fef2f3 100%);">
-                        <svg class="w-7 h-7" style="color:#FB0606;" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
-                        </svg>
-                        <span class="absolute inset-0 rounded-full map-pin" aria-hidden="true"></span>
+                {{-- ALERT card — top right --}}
+                <div class="hidden md:flex absolute -right-6 top-8 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl ring-1 ring-ink-100 z-10" style="min-width:215px; animation: floatY 6s ease-in-out infinite;">
+                    <span class="flex w-11 h-11 items-center justify-center rounded-full text-white shrink-0" style="background:#FB0606;">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75M2.7 16.13c-.87 1.5.22 3.37 1.95 3.37h14.7c1.73 0 2.82-1.87 1.95-3.37L13.95 3.38c-.87-1.5-3.03-1.5-3.9 0L2.7 16.13z"/></svg>
+                    </span>
+                    <div class="leading-tight">
+                        <div class="font-mono text-[10px] uppercase tracking-[.18em] font-bold" style="color:#FB0606;">ALERT · 0.3 MI</div>
+                        <div class="font-display text-[14px] font-bold text-navy-900 mt-0.5">Theft · Maple St</div>
                     </div>
                 </div>
 
-                {{-- Role node cards on continents --}}
-                @foreach ($nodes as $i => $n)
-                    <div class="absolute z-10 -translate-x-1/2 -translate-y-1/2 orbit-node" style="top:{{ $n['top'] }}; left:{{ $n['left'] }}; animation-delay:{{ $i * 0.5 }}s;">
-                        <div class="orbit-node-card">
-                            <span class="grid place-items-center shrink-0 w-8 h-8 rounded-lg text-white" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
-                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $n['icon'] }}"/></svg>
-                            </span>
-                            <span class="text-xs font-bold text-navy-950">{{ $n['label'] }}</span>
-                            <span class="relative inline-flex w-1.5 h-1.5 ml-1">
-                                <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:#FB0606;"></span>
-                                <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:#FB0606;"></span>
-                            </span>
-                        </div>
+                {{-- SOS circle badge --}}
+                <div class="hidden md:flex absolute -left-7 top-1/3 items-center justify-center w-20 h-20 rounded-full shadow-2xl ring-4 ring-white/10 z-10" style="background:#FB0606;">
+                    <span class="absolute inset-0 rounded-full animate-ping opacity-50" style="background:#FB0606;"></span>
+                    <span class="absolute inset-2 rounded-full animate-ping opacity-30" style="background:#FB0606; animation-delay:.6s;"></span>
+                    <span class="relative font-display font-extrabold text-white text-sm tracking-wider">SOS</span>
+                </div>
+
+                {{-- RESPONDER card — middle right (lower) --}}
+                <div class="hidden md:flex absolute -right-12 items-center gap-3 rounded-2xl text-white px-4 py-3 shadow-2xl ring-1 ring-white/10 z-10" style="top:62%; min-width:235px; background:#0c1126; animation: floatY 6s ease-in-out infinite; animation-delay:1s;">
+                    <span class="flex w-11 h-11 items-center justify-center rounded-full text-navy-900 shrink-0" style="background:#34d399;">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                    </span>
+                    <div class="leading-tight">
+                        <div class="font-mono text-[10px] uppercase tracking-[.18em] font-bold" style="color:#34d399;">RESPONDER · 90S</div>
+                        <div class="font-display text-[14px] font-bold mt-0.5">Officer Reyes · 90s</div>
                     </div>
-                @endforeach
+                </div>
+
+                {{-- PROTECTED card — bottom --}}
+                <div class="hidden md:flex absolute left-6 -bottom-6 items-center gap-3 rounded-2xl text-white px-4 py-3 shadow-2xl ring-1 ring-white/10 z-10" style="min-width:260px; background:#0c1126; animation: floatY 6s ease-in-out infinite; animation-delay:.4s;">
+                    <span class="flex w-10 h-10 items-center justify-center rounded-full text-navy-900 shrink-0" style="background:#34d399;">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l5 5L20 7"/></svg>
+                    </span>
+                    <div class="leading-tight">
+                        <div class="font-mono text-[10px] uppercase tracking-[.18em] font-bold" style="color:#34d399;">PROTECTED</div>
+                        <div class="font-display text-[14px] font-bold mt-0.5">All 4 family members</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    {{-- subtle bottom fade to next section --}}
+    <div class="pointer-events-none absolute inset-x-0 -bottom-px h-24" style="background:linear-gradient(180deg, transparent 0%, #ffffff 100%);"></div>
 </section>
 
 {{-- =======================================================================
@@ -1496,20 +1527,13 @@
                 </div>
                 <div class="reveal reveal-right lg:col-span-6">
                     <div class="relative mx-auto max-w-xl">
-                        {{-- Soft brand-tinted panel with subtle grid pattern --}}
-                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] shadow-[0_30px_80px_-20px_rgba(15,20,40,.18)] ring-1 ring-ink-100"
-                             style="background:
-                                radial-gradient(circle at 30% 20%, rgba(15,20,40,.04), transparent 55%),
-                                linear-gradient(160deg, #f7f8fb 0%, #eef1f6 60%, #ffffff 100%);">
-                            <div class="absolute inset-0 pointer-events-none opacity-50"
-                                 style="background-image:
-                                    linear-gradient(rgba(15,20,40,.05) 1px, transparent 1px),
-                                    linear-gradient(90deg, rgba(15,20,40,.05) 1px, transparent 1px);
-                                    background-size: 36px 36px;
-                                    mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);"></div>
-
-                            {{-- Officer image, bottom-anchored like Fundix --}}
-                            <img src="/images/officer-hero.jpg" alt="Auxilio Officer" class="absolute inset-x-0 bottom-0 mx-auto w-[92%] h-[92%] object-cover object-top rounded-[20px] shadow-2xl" />
+                        {{-- ambient halo (matches citizen) --}}
+                        <span class="absolute -inset-10 rounded-[44px] blur-3xl bg-red-500/15 pointer-events-none"></span>
+                        <span class="absolute -bottom-10 -left-6 w-48 h-48 rounded-full blur-3xl bg-amber-300/30 pointer-events-none"></span>
+                        {{-- Officer image, full-bleed like citizen hero (no inner frame) --}}
+                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow">
+                            <img src="/images/officer-hero.jpg" alt="Auxilio Officer" class="absolute inset-0 w-full h-full object-cover object-top" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-navy-950/0 to-transparent"></div>
                         </div>
 
                         {{-- Small checkmark badge (like Fundix green check) --}}
