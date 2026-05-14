@@ -41,10 +41,11 @@
 <header data-nav style="background-color:#FB0606" class="fixed inset-x-0 top-0 z-50 text-white">
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
         <div class="flex-1 flex items-center">
-            <a href="#top" class="flex items-center gap-2 group">
-                <span class="grid place-items-center h-14 w-14 rounded-md bg-white shadow-sm p-1.5 transition-transform group-hover:rotate-[-4deg]">
-                    <img src="/images/auxilio-logo-new.png" alt="Auxilio" class="h-full w-auto object-contain" />
+            <a href="#top" class="flex items-center gap-2.5 group">
+                <span class="grid place-items-center h-10 w-10 rounded-md bg-white shadow-sm p-1 transition-transform group-hover:rotate-[-4deg]">
+                    <img src="/images/auxilio-logo-new.png" alt="" class="h-full w-auto object-contain" />
                 </span>
+                <img src="/images/auxilio-logo-white.png" alt="Auxilio" class="h-5 sm:h-6 w-auto" />
             </a>
         </div>
 
@@ -108,7 +109,7 @@
 ========================================================================--}}
 <section class="home-hero relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%), linear-gradient(160deg, #050d2a 0%, #0a1a4a 30%, #0d1f56 55%, #061229 100%);">
     {{-- ambient particle/grid layer --}}
-    <div class="pointer-events-none absolute inset-0 opacity-[.07]" style="background-image: linear-gradient(rgba(140,180,255,.8) 1px, transparent 1px), linear-gradient(90deg, rgba(140,180,255,.8) 1px, transparent 1px); background-size: 48px 48px; mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);"></div>
+    <div class="pointer-events-none absolute inset-0 opacity-[.025]" style="background-image: linear-gradient(rgba(180,210,255,.55) 1px, transparent 1px), linear-gradient(90deg, rgba(180,210,255,.55) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);"></div>
     <span class="pointer-events-none absolute -top-32 -left-20 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(56,189,248,.28) 0%, transparent 70%);"></span>
     <span class="pointer-events-none absolute bottom-0 -right-20 w-[560px] h-[560px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(99,102,241,.28) 0%, transparent 70%);"></span>
     <span class="pointer-events-none absolute top-1/3 right-1/3 w-[320px] h-[320px] rounded-full blur-3xl opacity-50" style="background: radial-gradient(circle, rgba(125,211,252,.18) 0%, transparent 70%);"></span>
@@ -156,16 +157,16 @@
             </dl>
         </div>
 
-        {{-- RIGHT: officer photo + floating live cards --}}
+        {{-- RIGHT: family photo + floating live cards (sized like agent hero) --}}
         <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-right relative mx-auto max-w-xl">
+            <div class="reveal reveal-right relative mx-auto max-w-md">
                 {{-- ambient blue halo --}}
-                <span class="absolute -inset-10 rounded-[44px] blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(56,189,248,.32) 0%, transparent 70%);"></span>
-                <span class="absolute -bottom-12 -right-6 w-56 h-56 rounded-full blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(99,102,241,.40) 0%, transparent 70%);"></span>
+                <span class="absolute -inset-10 rounded-[44px] blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(56,189,248,.30) 0%, transparent 70%);"></span>
+                <span class="absolute -bottom-12 -right-6 w-48 h-48 rounded-full blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(99,102,241,.34) 0%, transparent 70%);"></span>
 
-                {{-- main hero image — citizen using the app --}}
+                {{-- main hero image — family at home --}}
                 <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15" style="box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
-                    <img src="/images/hero-citizen-phone.jpg" alt="Auxilio in your hand" class="absolute inset-0 w-full h-full object-cover object-top" />
+                    <img src="/images/hero-family-couch.jpg" alt="Auxilio for every family" class="absolute inset-0 w-full h-full object-cover" />
                     <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
                 </div>
 
@@ -212,8 +213,7 @@
         </div>
     </div>
 
-    {{-- subtle bottom fade to next section --}}
-    <div class="pointer-events-none absolute inset-x-0 -bottom-px h-24" style="background:linear-gradient(180deg, transparent 0%, #ffffff 100%);"></div>
+
 </section>
 
 {{-- =======================================================================
@@ -3548,10 +3548,11 @@
     <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-20 pb-10">
         <div class="grid lg:grid-cols-12 gap-12">
             <div class="lg:col-span-5">
-                <a href="#top" class="inline-flex items-center gap-2 group">
-                    <span class="grid place-items-center h-14 w-14 rounded-md bg-white shadow-sm p-1.5 transition-transform group-hover:rotate-[-4deg]">
-                        <img src="/images/auxilio-logo-new.png" alt="Auxilio" class="h-full w-auto object-contain" />
+                <a href="#top" class="inline-flex items-center gap-2.5 group">
+                    <span class="grid place-items-center h-11 w-11 rounded-md bg-white shadow-sm p-1 transition-transform group-hover:rotate-[-4deg]">
+                        <img src="/images/auxilio-logo-new.png" alt="" class="h-full w-auto object-contain" />
                     </span>
+                    <img src="/images/auxilio-logo-white.png" alt="Auxilio" class="h-6 w-auto" />
                 </a>
                 <p class="mt-5 max-w-md text-navy-300/80 leading-relaxed">
                     Real-time alerts, one-tap SOS, verified Super Agents, and live case tracking — Auxilio User is a personal safety companion built for the people you love.
