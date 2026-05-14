@@ -1497,14 +1497,14 @@
                 <div class="reveal reveal-right lg:col-span-6">
                     <div class="relative mx-auto max-w-xl">
                         {{-- Soft brand-tinted panel with subtle grid pattern --}}
-                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] shadow-[0_30px_80px_-20px_rgba(251,6,6,.18)] ring-1 ring-brand-100/60"
+                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] shadow-[0_30px_80px_-20px_rgba(15,20,40,.18)] ring-1 ring-ink-100"
                              style="background:
-                                radial-gradient(circle at 30% 20%, rgba(251,6,6,.06), transparent 55%),
-                                linear-gradient(160deg, #fff5f5 0%, #fdecec 60%, #fff 100%);">
+                                radial-gradient(circle at 30% 20%, rgba(15,20,40,.04), transparent 55%),
+                                linear-gradient(160deg, #f7f8fb 0%, #eef1f6 60%, #ffffff 100%);">
                             <div class="absolute inset-0 pointer-events-none opacity-50"
                                  style="background-image:
-                                    linear-gradient(rgba(251,6,6,.06) 1px, transparent 1px),
-                                    linear-gradient(90deg, rgba(251,6,6,.06) 1px, transparent 1px);
+                                    linear-gradient(rgba(15,20,40,.05) 1px, transparent 1px),
+                                    linear-gradient(90deg, rgba(15,20,40,.05) 1px, transparent 1px);
                                     background-size: 36px 36px;
                                     mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);"></div>
 
