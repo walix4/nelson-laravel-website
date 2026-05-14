@@ -2438,10 +2438,7 @@
         <span class="deco-shape" style="bottom:8%; right:18%; width:100px; height:100px; background:radial-gradient(circle, rgba(251,6,6,.16) 0%, transparent 70%); animation-delay:3.6s;"></span>
 
         <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
-            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
-                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">Citizen App</span>
-            </div>
-            <div class="mt-3 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 <div class="lg:col-span-6">
                     <span class="reveal reveal-delay-1 inline-flex items-center gap-2 rounded-full bg-brand-50 ring-1 ring-brand-100 text-brand-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5">
                         <span class="relative flex w-1.5 h-1.5">
@@ -2460,10 +2457,6 @@
                     <div class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center gap-3">
                         <a href="#" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 rounded-lg"><img src="/images/app-store-badge.png" alt="Download on the App Store" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                         <a href="#" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 rounded-lg"><img src="/images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
-                        <a href="#emergency-types" class="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-navy-900 ring-1 ring-ink-200 bg-white hover:ring-brand-300 hover:text-brand-600 transition shadow-sm">
-                            See how we protect families
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0l-6-6m6 6l6-6"/></svg>
-                        </a>
                     </div>
                     <dl class="reveal reveal-delay-4 mt-10 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl">
                         @foreach ([
@@ -2478,6 +2471,23 @@
                             </div>
                         @endforeach
                     </dl>
+
+                    {{-- Social proof block --}}
+                    <div class="reveal reveal-delay-4 mt-10 max-w-xl">
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center -space-x-3 shrink-0">
+                                <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
+                                <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
+                                <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
+                                <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
+                                <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-white bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
+                            </div>
+                            <p class="font-display text-base font-semibold text-navy-900">5,000+ Verified Officers</p>
+                        </div>
+                        <p class="mt-3 text-sm text-navy-700/75 leading-relaxed max-w-md">
+                            Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
+                        </p>
+                    </div>
                 </div>
 
                 {{-- Hero collage: real FAMILY illustrations + floating live cards --}}
