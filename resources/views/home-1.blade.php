@@ -2528,7 +2528,7 @@
                         </div>
 
                         {{-- RESPONDER card — middle right --}}
-                        <div class="hidden md:flex float-card delay-2 absolute -right-12 top-1/2 items-center gap-3 rounded-2xl bg-navy-900 text-white px-4 py-3 shadow-2xl ring-1 ring-white/10 z-10" style="min-width:235px;">
+                        <div class="hidden md:flex float-card delay-2 absolute -right-12 items-center gap-3 rounded-2xl bg-navy-900 text-white px-4 py-3 shadow-2xl ring-1 ring-white/10 z-10" style="top:64%; min-width:235px;">
                             <span class="flex w-11 h-11 items-center justify-center rounded-full bg-emerald-400 text-navy-900 shrink-0">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
                             </span>
