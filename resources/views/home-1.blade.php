@@ -2485,21 +2485,12 @@
                             </div>
                         </div>
 
-                        {{-- secondary tilted thumbnail: 2nd family illustration --}}
-                        <div class="hidden md:block absolute -bottom-10 -right-6 w-44 rounded-2xl overflow-hidden ring-2 ring-white shadow-2xl tilt-r float-card delay-2 bg-white">
-                            <div class="relative aspect-[4/5]">
-                                <img src="/images/citizen/family-cartoon.jpg" alt="Happy family at home" class="absolute inset-0 w-full h-full object-cover" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/65 via-transparent to-transparent"></div>
-                                <span class="absolute top-2 left-2 rounded-full bg-emerald-500 text-[9px] font-mono uppercase tracking-[.18em] text-white px-2 py-0.5 font-bold">Home safe</span>
-                            </div>
-                        </div>
-
-                        {{-- pulsing SOS ring badge --}}
+                        {{-- pulsing ALERT ring badge --}}
                         <div class="hidden md:flex absolute -left-7 top-1/3 items-center justify-center w-20 h-20 rounded-full bg-red-600 text-white shadow-2xl ring-4 ring-red-100 z-10">
                             <span class="ring-pulse"></span>
                             <span class="ring-pulse delay-1"></span>
                             <span class="ring-pulse delay-2"></span>
-                            <span class="font-display font-extrabold text-sm tracking-wider">SOS</span>
+                            <span class="font-display font-extrabold text-[11px] tracking-wider">ALERT</span>
                         </div>
 
                         {{-- ALERT card — top right --}}
