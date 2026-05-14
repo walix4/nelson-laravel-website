@@ -2597,9 +2597,9 @@
                 <div class="relative grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                     <div class="lg:col-span-5">
                         <div class="relative">
-                            {{-- main FAMILY image: cartoon family in warm gradient --}}
+                            {{-- main FAMILY photo --}}
                             <div class="relative rounded-[24px] overflow-hidden aspect-[4/5] shadow-2xl ring-1 ring-ink-100 bg-gradient-to-br from-amber-50 via-rose-50 to-amber-100">
-                                <img src="/images/citizen/family-cartoon.jpg" alt="Family protected by Auxilio" class="absolute inset-0 w-full h-full object-cover" />
+                                <img src="/images/citizen/family-safe.jpg" alt="Family protected by Auxilio" class="absolute inset-0 w-full h-full object-cover" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
                                 <span class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/60 shadow">
                                     <span class="beacon"></span>
@@ -2618,11 +2618,11 @@
                                 </div>
                             </div>
 
-                            {{-- secondary thumbnail: 2nd family illustration --}}
+                            {{-- secondary thumbnail: real family photo --}}
                             <div class="hidden md:block absolute -bottom-8 -right-8 w-40 rounded-2xl overflow-hidden ring-2 ring-white shadow-xl tilt-r bg-white">
                                 <div class="relative aspect-[4/5]">
-                                    <img src="/images/citizen/cartoon-family-3d.jpg" alt="Family ready and connected" class="absolute inset-0 w-full h-full object-cover" />
-                                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/45 via-transparent to-transparent"></div>
+                                    <img src="/images/citizen/family-hugging.jpg" alt="Family ready and connected" class="absolute inset-0 w-full h-full object-cover" />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
                                     <span class="absolute bottom-2 left-2 right-2 text-center text-[9.5px] font-mono uppercase tracking-[.16em] text-white">Always together</span>
                                 </div>
                             </div>
@@ -2803,7 +2803,7 @@
                     <div class="relative max-w-md mx-auto lg:mx-0">
                         <span class="absolute -inset-6 rounded-[40px] blur-3xl bg-red-500/15 pointer-events-none"></span>
                         <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow">
-                            <img src="/images/citizen/cartoon-family-3d.jpg" alt="Family inside a safe home" class="absolute inset-0 w-full h-full object-cover" />
+                            <img src="/images/citizen/family-hugging.jpg" alt="Family inside a safe home" class="absolute inset-0 w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
                             <span class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/60 shadow">
                                 <span class="beacon"></span>
@@ -3076,7 +3076,7 @@
                     <div class="relative mx-auto max-w-md lg:sticky lg:top-28">
                         <span class="absolute -inset-6 rounded-[36px] blur-3xl bg-brand-100/60 pointer-events-none"></span>
                         <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 shadow-2xl">
-                            <img data-citizen-step-img src="/images/citizen/cartoon-family-3d.jpg" alt="Step preview" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
+                            <img data-citizen-step-img src="/images/citizen/family-hugging.jpg" alt="Step preview" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
                             <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
                             <div class="absolute top-4 left-4">
                                 <span data-citizen-step-badge class="inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/40 shadow">
@@ -3096,10 +3096,10 @@
                 <div class="lg:col-span-7">
                     <ol data-citizen-steps class="relative space-y-2">
                         @foreach ([
-                            ['n'=>'01','img'=>'/images/citizen/cartoon-family-3d.jpg','h'=>'Create your free Citizen profile','b'=>"Just your name, phone, and a 4-digit PIN. We never sell your data — and the citizen tier is free, forever."],
-                            ['n'=>'02','img'=>'/images/citizen/family-cartoon.jpg', 'h'=>'Verify your phone in 30 seconds','b'=>"Standard SMS verification. Once verified, you'll receive trusted, ranked alerts and never spam."],
-                            ['n'=>'03','img'=>'/images/citizen/family-cartoon.jpg', 'h'=>'Add your family circle','b'=>'Invite parents, partner, kids — share location in either direction with one-tap controls.'],
-                            ['n'=>'04','img'=>'/images/citizen/cartoon-family-3d.jpg','h'=>"You're protected — go live the day",'b'=>"SOS is wired up, alerts are flowing, your family knows where you are when you want them to."],
+                            ['n'=>'01','img'=>'/images/citizen/family-hugging.jpg', 'h'=>'Create your free Citizen profile','b'=>"Just your name, phone, and a 4-digit PIN. We never sell your data — and the citizen tier is free, forever."],
+                            ['n'=>'02','img'=>'/images/citizen/family-safe.jpg',    'h'=>'Verify your phone in 30 seconds','b'=>"Standard SMS verification. Once verified, you'll receive trusted, ranked alerts and never spam."],
+                            ['n'=>'03','img'=>'/images/citizen/family-park-walk.jpg','h'=>'Add your family circle','b'=>'Invite parents, partner, kids — share location in either direction with one-tap controls.'],
+                            ['n'=>'04','img'=>'/images/citizen/family-safe.jpg',    'h'=>"You're protected — go live the day",'b'=>"SOS is wired up, alerts are flowing, your family knows where you are when you want them to."],
                         ] as $i => $s)
                             <li data-citizen-step="{{ $i }}" data-img="{{ $s['img'] }}"
                                 @if($i===0) data-active class="cursor-pointer rounded-md bg-white border-2 border-brand-200 shadow-lg p-5 lg:p-6 transition"
@@ -3441,9 +3441,9 @@
                         <span class="absolute -inset-10 rounded-[44px] blur-3xl bg-red-600/30 pointer-events-none"></span>
                         <span class="absolute -bottom-8 -right-8 w-44 h-44 rounded-full blur-2xl bg-amber-400/30 pointer-events-none"></span>
 
-                        {{-- main warm family image --}}
+                        {{-- main warm family photo --}}
                         <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 lush-shadow float-slow">
-                            <img src="/images/citizen/family-cartoon.jpg" alt="A family safe at home" class="absolute inset-0 w-full h-full object-cover" />
+                            <img src="/images/citizen/family-park-walk.jpg" alt="Families at sunset, safe together" class="absolute inset-0 w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/15 to-transparent"></div>
 
                             <div class="absolute bottom-5 left-5 right-5">
@@ -3460,10 +3460,10 @@
                             </div>
                         </div>
 
-                        {{-- floating thumb: 3D family --}}
+                        {{-- floating thumb: real family --}}
                         <div class="hidden md:block float-card absolute -left-10 -bottom-6 w-36 rounded-2xl overflow-hidden ring-2 ring-white/25 shadow-2xl tilt-l">
                             <div class="relative aspect-square">
-                                <img src="/images/citizen/cartoon-family-3d.jpg" alt="Family ready" class="absolute inset-0 w-full h-full object-cover" />
+                                <img src="/images/citizen/family-hugging.jpg" alt="Family safe" class="absolute inset-0 w-full h-full object-cover" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
                                 <span class="absolute bottom-2 left-2 right-2 text-center text-[9.5px] font-mono uppercase tracking-[.14em] text-white">Hello, neighbor.</span>
                             </div>
