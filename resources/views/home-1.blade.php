@@ -2440,14 +2440,7 @@
         <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
             <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 <div class="lg:col-span-6">
-                    <span class="reveal reveal-delay-1 inline-flex items-center gap-2 rounded-full bg-brand-50 ring-1 ring-brand-100 text-brand-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5">
-                        <span class="relative flex w-1.5 h-1.5">
-                            <span class="absolute inset-0 rounded-full bg-brand-600 animate-ping opacity-70"></span>
-                            <span class="relative w-1.5 h-1.5 rounded-full bg-brand-600"></span>
-                        </span>
-                        Auxilio Citizen · iOS &amp; Android · Free for families
-                    </span>
-                    <h1 class="reveal reveal-delay-2 mt-5 font-display font-extrabold text-4xl sm:text-5xl lg:text-[64px] xl:text-[72px] leading-[1.02] tracking-tight text-navy-900">
+                    <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[64px] xl:text-[72px] leading-[1.02] tracking-tight text-navy-900">
                         Protect the people<br/>
                         <span class="grad-red">you love most.</span>
                     </h1>
@@ -2595,10 +2588,10 @@
 
             <div class="reveal stagger grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 @foreach ([
-                    ['img'=>'/images/citizen/warning-lamp.jpg',  'tag'=>'01 · STREET',  'title'=>'Walking home at night',      'desc'=>'Auto-share live location with family. Auxilio listens for trouble and pre-arms SOS.'],
-                    ['img'=>'/images/citizen/theft-prep.jpg',    'tag'=>'02 · ALERT',   'title'=>'Pickpocket / theft',         'desc'=>'Silent SOS, location lock, and instant officer dispatch — without lifting the phone.'],
-                    ['img'=>'/images/citizen/emergency-room.jpg','tag'=>'03 · MEDICAL', 'title'=>'Sudden medical emergency',   'desc'=>'One tap routes paramedics + your saved medical info ahead, so the team is ready on arrival.'],
-                    ['img'=>'/images/citizen/threat-wall.jpg',   'tag'=>'04 · ASSAULT', 'title'=>'Domestic threat',            'desc'=>'A discreet panic gesture sends help and quietly records context — even when you can\'t talk.'],
+                    ['img'=>'/images/citizen/night-walk.jpg',              'tag'=>'01 · STREET',   'title'=>'Walking home at night',      'desc'=>'Auto-share live location with family. Auxilio listens for trouble and pre-arms SOS.'],
+                    ['img'=>'/images/citizen/theft-prep.jpg',              'tag'=>'02 · ALERT',    'title'=>'Pickpocket / theft',         'desc'=>'Silent SOS, location lock, and instant officer dispatch — without lifting the phone.'],
+                    ['img'=>'/images/citizen/paramedic-ambulance-day.jpg', 'tag'=>'03 · MEDICAL',  'title'=>'Sudden medical emergency',   'desc'=>'One tap routes paramedics + your saved medical info ahead, so the team is ready on arrival.'],
+                    ['img'=>'/images/citizen/assault.jpg',                 'tag'=>'04 · DOMESTIC', 'title'=>'Domestic violence',          'desc'=>'A discreet panic gesture sends help and quietly records context — even when you can\'t talk.'],
                 ] as $sc)
                     <article class="scenario-tile group relative rounded-md overflow-hidden bg-navy-900 text-white shadow-lg ring-1 ring-ink-100">
                         <div class="relative h-60 sm:h-72 overflow-hidden">
@@ -2629,7 +2622,7 @@
                         <div class="relative">
                             {{-- main FAMILY photo --}}
                             <div class="relative rounded-[24px] overflow-hidden aspect-[4/5] shadow-2xl ring-1 ring-ink-100 bg-gradient-to-br from-amber-50 via-rose-50 to-amber-100">
-                                <img src="/images/citizen/family-safe.jpg" alt="Family protected by Auxilio" class="absolute inset-0 w-full h-full object-cover" />
+                                <img src="/images/citizen/family-multi-gen.jpg" alt="Family protected by Auxilio" class="absolute inset-0 w-full h-full object-cover" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
                                 <span class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/60 shadow">
                                     <span class="beacon"></span>
@@ -2651,7 +2644,7 @@
                             {{-- secondary thumbnail: real family photo --}}
                             <div class="hidden md:block absolute -bottom-8 -right-8 w-40 rounded-2xl overflow-hidden ring-2 ring-white shadow-xl tilt-r bg-white">
                                 <div class="relative aspect-[4/5]">
-                                    <img src="/images/citizen/family-hugging.jpg" alt="Family ready and connected" class="absolute inset-0 w-full h-full object-cover" />
+                                    <img src="/images/citizen/family-laughing.jpg" alt="Family ready and connected" class="absolute inset-0 w-full h-full object-cover" />
                                     <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
                                     <span class="absolute bottom-2 left-2 right-2 text-center text-[9.5px] font-mono uppercase tracking-[.16em] text-white">Always together</span>
                                 </div>
@@ -2788,7 +2781,7 @@
         {{-- Emergency data (consumed by JS at bottom of citizen view) --}}
         <script type="application/json" data-em-data>
 [
-{"key":"medical","title":"Medical Emergency","desc":"Heart attack, stroke, allergic reaction — paramedics dispatched with your medical info pre-loaded.","img":"/images/citizen/emergency-room.jpg","tone":"#FB0606","tone2":"#7c0606","icon":"M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"},
+{"key":"medical","title":"Medical Emergency","desc":"Heart attack, stroke, allergic reaction — paramedics dispatched with your medical info pre-loaded.","img":"/images/citizen/paramedic-ambulance-night.jpg","tone":"#FB0606","tone2":"#7c0606","icon":"M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"},
 {"key":"fire","title":"Fire Emergency","desc":"Smoke, gas leak, kitchen fire — fire teams alerted instantly with your floor plan and exits.","img":"/images/citizen/em-fire.jpg","tone":"#f97316","tone2":"#9a1a1a","icon":"M12 2c1 4 5 5 5 10a5 5 0 11-10 0c0-3 2-3 2-7 1 1 2 2 3 2 0-2-1-3 0-5z"},
 {"key":"theft","title":"Theft or Robbery","desc":"Silent SOS sends location, recording, and verified responders — without alerting the attacker.","img":"/images/about/robbery.jpg","tone":"#dc2626","tone2":"#7f1d1d","icon":"M12 1l9 4v6c0 5-3.5 9.5-9 11-5.5-1.5-9-6-9-11V5l9-4z"},
 {"key":"missing-child","title":"Missing Child","desc":"Last-known location, photo, and AMBER-style alerts pushed to nearby Auxilio members within seconds.","img":"/images/citizen/child-distress.jpg","tone":"#f59e0b","tone2":"#7c2d12","icon":"M12 12a4 4 0 100-8 4 4 0 000 8zM4 22a8 8 0 0116 0"},
@@ -2797,7 +2790,7 @@
 {"key":"natural-disaster","title":"Natural Disaster","desc":"Storms, floods, quakes — proactive alerts with shelter locations and family check-ins.","img":"/images/citizen/em-disaster.jpg","tone":"#0891b2","tone2":"#0c4a6e","icon":"M3 14a4 4 0 014-4h1a5 5 0 019.9-1.5A4.5 4.5 0 0119 17H5a3 3 0 01-2-3z"},
 {"key":"women-safety","title":"Women Safety","desc":"Discreet panic gesture, live tracking, and trauma-informed responders — no questions asked.","img":"/images/citizen/abused-woman.jpg","tone":"#ec4899","tone2":"#831843","icon":"M12 2a4 4 0 014 4v2a4 4 0 11-8 0V6a4 4 0 014-4zM6 22a6 6 0 0112 0"},
 {"key":"elderly","title":"Elderly Emergency","desc":"Fall detection, missed meds, wandering alerts — calm, dignified response designed for seniors.","img":"/images/citizen/em-elderly.jpg","tone":"#8b5cf6","tone2":"#3730a3","icon":"M12 6V2m0 4a4 4 0 100 8 4 4 0 000-8zm-7 16l3-7 4 1 4-1 3 7"},
-{"key":"sos","title":"General SOS","desc":"Anything you can’t name in the moment. One tap reaches a real human in under 30 seconds.","img":"/images/citizen/warning-lamp.jpg","tone":"#FB0606","tone2":"#5a0606","icon":"M9 9l6 6m0-6l-6 6"}
+{"key":"sos","title":"General SOS","desc":"Anything you can’t name in the moment. One tap reaches a real human in under 30 seconds.","img":"/images/citizen/threat-wall.jpg","tone":"#FB0606","tone2":"#5a0606","icon":"M9 9l6 6m0-6l-6 6"}
 ]
         </script>
     </section>
@@ -2812,7 +2805,7 @@
                     <div class="relative max-w-md mx-auto lg:mx-0">
                         <span class="absolute -inset-6 rounded-[40px] blur-3xl bg-red-500/15 pointer-events-none"></span>
                         <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow">
-                            <img src="/images/citizen/family-hugging.jpg" alt="Family inside a safe home" class="absolute inset-0 w-full h-full object-cover" />
+                            <img src="/images/citizen/family-beach-4.jpg" alt="Family inside a safe home" class="absolute inset-0 w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
                             <span class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/60 shadow">
                                 <span class="beacon"></span>
@@ -3015,10 +3008,10 @@
                     <article class="bento-dark relative overflow-hidden rounded-[22px] p-7 text-white min-h-[240px] flex flex-col">
                         <div class="relative flex items-center justify-between">
                             <h3 class="font-display text-xl font-bold leading-tight">Join 500K+<br/>Safe Citizens</h3>
-                            <div class="flex -space-x-3">
-                                <img class="w-9 h-9 rounded-full ring-2 ring-navy-950 object-cover" src="/images/officer-1.jpg" alt="" />
-                                <img class="w-9 h-9 rounded-full ring-2 ring-navy-950 object-cover" src="/images/officer-2.jpg" alt="" />
-                                <img class="w-9 h-9 rounded-full ring-2 ring-navy-950 object-cover" src="/images/officer-3.jpg" alt="" />
+                            <div class="flex -space-x-2">
+                                <span class="w-9 h-9 grid place-items-center rounded-full ring-2 ring-navy-950 bg-amber-400 text-navy-950 font-display font-bold text-[12px]">JM</span>
+                                <span class="w-9 h-9 grid place-items-center rounded-full ring-2 ring-navy-950 bg-rose-400 text-white font-display font-bold text-[12px]">RV</span>
+                                <span class="w-9 h-9 grid place-items-center rounded-full ring-2 ring-navy-950 bg-sky-400 text-navy-950 font-display font-bold text-[12px]">AK</span>
                                 <span class="w-9 h-9 grid place-items-center rounded-full ring-2 ring-navy-950 bg-emerald-500 text-navy-950 font-display font-bold text-[11px]">500K</span>
                             </div>
                         </div>
@@ -3085,7 +3078,7 @@
                     <div class="relative mx-auto max-w-md lg:sticky lg:top-28">
                         <span class="absolute -inset-6 rounded-[36px] blur-3xl bg-brand-100/60 pointer-events-none"></span>
                         <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 shadow-2xl">
-                            <img data-citizen-step-img src="/images/citizen/family-hugging.jpg" alt="Step preview" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
+                            <img data-citizen-step-img src="/images/citizen/family-mom-beach.jpg" alt="Step preview" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300" />
                             <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
                             <div class="absolute top-4 left-4">
                                 <span data-citizen-step-badge class="inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/40 shadow">
@@ -3105,10 +3098,10 @@
                 <div class="lg:col-span-7">
                     <ol data-citizen-steps class="relative space-y-2">
                         @foreach ([
-                            ['n'=>'01','img'=>'/images/citizen/family-hugging.jpg', 'h'=>'Create your free Citizen profile','b'=>"Just your name, phone, and a 4-digit PIN. We never sell your data — and the citizen tier is free, forever."],
+                            ['n'=>'01','img'=>'/images/citizen/family-mom-beach.jpg','h'=>'Create your free Citizen profile','b'=>"Just your name, phone, and a 4-digit PIN. We never sell your data — and the citizen tier is free, forever."],
                             ['n'=>'02','img'=>'/images/citizen/family-safe.jpg',    'h'=>'Verify your phone in 30 seconds','b'=>"Standard SMS verification. Once verified, you'll receive trusted, ranked alerts and never spam."],
                             ['n'=>'03','img'=>'/images/citizen/family-park-walk.jpg','h'=>'Add your family circle','b'=>'Invite parents, partner, kids — share location in either direction with one-tap controls.'],
-                            ['n'=>'04','img'=>'/images/citizen/family-safe.jpg',    'h'=>"You're protected — go live the day",'b'=>"SOS is wired up, alerts are flowing, your family knows where you are when you want them to."],
+                            ['n'=>'04','img'=>'/images/citizen/family-dad-flowers.jpg','h'=>"You're protected — go live the day",'b'=>"SOS is wired up, alerts are flowing, your family knows where you are when you want them to."],
                         ] as $i => $s)
                             <li data-citizen-step="{{ $i }}" data-img="{{ $s['img'] }}"
                                 @if($i===0) data-active class="cursor-pointer rounded-md bg-white border-2 border-brand-200 shadow-lg p-5 lg:p-6 transition"
@@ -3339,13 +3332,18 @@
                 @endforeach
             </div>
 
-            {{-- responder portrait strip --}}
+            {{-- responder badge strip --}}
             <div class="reveal mt-12 flex flex-wrap items-center justify-center gap-4">
                 <div class="flex -space-x-3">
-                    @foreach (['officer-1.jpg','officer-2.jpg','officer-3.jpg','officer-4.jpg'] as $o)
-                        <img src="/images/{{ $o }}" alt="Verified responder" class="w-12 h-12 rounded-full ring-4 ring-navy-950 object-cover" />
+                    @foreach ([
+                        ['initials'=>'NPD','bg'=>'bg-blue-500','fg'=>'text-white'],
+                        ['initials'=>'HCS','bg'=>'bg-amber-400','fg'=>'text-navy-900'],
+                        ['initials'=>'BPD','bg'=>'bg-rose-500','fg'=>'text-white'],
+                        ['initials'=>'EMS','bg'=>'bg-emerald-400','fg'=>'text-navy-900'],
+                    ] as $b)
+                        <span class="grid place-items-center w-12 h-12 rounded-full ring-4 ring-navy-950 {{ $b['bg'] }} {{ $b['fg'] }} font-display font-extrabold text-[11px] tracking-wider">{{ $b['initials'] }}</span>
                     @endforeach
-                    <span class="grid place-items-center w-12 h-12 rounded-full ring-4 ring-navy-950 bg-emerald-500 text-navy-950 font-display font-extrabold text-xs">+12K</span>
+                    <span class="grid place-items-center w-12 h-12 rounded-full ring-4 ring-navy-950 bg-white text-navy-900 font-display font-extrabold text-xs">+12K</span>
                 </div>
                 <p class="font-mono text-[11px] uppercase tracking-[.2em] text-white/60">verified · badge-credentialed · background-checked</p>
             </div>
@@ -3424,8 +3422,14 @@
                     </p>
 
                     <div class="reveal reveal-delay-3 mt-8 flex flex-wrap items-center gap-3">
-                        <a href="#" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 rounded-lg"><img src="/images/app-store-badge.png" alt="Download on the App Store" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
-                        <a href="#" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 rounded-lg"><img src="/images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
+                        <a href="#" class="inline-flex items-center gap-2 rounded-full bg-white text-navy-900 px-6 py-3 text-sm font-bold transition hover:-translate-y-0.5 hover:opacity-95 shadow-lg">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 12.5c0-2.7 2.2-4 2.3-4-1.3-1.8-3.2-2.1-3.9-2.1-1.7-.2-3.3 1-4.1 1s-2.2-1-3.6-1c-1.9 0-3.6 1.1-4.5 2.7-1.9 3.3-.5 8.2 1.4 10.9.9 1.3 2 2.8 3.4 2.7 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.6.9c1.5 0 2.4-1.3 3.3-2.6.6-.9 1.1-1.8 1.5-2.8-2.5-1-2.9-2.5-2.9-3.8zM14.6 4.7c.7-.8 1.2-2 1.1-3.1-1 0-2.3.7-3 1.5-.6.7-1.2 1.9-1.1 3 1.2 0 2.3-.6 3-1.4z"/></svg>
+                            App Store
+                        </a>
+                        <a href="#" class="inline-flex items-center gap-2 rounded-full bg-white text-navy-900 px-6 py-3 text-sm font-bold transition hover:-translate-y-0.5 hover:opacity-95 shadow-lg">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.6.4-1.1 1-1.4l10 9-10 9c-.6-.2-1-.7-1-1.4zm14.6-5.1l-3.2 2.9-9.7 5.6c.3-.1.6-.2.9-.4l11.4-6.6.6-1.5zm3.4-3.4c0 .5-.3.9-.7 1.1l-2.7 1.5-3.3-3 3.3-3 2.7 1.5c.4.2.7.6.7 1.1l0 .8zM5.2 1.6l9.7 5.6 3.2 2.9-.6-1.5-11.4-6.6c-.3-.2-.6-.3-.9-.4z"/></svg>
+                            Google Play
+                        </a>
                     </div>
 
                     <div class="reveal reveal-delay-4 mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-white/70">
@@ -3452,7 +3456,7 @@
 
                         {{-- main warm family photo --}}
                         <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 lush-shadow float-slow">
-                            <img src="/images/citizen/family-park-walk.jpg" alt="Families at sunset, safe together" class="absolute inset-0 w-full h-full object-cover" />
+                            <img src="/images/citizen/family-friends-sunset.jpg" alt="Families at sunset, safe together" class="absolute inset-0 w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/15 to-transparent"></div>
 
                             <div class="absolute bottom-5 left-5 right-5">
@@ -3472,7 +3476,7 @@
                         {{-- floating thumb: real family --}}
                         <div class="hidden md:block float-card absolute -left-10 -bottom-6 w-36 rounded-2xl overflow-hidden ring-2 ring-white/25 shadow-2xl tilt-l">
                             <div class="relative aspect-square">
-                                <img src="/images/citizen/family-hugging.jpg" alt="Family safe" class="absolute inset-0 w-full h-full object-cover" />
+                                <img src="/images/citizen/family-couple-baby.jpg" alt="Family safe" class="absolute inset-0 w-full h-full object-cover" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
                                 <span class="absolute bottom-2 left-2 right-2 text-center text-[9.5px] font-mono uppercase tracking-[.14em] text-white">Hello, neighbor.</span>
                             </div>
