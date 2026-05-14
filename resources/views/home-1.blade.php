@@ -2440,9 +2440,9 @@
         <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
             <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 <div class="lg:col-span-6">
-                    <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[64px] xl:text-[72px] leading-[1.02] tracking-tight text-navy-900">
-                        Protect the people<br/>
-                        <span class="grad-red">you love most.</span>
+                    <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight text-navy-900">
+                        <span class="block whitespace-nowrap">Protect the people</span>
+                        <span class="grad-red block whitespace-nowrap">you love most.</span>
                     </h1>
                     <p class="reveal reveal-delay-3 mt-6 text-lg text-navy-700/80 max-w-xl leading-relaxed">
                         From a child's walk home, to a parent's late-night drive, to a sudden emergency in the kitchen — Auxilio puts real, verified help one tap away. Built for families. Trusted by communities.
