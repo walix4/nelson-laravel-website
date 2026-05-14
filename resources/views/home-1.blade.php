@@ -2208,34 +2208,34 @@
             --c-amber: #f5c844;
         }
 
-        /* ---- HERO ---- */
+        /* ---- HERO (light, family-warm) ---- */
         [data-view="citizen-app"] .citizen-hero {
             background:
-                radial-gradient(900px 600px at 12% 18%, rgba(251,6,6,.22), transparent 60%),
-                radial-gradient(700px 500px at 88% 25%, rgba(255,180,90,.18), transparent 55%),
-                radial-gradient(700px 500px at 50% 100%, rgba(70,130,255,.16), transparent 60%),
-                linear-gradient(180deg, #07101f 0%, #0c1730 50%, #060c1a 100%);
+                radial-gradient(900px 600px at 12% 18%, rgba(251,6,6,.10), transparent 60%),
+                radial-gradient(700px 500px at 88% 25%, rgba(245,200,68,.12), transparent 55%),
+                radial-gradient(700px 500px at 50% 100%, rgba(70,130,255,.08), transparent 60%),
+                linear-gradient(180deg, #f7f3ee 0%, #fbf8f3 50%, #ffffff 100%);
         }
         [data-view="citizen-app"] .citizen-hero::before {
-            content:""; position:absolute; inset:0; pointer-events:none; opacity:.45;
+            content:""; position:absolute; inset:0; pointer-events:none; opacity:.4;
             background-image:
-                linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+                linear-gradient(rgba(15,20,40,.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15,20,40,.06) 1px, transparent 1px);
             background-size: 56px 56px;
             mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);
         }
         [data-view="citizen-app"] .citizen-hero::after {
             content:""; position:absolute; inset:0; pointer-events:none;
             background:
-                radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.6) 0, transparent 50%),
-                radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,.5) 0, transparent 50%),
-                radial-gradient(1.5px 1.5px at 60% 20%, rgba(255,200,150,.7) 0, transparent 50%),
-                radial-gradient(1px 1px at 35% 75%, rgba(150,200,255,.6) 0, transparent 50%),
-                radial-gradient(1.5px 1.5px at 90% 35%, rgba(255,255,255,.5) 0, transparent 50%);
+                radial-gradient(2px 2px at 20% 30%, rgba(251,6,6,.18) 0, transparent 50%),
+                radial-gradient(1px 1px at 80% 60%, rgba(245,200,68,.30) 0, transparent 50%),
+                radial-gradient(1.5px 1.5px at 60% 20%, rgba(251,6,6,.20) 0, transparent 50%),
+                radial-gradient(1px 1px at 35% 75%, rgba(70,130,255,.18) 0, transparent 50%),
+                radial-gradient(1.5px 1.5px at 90% 35%, rgba(245,200,68,.22) 0, transparent 50%);
             background-size: 100% 100%;
             animation: starsTwinkle 6s ease-in-out infinite alternate;
         }
-        @keyframes starsTwinkle { from { opacity:.4 } to { opacity:.9 } }
+        @keyframes starsTwinkle { from { opacity:.35 } to { opacity:.85 } }
 
         /* ---- gradient-shift CTA / hero accents ---- */
         [data-view="citizen-app"] .moving-gradient {
@@ -2409,38 +2409,38 @@
         }
     </style>
 
-    {{-- ========== HERO — emotional, immersive, layered ========== --}}
-    <section class="citizen-hero relative overflow-hidden text-white">
-        {{-- ambient floating shapes --}}
-        <span class="deco-shape" style="top:8%;  left:6%;  width:120px; height:120px; opacity:.5;"></span>
-        <span class="deco-shape" style="top:62%; left:3%;  width:80px;  height:80px;  background:radial-gradient(circle, rgba(245,200,68,.35) 0%, transparent 70%); animation-delay:1.2s;"></span>
-        <span class="deco-shape" style="top:18%; right:5%; width:140px; height:140px; background:radial-gradient(circle, rgba(70,130,255,.32) 0%, transparent 70%); animation-delay:2.4s;"></span>
-        <span class="deco-shape" style="bottom:8%; right:18%; width:100px; height:100px; animation-delay:3.6s;"></span>
+    {{-- ========== HERO — light, emotional, family-focused ========== --}}
+    <section class="citizen-hero relative overflow-hidden text-navy-900">
+        {{-- ambient floating shapes (warm, soft on light bg) --}}
+        <span class="deco-shape" style="top:8%;  left:6%;  width:120px; height:120px; background:radial-gradient(circle, rgba(251,6,6,.18) 0%, transparent 70%); opacity:.6;"></span>
+        <span class="deco-shape" style="top:62%; left:3%;  width:80px;  height:80px;  background:radial-gradient(circle, rgba(245,200,68,.32) 0%, transparent 70%); animation-delay:1.2s;"></span>
+        <span class="deco-shape" style="top:18%; right:5%; width:140px; height:140px; background:radial-gradient(circle, rgba(70,130,255,.22) 0%, transparent 70%); animation-delay:2.4s;"></span>
+        <span class="deco-shape" style="bottom:8%; right:18%; width:100px; height:100px; background:radial-gradient(circle, rgba(251,6,6,.16) 0%, transparent 70%); animation-delay:3.6s;"></span>
 
         <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
-            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-white/60">
-                <a data-route href="#/" class="hover:text-white transition">Home</a><span>›</span><span class="text-white">Citizen App</span>
+            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">Citizen App</span>
             </div>
             <div class="mt-3 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 <div class="lg:col-span-6">
-                    <span class="reveal reveal-delay-1 inline-flex items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/15 backdrop-blur text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5">
+                    <span class="reveal reveal-delay-1 inline-flex items-center gap-2 rounded-full bg-brand-50 ring-1 ring-brand-100 text-brand-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5">
                         <span class="relative flex w-1.5 h-1.5">
-                            <span class="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-70"></span>
-                            <span class="relative w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                            <span class="absolute inset-0 rounded-full bg-brand-600 animate-ping opacity-70"></span>
+                            <span class="relative w-1.5 h-1.5 rounded-full bg-brand-600"></span>
                         </span>
                         Auxilio Citizen · iOS &amp; Android · Free for families
                     </span>
-                    <h1 class="reveal reveal-delay-2 mt-5 font-display font-extrabold text-4xl sm:text-5xl lg:text-[64px] xl:text-[72px] leading-[1.02] tracking-tight">
+                    <h1 class="reveal reveal-delay-2 mt-5 font-display font-extrabold text-4xl sm:text-5xl lg:text-[64px] xl:text-[72px] leading-[1.02] tracking-tight text-navy-900">
                         Protect the people<br/>
                         <span class="grad-red">you love most.</span>
                     </h1>
-                    <p class="reveal reveal-delay-3 mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
+                    <p class="reveal reveal-delay-3 mt-6 text-lg text-navy-700/80 max-w-xl leading-relaxed">
                         From a child's walk home, to a parent's late-night drive, to a sudden emergency in the kitchen — Auxilio puts real, verified help one tap away. Built for families. Trusted by communities.
                     </p>
                     <div class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center gap-3">
                         <a href="#" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 rounded-lg"><img src="/images/app-store-badge.png" alt="Download on the App Store" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                         <a href="#" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 rounded-lg"><img src="/images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
-                        <a href="#emergency-types" class="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white ring-1 ring-white/25 hover:bg-white/10 transition">
+                        <a href="#emergency-types" class="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-navy-900 ring-1 ring-ink-200 bg-white hover:ring-brand-300 hover:text-brand-600 transition shadow-sm">
                             See how we protect families
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0l-6-6m6 6l6-6"/></svg>
                         </a>
@@ -2453,49 +2453,49 @@
                             ['v'=>'Free','l'=>'forever for families'],
                         ] as $s)
                             <div>
-                                <dt class="font-display text-2xl font-bold tracking-tight">{{ $s['v'] }}</dt>
-                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/55">{{ $s['l'] }}</dd>
+                                <dt class="font-display text-2xl font-bold tracking-tight text-navy-900">{{ $s['v'] }}</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-ink-500">{{ $s['l'] }}</dd>
                             </div>
                         @endforeach
                     </dl>
                 </div>
 
-                {{-- Hero collage: layered family photos + floating live cards --}}
+                {{-- Hero collage: real FAMILY illustrations + floating live cards --}}
                 <div class="reveal reveal-right lg:col-span-6">
                     <div class="relative mx-auto max-w-xl">
-                        {{-- ambient red glow --}}
-                        <span class="absolute -inset-10 rounded-[44px] blur-3xl bg-red-600/30 pointer-events-none"></span>
-                        <span class="absolute -bottom-10 -left-6 w-48 h-48 rounded-full blur-3xl bg-amber-400/25 pointer-events-none"></span>
+                        {{-- ambient warm glow --}}
+                        <span class="absolute -inset-10 rounded-[44px] blur-3xl bg-red-500/15 pointer-events-none"></span>
+                        <span class="absolute -bottom-10 -left-6 w-48 h-48 rounded-full blur-3xl bg-amber-300/30 pointer-events-none"></span>
 
-                        {{-- main family portrait --}}
-                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 lush-shadow float-slow">
-                            <img src="/images/citizen/family-1.jpg" alt="Family safely connected with Auxilio" class="absolute inset-0 w-full h-full object-cover" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/10 to-transparent"></div>
+                        {{-- main FAMILY illustration (3D family on peach gradient) --}}
+                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow float-slow bg-gradient-to-br from-amber-50 via-rose-50 to-amber-100">
+                            <img src="/images/citizen/cartoon-family-3d.jpg" alt="A family safely connected with Auxilio" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/65 via-navy-950/0 to-transparent"></div>
 
                             {{-- glass status bar --}}
                             <div class="absolute inset-x-4 bottom-4 glass rounded-2xl px-4 py-3 flex items-center gap-3 text-white">
-                                <span class="flex w-10 h-10 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg " style="box-shadow:0 10px 24px -8px rgba(16,185,129,.45)">
+                                <span class="flex w-10 h-10 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg" style="box-shadow:0 10px 24px -8px rgba(16,185,129,.45)">
                                     <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l5 5L20 7"/></svg>
                                 </span>
                                 <div class="leading-tight">
-                                    <div class="font-mono text-[10px] uppercase tracking-[.18em] text-white/70">Family circle</div>
+                                    <div class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Family circle</div>
                                     <div class="font-display text-sm font-bold">4 of 4 protected · Live</div>
                                 </div>
                                 <span class="ml-auto beacon"></span>
                             </div>
                         </div>
 
-                        {{-- secondary tilted thumbnail (cartoon family) --}}
-                        <div class="hidden md:block absolute -bottom-10 -right-6 w-44 rounded-2xl overflow-hidden ring-2 ring-white/20 shadow-2xl tilt-r float-card delay-2">
+                        {{-- secondary tilted thumbnail: 2nd family illustration --}}
+                        <div class="hidden md:block absolute -bottom-10 -right-6 w-44 rounded-2xl overflow-hidden ring-2 ring-white shadow-2xl tilt-r float-card delay-2 bg-white">
                             <div class="relative aspect-[4/5]">
-                                <img src="/images/citizen/family-cartoon.jpg" alt="Family bedtime safe" class="absolute inset-0 w-full h-full object-cover" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent"></div>
+                                <img src="/images/citizen/family-cartoon.jpg" alt="Happy family at home" class="absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/65 via-transparent to-transparent"></div>
                                 <span class="absolute top-2 left-2 rounded-full bg-emerald-500 text-[9px] font-mono uppercase tracking-[.18em] text-white px-2 py-0.5 font-bold">Home safe</span>
                             </div>
                         </div>
 
                         {{-- pulsing SOS ring badge --}}
-                        <div class="hidden md:flex absolute -left-7 top-1/3 items-center justify-center w-20 h-20 rounded-full bg-red-600 text-white shadow-2xl ring-4 ring-red-600/20 z-10">
+                        <div class="hidden md:flex absolute -left-7 top-1/3 items-center justify-center w-20 h-20 rounded-full bg-red-600 text-white shadow-2xl ring-4 ring-red-100 z-10">
                             <span class="ring-pulse"></span>
                             <span class="ring-pulse delay-1"></span>
                             <span class="ring-pulse delay-2"></span>
@@ -2520,17 +2520,17 @@
                             </span>
                             <div class="leading-tight">
                                 <div class="font-mono text-[10px] uppercase tracking-[.18em] text-emerald-400 font-bold">RESPONDER · 90s</div>
-                                <div class="font-display text-[14px] font-bold mt-0.5">Officer Reyes is enroute</div>
+                                <div class="font-display text-[14px] font-bold mt-0.5">Help is on the way</div>
                             </div>
                         </div>
 
-                        {{-- HEARTBEAT mini card — bottom-left --}}
-                        <div class="hidden md:flex float-card delay-1 absolute -left-10 bottom-12 items-center gap-3 rounded-2xl glass px-4 py-3 z-10 text-white" style="min-width:200px;">
-                            <span class="flex w-10 h-10 items-center justify-center rounded-full bg-rose-500/90 text-white shrink-0 alert-bounce">
+                        {{-- HEARTBEAT mini card — bottom-left (light) --}}
+                        <div class="hidden md:flex float-card delay-1 absolute -left-10 bottom-12 items-center gap-3 rounded-2xl bg-white px-4 py-3 z-10 text-navy-900 shadow-2xl ring-1 ring-ink-100" style="min-width:200px;">
+                            <span class="flex w-10 h-10 items-center justify-center rounded-full bg-rose-500 text-white shrink-0 alert-bounce">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
                             </span>
                             <div class="leading-tight">
-                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-white/60 font-bold">Family pulse</div>
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-rose-600 font-bold">Family pulse</div>
                                 <div class="font-display text-[13px] font-bold">All vitals · normal</div>
                             </div>
                         </div>
@@ -2540,20 +2540,61 @@
 
             {{-- Trust marquee --}}
             <div class="reveal mt-20 overflow-hidden">
-                <p class="text-center text-[10.5px] font-mono uppercase tracking-[.28em] text-white/40 mb-5">Trusted by neighborhoods · families · school districts</p>
+                <p class="text-center text-[10.5px] font-mono uppercase tracking-[.28em] text-ink-500 mb-5">Trusted by neighborhoods · families · school districts</p>
                 <div class="relative">
                     <div class="marquee-track">
                         @foreach (['Newark PD','Hudson County','Safer Schools NJ','BlockWatch','Bergen Family Trust','Auxilio Network','Newark PD','Hudson County','Safer Schools NJ','BlockWatch','Bergen Family Trust','Auxilio Network'] as $logo)
-                            <span class="font-display font-bold text-lg text-white/35 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-white/10 bg-white/[.03]">{{ $logo }}</span>
+                            <span class="font-display font-bold text-lg text-navy-900/40 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-ink-100 bg-white/70">{{ $logo }}</span>
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
 
-        {{-- soft bottom transition --}}
-        <div class="absolute inset-x-0 -bottom-px h-24 pointer-events-none" style="background:linear-gradient(180deg, transparent 0%, #f7f3ee 100%);"></div>
+        {{-- soft bottom transition into next section --}}
+        <div class="absolute inset-x-0 -bottom-px h-24 pointer-events-none" style="background:linear-gradient(180deg, transparent 0%, #ffffff 100%);"></div>
     </section>
+
+    {{-- ========== REAL-LIFE SCENARIOS ========== --}}
+    <section class="relative bg-white">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-10 items-end mb-12">
+                <div class="lg:col-span-7">
+                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Built for real life</p>
+                    <h2 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
+                        The situations no one wants <span class="text-brand-600">to face alone.</span>
+                    </h2>
+                </div>
+                <div class="lg:col-span-5">
+                    <p class="reveal reveal-delay-2 text-navy-700/80 leading-relaxed">
+                        Auxilio Citizen is calibrated for the moments that matter most — a suspicious follower at night, a medical emergency at home, or a frightened call from a child on the way back from school.
+                    </p>
+                </div>
+            </div>
+
+            <div class="reveal stagger grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                @foreach ([
+                    ['img'=>'/images/citizen/warning-lamp.jpg',  'tag'=>'01 · STREET',  'title'=>'Walking home at night',      'desc'=>'Auto-share live location with family. Auxilio listens for trouble and pre-arms SOS.'],
+                    ['img'=>'/images/citizen/theft-prep.jpg',    'tag'=>'02 · ALERT',   'title'=>'Pickpocket / theft',         'desc'=>'Silent SOS, location lock, and instant officer dispatch — without lifting the phone.'],
+                    ['img'=>'/images/citizen/emergency-room.jpg','tag'=>'03 · MEDICAL', 'title'=>'Sudden medical emergency',   'desc'=>'One tap routes paramedics + your saved medical info ahead, so the team is ready on arrival.'],
+                    ['img'=>'/images/citizen/threat-wall.jpg',   'tag'=>'04 · ASSAULT', 'title'=>'Domestic threat',            'desc'=>'A discreet panic gesture sends help and quietly records context — even when you can\'t talk.'],
+                ] as $sc)
+                    <article class="scenario-tile group relative rounded-md overflow-hidden bg-navy-900 text-white shadow-lg ring-1 ring-ink-100">
+                        <div class="relative h-60 sm:h-72 overflow-hidden">
+                            <img src="{{ $sc['img'] }}" alt="{{ $sc['title'] }}" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                            <span class="absolute top-3 left-3 rounded-md bg-red-600 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg">{{ $sc['tag'] }}</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-display text-xl font-bold text-white">{{ $sc['title'] }}</h3>
+                            <p class="mt-1.5 text-[13px] text-navy-200/90 leading-relaxed">{{ $sc['desc'] }}</p>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
 
     {{-- ========== TRUST / STATS — cinematic responder + family ========== --}}
     <section class="relative" style="background:linear-gradient(180deg,#f7f3ee 0%, #fbfaf7 100%);">
@@ -2565,36 +2606,43 @@
                 <div class="relative grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                     <div class="lg:col-span-5">
                         <div class="relative">
-                            {{-- main cinematic image: responder helping families --}}
-                            <div class="relative rounded-[24px] overflow-hidden aspect-[4/5] shadow-2xl ring-1 ring-ink-100">
-                                <img src="/images/citizen/family-2.jpg" alt="Auxilio responder reaches a family" class="absolute inset-0 w-full h-full object-cover" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-navy-950/10 to-transparent"></div>
-                                <span class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/40 shadow">
+                            {{-- main FAMILY image: cartoon family in warm gradient --}}
+                            <div class="relative rounded-[24px] overflow-hidden aspect-[4/5] shadow-2xl ring-1 ring-ink-100 bg-gradient-to-br from-amber-50 via-rose-50 to-amber-100">
+                                <img src="/images/citizen/family-cartoon.jpg" alt="Family protected by Auxilio" class="absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
+                                <span class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/60 shadow">
                                     <span class="beacon"></span>
-                                    Live · Newark
+                                    Family circle · live
                                 </span>
                                 <div class="absolute inset-x-4 bottom-4 glass rounded-2xl px-4 py-3 text-white">
                                     <div class="flex items-center gap-3">
-                                        <span class="flex w-10 h-10 items-center justify-center rounded-full bg-emerald-500 text-white shrink-0 shadow-lg " style="box-shadow:0 10px 24px -8px rgba(16,185,129,.45)">
+                                        <span class="flex w-10 h-10 items-center justify-center rounded-full bg-emerald-500 text-white shrink-0 shadow-lg" style="box-shadow:0 10px 24px -8px rgba(16,185,129,.45)">
                                             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
                                         </span>
                                         <div class="leading-tight">
-                                            <div class="font-display text-sm font-bold">Officer Reyes is on the way</div>
-                                            <div class="font-mono text-[10px] uppercase tracking-[.18em] text-white/70">ETA 1m 48s · stays on call</div>
+                                            <div class="font-display text-sm font-bold">All 4 family members protected</div>
+                                            <div class="font-mono text-[10px] uppercase tracking-[.18em] text-white/70">Mom · Dad · Maya · Leo · home safe</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            {{-- secondary thumbnail: cartoon family at home --}}
-                            <div class="hidden md:block absolute -bottom-8 -right-8 w-40 rounded-2xl overflow-hidden ring-2 ring-white shadow-xl tilt-r">
+                            {{-- secondary thumbnail: 2nd family illustration --}}
+                            <div class="hidden md:block absolute -bottom-8 -right-8 w-40 rounded-2xl overflow-hidden ring-2 ring-white shadow-xl tilt-r bg-white">
                                 <div class="relative aspect-[4/5]">
-                                    <img src="/images/citizen/family-cartoon.jpg" alt="Family at home, safe" class="absolute inset-0 w-full h-full object-cover" />
+                                    <img src="/images/citizen/cartoon-family-3d.jpg" alt="Family ready and connected" class="absolute inset-0 w-full h-full object-cover" />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/45 via-transparent to-transparent"></div>
+                                    <span class="absolute bottom-2 left-2 right-2 text-center text-[9.5px] font-mono uppercase tracking-[.16em] text-white">Always together</span>
                                 </div>
                             </div>
-                            <div class="hidden md:block absolute -top-6 -left-6 w-32 rounded-2xl overflow-hidden ring-2 ring-white shadow-xl tilt-l">
-                                <div class="relative aspect-square">
-                                    <img src="/images/citizen/cartoon-family-3d.jpg" alt="Family ready" class="absolute inset-0 w-full h-full object-cover" />
+                            {{-- small accent badge top-left --}}
+                            <div class="hidden md:flex absolute -top-5 -left-5 w-36 rounded-2xl bg-white p-3 shadow-xl ring-1 ring-ink-100 items-center gap-2 tilt-l">
+                                <span class="flex w-9 h-9 items-center justify-center rounded-full bg-rose-50 text-rose-600 shrink-0">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+                                </span>
+                                <div class="leading-tight">
+                                    <div class="font-mono text-[9px] uppercase tracking-[.15em] text-rose-600 font-bold">Loved by</div>
+                                    <div class="font-display text-[12px] font-bold text-navy-900">500K+ families</div>
                                 </div>
                             </div>
                         </div>
@@ -2672,7 +2720,7 @@
                         ['key'=>'home-intrusion','title'=>'Home Intrusion','desc'=>'Door, window, or motion triggers — silent dispatch with live audio to verified responders.','img'=>'/images/about/break-in.jpg','color'=>'navy','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10h14V10"/>'],
                         ['key'=>'natural-disaster','title'=>'Natural Disaster','desc'=>'Storms, floods, quakes — proactive alerts with shelter locations and family check-ins.','img'=>null,'color'=>'cyan','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M3 14a4 4 0 014-4h1a5 5 0 019.9-1.5A4.5 4.5 0 0119 17H5a3 3 0 01-2-3z"/>'],
                         ['key'=>'women-safety','title'=>'Women Safety','desc'=>'Discreet panic gesture, live tracking, and trauma-informed responders — no questions asked.','img'=>'/images/citizen/abused-woman.jpg','color'=>'pink','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M12 2a4 4 0 014 4v2a4 4 0 11-8 0V6a4 4 0 014-4zM6 22a6 6 0 0112 0"/>'],
-                        ['key'=>'elderly','title'=>'Elderly Emergency','desc'=>'Fall detection, missed meds, wandering alerts — calm, dignified response designed for seniors.','img'=>'/images/citizen/officer-coffee.jpg','color'=>'violet','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M12 6V2m0 4a4 4 0 100 8 4 4 0 000-8zm-7 16l3-7 4 1 4-1 3 7"/>'],
+                        ['key'=>'elderly','title'=>'Elderly Emergency','desc'=>'Fall detection, missed meds, wandering alerts — calm, dignified response designed for seniors.','img'=>null,'color'=>'violet','icon'=>'<path stroke-linecap="round" stroke-linejoin="round" d="M12 6V2m0 4a4 4 0 100 8 4 4 0 000-8zm-7 16l3-7 4 1 4-1 3 7"/>'],
                         ['key'=>'sos','title'=>'General SOS','desc'=>'Anything you can\'t name in the moment. One tap reaches a real human in under 30 seconds.','img'=>'/images/citizen/warning-lamp.jpg','color'=>'red','icon'=>'<circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l6 6m0-6l-6 6"/>'],
                     ];
                     $colorMap = [
@@ -3058,9 +3106,9 @@
                     <ol data-citizen-steps class="relative space-y-2">
                         @foreach ([
                             ['n'=>'01','img'=>'/images/citizen/cartoon-family-3d.jpg','h'=>'Create your free Citizen profile','b'=>"Just your name, phone, and a 4-digit PIN. We never sell your data — and the citizen tier is free, forever."],
-                            ['n'=>'02','img'=>'/images/citizen/officer-coffee.jpg',  'h'=>'Verify your phone in 30 seconds','b'=>"Standard SMS verification. Once verified, you'll receive trusted, ranked alerts and never spam."],
+                            ['n'=>'02','img'=>'/images/citizen/family-cartoon.jpg', 'h'=>'Verify your phone in 30 seconds','b'=>"Standard SMS verification. Once verified, you'll receive trusted, ranked alerts and never spam."],
                             ['n'=>'03','img'=>'/images/citizen/family-cartoon.jpg', 'h'=>'Add your family circle','b'=>'Invite parents, partner, kids — share location in either direction with one-tap controls.'],
-                            ['n'=>'04','img'=>'/images/citizen/family-1.jpg',       'h'=>"You're protected — go live the day",'b'=>"SOS is wired up, alerts are flowing, your family knows where you are when you want them to."],
+                            ['n'=>'04','img'=>'/images/citizen/cartoon-family-3d.jpg','h'=>"You're protected — go live the day",'b'=>"SOS is wired up, alerts are flowing, your family knows where you are when you want them to."],
                         ] as $i => $s)
                             <li data-citizen-step="{{ $i }}" data-img="{{ $s['img'] }}"
                                 @if($i===0) data-active class="cursor-pointer rounded-md bg-white border-2 border-brand-200 shadow-lg p-5 lg:p-6 transition"
@@ -3090,46 +3138,6 @@
                         </a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- ========== REAL-LIFE SCENARIOS ========== --}}
-    <section class="relative bg-white">
-        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
-            <div class="grid lg:grid-cols-12 gap-10 items-end mb-12">
-                <div class="lg:col-span-7">
-                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Built for real life</p>
-                    <h2 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
-                        The situations no one wants <span class="text-brand-600">to face alone.</span>
-                    </h2>
-                </div>
-                <div class="lg:col-span-5">
-                    <p class="reveal reveal-delay-2 text-navy-700/80 leading-relaxed">
-                        Auxilio Citizen is calibrated for the moments that matter most — a suspicious follower at night, a medical emergency at home, or a frightened call from a child on the way back from school.
-                    </p>
-                </div>
-            </div>
-
-            <div class="reveal stagger grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                @foreach ([
-                    ['img'=>'/images/citizen/warning-lamp.jpg',  'tag'=>'01 · STREET',  'title'=>'Walking home at night',      'desc'=>'Auto-share live location with family. Auxilio listens for trouble and pre-arms SOS.'],
-                    ['img'=>'/images/citizen/theft-prep.jpg',    'tag'=>'02 · ALERT',   'title'=>'Pickpocket / theft',         'desc'=>'Silent SOS, location lock, and instant officer dispatch — without lifting the phone.'],
-                    ['img'=>'/images/citizen/emergency-room.jpg','tag'=>'03 · MEDICAL', 'title'=>'Sudden medical emergency',   'desc'=>'One tap routes paramedics + your saved medical info ahead, so the team is ready on arrival.'],
-                    ['img'=>'/images/citizen/threat-wall.jpg',   'tag'=>'04 · ASSAULT', 'title'=>'Domestic threat',            'desc'=>'A discreet panic gesture sends help and quietly records context — even when you can\'t talk.'],
-                ] as $sc)
-                    <article class="scenario-tile group relative rounded-md overflow-hidden bg-navy-900 text-white shadow-lg ring-1 ring-ink-100">
-                        <div class="relative h-60 sm:h-72 overflow-hidden">
-                            <img src="{{ $sc['img'] }}" alt="{{ $sc['title'] }}" class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
-                            <span class="absolute top-3 left-3 rounded-md bg-red-600 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg">{{ $sc['tag'] }}</span>
-                        </div>
-                        <div class="p-5">
-                            <h3 class="font-display text-xl font-bold text-white">{{ $sc['title'] }}</h3>
-                            <p class="mt-1.5 text-[13px] text-navy-200/90 leading-relaxed">{{ $sc['desc'] }}</p>
-                        </div>
-                    </article>
-                @endforeach
             </div>
         </div>
     </section>
