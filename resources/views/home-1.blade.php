@@ -1450,21 +1450,11 @@
             <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-brand-100/40 blur-3xl"></div>
         </div>
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
-            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
-                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">Agent App</span>
-            </div>
-            <div class="mt-3 grid lg:grid-cols-12 gap-10 items-center">
-                <div class="lg:col-span-7">
-                    <span class="reveal reveal-delay-1 inline-flex items-center gap-2 rounded-full bg-brand-50 text-brand-700 text-xs font-bold uppercase tracking-wider px-3 py-1.5">
-                        <span class="relative flex w-1.5 h-1.5">
-                            <span class="absolute inset-0 rounded-full bg-brand-600 animate-ping opacity-70"></span>
-                            <span class="relative w-1.5 h-1.5 rounded-full bg-brand-600"></span>
-                        </span>
-                        Auxilio Agente · iOS & Android
-                    </span>
-                    <h1 class="reveal reveal-delay-2 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
-                        The badge in <br/>
-                        <span class="text-brand-600">your pocket.</span>
+            <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                <div class="lg:col-span-6">
+                    <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight text-navy-900">
+                        <span class="block whitespace-nowrap">The badge in</span>
+                        <span class="text-brand-600 block whitespace-nowrap">your pocket.</span>
                     </h1>
                     <p class="reveal reveal-delay-3 mt-4 text-lg text-navy-700/80 max-w-xl">
                         Auxilio Agente turns every officer into a node in the dispatch network. Accept emergencies in one tap, navigate live to the incident, and capture everything that matters — straight from the field.
@@ -1504,10 +1494,10 @@
                         </p>
                     </div>
                 </div>
-                <div class="reveal reveal-right lg:col-span-5">
-                    <div class="relative mx-auto max-w-md">
+                <div class="reveal reveal-right lg:col-span-6">
+                    <div class="relative mx-auto max-w-xl">
                         {{-- Soft brand-tinted panel with subtle grid pattern --}}
-                        <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] shadow-[0_30px_80px_-20px_rgba(251,6,6,.18)] ring-1 ring-brand-100/60"
+                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] shadow-[0_30px_80px_-20px_rgba(251,6,6,.18)] ring-1 ring-brand-100/60"
                              style="background:
                                 radial-gradient(circle at 30% 20%, rgba(251,6,6,.06), transparent 55%),
                                 linear-gradient(160deg, #fff5f5 0%, #fdecec 60%, #fff 100%);">
