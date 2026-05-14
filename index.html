@@ -9,7 +9,7 @@
     <title>Auxilio User — Your Safety, Your Control</title>
     <link rel="icon" type="image/png" href="images/auxilio-user.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="preload" as="style" href="build/assets/app-BPz3Ftdw.css" /><link rel="modulepreload" as="script" href="build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="build/assets/app-BPz3Ftdw.css" /><script type="module" src="build/assets/app-C2cgr6mz.js"></script>    <style>
+    <link rel="preload" as="style" href="build/assets/app-Enuw4ipm.css" /><link rel="modulepreload" as="script" href="build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="build/assets/app-Enuw4ipm.css" /><script type="module" src="build/assets/app-C2cgr6mz.js"></script>    <style>
         [data-nav].is-scrolled {
             box-shadow: 0 8px 24px -12px rgba(116, 25, 33, .45);
         }
@@ -4632,7 +4632,7 @@
 
         var car = document.querySelector('[data-agent-carousel]');
         if (car) {
-            var imgs = ['images/screen-companion.png','images/screen-location.png','images/screen-sos.png','images/screen-map.png'];
+            var imgs = ['/images/screen-companion.png','/images/screen-location.png','/images/screen-sos.png','/images/screen-map.png'];
             var img = car.querySelector('[data-onboard-img]');
             var slides = car.querySelectorAll('[data-onboard-slide]');
             var dots = car.querySelectorAll('[data-onboard-dot]');
@@ -4704,28 +4704,55 @@
 
 <div data-view="citizen-app" class="hidden">
     <style>
+        /* ============ CITIZEN PAGE — premium, emotional, family-focused ============ */
+
+        [data-view="citizen-app"] {
+            --c-red: #FB0606;
+            --c-red-deep: #b80505;
+            --c-navy: #0a1224;
+            --c-navy-soft: #131c36;
+            --c-warm: #f7f3ee;
+            --c-amber: #f5c844;
+        }
+
+        /* ---- HERO ---- */
         [data-view="citizen-app"] .citizen-hero {
             background:
-                radial-gradient(circle at 20% 20%, rgba(251,6,6,.18), transparent 55%),
-                radial-gradient(circle at 80% 30%, rgba(245,200,68,.16), transparent 50%),
-                linear-gradient(180deg, #0a1224 0%, #0c1730 55%, #0a1224 100%);
+                radial-gradient(900px 600px at 12% 18%, rgba(251,6,6,.22), transparent 60%),
+                radial-gradient(700px 500px at 88% 25%, rgba(255,180,90,.18), transparent 55%),
+                radial-gradient(700px 500px at 50% 100%, rgba(70,130,255,.16), transparent 60%),
+                linear-gradient(180deg, #07101f 0%, #0c1730 50%, #060c1a 100%);
         }
         [data-view="citizen-app"] .citizen-hero::before {
-            content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+            content:""; position:absolute; inset:0; pointer-events:none; opacity:.45;
             background-image:
                 linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
-            background-size: 48px 48px;
-            mask-image: radial-gradient(circle at 50% 40%, black, transparent 70%);
+            background-size: 56px 56px;
+            mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);
         }
-        [data-view="citizen-app"] .bento-dark {
-            background: linear-gradient(160deg, #0d1b2a 0%, #08111f 100%);
+        [data-view="citizen-app"] .citizen-hero::after {
+            content:""; position:absolute; inset:0; pointer-events:none;
+            background:
+                radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.6) 0, transparent 50%),
+                radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,.5) 0, transparent 50%),
+                radial-gradient(1.5px 1.5px at 60% 20%, rgba(255,200,150,.7) 0, transparent 50%),
+                radial-gradient(1px 1px at 35% 75%, rgba(150,200,255,.6) 0, transparent 50%),
+                radial-gradient(1.5px 1.5px at 90% 35%, rgba(255,255,255,.5) 0, transparent 50%);
+            background-size: 100% 100%;
+            animation: starsTwinkle 6s ease-in-out infinite alternate;
         }
-        [data-view="citizen-app"] .bento-dark::before {
-            content:""; position:absolute; inset:0; opacity:.16; pointer-events:none;
-            background-image: radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px);
-            background-size: 18px 18px;
+        @keyframes starsTwinkle { from { opacity:.4 } to { opacity:.9 } }
+
+        /* ---- gradient-shift CTA / hero accents ---- */
+        [data-view="citizen-app"] .moving-gradient {
+            background: linear-gradient(120deg, #FB0606 0%, #ff5b3c 25%, #FB0606 50%, #ff8a4a 75%, #FB0606 100%);
+            background-size: 250% 100%;
+            animation: gradShift 8s ease-in-out infinite;
         }
+        @keyframes gradShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        /* ---- pulse rings ---- */
         [data-view="citizen-app"] .ring-pulse {
             position:absolute; inset:0; border-radius:9999px;
             border:2px solid rgba(251,6,6,.55);
@@ -4738,19 +4765,40 @@
             70%  { transform: scale(2.2); opacity:0; }
             100% { transform: scale(2.2); opacity:0; }
         }
-        [data-view="citizen-app"] .float-card { animation: floatY 6s ease-in-out infinite; }
+
+        /* ---- floating cards ---- */
+        [data-view="citizen-app"] .float-card  { animation: floatY 6s ease-in-out infinite; }
         [data-view="citizen-app"] .float-card.delay-1 { animation-delay:.8s; }
         [data-view="citizen-app"] .float-card.delay-2 { animation-delay:1.6s; }
+        [data-view="citizen-app"] .float-slow  { animation: floatY 8s ease-in-out infinite; }
         @keyframes floatY {
             0%,100% { transform: translateY(0); }
-            50%     { transform: translateY(-10px); }
+            50%     { transform: translateY(-12px); }
         }
-        [data-view="citizen-app"] .citizen-counter {
-            font-variant-numeric: tabular-nums;
+
+        /* ---- floating shapes (emergency-themed deco) ---- */
+        [data-view="citizen-app"] .deco-shape {
+            position:absolute; border-radius:9999px; pointer-events:none; opacity:.55;
+            background: radial-gradient(circle, rgba(251,6,6,.35) 0%, rgba(251,6,6,0) 70%);
+            filter: blur(8px);
+            animation: floatY 9s ease-in-out infinite;
         }
-        [data-view="citizen-app"] [data-faq-item][data-open] [data-faq-icon] {
-            transform: rotate(180deg);
+
+        /* ---- bento dark cards ---- */
+        [data-view="citizen-app"] .bento-dark {
+            background: linear-gradient(160deg, #0d1b2a 0%, #08111f 100%);
         }
+        [data-view="citizen-app"] .bento-dark::before {
+            content:""; position:absolute; inset:0; opacity:.16; pointer-events:none;
+            background-image: radial-gradient(rgba(255,255,255,.6) 1px, transparent 1px);
+            background-size: 18px 18px;
+        }
+
+        /* ---- counter ---- */
+        [data-view="citizen-app"] .citizen-counter { font-variant-numeric: tabular-nums; }
+
+        /* ---- FAQ ---- */
+        [data-view="citizen-app"] [data-faq-item][data-open] [data-faq-icon] { transform: rotate(180deg); }
         [data-view="citizen-app"] [data-faq-item] [data-faq-body] {
             max-height: 0; opacity: 0; overflow: hidden;
             transition: max-height .35s ease, opacity .3s ease, padding .3s ease;
@@ -4758,8 +4806,12 @@
         [data-view="citizen-app"] [data-faq-item][data-open] [data-faq-body] {
             max-height: 480px; opacity: 1;
         }
+
+        /* ---- scenario hover lift ---- */
         [data-view="citizen-app"] .scenario-tile { transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s; }
         [data-view="citizen-app"] .scenario-tile:hover { transform: translateY(-6px); }
+
+        /* ---- marquee ---- */
         [data-view="citizen-app"] .marquee-track {
             display:flex; gap:1.25rem; width:max-content; animation: marquee 38s linear infinite;
         }
@@ -4767,36 +4819,138 @@
             from { transform: translateX(0); }
             to   { transform: translateX(-50%); }
         }
+
+        /* ---- step indicator gradient ---- */
         [data-view="citizen-app"] .step-line {
             background: linear-gradient(180deg, #10b981 0%, #10b981 var(--p,0%), #e5e7eb var(--p,0%) 100%);
+        }
+
+        /* ---- emergency types grid ---- */
+        [data-view="citizen-app"] .em-card {
+            position: relative;
+            border-radius: 22px;
+            overflow: hidden;
+            transition: transform .55s cubic-bezier(.22,1,.36,1), box-shadow .55s;
+            isolation: isolate;
+        }
+        [data-view="citizen-app"] .em-card:hover { transform: translateY(-8px) scale(1.015); box-shadow: 0 30px 60px -25px rgba(0,0,0,.4); }
+        [data-view="citizen-app"] .em-card .em-img { transition: transform 1.2s cubic-bezier(.22,1,.36,1), filter .55s; }
+        [data-view="citizen-app"] .em-card:hover .em-img { transform: scale(1.08); filter: saturate(1.15); }
+        [data-view="citizen-app"] .em-card .em-icon { transition: transform .45s cubic-bezier(.22,1,.36,1); }
+        [data-view="citizen-app"] .em-card:hover .em-icon { transform: rotate(-8deg) scale(1.08); }
+
+        /* ---- stagger reveal helper ---- */
+        [data-view="citizen-app"] .stagger-in > * { opacity:0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+        [data-view="citizen-app"] .stagger-in.is-in > * { opacity:1; transform: none; }
+        [data-view="citizen-app"] .stagger-in.is-in > *:nth-child(1) { transition-delay: .04s; }
+        [data-view="citizen-app"] .stagger-in.is-in > *:nth-child(2) { transition-delay: .12s; }
+        [data-view="citizen-app"] .stagger-in.is-in > *:nth-child(3) { transition-delay: .2s; }
+        [data-view="citizen-app"] .stagger-in.is-in > *:nth-child(4) { transition-delay: .28s; }
+        [data-view="citizen-app"] .stagger-in.is-in > *:nth-child(5) { transition-delay: .36s; }
+        [data-view="citizen-app"] .stagger-in.is-in > *:nth-child(6) { transition-delay: .44s; }
+        [data-view="citizen-app"] .stagger-in.is-in > *:nth-child(7) { transition-delay: .52s; }
+        [data-view="citizen-app"] .stagger-in.is-in > *:nth-child(8) { transition-delay: .6s; }
+        [data-view="citizen-app"] .stagger-in.is-in > *:nth-child(9) { transition-delay: .68s; }
+        [data-view="citizen-app"] .stagger-in.is-in > *:nth-child(10) { transition-delay: .76s; }
+
+        /* ---- gentle fade-up for storytelling sections ---- */
+        [data-view="citizen-app"] .fade-up { opacity:0; transform: translateY(34px); transition: opacity .9s ease, transform .9s cubic-bezier(.22,1,.36,1); }
+        [data-view="citizen-app"] .fade-up.is-in { opacity:1; transform:none; }
+
+        /* ---- gradient text ---- */
+        [data-view="citizen-app"] .grad-red {
+            background: linear-gradient(120deg, #FB0606 0%, #ff5b3c 50%, #f5c844 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+
+        /* ---- glassmorph card ---- */
+        [data-view="citizen-app"] .glass {
+            background: rgba(255,255,255,.08);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,.18);
+        }
+        [data-view="citizen-app"] .glass-light {
+            background: rgba(255,255,255,.65);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,.6);
+        }
+
+        /* ---- pulse beacon ---- */
+        [data-view="citizen-app"] .beacon {
+            position:relative; display:inline-flex; width:10px; height:10px; border-radius:9999px;
+            background:#10b981;
+        }
+        [data-view="citizen-app"] .beacon::before {
+            content:""; position:absolute; inset:-6px; border-radius:9999px;
+            border:2px solid rgba(16,185,129,.5); animation: beaconPulse 1.8s ease-out infinite;
+        }
+        @keyframes beaconPulse {
+            0% { transform:scale(.6); opacity:1; }
+            80%, 100% { transform:scale(2); opacity:0; }
+        }
+
+        /* ---- soft tilt for image frames ---- */
+        [data-view="citizen-app"] .tilt-l { transform: rotate(-2deg); }
+        [data-view="citizen-app"] .tilt-r { transform: rotate(2deg); }
+
+        /* ---- shadow utility ---- */
+        [data-view="citizen-app"] .lush-shadow { box-shadow: 0 40px 80px -30px rgba(15,20,40,.4), 0 12px 30px -15px rgba(251,6,6,.18); }
+
+        /* ---- alert dot bouncing ---- */
+        [data-view="citizen-app"] .alert-bounce { animation: bounceY 2.4s ease-in-out infinite; }
+        @keyframes bounceY {
+            0%,100% { transform: translateY(0); }
+            50%     { transform: translateY(-6px); }
+        }
+
+        /* ---- prefers-reduced-motion ---- */
+        @media (prefers-reduced-motion: reduce) {
+            [data-view="citizen-app"] *,
+            [data-view="citizen-app"] *::before,
+            [data-view="citizen-app"] *::after {
+                animation: none !important;
+                transition-duration: .001ms !important;
+            }
         }
     </style>
 
     
     <section class="citizen-hero relative overflow-hidden text-white">
+        
+        <span class="deco-shape" style="top:8%;  left:6%;  width:120px; height:120px; opacity:.5;"></span>
+        <span class="deco-shape" style="top:62%; left:3%;  width:80px;  height:80px;  background:radial-gradient(circle, rgba(245,200,68,.35) 0%, transparent 70%); animation-delay:1.2s;"></span>
+        <span class="deco-shape" style="top:18%; right:5%; width:140px; height:140px; background:radial-gradient(circle, rgba(70,130,255,.32) 0%, transparent 70%); animation-delay:2.4s;"></span>
+        <span class="deco-shape" style="bottom:8%; right:18%; width:100px; height:100px; animation-delay:3.6s;"></span>
+
         <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
             <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-white/60">
                 <a data-route href="#/" class="hover:text-white transition">Home</a><span>›</span><span class="text-white">Citizen App</span>
             </div>
-            <div class="mt-3 grid lg:grid-cols-12 gap-10 items-center">
-                <div class="lg:col-span-7">
+            <div class="mt-3 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+                <div class="lg:col-span-6">
                     <span class="reveal reveal-delay-1 inline-flex items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/15 backdrop-blur text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5">
                         <span class="relative flex w-1.5 h-1.5">
                             <span class="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-70"></span>
                             <span class="relative w-1.5 h-1.5 rounded-full bg-red-500"></span>
                         </span>
-                        Auxilio Citizen · iOS & Android
+                        Auxilio Citizen · iOS &amp; Android · Free for families
                     </span>
-                    <h1 class="reveal reveal-delay-2 mt-5 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight">
-                        Your safety, <br/>
-                        <span style="color:#FB0606">your control.</span>
+                    <h1 class="reveal reveal-delay-2 mt-5 font-display font-extrabold text-4xl sm:text-5xl lg:text-[64px] xl:text-[72px] leading-[1.02] tracking-tight">
+                        Protect the people<br/>
+                        <span class="grad-red">you love most.</span>
                     </h1>
-                    <p class="reveal reveal-delay-3 mt-5 text-lg text-white/75 max-w-xl">
-                        Live crime maps, registered offender alerts, and one-tap emergency response — designed for families, accessible for every citizen. Help is never more than a thumb away.
+                    <p class="reveal reveal-delay-3 mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
+                        From a child's walk home, to a parent's late-night drive, to a sudden emergency in the kitchen — Auxilio puts real, verified help one tap away. Built for families. Trusted by communities.
                     </p>
                     <div class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center gap-3">
                         <a href="#" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 rounded-lg"><img src="images/app-store-badge.png" alt="Download on the App Store" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                         <a href="#" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 rounded-lg"><img src="images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
+                        <a href="#emergency-types" class="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white ring-1 ring-white/25 hover:bg-white/10 transition">
+                            See how we protect families
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0l-6-6m6 6l6-6"/></svg>
+                        </a>
                     </div>
                     <dl class="reveal reveal-delay-4 mt-10 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl">
                                                     <div>
@@ -4809,39 +4963,51 @@
                             </div>
                                                     <div>
                                 <dt class="font-display text-2xl font-bold tracking-tight">Live</dt>
-                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/55">crime map alerts</dd>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/55">safety alerts</dd>
                             </div>
                                                     <div>
                                 <dt class="font-display text-2xl font-bold tracking-tight">Free</dt>
-                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/55">forever for citizens</dd>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/55">forever for families</dd>
                             </div>
                                             </dl>
                 </div>
 
                 
-                <div class="reveal reveal-right lg:col-span-5">
-                    <div class="relative mx-auto max-w-md">
-                        <span class="absolute -inset-6 rounded-[36px] blur-3xl bg-red-600/25 pointer-events-none"></span>
+                <div class="reveal reveal-right lg:col-span-6">
+                    <div class="relative mx-auto max-w-xl">
+                        
+                        <span class="absolute -inset-10 rounded-[44px] blur-3xl bg-red-600/30 pointer-events-none"></span>
+                        <span class="absolute -bottom-10 -left-6 w-48 h-48 rounded-full blur-3xl bg-amber-400/25 pointer-events-none"></span>
 
                         
-                        <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 shadow-[0_30px_80px_-20px_rgba(251,6,6,.45)]">
-                            <img src="images/citizen/family-1.jpg" alt="Family using Auxilio" class="absolute inset-0 w-full h-full object-cover" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/15 to-transparent"></div>
-                            <div class="absolute inset-x-0 bottom-0 p-5">
-                                <div class="rounded-md bg-white/10 backdrop-blur ring-1 ring-white/20 px-4 py-3 flex items-center gap-3">
-                                    <span class="flex w-9 h-9 items-center justify-center rounded-full bg-emerald-500 text-white">
-                                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l5 5L20 7"/></svg>
-                                    </span>
-                                    <div class="leading-tight">
-                                        <div class="font-mono text-[9.5px] uppercase tracking-[.18em] text-white/65">Protected</div>
-                                        <div class="font-display text-sm font-bold text-white">All 4 family members</div>
-                                    </div>
+                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 lush-shadow float-slow">
+                            <img src="images/citizen/family-1.jpg" alt="Family safely connected with Auxilio" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-950/10 to-transparent"></div>
+
+                            
+                            <div class="absolute inset-x-4 bottom-4 glass rounded-2xl px-4 py-3 flex items-center gap-3 text-white">
+                                <span class="flex w-10 h-10 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg " style="box-shadow:0 10px 24px -8px rgba(16,185,129,.45)">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l5 5L20 7"/></svg>
+                                </span>
+                                <div class="leading-tight">
+                                    <div class="font-mono text-[10px] uppercase tracking-[.18em] text-white/70">Family circle</div>
+                                    <div class="font-display text-sm font-bold">4 of 4 protected · Live</div>
                                 </div>
+                                <span class="ml-auto beacon"></span>
                             </div>
                         </div>
 
                         
-                        <div class="hidden md:flex absolute -left-6 top-1/3 items-center justify-center w-16 h-16 rounded-full bg-red-600 text-white shadow-2xl ring-4 ring-red-600/20 z-10">
+                        <div class="hidden md:block absolute -bottom-10 -right-6 w-44 rounded-2xl overflow-hidden ring-2 ring-white/20 shadow-2xl tilt-r float-card delay-2">
+                            <div class="relative aspect-[4/5]">
+                                <img src="images/citizen/family-cartoon.jpg" alt="Family bedtime safe" class="absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent"></div>
+                                <span class="absolute top-2 left-2 rounded-full bg-emerald-500 text-[9px] font-mono uppercase tracking-[.18em] text-white px-2 py-0.5 font-bold">Home safe</span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="hidden md:flex absolute -left-7 top-1/3 items-center justify-center w-20 h-20 rounded-full bg-red-600 text-white shadow-2xl ring-4 ring-red-600/20 z-10">
                             <span class="ring-pulse"></span>
                             <span class="ring-pulse delay-1"></span>
                             <span class="ring-pulse delay-2"></span>
@@ -4849,24 +5015,35 @@
                         </div>
 
                         
-                        <div class="hidden md:flex float-card absolute -right-6 top-12 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl ring-1 ring-ink-100 z-10" style="min-width:215px;">
-                            <span class="flex w-10 h-10 items-center justify-center rounded-full bg-red-600 text-white shrink-0">
+                        <div class="hidden md:flex float-card absolute -right-6 top-8 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl ring-1 ring-ink-100 z-10" style="min-width:230px;">
+                            <span class="flex w-11 h-11 items-center justify-center rounded-full bg-red-600 text-white shrink-0">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75M2.7 16.13c-.87 1.5.22 3.37 1.95 3.37h14.7c1.73 0 2.82-1.87 1.95-3.37L13.95 3.38c-.87-1.5-3.03-1.5-3.9 0L2.7 16.13z"/></svg>
                             </span>
                             <div class="leading-tight">
-                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-red-600 font-bold">ALERT · 0.3 mi</div>
-                                <div class="font-display text-[14px] font-bold text-navy-900 mt-0.5">Theft · Maple St</div>
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-red-600 font-bold">SAFETY ALERT · 0.3 mi</div>
+                                <div class="font-display text-[14px] font-bold text-navy-900 mt-0.5">Maya is home safely</div>
                             </div>
                         </div>
 
                         
-                        <div class="hidden md:flex float-card delay-2 absolute -right-10 bottom-20 items-center gap-3 rounded-2xl bg-navy-900 text-white px-4 py-3 shadow-2xl ring-1 ring-white/10 z-10" style="min-width:215px;">
-                            <span class="flex w-10 h-10 items-center justify-center rounded-full bg-emerald-400 text-navy-900 shrink-0">
+                        <div class="hidden md:flex float-card delay-2 absolute -right-12 top-1/2 items-center gap-3 rounded-2xl bg-navy-900 text-white px-4 py-3 shadow-2xl ring-1 ring-white/10 z-10" style="min-width:235px;">
+                            <span class="flex w-11 h-11 items-center justify-center rounded-full bg-emerald-400 text-navy-900 shrink-0">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
                             </span>
                             <div class="leading-tight">
-                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-emerald-400 font-bold">RESPONDER</div>
-                                <div class="font-display text-[14px] font-bold mt-0.5">Officer Reyes · 90s</div>
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-emerald-400 font-bold">RESPONDER · 90s</div>
+                                <div class="font-display text-[14px] font-bold mt-0.5">Officer Reyes is enroute</div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="hidden md:flex float-card delay-1 absolute -left-10 bottom-12 items-center gap-3 rounded-2xl glass px-4 py-3 z-10 text-white" style="min-width:200px;">
+                            <span class="flex w-10 h-10 items-center justify-center rounded-full bg-rose-500/90 text-white shrink-0 alert-bounce">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+                            </span>
+                            <div class="leading-tight">
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-white/60 font-bold">Family pulse</div>
+                                <div class="font-display text-[13px] font-bold">All vitals · normal</div>
                             </div>
                         </div>
                     </div>
@@ -4874,7 +5051,7 @@
             </div>
 
             
-            <div class="reveal mt-16 overflow-hidden">
+            <div class="reveal mt-20 overflow-hidden">
                 <p class="text-center text-[10.5px] font-mono uppercase tracking-[.28em] text-white/40 mb-5">Trusted by neighborhoods · families · school districts</p>
                 <div class="relative">
                     <div class="marquee-track">
@@ -4894,49 +5071,80 @@
                 </div>
             </div>
         </div>
+
+        
+        <div class="absolute inset-x-0 -bottom-px h-24 pointer-events-none" style="background:linear-gradient(180deg, transparent 0%, #f7f3ee 100%);"></div>
     </section>
 
     
-    <section class="relative bg-ink-50">
+    <section class="relative" style="background:linear-gradient(180deg,#f7f3ee 0%, #fbfaf7 100%);">
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
-            <div class="reveal rounded-[28px] bg-white shadow-xl ring-1 ring-ink-100 p-6 sm:p-10 lg:p-14">
-                <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div class="reveal rounded-[32px] bg-white shadow-2xl ring-1 ring-ink-100 p-6 sm:p-10 lg:p-14 overflow-hidden relative">
+                <span class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-red-600/8 blur-3xl pointer-events-none"></span>
+                <span class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-amber-300/15 blur-3xl pointer-events-none"></span>
+
+                <div class="relative grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                     <div class="lg:col-span-5">
                         <div class="relative">
-                            <div class="relative rounded-[22px] overflow-hidden aspect-[4/5] shadow-lg">
-                                <img src="images/citizen/family-2.jpg" alt="Family using Auxilio" class="absolute inset-0 w-full h-full object-cover" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/40 via-transparent to-transparent"></div>
-                            </div>
-                            <div class="absolute -bottom-5 left-4 right-4 rounded-md bg-white px-4 py-3 shadow-2xl ring-1 ring-ink-100 flex items-center gap-3">
-                                <span class="flex w-9 h-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                            
+                            <div class="relative rounded-[24px] overflow-hidden aspect-[4/5] shadow-2xl ring-1 ring-ink-100">
+                                <img src="images/citizen/family-2.jpg" alt="Auxilio responder reaches a family" class="absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-navy-950/10 to-transparent"></div>
+                                <span class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/40 shadow">
+                                    <span class="beacon"></span>
+                                    Live · Newark
                                 </span>
-                                <div>
-                                    <div class="font-display text-sm font-bold text-navy-900">Help on the way</div>
-                                    <div class="text-[12px] text-ink-500">Responder dispatched · ETA 1m 48s</div>
+                                <div class="absolute inset-x-4 bottom-4 glass rounded-2xl px-4 py-3 text-white">
+                                    <div class="flex items-center gap-3">
+                                        <span class="flex w-10 h-10 items-center justify-center rounded-full bg-emerald-500 text-white shrink-0 shadow-lg " style="box-shadow:0 10px 24px -8px rgba(16,185,129,.45)">
+                                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                        </span>
+                                        <div class="leading-tight">
+                                            <div class="font-display text-sm font-bold">Officer Reyes is on the way</div>
+                                            <div class="font-mono text-[10px] uppercase tracking-[.18em] text-white/70">ETA 1m 48s · stays on call</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="hidden md:block absolute -bottom-8 -right-8 w-40 rounded-2xl overflow-hidden ring-2 ring-white shadow-xl tilt-r">
+                                <div class="relative aspect-[4/5]">
+                                    <img src="images/citizen/family-cartoon.jpg" alt="Family at home, safe" class="absolute inset-0 w-full h-full object-cover" />
+                                </div>
+                            </div>
+                            <div class="hidden md:block absolute -top-6 -left-6 w-32 rounded-2xl overflow-hidden ring-2 ring-white shadow-xl tilt-l">
+                                <div class="relative aspect-square">
+                                    <img src="images/citizen/cartoon-family-3d.jpg" alt="Family ready" class="absolute inset-0 w-full h-full object-cover" />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="lg:col-span-7">
                         <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Trusted by families nationwide</p>
-                        <h2 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
-                            Loved by folks in over <span class="text-brand-600">thirty cities.</span>
+                        <h2 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight text-navy-900">
+                            Real people. Real responders. <span class="grad-red">Real help — fast.</span>
                         </h2>
                         <p class="reveal reveal-delay-2 mt-5 text-navy-700/80 leading-relaxed max-w-xl">
-                            Auxilio is the safety companion families count on every day. From your child's walk home to your parents' late-night drive — we keep you connected, informed, and one tap away from real help.
+                            Auxilio is the safety companion families count on every day. From your child's walk home to your parents' late-night drive — we keep you connected, informed, and one tap away from real, accountable help.
                         </p>
-                        <a data-route href="#/about" class="reveal reveal-delay-3 mt-7 inline-flex items-center gap-2 rounded-full border-2 border-brand-500 text-brand-600 hover:bg-brand-50 px-6 py-2.5 text-sm font-semibold transition">
-                            About Auxilio
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
-                        </a>
+                        <div class="reveal reveal-delay-3 mt-7 flex flex-wrap items-center gap-3">
+                            <a data-route href="#/about" class="inline-flex items-center gap-2 rounded-full border-2 border-brand-500 text-brand-600 hover:bg-brand-50 px-6 py-2.5 text-sm font-semibold transition">
+                                About Auxilio
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
+                            </a>
+                            <a href="#emergency-types" class="inline-flex items-center gap-2 rounded-full bg-navy-900 hover:bg-navy-800 text-white px-6 py-2.5 text-sm font-semibold transition shadow-lg">
+                                See emergencies we cover
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0l-6-6m6 6l6-6"/></svg>
+                            </a>
+                        </div>
 
                         <dl data-citizen-stats class="mt-10 grid grid-cols-2 gap-x-10 gap-y-8">
                                                             <div>
                                     <dt class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-900 citizen-counter">
                                         <span data-stat-num data-stat-to="500">0</span><span class="text-brand-600">K+</span>
                                     </dt>
-                                    <dd class="mt-2 text-sm text-navy-700/80">Active Citizens Protected</dd>
+                                    <dd class="mt-2 text-sm text-navy-700/80">Families Protected Daily</dd>
                                 </div>
                                                             <div>
                                     <dt class="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-navy-900 citizen-counter">
@@ -4958,6 +5166,486 @@
                                 </div>
                                                     </dl>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="emergency-types" class="relative overflow-hidden" style="background:linear-gradient(180deg,#fbfaf7 0%, #ffffff 100%);">
+        
+        <span class="absolute -top-32 left-1/4 w-[420px] h-[420px] rounded-full bg-red-500/10 blur-3xl pointer-events-none"></span>
+        <span class="absolute top-1/2 -right-20 w-[360px] h-[360px] rounded-full bg-amber-300/15 blur-3xl pointer-events-none"></span>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-10 items-end mb-14">
+                <div class="lg:col-span-7">
+                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-brand-600">Every emergency. Every family. Every time.</p>
+                    <h2 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight text-navy-900">
+                        When the unthinkable happens, <br/>
+                        <span class="grad-red">help is already moving.</span>
+                    </h2>
+                </div>
+                <div class="lg:col-span-5">
+                    <p class="reveal reveal-delay-2 text-navy-700/80 leading-relaxed">
+                        Auxilio is built for the moments you hope you'll never face — and ready for the ones you do. From a sudden medical scare to a missing child, our network mobilizes in seconds, with the right responders for the right emergency.
+                    </p>
+                </div>
+            </div>
+
+            <div data-stagger class="stagger-in grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+                
+                                                        <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
+                        <div class="relative aspect-[4/5] overflow-hidden">
+                                                            <img src="images/citizen/emergency-room.jpg" alt="Medical Emergency" class="em-img absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-rose-500 to-rose-700 opacity-25 mix-blend-multiply"></div>
+                            
+                            
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+                                </span>
+                            </div>
+
+                            
+                            <span class="absolute top-4 right-4 z-10 rounded-full bg-rose-500 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">01 · TYPE</span>
+
+                            
+                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
+                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">Medical Emergency</h3>
+                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">Heart attack, stroke, allergic reaction — paramedics dispatched with your medical info pre-loaded.</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="beacon" style="background:#fff;"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                                                        <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
+                        <div class="relative aspect-[4/5] overflow-hidden">
+                                                            
+                                <div class="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-600"></div>
+                                <div class="absolute inset-0 opacity-30"
+                                     style="background-image:
+                                        radial-gradient(circle at 25% 25%, rgba(255,255,255,.5) 1px, transparent 1.5px),
+                                        radial-gradient(circle at 75% 60%, rgba(255,255,255,.4) 1px, transparent 1.5px);
+                                        background-size: 32px 32px;"></div>
+                                <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
+                                <div class="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-white/10 blur-2xl"></div>
+                            
+                            
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2c1 4 5 5 5 10a5 5 0 11-10 0c0-3 2-3 2-7 1 1 2 2 3 2 0-2-1-3 0-5z"/></svg>
+                                </span>
+                            </div>
+
+                            
+                            <span class="absolute top-4 right-4 z-10 rounded-full bg-orange-500 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">02 · TYPE</span>
+
+                            
+                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
+                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">Fire Emergency</h3>
+                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">Smoke, gas leak, kitchen fire — fire teams alerted instantly with your floor plan and exits.</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="beacon" style="background:#fff;"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                                                        <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
+                        <div class="relative aspect-[4/5] overflow-hidden">
+                                                            <img src="images/about/robbery.jpg" alt="Theft or Robbery" class="em-img absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-red-600 to-red-800 opacity-25 mix-blend-multiply"></div>
+                            
+                            
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 1l9 4v6c0 5-3.5 9.5-9 11-5.5-1.5-9-6-9-11V5l9-4z"/></svg>
+                                </span>
+                            </div>
+
+                            
+                            <span class="absolute top-4 right-4 z-10 rounded-full bg-red-600 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">03 · TYPE</span>
+
+                            
+                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
+                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">Theft or Robbery</h3>
+                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">Silent SOS sends location, recording, and verified responders without alerting the attacker.</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="beacon" style="background:#fff;"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                                                        <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
+                        <div class="relative aspect-[4/5] overflow-hidden">
+                                                            <img src="images/citizen/child-distress.jpg" alt="Missing Child" class="em-img absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-amber-400 to-orange-500 opacity-25 mix-blend-multiply"></div>
+                            
+                            
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 22a8 8 0 0116 0"/></svg>
+                                </span>
+                            </div>
+
+                            
+                            <span class="absolute top-4 right-4 z-10 rounded-full bg-amber-500 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">04 · TYPE</span>
+
+                            
+                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
+                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">Missing Child</h3>
+                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">Last-known location, photo, and AMBER-style alerts pushed to nearby Auxilio members.</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="beacon" style="background:#fff;"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                                                        <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
+                        <div class="relative aspect-[4/5] overflow-hidden">
+                                                            <img src="images/about/accident.jpg" alt="Road Accident" class="em-img absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-red-600 to-red-800 opacity-25 mix-blend-multiply"></div>
+                            
+                            
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17h18l-2-7H5l-2 7zm2-3h14M7 17v2m10-2v2"/></svg>
+                                </span>
+                            </div>
+
+                            
+                            <span class="absolute top-4 right-4 z-10 rounded-full bg-red-600 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">05 · TYPE</span>
+
+                            
+                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
+                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">Road Accident</h3>
+                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">Crash detection auto-summons help, shares location, and alerts your family circle.</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="beacon" style="background:#fff;"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                                                        <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
+                        <div class="relative aspect-[4/5] overflow-hidden">
+                                                            <img src="images/about/break-in.jpg" alt="Home Intrusion" class="em-img absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-navy-800 to-navy-950 opacity-25 mix-blend-multiply"></div>
+                            
+                            
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10h14V10"/></svg>
+                                </span>
+                            </div>
+
+                            
+                            <span class="absolute top-4 right-4 z-10 rounded-full bg-navy-900 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">06 · TYPE</span>
+
+                            
+                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
+                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">Home Intrusion</h3>
+                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">Door, window, or motion triggers — silent dispatch with live audio to verified responders.</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="beacon" style="background:#fff;"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                                                        <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
+                        <div class="relative aspect-[4/5] overflow-hidden">
+                                                            
+                                <div class="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-700"></div>
+                                <div class="absolute inset-0 opacity-30"
+                                     style="background-image:
+                                        radial-gradient(circle at 25% 25%, rgba(255,255,255,.5) 1px, transparent 1.5px),
+                                        radial-gradient(circle at 75% 60%, rgba(255,255,255,.4) 1px, transparent 1.5px);
+                                        background-size: 32px 32px;"></div>
+                                <div class="absolute -top-8 -right-8 w-40 h-40 rounded-full bg-white/15 blur-2xl"></div>
+                                <div class="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-white/10 blur-2xl"></div>
+                            
+                            
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 14a4 4 0 014-4h1a5 5 0 019.9-1.5A4.5 4.5 0 0119 17H5a3 3 0 01-2-3z"/></svg>
+                                </span>
+                            </div>
+
+                            
+                            <span class="absolute top-4 right-4 z-10 rounded-full bg-cyan-500 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">07 · TYPE</span>
+
+                            
+                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
+                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">Natural Disaster</h3>
+                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">Storms, floods, quakes — proactive alerts with shelter locations and family check-ins.</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="beacon" style="background:#fff;"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                                                        <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
+                        <div class="relative aspect-[4/5] overflow-hidden">
+                                                            <img src="images/citizen/abused-woman.jpg" alt="Women Safety" class="em-img absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-pink-500 to-rose-600 opacity-25 mix-blend-multiply"></div>
+                            
+                            
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a4 4 0 014 4v2a4 4 0 11-8 0V6a4 4 0 014-4zM6 22a6 6 0 0112 0"/></svg>
+                                </span>
+                            </div>
+
+                            
+                            <span class="absolute top-4 right-4 z-10 rounded-full bg-pink-500 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">08 · TYPE</span>
+
+                            
+                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
+                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">Women Safety</h3>
+                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">Discreet panic gesture, live tracking, and trauma-informed responders — no questions asked.</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="beacon" style="background:#fff;"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                                                        <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
+                        <div class="relative aspect-[4/5] overflow-hidden">
+                                                            <img src="images/citizen/officer-coffee.jpg" alt="Elderly Emergency" class="em-img absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-violet-500 to-indigo-700 opacity-25 mix-blend-multiply"></div>
+                            
+                            
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6V2m0 4a4 4 0 100 8 4 4 0 000-8zm-7 16l3-7 4 1 4-1 3 7"/></svg>
+                                </span>
+                            </div>
+
+                            
+                            <span class="absolute top-4 right-4 z-10 rounded-full bg-violet-500 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">09 · TYPE</span>
+
+                            
+                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
+                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">Elderly Emergency</h3>
+                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">Fall detection, missed meds, wandering alerts — calm, dignified response designed for seniors.</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="beacon" style="background:#fff;"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                                                        <article class="em-card group lush-shadow ring-1 ring-ink-100 bg-white">
+                        <div class="relative aspect-[4/5] overflow-hidden">
+                                                            <img src="images/citizen/warning-lamp.jpg" alt="General SOS" class="em-img absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/40 to-transparent"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-red-600 to-red-800 opacity-25 mix-blend-multiply"></div>
+                            
+                            
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="em-icon flex w-12 h-12 items-center justify-center rounded-2xl bg-white/95 backdrop-blur ring-1 ring-white/40 text-navy-900 shadow-lg">
+                                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l6 6m0-6l-6 6"/></svg>
+                                </span>
+                            </div>
+
+                            
+                            <span class="absolute top-4 right-4 z-10 rounded-full bg-red-600 text-white text-[9.5px] font-mono uppercase tracking-[.18em] px-2 py-0.5 shadow-lg font-bold">10 · TYPE</span>
+
+                            
+                            <div class="absolute inset-x-0 bottom-0 p-5 z-10 text-white">
+                                <h3 class="font-display text-lg sm:text-xl font-bold leading-tight">General SOS</h3>
+                                <p class="mt-2 text-[12.5px] text-white/85 leading-relaxed">Anything you can&#039;t name in the moment. One tap reaches a real human in under 30 seconds.</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="beacon" style="background:#fff;"></span>
+                                    <span class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Avg. response &lt; 4 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                            </div>
+
+            
+            <div class="reveal mt-14 rounded-3xl glass-light ring-1 ring-ink-100 p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-5 sm:gap-8 lush-shadow">
+                <div class="flex items-center gap-4 flex-1">
+                    <span class="flex w-14 h-14 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg " style="box-shadow:0 14px 30px -10px rgba(251,6,6,.45)">
+                        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l6 6m0-6l-6 6"/></svg>
+                    </span>
+                    <div>
+                        <p class="font-display text-xl sm:text-2xl font-extrabold text-navy-900">Your family's safety net is one tap away.</p>
+                        <p class="mt-1 text-sm text-navy-700/80">Free for citizens. Live in 30+ cities. No credit card.</p>
+                    </div>
+                </div>
+                <a href="#" class="moving-gradient inline-flex items-center gap-2 rounded-full text-white px-6 py-3 text-sm font-semibold shadow-lg transition hover:-translate-y-0.5">
+                    Get Auxilio Free
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="relative overflow-hidden bg-white">
+        <span class="absolute -top-24 -left-24 w-[420px] h-[420px] rounded-full bg-rose-300/15 blur-3xl pointer-events-none"></span>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <div class="lg:col-span-6 fade-up">
+                    <div class="relative max-w-md mx-auto lg:mx-0">
+                        <span class="absolute -inset-6 rounded-[40px] blur-3xl bg-red-500/15 pointer-events-none"></span>
+                        <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow">
+                            <img src="images/citizen/cartoon-family-3d.jpg" alt="Family inside a safe home" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
+                            <span class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/60 shadow">
+                                <span class="beacon"></span>
+                                Family circle · 4 of 4
+                            </span>
+                        </div>
+                        
+                        <div class="hidden md:flex float-card absolute -right-8 top-12 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl ring-1 ring-ink-100" style="min-width:210px;">
+                            <span class="flex w-11 h-11 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </span>
+                            <div class="leading-tight">
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-emerald-700 font-bold">CHECK-IN</div>
+                                <div class="font-display text-[14px] font-bold text-navy-900">Maya · safe at school</div>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex float-card delay-2 absolute -left-10 -bottom-8 items-center gap-3 rounded-2xl bg-navy-900 text-white px-4 py-3 shadow-2xl ring-1 ring-white/10" style="min-width:215px;">
+                            <span class="flex w-11 h-11 items-center justify-center rounded-full bg-amber-400 text-navy-900">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+                            </span>
+                            <div class="leading-tight">
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-amber-300 font-bold">PROTECTED</div>
+                                <div class="font-display text-[14px] font-bold">Mom · Dad · Maya · Leo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 fade-up">
+                    <p class="text-xs font-mono uppercase tracking-[.2em] text-brand-600">Protect your loved ones</p>
+                    <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight text-navy-900">
+                        The people you love, <span class="grad-red">always within reach.</span>
+                    </h2>
+                    <p class="mt-5 text-navy-700/80 leading-relaxed max-w-xl">
+                        Build a private family circle in seconds. Share location only when you choose. Auxilio quietly checks in, listens for trouble, and brings everyone home — without ever feeling like surveillance.
+                    </p>
+                    <ul class="mt-7 space-y-4 max-w-xl">
+                                                    <li class="flex gap-4">
+                                <span class="grid place-items-center w-10 h-10 rounded-full bg-red-50 text-red-600 ring-1 ring-red-100 shrink-0">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <div>
+                                    <p class="font-display font-bold text-navy-900">Live family circle</p>
+                                    <p class="text-sm text-navy-700/80 leading-relaxed">Add up to 12 people. Toggle visibility per person, per day.</p>
+                                </div>
+                            </li>
+                                                    <li class="flex gap-4">
+                                <span class="grid place-items-center w-10 h-10 rounded-full bg-red-50 text-red-600 ring-1 ring-red-100 shrink-0">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <div>
+                                    <p class="font-display font-bold text-navy-900">Auto check-ins</p>
+                                    <p class="text-sm text-navy-700/80 leading-relaxed">Scheduled &quot;I&#039;m home safe&quot; pings — no manual texts.</p>
+                                </div>
+                            </li>
+                                                    <li class="flex gap-4">
+                                <span class="grid place-items-center w-10 h-10 rounded-full bg-red-50 text-red-600 ring-1 ring-red-100 shrink-0">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <div>
+                                    <p class="font-display font-bold text-navy-900">Trusted contacts only</p>
+                                    <p class="text-sm text-navy-700/80 leading-relaxed">You decide who hears the SOS. Default is your circle + dispatch.</p>
+                                </div>
+                            </li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="relative overflow-hidden text-white" style="background:linear-gradient(160deg,#0a1224 0%, #131c36 60%, #07101f 100%);">
+        <span class="absolute -top-32 -right-20 w-[520px] h-[520px] rounded-full bg-red-600/25 blur-3xl pointer-events-none"></span>
+        <span class="absolute -bottom-32 -left-20 w-[440px] h-[440px] rounded-full bg-amber-400/15 blur-3xl pointer-events-none"></span>
+        <div class="absolute inset-0 opacity-30 pointer-events-none"
+             style="background-image:
+                linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+                background-size: 56px 56px;
+                mask-image: radial-gradient(circle at 50% 50%, black, transparent 70%);"></div>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <div class="lg:col-span-6 lg:order-2 fade-up">
+                    <div class="relative max-w-md mx-auto lg:mx-0">
+                        <span class="absolute -inset-8 rounded-[40px] blur-3xl bg-red-600/40 pointer-events-none"></span>
+                        <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 lush-shadow">
+                            <img src="images/citizen/emergency-room.jpg" alt="Paramedics responding fast" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-navy-950/20 to-navy-950/30"></div>
+                            <div class="absolute inset-x-4 top-4 glass rounded-2xl px-4 py-3 flex items-center gap-3">
+                                <span class="flex w-10 h-10 items-center justify-center rounded-full bg-red-600 text-white shrink-0 alert-bounce">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75M12 17h.01M2.7 16.13c-.87 1.5.22 3.37 1.95 3.37h14.7c1.73 0 2.82-1.87 1.95-3.37L13.95 3.38c-.87-1.5-3.03-1.5-3.9 0L2.7 16.13z"/></svg>
+                                </span>
+                                <div class="leading-tight">
+                                    <div class="font-mono text-[10px] uppercase tracking-[.18em] text-red-300 font-bold">SOS · 00:08</div>
+                                    <div class="font-display text-sm font-bold">Paramedics dispatched</div>
+                                </div>
+                                <span class="ml-auto beacon" style="background:#FB0606;"></span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="hidden md:block float-slow absolute -left-10 bottom-10 rounded-2xl bg-white/95 backdrop-blur px-5 py-4 ring-1 ring-white/40 shadow-2xl">
+                            <div class="font-mono text-[10px] uppercase tracking-[.18em] text-red-600 font-bold">RESPONSE TIME</div>
+                            <div class="mt-1 font-display text-3xl font-extrabold text-navy-900 citizen-counter">3:42</div>
+                            <div class="mt-1 text-[11px] text-navy-700/70">average · Newark Metro</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 lg:order-1 fade-up">
+                    <p class="text-xs font-mono uppercase tracking-[.2em] text-red-400">Emergency help in seconds</p>
+                    <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight">
+                        From <span class="grad-red">tap to dispatch</span> in under 8 seconds.
+                    </h2>
+                    <p class="mt-5 text-white/75 leading-relaxed max-w-xl">
+                        Auxilio collapses the seconds that matter. One press hands the closest verified responder your name, location, family contacts, and any medical details you've chosen to share — before you've even let go of the button.
+                    </p>
+
+                    <div class="mt-8 grid sm:grid-cols-3 gap-4 max-w-xl">
+                                                    <div class="rounded-2xl glass p-5">
+                                <div class="font-display text-3xl font-extrabold">8s</div>
+                                <div class="mt-1 font-mono text-[10px] uppercase tracking-[.18em] text-white/55">Tap to dispatch</div>
+                            </div>
+                                                    <div class="rounded-2xl glass p-5">
+                                <div class="font-display text-3xl font-extrabold">3:42</div>
+                                <div class="mt-1 font-mono text-[10px] uppercase tracking-[.18em] text-white/55">Avg. arrival</div>
+                            </div>
+                                                    <div class="rounded-2xl glass p-5">
+                                <div class="font-display text-3xl font-extrabold">24/7</div>
+                                <div class="mt-1 font-mono text-[10px] uppercase tracking-[.18em] text-white/55">Live human desk</div>
+                            </div>
+                                            </div>
+
+                    <a href="#" class="mt-8 inline-flex items-center gap-2 moving-gradient text-white rounded-full px-6 py-3 text-sm font-semibold shadow-2xl transition hover:-translate-y-0.5" style="box-shadow:0 22px 50px -12px rgba(251,6,6,.55)">
+                        Try the SOS demo
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 5l7 7-7 7"/></svg>
+                    </a>
                 </div>
             </div>
         </div>
@@ -5135,7 +5823,7 @@
                 </div>
                 <div class="lg:col-span-7">
                     <ol data-citizen-steps class="relative space-y-2">
-                                                    <li data-citizen-step="0" data-img="images/citizen/cartoon-family-3d.jpg"
+                                                    <li data-citizen-step="0" data-img="/images/citizen/cartoon-family-3d.jpg"
                                  data-active class="cursor-pointer rounded-md bg-white border-2 border-brand-200 shadow-lg p-5 lg:p-6 transition"
                                 >
                                 <div class="flex items-start gap-4">
@@ -5146,7 +5834,7 @@
                                     </div>
                                 </div>
                             </li>
-                                                    <li data-citizen-step="1" data-img="images/citizen/officer-coffee.jpg"
+                                                    <li data-citizen-step="1" data-img="/images/citizen/officer-coffee.jpg"
                                  class="cursor-pointer rounded-md bg-white border-2 border-transparent hover:border-brand-200 hover:shadow-md p-5 lg:p-6 transition"
                                 >
                                 <div class="flex items-start gap-4">
@@ -5157,7 +5845,7 @@
                                     </div>
                                 </div>
                             </li>
-                                                    <li data-citizen-step="2" data-img="images/citizen/family-cartoon.jpg"
+                                                    <li data-citizen-step="2" data-img="/images/citizen/family-cartoon.jpg"
                                  class="cursor-pointer rounded-md bg-white border-2 border-transparent hover:border-brand-200 hover:shadow-md p-5 lg:p-6 transition"
                                 >
                                 <div class="flex items-start gap-4">
@@ -5168,7 +5856,7 @@
                                     </div>
                                 </div>
                             </li>
-                                                    <li data-citizen-step="3" data-img="images/citizen/family-1.jpg"
+                                                    <li data-citizen-step="3" data-img="/images/citizen/family-1.jpg"
                                  class="cursor-pointer rounded-md bg-white border-2 border-transparent hover:border-brand-200 hover:shadow-md p-5 lg:p-6 transition"
                                 >
                                 <div class="flex items-start gap-4">
@@ -5265,6 +5953,251 @@
     </section>
 
     
+    <section class="relative overflow-hidden" style="background:linear-gradient(180deg,#f7f3ee 0%, #ffffff 100%);">
+        <span class="absolute -top-32 left-1/3 w-[420px] h-[420px] rounded-full bg-cyan-300/20 blur-3xl pointer-events-none"></span>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <div class="lg:col-span-6 fade-up">
+                    <div class="relative max-w-md mx-auto lg:mx-0">
+                        <span class="absolute -inset-6 rounded-[40px] blur-3xl bg-navy-900/15 pointer-events-none"></span>
+                        <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow">
+                            <img src="images/citizen/officer-coffee.jpg" alt="Officer connected with the community" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
+                            <span class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/60 shadow">
+                                <span class="beacon"></span>
+                                Verified · Newark PD
+                            </span>
+                        </div>
+
+                        
+                        <div class="hidden md:block float-card absolute -right-12 top-12 w-64 rounded-2xl bg-white p-4 shadow-2xl ring-1 ring-ink-100">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="flex w-8 h-8 items-center justify-center rounded-full bg-blue-100 text-blue-700">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12c0-3.87 4.03-7 9-7s9 3.13 9 7-4.03 7-9 7c-1.05 0-2.06-.13-3-.38L3 21l1.45-3.95C3.55 15.86 3 14.02 3 12z"/></svg>
+                                </span>
+                                <div class="leading-tight">
+                                    <div class="font-display text-sm font-bold text-navy-900">Live with dispatch</div>
+                                    <div class="font-mono text-[9.5px] uppercase tracking-[.16em] text-emerald-600">Encrypted</div>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="rounded-xl bg-ink-50 px-3 py-2 text-[12.5px] text-navy-900">"You're connected. What's happening?"</div>
+                                <div class="ml-auto max-w-[80%] rounded-xl bg-red-600 text-white px-3 py-2 text-[12.5px]">"Suspicious car outside."</div>
+                                <div class="rounded-xl bg-ink-50 px-3 py-2 text-[12.5px] text-navy-900">"Officer Reyes is 90s out. Stay on the line."</div>
+                            </div>
+                        </div>
+
+                        <div class="hidden md:flex float-card delay-2 absolute -left-8 -bottom-8 items-center gap-3 rounded-2xl bg-navy-900 text-white px-4 py-3 shadow-2xl ring-1 ring-white/10" style="min-width:215px;">
+                            <span class="flex w-11 h-11 items-center justify-center rounded-full bg-amber-400 text-navy-900">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/></svg>
+                            </span>
+                            <div class="leading-tight">
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-amber-300 font-bold">VERIFIED</div>
+                                <div class="font-display text-[14px] font-bold">Badge #487 · 12 yrs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 fade-up">
+                    <p class="text-xs font-mono uppercase tracking-[.2em] text-brand-600">Stay connected with authorities</p>
+                    <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight text-navy-900">
+                        A direct line to <span class="grad-red">verified responders</span> — not a hotline maze.
+                    </h2>
+                    <p class="mt-5 text-navy-700/80 leading-relaxed max-w-xl">
+                        Every responder on Auxilio is identity-verified and badge-credentialed. When you reach out, you get a real person — not a phone tree, not a chatbot — and a transparent log of who responded, when, and why.
+                    </p>
+
+                    <div class="mt-7 grid sm:grid-cols-2 gap-4 max-w-xl">
+                                                                                <div class="rounded-2xl bg-white ring-1 ring-ink-100 p-5 shadow-sm hover:shadow-md transition">
+                                <span class="flex w-10 h-10 items-center justify-center rounded-xl bg-red-50 text-red-600 ring-1 ring-red-100">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <p class="mt-3 font-display font-bold text-navy-900">Verified badges</p>
+                                <p class="text-sm text-navy-700/80 leading-relaxed">Every responder. Every dispatch.</p>
+                            </div>
+                                                                                <div class="rounded-2xl bg-white ring-1 ring-ink-100 p-5 shadow-sm hover:shadow-md transition">
+                                <span class="flex w-10 h-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <p class="mt-3 font-display font-bold text-navy-900">Encrypted chat</p>
+                                <p class="text-sm text-navy-700/80 leading-relaxed">AES-256, end-to-end. Always.</p>
+                            </div>
+                                                                                <div class="rounded-2xl bg-white ring-1 ring-ink-100 p-5 shadow-sm hover:shadow-md transition">
+                                <span class="flex w-10 h-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600 ring-1 ring-amber-100">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <p class="mt-3 font-display font-bold text-navy-900">Audit trail</p>
+                                <p class="text-sm text-navy-700/80 leading-relaxed">Signed, timestamped, exportable.</p>
+                            </div>
+                                                                                <div class="rounded-2xl bg-white ring-1 ring-ink-100 p-5 shadow-sm hover:shadow-md transition">
+                                <span class="flex w-10 h-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600 ring-1 ring-blue-100">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                <p class="mt-3 font-display font-bold text-navy-900">Local PD bridge</p>
+                                <p class="text-sm text-navy-700/80 leading-relaxed">911 handoff in serious cases.</p>
+                            </div>
+                                            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="relative overflow-hidden bg-white">
+        <span class="absolute top-1/2 -left-32 w-[440px] h-[440px] rounded-full bg-amber-200/25 blur-3xl pointer-events-none"></span>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <div class="lg:col-span-6 lg:order-2 fade-up">
+                    <div class="relative max-w-md mx-auto lg:mx-0">
+                        <span class="absolute -inset-6 rounded-[40px] blur-3xl bg-amber-300/30 pointer-events-none"></span>
+                        <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow">
+                            <img src="images/citizen/warning-lamp.jpg" alt="Real-time safety alerts" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent"></div>
+                            <div class="absolute inset-x-4 bottom-4 glass rounded-2xl p-4 text-white">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <span class="flex w-9 h-9 items-center justify-center rounded-full bg-amber-400 text-navy-900">
+                                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l-1 6 4 1-3 5h3l-2 8 6-9h-3l3-6h-4l1-5h-4z"/></svg>
+                                    </span>
+                                    <div class="leading-tight">
+                                        <div class="font-mono text-[10px] uppercase tracking-[.18em] text-amber-300 font-bold">CITY ALERT · 0.4 mi</div>
+                                        <div class="font-display text-sm font-bold">Power outage · Maple St</div>
+                                    </div>
+                                </div>
+                                <div class="space-y-1.5">
+                                                                                                                    <div class="flex items-center gap-2 text-[12px]">
+                                            <span class="w-1.5 h-1.5 rounded-full" style="background:#f5c844"></span>
+                                            <span class="font-mono text-white/60 w-12">2:14p</span>
+                                            <span class="text-white/90">Crime spike on E Broad</span>
+                                        </div>
+                                                                                                                    <div class="flex items-center gap-2 text-[12px]">
+                                            <span class="w-1.5 h-1.5 rounded-full" style="background:#10b981"></span>
+                                            <span class="font-mono text-white/60 w-12">2:31p</span>
+                                            <span class="text-white/90">School lockdown lifted</span>
+                                        </div>
+                                                                                                                    <div class="flex items-center gap-2 text-[12px]">
+                                            <span class="w-1.5 h-1.5 rounded-full" style="background:#FB0606"></span>
+                                            <span class="font-mono text-white/60 w-12">2:48p</span>
+                                            <span class="text-white/90">Severe weather warning</span>
+                                        </div>
+                                                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 lg:order-1 fade-up">
+                    <p class="text-xs font-mono uppercase tracking-[.2em] text-brand-600">Real-time safety alerts</p>
+                    <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight text-navy-900">
+                        Know what's happening, <span class="grad-red">before it reaches you.</span>
+                    </h2>
+                    <p class="mt-5 text-navy-700/80 leading-relaxed max-w-xl">
+                        Auxilio surfaces only the alerts that matter to your block, your route, your kid's school. No noise, no fear-mongering — just the calm, accurate signal you need to make a smart decision in the moment.
+                    </p>
+
+                    <ul class="mt-7 space-y-3 max-w-xl">
+                                                                                <li class="flex items-start gap-4 rounded-2xl bg-white ring-1 ring-ink-100 p-4 shadow-sm">
+                                <span class="flex w-10 h-10 items-center justify-center rounded-full bg-amber-100 text-amber-700 shrink-0">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                </span>
+                                <div class="leading-snug">
+                                    <p class="font-display font-bold text-navy-900">Hyperlocal</p>
+                                    <p class="text-sm text-navy-700/80">Filtered to your home, work, and family zones.</p>
+                                </div>
+                            </li>
+                                                                                <li class="flex items-start gap-4 rounded-2xl bg-white ring-1 ring-ink-100 p-4 shadow-sm">
+                                <span class="flex w-10 h-10 items-center justify-center rounded-full bg-red-100 text-red-700 shrink-0">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                </span>
+                                <div class="leading-snug">
+                                    <p class="font-display font-bold text-navy-900">Verified</p>
+                                    <p class="text-sm text-navy-700/80">Cross-checked against municipal feeds and trusted reports.</p>
+                                </div>
+                            </li>
+                                                                                <li class="flex items-start gap-4 rounded-2xl bg-white ring-1 ring-ink-100 p-4 shadow-sm">
+                                <span class="flex w-10 h-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 shrink-0">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.4-1.4A2 2 0 0118 14V11a6 6 0 10-12 0v3a2 2 0 01-.6 1.6L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                                </span>
+                                <div class="leading-snug">
+                                    <p class="font-display font-bold text-navy-900">Quiet by default</p>
+                                    <p class="text-sm text-navy-700/80">Push only for what genuinely affects your safety.</p>
+                                </div>
+                            </li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="relative overflow-hidden text-white" style="background:linear-gradient(135deg, #1a0707 0%, #4a0606 40%, #07101f 100%);">
+        <div class="absolute inset-0 opacity-30 pointer-events-none"
+             style="background-image:
+                radial-gradient(circle at 30% 30%, rgba(255,200,150,.6) 1px, transparent 1.5px),
+                radial-gradient(circle at 70% 70%, rgba(255,255,255,.4) 1px, transparent 1.5px);
+                background-size: 36px 36px;
+                mask-image: radial-gradient(circle at 50% 50%, black, transparent 75%);"></div>
+        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[820px] h-[820px] rounded-full bg-red-600/15 blur-3xl pointer-events-none"></span>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
+            <div class="text-center max-w-3xl mx-auto fade-up">
+                <p class="text-xs font-mono uppercase tracking-[.2em] text-red-300">Fast response network</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight">
+                    A network of <span class="grad-red">12,000+ verified responders</span> — moving the moment you need them.
+                </h2>
+                <p class="mt-5 text-white/75 leading-relaxed">
+                    Trained, badged, background-checked. The nearest verified responder accepts within seconds — and stays on the line until help is at your door.
+                </p>
+            </div>
+
+            <div class="reveal mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                                    <div class="glass rounded-3xl p-6 hover:-translate-y-1 transition-transform duration-500">
+                        <span class="flex w-12 h-12 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg ring-1 ring-white/20" style="box-shadow:0 14px 30px -10px rgba(251,6,6,.45)">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11a4 4 0 10-8 0 4 4 0 008 0zM3 21a7 7 0 0118 0"/></svg>
+                        </span>
+                        <div class="mt-5 font-display text-4xl font-extrabold">12K+</div>
+                        <div class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/60">Verified responders</div>
+                    </div>
+                                    <div class="glass rounded-3xl p-6 hover:-translate-y-1 transition-transform duration-500">
+                        <span class="flex w-12 h-12 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg ring-1 ring-white/20" style="box-shadow:0 14px 30px -10px rgba(251,6,6,.45)">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                        </span>
+                        <div class="mt-5 font-display text-4xl font-extrabold">30+</div>
+                        <div class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/60">Cities live</div>
+                    </div>
+                                    <div class="glass rounded-3xl p-6 hover:-translate-y-1 transition-transform duration-500">
+                        <span class="flex w-12 h-12 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg ring-1 ring-white/20" style="box-shadow:0 14px 30px -10px rgba(251,6,6,.45)">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </span>
+                        <div class="mt-5 font-display text-4xl font-extrabold">8s</div>
+                        <div class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/60">To dispatch</div>
+                    </div>
+                                    <div class="glass rounded-3xl p-6 hover:-translate-y-1 transition-transform duration-500">
+                        <span class="flex w-12 h-12 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg ring-1 ring-white/20" style="box-shadow:0 14px 30px -10px rgba(251,6,6,.45)">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l2 2 3.5-4"/></svg>
+                        </span>
+                        <div class="mt-5 font-display text-4xl font-extrabold">99.9%</div>
+                        <div class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/60">Uptime SLA</div>
+                    </div>
+                            </div>
+
+            
+            <div class="reveal mt-12 flex flex-wrap items-center justify-center gap-4">
+                <div class="flex -space-x-3">
+                                            <img src="images/officer-1.jpg" alt="Verified responder" class="w-12 h-12 rounded-full ring-4 ring-navy-950 object-cover" />
+                                            <img src="images/officer-2.jpg" alt="Verified responder" class="w-12 h-12 rounded-full ring-4 ring-navy-950 object-cover" />
+                                            <img src="images/officer-3.jpg" alt="Verified responder" class="w-12 h-12 rounded-full ring-4 ring-navy-950 object-cover" />
+                                            <img src="images/officer-4.jpg" alt="Verified responder" class="w-12 h-12 rounded-full ring-4 ring-navy-950 object-cover" />
+                                        <span class="grid place-items-center w-12 h-12 rounded-full ring-4 ring-navy-950 bg-emerald-500 text-navy-950 font-display font-extrabold text-xs">+12K</span>
+                </div>
+                <p class="font-mono text-[11px] uppercase tracking-[.2em] text-white/60">verified · badge-credentialed · background-checked</p>
+            </div>
+        </div>
+    </section>
+
+    
     <section class="relative bg-ink-50">
         <div class="mx-auto max-w-5xl px-5 sm:px-8 py-20 lg:py-28">
             <div class="text-center max-w-2xl mx-auto">
@@ -5355,42 +6288,100 @@
     </section>
 
     
-    <section class="relative overflow-hidden bg-navy-950 text-white">
+    <section class="relative overflow-hidden text-white" style="background:linear-gradient(155deg, #060c1a 0%, #1a0707 45%, #2a0a0a 75%, #060c1a 100%);">
         <div class="absolute inset-0 pointer-events-none">
-            <div class="absolute -top-32 -left-20 w-[420px] h-[420px] rounded-full bg-red-600/25 blur-3xl"></div>
-            <div class="absolute -bottom-32 -right-10 w-[480px] h-[480px] rounded-full bg-gold-400/15 blur-3xl"></div>
+            <div class="absolute -top-32 -left-20 w-[520px] h-[520px] rounded-full bg-red-600/30 blur-3xl"></div>
+            <div class="absolute -bottom-32 -right-10 w-[560px] h-[560px] rounded-full bg-amber-400/15 blur-3xl"></div>
+            <div class="absolute top-1/2 left-1/4 w-[300px] h-[300px] rounded-full bg-rose-500/15 blur-3xl"></div>
         </div>
-        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-28">
-            <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="absolute inset-0 opacity-25 pointer-events-none"
+             style="background-image:
+                linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+                background-size: 56px 56px;
+                mask-image: radial-gradient(circle at 50% 50%, black, transparent 70%);"></div>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-20 lg:py-32">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
                 <div class="lg:col-span-7">
-                    <p class="reveal text-xs font-mono uppercase tracking-[.2em] text-red-400">Stop scrolling, start safe</p>
-                    <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight">
-                        Download Auxilio — and never <br/>
-                        <span style="color:#FB0606">walk alone</span> again.
+                    <span class="reveal inline-flex items-center gap-2 rounded-full bg-white/10 ring-1 ring-white/15 backdrop-blur text-white text-xs font-bold uppercase tracking-wider px-3 py-1.5">
+                        <span class="relative flex w-1.5 h-1.5">
+                            <span class="absolute inset-0 rounded-full bg-red-500 animate-ping opacity-70"></span>
+                            <span class="relative w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                        </span>
+                        Ready when life isn't
+                    </span>
+                    <h2 class="reveal reveal-delay-1 mt-5 font-display font-extrabold text-3xl sm:text-4xl lg:text-6xl leading-[1.02] tracking-tight">
+                        Bring everyone <br/>
+                        <span class="grad-red">home tonight.</span>
                     </h2>
-                    <p class="reveal reveal-delay-2 mt-5 max-w-xl text-white/75 leading-relaxed">
-                        Free for citizens. Encrypted by default. Live in 30+ cities. Your family's new safety net is one tap away.
+                    <p class="reveal reveal-delay-2 mt-6 max-w-xl text-white/80 leading-relaxed text-lg">
+                        Free for families. Encrypted by default. Live in 30+ cities. Auxilio is the safety companion that loves your people as much as you do — quietly there, instantly ready.
                     </p>
+
                     <div class="reveal reveal-delay-3 mt-8 flex flex-wrap items-center gap-3">
                         <a href="#" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 rounded-lg"><img src="images/app-store-badge.png" alt="Download on the App Store" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                         <a href="#" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 rounded-lg"><img src="images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                     </div>
+
+                    <div class="reveal reveal-delay-4 mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-white/70">
+                        <span class="inline-flex items-center gap-2">
+                            <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            Free, forever for families
+                        </span>
+                        <span class="inline-flex items-center gap-2">
+                            <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            No credit card to start
+                        </span>
+                        <span class="inline-flex items-center gap-2">
+                            <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                            We never sell your data
+                        </span>
+                    </div>
                 </div>
+
                 <div class="lg:col-span-5">
                     <div class="reveal reveal-right relative max-w-md mx-auto">
-                        <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-white/10 shadow-2xl">
-                            <img src="images/citizen/family-cartoon.jpg" alt="Family" class="absolute inset-0 w-full h-full object-cover" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/30 to-transparent"></div>
+                        
+                        <span class="absolute -inset-10 rounded-[44px] blur-3xl bg-red-600/30 pointer-events-none"></span>
+                        <span class="absolute -bottom-8 -right-8 w-44 h-44 rounded-full blur-2xl bg-amber-400/30 pointer-events-none"></span>
+
+                        
+                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 lush-shadow float-slow">
+                            <img src="images/citizen/family-cartoon.jpg" alt="A family safe at home" class="absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/85 via-navy-950/15 to-transparent"></div>
+
                             <div class="absolute bottom-5 left-5 right-5">
-                                <div class="rounded-md bg-white/10 backdrop-blur ring-1 ring-white/15 px-4 py-3 flex items-center gap-3">
-                                    <span class="flex w-9 h-9 items-center justify-center rounded-full bg-red-600 text-white">
-                                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
+                                <div class="glass rounded-2xl px-4 py-3 flex items-center gap-3 text-white">
+                                    <span class="flex w-11 h-11 items-center justify-center rounded-full bg-red-600 text-white shadow-lg " style="box-shadow:0 14px 30px -10px rgba(251,6,6,.55)">
+                                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
                                     </span>
                                     <div class="leading-tight">
-                                        <div class="font-mono text-[9.5px] uppercase tracking-[.18em] text-white/60">Protected</div>
-                                        <div class="font-display text-sm font-bold">All 4 family members</div>
+                                        <div class="font-mono text-[10px] uppercase tracking-[.18em] text-white/65">Protected · Live</div>
+                                        <div class="font-display text-sm font-bold">All 4 family members home</div>
                                     </div>
+                                    <span class="ml-auto beacon"></span>
                                 </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="hidden md:block float-card absolute -left-10 -bottom-6 w-36 rounded-2xl overflow-hidden ring-2 ring-white/25 shadow-2xl tilt-l">
+                            <div class="relative aspect-square">
+                                <img src="images/citizen/cartoon-family-3d.jpg" alt="Family ready" class="absolute inset-0 w-full h-full object-cover" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
+                                <span class="absolute bottom-2 left-2 right-2 text-center text-[9.5px] font-mono uppercase tracking-[.14em] text-white">Hello, neighbor.</span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="hidden md:flex float-card delay-2 absolute -right-8 top-12 items-center gap-3 rounded-2xl bg-white text-navy-900 px-4 py-3 shadow-2xl ring-1 ring-ink-100" style="min-width:215px;">
+                            <span class="flex w-11 h-11 items-center justify-center rounded-full bg-amber-400 text-navy-900">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m0 0l-5-5m5 5l5-5"/></svg>
+                            </span>
+                            <div class="leading-tight">
+                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-amber-700 font-bold">FREE DOWNLOAD</div>
+                                <div class="font-display text-[14px] font-bold">iOS &amp; Android</div>
                             </div>
                         </div>
                     </div>
@@ -5495,6 +6486,39 @@
                     if (!isOpen) item.setAttribute('data-open','');
                 });
             });
+        }
+
+        /* ---- Scroll-triggered reveal: .stagger-in + .fade-up ---- */
+        if ('IntersectionObserver' in window) {
+            var revealEls = document.querySelectorAll('[data-view="citizen-app"] .stagger-in, [data-view="citizen-app"] .fade-up');
+            var revealIO = new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if (e.isIntersecting) {
+                        e.target.classList.add('is-in');
+                        revealIO.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            revealEls.forEach(function(el){ revealIO.observe(el); });
+
+            /* Re-trigger when navigating back into the view */
+            window.addEventListener('hashchange', function(){
+                if (location.hash === '#/citizen-app') {
+                    setTimeout(function(){
+                        document.querySelectorAll('[data-view="citizen-app"] .stagger-in, [data-view="citizen-app"] .fade-up').forEach(function(el){
+                            var rect = el.getBoundingClientRect();
+                            if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+                                el.classList.add('is-in');
+                            } else {
+                                el.classList.remove('is-in');
+                                revealIO.observe(el);
+                            }
+                        });
+                    }, 80);
+                }
+            });
+        } else {
+            document.querySelectorAll('[data-view="citizen-app"] .stagger-in, [data-view="citizen-app"] .fade-up').forEach(function(el){ el.classList.add('is-in'); });
         }
     })();
     </script>
