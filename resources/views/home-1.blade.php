@@ -3145,7 +3145,7 @@
                     <div class="relative max-w-md mx-auto lg:mx-0">
                         <span class="absolute -inset-6 rounded-[40px] blur-3xl bg-navy-900/15 pointer-events-none"></span>
                         <div class="relative rounded-[28px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow">
-                            <img src="/images/citizen/officer-coffee.jpg" alt="Officer connected with the community" class="absolute inset-0 w-full h-full object-cover" />
+                            <img src="/images/citizen/officer-portrait.jpg" alt="Officer connected with the community" class="absolute inset-0 w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent"></div>
                             <span class="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1 text-[10.5px] font-mono uppercase tracking-[.18em] text-navy-900 ring-1 ring-white/60 shadow">
                                 <span class="beacon"></span>
