@@ -108,8 +108,6 @@
      HERO — DARK split (text + stats left, officer photo + floating cards right)
 ========================================================================--}}
 <section class="home-hero relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%), linear-gradient(160deg, #050d2a 0%, #0a1a4a 30%, #0d1f56 55%, #061229 100%);">
-    {{-- ambient particle/grid layer --}}
-    <div class="pointer-events-none absolute inset-0 opacity-[.025]" style="background-image: linear-gradient(rgba(180,210,255,.55) 1px, transparent 1px), linear-gradient(90deg, rgba(180,210,255,.55) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);"></div>
     <span class="pointer-events-none absolute -top-32 -left-20 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(56,189,248,.28) 0%, transparent 70%);"></span>
     <span class="pointer-events-none absolute bottom-0 -right-20 w-[560px] h-[560px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(99,102,241,.28) 0%, transparent 70%);"></span>
     <span class="pointer-events-none absolute top-1/3 right-1/3 w-[320px] h-[320px] rounded-full blur-3xl opacity-50" style="background: radial-gradient(circle, rgba(125,211,252,.18) 0%, transparent 70%);"></span>
@@ -361,130 +359,9 @@
 
 
 {{-- =======================================================================
-     FEATURES — Efficiency-Metrics card style: 4 big metric cards w/ AI hover
-========================================================================--}}
-<section id="features" class="relative py-24 lg:py-32 bg-white overflow-hidden">
-    {{-- subtle ambient AI grid background --}}
-    <div class="pointer-events-none absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(#0c1126 1px, transparent 1px), linear-gradient(90deg, #0c1126 1px, transparent 1px); background-size: 64px 64px; mask-image: radial-gradient(ellipse at center, #000 0%, transparent 75%);"></div>
-
-    <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <div class="max-w-3xl mx-auto text-center">
-            <p class="reveal inline-flex items-center gap-2 text-sm font-medium text-navy-900/70">
-                <span class="grid place-items-center w-5 h-5 rounded-full" style="background:#FB0606;">
-                    <svg class="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
-                </span>
-                Auxilio AI · Safety Metrics
-            </p>
-            <h2 class="reveal reveal-delay-1 mt-4 font-display font-extrabold text-4xl sm:text-5xl lg:text-[64px] leading-[1.02] tracking-tight text-navy-950">
-                Efficiency Metrics
-            </h2>
-            <p class="reveal reveal-delay-2 mt-5 text-lg text-navy-900/65 leading-relaxed">
-                At Auxilio, we harness real-time intelligence and verified responders to redefine personal safety.
-            </p>
-        </div>
-
-        @php
-            $metrics = [
-                [
-                    'big'    => '30s',
-                    'label'  => 'Avg Alert Time',
-                    'body'   => 'From incident to verified responder lock screen in under thirty seconds.',
-                    'bg'     => '#fdf6d8',  // pastel yellow
-                    'fg'     => '#FB0606',
-                    'glyph'  => 'M13 2L3 14h7l-1 8 10-12h-7l1-8z',
-                    'count'  => 'seconds',
-                    'target' => 30,
-                ],
-                [
-                    'big'    => '24/7',
-                    'label'  => 'Verified Agents',
-                    'body'   => 'Background-checked Super Agents on standby, ready to respond on your behalf.',
-                    'bg'     => '#eef1f6',  // pastel gray
-                    'fg'     => '#FB0606',
-                    'glyph'  => 'M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z',
-                    'count'  => 'schedule',
-                    'target' => 24,
-                ],
-                [
-                    'big'    => '1M+',
-                    'label'  => 'Crimes Mapped',
-                    'body'   => 'A live, AI-classified crime feed across 40+ states — refreshed as events come in.',
-                    'bg'     => '#e7eeff',  // pastel blue
-                    'fg'     => '#FB0606',
-                    'glyph'  => 'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z',
-                    'count'  => 'millions',
-                    'target' => 1000000,
-                ],
-                [
-                    'big'    => '100%',
-                    'label'  => 'Privacy by Design',
-                    'body'   => 'End-to-end encrypted location sharing — opt-in, revocable, and never sold.',
-                    'bg'     => '#f1f1f3',  // pastel neutral
-                    'fg'     => '#FB0606',
-                    'glyph'  => 'M6 10V8a6 6 0 1112 0v2M5 10h14v10H5z',
-                    'count'  => 'percent',
-                    'target' => 100,
-                ],
-            ];
-        @endphp
-
-        <div class="mt-14 stagger grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            @foreach ($metrics as $m)
-                <article class="metric-card group relative rounded-3xl p-7 lg:p-8 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-18px_rgba(12,17,38,.22)]" style="background:{{ $m['bg'] }}; min-height:380px;">
-
-                    {{-- AI sparkle — appears on hover --}}
-                    <span class="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true">
-                        <svg class="w-5 h-5 metric-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:{{ $m['fg'] }};">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>
-                        </svg>
-                    </span>
-
-                    {{-- soft hover glow --}}
-                    <span class="pointer-events-none absolute -inset-12 rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700" style="background:radial-gradient(circle, {{ $m['fg'] }}22 0%, transparent 60%);"></span>
-
-                    <div class="relative h-full flex flex-col">
-                        {{-- Big number — count-up on scroll into view --}}
-                        <p class="font-display font-extrabold text-6xl lg:text-7xl tracking-tight leading-none transition-transform duration-500 group-hover:scale-[1.04] origin-left" style="color:{{ $m['fg'] }};" data-counter data-counter-format="{{ $m['count'] }}" data-counter-to="{{ $m['target'] }}" data-counter-final="{{ $m['big'] }}">
-                            {{ $m['big'] }}
-                        </p>
-                        {{-- Label --}}
-                        <h3 class="mt-3 font-display font-bold text-lg lg:text-xl tracking-tight text-navy-950">
-                            {{ $m['label'] }}
-                        </h3>
-
-                        {{-- pulsing data line, AI feel --}}
-                        <div class="mt-4 relative h-0.5 w-12 rounded-full overflow-hidden" style="background:rgba(12,17,38,.10);">
-                            <span class="absolute inset-y-0 left-0 w-1/2 metric-pulse-line" style="background:{{ $m['fg'] }};"></span>
-                        </div>
-
-                        {{-- spacer --}}
-                        <div class="flex-1"></div>
-
-                        {{-- Description (bottom) --}}
-                        <p class="mt-6 text-sm text-navy-900/65 leading-relaxed">
-                            {{ $m['body'] }}
-                        </p>
-
-                        {{-- inline glyph that slides in on hover --}}
-                        <div class="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[.18em] opacity-60 group-hover:opacity-100 transition-all duration-500" style="color:{{ $m['fg'] }};">
-                            <svg class="w-4 h-4 transition-transform duration-500 group-hover:rotate-[12deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $m['glyph'] }}"/></svg>
-                            <span class="transition-transform duration-500 group-hover:translate-x-1">Learn more</span>
-                            <svg class="w-3.5 h-3.5 -ml-0.5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
-                        </div>
-                    </div>
-                </article>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-
-{{-- =======================================================================
      PEOPLE SAFETY AI — How Auxilio AI solves crime & emergencies
 ========================================================================--}}
 <section class="relative py-24 lg:py-32 bg-white overflow-hidden">
-    <div class="pointer-events-none absolute inset-0 ai-grid-bg opacity-60"></div>
-
     <div class="relative mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
         {{-- LEFT: copy --}}
@@ -643,7 +520,6 @@
      IMPACT METRICS — big numbers on dark
 ========================================================================--}}
 <section id="walkthrough" class="relative py-24 lg:py-28 overflow-hidden" style="background:#0c1126;">
-    <div class="pointer-events-none absolute inset-0 opacity-30" style="background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 80px 80px;"></div>
     <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
         <div class="max-w-3xl mx-auto text-center">
             <p class="reveal text-xs font-semibold uppercase tracking-[.2em]" style="color:#f4c441;">Impact metrics</p>
