@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Auxilio User — Real-time crime maps, registered sex-offender alerts, and one-tap emergency response. Designed for the safety of families, accessible for citizens." />
-    <meta property="og:title" content="Auxilio User — Your Safety, Your Control" />
+    <meta name="description" content="Auxilio APP LLC — Real-time crime maps, registered sex-offender alerts, and one-tap emergency response. Designed for the safety of families, accessible for citizens." />
+    <meta property="og:title" content="Auxilio APP LLC — Your Safety, Your Control" />
     <meta property="og:description" content="Designed for safety of the families, making it accessible for citizens." />
-    <title>Auxilio User — Your Safety, Your Control</title>
+    <title>Auxilio APP LLC — Your Safety, Your Control</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -217,11 +217,11 @@
                     </div>
                 </div>
 
-                {{-- SOS circle badge (kept red for urgency contrast) --}}
+                {{-- ALERT circle badge --}}
                 <div class="hidden md:flex absolute -left-7 top-1/3 items-center justify-center w-20 h-20 rounded-full shadow-2xl ring-4 ring-white/15 z-10" style="background:#FB0606;">
                     <span class="absolute inset-0 rounded-full animate-ping opacity-50" style="background:#FB0606;"></span>
                     <span class="absolute inset-2 rounded-full animate-ping opacity-30" style="background:#FB0606; animation-delay:.6s;"></span>
-                    <span class="relative font-display font-extrabold text-white text-sm tracking-wider">SOS</span>
+                    <span class="relative font-display font-extrabold text-white text-[11px] tracking-[.12em]">ALERT</span>
                 </div>
 
                 {{-- RESPONDER card — middle right (lower) --}}
@@ -3666,7 +3666,7 @@
             <div class="mt-12 grid lg:grid-cols-12 gap-10">
                 <div class="reveal reveal-left lg:col-span-5 space-y-4">
                     @foreach ([
-                        ['i'=>'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z','t'=>'Email','v'=>'support@auxilionetwork.com','h'=>'mailto:support@auxilionetwork.com'],
+                        ['i'=>'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z','t'=>'Email','v'=>'support@auxilio.app','h'=>'mailto:support@auxilio.app'],
                         ['i'=>'M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z','t'=>'Phone','v'=>'(704) 555-0127','h'=>'tel:+17045550127'],
                         ['i'=>'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z','t'=>'Headquarters','v'=>'1 Mission Way, San Francisco, CA 94103','h'=>'#'],
                     ] as $info)
@@ -3955,7 +3955,7 @@
                 ['t'=>'11. Limitation of liability','b'=>'To the maximum extent permitted by law, Auxilio\'s aggregate liability for any claim related to the service is limited to the greater of (a) what you paid us in the last 12 months or (b) $100.'],
                 ['t'=>'12. Changes to these Terms','b'=>'If we change anything material, we\'ll notify you in-app at least 30 days in advance. Continuing to use Auxilio after the change means you accept the updated Terms.'],
                 ['t'=>'13. Governing law','b'=>'These Terms are governed by the laws of the State of New Jersey, USA, without regard to its conflict-of-laws rules. Disputes go to the state or federal courts located in Essex County, NJ.'],
-                ['t'=>'14. Contact','b'=>'Questions about these Terms: <a class="text-brand-600 hover:underline" href="mailto:legal@auxilionetwork.com">legal@auxilionetwork.com</a>.'],
+                ['t'=>'14. Contact','b'=>'Questions about these Terms: <a class="text-brand-600 hover:underline" href="mailto:legal@auxilio.app">legal@auxilio.app</a>.'],
             ] as $sec)
                 <div>
                     <h2 class="font-display font-bold text-2xl text-navy-900">{{ $sec['t'] }}</h2>
@@ -4008,7 +4008,7 @@
                 ['t'=>'6. Your controls','b'=>'In Settings → Account you can revoke location sharing in one tap, delete your profile, export your data, or audit who has accessed your case history. GDPR, CCPA, and HIPAA-aligned by default.'],
                 ['t'=>'7. Children','b'=>'Auxilio is not directed at children under 13. Parents may add minors to their family circle; the minor\'s account inherits parental privacy controls.'],
                 ['t'=>'8. Changes','b'=>'If we change anything material, we\'ll notify you in-app at least 30 days in advance and require fresh consent for any new data use.'],
-                ['t'=>'9. Contact','b'=>'Questions, requests, or concerns: <a class="text-brand-600 hover:underline" href="mailto:privacy@auxilionetwork.com">privacy@auxilionetwork.com</a>. We reply within one business day.'],
+                ['t'=>'9. Contact','b'=>'Questions, requests, or concerns: <a class="text-brand-600 hover:underline" href="mailto:privacy@auxilio.app">privacy@auxilio.app</a>. We reply within one business day.'],
             ] as $sec)
                 <div>
                     <h2 class="font-display font-bold text-2xl text-navy-900">{{ $sec['t'] }}</h2>
@@ -4019,7 +4019,7 @@
             <div class="rounded-2xl border border-ink-100 bg-ink-50/40 p-6 mt-12">
                 <p class="text-sm text-navy-700">
                     Have a privacy concern? Use the in-app <strong>Auxilio AI</strong> assistant (top of every page) or email
-                    <a class="text-brand-600 hover:underline" href="mailto:privacy@auxilionetwork.com">privacy@auxilionetwork.com</a>.
+                    <a class="text-brand-600 hover:underline" href="mailto:privacy@auxilio.app">privacy@auxilio.app</a>.
                 </p>
             </div>
         </div>
@@ -4042,7 +4042,7 @@
                     <img src="/images/auxilio-logo-white.png" alt="Auxilio" class="h-6 w-auto" />
                 </a>
                 <p class="mt-5 max-w-md text-navy-300/80 leading-relaxed">
-                    Real-time alerts, one-tap SOS, verified Super Agents, and live case tracking — Auxilio User is a personal safety companion built for the people you love.
+                    Real-time alerts, one-tap SOS, verified Super Agents, and live case tracking — Auxilio APP LLC is a personal safety companion built for the people you love.
                 </p>
             </div>
 
@@ -4077,7 +4077,8 @@
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg>
                             Terms of Service
                         </a></li>
-                        <li><a href="mailto:support@auxilionetwork.com" class="hover:text-white transition">support@auxilionetwork.com</a></li>
+                        <li><a href="mailto:info@auxilio.app" class="hover:text-white transition">info@auxilio.app</a></li>
+                        <li><a href="mailto:support@auxilio.app" class="hover:text-white transition">support@auxilio.app</a></li>
                         <li class="text-navy-400">1 Mission Way<br/>San Francisco, CA 94103</li>
                     </ul>
                 </div>
@@ -4085,7 +4086,7 @@
         </div>
 
         <div class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-navy-400">
-            <p>&copy; {{ date('Y') }} Auxilio User. All rights reserved.</p>
+            <p>&copy; 2026 Auxilio APP LLC. All rights reserved.</p>
             <div class="flex items-center gap-5">
                 <a data-route href="#/privacy" class="hover:text-white transition">Privacy</a>
                 <a data-route href="#/terms"   class="hover:text-white transition">Terms</a>
