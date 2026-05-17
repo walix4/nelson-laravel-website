@@ -239,42 +239,61 @@
 
         <div class="flex items-center gap-14 badge-marquee whitespace-nowrap">
             @php
-                // Stylized US police agency badges — circular shield with department initials.
-                // Real PD logos are licensed; these are designed insignia placeholders.
+                // NJ partner departments. To use real licensed logos, drop PNGs in /public/images/pd-logos/
+                // named e.g. leonia-pd.png and set the 'img' key on the entry.
                 $depts = [
-                    ['name'=>'NYPD',       'sub'=>'New York City',  'color'=>'#1a3a8a'],
-                    ['name'=>'LAPD',       'sub'=>'Los Angeles',    'color'=>'#0f3d6e'],
-                    ['name'=>'CPD',        'sub'=>'Chicago',        'color'=>'#1e3a8a'],
-                    ['name'=>'HPD',        'sub'=>'Houston',        'color'=>'#1a2548'],
-                    ['name'=>'PPD',        'sub'=>'Philadelphia',   'color'=>'#0c4a6e'],
-                    ['name'=>'PhxPD',      'sub'=>'Phoenix',        'color'=>'#7c2d12'],
-                    ['name'=>'SAPD',       'sub'=>'San Antonio',    'color'=>'#14532d'],
-                    ['name'=>'SDPD',       'sub'=>'San Diego',      'color'=>'#1e3a8a'],
-                    ['name'=>'DPD',        'sub'=>'Dallas',         'color'=>'#1a2548'],
-                    ['name'=>'BPD',        'sub'=>'Boston',         'color'=>'#0c4a6e'],
-                    ['name'=>'NPD',        'sub'=>'Newark',         'color'=>'#FB0606'],
-                    ['name'=>'NJSP',       'sub'=>'NJ State Police','color'=>'#1a2548'],
-                    ['name'=>'FBI',        'sub'=>'Federal Bureau', 'color'=>'#0c1126'],
-                    ['name'=>'USMS',       'sub'=>'US Marshals',    'color'=>'#1a3a8a'],
-                    ['name'=>'CHP',        'sub'=>'California HP',  'color'=>'#7c2d12'],
+                    ['name'=>'LPD',  'sub'=>'Leonia, NJ',    'color'=>'#d97706', 'shape'=>'shield'],
+                    ['name'=>'TPD',  'sub'=>'Teaneck, NJ',   'color'=>'#0c1126', 'shape'=>'oval'],
+                    ['name'=>'LPD',  'sub'=>'Linden, NJ',    'color'=>'#1d4ed8', 'shape'=>'round'],
+                    ['name'=>'BPD',  'sub'=>'Bogota, NJ',    'color'=>'#15803d', 'shape'=>'pentagon'],
+                    ['name'=>'PPD',  'sub'=>'Paterson, NJ',  'color'=>'#ea580c', 'shape'=>'star'],
+                    ['name'=>'FLPD', 'sub'=>'Fort Lee, NJ',  'color'=>'#1e40af', 'shape'=>'shield'],
+                    ['name'=>'KPD',  'sub'=>'Kearny, NJ',    'color'=>'#166534', 'shape'=>'round'],
                 ];
-                $depts = array_merge($depts, $depts);
+                $depts = array_merge($depts, $depts, $depts);  // 3x for seamless marquee loop
             @endphp
             @foreach ($depts as $d)
-                <div class="inline-flex items-center gap-3 shrink-0 grayscale hover:grayscale-0 transition opacity-80 hover:opacity-100">
-                    {{-- badge SVG: police shield/star --}}
-                    <span class="relative grid place-items-center w-12 h-12 shrink-0">
-                        <svg viewBox="0 0 64 64" class="absolute inset-0 w-full h-full">
-                            {{-- outer star (7-point) --}}
-                            <path fill="{{ $d['color'] }}" d="M32 2 L37 14 L50 12 L46 25 L58 30 L46 37 L50 50 L37 48 L32 62 L27 48 L14 50 L18 37 L6 30 L18 25 L14 12 L27 14 Z" stroke="#fff" stroke-width="1.4"/>
-                            {{-- inner shield --}}
-                            <path fill="#fff" d="M32 16 L44 21 V32 C44 39 38 44 32 46 C26 44 20 39 20 32 V21 Z"/>
-                            {{-- inner mark --}}
-                            <path fill="{{ $d['color'] }}" d="M32 22 L40 26 V32 C40 36 36 40 32 41 C28 40 24 36 24 32 V26 Z"/>
-                            {{-- center star --}}
-                            <path fill="#fff" d="M32 27 L33.2 30 L36.4 30 L33.8 32 L34.8 35 L32 33.2 L29.2 35 L30.2 32 L27.6 30 L30.8 30 Z"/>
-                        </svg>
-                    </span>
+                <div class="inline-flex items-center gap-3 shrink-0 transition opacity-90 hover:opacity-100">
+                    @if(!empty($d['img']))
+                        <img src="{{ $d['img'] }}" alt="{{ $d['sub'] }} badge" class="w-12 h-12 object-contain shrink-0" />
+                    @else
+                        <span class="relative grid place-items-center w-12 h-12 shrink-0">
+                            <svg viewBox="0 0 64 64" class="absolute inset-0 w-full h-full">
+                                @php $c = $d['color']; @endphp
+                                @switch($d['shape'] ?? 'shield')
+                                    @case('round')
+                                        <circle cx="32" cy="32" r="29" fill="{{ $c }}" stroke="#fff" stroke-width="1.6"/>
+                                        <circle cx="32" cy="32" r="22" fill="none" stroke="#fff" stroke-width="1.6"/>
+                                        <path fill="#fff" d="M32 18 L34 26 L42 26 L35.5 31 L38 39 L32 34 L26 39 L28.5 31 L22 26 L30 26 Z"/>
+                                        @break
+                                    @case('oval')
+                                        <ellipse cx="32" cy="32" rx="27" ry="30" fill="{{ $c }}" stroke="#fff" stroke-width="1.6"/>
+                                        <path fill="#fff" d="M32 14 L42 20 V34 C42 41 37 46 32 48 C27 46 22 41 22 34 V20 Z" opacity=".95"/>
+                                        <path fill="{{ $c }}" d="M32 19 L38 22 V33 C38 38 35 42 32 43 C29 42 26 38 26 33 V22 Z"/>
+                                        <path fill="#fff" d="M32 25 L33.3 28.5 L37 28.5 L34 30.8 L35 34.5 L32 32.4 L29 34.5 L30 30.8 L27 28.5 L30.7 28.5 Z"/>
+                                        @break
+                                    @case('pentagon')
+                                        <path fill="{{ $c }}" d="M32 3 L60 18 V36 C60 50 47 60 32 62 C17 60 4 50 4 36 V18 Z" stroke="#fff" stroke-width="1.4"/>
+                                        <path fill="#fff" d="M32 16 L46 24 V35 C46 44 39 49 32 51 C25 49 18 44 18 35 V24 Z" opacity=".95"/>
+                                        <path fill="{{ $c }}" d="M32 22 L41 27 V34 C41 40 36 43 32 44 C28 43 23 40 23 34 V27 Z"/>
+                                        @break
+                                    @case('star')
+                                        {{-- 7-point star with bold ring --}}
+                                        <path fill="{{ $c }}" d="M32 2 L37 14 L50 12 L46 25 L58 30 L46 37 L50 50 L37 48 L32 62 L27 48 L14 50 L18 37 L6 30 L18 25 L14 12 L27 14 Z" stroke="#fff" stroke-width="1.4"/>
+                                        <circle cx="32" cy="32" r="13" fill="#fff" opacity=".95"/>
+                                        <circle cx="32" cy="32" r="9" fill="{{ $c }}"/>
+                                        <path fill="#fff" d="M32 25 L33.3 28.5 L37 28.5 L34 30.8 L35 34.5 L32 32.4 L29 34.5 L30 30.8 L27 28.5 L30.7 28.5 Z"/>
+                                        @break
+                                    @default
+                                        {{-- shield --}}
+                                        <path fill="{{ $c }}" d="M32 4 L56 12 V34 C56 47 46 56 32 60 C18 56 8 47 8 34 V12 Z" stroke="#fff" stroke-width="1.4"/>
+                                        <path fill="#fff" d="M32 14 L46 19 V32 C46 41 40 47 32 50 C24 47 18 41 18 32 V19 Z" opacity=".95"/>
+                                        <path fill="{{ $c }}" d="M32 20 L41 24 V32 C41 38 37 42 32 44 C27 42 23 38 23 32 V24 Z"/>
+                                        <path fill="#fff" d="M32 26 L33.3 29.5 L37 29.5 L34 31.8 L35 35.5 L32 33.4 L29 35.5 L30 31.8 L27 29.5 L30.7 29.5 Z"/>
+                                @endswitch
+                            </svg>
+                        </span>
+                    @endif
                     <div class="flex flex-col">
                         <span class="font-display font-extrabold text-lg tracking-tight leading-none" style="color:{{ $d['color'] }};">{{ $d['name'] }}</span>
                         <span class="mt-1 text-[10px] uppercase tracking-[.18em] font-semibold text-ink-500">{{ $d['sub'] }}</span>
