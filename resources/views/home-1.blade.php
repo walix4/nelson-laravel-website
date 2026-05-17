@@ -50,7 +50,8 @@
         </div>
 
         <ul class="hidden md:flex items-center gap-6 lg:gap-7 text-sm font-medium text-white/90 shrink-0 whitespace-nowrap">
-            <li><a data-route href="#/"                 class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
+            <li><a data-route href="#/"                 class="nav-link hover:text-white transition">Home</a></li>
+            <li><a data-route href="#/auxilio-ai"        class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
                 Auxilio AI
             </a></li>
@@ -73,7 +74,8 @@
 
     <div id="mobile-menu" data-menu-panel class="md:hidden absolute inset-x-4 top-[72px] rounded-md bg-white border border-ink-100 shadow-xl p-6">
         <ul class="flex flex-col gap-4 text-base font-medium text-navy-800">
-            <li><a data-route href="#/" class="inline-flex items-center gap-1.5 text-brand-600">
+            <li><a data-route href="#/">Home</a></li>
+            <li><a data-route href="#/auxilio-ai" class="inline-flex items-center gap-1.5 text-brand-600">
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
                 Auxilio AI
             </a></li>
@@ -238,13 +240,20 @@
                 // NJ partner departments. To use real licensed logos, drop PNGs in /public/images/pd-logos/
                 // named e.g. leonia-pd.png and set the 'img' key on the entry.
                 $depts = [
-                    ['name'=>'LPD',  'sub'=>'Leonia, NJ',    'color'=>'#d97706', 'img'=>'/images/pd-logos/leonia-pd.png'],
-                    ['name'=>'TPD',  'sub'=>'Teaneck, NJ',   'color'=>'#0c1126', 'img'=>'/images/pd-logos/teaneck-pd.png'],
-                    ['name'=>'LPD',  'sub'=>'Linden, NJ',    'color'=>'#1d4ed8', 'img'=>'/images/pd-logos/linden-pd.png'],
-                    ['name'=>'BPD',  'sub'=>'Bogota, NJ',    'color'=>'#15803d', 'shape'=>'pentagon'],
-                    ['name'=>'PPD',  'sub'=>'Paterson, NJ',  'color'=>'#ea580c', 'img'=>'/images/pd-logos/paterson-pd.png'],
-                    ['name'=>'FLPD', 'sub'=>'Fort Lee, NJ',  'color'=>'#1e40af', 'img'=>'/images/pd-logos/fort-lee-pd.png'],
-                    ['name'=>'KPD',  'sub'=>'Kearny, NJ',    'color'=>'#166534', 'img'=>'/images/pd-logos/kearny-pd.png'],
+                    ['name'=>'Hoboken PD',      'sub'=>'Hoboken, NJ',      'color'=>'#1a3a8a', 'img'=>'/images/pd-logos/hoboken-pd.png'],
+                    ['name'=>'Bayonne PD',      'sub'=>'Bayonne, NJ',      'color'=>'#c8202f', 'img'=>'/images/pd-logos/bayonne-pd.png'],
+                    ['name'=>'Leonia PD',       'sub'=>'Leonia, NJ',       'color'=>'#d97706', 'img'=>'/images/pd-logos/leonia-pd.png'],
+                    ['name'=>'Bogota PD',       'sub'=>'Bogota, NJ',       'color'=>'#0c1126', 'img'=>'/images/pd-logos/bogota-pd.png'],
+                    ['name'=>'Hillside PD',     'sub'=>'Hillside, NJ',     'color'=>'#15803d', 'img'=>'/images/pd-logos/hillside-pd.png'],
+                    ['name'=>'Kearny PD',       'sub'=>'Kearny, NJ',       'color'=>'#166534', 'img'=>'/images/pd-logos/kearny-pd.png'],
+                    ['name'=>'Paterson PD',     'sub'=>'Paterson, NJ',     'color'=>'#ea580c', 'img'=>'/images/pd-logos/paterson-pd.png'],
+                    ['name'=>'Linden PD',       'sub'=>'Linden, NJ',       'color'=>'#1d4ed8', 'img'=>'/images/pd-logos/linden-pd.png'],
+                    ['name'=>'North Bergen PD', 'sub'=>'North Bergen, NJ', 'color'=>'#854d0e', 'img'=>'/images/pd-logos/north-bergen-pd.png'],
+                    ['name'=>'Hackensack PD',   'sub'=>'Hackensack, NJ',   'color'=>'#ea580c', 'img'=>'/images/pd-logos/hackensack-pd.png'],
+                    ['name'=>'Teaneck PD',      'sub'=>'Teaneck, NJ',      'color'=>'#0c1126', 'img'=>'/images/pd-logos/teaneck-pd.png'],
+                    ['name'=>'Union City PD',   'sub'=>'Union City, NJ',   'color'=>'#854d0e', 'img'=>'/images/pd-logos/union-city-pd.png'],
+                    ['name'=>'Englewood PD',    'sub'=>'Englewood, NJ',    'color'=>'#1e40af', 'img'=>'/images/pd-logos/englewood-pd.png'],
+                    ['name'=>'Fort Lee PD',     'sub'=>'Fort Lee, NJ',     'color'=>'#1e40af', 'img'=>'/images/pd-logos/fort-lee-pd.png'],
                 ];
                 $depts = array_merge($depts, $depts, $depts);  // 3x for seamless marquee loop
             @endphp
