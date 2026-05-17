@@ -50,7 +50,10 @@
         </div>
 
         <ul class="hidden md:flex items-center gap-6 lg:gap-7 text-sm font-medium text-white/90 shrink-0 whitespace-nowrap">
-            <li><a data-route href="#/"                 class="nav-link hover:text-white transition">Home</a></li>
+            <li><a data-route href="#/"                 class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
+                Auxilio AI
+            </a></li>
             <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
             <li><a data-route href="#/sex-offender-map" class="nav-link hover:text-white transition">Sex Offender Map</a></li>
             <li><a data-route href="#/how-it-works"     class="nav-link hover:text-white transition">How it works</a></li>
@@ -58,11 +61,6 @@
             <li><a data-route href="#/citizen-app"      class="nav-link hover:text-white transition">Citizen App</a></li>
             <li><a data-route href="#/about"            class="nav-link hover:text-white transition">About us</a></li>
             <li><a data-route href="#/contact"          class="nav-link hover:text-white transition">Contact us</a></li>
-            <li><a data-route href="#/privacy"          class="nav-link hover:text-white transition">Privacy</a></li>
-            <li><a data-route href="#/auxilio-ai"        class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
-                Auxilio AI
-            </a></li>
         </ul>
 
         <div class="flex-1 flex items-center justify-end">
@@ -75,7 +73,10 @@
 
     <div id="mobile-menu" data-menu-panel class="md:hidden absolute inset-x-4 top-[72px] rounded-md bg-white border border-ink-100 shadow-xl p-6">
         <ul class="flex flex-col gap-4 text-base font-medium text-navy-800">
-            <li><a data-route href="#/">Home</a></li>
+            <li><a data-route href="#/" class="inline-flex items-center gap-1.5 text-brand-600">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
+                Auxilio AI
+            </a></li>
             <li><a data-route href="#/crime-map">Crime Map</a></li>
             <li><a data-route href="#/sex-offender-map">Sex Offender Map</a></li>
             <li><a data-route href="#/how-it-works">How it works</a></li>
@@ -83,11 +84,6 @@
             <li><a data-route href="#/citizen-app">Citizen App</a></li>
             <li><a data-route href="#/about">About us</a></li>
             <li><a data-route href="#/contact">Contact us</a></li>
-            <li><a data-route href="#/privacy">Privacy</a></li>
-            <li><a data-route href="#/auxilio-ai" class="inline-flex items-center gap-1.5 text-brand-600">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg>
-                Auxilio AI
-            </a></li>
         </ul>
     </div>
 </header>
@@ -3882,6 +3878,63 @@
 </div>
 
 {{-- ============================================================
+     TERMS OF SERVICE VIEW
+============================================================--}}
+<div data-view="terms" class="hidden">
+    <section class="relative overflow-hidden hero-bg">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute -top-32 right-1/4 w-[520px] h-[520px] rounded-full bg-navy-100/60 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-brand-100/40 blur-3xl"></div>
+        </div>
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
+            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">Terms of Service</span>
+            </div>
+            <h1 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+                Terms of <span class="text-brand-600">Service.</span>
+            </h1>
+            <p class="reveal reveal-delay-2 mt-4 text-lg text-navy-700/80 max-w-2xl">
+                Plain-English rules of the road for using Auxilio. Read them once — they apply every time you open the app.
+            </p>
+            <p class="reveal reveal-delay-3 mt-2 text-sm text-ink-500 font-mono">Last updated: May 2026</p>
+        </div>
+    </section>
+
+    <section class="relative bg-white py-16 lg:py-20">
+        <div class="mx-auto max-w-3xl px-5 sm:px-8 space-y-10 text-navy-800 leading-relaxed">
+            @foreach ([
+                ['t'=>'1. Acceptance','b'=>'By creating an Auxilio account or using the apps, you agree to these Terms. If you do not agree, please do not use the service.'],
+                ['t'=>'2. Who can use Auxilio','b'=>'You must be at least 13 to create an account. Minors between 13 and 18 must be added to a family circle by a parent or guardian, who accepts these Terms on the minor\'s behalf.'],
+                ['t'=>'3. Your account','b'=>'You\'re responsible for keeping your phone, PIN, and account credentials secure. Notify us immediately if you suspect unauthorized access. Do not share your account.'],
+                ['t'=>'4. Emergency-use disclaimer','b'=>'Auxilio is a coordination layer — not a replacement for 911. In a life-threatening emergency, always call 911 (or your local equivalent) first. Auxilio aims to route help quickly but cannot guarantee specific response times or outcomes.'],
+                ['t'=>'5. Acceptable use','b'=>'Do not use Auxilio to harass, stalk, defraud, or harm anyone; to send false Alerts or spoof location; to scrape, reverse-engineer, or interfere with the service; or to upload anything illegal, threatening, or unauthorized for the platform.'],
+                ['t'=>'6. Verified responders','b'=>'Super Agents and partnered officers are background-checked third parties acting in their own capacity. Auxilio facilitates the connection but is not an employer of, or insurer for, any responder.'],
+                ['t'=>'7. Subscriptions & billing','b'=>'Core citizen features are free forever. Optional premium plans bill monthly via your app-store account; you can cancel any time in Settings → Subscription, effective at the end of the current period.'],
+                ['t'=>'8. Your content','b'=>'Anything you upload (photos, notes, audio) stays yours. You grant Auxilio a limited license to store, transmit, and route it solely to operate the service for you and your authorized responders.'],
+                ['t'=>'9. Termination','b'=>'You can close your account anytime in Settings → Account. We may suspend or terminate accounts that violate these Terms or applicable law, with notice where reasonable.'],
+                ['t'=>'10. Disclaimer of warranties','b'=>'Auxilio is provided "as is." We work hard to keep it fast, reliable, and accurate, but we don\'t warrant that it will be uninterrupted or error-free, or that incident data is exhaustive or current to the second.'],
+                ['t'=>'11. Limitation of liability','b'=>'To the maximum extent permitted by law, Auxilio\'s aggregate liability for any claim related to the service is limited to the greater of (a) what you paid us in the last 12 months or (b) $100.'],
+                ['t'=>'12. Changes to these Terms','b'=>'If we change anything material, we\'ll notify you in-app at least 30 days in advance. Continuing to use Auxilio after the change means you accept the updated Terms.'],
+                ['t'=>'13. Governing law','b'=>'These Terms are governed by the laws of the State of New Jersey, USA, without regard to its conflict-of-laws rules. Disputes go to the state or federal courts located in Essex County, NJ.'],
+                ['t'=>'14. Contact','b'=>'Questions about these Terms: <a class="text-brand-600 hover:underline" href="mailto:legal@auxilionetwork.com">legal@auxilionetwork.com</a>.'],
+            ] as $sec)
+                <div>
+                    <h2 class="font-display font-bold text-2xl text-navy-900">{{ $sec['t'] }}</h2>
+                    <p class="mt-3 text-navy-700/80">{!! $sec['b'] !!}</p>
+                </div>
+            @endforeach
+
+            <div class="rounded-2xl border border-ink-100 bg-ink-50/40 p-6 mt-12">
+                <p class="text-sm text-navy-700">
+                    Looking for our <a class="text-brand-600 hover:underline" data-route href="#/privacy">Privacy Policy</a>?
+                    Or open the <strong>Auxilio AI</strong> assistant (bottom-right) and ask anything.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+{{-- ============================================================
      PRIVACY POLICY VIEW
 ============================================================--}}
 <div data-view="privacy" class="hidden">
@@ -3958,26 +4011,33 @@
                 <div>
                     <p class="text-xs font-semibold uppercase tracking-[.18em] text-white">Product</p>
                     <ul class="mt-4 space-y-3 text-sm">
-                        <li><a href="#features"    class="hover:text-white transition">Features</a></li>
-                        <li><a href="#walkthrough" class="hover:text-white transition">Walkthrough</a></li>
-                        <li><a href="#how"         class="hover:text-white transition">Report flow</a></li>
-                        <li><a href="#dispatch"    class="hover:text-white transition">Live dispatch</a></li>
+                        <li><a data-route href="#/auxilio-ai" class="hover:text-white transition">Auxilio AI</a></li>
+                        <li><a data-route href="#/citizen-app" class="hover:text-white transition">Citizen App</a></li>
+                        <li><a data-route href="#/agent-app"  class="hover:text-white transition">Agent App</a></li>
+                        <li><a data-route href="#/crime-map"  class="hover:text-white transition">Crime Map</a></li>
                         <li><a href="#contact"     class="hover:text-white transition">Download</a></li>
                     </ul>
                 </div>
                 <div>
                     <p class="text-xs font-semibold uppercase tracking-[.18em] text-white">Company</p>
                     <ul class="mt-4 space-y-3 text-sm">
-                        <li><a href="#voices" class="hover:text-white transition">Voices</a></li>
-                        <li><a href="#blog"   class="hover:text-white transition">Blog</a></li>
+                        <li><a data-route href="#/about"   class="hover:text-white transition">About us</a></li>
+                        <li><a data-route href="#/how-it-works" class="hover:text-white transition">How it works</a></li>
+                        <li><a data-route href="#/contact" class="hover:text-white transition">Contact us</a></li>
                         <li><a href="#"       class="hover:text-white transition">Careers</a></li>
-                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
                     </ul>
                 </div>
                 <div>
-                    <p class="text-xs font-semibold uppercase tracking-[.18em] text-white">Reach us</p>
+                    <p class="text-xs font-semibold uppercase tracking-[.18em] text-white">Legal</p>
                     <ul class="mt-4 space-y-3 text-sm">
-                        <li><a href="tel:+17045550127" class="hover:text-white transition">(704) 555-0127</a></li>
+                        <li><a data-route href="#/privacy" class="inline-flex items-center gap-2 font-semibold text-white hover:text-brand-300 transition">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V7l8-4z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l2 2 3.5-4"/></svg>
+                            Privacy Policy
+                        </a></li>
+                        <li><a data-route href="#/terms" class="inline-flex items-center gap-2 font-semibold text-white hover:text-brand-300 transition">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6M7 3h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z"/></svg>
+                            Terms of Service
+                        </a></li>
                         <li><a href="mailto:support@auxilionetwork.com" class="hover:text-white transition">support@auxilionetwork.com</a></li>
                         <li class="text-navy-400">1 Mission Way<br/>San Francisco, CA 94103</li>
                     </ul>
@@ -3988,9 +4048,9 @@
         <div class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-navy-400">
             <p>&copy; {{ date('Y') }} Auxilio User. All rights reserved.</p>
             <div class="flex items-center gap-5">
-                <a href="#" class="hover:text-white transition">Privacy</a>
-                <a href="#" class="hover:text-white transition">Terms</a>
-                <a href="#" class="hover:text-white transition">Licenses</a>
+                <a data-route href="#/privacy" class="hover:text-white transition">Privacy</a>
+                <a data-route href="#/terms"   class="hover:text-white transition">Terms</a>
+                <a data-route href="#/auxilio-ai" class="hover:text-white transition">Auxilio AI</a>
             </div>
         </div>
     </div>
@@ -4212,7 +4272,7 @@
 
     function getRoute() {
         var h = (window.location.hash || '').replace(/^#\//, '');
-        var allowed = ['crime-map','sex-offender-map','how-it-works','agent-app','citizen-app','about','contact','privacy','auxilio-ai'];
+        var allowed = ['crime-map','sex-offender-map','how-it-works','agent-app','citizen-app','about','contact','privacy','terms','auxilio-ai'];
         if (allowed.indexOf(h) !== -1) return h;
         return 'home';
     }
