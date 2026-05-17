@@ -4535,7 +4535,8 @@
 
 {{-- Chat dialog --}}
 <div id="chat-dialog" role="dialog" aria-modal="false" aria-labelledby="chat-title"
-     class="fixed bottom-24 right-6 z-[9998] w-[min(400px,calc(100vw-2rem))] h-[min(580px,calc(100vh-8rem))] rounded-2xl bg-white border border-ink-100 shadow-[0_30px_60px_-15px_rgba(12,17,38,.35)] overflow-hidden flex flex-col">
+     class="fixed bottom-24 right-6 z-[9998] rounded-2xl bg-white border border-ink-100 shadow-[0_30px_60px_-15px_rgba(12,17,38,.35)] overflow-hidden flex flex-col"
+     style="width: min(340px, calc(100vw - 2rem)); height: min(480px, calc(100vh - 8rem));">
 
     {{-- Navy header bar with expand + collapse icons --}}
     <header class="flex items-center justify-between px-4 py-3" style="background:#1e3a8a;">
