@@ -242,13 +242,13 @@
                 // NJ partner departments. To use real licensed logos, drop PNGs in /public/images/pd-logos/
                 // named e.g. leonia-pd.png and set the 'img' key on the entry.
                 $depts = [
-                    ['name'=>'LPD',  'sub'=>'Leonia, NJ',    'color'=>'#d97706', 'shape'=>'shield'],
-                    ['name'=>'TPD',  'sub'=>'Teaneck, NJ',   'color'=>'#0c1126', 'shape'=>'oval'],
-                    ['name'=>'LPD',  'sub'=>'Linden, NJ',    'color'=>'#1d4ed8', 'shape'=>'round'],
+                    ['name'=>'LPD',  'sub'=>'Leonia, NJ',    'color'=>'#d97706', 'img'=>'/images/pd-logos/leonia-pd.png'],
+                    ['name'=>'TPD',  'sub'=>'Teaneck, NJ',   'color'=>'#0c1126', 'img'=>'/images/pd-logos/teaneck-pd.png'],
+                    ['name'=>'LPD',  'sub'=>'Linden, NJ',    'color'=>'#1d4ed8', 'img'=>'/images/pd-logos/linden-pd.png'],
                     ['name'=>'BPD',  'sub'=>'Bogota, NJ',    'color'=>'#15803d', 'shape'=>'pentagon'],
-                    ['name'=>'PPD',  'sub'=>'Paterson, NJ',  'color'=>'#ea580c', 'shape'=>'star'],
-                    ['name'=>'FLPD', 'sub'=>'Fort Lee, NJ',  'color'=>'#1e40af', 'shape'=>'shield'],
-                    ['name'=>'KPD',  'sub'=>'Kearny, NJ',    'color'=>'#166534', 'shape'=>'round'],
+                    ['name'=>'PPD',  'sub'=>'Paterson, NJ',  'color'=>'#ea580c', 'img'=>'/images/pd-logos/paterson-pd.png'],
+                    ['name'=>'FLPD', 'sub'=>'Fort Lee, NJ',  'color'=>'#1e40af', 'img'=>'/images/pd-logos/fort-lee-pd.png'],
+                    ['name'=>'KPD',  'sub'=>'Kearny, NJ',    'color'=>'#166534', 'img'=>'/images/pd-logos/kearny-pd.png'],
                 ];
                 $depts = array_merge($depts, $depts, $depts);  // 3x for seamless marquee loop
             @endphp
