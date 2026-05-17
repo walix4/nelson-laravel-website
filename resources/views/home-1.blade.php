@@ -4556,13 +4556,13 @@
     </div>
 
     {{-- Messages --}}
-    <div id="chat-thread" class="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-white relative">
-        <div id="chat-empty" class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-            <div class="grid place-items-center w-14 h-14 rounded-full" style="background:#dbeafe;">
-                <svg class="w-7 h-7" style="color:#1e3a8a;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
+    <div id="chat-thread" class="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-white">
+        <div id="chat-empty" class="flex flex-col items-center justify-center text-center px-6 min-h-full" style="min-height: 280px; padding-block: 32px;">
+            <div class="grid place-items-center w-16 h-16 rounded-full mb-5" style="background:#dbeafe;">
+                <svg class="w-8 h-8" style="color:#1e3a8a;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
             </div>
-            <p class="mt-3 font-semibold text-navy-900">Ask Auxilio AI anything</p>
-            <p class="mt-1 text-[13px] text-ink-500">Public safety info, app help, account questions.</p>
+            <p class="font-display font-bold text-lg text-navy-900">Ask Auxilio AI anything</p>
+            <p class="mt-2 text-[14px] text-ink-500 max-w-[260px] leading-relaxed">Public safety info, app help, or account questions — type below to get started.</p>
         </div>
     </div>
 
