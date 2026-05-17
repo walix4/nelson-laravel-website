@@ -58,6 +58,11 @@
             <li><a data-route href="#/citizen-app"      class="nav-link hover:text-white transition">Citizen App</a></li>
             <li><a data-route href="#/about"            class="nav-link hover:text-white transition">About us</a></li>
             <li><a data-route href="#/contact"          class="nav-link hover:text-white transition">Contact us</a></li>
+            <li><a data-route href="#/privacy"          class="nav-link hover:text-white transition">Privacy</a></li>
+            <li><a href="#" data-open-chat class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"/></svg>
+                Auxilio AI
+            </a></li>
         </ul>
 
         <div class="flex-1 flex items-center justify-end">
@@ -78,6 +83,11 @@
             <li><a data-route href="#/citizen-app">Citizen App</a></li>
             <li><a data-route href="#/about">About us</a></li>
             <li><a data-route href="#/contact">Contact us</a></li>
+            <li><a data-route href="#/privacy">Privacy</a></li>
+            <li><a href="#" data-open-chat class="inline-flex items-center gap-1.5 text-brand-600">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3M3 12h3m12 0h3"/></svg>
+                Auxilio AI
+            </a></li>
         </ul>
     </div>
 </header>
@@ -3665,6 +3675,59 @@
     </div>
 </div>
 
+{{-- ============================================================
+     PRIVACY POLICY VIEW
+============================================================--}}
+<div data-view="privacy" class="hidden">
+    <section class="relative overflow-hidden hero-bg">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+            <div class="absolute -top-32 right-1/4 w-[520px] h-[520px] rounded-full bg-navy-100/60 blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-brand-100/40 blur-3xl"></div>
+        </div>
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
+            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
+                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">Privacy Policy</span>
+            </div>
+            <h1 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
+                Privacy <span class="text-brand-600">Policy.</span>
+            </h1>
+            <p class="reveal reveal-delay-2 mt-4 text-lg text-navy-700/80 max-w-2xl">
+                Your safety data should never become someone else's product. Here's exactly what we collect, why, and how you stay in control.
+            </p>
+            <p class="reveal reveal-delay-3 mt-2 text-sm text-ink-500 font-mono">Last updated: May 2026</p>
+        </div>
+    </section>
+
+    <section class="relative bg-white py-16 lg:py-20">
+        <div class="mx-auto max-w-3xl px-5 sm:px-8 space-y-10 text-navy-800 leading-relaxed">
+
+            @foreach ([
+                ['t'=>'1. What we collect','b'=>'Account essentials — name, phone, and a PIN you set. With your permission, location for the duration of an active Alert, plus any media you choose to attach. We do not collect contacts, microphone, or background location unless you explicitly enable a related feature.'],
+                ['t'=>'2. Why we collect it','b'=>'To route an Alert to verified responders, notify your family circle, and keep a tamper-evident record of who responded, when, and why. That\'s it.'],
+                ['t'=>'3. Who can see your data','b'=>'Only the people you explicitly authorize: your family circle, the responding officer or Super Agent on an active case, and 911 dispatch if the Alert escalates. We do not sell, share, or trade your data with advertisers — ever.'],
+                ['t'=>'4. How long we keep it','b'=>'Live location is purged within 24 hours of an Alert closing. Case records are retained for 12 months for audit purposes, then anonymized. You can request full deletion at any time.'],
+                ['t'=>'5. Encryption','b'=>'Location and chat data are end-to-end encrypted with AES-256. We can\'t read your messages — only you and the people you\'ve authorized can.'],
+                ['t'=>'6. Your controls','b'=>'In Settings → Account you can revoke location sharing in one tap, delete your profile, export your data, or audit who has accessed your case history. GDPR, CCPA, and HIPAA-aligned by default.'],
+                ['t'=>'7. Children','b'=>'Auxilio is not directed at children under 13. Parents may add minors to their family circle; the minor\'s account inherits parental privacy controls.'],
+                ['t'=>'8. Changes','b'=>'If we change anything material, we\'ll notify you in-app at least 30 days in advance and require fresh consent for any new data use.'],
+                ['t'=>'9. Contact','b'=>'Questions, requests, or concerns: <a class="text-brand-600 hover:underline" href="mailto:privacy@auxilionetwork.com">privacy@auxilionetwork.com</a>. We reply within one business day.'],
+            ] as $sec)
+                <div>
+                    <h2 class="font-display font-bold text-2xl text-navy-900">{{ $sec['t'] }}</h2>
+                    <p class="mt-3 text-navy-700/80">{!! $sec['b'] !!}</p>
+                </div>
+            @endforeach
+
+            <div class="rounded-2xl border border-ink-100 bg-ink-50/40 p-6 mt-12">
+                <p class="text-sm text-navy-700">
+                    Have a privacy concern? Use the in-app <strong>Auxilio AI</strong> assistant (top of every page) or email
+                    <a class="text-brand-600 hover:underline" href="mailto:privacy@auxilionetwork.com">privacy@auxilionetwork.com</a>.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
 </main>
 
 {{-- =======================================================================
@@ -3943,7 +4006,7 @@
 
     function getRoute() {
         var h = (window.location.hash || '').replace(/^#\//, '');
-        var allowed = ['crime-map','sex-offender-map','how-it-works','agent-app','citizen-app','about','contact'];
+        var allowed = ['crime-map','sex-offender-map','how-it-works','agent-app','citizen-app','about','contact','privacy'];
         if (allowed.indexOf(h) !== -1) return h;
         return 'home';
     }
@@ -4303,6 +4366,15 @@
         if (dialog.classList.contains('is-open')) closeDialog(); else openDialog();
     });
     closeBtn.addEventListener('click', closeDialog);
+
+    // Header "Auxilio AI" links — open the chat panel
+    document.querySelectorAll('[data-open-chat]').forEach(function(el){
+        el.addEventListener('click', function(e){
+            e.preventDefault();
+            openDialog();
+            try { input && input.focus(); } catch(_){}
+        });
+    });
 
     form.addEventListener('submit', function(e){
         e.preventDefault();
