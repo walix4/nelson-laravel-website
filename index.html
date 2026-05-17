@@ -170,23 +170,25 @@
                     </div>
                 </div>
                 <style>
-                    .hero-slideshow .hero-slide { opacity: 0; animation: heroSlide 20s infinite; }
-                    .hero-slideshow .hero-slide:nth-child(1) { animation-delay: 0s; }
+                    /* Slide 1 visible from the start; others fade in on cue */
+                    .hero-slideshow .hero-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; animation: heroSlide 20s infinite; will-change: opacity; }
+                    .hero-slideshow .hero-slide:nth-child(1) { animation-delay: 0s; opacity: 1; }
                     .hero-slideshow .hero-slide:nth-child(2) { animation-delay: 5s; }
                     .hero-slideshow .hero-slide:nth-child(3) { animation-delay: 10s; }
                     .hero-slideshow .hero-slide:nth-child(4) { animation-delay: 15s; }
                     @keyframes heroSlide {
-                        0%, 22% { opacity: 1; }
-                        25%, 100% { opacity: 0; }
+                        0%, 23%   { opacity: 1; }
+                        27%, 98%  { opacity: 0; }
+                        100%      { opacity: 1; }
                     }
-                    .hero-slideshow .hero-dot { animation: heroDot 20s infinite; }
+                    .hero-slideshow .hero-dot { transition: all .3s ease; animation: heroDot 20s infinite; }
                     .hero-slideshow .hero-dot:nth-child(1) { animation-delay: 0s; }
                     .hero-slideshow .hero-dot:nth-child(2) { animation-delay: 5s; }
                     .hero-slideshow .hero-dot:nth-child(3) { animation-delay: 10s; }
                     .hero-slideshow .hero-dot:nth-child(4) { animation-delay: 15s; }
                     @keyframes heroDot {
-                        0%, 24% { background:rgba(255,255,255,.9); width:18px; border-radius:9999px; }
-                        26%, 100% { background:rgba(255,255,255,.5); width:6px; border-radius:9999px; }
+                        0%, 24% { background:rgba(255,255,255,.95); width:18px; border-radius:9999px; }
+                        27%, 100% { background:rgba(255,255,255,.45); width:6px; border-radius:9999px; }
                     }
                 </style>
 
@@ -6711,12 +6713,12 @@
         if (typeof L === 'undefined') { setTimeout(initCrimeMap, 100); return; }
         var el = document.getElementById('auxilio-map');
         if (!el) return;
-        crimeMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 11);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        crimeMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 12);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution:'© OpenStreetMap contributors © CARTO',
             subdomains:'abcd', maxZoom: 19
         }).addTo(crimeMap);
-        L.circle(NEWARK, { radius: 5000, color:'#0f172a', fillColor:'#0f172a', weight:1.5, opacity:.45, fillOpacity:.04, dashArray:'6 6' }).addTo(crimeMap);
+        L.circle(NEWARK, { radius: 5000, color:'#38bdf8', fillColor:'#38bdf8', weight:1.5, opacity:.7, fillOpacity:.06, dashArray:'6 6' }).addTo(crimeMap);
         INCIDENTS.forEach(function(inc){
             var m = L.marker([inc.lat, inc.lng], { icon: makeIcon(inc.type) }).addTo(crimeMap);
             m.on('click', function(){ openIncident(inc, 'crime'); });
