@@ -171,10 +171,40 @@
                 <span class="absolute -bottom-12 -right-6 w-48 h-48 rounded-full blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(99,102,241,.34) 0%, transparent 70%);"></span>
 
                 {{-- main hero image — family at home --}}
-                <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15" style="box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
-                    <img src="/images/hero-family-couch.jpg" alt="Auxilio for every family" class="absolute inset-0 w-full h-full object-cover" />
-                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent"></div>
+                <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 hero-slideshow" style="box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
+                    <img src="/images/hero-slide-1.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                    <img src="/images/hero-slide-2.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                    <img src="/images/hero-slide-3.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                    <img src="/images/hero-slide-4.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent z-10"></div>
+                    {{-- progress dots --}}
+                    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
+                        <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/90"></span>
+                        <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                        <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                        <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                    </div>
                 </div>
+                <style>
+                    .hero-slideshow .hero-slide { opacity: 0; animation: heroSlide 20s infinite; }
+                    .hero-slideshow .hero-slide:nth-child(1) { animation-delay: 0s; }
+                    .hero-slideshow .hero-slide:nth-child(2) { animation-delay: 5s; }
+                    .hero-slideshow .hero-slide:nth-child(3) { animation-delay: 10s; }
+                    .hero-slideshow .hero-slide:nth-child(4) { animation-delay: 15s; }
+                    @keyframes heroSlide {
+                        0%, 22% { opacity: 1; }
+                        25%, 100% { opacity: 0; }
+                    }
+                    .hero-slideshow .hero-dot { animation: heroDot 20s infinite; }
+                    .hero-slideshow .hero-dot:nth-child(1) { animation-delay: 0s; }
+                    .hero-slideshow .hero-dot:nth-child(2) { animation-delay: 5s; }
+                    .hero-slideshow .hero-dot:nth-child(3) { animation-delay: 10s; }
+                    .hero-slideshow .hero-dot:nth-child(4) { animation-delay: 15s; }
+                    @keyframes heroDot {
+                        0%, 24% { background:rgba(255,255,255,.9); width:18px; border-radius:9999px; }
+                        26%, 100% { background:rgba(255,255,255,.5); width:6px; border-radius:9999px; }
+                    }
+                </style>
 
                 {{-- ALERT card — top right (blue accent) --}}
                 <div class="hidden md:flex absolute -right-6 top-8 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl ring-1 ring-ink-100 z-10" style="min-width:215px; animation: floatY 6s ease-in-out infinite;">
