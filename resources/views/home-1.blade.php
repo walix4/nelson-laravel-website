@@ -1427,7 +1427,7 @@
                             }
                         </style>
                         <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow agent-slideshow">
-                            <img src="/images/hero-agent-slide-4.jpg" alt="Live incident map" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
+                            <img src="/images/hero-agent-slide-k9.jpg" alt="K-9 officer on duty" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
                             <img src="/images/hero-agent-slide-1.jpg" alt="Flood emergency dispatch" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
                             <img src="/images/hero-agent-slide-3.jpg" alt="K-9 unit handler" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
                             <img src="/images/hero-agent-slide-2.jpg" alt="Officer on patrol" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
