@@ -4043,9 +4043,10 @@
 
             {{-- RIGHT: AI badge + heading + body + orb + stats --}}
             <div class="lg:col-span-6 order-1 lg:order-2 relative">
-                {{-- AI orb — GIF (its #0a0826 bg matches the hero, so the edges melt in) --}}
+                {{-- AI orb — GIF rendered transparent via mix-blend-mode: screen
+                     (the GIF's #0a0826 backdrop blends into black, only the bright orb remains) --}}
                 <span class="pointer-events-none absolute -top-24 -right-24 w-[420px] h-[420px] hidden md:block" style="animation: auxOrbFloat 9s ease-in-out infinite;" aria-hidden="true">
-                    <img src="/images/ai-orb.gif" alt="" class="w-full h-full object-cover" style="filter: drop-shadow(0 0 60px rgba(56,189,248,.55));" />
+                    <img src="/images/ai-orb.gif" alt="" class="w-full h-full object-cover" style="mix-blend-mode: screen; filter: drop-shadow(0 0 60px rgba(56,189,248,.55));" />
                 </span>
 
                 <div class="relative">
