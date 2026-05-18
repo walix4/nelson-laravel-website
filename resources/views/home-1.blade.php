@@ -3903,6 +3903,94 @@
         </div>
     </section>
 
+    {{-- DEFINITION CALLOUT + TAGLINE PULL QUOTE --}}
+    <section class="relative py-16 lg:py-20" style="background:linear-gradient(180deg,#f6f8fc 0%,#eef2fb 100%);">
+        <div class="mx-auto max-w-4xl px-5 sm:px-8">
+            <div class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider" style="background:rgba(226,75,74,.08); color:#c1272d;">
+                <span class="relative flex w-2 h-2">
+                    <span class="absolute inline-flex w-2 h-2 rounded-full opacity-75 animate-ping" style="background:#E24B4A"></span>
+                    <span class="relative inline-flex w-2 h-2 rounded-full" style="background:#E24B4A"></span>
+                </span>
+                AI-Powered Safety
+            </div>
+            <h2 class="reveal mt-4 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">What Auxilio actually is.</h2>
+            <p class="reveal mt-2 text-navy-700/80 text-[15px]">The intelligent personal safety layer that turns your phone into a real-time shield for your family and community.</p>
+
+            <div class="reveal mt-8 rounded-3xl bg-white p-7 sm:p-9 shadow-[0_30px_60px_-30px_rgba(8,15,40,.18)] border border-ink-100" style="border-left:4px solid #E24B4A;">
+                <p class="text-navy-900 leading-[1.75] text-[16px] sm:text-[17px]">
+                    <strong class="font-semibold">Auxilio</strong> is an AI-powered community safety platform that unifies <span class="font-semibold" style="color:#0ea5e9">live crime data</span>, <span class="font-semibold" style="color:#6366f1">registered offender proximity alerts</span>, <span class="font-semibold" style="color:#10b981">verified emergency responders</span>, and <span class="font-semibold" style="color:#E24B4A">one-tap panic response</span> into a single, always-on experience. Its adaptive intelligence engine continuously monitors incident signals across your city — synthesizing reports, registry updates, and agent locations into actionable awareness in <span class="font-semibold">under 30 seconds</span> — so every citizen, from parents to seniors, always knows exactly how safe they are and how fast help can arrive.
+                </p>
+            </div>
+
+            <figure class="reveal mt-10 text-center">
+                <div class="mx-auto w-12 h-px" style="background:linear-gradient(90deg,transparent,#0ea5e9,transparent);"></div>
+                <blockquote class="mt-6 font-display font-bold text-2xl sm:text-[28px] text-navy-900 leading-snug">
+                    "Your safety, your control — <span style="background:linear-gradient(90deg,#0ea5e9,#6366f1); -webkit-background-clip:text; background-clip:text; color:transparent;">not the news feed's</span>."
+                </blockquote>
+                <div class="mx-auto mt-6 w-12 h-px" style="background:linear-gradient(90deg,transparent,#6366f1,transparent);"></div>
+            </figure>
+        </div>
+    </section>
+
+    {{-- CORE INTELLIGENCE PILLARS — 4 cards --}}
+    <section class="relative bg-white py-16 lg:py-20">
+        <div class="mx-auto max-w-6xl px-5 sm:px-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#0ea5e9;">Core intelligence pillars</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">
+                    Four engines, <span style="background:linear-gradient(90deg,#0ea5e9,#6366f1); -webkit-background-clip:text; background-clip:text; color:transparent;">one safety net.</span>
+                </h2>
+            </div>
+            @php
+                $pillars = [
+                    ['t'=>'Live situational awareness','d'=>'Real-time crime mapping and incident feeds pulled from verified public and agency sources.','c'=>'#0ea5e9','p'=>'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z M12 9.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z'],
+                    ['t'=>'Proximity intelligence','d'=>'Automatic alerts when registered offenders or flagged activity enter your defined safe zones.','c'=>'#6366f1','p'=>'M12 9v3.75m0 3.75h.01M2.7 16.13c-.87 1.5.22 3.37 1.95 3.37h14.7c1.73 0 2.82-1.87 1.95-3.37L13.95 3.38c-.87-1.5-3.03-1.5-3.9 0L2.7 16.13z'],
+                    ['t'=>'One-tap emergency response','d'=>'Panic Alert instantly routes to verified responders with your live GPS — no call, no wait.','c'=>'#E24B4A','p'=>'M13 2L4.5 13.5h7L11 22l8.5-11.5h-7L13 2z'],
+                    ['t'=>'Adaptive AI engine','d'=>'Continuously learns neighborhood patterns to surface threats before they escalate.','c'=>'#10b981','p'=>'M9.75 17L9 21l-1 1m6-5l.75 4 1 1M4 4h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z M8 9h.01M16 9h.01M9 13h6'],
+                ];
+            @endphp
+            <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                @foreach ($pillars as $p)
+                    <article class="group relative rounded-2xl bg-white border border-ink-100 p-6 transition hover:-translate-y-1 hover:shadow-xl hover:border-transparent overflow-hidden">
+                        <span class="absolute inset-x-0 top-0 h-1 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(90deg,{{ $p['c'] }},{{ $p['c'] }}88);"></span>
+                        <span class="grid place-items-center w-12 h-12 rounded-xl text-white shadow-lg" style="background:linear-gradient(135deg,{{ $p['c'] }},{{ $p['c'] }}cc);">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $p['p'] }}"/></svg>
+                        </span>
+                        <h3 class="mt-5 font-display font-bold text-navy-900 text-[16px] leading-snug">{{ $p['t'] }}</h3>
+                        <p class="mt-2 text-navy-700/80 leading-relaxed text-[14px]">{{ $p['d'] }}</p>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- AT A GLANCE — 4 hero stats --}}
+    <section class="relative py-16 lg:py-20 overflow-hidden text-white" style="background:linear-gradient(160deg, #050d2a 0%, #0a1a4a 50%, #061229 100%);">
+        <span class="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 w-[560px] h-[560px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(56,189,248,.18) 0%, transparent 70%);"></span>
+        <div class="relative mx-auto max-w-6xl px-5 sm:px-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#7dd3fc;">At a glance</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight">The numbers that <span style="background:linear-gradient(90deg,#38bdf8,#a5b4fc); -webkit-background-clip:text; background-clip:text; color:transparent;">matter most.</span></h2>
+            </div>
+            @php
+                $atGlance = [
+                    ['n'=>'&lt; 30s','l'=>'Threat-to-alert response','c'=>'#38bdf8'],
+                    ['n'=>'1-tap','l'=>'Emergency activation','c'=>'#a5b4fc'],
+                    ['n'=>'24/7','l'=>'Live monitoring','c'=>'#34d399'],
+                    ['n'=>'∞','l'=>'Safe zones per family','c'=>'#fbbf24'],
+                ];
+            @endphp
+            <div class="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
+                @foreach ($atGlance as $s)
+                    <div class="rounded-2xl p-6 text-center" style="background:rgba(255,255,255,.04); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);">
+                        <div class="font-display font-extrabold text-3xl sm:text-4xl tracking-tight" style="color:{{ $s['c'] }};">{!! $s['n'] !!}</div>
+                        <div class="mt-2 text-[12px] uppercase tracking-[.14em] font-semibold text-white/60">{{ $s['l'] }}</div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
     {{-- CORE FEATURES — 12 cards --}}
     <section class="relative py-16 lg:py-20" style="background:#f6f8fc;">
         <div class="mx-auto max-w-7xl px-5 sm:px-8">
@@ -4004,14 +4092,321 @@
         </div>
     </section>
 
-    {{-- DEFINITION --}}
+    {{-- WHO IT'S FOR — 3 cards --}}
     <section class="relative bg-white py-16 lg:py-20">
-        <div class="mx-auto max-w-3xl px-5 sm:px-8 text-center">
-            <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#0ea5e9;">In one sentence</p>
-            <p class="mt-5 font-display font-bold text-2xl sm:text-3xl text-navy-900 leading-snug">
-                Auxilio Network AI is an AI-driven public safety and emergency response platform that delivers real-time crime intelligence, emergency alerts, and intelligent community protection through advanced artificial intelligence and connected safety networks.
-            </p>
+        <div class="mx-auto max-w-6xl px-5 sm:px-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#0ea5e9;">Who it's for</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">Built for <span style="background:linear-gradient(90deg,#0ea5e9,#6366f1); -webkit-background-clip:text; background-clip:text; color:transparent;">every citizen.</span></h2>
+            </div>
+            @php
+                $audience = [
+                    ['t'=>'Families','d'=>'Know whether to keep kids inside — before the news does.','c'=>'#E24B4A','p'=>'M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z'],
+                    ['t'=>'Communities','d'=>'Shared awareness that makes every neighborhood safer collectively.','c'=>'#0ea5e9','p'=>'M3 21h18 M5 21V8l7-4 7 4v13 M9 12h6 M9 16h6'],
+                    ['t'=>'Every citizen','d'=>'Designed for accessibility — seniors, solo travelers, and commuters included.','c'=>'#6366f1','p'=>'M12 7a3 3 0 100-6 3 3 0 000 6z M6 22v-7l-3-7h4l2 5 2-5h4l-3 7v7h-2l-1-5-1 5H6z'],
+                ];
+            @endphp
+            <div class="mt-12 grid sm:grid-cols-3 gap-5">
+                @foreach ($audience as $a)
+                    <article class="group relative rounded-3xl bg-white border border-ink-100 p-8 text-center transition hover:-translate-y-1 hover:shadow-xl">
+                        <span class="grid place-items-center mx-auto w-14 h-14 rounded-2xl text-white shadow-lg" style="background:linear-gradient(135deg,{{ $a['c'] }},{{ $a['c'] }}bb);">
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $a['p'] }}"/></svg>
+                        </span>
+                        <h3 class="mt-5 font-display font-bold text-navy-900 text-[18px]">{{ $a['t'] }}</h3>
+                        <p class="mt-2 text-navy-700/80 leading-relaxed text-[14px]">{{ $a['d'] }}</p>
+                    </article>
+                @endforeach
+            </div>
         </div>
+    </section>
+
+    {{-- INTERACTIVE CRIME STATISTICS DASHBOARD --}}
+    <section class="relative py-16 lg:py-20" style="background:#f6f8fc;">
+        <style>
+            [data-view="auxilio-ai"] .aux-dash { --aux-red:#E24B4A; --aux-blue:#378ADD; --aux-amber:#BA7517; --aux-green:#0F6E56; --aux-purple:#533b8a; --aux-rose:#993556; --aux-olive:#3B6D11; --aux-deep:#A32D2D; }
+            [data-view="auxilio-ai"] .aux-tab-btn { padding: 8px 18px; border-radius: 9999px; font-size: 13px; font-weight: 600; cursor: pointer; background:#ffffff; color:#475569; border:1px solid #e2e8f0; transition: all .18s ease; display:inline-flex; align-items:center; gap:6px; }
+            [data-view="auxilio-ai"] .aux-tab-btn:hover { color:#0f172a; border-color:#cbd5e1; }
+            [data-view="auxilio-ai"] .aux-tab-btn.active { background: linear-gradient(135deg,#E24B4A,#c1272d); color:#fff; border-color:transparent; box-shadow: 0 10px 24px -10px rgba(226,75,74,.6); }
+            [data-view="auxilio-ai"] .aux-panel { display:none; }
+            [data-view="auxilio-ai"] .aux-panel.active { display:block; animation: auxPanelIn .25s ease both; }
+            @keyframes auxPanelIn { from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+            [data-view="auxilio-ai"] .aux-crime-btn { padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight:500; cursor: pointer; background:#ffffff; color:#475569; border:1px solid #e2e8f0; transition: all .15s ease; }
+            [data-view="auxilio-ai"] .aux-crime-btn:hover { color:#0f172a; }
+            [data-view="auxilio-ai"] .aux-crime-btn.on { color:#fff; border-color:transparent; box-shadow: 0 6px 14px -6px rgba(0,0,0,.25); }
+            [data-view="auxilio-ai"] .aux-bar-row { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+            [data-view="auxilio-ai"] .aux-bar-label { font-size:12px; color:#64748b; min-width:78px; text-align:right; font-variant-numeric: tabular-nums; }
+            [data-view="auxilio-ai"] .aux-bar-track { flex:1; height:22px; background:#e8edf5; border-radius:6px; overflow:hidden; }
+            [data-view="auxilio-ai"] .aux-bar-fill { height:100%; border-radius:6px; display:flex; align-items:center; padding-left:8px; font-size:11px; font-weight:600; color:#fff; transition: width .5s cubic-bezier(.22,1,.36,1); white-space:nowrap; }
+            [data-view="auxilio-ai"] .aux-bar-val { font-size:11px; color:#64748b; min-width:36px; font-weight:500; }
+            [data-view="auxilio-ai"] .aux-stat-card { background:#ffffff; border-radius:14px; padding: 14px 16px; border:1px solid #e2e8f0; }
+            [data-view="auxilio-ai"] .aux-stat-num { font-size:22px; font-weight:800; color:#0f172a; font-family: var(--font-display, inherit); }
+            [data-view="auxilio-ai"] .aux-stat-lbl { font-size:12px; color:#64748b; margin-top:2px; line-height:1.35; }
+            [data-view="auxilio-ai"] .aux-stat-num.red { color:#E24B4A; }
+            [data-view="auxilio-ai"] .aux-stat-num.amber { color:#BA7517; }
+            [data-view="auxilio-ai"] .aux-stat-num.dn { color:#15803d; }
+            [data-view="auxilio-ai"] .aux-legend { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:12px; }
+            [data-view="auxilio-ai"] .aux-legend-item { display:flex; align-items:center; gap:6px; font-size:12px; color:#64748b; }
+            [data-view="auxilio-ai"] .aux-legend-dot { width:10px; height:10px; border-radius:50%; }
+            [data-view="auxilio-ai"] .aux-trend-row { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid #eef2f7; }
+            [data-view="auxilio-ai"] .aux-trend-year { font-size:13px; font-weight:600; color:#0f172a; min-width:48px; }
+            [data-view="auxilio-ai"] .aux-trend-track { flex:1; height:18px; background:#e8edf5; border-radius:6px; overflow:hidden; }
+            [data-view="auxilio-ai"] .aux-trend-fill { height:100%; border-radius:6px; display:flex; align-items:center; padding-left:8px; font-size:10px; font-weight:600; color:#fff; transition: width .5s cubic-bezier(.22,1,.36,1); }
+            [data-view="auxilio-ai"] .aux-trend-pct { font-size:11px; min-width:54px; text-align:right; font-weight:600; }
+            [data-view="auxilio-ai"] .aux-source { font-size:11px; color:#94a3b8; margin-top:18px; line-height:1.6; }
+            [data-view="auxilio-ai"] .aux-divider { border:none; border-top:1px solid #e2e8f0; margin:20px 0; }
+            [data-view="auxilio-ai"] .aux-peak { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid #eef2f7; flex-wrap:wrap; }
+            [data-view="auxilio-ai"] .aux-peak-name { font-size:13px; font-weight:600; color:#0f172a; min-width:150px; }
+            [data-view="auxilio-ai"] .aux-peak-meta { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+            [data-view="auxilio-ai"] .aux-peak-meta span { font-size:12px; color:#64748b; display:inline-flex; align-items:center; gap:5px; }
+            [data-view="auxilio-ai"] .aux-peak-chip { background:#eef2f7; padding:3px 10px; border-radius:10px; color:#475569; font-weight:500; }
+        </style>
+
+        <div class="mx-auto max-w-6xl px-5 sm:px-8 aux-dash">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#E24B4A;">US crime statistics</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">
+                    The data <span style="background:linear-gradient(90deg,#E24B4A,#c1272d); -webkit-background-clip:text; background-clip:text; color:transparent;">behind the urgency.</span>
+                </h2>
+                <p class="mt-3 text-navy-700/80 text-[15px]">Explore live national patterns — by hour, month, type, and year.</p>
+            </div>
+
+            {{-- Top stat cards --}}
+            <div class="mt-10 grid grid-cols-2 lg:grid-cols-6 gap-3">
+                <div class="aux-stat-card"><div class="aux-stat-num red">every 25.9s</div><div class="aux-stat-lbl">Violent crime occurs</div></div>
+                <div class="aux-stat-card"><div class="aux-stat-num red">every 31 min</div><div class="aux-stat-lbl">Murder committed</div></div>
+                <div class="aux-stat-card"><div class="aux-stat-num amber">every 4.1 min</div><div class="aux-stat-lbl">Rape committed</div></div>
+                <div class="aux-stat-card"><div class="aux-stat-num">1,221,345</div><div class="aux-stat-lbl">Violent crimes in 2024</div></div>
+                <div class="aux-stat-card"><div class="aux-stat-num">5,986,400</div><div class="aux-stat-lbl">Property crimes in 2024</div></div>
+                <div class="aux-stat-card"><div class="aux-stat-num dn">−4.5%</div><div class="aux-stat-lbl">Violent crime vs 2023</div></div>
+            </div>
+
+            {{-- Tabs --}}
+            <div class="mt-10 flex flex-wrap gap-2 justify-center">
+                <button type="button" class="aux-tab-btn active" data-aux-tab="hour">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/></svg>
+                    By hour
+                </button>
+                <button type="button" class="aux-tab-btn" data-aux-tab="month">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 9h18M8 3v4M16 3v4"/></svg>
+                    By month
+                </button>
+                <button type="button" class="aux-tab-btn" data-aux-tab="type">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 20h16M6 16V8m6 8V4m6 12v-6"/></svg>
+                    By crime type
+                </button>
+                <button type="button" class="aux-tab-btn" data-aux-tab="year">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 8-8m0 0v6m0-6h-6"/></svg>
+                    Year trend
+                </button>
+            </div>
+
+            {{-- Panels --}}
+            <div class="mt-8 rounded-3xl bg-white border border-ink-100 p-6 sm:p-8 shadow-[0_30px_60px_-40px_rgba(8,15,40,.18)]">
+                {{-- Hour --}}
+                <div class="aux-panel active" data-aux-panel="hour">
+                    <p class="text-xs font-semibold uppercase tracking-[.16em] text-navy-700/60 mb-4">Crime activity by hour of day</p>
+                    <div id="aux-hour-select" class="flex flex-wrap gap-2 mb-5">
+                        <button type="button" class="aux-crime-btn on" data-crime="assault" style="background:#E24B4A">Assault</button>
+                        <button type="button" class="aux-crime-btn" data-crime="burglary">Burglary</button>
+                        <button type="button" class="aux-crime-btn" data-crime="robbery">Robbery</button>
+                        <button type="button" class="aux-crime-btn" data-crime="rape">Sexual assault</button>
+                        <button type="button" class="aux-crime-btn" data-crime="murder">Homicide</button>
+                        <button type="button" class="aux-crime-btn" data-crime="theft">Theft / larceny</button>
+                        <button type="button" class="aux-crime-btn" data-crime="carjack">Vehicle theft</button>
+                    </div>
+                    <div id="aux-hour-chart"></div>
+                    <p class="aux-source">Sources: FBI UCR, BJS NCVS, CrimeInAmerica.net. Hour distributions estimated from nationally published pattern data (% of incidents per time block).</p>
+                </div>
+
+                {{-- Month --}}
+                <div class="aux-panel" data-aux-panel="month">
+                    <p class="text-xs font-semibold uppercase tracking-[.16em] text-navy-700/60 mb-4">Crime frequency by month — seasonal index (100 = yearly average)</p>
+                    <div class="aux-legend">
+                        <div class="aux-legend-item"><span class="aux-legend-dot" style="background:#E24B4A"></span>Violent crime</div>
+                        <div class="aux-legend-item"><span class="aux-legend-dot" style="background:#378ADD"></span>Property crime</div>
+                        <div class="aux-legend-item"><span class="aux-legend-dot" style="background:#BA7517"></span>Robbery</div>
+                    </div>
+                    <div id="aux-month-chart"></div>
+                    <p class="aux-source">Seasonal index: BJS NCVS analysis. Summer peaks reflect routine activity theory — more people outside, homes unoccupied. Robbery peaks in December due to holiday foot traffic.</p>
+                </div>
+
+                {{-- Type --}}
+                <div class="aux-panel" data-aux-panel="type">
+                    <p class="text-xs font-semibold uppercase tracking-[.16em] text-navy-700/60 mb-4">2024 estimated offenses by crime type (FBI UCR)</p>
+                    <div id="aux-type-chart"></div>
+                    <hr class="aux-divider">
+                    <p class="text-xs font-semibold uppercase tracking-[.16em] text-navy-700/60 mb-3">When each crime peaks</p>
+                    <div id="aux-peak-table"></div>
+                    <p class="aux-source">Sources: FBI 2024 Crime Report, BJS NCVS, SafeHome.org, DOJ statistics.</p>
+                </div>
+
+                {{-- Year --}}
+                <div class="aux-panel" data-aux-panel="year">
+                    <p class="text-xs font-semibold uppercase tracking-[.16em] text-navy-700/60 mb-4">Violent crime rate per 100,000 residents — 2015–2024</p>
+                    <div id="aux-year-chart"></div>
+                    <hr class="aux-divider">
+                    <p class="text-xs font-semibold uppercase tracking-[.16em] text-navy-700/60 mb-3">Year-over-year change by crime category (2023 → 2024)</p>
+                    <div id="aux-yoy-chart"></div>
+                    <p class="aux-source">Sources: FBI UCR 2024 Annual Report. Violent crime rate fell from 379.5 to 359.1 per 100,000 in 2024. Murder saw the largest single-year drop at −14.9%.</p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        (function(){
+            if (window.__auxDashInit) return; window.__auxDashInit = true;
+            var COLORS = { assault:'#E24B4A', burglary:'#378ADD', robbery:'#BA7517', rape:'#993556', murder:'#533b8a', theft:'#0F6E56', carjack:'#3B6D11' };
+            var hourData = {
+                assault: [2,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,11,10,9,8,6,5,4,3],
+                burglary: [2,1,1,1,1,2,4,6,8,9,10,9,8,7,6,5,5,5,4,3,2,2,2,2],
+                robbery: [2,2,2,2,1,1,2,3,3,4,4,4,5,5,6,7,8,8,8,8,7,7,6,5],
+                rape: [8,9,7,5,3,2,2,2,3,4,5,5,5,5,5,5,5,5,5,5,5,5,5,6],
+                murder: [3,3,3,2,2,2,2,2,2,3,3,4,4,4,5,5,6,7,8,9,9,8,7,6],
+                theft: [1,1,1,1,1,1,2,4,6,7,8,9,9,8,8,7,7,6,5,4,3,2,2,1],
+                carjack: [3,3,3,3,2,2,2,3,4,5,6,6,6,6,6,6,7,7,7,7,6,5,5,4]
+            };
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var monthViolent = [88,86,92,96,102,108,112,114,108,104,97,93];
+            var monthProperty = [85,84,90,96,103,109,113,115,110,104,96,95];
+            var monthRobbery = [96,92,94,95,98,100,103,104,100,99,102,117];
+            var timeLabels = ['12a','1a','2a','3a','4a','5a','6a','7a','8a','9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p','9p','10p','11p'];
+            var typeData = [
+                {name:'Larceny / theft', val:3590000, color:'#0F6E56'},
+                {name:'Aggravated assault', val:743000, color:'#E24B4A'},
+                {name:'Motor vehicle theft', val:532000, color:'#3B6D11'},
+                {name:'Burglary', val:778000, color:'#378ADD'},
+                {name:'Robbery', val:182000, color:'#BA7517'},
+                {name:'Rape', val:127000, color:'#993556'},
+                {name:'Murder / manslaughter', val:17300, color:'#533b8a'},
+                {name:'Arson', val:42000, color:'#A32D2D'}
+            ];
+            var peakData = [
+                {crime:'Homicide', hour:'10 pm – 2 am', month:'Jul – Aug, Dec', season:'Summer + Dec'},
+                {crime:'Aggravated assault', hour:'3 pm – 11 pm', month:'Jun – Aug', season:'Summer'},
+                {crime:'Sexual assault', hour:'12 am – 3 am', month:'Jun – Aug', season:'Summer'},
+                {crime:'Robbery', hour:'8 pm – 2 am', month:'Dec (holiday)', season:'Winter holidays'},
+                {crime:'Burglary', hour:'8 am – 3 pm', month:'Jul – Aug', season:'Summer daytime'},
+                {crime:'Vehicle theft', hour:'4 pm – 11 pm', month:'May – Sep', season:'Summer'},
+                {crime:'Larceny / theft', hour:'9 am – 6 pm', month:'Aug – Oct', season:'Summer/Fall'},
+                {crime:'Arson', hour:'12 am – 3 am', month:'Jul – Aug', season:'Summer nights'}
+            ];
+            var yearData = [
+                {yr:'2015',rate:373},{yr:'2016',rate:386},{yr:'2017',rate:383},{yr:'2018',rate:369},
+                {yr:'2019',rate:366},{yr:'2020',rate:398},{yr:'2021',rate:396},{yr:'2022',rate:381},
+                {yr:'2023',rate:380},{yr:'2024',rate:359}
+            ];
+            var yoyData = [
+                {cat:'Murder', pct:-14.9, color:'#533b8a'},
+                {cat:'Rape', pct:-5.2, color:'#993556'},
+                {cat:'Robbery', pct:-8.9, color:'#BA7517'},
+                {cat:'Aggravated assault', pct:-3.0, color:'#E24B4A'},
+                {cat:'All violent crime', pct:-4.5, color:'#A32D2D'},
+                {cat:'Burglary', pct:-8.6, color:'#378ADD'},
+                {cat:'Motor vehicle theft', pct:-18.6, color:'#3B6D11'},
+                {cat:'Larceny / theft', pct:-5.5, color:'#0F6E56'},
+                {cat:'All property crime', pct:-8.1, color:'#185FA5'}
+            ];
+            var currentHourCrime = 'assault';
+
+            function renderHour(crime) {
+                var data = hourData[crime]; var color = COLORS[crime]; var max = Math.max.apply(null, data);
+                var html = timeLabels.map(function(lbl, i){
+                    var pct = Math.round(data[i]/max*100);
+                    var val = data[i];
+                    return '<div class="aux-bar-row"><div class="aux-bar-label">'+lbl+'</div><div class="aux-bar-track"><div class="aux-bar-fill" style="width:'+pct+'%;background:'+color+'">'+(pct>20?val+'%':'')+'</div></div><div class="aux-bar-val">'+(pct<=20?val+'%':'')+'</div></div>';
+                }).join('');
+                var el = document.getElementById('aux-hour-chart'); if (el) el.innerHTML = html;
+            }
+            function renderMonth() {
+                var max = 120;
+                var html = months.map(function(m, i){
+                    var v = monthViolent[i], p = monthProperty[i], r = monthRobbery[i];
+                    return ''
+                        +'<div style="margin-bottom:12px">'
+                        +  '<div style="font-size:13px;font-weight:600;color:#0f172a;margin-bottom:5px">'+m+'</div>'
+                        +  '<div class="aux-bar-row" style="margin-bottom:3px"><div class="aux-bar-label" style="min-width:62px;font-size:11px">Violent</div><div class="aux-bar-track"><div class="aux-bar-fill" style="width:'+(v/max*100)+'%;background:#E24B4A">'+v+'</div></div></div>'
+                        +  '<div class="aux-bar-row" style="margin-bottom:3px"><div class="aux-bar-label" style="min-width:62px;font-size:11px">Property</div><div class="aux-bar-track"><div class="aux-bar-fill" style="width:'+(p/max*100)+'%;background:#378ADD">'+p+'</div></div></div>'
+                        +  '<div class="aux-bar-row"><div class="aux-bar-label" style="min-width:62px;font-size:11px">Robbery</div><div class="aux-bar-track"><div class="aux-bar-fill" style="width:'+(r/max*100)+'%;background:#BA7517">'+r+'</div></div></div>'
+                        +'</div>';
+                }).join('');
+                var el = document.getElementById('aux-month-chart'); if (el) el.innerHTML = html;
+            }
+            function renderType() {
+                var max = typeData[0].val;
+                var bars = typeData.map(function(d){
+                    var pct = Math.round(d.val/max*100);
+                    var fmt = d.val >= 1000000 ? (d.val/1000000).toFixed(1)+'M' : (d.val/1000).toFixed(0)+'K';
+                    return '<div class="aux-bar-row"><div class="aux-bar-label" style="min-width:170px;font-size:12px">'+d.name+'</div><div class="aux-bar-track"><div class="aux-bar-fill" style="width:'+pct+'%;background:'+d.color+'">'+(pct>18?fmt:'')+'</div></div><div class="aux-bar-val" style="min-width:44px">'+(pct<=18?fmt:'')+'</div></div>';
+                }).join('');
+                var el = document.getElementById('aux-type-chart'); if (el) el.innerHTML = bars;
+
+                var rows = peakData.map(function(d){
+                    return '<div class="aux-peak">'
+                        + '<div class="aux-peak-name">'+d.crime+'</div>'
+                        + '<div class="aux-peak-meta">'
+                        +   '<span><svg style="width:12px;height:12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/></svg>'+d.hour+'</span>'
+                        +   '<span><svg style="width:12px;height:12px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 9h18M8 3v4M16 3v4"/></svg>'+d.month+'</span>'
+                        +   '<span class="aux-peak-chip">'+d.season+'</span>'
+                        + '</div>'
+                        + '</div>';
+                }).join('');
+                var pe = document.getElementById('aux-peak-table'); if (pe) pe.innerHTML = rows;
+            }
+            function renderYear() {
+                var maxR = Math.max.apply(null, yearData.map(function(d){return d.rate;}));
+                var minR = 340;
+                var bars = yearData.map(function(d){
+                    var fill = Math.round((d.rate-minR)/(maxR-minR)*100);
+                    var isSpike = d.yr==='2020' || d.yr==='2021';
+                    var col = isSpike ? '#E24B4A' : '#378ADD';
+                    return '<div class="aux-trend-row"><div class="aux-trend-year">'+d.yr+'</div><div class="aux-trend-track"><div class="aux-trend-fill" style="width:'+fill+'%;background:'+col+'">'+d.rate+'</div></div><div class="aux-trend-pct" style="color:#94a3b8;font-weight:500">/100k</div></div>';
+                }).join('');
+                var y = document.getElementById('aux-year-chart'); if (y) y.innerHTML = bars;
+
+                var yoy = yoyData.map(function(d){
+                    var abs = Math.abs(d.pct);
+                    return '<div class="aux-trend-row"><div class="aux-trend-year" style="min-width:160px;font-size:12px">'+d.cat+'</div><div class="aux-trend-track"><div class="aux-trend-fill" style="width:'+(abs/20*100)+'%;background:'+d.color+'">'+d.pct+'%</div></div><div class="aux-trend-pct" style="color:#15803d">'+d.pct+'%</div></div>';
+                }).join('');
+                var yo = document.getElementById('aux-yoy-chart'); if (yo) yo.innerHTML = yoy;
+            }
+
+            function activateTab(name) {
+                document.querySelectorAll('[data-view="auxilio-ai"] .aux-tab-btn').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-aux-tab')===name); });
+                document.querySelectorAll('[data-view="auxilio-ai"] .aux-panel').forEach(function(p){ p.classList.toggle('active', p.getAttribute('data-aux-panel')===name); });
+                if (name==='hour')  renderHour(currentHourCrime);
+                if (name==='month') renderMonth();
+                if (name==='type')  renderType();
+                if (name==='year')  renderYear();
+            }
+
+            function init() {
+                if (!document.querySelector('[data-view="auxilio-ai"] #aux-hour-chart')) return;
+                document.querySelectorAll('[data-view="auxilio-ai"] .aux-tab-btn').forEach(function(b){
+                    b.addEventListener('click', function(){ activateTab(b.getAttribute('data-aux-tab')); });
+                });
+                document.querySelectorAll('[data-view="auxilio-ai"] #aux-hour-select .aux-crime-btn').forEach(function(b){
+                    b.addEventListener('click', function(){
+                        document.querySelectorAll('[data-view="auxilio-ai"] #aux-hour-select .aux-crime-btn').forEach(function(x){ x.classList.remove('on'); x.style.background=''; });
+                        b.classList.add('on');
+                        var crime = b.getAttribute('data-crime');
+                        b.style.background = COLORS[crime];
+                        currentHourCrime = crime;
+                        renderHour(crime);
+                    });
+                });
+                renderHour('assault');
+            }
+            if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+            else { init(); }
+            window.addEventListener('hashchange', function(){
+                setTimeout(function(){
+                    if (location.hash.indexOf('auxilio-ai') > -1) {
+                        if (!document.getElementById('aux-hour-chart').innerHTML) renderHour(currentHourCrime);
+                    }
+                }, 50);
+            });
+        })();
+        </script>
     </section>
 
     {{-- TAGLINES --}}
