@@ -4043,11 +4043,6 @@
 
             {{-- RIGHT: AI badge + heading + body + orb + stats --}}
             <div class="lg:col-span-6 order-1 lg:order-2 relative">
-                {{-- AI orb — transparent via mix-blend-mode: lighten
-                     (max of GIF vs hero per pixel: dark #0a0826 backdrop loses to any hero color, only the bright orb wins) --}}
-                <span class="pointer-events-none absolute -top-24 -right-24 w-[420px] h-[420px] hidden md:block" style="animation: auxOrbFloat 9s ease-in-out infinite;" aria-hidden="true">
-                    <img src="/images/ai-orb.gif" alt="" class="w-full h-full object-cover" style="mix-blend-mode: lighten; filter: drop-shadow(0 0 60px rgba(56,189,248,.55));" />
-                </span>
 
                 <div class="relative">
                     <span class="reveal scifi-chip">
