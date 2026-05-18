@@ -840,13 +840,19 @@
     <section class="relative w-full" style="height: calc(100vh - 78px);">
         <div id="auxilio-map" class="absolute inset-0 bg-ink-100"></div>
 
-        {{-- Title chip (top-left) --}}
-        <div class="absolute top-4 left-4 z-[500] flex items-center gap-2 rounded-full bg-white shadow-lg ring-1 ring-ink-100 pl-2 pr-4 py-1.5">
-            <a data-route href="#/" class="grid place-items-center w-7 h-7 rounded-full bg-ink-100 hover:bg-ink-200 text-navy-900 transition" aria-label="Home">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-            </a>
-            <span class="text-sm font-bold text-navy-900">Crime Map</span>
-            <span class="text-xs text-ink-500 hidden sm:inline">· Newark, NJ</span>
+        {{-- Title chip + Filters toggle (top-left) --}}
+        <div class="absolute top-4 left-4 z-[500] flex items-center gap-2">
+            <div class="flex items-center gap-2 rounded-full bg-white shadow-lg ring-1 ring-ink-100 pl-2 pr-4 py-1.5">
+                <a data-route href="#/" class="grid place-items-center w-7 h-7 rounded-full bg-ink-100 hover:bg-ink-200 text-navy-900 transition" aria-label="Home">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                </a>
+                <span class="text-sm font-bold text-navy-900">Crime Map</span>
+                <span class="text-xs text-ink-500 hidden sm:inline">· Newark, NJ</span>
+            </div>
+            <button type="button" data-crime-filter-toggle class="inline-flex items-center gap-1.5 rounded-full bg-white shadow-lg ring-1 ring-ink-100 px-3.5 py-2 text-xs font-bold text-navy-900 hover:ring-brand-300 hover:text-brand-600 transition">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M6 12h12M10 18h4"/></svg>
+                <span>Filters</span>
+            </button>
         </div>
 
         {{-- Live status (top-right) --}}
@@ -878,7 +884,7 @@
                     'subs'=>['Missing Person','Child Endangerment','Amber Alert','Stalking','Harassment','Restraining Order Violation','Welfare Check','Suspicious Person','Suspicious Activity']],
             ];
         @endphp
-        <div class="absolute top-20 sm:top-[88px] left-1/2 -translate-x-1/2 z-[500] w-[min(96vw,1100px)]" data-crime-filter>
+        <div class="hidden absolute top-20 sm:top-[88px] left-1/2 -translate-x-1/2 z-[500] w-[min(96vw,1100px)]" data-crime-filter>
             <div class="crime-pill-row flex items-center gap-1.5 overflow-x-auto bg-white/95 backdrop-blur rounded-full shadow-lg ring-1 ring-ink-100 p-1.5">
                 <button type="button" data-cat="all" class="crime-pill is-active shrink-0">All</button>
                 @foreach ($crimeCats as $key => $cat)
@@ -4429,7 +4435,8 @@
         if (typeof L === 'undefined') { setTimeout(initCrimeMap, 100); return; }
         var el = document.getElementById('auxilio-map');
         if (!el) return;
-        crimeMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 12);
+        crimeMap = L.map(el, { scrollWheelZoom: true, zoomControl: false }).setView(NEWARK, 12);
+        L.control.zoom({ position: 'bottomright' }).addTo(crimeMap);
         // MapTiler hybrid-v4 (satellite + labels). Per Auxilio APP LLC account.
         var MAPTILER_KEY = 'ZeehnWq20vkTFR42zObM';
         L.tileLayer('https://api.maptiler.com/maps/hybrid-v4/{z}/{x}/{y}.jpg?key=' + MAPTILER_KEY, {
@@ -4502,8 +4509,18 @@
         var subsBox = root.querySelector('[data-crime-subs]');
         var subRow  = root.querySelector('[data-crime-sub-row]');
         var countEl = document.querySelector('[data-view="crime-map"] [data-crime-count]');
+        var toggleBtn = document.querySelector('[data-view="crime-map"] [data-crime-filter-toggle]');
         var activeCat = 'all';
         var activeSub = null;
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function(){
+                var hidden = root.classList.toggle('hidden');
+                toggleBtn.classList.toggle('!bg-navy-900', !hidden);
+                toggleBtn.classList.toggle('!text-white', !hidden);
+                toggleBtn.classList.toggle('!ring-navy-900', !hidden);
+            });
+        }
 
         function applyFilter() {
             var visible = 0;
