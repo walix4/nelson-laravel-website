@@ -2378,10 +2378,45 @@
                         <span class="absolute -inset-10 rounded-[44px] blur-3xl bg-red-500/15 pointer-events-none"></span>
                         <span class="absolute -bottom-10 -left-6 w-48 h-48 rounded-full blur-3xl bg-amber-300/30 pointer-events-none"></span>
 
-                        {{-- main FAMILY illustration (3D family on peach gradient) --}}
-                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow float-slow bg-gradient-to-br from-amber-50 via-rose-50 to-amber-100">
-                            <img src="/images/citizen/cartoon-family-3d.jpg" alt="A family safely connected with Auxilio" class="absolute inset-0 w-full h-full object-cover" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/65 via-navy-950/0 to-transparent"></div>
+                        {{-- main hero slideshow (5 photos, auto-swipe like home) --}}
+                        <style>
+                            .citizen-slideshow .hero-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; animation: citizenHeroSlide 25s infinite; will-change: opacity; }
+                            .citizen-slideshow .hero-slide:nth-child(1) { animation-delay: 0s; opacity: 1; }
+                            .citizen-slideshow .hero-slide:nth-child(2) { animation-delay: 5s; }
+                            .citizen-slideshow .hero-slide:nth-child(3) { animation-delay: 10s; }
+                            .citizen-slideshow .hero-slide:nth-child(4) { animation-delay: 15s; }
+                            .citizen-slideshow .hero-slide:nth-child(5) { animation-delay: 20s; }
+                            @keyframes citizenHeroSlide {
+                                0%, 18% { opacity: 1; }
+                                22%, 98% { opacity: 0; }
+                                100% { opacity: 1; }
+                            }
+                            .citizen-slideshow .hero-dot { transition: all .3s ease; animation: citizenHeroDot 25s infinite; }
+                            .citizen-slideshow .hero-dot:nth-child(1) { animation-delay: 0s; }
+                            .citizen-slideshow .hero-dot:nth-child(2) { animation-delay: 5s; }
+                            .citizen-slideshow .hero-dot:nth-child(3) { animation-delay: 10s; }
+                            .citizen-slideshow .hero-dot:nth-child(4) { animation-delay: 15s; }
+                            .citizen-slideshow .hero-dot:nth-child(5) { animation-delay: 20s; }
+                            @keyframes citizenHeroDot {
+                                0%, 19% { background: rgba(255,255,255,.95); width: 18px; border-radius: 9999px; }
+                                22%, 100% { background: rgba(255,255,255,.45); width: 6px; border-radius: 9999px; }
+                            }
+                        </style>
+                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow float-slow citizen-slideshow bg-gradient-to-br from-amber-50 via-rose-50 to-amber-100">
+                            <img src="/images/citizen/hero-citizen-slide-1.jpg" alt="A citizen protected by Auxilio" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                            <img src="/images/citizen/hero-citizen-slide-2.jpg" alt="A family using Auxilio" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                            <img src="/images/citizen/hero-citizen-slide-3.jpg" alt="A student using Auxilio" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                            <img src="/images/citizen/hero-citizen-slide-4.jpg" alt="A family out together with Auxilio" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                            <img src="/images/citizen/hero-citizen-slide-5.jpg" alt="A citizen reporting an incident on Auxilio" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/65 via-navy-950/0 to-transparent z-[2]"></div>
+                            {{-- progress dots --}}
+                            <div class="absolute bottom-20 left-1/2 -translate-x-1/2 z-[3] flex items-center gap-1.5">
+                                <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/90"></span>
+                                <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                                <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                                <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                                <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                            </div>
 
                             {{-- glass status bar --}}
                             <div class="absolute inset-x-4 bottom-4 glass rounded-2xl px-4 py-3 flex items-center gap-3 text-white">
