@@ -6794,9 +6794,9 @@
         var el = document.getElementById('auxilio-map');
         if (!el) return;
         crimeMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 12);
-        // MapTiler hybrid (satellite + labels). Replace MAPTILER_KEY env var with your own key for production.
-        var MAPTILER_KEY = 'get_your_own_OpIi9ZULNHzrESv6T2vL';
-        L.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=' + MAPTILER_KEY, {
+        // MapTiler hybrid-v4 (satellite + labels). Per Auxilio APP LLC account.
+        var MAPTILER_KEY = 'ZeehnWq20vkTFR42zObM';
+        L.tileLayer('https://api.maptiler.com/maps/hybrid-v4/{z}/{x}/{y}.jpg?key=' + MAPTILER_KEY, {
             attribution:'© MapTiler © OpenStreetMap contributors',
             tileSize: 256, maxZoom: 22, crossOrigin: true
         }).addTo(crimeMap);
