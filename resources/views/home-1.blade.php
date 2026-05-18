@@ -3875,6 +3875,9 @@
 ============================================================--}}
 <div data-view="auxilio-ai" class="hidden">
 
+    {{-- Lottie player (loaded once for the AI page) --}}
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js" defer></script>
+
     {{-- SCI-FI SHARED STYLES — used across the Auxilio AI page --}}
     <style>
         /* ----- AI page scroll-triggered animations ----- */
@@ -3980,8 +3983,8 @@
                         <div class="absolute inset-0 scifi-grid opacity-40"></div>
                         {{-- soft inner glow behind the phone --}}
                         <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[80%] rounded-full blur-3xl" style="background:radial-gradient(ellipse, rgba(56,189,248,.28) 0%, transparent 60%);"></span>
-                        {{-- the hand+phone PNG — natural size, fills horizontally --}}
-                        <img src="/images/ai-hand-phone-mockup.png" alt="Auxilio app — crime map view held in hand" class="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full h-auto z-[2]" style="filter: drop-shadow(0 30px 50px rgba(0,0,0,.55));" />
+                        {{-- the hand+phone PNG — scaled up so the phone reads big inside the box --}}
+                        <img src="/images/ai-hand-phone-mockup.png" alt="Auxilio app — crime map view held in hand" class="absolute left-1/2 top-1/2 w-[140%] h-auto z-[2]" style="transform: translate(-50%, -50%); filter: drop-shadow(0 30px 50px rgba(0,0,0,.55));" />
                         {{-- HUD ticker overlay --}}
                         <div class="absolute top-3 left-3 right-3 z-[3] flex items-center justify-between scifi-mono text-[9px] text-cyan-300/85">
                             <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full" style="background:#34d399; animation: auxTickerDot 1.4s infinite;"></span>NODE-01 / SYNC</span>
@@ -4042,9 +4045,9 @@
 
             {{-- RIGHT: AI badge + heading + body + orb + stats --}}
             <div class="lg:col-span-6 order-1 lg:order-2 relative">
-                {{-- Orb — small, top-right, behind copy. mix-blend-mode: screen knocks out the GIF's white bg on the navy. --}}
-                <span class="pointer-events-none absolute -top-20 -right-16 w-[300px] h-[300px] hidden md:block" style="animation: auxOrbFloat 9s ease-in-out infinite;" aria-hidden="true">
-                    <img src="/images/ai-orb.gif" alt="" class="w-full h-full object-contain" style="mix-blend-mode: screen; filter: drop-shadow(0 0 60px rgba(56,189,248,.55));" />
+                {{-- AI orb — Lottie animation (transparent by default) --}}
+                <span class="pointer-events-none absolute -top-24 -right-20 w-[360px] h-[360px] hidden md:block" style="animation: auxOrbFloat 9s ease-in-out infinite;" aria-hidden="true">
+                    <lottie-player src="/images/ai-orb.json" background="transparent" speed="1" loop autoplay style="width:100%; height:100%; filter: drop-shadow(0 0 60px rgba(56,189,248,.55));"></lottie-player>
                 </span>
 
                 <div class="relative">
@@ -4077,14 +4080,13 @@
                         </p>
                     </div>
 
-                    {{-- CTAs --}}
+                    {{-- App Store + Google Play download badges --}}
                     <div class="reveal reveal-delay-3 mt-7 flex flex-wrap items-center gap-3">
-                        <a href="#" data-open-chat class="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#0ea5e9,#6366f1); box-shadow: 0 14px 30px -10px rgba(14,165,233,.6);">
-                            Try Auxilio AI
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                        <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 rounded-lg">
+                            <img src="/images/app-store-badge.png" alt="Download on the App Store" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" />
                         </a>
-                        <a data-route href="#/how-it-works" class="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white/90 transition hover:bg-white/[.08]" style="box-shadow: inset 0 0 0 1px rgba(125,211,252,.30);">
-                            How it works
+                        <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 rounded-lg">
+                            <img src="/images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" />
                         </a>
                     </div>
 
@@ -4413,17 +4415,93 @@
                     ['t'=>'Every citizen','d'=>'Designed for accessibility — seniors, solo travelers, and commuters included.','c'=>'#6366f1','p'=>'M12 7a3 3 0 100-6 3 3 0 000 6z M6 22v-7l-3-7h4l2 5 2-5h4l-3 7v7h-2l-1-5-1 5H6z'],
                 ];
             @endphp
+            @php
+                $audienceImgs = ['/images/citizen/family-laughing.jpg','/images/citizen/family-friends-sunset.jpg','/images/citizen/family-grandma-kid.jpg'];
+            @endphp
             <div class="ai-anim ai-stagger mt-12 grid sm:grid-cols-3 gap-5">
-                @foreach ($audience as $a)
-                    <article class="group relative rounded-3xl scifi-hud p-8 text-center transition hover:-translate-y-1 overflow-hidden scifi-corner">
-                        <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition" style="background:radial-gradient(ellipse at top, {{ $a['c'] }}1f, transparent 60%);"></span>
-                        <span class="relative grid place-items-center mx-auto w-14 h-14 rounded-2xl text-navy-900 shadow-lg" style="background:linear-gradient(135deg,{{ $a['c'] }},{{ $a['c'] }}aa); box-shadow:0 0 26px -6px {{ $a['c'] }};">
-                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $a['p'] }}"/></svg>
-                        </span>
-                        <h3 class="relative mt-5 font-display font-bold text-white text-[18px]">{{ $a['t'] }}</h3>
-                        <p class="relative mt-2 text-white/70 leading-relaxed text-[14px]">{{ $a['d'] }}</p>
+                @foreach ($audience as $i => $a)
+                    <article class="group relative rounded-3xl overflow-hidden transition hover:-translate-y-1 scifi-corner h-[360px]" style="box-shadow: 0 30px 60px -25px rgba(8,15,40,.6);">
+                        {{-- photo backdrop --}}
+                        <img src="{{ $audienceImgs[$i] }}" alt="" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] group-hover:scale-105" />
+                        {{-- gradient overlay --}}
+                        <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(5,11,34,.55) 0%, rgba(5,11,34,.30) 35%, rgba(5,11,34,.92) 100%);"></div>
+                        {{-- accent glow at top --}}
+                        <span class="pointer-events-none absolute -top-12 -right-12 w-44 h-44 rounded-full blur-3xl opacity-70" style="background:radial-gradient(circle, {{ $a['c'] }}44 0%, transparent 70%);"></span>
+                        {{-- accent line --}}
+                        <span class="pointer-events-none absolute inset-x-0 top-0 h-px" style="background:linear-gradient(90deg, transparent, {{ $a['c'] }}, transparent);"></span>
+
+                        {{-- top chip --}}
+                        <div class="absolute top-4 left-4 z-[2] flex items-center gap-2 px-2.5 py-1 rounded-full scifi-mono text-[10px] font-bold" style="background:rgba(5,11,34,.55); color:{{ $a['c'] }}; box-shadow: inset 0 0 0 1px {{ $a['c'] }}55;">
+                            <span class="w-1.5 h-1.5 rounded-full" style="background:{{ $a['c'] }}; box-shadow:0 0 6px {{ $a['c'] }};"></span>
+                            PROFILE · 0{{ $i+1 }}
+                        </div>
+
+                        {{-- bottom content --}}
+                        <div class="absolute inset-x-0 bottom-0 p-6 z-[2]">
+                            <span class="grid place-items-center w-12 h-12 rounded-xl text-navy-900 shadow-lg" style="background:linear-gradient(135deg,{{ $a['c'] }},{{ $a['c'] }}aa); box-shadow:0 0 22px -6px {{ $a['c'] }};">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $a['p'] }}"/></svg>
+                            </span>
+                            <h3 class="mt-4 font-display font-bold text-white text-[20px]">{{ $a['t'] }}</h3>
+                            <p class="mt-1.5 text-white/75 leading-relaxed text-[13.5px]">{{ $a['d'] }}</p>
+                        </div>
                     </article>
                 @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- AI IN ACTION — real-world scenarios w/ stock photos --}}
+    <section class="relative overflow-hidden py-16 lg:py-20 text-white" style="background:linear-gradient(180deg,#050b22 0%,#0a1a4a 50%,#050b22 100%);">
+        <div class="absolute inset-0 scifi-grid opacity-50 pointer-events-none"></div>
+        <span class="pointer-events-none absolute -top-32 -right-20 w-[420px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(56,189,248,.18) 0%, transparent 70%);"></span>
+        <span class="pointer-events-none absolute -bottom-20 -left-10 w-[420px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(226,75,74,.18) 0%, transparent 70%);"></span>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <p class="scifi-mono text-[11px] font-bold" style="color:#fda4af;">// AI · IN ACTION</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight">When the unexpected happens, <span style="background:linear-gradient(90deg,#38bdf8,#fda4af); -webkit-background-clip:text; background-clip:text; color:transparent;">Auxilio responds.</span></h2>
+                <p class="mt-3 text-white/65 text-[15px]">Real situations, real responses — synthesized by AI in seconds.</p>
+            </div>
+
+            @php
+                $scenarios = [
+                    ['img'=>'/images/about/robbery.jpg','tag'=>'INCIDENT · 0:18s','title'=>'Armed robbery flagged','desc'=>'Citizen alert verified against PD feed. 412 residents pinged within a 0.4 mi radius.','c'=>'#E24B4A','step'=>'01 · DETECT'],
+                    ['img'=>'/images/about/break-in.jpg','tag'=>'BURGLARY · 4 min ETA','title'=>'Vehicle break-in routed','desc'=>'Super Agent dispatched. Live video uploaded for evidence chain.','c'=>'#38bdf8','step'=>'02 · ROUTE'],
+                    ['img'=>'/images/about/accident.jpg','tag'=>'COLLISION · 0:09s','title'=>'EMT + PD notified','desc'=>'Crash detected on smartphone sensor. Emergency contacts notified automatically.','c'=>'#a5b4fc','step'=>'03 · NOTIFY'],
+                    ['img'=>'/images/about/roadside.jpg','tag'=>'ROADSIDE · cleared','title'=>'Verified responder on-scene','desc'=>'Citizen-flagged stranded vehicle resolved by nearest verified responder.','c'=>'#34d399','step'=>'04 · RESOLVE'],
+                ];
+            @endphp
+
+            <div class="ai-anim ai-stagger mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                @foreach ($scenarios as $s)
+                    <article class="group relative rounded-2xl overflow-hidden transition hover:-translate-y-1 scifi-corner h-[320px]" style="box-shadow: 0 30px 60px -25px rgba(8,15,40,.6);">
+                        <img src="{{ $s['img'] }}" alt="{{ $s['title'] }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] group-hover:scale-105" />
+                        <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(5,11,34,.45) 0%, rgba(5,11,34,.20) 30%, rgba(5,11,34,.94) 100%);"></div>
+                        <span class="pointer-events-none absolute inset-x-0 top-0 h-px" style="background:linear-gradient(90deg, transparent, {{ $s['c'] }}, transparent);"></span>
+
+                        <div class="absolute top-3 left-3 z-[2] flex items-center gap-2 px-2.5 py-1 rounded-full scifi-mono text-[10px] font-bold" style="background:rgba(5,11,34,.55); color:{{ $s['c'] }}; box-shadow: inset 0 0 0 1px {{ $s['c'] }}55;">
+                            <span class="relative flex w-1.5 h-1.5">
+                                <span class="absolute inline-flex w-1.5 h-1.5 rounded-full opacity-75 animate-ping" style="background:{{ $s['c'] }};"></span>
+                                <span class="relative inline-flex w-1.5 h-1.5 rounded-full" style="background:{{ $s['c'] }};"></span>
+                            </span>
+                            {{ $s['tag'] }}
+                        </div>
+
+                        <div class="absolute inset-x-0 bottom-0 p-5 z-[2]">
+                            <div class="scifi-mono text-[10px]" style="color:{{ $s['c'] }};">{{ $s['step'] }}</div>
+                            <h3 class="mt-1.5 font-display font-bold text-white text-[17px] leading-snug">{{ $s['title'] }}</h3>
+                            <p class="mt-1.5 text-white/75 leading-relaxed text-[13px]">{{ $s['desc'] }}</p>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+
+            <div class="ai-anim ai-d2 mt-10 text-center">
+                <div class="inline-flex items-center gap-2 scifi-mono text-[11px] text-white/55">
+                    <span class="w-8 h-px" style="background:linear-gradient(90deg, transparent, rgba(125,211,252,.6));"></span>
+                    AVERAGE RESPONSE · 28 SECONDS
+                    <span class="w-8 h-px" style="background:linear-gradient(90deg, rgba(125,211,252,.6), transparent);"></span>
+                </div>
             </div>
         </div>
     </section>
