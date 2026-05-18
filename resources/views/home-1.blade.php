@@ -852,7 +852,48 @@
         {{-- Live status (top-right) --}}
         <div class="absolute top-4 right-4 z-[500] inline-flex items-center gap-2 rounded-full bg-white shadow-lg ring-1 ring-ink-100 px-3 py-1.5">
             <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-500 pulse-dot text-emerald-500"></span>
-            <span class="text-xs font-semibold tracking-wider uppercase text-navy-900">Live · 15 reports</span>
+            <span class="text-xs font-semibold tracking-wider uppercase text-navy-900" data-crime-count>Live · 15 reports</span>
+        </div>
+
+        {{-- Category pill filter (floating, top, horizontally scrollable) --}}
+        @php
+            $crimeCats = [
+                'persons' => ['title'=>'Crimes Against Persons','color'=>'#ef4444','types'=>['SC','H'],
+                    'subs'=>['Homicide / Murder','Manslaughter','Assault','Aggravated Assault','Domestic Violence','Kidnapping','Human Trafficking','Robbery','Sexual Assault','Rape','Child Abuse','Elder Abuse','Terroristic Threats']],
+                'property' => ['title'=>'Property Crimes','color'=>'#f97316','types'=>['RC'],
+                    'subs'=>['Burglary','Theft / Larceny','Shoplifting','Motor Vehicle Theft','Arson','Vandalism','Trespassing','Stolen Property','Identity Theft','Package Theft','Catalytic Converter Theft']],
+                'drugs' => ['title'=>'Drug-Related','color'=>'#a855f7','types'=>['O'],
+                    'subs'=>['Drug Possession','Drug Distribution','Drug Manufacturing','Prescription Fraud','DUI / DWI (drug-related)','Narcotics Trafficking']],
+                'cyber' => ['title'=>'Financial & Cyber','color'=>'#0ea5e9','types'=>['PV'],
+                    'subs'=>['Fraud','Credit Card Fraud','Insurance Fraud','Wire Fraud','Tax Evasion','Money Laundering','Embezzlement','Counterfeiting','Cyberbullying','Hacking','Phishing','Online Scams','Cryptocurrency Fraud']],
+                'public' => ['title'=>'Public Order','color'=>'#eab308','types'=>['O','PV'],
+                    'subs'=>['Disorderly Conduct','Public Intoxication','Loitering','Illegal Gambling','Riot','Disturbing the Peace','Illegal Weapons Possession','Reckless Endangerment','Prostitution','Obstruction of Justice']],
+                'traffic' => ['title'=>'Traffic & Vehicle','color'=>'#06b6d4','types'=>['RC'],
+                    'subs'=>['DUI / DWI','Reckless Driving','Hit and Run','Street Racing','Driving Without License','Vehicular Assault','Vehicular Homicide','Speeding Violations']],
+                'weapons' => ['title'=>'Weapons','color'=>'#dc2626','types'=>['H','RC'],
+                    'subs'=>['Illegal Firearm Possession','Unlawful Carrying','Armed Robbery','Weapons Trafficking','Brandishing a Weapon','Possession of Illegal Weapons']],
+                'juvenile' => ['title'=>'Juvenile','color'=>'#10b981','types'=>['SC','O'],
+                    'subs'=>['Truancy','Underage Drinking','Juvenile Theft','Juvenile Assault','Vandalism by Minors']],
+                'family' => ['title'=>'Family & Personal Safety','color'=>'#6366f1','types'=>['SC','PV'],
+                    'subs'=>['Missing Person','Child Endangerment','Amber Alert','Stalking','Harassment','Restraining Order Violation','Welfare Check','Suspicious Person','Suspicious Activity']],
+            ];
+        @endphp
+        <div class="absolute top-16 left-1/2 -translate-x-1/2 z-[500] w-[min(96vw,1100px)]" data-crime-filter>
+            <div class="crime-pill-row flex items-center gap-1.5 overflow-x-auto bg-white/95 backdrop-blur rounded-full shadow-lg ring-1 ring-ink-100 p-1.5">
+                <button type="button" data-cat="all" class="crime-pill is-active shrink-0">All</button>
+                @foreach ($crimeCats as $key => $cat)
+                    <button type="button" data-cat="{{ $key }}" class="crime-pill shrink-0 inline-flex items-center gap-1.5">
+                        <span class="inline-block w-2 h-2 rounded-full" style="background:{{ $cat['color'] }};"></span>
+                        {{ $cat['title'] }}
+                        <svg class="w-3 h-3 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+                    </button>
+                @endforeach
+            </div>
+
+            {{-- Sub-pill dropdown (hidden until a category is selected) --}}
+            <div data-crime-subs class="hidden mt-2 bg-white/95 backdrop-blur rounded-2xl shadow-lg ring-1 ring-ink-100 p-2">
+                <div class="flex items-center gap-1.5 overflow-x-auto crime-pill-row" data-crime-sub-row></div>
+            </div>
         </div>
 
         {{-- Legend (bottom) --}}
@@ -865,6 +906,29 @@
                 <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> O</span>
             </div>
         </div>
+
+        {{-- Crime filter JSON (consumed by JS in main script) --}}
+        <script type="application/json" data-crime-cats>{!! json_encode($crimeCats) !!}</script>
+
+        <style>
+            .crime-pill { padding: 7px 13px; font-size: 12.5px; font-weight: 600; color: #0c1126; border-radius: 9999px; white-space: nowrap; transition: background .15s, color .15s, box-shadow .15s; }
+            .crime-pill:hover { background: #f1f5f9; }
+            .crime-pill.is-active { background: #0c1126; color: #fff; box-shadow: 0 6px 14px -6px rgba(12,17,38,.4); }
+            .crime-pill.is-active .opacity-60 { opacity: 1; color: #fff; }
+            .crime-pill-row { scrollbar-width: none; -ms-overflow-style: none; }
+            .crime-pill-row::-webkit-scrollbar { display: none; }
+            .crime-sub-pill { padding: 5px 11px; font-size: 11.5px; font-weight: 500; color: #1e3a8a; background: #eef2ff; border-radius: 9999px; white-space: nowrap; transition: background .15s, color .15s; }
+            .crime-sub-pill:hover { background: #c7d2fe; }
+            .crime-sub-pill.is-active { background: #1e3a8a; color: #fff; }
+            @media (prefers-reduced-motion: no-preference) {
+                .crime-pill-marquee { animation: crimePillScroll 28s linear infinite; }
+                .crime-pill-marquee:hover { animation-play-state: paused; }
+            }
+            @keyframes crimePillScroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+        </style>
     </section>
 </div>
 
@@ -4366,17 +4430,77 @@
         var el = document.getElementById('auxilio-map');
         if (!el) return;
         crimeMap = L.map(el, { scrollWheelZoom: true, zoomControl: true }).setView(NEWARK, 12);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution:'© OpenStreetMap contributors © CARTO',
-            subdomains:'abcd', maxZoom: 19
+        // MapTiler hybrid (satellite + labels). Replace MAPTILER_KEY env var with your own key for production.
+        var MAPTILER_KEY = 'get_your_own_OpIi9ZULNHzrESv6T2vL';
+        L.tileLayer('https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=' + MAPTILER_KEY, {
+            attribution:'© MapTiler © OpenStreetMap contributors',
+            tileSize: 256, maxZoom: 22, crossOrigin: true
         }).addTo(crimeMap);
-        L.circle(NEWARK, { radius: 5000, color:'#38bdf8', fillColor:'#38bdf8', weight:1.5, opacity:.7, fillOpacity:.06, dashArray:'6 6' }).addTo(crimeMap);
+        L.circle(NEWARK, { radius: 5000, color:'#38bdf8', fillColor:'#38bdf8', weight:2, opacity:.95, fillOpacity:.05, dashArray:'6 6' }).addTo(crimeMap);
+        crimeMarkers = [];
         INCIDENTS.forEach(function(inc){
             var m = L.marker([inc.lat, inc.lng], { icon: makeIcon(inc.type) }).addTo(crimeMap);
             m.on('click', function(){ openIncident(inc, 'crime'); });
+            crimeMarkers.push({ marker:m, type:inc.type });
         });
+        initCrimeFilters();
         crimeMapInited = true;
         setTimeout(function(){ crimeMap.invalidateSize(); }, 100);
+    }
+    var crimeMarkers = [];
+    function initCrimeFilters() {
+        var root = document.querySelector('[data-view="crime-map"] [data-crime-filter]');
+        if (!root) return;
+        var catsEl = document.querySelector('[data-view="crime-map"] [data-crime-cats]');
+        var cats = catsEl ? JSON.parse(catsEl.textContent || '{}') : {};
+        var subsBox = root.querySelector('[data-crime-subs]');
+        var subRow  = root.querySelector('[data-crime-sub-row]');
+        var countEl = document.querySelector('[data-view="crime-map"] [data-crime-count]');
+        var activeCat = 'all';
+        var activeSub = null;
+
+        function applyFilter() {
+            var visible = 0;
+            crimeMarkers.forEach(function(item){
+                var show = true;
+                if (activeCat !== 'all') {
+                    var cat = cats[activeCat];
+                    show = cat && cat.types && cat.types.indexOf(item.type) !== -1;
+                }
+                if (show) { item.marker.addTo(crimeMap); visible++; }
+                else { crimeMap.removeLayer(item.marker); }
+            });
+            if (countEl) countEl.textContent = 'Live · ' + visible + ' reports';
+        }
+
+        function renderSubs(key) {
+            if (key === 'all' || !cats[key]) { subsBox.classList.add('hidden'); return; }
+            subRow.innerHTML = '';
+            cats[key].subs.forEach(function(s){
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'crime-sub-pill shrink-0';
+                b.textContent = s;
+                b.addEventListener('click', function(){
+                    subRow.querySelectorAll('.crime-sub-pill').forEach(function(p){ p.classList.remove('is-active'); });
+                    if (activeSub === s) { activeSub = null; }
+                    else { activeSub = s; b.classList.add('is-active'); }
+                });
+                subRow.appendChild(b);
+            });
+            subsBox.classList.remove('hidden');
+        }
+
+        root.querySelectorAll('.crime-pill').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                root.querySelectorAll('.crime-pill').forEach(function(p){ p.classList.remove('is-active'); });
+                btn.classList.add('is-active');
+                activeCat = btn.getAttribute('data-cat');
+                activeSub = null;
+                renderSubs(activeCat);
+                applyFilter();
+            });
+        });
     }
     var dispatchMapInited = false, dispatchMap;
     function initDispatchMap() {
