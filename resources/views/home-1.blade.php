@@ -878,7 +878,7 @@
                     'subs'=>['Missing Person','Child Endangerment','Amber Alert','Stalking','Harassment','Restraining Order Violation','Welfare Check','Suspicious Person','Suspicious Activity']],
             ];
         @endphp
-        <div class="absolute top-16 left-1/2 -translate-x-1/2 z-[500] w-[min(96vw,1100px)]" data-crime-filter>
+        <div class="absolute top-20 sm:top-[88px] left-1/2 -translate-x-1/2 z-[500] w-[min(96vw,1100px)]" data-crime-filter>
             <div class="crime-pill-row flex items-center gap-1.5 overflow-x-auto bg-white/95 backdrop-blur rounded-full shadow-lg ring-1 ring-ink-100 p-1.5">
                 <button type="button" data-cat="all" class="crime-pill is-active shrink-0">All</button>
                 @foreach ($crimeCats as $key => $cat)
@@ -4448,6 +4448,52 @@
         setTimeout(function(){ crimeMap.invalidateSize(); }, 100);
     }
     var crimeMarkers = [];
+    var demoMarkers = [];  // dynamic markers added per category filter
+    var STREETS = ['Broad St','Market St','Halsey St','Mt Prospect Ave','Clinton Ave','Ferry St','Bloomfield Ave','South Orange Ave','Frelinghuysen Ave','McCarter Hwy','Avon Ave','Springfield Ave'];
+    function makeDemoIcon(color, label) {
+        return L.divIcon({
+            className: 'crime-marker',
+            html: '<span class="pin" style="background:'+color+'; box-shadow: 0 0 0 2px #fff, 0 6px 12px rgba(0,0,0,.35);">'+label+'</span>',
+            iconSize: [34, 22], iconAnchor: [17, 11]
+        });
+    }
+    function clearDemoMarkers() {
+        demoMarkers.forEach(function(m){ crimeMap.removeLayer(m); });
+        demoMarkers = [];
+    }
+    function spawnDemoMarkersForCategory(catKey, cat) {
+        clearDemoMarkers();
+        if (!cat) return 0;
+        var subs = cat.subs || [];
+        var color = cat.color || '#0c1126';
+        var label = catKey.toUpperCase().slice(0,2);
+        // Spawn one marker per subcategory, distributed within the geofence circle (5km)
+        var count = Math.min(subs.length, 14);
+        for (var i = 0; i < count; i++) {
+            // Deterministic angle + radius from index → spread evenly inside the circle
+            var angle = (i * 137.5) * Math.PI / 180;          // golden-angle distribution
+            var radius = 0.018 + (i % 6) * 0.005;             // ~0.018° ≈ 2km, varies out to ~4km
+            var lat = NEWARK[0] + Math.cos(angle) * radius;
+            var lng = NEWARK[1] + Math.sin(angle) * radius * 1.3;
+            var sub = subs[i];
+            var street = STREETS[i % STREETS.length];
+            var addr = (100 + (i*37) % 800) + ' ' + street + ', Newark, NJ';
+            var inc = {
+                id: 9000 + i,
+                lat: lat, lng: lng, type: catKey,
+                person:{ name: sub, photo:'', hair:'-', eyes:'-', height:'-', weight:'-', sex:'-', race:'-' },
+                address: addr, status: 30 + ((i*17) % 70),
+                agents:[], injured:[],
+                _sub: sub, _cat: cat.title
+            };
+            var m = L.marker([lat, lng], { icon: makeDemoIcon(color, label) }).addTo(crimeMap);
+            m.bindTooltip('<strong>'+sub+'</strong><br/>'+addr, { direction:'top', offset:[0,-8], className:'crime-tooltip' });
+            (function(incident){ m.on('click', function(){ openIncident(incident, 'crime'); }); })(inc);
+            demoMarkers.push(m);
+        }
+        return count;
+    }
+
     function initCrimeFilters() {
         var root = document.querySelector('[data-view="crime-map"] [data-crime-filter]');
         if (!root) return;
@@ -4461,15 +4507,19 @@
 
         function applyFilter() {
             var visible = 0;
+            // base markers
             crimeMarkers.forEach(function(item){
-                var show = true;
-                if (activeCat !== 'all') {
-                    var cat = cats[activeCat];
-                    show = cat && cat.types && cat.types.indexOf(item.type) !== -1;
-                }
+                var show = (activeCat === 'all');
                 if (show) { item.marker.addTo(crimeMap); visible++; }
                 else { crimeMap.removeLayer(item.marker); }
             });
+            // demo markers: spawn fresh per-category
+            if (activeCat !== 'all') {
+                var added = spawnDemoMarkersForCategory(activeCat, cats[activeCat]);
+                visible += added;
+            } else {
+                clearDemoMarkers();
+            }
             if (countEl) countEl.textContent = 'Live · ' + visible + ' reports';
         }
 
