@@ -3966,7 +3966,7 @@
 
             {{-- LEFT: phone-in-hand mockup inside the home-style hero box --}}
             <div class="lg:col-span-6 order-2 lg:order-1 relative">
-                <div class="reveal reveal-right relative mx-auto max-w-md">
+                <div class="reveal reveal-right relative mx-auto max-w-xl">
                     {{-- ambient halos --}}
                     <span class="absolute -inset-10 rounded-[44px] blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(56,189,248,.32) 0%, transparent 70%);"></span>
                     <span class="absolute -bottom-12 -right-6 w-48 h-48 rounded-full blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(99,102,241,.36) 0%, transparent 70%);"></span>
@@ -3981,8 +3981,8 @@
                         <div class="absolute inset-0 scifi-grid opacity-40"></div>
                         {{-- soft inner glow behind the phone --}}
                         <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[80%] rounded-full blur-3xl" style="background:radial-gradient(ellipse, rgba(56,189,248,.28) 0%, transparent 60%);"></span>
-                        {{-- the hand+phone PNG — scaled up so the phone reads big inside the box --}}
-                        <img src="/images/ai-hand-phone-mockup.png" alt="Auxilio app — crime map view held in hand" class="absolute left-1/2 top-1/2 w-[140%] h-auto z-[2]" style="transform: translate(-50%, -50%); filter: drop-shadow(0 30px 50px rgba(0,0,0,.55));" />
+                        {{-- the hand+phone PNG — scaled up so the phone dominates the box --}}
+                        <img src="/images/ai-hand-phone-mockup.png" alt="Auxilio app — crime map view held in hand" class="absolute left-1/2 top-1/2 w-[165%] h-auto z-[2]" style="transform: translate(-50%, -50%); filter: drop-shadow(0 30px 50px rgba(0,0,0,.55));" />
                         {{-- HUD ticker overlay --}}
                         <div class="absolute top-3 left-3 right-3 z-[3] flex items-center justify-between scifi-mono text-[9px] text-cyan-300/85">
                             <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full" style="background:#34d399; animation: auxTickerDot 1.4s infinite;"></span>NODE-01 / SYNC</span>
@@ -4043,10 +4043,10 @@
 
             {{-- RIGHT: AI badge + heading + body + orb + stats --}}
             <div class="lg:col-span-6 order-1 lg:order-2 relative">
-                {{-- AI orb — GIF rendered transparent via mix-blend-mode: screen
-                     (the GIF's #0a0826 backdrop blends into black, only the bright orb remains) --}}
+                {{-- AI orb — transparent via mix-blend-mode: lighten
+                     (max of GIF vs hero per pixel: dark #0a0826 backdrop loses to any hero color, only the bright orb wins) --}}
                 <span class="pointer-events-none absolute -top-24 -right-24 w-[420px] h-[420px] hidden md:block" style="animation: auxOrbFloat 9s ease-in-out infinite;" aria-hidden="true">
-                    <img src="/images/ai-orb.gif" alt="" class="w-full h-full object-cover" style="mix-blend-mode: screen; filter: drop-shadow(0 0 60px rgba(56,189,248,.55));" />
+                    <img src="/images/ai-orb.gif" alt="" class="w-full h-full object-cover" style="mix-blend-mode: lighten; filter: drop-shadow(0 0 60px rgba(56,189,248,.55));" />
                 </span>
 
                 <div class="relative">
