@@ -840,23 +840,23 @@
     <section class="relative w-full" style="height: calc(100vh - 78px);">
         <div id="auxilio-map" class="absolute inset-0 bg-ink-100"></div>
 
-        {{-- Title chip + Filters toggle (top-left) --}}
+        {{-- Title chip + Filters toggle (top-left) — square --}}
         <div class="absolute top-4 left-4 z-[500] flex items-center gap-2">
-            <div class="flex items-center gap-2 rounded-full bg-white shadow-lg ring-1 ring-ink-100 pl-2 pr-4 py-1.5">
-                <a data-route href="#/" class="grid place-items-center w-7 h-7 rounded-full bg-ink-100 hover:bg-ink-200 text-navy-900 transition" aria-label="Home">
+            <div class="flex items-center gap-2 h-10 rounded-md bg-white shadow-lg ring-1 ring-ink-100 pl-1.5 pr-4">
+                <a data-route href="#/" class="grid place-items-center w-7 h-7 rounded-md bg-ink-100 hover:bg-ink-200 text-navy-900 transition" aria-label="Home">
                     <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
                 </a>
                 <span class="text-sm font-bold text-navy-900">Crime Map</span>
                 <span class="text-xs text-ink-500 hidden sm:inline">· Newark, NJ</span>
             </div>
-            <button type="button" data-crime-filter-toggle class="inline-flex items-center gap-1.5 rounded-full bg-white shadow-lg ring-1 ring-ink-100 px-3.5 py-2 text-xs font-bold text-navy-900 hover:ring-brand-300 hover:text-brand-600 transition">
-                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M6 12h12M10 18h4"/></svg>
+            <button type="button" data-crime-filter-toggle class="inline-flex items-center gap-1.5 h-10 px-4 rounded-md bg-white shadow-lg ring-1 ring-ink-100 text-sm font-semibold text-navy-900 hover:ring-brand-300 hover:text-brand-600 transition">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M6 12h12M10 18h4"/></svg>
                 <span>Filters</span>
             </button>
         </div>
 
-        {{-- Live status (top-right) --}}
-        <div class="absolute top-4 right-4 z-[500] inline-flex items-center gap-2 rounded-full bg-white shadow-lg ring-1 ring-ink-100 px-3 py-1.5">
+        {{-- Live status (top-right) — square --}}
+        <div class="absolute top-4 right-4 z-[500] inline-flex items-center gap-2 h-10 rounded-md bg-white shadow-lg ring-1 ring-ink-100 px-3">
             <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-500 pulse-dot text-emerald-500"></span>
             <span class="text-xs font-semibold tracking-wider uppercase text-navy-900" data-crime-count>Live · 15 reports</span>
         </div>
@@ -885,7 +885,7 @@
             ];
         @endphp
         <div class="hidden absolute top-20 sm:top-[88px] left-1/2 -translate-x-1/2 z-[500] w-[min(96vw,1100px)]" data-crime-filter>
-            <div class="crime-pill-row flex items-center gap-1.5 overflow-x-auto bg-white/95 backdrop-blur rounded-full shadow-lg ring-1 ring-ink-100 p-1.5">
+            <div class="crime-pill-row flex items-center gap-1.5 overflow-x-auto bg-white/95 backdrop-blur rounded-md shadow-lg ring-1 ring-ink-100 p-1.5">
                 <button type="button" data-cat="all" class="crime-pill is-active shrink-0">All</button>
                 @foreach ($crimeCats as $key => $cat)
                     <button type="button" data-cat="{{ $key }}" class="crime-pill shrink-0 inline-flex items-center gap-1.5">
@@ -897,19 +897,19 @@
             </div>
 
             {{-- Sub-pill dropdown (hidden until a category is selected) --}}
-            <div data-crime-subs class="hidden mt-2 bg-white/95 backdrop-blur rounded-2xl shadow-lg ring-1 ring-ink-100 p-2">
+            <div data-crime-subs class="hidden mt-2 bg-white/95 backdrop-blur rounded-md shadow-lg ring-1 ring-ink-100 p-2">
                 <div class="flex items-center gap-1.5 overflow-x-auto crime-pill-row" data-crime-sub-row></div>
             </div>
         </div>
 
-        {{-- Legend (bottom) --}}
+        {{-- Legend (bottom) — square --}}
         <div class="absolute bottom-4 left-4 right-4 z-[500] flex justify-center pointer-events-none">
             <div class="pointer-events-auto inline-flex flex-wrap gap-2 rounded-md bg-white/95 backdrop-blur shadow-lg ring-1 ring-ink-100 p-2">
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> SC</span>
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-orange-500"></span> RC</span>
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-red-600"></span> H</span>
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> PV</span>
-                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> O</span>
+                <span class="inline-flex items-center gap-1.5 rounded-md bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> SC</span>
+                <span class="inline-flex items-center gap-1.5 rounded-md bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-orange-500"></span> RC</span>
+                <span class="inline-flex items-center gap-1.5 rounded-md bg-red-100 text-red-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-red-600"></span> H</span>
+                <span class="inline-flex items-center gap-1.5 rounded-md bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> PV</span>
+                <span class="inline-flex items-center gap-1.5 rounded-md bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> O</span>
             </div>
         </div>
 
@@ -917,15 +917,18 @@
         <script type="application/json" data-crime-cats>{!! json_encode($crimeCats) !!}</script>
 
         <style>
-            .crime-pill { padding: 7px 13px; font-size: 12.5px; font-weight: 600; color: #0c1126; border-radius: 9999px; white-space: nowrap; transition: background .15s, color .15s, box-shadow .15s; }
+            .crime-pill { padding: 7px 13px; font-size: 12.5px; font-weight: 600; color: #0c1126; border-radius: 6px; white-space: nowrap; transition: background .15s, color .15s, box-shadow .15s; }
             .crime-pill:hover { background: #f1f5f9; }
             .crime-pill.is-active { background: #0c1126; color: #fff; box-shadow: 0 6px 14px -6px rgba(12,17,38,.4); }
             .crime-pill.is-active .opacity-60 { opacity: 1; color: #fff; }
             .crime-pill-row { scrollbar-width: none; -ms-overflow-style: none; }
             .crime-pill-row::-webkit-scrollbar { display: none; }
-            .crime-sub-pill { padding: 5px 11px; font-size: 11.5px; font-weight: 500; color: #1e3a8a; background: #eef2ff; border-radius: 9999px; white-space: nowrap; transition: background .15s, color .15s; }
+            .crime-sub-pill { padding: 5px 11px; font-size: 11.5px; font-weight: 500; color: #1e3a8a; background: #eef2ff; border-radius: 6px; white-space: nowrap; transition: background .15s, color .15s; }
             .crime-sub-pill:hover { background: #c7d2fe; }
             .crime-sub-pill.is-active { background: #1e3a8a; color: #fff; }
+            /* Leaflet zoom controls: square them too */
+            [data-view="crime-map"] .leaflet-control-zoom a { border-radius: 6px !important; }
+            [data-view="crime-map"] .leaflet-control-zoom { border-radius: 6px !important; overflow: hidden; }
             @media (prefers-reduced-motion: no-preference) {
                 .crime-pill-marquee { animation: crimePillScroll 28s linear infinite; }
                 .crime-pill-marquee:hover { animation-play-state: paused; }
@@ -4436,7 +4439,7 @@
         var el = document.getElementById('auxilio-map');
         if (!el) return;
         crimeMap = L.map(el, { scrollWheelZoom: true, zoomControl: false }).setView(NEWARK, 12);
-        L.control.zoom({ position: 'bottomright' }).addTo(crimeMap);
+        L.control.zoom({ position: 'bottomleft' }).addTo(crimeMap);
         // MapTiler hybrid-v4 (satellite + labels). Per Auxilio APP LLC account.
         var MAPTILER_KEY = 'ZeehnWq20vkTFR42zObM';
         L.tileLayer('https://api.maptiler.com/maps/hybrid-v4/{z}/{x}/{y}.jpg?key=' + MAPTILER_KEY, {
