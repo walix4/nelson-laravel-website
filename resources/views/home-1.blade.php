@@ -3974,14 +3974,14 @@
                     <span class="hidden md:block pointer-events-none absolute inset-0 -m-12 rounded-full" style="border:1px dashed rgba(125,211,252,.20); animation: auxOrbit 60s linear infinite;"></span>
                     <span class="hidden md:block pointer-events-none absolute inset-0 -m-24 rounded-full" style="border:1px dashed rgba(165,180,252,.16); animation: auxOrbit 90s linear infinite reverse;"></span>
 
-                    {{-- main mockup box --}}
-                    <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 scifi-glow-cyan scifi-corner" style="background:radial-gradient(ellipse at 50% 40%, #112a5e 0%, #050d2a 70%); box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
+                    {{-- main mockup box (square — matches phone+hand 4:3 image better than 4:5 portrait) --}}
+                    <div class="relative rounded-[32px] overflow-hidden aspect-square ring-1 ring-white/15 scifi-glow-cyan scifi-corner" style="background:radial-gradient(ellipse at 50% 40%, #112a5e 0%, #050d2a 70%); box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
                         {{-- grid background inside the box --}}
                         <div class="absolute inset-0 scifi-grid opacity-40"></div>
                         {{-- soft inner glow behind the phone --}}
                         <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[80%] rounded-full blur-3xl" style="background:radial-gradient(ellipse, rgba(56,189,248,.28) 0%, transparent 60%);"></span>
-                        {{-- the hand+phone PNG --}}
-                        <img src="/images/ai-hand-phone-mockup.png" alt="Auxilio app — crime map view held in hand" class="absolute inset-0 w-full h-full object-contain p-4 z-[2]" style="filter: drop-shadow(0 30px 50px rgba(0,0,0,.55));" />
+                        {{-- the hand+phone PNG — natural size, fills horizontally --}}
+                        <img src="/images/ai-hand-phone-mockup.png" alt="Auxilio app — crime map view held in hand" class="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full h-auto z-[2]" style="filter: drop-shadow(0 30px 50px rgba(0,0,0,.55));" />
                         {{-- HUD ticker overlay --}}
                         <div class="absolute top-3 left-3 right-3 z-[3] flex items-center justify-between scifi-mono text-[9px] text-cyan-300/85">
                             <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full" style="background:#34d399; animation: auxTickerDot 1.4s infinite;"></span>NODE-01 / SYNC</span>
@@ -4042,9 +4042,9 @@
 
             {{-- RIGHT: AI badge + heading + body + orb + stats --}}
             <div class="lg:col-span-6 order-1 lg:order-2 relative">
-                {{-- The orb sits as a soft background visual behind the copy --}}
-                <span class="pointer-events-none absolute -top-12 -right-10 w-[420px] h-[420px] opacity-70 hidden md:block" style="animation: auxOrbFloat 9s ease-in-out infinite;">
-                    <img src="/images/ai-orb.gif" alt="" class="w-full h-full object-contain" style="filter: drop-shadow(0 0 40px rgba(56,189,248,.45));" aria-hidden="true" />
+                {{-- Orb — small, top-right, behind copy. mix-blend-mode: screen knocks out the GIF's white bg on the navy. --}}
+                <span class="pointer-events-none absolute -top-20 -right-16 w-[300px] h-[300px] hidden md:block" style="animation: auxOrbFloat 9s ease-in-out infinite;" aria-hidden="true">
+                    <img src="/images/ai-orb.gif" alt="" class="w-full h-full object-contain" style="mix-blend-mode: screen; filter: drop-shadow(0 0 60px rgba(56,189,248,.55));" />
                 </span>
 
                 <div class="relative">
