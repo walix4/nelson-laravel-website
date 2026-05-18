@@ -3875,70 +3875,311 @@
 ============================================================--}}
 <div data-view="auxilio-ai" class="hidden">
 
-    {{-- HERO --}}
-    <section class="relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%), linear-gradient(160deg, #050d2a 0%, #0a1a4a 35%, #0d1f56 65%, #061229 100%);">
-        <span class="pointer-events-none absolute -top-32 -left-20 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(56,189,248,.25) 0%, transparent 70%);"></span>
-        <span class="pointer-events-none absolute bottom-0 -right-20 w-[560px] h-[560px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(99,102,241,.25) 0%, transparent 70%);"></span>
+    {{-- SCI-FI SHARED STYLES — used across the Auxilio AI page --}}
+    <style>
+        /* ----- AI page scroll-triggered animations ----- */
+        [data-view="auxilio-ai"] .ai-anim {
+            opacity:0; transform: translateY(28px); filter: blur(6px);
+            transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1), filter .9s ease;
+        }
+        [data-view="auxilio-ai"] .ai-anim.is-in { opacity:1; transform: none; filter: blur(0); }
+        [data-view="auxilio-ai"] .ai-anim.from-left  { transform: translateX(-40px); }
+        [data-view="auxilio-ai"] .ai-anim.from-right { transform: translateX(40px); }
+        [data-view="auxilio-ai"] .ai-anim.from-left.is-in,
+        [data-view="auxilio-ai"] .ai-anim.from-right.is-in { transform: none; }
+        [data-view="auxilio-ai"] .ai-anim.zoom { transform: scale(.92); }
+        [data-view="auxilio-ai"] .ai-anim.zoom.is-in { transform: scale(1); }
+        [data-view="auxilio-ai"] .ai-d1 { transition-delay: .08s; }
+        [data-view="auxilio-ai"] .ai-d2 { transition-delay: .18s; }
+        [data-view="auxilio-ai"] .ai-d3 { transition-delay: .28s; }
+        [data-view="auxilio-ai"] .ai-d4 { transition-delay: .38s; }
+        [data-view="auxilio-ai"] .ai-d5 { transition-delay: .48s; }
+        [data-view="auxilio-ai"] .ai-stagger > * { opacity:0; transform: translateY(22px); filter: blur(4px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1), filter .6s ease; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > * { opacity:1; transform:none; filter: blur(0); }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(1) { transition-delay: .05s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(2) { transition-delay: .15s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(3) { transition-delay: .25s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(4) { transition-delay: .35s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(5) { transition-delay: .45s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(6) { transition-delay: .55s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(7) { transition-delay: .60s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(8) { transition-delay: .65s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(9) { transition-delay: .70s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(10){ transition-delay: .75s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(11){ transition-delay: .80s; }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(12){ transition-delay: .85s; }
 
-        <div class="relative mx-auto max-w-5xl px-5 sm:px-8 py-20 lg:py-28 text-center">
-            <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wider" style="background:rgba(56,189,248,.16); box-shadow: inset 0 0 0 1px rgba(125,211,252,.45);">
-                <svg class="w-3.5 h-3.5" style="color:#7dd3fc;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.5 5 5 1.5-5 1.5L12 15l-1.5-5-5-1.5 5-1.5L12 2z"/></svg>
-                Auxilio Network AI
-            </span>
-            <h1 class="reveal reveal-delay-1 mt-5 font-display font-extrabold text-4xl sm:text-5xl lg:text-[64px] leading-[1.05] tracking-tight">
-                Intelligent <span style="background:linear-gradient(90deg,#38bdf8,#a5b4fc); -webkit-background-clip:text; background-clip:text; color:transparent;">Public Safety Platform.</span>
-            </h1>
-            <p class="reveal reveal-delay-2 mt-6 mx-auto max-w-3xl text-base sm:text-lg text-white/70 leading-relaxed">
-                An advanced artificial intelligence platform built to protect families, communities, and cities through real-time crime intelligence, emergency response technology, and intelligent network communication.
-            </p>
+        [data-view="auxilio-ai"] .scifi-grid {
+            background-image:
+                linear-gradient(rgba(56,189,248,.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56,189,248,.06) 1px, transparent 1px);
+            background-size: 48px 48px;
+            background-position: -1px -1px;
+        }
+        [data-view="auxilio-ai"] .scifi-scan {
+            position:absolute; inset:0; pointer-events:none;
+            background: linear-gradient(180deg, transparent 0%, transparent 49%, rgba(125,211,252,.18) 50%, transparent 51%, transparent 100%);
+            background-size: 100% 6px;
+            opacity:.25; mix-blend-mode: screen; animation: scifiScan 8s linear infinite;
+        }
+        @keyframes scifiScan { from{background-position-y:0;} to{background-position-y:200px;} }
+        [data-view="auxilio-ai"] .scifi-mono { font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace; letter-spacing:.18em; text-transform:uppercase; }
+        [data-view="auxilio-ai"] .scifi-chip {
+            display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:9999px;
+            font-size:10.5px; font-weight:700; font-family: ui-monospace, "SF Mono", monospace; letter-spacing:.18em; text-transform:uppercase;
+            background: rgba(56,189,248,.10); color:#7dd3fc; box-shadow: inset 0 0 0 1px rgba(125,211,252,.30);
+        }
+        [data-view="auxilio-ai"] .scifi-glow-cyan { box-shadow: 0 0 0 1px rgba(56,189,248,.35), 0 0 30px -8px rgba(56,189,248,.5), inset 0 0 30px -10px rgba(56,189,248,.18); }
+        [data-view="auxilio-ai"] .scifi-glow-violet { box-shadow: 0 0 0 1px rgba(165,180,252,.35), 0 0 30px -8px rgba(99,102,241,.5), inset 0 0 30px -10px rgba(99,102,241,.18); }
+        [data-view="auxilio-ai"] .scifi-corner::before, [data-view="auxilio-ai"] .scifi-corner::after { content:""; position:absolute; width:14px; height:14px; border:1.5px solid #38bdf8; pointer-events:none; }
+        [data-view="auxilio-ai"] .scifi-corner::before { top:-2px; left:-2px; border-right:0; border-bottom:0; }
+        [data-view="auxilio-ai"] .scifi-corner::after { bottom:-2px; right:-2px; border-left:0; border-top:0; }
+        [data-view="auxilio-ai"] .scifi-hex {
+            clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0% 50%);
+        }
+        @keyframes auxOrbFloat { 0%,100%{transform:translateY(0) rotate(0);} 50%{transform:translateY(-14px) rotate(3deg);} }
+        @keyframes auxPulse { 0%,100%{opacity:.6; transform:scale(1);} 50%{opacity:1; transform:scale(1.06);} }
+        @keyframes auxOrbit { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+        @keyframes auxLineSweep { 0%{transform:translateX(-100%);} 100%{transform:translateX(100%);} }
+        @keyframes auxTickerDot { 0%,49%{opacity:.25;} 50%,100%{opacity:1;} }
+        @keyframes auxBlink { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+        [data-view="auxilio-ai"] .ai-caret::after { content:"_"; display:inline-block; margin-left:2px; animation: auxBlink 1s steps(2) infinite; color:#38bdf8; }
+        [data-view="auxilio-ai"] .scifi-hud { background: linear-gradient(160deg, rgba(10,26,74,.85), rgba(6,18,41,.85)); border:1px solid rgba(125,211,252,.18); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        [data-view="auxilio-ai"] .scifi-divider {
+            height:1px;
+            background: linear-gradient(90deg, transparent, rgba(125,211,252,.5), transparent);
+        }
+    </style>
+
+    {{-- HERO — split: phone mockup LEFT (in home-style box), AI orb + copy RIGHT --}}
+    <section class="relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 12% -10%, rgba(56,189,248,.28) 0%, transparent 55%), radial-gradient(ellipse at 92% 110%, rgba(99,102,241,.32) 0%, transparent 55%), linear-gradient(160deg, #030820 0%, #0a1a4a 30%, #0d1f56 55%, #050b22 100%);">
+        <div class="absolute inset-0 scifi-grid opacity-60 pointer-events-none"></div>
+        <span class="pointer-events-none absolute -top-32 -left-20 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(56,189,248,.32) 0%, transparent 70%);"></span>
+        <span class="pointer-events-none absolute bottom-0 -right-20 w-[560px] h-[560px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(99,102,241,.32) 0%, transparent 70%);"></span>
+        <span class="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[320px] h-[320px] rounded-full blur-3xl opacity-50" style="background: radial-gradient(circle, rgba(125,211,252,.18) 0%, transparent 70%);"></span>
+
+        {{-- subtle scan-line overlay --}}
+        <div class="absolute inset-0 pointer-events-none scifi-scan"></div>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-16 sm:pt-20 lg:pt-24 pb-20 lg:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+
+            {{-- LEFT: phone-in-hand mockup inside the home-style hero box --}}
+            <div class="lg:col-span-6 order-2 lg:order-1 relative">
+                <div class="reveal reveal-right relative mx-auto max-w-md">
+                    {{-- ambient halos --}}
+                    <span class="absolute -inset-10 rounded-[44px] blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(56,189,248,.32) 0%, transparent 70%);"></span>
+                    <span class="absolute -bottom-12 -right-6 w-48 h-48 rounded-full blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(99,102,241,.36) 0%, transparent 70%);"></span>
+
+                    {{-- orbit rings around the box --}}
+                    <span class="hidden md:block pointer-events-none absolute inset-0 -m-12 rounded-full" style="border:1px dashed rgba(125,211,252,.20); animation: auxOrbit 60s linear infinite;"></span>
+                    <span class="hidden md:block pointer-events-none absolute inset-0 -m-24 rounded-full" style="border:1px dashed rgba(165,180,252,.16); animation: auxOrbit 90s linear infinite reverse;"></span>
+
+                    {{-- main mockup box --}}
+                    <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 scifi-glow-cyan scifi-corner" style="background:radial-gradient(ellipse at 50% 40%, #112a5e 0%, #050d2a 70%); box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
+                        {{-- grid background inside the box --}}
+                        <div class="absolute inset-0 scifi-grid opacity-40"></div>
+                        {{-- soft inner glow behind the phone --}}
+                        <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[80%] rounded-full blur-3xl" style="background:radial-gradient(ellipse, rgba(56,189,248,.28) 0%, transparent 60%);"></span>
+                        {{-- the hand+phone PNG --}}
+                        <img src="/images/ai-hand-phone-mockup.png" alt="Auxilio app — crime map view held in hand" class="absolute inset-0 w-full h-full object-contain p-4 z-[2]" style="filter: drop-shadow(0 30px 50px rgba(0,0,0,.55));" />
+                        {{-- HUD ticker overlay --}}
+                        <div class="absolute top-3 left-3 right-3 z-[3] flex items-center justify-between scifi-mono text-[9px] text-cyan-300/85">
+                            <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full" style="background:#34d399; animation: auxTickerDot 1.4s infinite;"></span>NODE-01 / SYNC</span>
+                            <span>SIG · 99.4%</span>
+                        </div>
+                        {{-- subtle sweep line --}}
+                        <span class="absolute inset-x-0 top-1/3 h-px z-[3] overflow-hidden">
+                            <span class="block h-full w-1/2" style="background:linear-gradient(90deg, transparent, #7dd3fc, transparent); animation: auxLineSweep 4s ease-in-out infinite;"></span>
+                        </span>
+                        {{-- bottom HUD strip --}}
+                        <div class="absolute bottom-3 left-3 right-3 z-[3] scifi-hud rounded-lg px-3 py-2 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full" style="background:#38bdf8; box-shadow:0 0 8px #38bdf8;"></span>
+                            <span class="scifi-mono text-[9px] text-cyan-200/80">AI · LIVE FEED</span>
+                            <span class="ml-auto scifi-mono text-[9px] text-white/60">PINGS · 14/s</span>
+                        </div>
+                    </div>
+
+                    {{-- ANALYZING float card — top right --}}
+                    <div class="hidden md:flex absolute -right-6 top-8 items-center gap-3 rounded-2xl scifi-hud px-4 py-3 z-10 text-white" style="min-width:230px; animation: floatY 6s ease-in-out infinite;">
+                        <span class="flex w-11 h-11 items-center justify-center rounded-xl text-navy-900 shrink-0" style="background:linear-gradient(135deg,#38bdf8,#7dd3fc); box-shadow: 0 0 20px -5px #38bdf8;">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>
+                        </span>
+                        <div class="leading-tight">
+                            <div class="scifi-mono text-[10px] font-bold" style="color:#7dd3fc;">AI · ANALYZING</div>
+                            <div class="font-display text-[13px] font-bold mt-0.5">142 signals/sec</div>
+                        </div>
+                    </div>
+
+                    {{-- THREAT badge (hexagonal) --}}
+                    <div class="hidden md:flex absolute -left-7 top-1/3 items-center justify-center w-20 h-20 z-10 scifi-hex" style="background:linear-gradient(135deg,#1d4ed8,#6366f1); box-shadow: 0 0 30px -6px #38bdf8;">
+                        <span class="absolute inset-0 scifi-hex" style="background:linear-gradient(135deg,#1d4ed8,#6366f1); animation: auxPulse 2.2s infinite;"></span>
+                        <span class="relative font-display font-extrabold text-white text-[11px] tracking-[.14em]">NEURAL</span>
+                    </div>
+
+                    {{-- RESPONDER float card — mid right --}}
+                    <div class="hidden md:flex absolute -right-12 items-center gap-3 rounded-2xl text-white px-4 py-3 z-10 scifi-hud" style="top:60%; min-width:240px; animation: floatY 6s ease-in-out infinite; animation-delay:1s;">
+                        <span class="flex w-11 h-11 items-center justify-center rounded-xl text-navy-900 shrink-0" style="background:linear-gradient(135deg,#34d399,#10b981); box-shadow:0 0 18px -4px #34d399;">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                        </span>
+                        <div class="leading-tight">
+                            <div class="scifi-mono text-[10px] font-bold" style="color:#34d399;">RESPONSE · 28S</div>
+                            <div class="font-display text-[13px] font-bold mt-0.5">Officer routed</div>
+                        </div>
+                    </div>
+
+                    {{-- DATA STREAM card — bottom --}}
+                    <div class="hidden md:flex absolute left-6 -bottom-6 items-center gap-3 rounded-2xl text-white px-4 py-3 z-10 scifi-hud" style="min-width:260px; animation: floatY 6s ease-in-out infinite; animation-delay:.4s;">
+                        <span class="flex w-10 h-10 items-center justify-center rounded-xl text-navy-900 shrink-0" style="background:linear-gradient(135deg,#a5b4fc,#818cf8); box-shadow:0 0 18px -4px #a5b4fc;">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h10M4 18h7"/></svg>
+                        </span>
+                        <div class="leading-tight">
+                            <div class="scifi-mono text-[10px] font-bold" style="color:#a5b4fc;">DATA · STREAMING</div>
+                            <div class="font-display text-[13px] font-bold mt-0.5">All nodes online</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- RIGHT: AI badge + heading + body + orb + stats --}}
+            <div class="lg:col-span-6 order-1 lg:order-2 relative">
+                {{-- The orb sits as a soft background visual behind the copy --}}
+                <span class="pointer-events-none absolute -top-12 -right-10 w-[420px] h-[420px] opacity-70 hidden md:block" style="animation: auxOrbFloat 9s ease-in-out infinite;">
+                    <img src="/images/ai-orb.gif" alt="" class="w-full h-full object-contain" style="filter: drop-shadow(0 0 40px rgba(56,189,248,.45));" aria-hidden="true" />
+                </span>
+
+                <div class="relative">
+                    <span class="reveal scifi-chip">
+                        <span class="relative flex w-1.5 h-1.5">
+                            <span class="absolute inset-0 rounded-full animate-ping opacity-70" style="background:#38bdf8;"></span>
+                            <span class="relative w-1.5 h-1.5 rounded-full" style="background:#38bdf8;"></span>
+                        </span>
+                        AUXILIO · NEURAL CORE v2.6
+                    </span>
+
+                    <h1 class="reveal reveal-delay-1 mt-5 font-display font-extrabold tracking-tight text-white text-[40px] sm:text-5xl lg:text-[60px] leading-[1.04]">
+                        The intelligence<br/>
+                        <span style="background:linear-gradient(90deg,#38bdf8 0%,#818cf8 55%,#a5b4fc 100%); -webkit-background-clip:text; background-clip:text; color:transparent;">behind every second.</span>
+                    </h1>
+
+                    <p class="reveal reveal-delay-2 mt-6 max-w-xl text-base sm:text-lg text-white/70 leading-relaxed">
+                        Auxilio AI synthesizes <span class="text-cyan-300 font-semibold">live incidents</span>, <span class="text-indigo-300 font-semibold">registry signals</span>, <span class="text-emerald-300 font-semibold">responder telemetry</span>, and <span class="text-rose-300 font-semibold">citizen alerts</span> into real-time situational awareness — delivered to your screen in under 30 seconds. Built for families, accessible for every citizen.
+                    </p>
+
+                    {{-- terminal-style status --}}
+                    <div class="reveal reveal-delay-3 mt-7 scifi-hud rounded-xl px-4 py-3 max-w-md">
+                        <div class="flex items-center gap-2 scifi-mono text-[10px] text-cyan-300/80">
+                            <span class="w-2 h-2 rounded-full" style="background:#34d399; animation: auxTickerDot 1.4s infinite;"></span>
+                            CORE · READY
+                            <span class="ml-auto text-white/40">latency · 28ms</span>
+                        </div>
+                        <p class="mt-2 text-[13px] font-mono text-white/85">
+                            <span class="text-emerald-300">$</span> auxilio scan --region=newark<span class="ai-caret"></span>
+                        </p>
+                    </div>
+
+                    {{-- CTAs --}}
+                    <div class="reveal reveal-delay-3 mt-7 flex flex-wrap items-center gap-3">
+                        <a href="#" data-open-chat class="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#0ea5e9,#6366f1); box-shadow: 0 14px 30px -10px rgba(14,165,233,.6);">
+                            Try Auxilio AI
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                        </a>
+                        <a data-route href="#/how-it-works" class="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white/90 transition hover:bg-white/[.08]" style="box-shadow: inset 0 0 0 1px rgba(125,211,252,.30);">
+                            How it works
+                        </a>
+                    </div>
+
+                    {{-- stat row --}}
+                    <dl class="reveal reveal-delay-4 mt-10 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl">
+                        @foreach ([
+                            ['v'=>'&lt; 30s','l'=>'Threat-to-alert','c'=>'#38bdf8'],
+                            ['v'=>'1-tap','l'=>'Emergency','c'=>'#a5b4fc'],
+                            ['v'=>'24/7','l'=>'Live monitoring','c'=>'#34d399'],
+                            ['v'=>'∞','l'=>'Safe zones','c'=>'#fbbf24'],
+                        ] as $s)
+                            <div>
+                                <dt class="font-display text-2xl font-extrabold tracking-tight" style="color:{{ $s['c'] }};">{!! $s['v'] !!}</dt>
+                                <dd class="mt-1 scifi-mono text-[10px] text-white/55">{{ $s['l'] }}</dd>
+                            </div>
+                        @endforeach
+                    </dl>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    {{-- INTRO COPY — 3 paragraphs --}}
-    <section class="relative bg-white py-16 lg:py-20">
-        <div class="mx-auto max-w-3xl px-5 sm:px-8 space-y-6 text-navy-800 leading-relaxed text-[17px]">
-            <p>Designed as the personal safety layer every smartphone should have, Auxilio combines live crime maps, registered offender alerts, AI-powered monitoring, verified responder networks, and one-tap emergency assistance into a single intelligent ecosystem. The platform transforms public safety from reactive to proactive by delivering critical information instantly — before danger escalates.</p>
-            <p>Powered by artificial intelligence, Auxilio AI continuously analyzes live city signals including emergency incidents, crime activity, public safety reports, registry updates, responder locations, and user-generated panic alerts. Within seconds, the system connects the data, evaluates risk, and delivers real-time safety awareness and emergency coordination directly to users and authorities.</p>
-            <p>Auxilio is designed to give every citizen greater control over their environment, helping families make safer decisions without relying on delayed news reports or fragmented information systems.</p>
+    {{-- INTRO COPY — sci-fi HUD console --}}
+    <section class="relative overflow-hidden py-16 lg:py-20 text-white" style="background:linear-gradient(180deg,#050b22 0%,#081336 50%,#050b22 100%);">
+        <div class="absolute inset-0 scifi-grid opacity-50 pointer-events-none"></div>
+        <span class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[640px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(56,189,248,.18) 0%, transparent 70%);"></span>
+
+        <div class="relative mx-auto max-w-4xl px-5 sm:px-8">
+            <div class="ai-anim zoom scifi-hud rounded-2xl p-1.5 relative scifi-corner">
+                {{-- top header bar --}}
+                <div class="flex items-center justify-between gap-3 px-4 py-2 border-b border-cyan-300/15">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full" style="background:#ef4444; opacity:.7;"></span>
+                        <span class="w-2.5 h-2.5 rounded-full" style="background:#facc15; opacity:.7;"></span>
+                        <span class="w-2.5 h-2.5 rounded-full" style="background:#22c55e; opacity:.7;"></span>
+                        <span class="scifi-mono text-[10px] text-white/50 ml-2">// auxilio · about</span>
+                    </div>
+                    <span class="scifi-mono text-[10px] text-cyan-300/70">build · 2.6.041</span>
+                </div>
+                {{-- body --}}
+                <div class="px-5 sm:px-7 py-7 space-y-5 leading-relaxed text-[16px] text-white/75">
+                    <p><span class="scifi-mono text-cyan-300/80 text-[11px] mr-2">[01]</span>Designed as the personal safety layer every smartphone should have, Auxilio combines live crime maps, registered offender alerts, AI-powered monitoring, verified responder networks, and one-tap emergency assistance into a single intelligent ecosystem. The platform transforms public safety from reactive to proactive by delivering critical information instantly — <span class="text-cyan-300 font-semibold">before danger escalates.</span></p>
+                    <div class="scifi-divider"></div>
+                    <p><span class="scifi-mono text-indigo-300/80 text-[11px] mr-2">[02]</span>Powered by artificial intelligence, Auxilio AI continuously analyzes live city signals including emergency incidents, crime activity, public safety reports, registry updates, responder locations, and user-generated panic alerts. Within seconds, the system connects the data, evaluates risk, and delivers <span class="text-indigo-300 font-semibold">real-time safety awareness</span> and emergency coordination directly to users and authorities.</p>
+                    <div class="scifi-divider"></div>
+                    <p><span class="scifi-mono text-emerald-300/80 text-[11px] mr-2">[03]</span>Auxilio is designed to give every citizen greater control over their environment, helping families make safer decisions <span class="text-emerald-300 font-semibold">without relying on delayed news reports</span> or fragmented information systems.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    {{-- DEFINITION CALLOUT + TAGLINE PULL QUOTE --}}
-    <section class="relative py-16 lg:py-20" style="background:linear-gradient(180deg,#f6f8fc 0%,#eef2fb 100%);">
-        <div class="mx-auto max-w-4xl px-5 sm:px-8">
-            <div class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider" style="background:rgba(226,75,74,.08); color:#c1272d;">
+    {{-- DEFINITION CALLOUT + TAGLINE — sci-fi --}}
+    <section class="relative overflow-hidden py-16 lg:py-20 text-white" style="background:linear-gradient(180deg,#050b22,#0a1a4a,#050b22);">
+        <div class="absolute inset-0 scifi-grid opacity-40 pointer-events-none"></div>
+        <span class="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 w-[640px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(226,75,74,.16) 0%, transparent 70%);"></span>
+
+        <div class="relative mx-auto max-w-4xl px-5 sm:px-8">
+            <div class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1.5 scifi-mono text-[10.5px] font-bold" style="background:rgba(226,75,74,.12); color:#fda4af; box-shadow: inset 0 0 0 1px rgba(226,75,74,.4);">
                 <span class="relative flex w-2 h-2">
-                    <span class="absolute inline-flex w-2 h-2 rounded-full opacity-75 animate-ping" style="background:#E24B4A"></span>
-                    <span class="relative inline-flex w-2 h-2 rounded-full" style="background:#E24B4A"></span>
+                    <span class="absolute inline-flex w-2 h-2 rounded-full opacity-75 animate-ping" style="background:#fda4af"></span>
+                    <span class="relative inline-flex w-2 h-2 rounded-full" style="background:#fda4af"></span>
                 </span>
                 AI-Powered Safety
             </div>
-            <h2 class="reveal mt-4 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">What Auxilio actually is.</h2>
-            <p class="reveal mt-2 text-navy-700/80 text-[15px]">The intelligent personal safety layer that turns your phone into a real-time shield for your family and community.</p>
+            <h2 class="reveal mt-4 font-display font-extrabold text-3xl sm:text-4xl tracking-tight">What Auxilio <span style="background:linear-gradient(90deg,#38bdf8,#a5b4fc); -webkit-background-clip:text; background-clip:text; color:transparent;">actually is.</span></h2>
+            <p class="reveal mt-2 text-white/65 text-[15px]">The intelligent personal safety layer that turns your phone into a real-time shield for your family and community.</p>
 
-            <div class="reveal mt-8 rounded-3xl bg-white p-7 sm:p-9 shadow-[0_30px_60px_-30px_rgba(8,15,40,.18)] border border-ink-100" style="border-left:4px solid #E24B4A;">
-                <p class="text-navy-900 leading-[1.75] text-[16px] sm:text-[17px]">
-                    <strong class="font-semibold">Auxilio</strong> is an AI-powered community safety platform that unifies <span class="font-semibold" style="color:#0ea5e9">live crime data</span>, <span class="font-semibold" style="color:#6366f1">registered offender proximity alerts</span>, <span class="font-semibold" style="color:#10b981">verified emergency responders</span>, and <span class="font-semibold" style="color:#E24B4A">one-tap panic response</span> into a single, always-on experience. Its adaptive intelligence engine continuously monitors incident signals across your city — synthesizing reports, registry updates, and agent locations into actionable awareness in <span class="font-semibold">under 30 seconds</span> — so every citizen, from parents to seniors, always knows exactly how safe they are and how fast help can arrive.
+            <div class="reveal mt-8 relative rounded-3xl scifi-hud p-7 sm:p-9 scifi-corner overflow-hidden" style="border-left:3px solid #E24B4A;">
+                <span class="pointer-events-none absolute -top-16 -left-16 w-48 h-48 rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(226,75,74,.28) 0%, transparent 70%);"></span>
+                <p class="relative text-white/90 leading-[1.78] text-[16px] sm:text-[17px]">
+                    <strong class="font-semibold text-white">Auxilio</strong> is an AI-powered community safety platform that unifies <span class="font-semibold text-cyan-300">live crime data</span>, <span class="font-semibold text-indigo-300">registered offender proximity alerts</span>, <span class="font-semibold text-emerald-300">verified emergency responders</span>, and <span class="font-semibold text-rose-300">one-tap panic response</span> into a single, always-on experience. Its adaptive intelligence engine continuously monitors incident signals across your city — synthesizing reports, registry updates, and agent locations into actionable awareness in <span class="font-semibold text-white">under 30 seconds</span> — so every citizen, from parents to seniors, always knows exactly how safe they are and how fast help can arrive.
                 </p>
             </div>
 
             <figure class="reveal mt-10 text-center">
-                <div class="mx-auto w-12 h-px" style="background:linear-gradient(90deg,transparent,#0ea5e9,transparent);"></div>
-                <blockquote class="mt-6 font-display font-bold text-2xl sm:text-[28px] text-navy-900 leading-snug">
-                    "Your safety, your control — <span style="background:linear-gradient(90deg,#0ea5e9,#6366f1); -webkit-background-clip:text; background-clip:text; color:transparent;">not the news feed's</span>."
+                <div class="mx-auto w-12 h-px" style="background:linear-gradient(90deg,transparent,#38bdf8,transparent);"></div>
+                <blockquote class="mt-6 font-display font-bold text-2xl sm:text-[28px] text-white leading-snug">
+                    "Your safety, your control — <span style="background:linear-gradient(90deg,#38bdf8,#a5b4fc); -webkit-background-clip:text; background-clip:text; color:transparent;">not the news feed's</span>."
                 </blockquote>
-                <div class="mx-auto mt-6 w-12 h-px" style="background:linear-gradient(90deg,transparent,#6366f1,transparent);"></div>
+                <div class="mx-auto mt-6 w-12 h-px" style="background:linear-gradient(90deg,transparent,#a5b4fc,transparent);"></div>
             </figure>
         </div>
     </section>
 
-    {{-- CORE INTELLIGENCE PILLARS — 4 cards --}}
-    <section class="relative bg-white py-16 lg:py-20">
-        <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    {{-- CORE INTELLIGENCE PILLARS — sci-fi --}}
+    <section class="relative overflow-hidden py-16 lg:py-20 text-white" style="background:linear-gradient(180deg,#050b22,#081336 50%,#050b22);">
+        <div class="absolute inset-0 scifi-grid opacity-50 pointer-events-none"></div>
+        <span class="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[640px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(56,189,248,.18) 0%, transparent 70%);"></span>
+
+        <div class="relative mx-auto max-w-6xl px-5 sm:px-8">
             <div class="text-center max-w-2xl mx-auto">
-                <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#0ea5e9;">Core intelligence pillars</p>
-                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">
-                    Four engines, <span style="background:linear-gradient(90deg,#0ea5e9,#6366f1); -webkit-background-clip:text; background-clip:text; color:transparent;">one safety net.</span>
+                <p class="scifi-mono text-[11px] font-bold" style="color:#7dd3fc;">// CORE INTELLIGENCE</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight">
+                    Four engines, <span style="background:linear-gradient(90deg,#38bdf8,#a5b4fc); -webkit-background-clip:text; background-clip:text; color:transparent;">one safety net.</span>
                 </h2>
             </div>
             @php
@@ -3949,55 +4190,68 @@
                     ['t'=>'Adaptive AI engine','d'=>'Continuously learns neighborhood patterns to surface threats before they escalate.','c'=>'#10b981','p'=>'M9.75 17L9 21l-1 1m6-5l.75 4 1 1M4 4h16a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1z M8 9h.01M16 9h.01M9 13h6'],
                 ];
             @endphp
-            <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                @foreach ($pillars as $p)
-                    <article class="group relative rounded-2xl bg-white border border-ink-100 p-6 transition hover:-translate-y-1 hover:shadow-xl hover:border-transparent overflow-hidden">
-                        <span class="absolute inset-x-0 top-0 h-1 opacity-0 group-hover:opacity-100 transition" style="background:linear-gradient(90deg,{{ $p['c'] }},{{ $p['c'] }}88);"></span>
-                        <span class="grid place-items-center w-12 h-12 rounded-xl text-white shadow-lg" style="background:linear-gradient(135deg,{{ $p['c'] }},{{ $p['c'] }}cc);">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $p['p'] }}"/></svg>
-                        </span>
-                        <h3 class="mt-5 font-display font-bold text-navy-900 text-[16px] leading-snug">{{ $p['t'] }}</h3>
-                        <p class="mt-2 text-navy-700/80 leading-relaxed text-[14px]">{{ $p['d'] }}</p>
+            <div class="ai-anim ai-stagger mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                @foreach ($pillars as $i => $p)
+                    @php $idx = str_pad($i+1, 2, '0', STR_PAD_LEFT); @endphp
+                    <article class="group relative rounded-2xl scifi-hud p-6 transition hover:-translate-y-1 overflow-hidden scifi-corner">
+                        <span class="absolute inset-x-0 top-0 h-px opacity-60 group-hover:opacity-100 transition" style="background:linear-gradient(90deg, transparent, {{ $p['c'] }}, transparent);"></span>
+                        <span class="pointer-events-none absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition" style="background:radial-gradient(circle, {{ $p['c'] }}44 0%, transparent 70%);"></span>
+
+                        <div class="flex items-center justify-between">
+                            <span class="grid place-items-center w-12 h-12 rounded-xl text-navy-900 shadow-lg" style="background:linear-gradient(135deg,{{ $p['c'] }},{{ $p['c'] }}aa); box-shadow: 0 0 22px -6px {{ $p['c'] }};">
+                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $p['p'] }}"/></svg>
+                            </span>
+                            <span class="scifi-mono text-[10px]" style="color:{{ $p['c'] }};">P-{{ $idx }}</span>
+                        </div>
+                        <h3 class="mt-5 font-display font-bold text-white text-[16px] leading-snug">{{ $p['t'] }}</h3>
+                        <p class="mt-2 text-white/65 leading-relaxed text-[13.5px]">{{ $p['d'] }}</p>
                     </article>
                 @endforeach
             </div>
         </div>
     </section>
 
-    {{-- AT A GLANCE — 4 hero stats --}}
+    {{-- AT A GLANCE — sci-fi telemetry --}}
     <section class="relative py-16 lg:py-20 overflow-hidden text-white" style="background:linear-gradient(160deg, #050d2a 0%, #0a1a4a 50%, #061229 100%);">
-        <span class="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 w-[560px] h-[560px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(56,189,248,.18) 0%, transparent 70%);"></span>
+        <div class="absolute inset-0 scifi-grid opacity-60 pointer-events-none"></div>
+        <span class="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 w-[560px] h-[560px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(56,189,248,.20) 0%, transparent 70%);"></span>
         <div class="relative mx-auto max-w-6xl px-5 sm:px-8">
             <div class="text-center max-w-2xl mx-auto">
-                <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#7dd3fc;">At a glance</p>
+                <p class="scifi-mono text-[11px] font-bold" style="color:#7dd3fc;">// TELEMETRY</p>
                 <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight">The numbers that <span style="background:linear-gradient(90deg,#38bdf8,#a5b4fc); -webkit-background-clip:text; background-clip:text; color:transparent;">matter most.</span></h2>
             </div>
             @php
                 $atGlance = [
-                    ['n'=>'&lt; 30s','l'=>'Threat-to-alert response','c'=>'#38bdf8'],
-                    ['n'=>'1-tap','l'=>'Emergency activation','c'=>'#a5b4fc'],
-                    ['n'=>'24/7','l'=>'Live monitoring','c'=>'#34d399'],
-                    ['n'=>'∞','l'=>'Safe zones per family','c'=>'#fbbf24'],
+                    ['n'=>'&lt; 30s','l'=>'Threat-to-alert response','c'=>'#38bdf8','k'=>'T-01'],
+                    ['n'=>'1-tap','l'=>'Emergency activation','c'=>'#a5b4fc','k'=>'T-02'],
+                    ['n'=>'24/7','l'=>'Live monitoring','c'=>'#34d399','k'=>'T-03'],
+                    ['n'=>'∞','l'=>'Safe zones per family','c'=>'#fbbf24','k'=>'T-04'],
                 ];
             @endphp
-            <div class="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="ai-anim ai-stagger mt-12 grid grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach ($atGlance as $s)
-                    <div class="rounded-2xl p-6 text-center" style="background:rgba(255,255,255,.04); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);">
-                        <div class="font-display font-extrabold text-3xl sm:text-4xl tracking-tight" style="color:{{ $s['c'] }};">{!! $s['n'] !!}</div>
-                        <div class="mt-2 text-[12px] uppercase tracking-[.14em] font-semibold text-white/60">{{ $s['l'] }}</div>
+                    <div class="relative rounded-2xl p-6 text-center scifi-hud scifi-corner overflow-hidden">
+                        <span class="pointer-events-none absolute inset-x-0 top-0 h-px" style="background:linear-gradient(90deg, transparent, {{ $s['c'] }}, transparent);"></span>
+                        <div class="scifi-mono text-[9px] mb-1 opacity-60" style="color:{{ $s['c'] }};">{{ $s['k'] }}</div>
+                        <div class="font-display font-extrabold text-3xl sm:text-4xl tracking-tight" style="color:{{ $s['c'] }}; text-shadow: 0 0 14px {{ $s['c'] }}66;">{!! $s['n'] !!}</div>
+                        <div class="mt-2 scifi-mono text-[10px] text-white/55">{{ $s['l'] }}</div>
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
 
-    {{-- CORE FEATURES — 12 cards --}}
-    <section class="relative py-16 lg:py-20" style="background:#f6f8fc;">
-        <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    {{-- CORE FEATURES — sci-fi tile grid --}}
+    <section class="relative overflow-hidden py-16 lg:py-20 text-white" style="background:linear-gradient(180deg,#050b22 0%,#0a1a4a 50%,#050b22 100%);">
+        <div class="absolute inset-0 scifi-grid opacity-50 pointer-events-none"></div>
+        <span class="pointer-events-none absolute -top-32 -right-20 w-[420px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(56,189,248,.20) 0%, transparent 70%);"></span>
+        <span class="pointer-events-none absolute -bottom-20 -left-10 w-[420px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(99,102,241,.22) 0%, transparent 70%);"></span>
+
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
             <div class="text-center max-w-2xl mx-auto">
-                <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#0ea5e9;">Core features</p>
-                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-navy-900">
-                    Every layer of <span style="background:linear-gradient(90deg,#0ea5e9,#6366f1); -webkit-background-clip:text; background-clip:text; color:transparent;">modern safety.</span>
+                <p class="scifi-mono text-[11px] font-bold" style="color:#7dd3fc;">// CAPABILITIES MATRIX</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight">
+                    Every layer of <span style="background:linear-gradient(90deg,#38bdf8,#a5b4fc); -webkit-background-clip:text; background-clip:text; color:transparent;">modern safety.</span>
                 </h2>
             </div>
             @php
@@ -4016,51 +4270,87 @@
                     ['t'=>'Instant citizen ↔ responder comms','i'=>'M21 12a8.5 8.5 0 01-12.6 7.4L3 21l1.6-5.4A8.5 8.5 0 1121 12z'],
                 ];
             @endphp
-            <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="ai-anim ai-stagger mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 @foreach ($auxFeats as $i => $f)
-                    @php $accent = ['#0ea5e9','#6366f1','#22c55e'][$i % 3]; @endphp
-                    <article class="group rounded-2xl bg-white border border-ink-100 p-5 flex items-start gap-4 transition hover:-translate-y-0.5 hover:shadow-lg hover:border-blue-200">
-                        <span class="grid place-items-center shrink-0 w-11 h-11 rounded-xl text-white shadow-lg" style="background:linear-gradient(135deg,{{ $accent }},{{ $accent }}cc);">
+                    @php $accent = ['#38bdf8','#a5b4fc','#34d399'][$i % 3]; $idx = str_pad($i+1, 2, '0', STR_PAD_LEFT); @endphp
+                    <article class="group relative rounded-2xl p-5 flex items-start gap-4 transition hover:-translate-y-1 overflow-hidden scifi-corner" style="background:linear-gradient(160deg, rgba(10,26,74,.55), rgba(6,18,41,.55)); border:1px solid rgba(125,211,252,.16);">
+                        <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition" style="background:radial-gradient(ellipse at top left, {{ $accent }}33, transparent 60%);"></span>
+                        <span class="grid place-items-center shrink-0 w-11 h-11 rounded-xl text-navy-900 shadow-lg" style="background:linear-gradient(135deg,{{ $accent }},{{ $accent }}aa); box-shadow: 0 0 22px -6px {{ $accent }};">
                             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $f['i'] }}"/></svg>
                         </span>
-                        <p class="font-display font-semibold text-navy-900 text-[15px] leading-snug pt-1">{{ $f['t'] }}</p>
+                        <div class="min-w-0 relative">
+                            <p class="scifi-mono text-[10px]" style="color:{{ $accent }};">#{{ $idx }}</p>
+                            <p class="mt-1 font-display font-semibold text-white text-[15px] leading-snug">{{ $f['t'] }}</p>
+                        </div>
                     </article>
                 @endforeach
             </div>
         </div>
     </section>
 
-    {{-- AI SAFETY ENGINE --}}
-    <section class="relative bg-white py-16 lg:py-20">
-        <div class="mx-auto max-w-5xl px-5 sm:px-8">
+    {{-- AI SAFETY ENGINE — HUD terminal --}}
+    <section class="relative overflow-hidden py-16 lg:py-20 text-white" style="background:linear-gradient(180deg,#050b22,#081336);">
+        <div class="absolute inset-0 scifi-grid opacity-50 pointer-events-none"></div>
+        <span class="pointer-events-none absolute top-1/3 -left-20 w-[420px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(56,189,248,.18) 0%, transparent 70%);"></span>
+
+        <div class="relative mx-auto max-w-6xl px-5 sm:px-8">
             <div class="grid lg:grid-cols-12 gap-10 items-center">
-                <div class="lg:col-span-7">
-                    <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#0ea5e9;">AI Safety Engine</p>
-                    <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl leading-tight tracking-tight text-navy-900">
-                        Listens. Analyzes. <span style="background:linear-gradient(90deg,#0ea5e9,#6366f1); -webkit-background-clip:text; background-clip:text; color:transparent;">Responds.</span>
+                <div class="ai-anim from-left lg:col-span-6">
+                    <p class="scifi-mono text-[11px] font-bold" style="color:#7dd3fc;">// AI · SAFETY ENGINE</p>
+                    <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-[1.05] tracking-tight">
+                        Listens. Analyzes. <span style="background:linear-gradient(90deg,#38bdf8,#a5b4fc); -webkit-background-clip:text; background-clip:text; color:transparent;">Responds.</span>
                     </h2>
-                    <p class="mt-4 text-navy-700/80 leading-relaxed text-[17px]">
-                        Auxilio AI listens, analyzes, and responds to real-time public safety data across the city — connecting incidents, emergencies, responder activity, and user alerts into a unified intelligent response system in <span class="font-semibold text-navy-900">under 30 seconds.</span>
+                    <p class="mt-5 max-w-xl text-white/70 leading-relaxed text-[17px]">
+                        Auxilio AI listens, analyzes, and responds to real-time public safety data across the city — connecting incidents, emergencies, responder activity, and user alerts into a unified intelligent response system in <span class="font-semibold text-cyan-300">under 30 seconds.</span>
                     </p>
+
+                    {{-- mini telemetry tiles --}}
+                    <div class="mt-7 grid grid-cols-3 gap-3 max-w-md">
+                        @foreach ([['l'=>'CPU','v'=>'12%','c'=>'#34d399'],['l'=>'NEURAL','v'=>'OK','c'=>'#38bdf8'],['l'=>'MESH','v'=>'97/97','c'=>'#a5b4fc']] as $t)
+                            <div class="scifi-hud rounded-lg px-3 py-2">
+                                <div class="scifi-mono text-[9px] text-white/55">{{ $t['l'] }}</div>
+                                <div class="mt-0.5 font-display font-bold text-[16px]" style="color:{{ $t['c'] }};">{{ $t['v'] }}</div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-                <div class="lg:col-span-5">
-                    <div class="relative rounded-3xl p-6 text-white" style="background:linear-gradient(160deg,#0a1a4a,#061229); box-shadow: 0 30px 60px -20px rgba(8,15,40,.5);">
-                        <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-[.18em] text-cyan-300/80">
-                            <span class="relative flex w-2 h-2">
-                                <span class="absolute inline-flex w-2 h-2 rounded-full opacity-75 animate-ping bg-cyan-400"></span>
-                                <span class="relative inline-flex w-2 h-2 rounded-full bg-cyan-400"></span>
-                            </span>
-                            Live · 30s window
+
+                {{-- right: terminal stream --}}
+                <div class="ai-anim from-right ai-d2 lg:col-span-6">
+                    <div class="relative scifi-hud rounded-2xl p-1.5 scifi-corner">
+                        {{-- header --}}
+                        <div class="flex items-center justify-between gap-3 px-4 py-2 border-b border-cyan-300/15">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full" style="background:#ef4444; opacity:.7;"></span>
+                                <span class="w-2.5 h-2.5 rounded-full" style="background:#facc15; opacity:.7;"></span>
+                                <span class="w-2.5 h-2.5 rounded-full" style="background:#22c55e; opacity:.7;"></span>
+                                <span class="scifi-mono text-[10px] text-white/55 ml-2">auxilio-core · live</span>
+                            </div>
+                            <div class="flex items-center gap-2 scifi-mono text-[10px] text-cyan-300/75">
+                                <span class="relative flex w-2 h-2">
+                                    <span class="absolute inline-flex w-2 h-2 rounded-full opacity-75 animate-ping bg-cyan-400"></span>
+                                    <span class="relative inline-flex w-2 h-2 rounded-full bg-cyan-400"></span>
+                                </span>
+                                30s window
+                            </div>
                         </div>
-                        <div class="mt-5 space-y-3">
-                            @foreach (['Incident detected','Risk scored','Responder routed'] as $i => $step)
-                                @php $c = ['#38bdf8','#a5b4fc','#34d399'][$i]; @endphp
-                                <div class="flex items-center gap-3">
-                                    <span class="flex w-8 h-8 items-center justify-center rounded-full text-navy-900 text-xs font-bold" style="background:{{ $c }};">{{ $i+1 }}</span>
-                                    <span class="text-sm font-semibold">{{ $step }}</span>
-                                    <span class="ml-auto text-[11px] font-mono text-white/40">{{ ($i+1)*8 }}s</span>
+                        {{-- pipeline steps as terminal lines --}}
+                        <div class="px-5 py-5 space-y-3 font-mono text-[13px]">
+                            @foreach ([
+                                ['t'=>'INGEST','s'=>'incident detected','d'=>'feed#382 · jersey-city · armed-robbery','c'=>'#38bdf8','sec'=>'08s'],
+                                ['t'=>'SCORE','s'=>'risk classified','d'=>'severity=high · proximity=0.4mi · confidence=94%','c'=>'#a5b4fc','sec'=>'16s'],
+                                ['t'=>'ROUTE','s'=>'responder dispatched','d'=>'unit#K9-12 · eta=28s · alert pushed to 412 users','c'=>'#34d399','sec'=>'24s'],
+                            ] as $i => $row)
+                                <div class="flex items-start gap-3">
+                                    <span class="scifi-mono shrink-0 text-[10px] rounded px-2 py-0.5" style="background:{{ $row['c'] }}22; color:{{ $row['c'] }}; box-shadow: inset 0 0 0 1px {{ $row['c'] }}55;">{{ $row['t'] }}</span>
+                                    <div class="min-w-0 flex-1">
+                                        <div class="text-white/90 font-semibold text-[13px]">{{ $row['s'] }} <span class="ml-1 text-[11px] font-normal" style="color:{{ $row['c'] }};">›</span></div>
+                                        <div class="text-white/45 text-[11px] truncate">{{ $row['d'] }}</div>
+                                    </div>
+                                    <span class="scifi-mono text-[10px] text-white/40 shrink-0">{{ $row['sec'] }}</span>
                                 </div>
                             @endforeach
+                            <div class="text-emerald-300 text-[12px] pt-2 border-t border-white/5"><span class="text-white/40">$</span> auxilio status<br/><span class="text-white/85">› core: <span class="text-emerald-300">OK</span> · uptime: 99.997% · last sync: 0.4s ago<span class="ai-caret"></span></span></div>
                         </div>
                     </div>
                 </div>
@@ -4068,36 +4358,53 @@
         </div>
     </section>
 
-    {{-- MISSION + VISION --}}
-    <section class="relative py-16 lg:py-20" style="background:#f6f8fc;">
-        <div class="mx-auto max-w-5xl px-5 sm:px-8 grid md:grid-cols-2 gap-6">
-            <div class="rounded-3xl bg-white border border-ink-100 p-8 shadow-sm">
-                <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.2em]" style="color:#0ea5e9;">
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
-                    Mission
+    {{-- MISSION + VISION — holographic panels --}}
+    <section class="relative overflow-hidden py-16 lg:py-20 text-white" style="background:linear-gradient(180deg,#050b22,#081336);">
+        <div class="absolute inset-0 scifi-grid opacity-50 pointer-events-none"></div>
+        <span class="pointer-events-none absolute -top-20 -right-20 w-[420px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(56,189,248,.20) 0%, transparent 70%);"></span>
+        <span class="pointer-events-none absolute -bottom-20 -left-20 w-[420px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(99,102,241,.22) 0%, transparent 70%);"></span>
+
+        <div class="relative mx-auto max-w-5xl px-5 sm:px-8 grid md:grid-cols-2 gap-6">
+            <div class="ai-anim from-left relative rounded-3xl scifi-hud p-8 scifi-corner overflow-hidden">
+                <span class="pointer-events-none absolute -top-20 -right-20 w-60 h-60 rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(56,189,248,.35) 0%, transparent 70%);"></span>
+                <div class="relative">
+                    <div class="flex items-center gap-2 scifi-mono text-[11px] font-bold" style="color:#7dd3fc;">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                        // MISSION
+                    </div>
+                    <p class="mt-5 font-display font-bold text-[22px] leading-snug">
+                        Make public safety <span style="background:linear-gradient(90deg,#38bdf8,#7dd3fc); -webkit-background-clip:text; background-clip:text; color:transparent;">accessible, intelligent, immediate.</span>
+                    </p>
+                    <p class="mt-3 text-white/70 leading-relaxed text-[15px]">
+                        Empower every citizen with real-time AI-driven protection and emergency awareness — no exceptions, no delays.
+                    </p>
                 </div>
-                <p class="mt-4 text-navy-800 leading-relaxed text-[17px]">
-                    To make public safety accessible, intelligent, and immediate by empowering every citizen with real-time AI-driven protection and emergency awareness.
-                </p>
             </div>
-            <div class="rounded-3xl bg-white border border-ink-100 p-8 shadow-sm">
-                <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.2em]" style="color:#6366f1;">
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>
-                    Vision
+            <div class="ai-anim from-right ai-d2 relative rounded-3xl scifi-hud p-8 scifi-corner overflow-hidden">
+                <span class="pointer-events-none absolute -bottom-20 -left-20 w-60 h-60 rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(165,180,252,.40) 0%, transparent 70%);"></span>
+                <div class="relative">
+                    <div class="flex items-center gap-2 scifi-mono text-[11px] font-bold" style="color:#a5b4fc;">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg>
+                        // VISION
+                    </div>
+                    <p class="mt-5 font-display font-bold text-[22px] leading-snug">
+                        The world's leading <span style="background:linear-gradient(90deg,#a5b4fc,#818cf8); -webkit-background-clip:text; background-clip:text; color:transparent;">AI-powered safety network.</span>
+                    </p>
+                    <p class="mt-3 text-white/70 leading-relaxed text-[15px]">
+                        Connecting communities, responders, and real-time intelligence into one unified protection ecosystem.
+                    </p>
                 </div>
-                <p class="mt-4 text-navy-800 leading-relaxed text-[17px]">
-                    To become the world's leading AI-powered public safety network, connecting communities, responders, and real-time intelligence into one unified protection ecosystem.
-                </p>
             </div>
         </div>
     </section>
 
-    {{-- WHO IT'S FOR — 3 cards --}}
-    <section class="relative bg-white py-16 lg:py-20">
-        <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    {{-- WHO IT'S FOR — sci-fi --}}
+    <section class="relative overflow-hidden py-16 lg:py-20 text-white" style="background:linear-gradient(180deg,#050b22,#081336);">
+        <div class="absolute inset-0 scifi-grid opacity-50 pointer-events-none"></div>
+        <div class="relative mx-auto max-w-6xl px-5 sm:px-8">
             <div class="text-center max-w-2xl mx-auto">
-                <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#0ea5e9;">Who it's for</p>
-                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">Built for <span style="background:linear-gradient(90deg,#0ea5e9,#6366f1); -webkit-background-clip:text; background-clip:text; color:transparent;">every citizen.</span></h2>
+                <p class="scifi-mono text-[11px] font-bold" style="color:#7dd3fc;">// USER PROFILES</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight">Built for <span style="background:linear-gradient(90deg,#38bdf8,#a5b4fc); -webkit-background-clip:text; background-clip:text; color:transparent;">every citizen.</span></h2>
             </div>
             @php
                 $audience = [
@@ -4106,14 +4413,15 @@
                     ['t'=>'Every citizen','d'=>'Designed for accessibility — seniors, solo travelers, and commuters included.','c'=>'#6366f1','p'=>'M12 7a3 3 0 100-6 3 3 0 000 6z M6 22v-7l-3-7h4l2 5 2-5h4l-3 7v7h-2l-1-5-1 5H6z'],
                 ];
             @endphp
-            <div class="mt-12 grid sm:grid-cols-3 gap-5">
+            <div class="ai-anim ai-stagger mt-12 grid sm:grid-cols-3 gap-5">
                 @foreach ($audience as $a)
-                    <article class="group relative rounded-3xl bg-white border border-ink-100 p-8 text-center transition hover:-translate-y-1 hover:shadow-xl">
-                        <span class="grid place-items-center mx-auto w-14 h-14 rounded-2xl text-white shadow-lg" style="background:linear-gradient(135deg,{{ $a['c'] }},{{ $a['c'] }}bb);">
+                    <article class="group relative rounded-3xl scifi-hud p-8 text-center transition hover:-translate-y-1 overflow-hidden scifi-corner">
+                        <span class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition" style="background:radial-gradient(ellipse at top, {{ $a['c'] }}1f, transparent 60%);"></span>
+                        <span class="relative grid place-items-center mx-auto w-14 h-14 rounded-2xl text-navy-900 shadow-lg" style="background:linear-gradient(135deg,{{ $a['c'] }},{{ $a['c'] }}aa); box-shadow:0 0 26px -6px {{ $a['c'] }};">
                             <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $a['p'] }}"/></svg>
                         </span>
-                        <h3 class="mt-5 font-display font-bold text-navy-900 text-[18px]">{{ $a['t'] }}</h3>
-                        <p class="mt-2 text-navy-700/80 leading-relaxed text-[14px]">{{ $a['d'] }}</p>
+                        <h3 class="relative mt-5 font-display font-bold text-white text-[18px]">{{ $a['t'] }}</h3>
+                        <p class="relative mt-2 text-white/70 leading-relaxed text-[14px]">{{ $a['d'] }}</p>
                     </article>
                 @endforeach
             </div>
@@ -4121,7 +4429,9 @@
     </section>
 
     {{-- INTERACTIVE CRIME STATISTICS DASHBOARD --}}
-    <section class="relative py-16 lg:py-20" style="background:#f6f8fc;">
+    <section class="relative overflow-hidden py-16 lg:py-20" style="background:linear-gradient(180deg,#050b22,#0a1a4a 50%,#050b22);">
+        <div class="absolute inset-0 scifi-grid opacity-50 pointer-events-none"></div>
+        <span class="pointer-events-none absolute -top-32 right-1/4 w-[520px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(226,75,74,.18) 0%, transparent 70%);"></span>
         <style>
             [data-view="auxilio-ai"] .aux-dash { --aux-red:#E24B4A; --aux-blue:#378ADD; --aux-amber:#BA7517; --aux-green:#0F6E56; --aux-purple:#533b8a; --aux-rose:#993556; --aux-olive:#3B6D11; --aux-deep:#A32D2D; }
             [data-view="auxilio-ai"] .aux-tab-btn { padding: 8px 18px; border-radius: 9999px; font-size: 13px; font-weight: 600; cursor: pointer; background:#ffffff; color:#475569; border:1px solid #e2e8f0; transition: all .18s ease; display:inline-flex; align-items:center; gap:6px; }
@@ -4161,17 +4471,17 @@
             [data-view="auxilio-ai"] .aux-peak-chip { background:#eef2f7; padding:3px 10px; border-radius:10px; color:#475569; font-weight:500; }
         </style>
 
-        <div class="mx-auto max-w-6xl px-5 sm:px-8 aux-dash">
+        <div class="relative mx-auto max-w-6xl px-5 sm:px-8 aux-dash">
             <div class="text-center max-w-2xl mx-auto">
-                <p class="text-xs font-semibold uppercase tracking-[.2em]" style="color:#E24B4A;">US crime statistics</p>
-                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-navy-900">
-                    The data <span style="background:linear-gradient(90deg,#E24B4A,#c1272d); -webkit-background-clip:text; background-clip:text; color:transparent;">behind the urgency.</span>
+                <p class="scifi-mono text-[11px] font-bold" style="color:#fda4af;">// CRIME DATA · LIVE</p>
+                <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-white">
+                    The data <span style="background:linear-gradient(90deg,#E24B4A,#fda4af); -webkit-background-clip:text; background-clip:text; color:transparent;">behind the urgency.</span>
                 </h2>
-                <p class="mt-3 text-navy-700/80 text-[15px]">Explore live national patterns — by hour, month, type, and year.</p>
+                <p class="mt-3 text-white/65 text-[15px]">Explore live national patterns — by hour, month, type, and year.</p>
             </div>
 
             {{-- Top stat cards --}}
-            <div class="mt-10 grid grid-cols-2 lg:grid-cols-6 gap-3">
+            <div class="ai-anim ai-stagger mt-10 grid grid-cols-2 lg:grid-cols-6 gap-3">
                 <div class="aux-stat-card"><div class="aux-stat-num red">every 25.9s</div><div class="aux-stat-lbl">Violent crime occurs</div></div>
                 <div class="aux-stat-card"><div class="aux-stat-num red">every 31 min</div><div class="aux-stat-lbl">Murder committed</div></div>
                 <div class="aux-stat-card"><div class="aux-stat-num amber">every 4.1 min</div><div class="aux-stat-lbl">Rape committed</div></div>
@@ -4181,7 +4491,7 @@
             </div>
 
             {{-- Tabs --}}
-            <div class="mt-10 flex flex-wrap gap-2 justify-center">
+            <div class="ai-anim ai-d1 mt-10 flex flex-wrap gap-2 justify-center">
                 <button type="button" class="aux-tab-btn active" data-aux-tab="hour">
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3 2"/></svg>
                     By hour
@@ -4201,7 +4511,7 @@
             </div>
 
             {{-- Panels --}}
-            <div class="mt-8 rounded-3xl bg-white border border-ink-100 p-6 sm:p-8 shadow-[0_30px_60px_-40px_rgba(8,15,40,.18)]">
+            <div class="ai-anim ai-d2 mt-8 rounded-3xl bg-white border border-ink-100 p-6 sm:p-8 shadow-[0_30px_60px_-40px_rgba(8,15,40,.18)]">
                 {{-- Hour --}}
                 <div class="aux-panel active" data-aux-panel="hour">
                     <p class="text-xs font-semibold uppercase tracking-[.16em] text-navy-700/60 mb-4">Crime activity by hour of day</p>
@@ -4450,6 +4760,48 @@
             </div>
         </div>
     </section>
+
+    {{-- AI page scroll-triggered animation observer --}}
+    <script>
+    (function(){
+        if (window.__auxAiAnim) return; window.__auxAiAnim = true;
+        function makeObserver(){
+            if (!('IntersectionObserver' in window)) {
+                document.querySelectorAll('[data-view="auxilio-ai"] .ai-anim').forEach(function(el){ el.classList.add('is-in'); });
+                return null;
+            }
+            var io = new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                    if (e.isIntersecting) {
+                        e.target.classList.add('is-in');
+                        io.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.10, rootMargin: '0px 0px -8% 0px' });
+            document.querySelectorAll('[data-view="auxilio-ai"] .ai-anim').forEach(function(el){ io.observe(el); });
+            return io;
+        }
+        var io = makeObserver();
+        // Re-trigger when navigating into the AI view
+        function refresh(){
+            if (location.hash.indexOf('auxilio-ai') === -1) return;
+            setTimeout(function(){
+                document.querySelectorAll('[data-view="auxilio-ai"] .ai-anim').forEach(function(el){
+                    var r = el.getBoundingClientRect();
+                    if (r.top < window.innerHeight * 0.92 && r.bottom > 0) {
+                        el.classList.add('is-in');
+                    } else {
+                        el.classList.remove('is-in');
+                        if (io) io.observe(el);
+                    }
+                });
+            }, 80);
+        }
+        window.addEventListener('hashchange', refresh);
+        document.addEventListener('DOMContentLoaded', refresh);
+        if (document.readyState !== 'loading') refresh();
+    })();
+    </script>
 </div>
 
 {{-- ============================================================
