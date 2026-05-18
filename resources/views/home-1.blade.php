@@ -1404,10 +1404,41 @@
                         {{-- ambient halo (matches citizen) --}}
                         <span class="absolute -inset-10 rounded-[44px] blur-3xl bg-red-500/15 pointer-events-none"></span>
                         <span class="absolute -bottom-10 -left-6 w-48 h-48 rounded-full blur-3xl bg-amber-300/30 pointer-events-none"></span>
-                        {{-- Officer image, full-bleed like citizen hero (no inner frame) --}}
-                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow">
-                            <img src="/images/officer-hero.jpg" alt="Auxilio Officer" class="absolute inset-0 w-full h-full object-cover object-top" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-navy-950/0 to-transparent"></div>
+                        {{-- main hero slideshow (4 photos, auto-swipe) --}}
+                        <style>
+                            .agent-slideshow .hero-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; animation: agentHeroSlide 20s infinite; will-change: opacity; }
+                            .agent-slideshow .hero-slide:nth-child(1) { animation-delay: 0s; opacity: 1; }
+                            .agent-slideshow .hero-slide:nth-child(2) { animation-delay: 5s; }
+                            .agent-slideshow .hero-slide:nth-child(3) { animation-delay: 10s; }
+                            .agent-slideshow .hero-slide:nth-child(4) { animation-delay: 15s; }
+                            @keyframes agentHeroSlide {
+                                0%, 22%   { opacity: 1; }
+                                27%, 98%  { opacity: 0; }
+                                100%      { opacity: 1; }
+                            }
+                            .agent-slideshow .hero-dot { transition: all .3s ease; animation: agentHeroDot 20s infinite; }
+                            .agent-slideshow .hero-dot:nth-child(1) { animation-delay: 0s; }
+                            .agent-slideshow .hero-dot:nth-child(2) { animation-delay: 5s; }
+                            .agent-slideshow .hero-dot:nth-child(3) { animation-delay: 10s; }
+                            .agent-slideshow .hero-dot:nth-child(4) { animation-delay: 15s; }
+                            @keyframes agentHeroDot {
+                                0%, 24% { background: rgba(255,255,255,.95); width: 18px; border-radius: 9999px; }
+                                27%, 100% { background: rgba(255,255,255,.45); width: 6px; border-radius: 9999px; }
+                            }
+                        </style>
+                        <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow agent-slideshow">
+                            <img src="/images/hero-agent-slide-4.jpg" alt="Live incident map" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
+                            <img src="/images/hero-agent-slide-1.jpg" alt="Flood emergency dispatch" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
+                            <img src="/images/hero-agent-slide-3.jpg" alt="K-9 unit handler" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
+                            <img src="/images/hero-agent-slide-2.jpg" alt="Officer on patrol" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-navy-950/0 to-transparent z-[2]"></div>
+                            {{-- progress dots --}}
+                            <div class="absolute bottom-5 left-1/2 -translate-x-1/2 z-[3] flex items-center gap-1.5">
+                                <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/90"></span>
+                                <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                                <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                                <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
+                            </div>
                         </div>
 
                         {{-- Small checkmark badge (like Fundix green check) --}}
