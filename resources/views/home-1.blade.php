@@ -3875,9 +3875,6 @@
 ============================================================--}}
 <div data-view="auxilio-ai" class="hidden">
 
-    {{-- Lottie player (loaded once for the AI page) --}}
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.8/dist/lottie-player.js" defer></script>
-
     {{-- SCI-FI SHARED STYLES — used across the Auxilio AI page --}}
     <style>
         /* ----- AI page scroll-triggered animations ----- */
@@ -3955,7 +3952,8 @@
     </style>
 
     {{-- HERO — split: phone mockup LEFT (in home-style box), AI orb + copy RIGHT --}}
-    <section class="relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 12% -10%, rgba(56,189,248,.28) 0%, transparent 55%), radial-gradient(ellipse at 92% 110%, rgba(99,102,241,.32) 0%, transparent 55%), linear-gradient(160deg, #030820 0%, #0a1a4a 30%, #0d1f56 55%, #050b22 100%);">
+    {{-- Base bg matches the orb GIF backdrop (#0a0826) so it tiles seamlessly into the section --}}
+    <section class="relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 12% -10%, rgba(56,189,248,.20) 0%, transparent 55%), radial-gradient(ellipse at 92% 110%, rgba(99,102,241,.26) 0%, transparent 55%), #0a0826;">
         <div class="absolute inset-0 scifi-grid opacity-60 pointer-events-none"></div>
         <span class="pointer-events-none absolute -top-32 -left-20 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(56,189,248,.32) 0%, transparent 70%);"></span>
         <span class="pointer-events-none absolute bottom-0 -right-20 w-[560px] h-[560px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(99,102,241,.32) 0%, transparent 70%);"></span>
@@ -4045,9 +4043,9 @@
 
             {{-- RIGHT: AI badge + heading + body + orb + stats --}}
             <div class="lg:col-span-6 order-1 lg:order-2 relative">
-                {{-- AI orb — Lottie animation (transparent by default) --}}
-                <span class="pointer-events-none absolute -top-24 -right-20 w-[360px] h-[360px] hidden md:block" style="animation: auxOrbFloat 9s ease-in-out infinite;" aria-hidden="true">
-                    <lottie-player src="/images/ai-orb.json" background="transparent" speed="1" loop autoplay style="width:100%; height:100%; filter: drop-shadow(0 0 60px rgba(56,189,248,.55));"></lottie-player>
+                {{-- AI orb — GIF (its #0a0826 bg matches the hero, so the edges melt in) --}}
+                <span class="pointer-events-none absolute -top-24 -right-24 w-[420px] h-[420px] hidden md:block" style="animation: auxOrbFloat 9s ease-in-out infinite;" aria-hidden="true">
+                    <img src="/images/ai-orb.gif" alt="" class="w-full h-full object-cover" style="filter: drop-shadow(0 0 60px rgba(56,189,248,.55));" />
                 </span>
 
                 <div class="relative">
