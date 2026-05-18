@@ -4000,44 +4000,6 @@
                         </div>
                     </div>
 
-                    {{-- ANALYZING float card — top right --}}
-                    <div class="hidden md:flex absolute -right-6 top-8 items-center gap-3 rounded-2xl scifi-hud px-4 py-3 z-10 text-white" style="min-width:230px; animation: floatY 6s ease-in-out infinite;">
-                        <span class="flex w-11 h-11 items-center justify-center rounded-xl text-navy-900 shrink-0" style="background:linear-gradient(135deg,#38bdf8,#7dd3fc); box-shadow: 0 0 20px -5px #38bdf8;">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v3M12 19v3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M2 12h3M19 12h3M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>
-                        </span>
-                        <div class="leading-tight">
-                            <div class="scifi-mono text-[10px] font-bold" style="color:#7dd3fc;">AI · ANALYZING</div>
-                            <div class="font-display text-[13px] font-bold mt-0.5">142 signals/sec</div>
-                        </div>
-                    </div>
-
-                    {{-- THREAT badge (hexagonal) --}}
-                    <div class="hidden md:flex absolute -left-7 top-1/3 items-center justify-center w-20 h-20 z-10 scifi-hex" style="background:linear-gradient(135deg,#1d4ed8,#6366f1); box-shadow: 0 0 30px -6px #38bdf8;">
-                        <span class="absolute inset-0 scifi-hex" style="background:linear-gradient(135deg,#1d4ed8,#6366f1); animation: auxPulse 2.2s infinite;"></span>
-                        <span class="relative font-display font-extrabold text-white text-[11px] tracking-[.14em]">NEURAL</span>
-                    </div>
-
-                    {{-- RESPONDER float card — mid right --}}
-                    <div class="hidden md:flex absolute -right-12 items-center gap-3 rounded-2xl text-white px-4 py-3 z-10 scifi-hud" style="top:60%; min-width:240px; animation: floatY 6s ease-in-out infinite; animation-delay:1s;">
-                        <span class="flex w-11 h-11 items-center justify-center rounded-xl text-navy-900 shrink-0" style="background:linear-gradient(135deg,#34d399,#10b981); box-shadow:0 0 18px -4px #34d399;">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
-                        </span>
-                        <div class="leading-tight">
-                            <div class="scifi-mono text-[10px] font-bold" style="color:#34d399;">RESPONSE · 28S</div>
-                            <div class="font-display text-[13px] font-bold mt-0.5">Officer routed</div>
-                        </div>
-                    </div>
-
-                    {{-- DATA STREAM card — bottom --}}
-                    <div class="hidden md:flex absolute left-6 -bottom-6 items-center gap-3 rounded-2xl text-white px-4 py-3 z-10 scifi-hud" style="min-width:260px; animation: floatY 6s ease-in-out infinite; animation-delay:.4s;">
-                        <span class="flex w-10 h-10 items-center justify-center rounded-xl text-navy-900 shrink-0" style="background:linear-gradient(135deg,#a5b4fc,#818cf8); box-shadow:0 0 18px -4px #a5b4fc;">
-                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h10M4 18h7"/></svg>
-                        </span>
-                        <div class="leading-tight">
-                            <div class="scifi-mono text-[10px] font-bold" style="color:#a5b4fc;">DATA · STREAMING</div>
-                            <div class="font-display text-[13px] font-bold mt-0.5">All nodes online</div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
