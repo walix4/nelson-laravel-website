@@ -1399,49 +1399,19 @@ var s2=document.getElementById('cg-s-cities2');if(s2)s2.textContent=CG_ALL.lengt
 
 var STATE_NAMES={AK:'Alaska',AL:'Alabama',AR:'Arkansas',AZ:'Arizona',CA:'California',CO:'Colorado',CT:'Connecticut',DC:'Wash. D.C.',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',IA:'Iowa',ID:'Idaho',IL:'Illinois',IN:'Indiana',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',MA:'Massachusetts',MD:'Maryland',ME:'Maine',MI:'Michigan',MN:'Minnesota',MO:'Missouri',MS:'Mississippi',MT:'Montana',NC:'North Carolina',ND:'North Dakota',NE:'Nebraska',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NV:'Nevada',NY:'New York',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VA:'Virginia',VT:'Vermont',WA:'Washington',WI:'Wisconsin',WV:'West Virginia',WY:'Wyoming'};
 
-/* State flag thumb URLs populated via Wikimedia API batch call */
-var FLAG_URLS={};
-(function(){
-  var files={
-    AK:'Flag_of_Alaska.svg',AL:'Flag_of_Alabama.svg',AR:'Flag_of_Arkansas.svg',
-    AZ:'Flag_of_Arizona.svg',CA:'Flag_of_California.svg',CO:'Flag_of_Colorado.svg',
-    CT:'Flag_of_Connecticut.svg',DC:'Flag_of_Washington,_D.C..svg',DE:'Flag_of_Delaware.svg',
-    FL:'Flag_of_Florida.svg',GA:'Flag_of_Georgia_(U.S._state).svg',HI:'Flag_of_Hawaii.svg',
-    IA:'Flag_of_Iowa.svg',ID:'Flag_of_Idaho.svg',IL:'Flag_of_Illinois.svg',
-    IN:'Flag_of_Indiana.svg',KS:'Flag_of_Kansas.svg',KY:'Flag_of_Kentucky.svg',
-    LA:'Flag_of_Louisiana.svg',MA:'Flag_of_Massachusetts.svg',MD:'Flag_of_Maryland.svg',
-    ME:'Flag_of_Maine.svg',MI:'Flag_of_Michigan.svg',MN:'Flag_of_Minnesota.svg',
-    MO:'Flag_of_Missouri.svg',MS:'Flag_of_Mississippi.svg',MT:'Flag_of_Montana.svg',
-    NC:'Flag_of_North_Carolina.svg',ND:'Flag_of_North_Dakota.svg',NE:'Flag_of_Nebraska.svg',
-    NH:'Flag_of_New_Hampshire.svg',NJ:'Flag_of_New_Jersey.svg',NM:'Flag_of_New_Mexico.svg',
-    NV:'Flag_of_Nevada.svg',NY:'Flag_of_New_York.svg',OH:'Flag_of_Ohio.svg',
-    OK:'Flag_of_Oklahoma.svg',OR:'Flag_of_Oregon.svg',PA:'Flag_of_Pennsylvania.svg',
-    RI:'Flag_of_Rhode_Island.svg',SC:'Flag_of_South_Carolina.svg',SD:'Flag_of_South_Dakota.svg',
-    TN:'Flag_of_Tennessee.svg',TX:'Flag_of_Texas.svg',UT:'Flag_of_Utah.svg',
-    VA:'Flag_of_Virginia.svg',VT:'Flag_of_Vermont.svg',WA:'Flag_of_Washington_(state).svg',
-    WI:'Flag_of_Wisconsin.svg',WV:'Flag_of_West_Virginia.svg',WY:'Flag_of_Wyoming.svg'
-  };
-  /* Build reverse map: "Flag_of_X.svg" → abbr */
-  var rev={};
-  Object.keys(files).forEach(function(ab){rev['File:'+files[ab]]=ab;});
-  var titles=Object.keys(files).map(function(ab){return'File:'+files[ab];}).join('|');
-  fetch('https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url&iiwidth=220&format=json&origin=*&titles='+encodeURIComponent(titles))
-    .then(function(r){return r.json();})
-    .then(function(data){
-      var pages=data.query.pages;
-      Object.keys(pages).forEach(function(id){
-        var pg=pages[id];
-        var ab=rev[pg.title];
-        if(ab&&pg.imageinfo&&pg.imageinfo[0]&&pg.imageinfo[0].thumburl){
-          FLAG_URLS[ab]=pg.imageinfo[0].thumburl;
-        }
-      });
-      /* Re-render cards now that URLs are ready */
-      var srch=document.getElementById('cg-state-search');
-      if(document.getElementById('cg-state-grid').children.length>0)
-        cgRenderStates(srch?srch.value:'');
-    }).catch(function(){});
-})();
+/* US state flag primary colours — used as fallback header gradient */
+var STATE_COLORS={
+  AK:'#002868',AL:'#BF0A30',AR:'#BF0A30',AZ:'#002868',CA:'#003776',
+  CO:'#003DA5',CT:'#002868',DC:'#E31C3D',DE:'#002868',FL:'#F15A22',
+  GA:'#003087',HI:'#002868',IA:'#002868',ID:'#003087',IL:'#003087',
+  IN:'#002868',KS:'#003087',KY:'#003087',LA:'#003087',MA:'#003087',
+  MD:'#E31C3D',ME:'#003087',MI:'#002868',MN:'#003087',MO:'#003087',
+  MS:'#BF0A30',MT:'#003087',NC:'#003087',ND:'#003087',NE:'#003087',
+  NH:'#003087',NJ:'#D4A017',NM:'#FFCC00',NV:'#002868',NY:'#003087',
+  OH:'#003087',OK:'#003087',OR:'#003087',PA:'#003087',RI:'#002868',
+  SC:'#003087',SD:'#003087',TN:'#BF0A30',TX:'#BF0A30',UT:'#003087',
+  VA:'#003087',VT:'#003087',WA:'#005C2E',WI:'#003087',WV:'#003087',WY:'#003087'
+};
 
 var cgSelectedState='';
 var cgSortKey='rank',cgSortDir=1,cgPage=1;
@@ -1527,32 +1497,29 @@ function cgRenderStates(filter){
   var html='';
   states.forEach(function(s){
     var gc=GC[s.grade]||GC.F;
-    var flagUrl=FLAG_URLS[s.abbr]||'';
+    var stColor=STATE_COLORS[s.abbr]||'#002868';
+    var flagSrc='https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/flags/4x3/us-'+s.abbr.toLowerCase()+'.svg';
     html+='<div class="cg-state-card" onclick="cgSelectState(\''+s.abbr+'\')" style="box-shadow:0 6px 24px rgba(0,0,0,.35)">'
       /* ── Flag header ── */
-      +'<div style="position:relative;height:80px;background:#0d1129;overflow:hidden">'
-        +(flagUrl
-          ?'<img src="'+flagUrl+'" alt="'+s.abbr+' flag" loading="lazy" '
-            +'style="width:100%;height:100%;object-fit:cover;object-position:center;opacity:.85" '
-            +'onerror="this.style.display=\'none\'">'
-          :'')
-        /* dark gradient overlay so text is readable */
-        +'<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.08) 0%,rgba(0,0,0,.55) 100%)"></div>'
+      +'<div style="position:relative;height:80px;background:'+stColor+';overflow:hidden">'
+        /* Flag image — fills header, gentle overlay so abbr/badge remain legible */
+        +'<img src="'+flagSrc+'" alt="'+s.name+' flag" loading="lazy" '
+          +'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.9" '
+          +'onerror="this.parentNode.style.background=\''+stColor+'\';this.remove()">'
+        /* readability gradient */
+        +'<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,.5) 100%);pointer-events:none"></div>'
         /* grade badge — top right */
-        +'<div style="position:absolute;top:8px;right:8px;background:'+gc.bg+';color:#fff;font-size:13px;font-weight:900;width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4)">'+s.grade+'</div>'
-        /* state abbr overlay bottom-left */
-        +'<div style="position:absolute;bottom:8px;left:10px;font-size:22px;font-weight:900;color:#fff;letter-spacing:-.02em;text-shadow:0 2px 8px rgba(0,0,0,.8)">'+s.abbr+'</div>'
+        +'<div style="position:absolute;top:8px;right:8px;background:'+gc.bg+';color:#fff;font-size:13px;font-weight:900;width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.5)">'+s.grade+'</div>'
+        /* state abbr — bottom left over flag */
+        +'<div style="position:absolute;bottom:7px;left:10px;font-size:20px;font-weight:900;color:#fff;letter-spacing:-.02em;text-shadow:0 1px 6px rgba(0,0,0,.9),0 0 12px rgba(0,0,0,.7)">'+s.abbr+'</div>'
       +'</div>'
       /* ── Card body ── */
-      +'<div style="padding:10px 12px 12px">'
-        /* Grade colour accent line */
-        +'<div style="height:2px;border-radius:2px;background:'+gc.bg+';opacity:.6;margin-bottom:8px"></div>'
-        /* State full name */
-        +'<p style="font-size:11.5px;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.name+'</p>'
-        /* Cities row */
+      +'<div style="padding:10px 12px 12px;background:#0d1129">'
+        +'<div style="height:2px;border-radius:2px;background:'+gc.bg+';opacity:.7;margin-bottom:8px"></div>'
+        +'<p style="font-size:11.5px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.name+'</p>'
         +'<div style="display:flex;align-items:center;gap:4px">'
           +'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="'+gc.bg+'" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>'
-          +'<span style="font-size:10px;color:rgba(255,255,255,.38)">'+s.cities.length+' cit'+(s.cities.length===1?'y':'ies')+'</span>'
+          +'<span style="font-size:10px;color:rgba(255,255,255,.4)">'+s.cities.length+' cit'+(s.cities.length===1?'y':'ies')+'</span>'
         +'</div>'
       +'</div>'
     +'</div>';
