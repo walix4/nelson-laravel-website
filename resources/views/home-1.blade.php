@@ -993,7 +993,7 @@
 </style>
 
 {{-- ── HERO ── --}}
-<section id="cg-hero-section" style="position:relative;height:100vh;box-sizing:border-box;padding-top:78px;display:flex;flex-direction:column;overflow:hidden;background:#08090e">
+<section id="cg-hero-section" style="position:relative;height:calc(100vh - 78px);display:flex;flex-direction:column;overflow:hidden;background:#08090e">
     {{-- Background: USA map SVG + subtle crime-density blobs --}}
     <div style="position:absolute;inset:0;overflow:hidden">
         {{-- USA Map SVG at low opacity --}}
