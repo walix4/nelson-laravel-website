@@ -993,7 +993,7 @@
 </style>
 
 {{-- ── HERO ── --}}
-<section id="cg-hero-section" style="position:relative;height:calc(100vh - 78px);display:flex;flex-direction:column;overflow:hidden;background:#08090e">
+<section id="cg-hero-section" style="position:relative;height:calc(100vh - 78px);display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;background:#08090e">
     {{-- Background: USA map SVG + subtle crime-density blobs --}}
     <div style="position:absolute;inset:0;overflow:hidden">
         {{-- USA Map SVG at low opacity --}}
@@ -1064,7 +1064,7 @@
     </div>
 
     {{-- Main centred content --}}
-    <div style="position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px 8px;text-align:center">
+    <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px 8px;text-align:center;min-height:0;overflow:hidden">
 
         {{-- Corner reticle marks --}}
         <div style="position:absolute;top:24px;left:32px;width:28px;height:28px;border-top:2px solid rgba(226,75,74,.5);border-left:2px solid rgba(226,75,74,.5)"></div>
