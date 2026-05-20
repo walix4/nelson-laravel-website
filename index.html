@@ -1509,6 +1509,7 @@
 .cg-decile-b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:11px;font-weight:700}
 .cg-rbar{height:4px;border-radius:3px;background:rgba(0,0,0,.06);min-width:56px;margin-top:5px;overflow:hidden}
 .cg-rbar-f{height:100%;border-radius:3px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+@keyframes cgMapSpin{to{transform:rotate(360deg)}}
 .cg-tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .cg-tbl{width:100%;border-collapse:collapse;font-size:13px}
 .cg-tbl thead th{font-size:10.5px;font-weight:700;color:#64748b;text-align:left;padding:11px 13px;border-bottom:1px solid rgba(255,255,255,.07);cursor:pointer;white-space:nowrap;user-select:none;background:#131929;letter-spacing:.05em;text-transform:uppercase;transition:color .15s}
@@ -1730,6 +1731,37 @@
 
         
         <div id="cg-states-view">
+
+            
+            <div id="cg-map-wrap" style="position:relative;background:rgba(8,9,20,.6);border:1px solid rgba(255,255,255,.07);border-radius:16px;margin-bottom:32px;padding:18px 20px 14px;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                    <p style="font-size:10px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.18em;text-transform:uppercase">Crime Grade Map · Click a state to explore</p>
+                    <div style="display:flex;align-items:center;gap:10px">
+                                                <span style="display:flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:#4ade80">
+                            <span style="width:8px;height:8px;border-radius:2px;background:#4ade80;display:inline-block"></span>A
+                        </span>
+                                                <span style="display:flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:#34d399">
+                            <span style="width:8px;height:8px;border-radius:2px;background:#34d399;display:inline-block"></span>B
+                        </span>
+                                                <span style="display:flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:#60a5fa">
+                            <span style="width:8px;height:8px;border-radius:2px;background:#60a5fa;display:inline-block"></span>C
+                        </span>
+                                                <span style="display:flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:#fbbf24">
+                            <span style="width:8px;height:8px;border-radius:2px;background:#fbbf24;display:inline-block"></span>D
+                        </span>
+                                                <span style="display:flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:#f87171">
+                            <span style="width:8px;height:8px;border-radius:2px;background:#f87171;display:inline-block"></span>F
+                        </span>
+                                            </div>
+                </div>
+                <div id="cg-map-loading" style="display:flex;align-items:center;justify-content:center;height:300px;color:rgba(255,255,255,.2);font-size:12px;gap:8px">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2.5" style="animation:cgMapSpin 1s linear infinite;flex-shrink:0"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-opacity=".2"/><path d="M21 12a9 9 0 00-9-9"/></svg>
+                    Loading map…
+                </div>
+                <svg id="cg-us-map-svg" style="display:none;width:100%;border-radius:6px"></svg>
+                <div id="cg-map-tooltip" style="position:absolute;pointer-events:none;background:#0f172a;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:9px 13px;font-size:12px;color:#fff;display:none;z-index:20;box-shadow:0 12px 32px rgba(0,0,0,.7);white-space:nowrap;line-height:1.5"></div>
+            </div>
+
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-7">
                 <div>
                     <h2 class="text-lg font-bold text-white">All States</h2>
@@ -2241,6 +2273,114 @@ function cgBackToStates(){
 }
 window.cgBackToStates=cgBackToStates;
 
+/* ── Interactive US Map ── */
+var cgMapBuilt=false,cgMapDepsOK=false;
+var FIPS_ABBR={"01":"AL","02":"AK","04":"AZ","05":"AR","06":"CA","08":"CO","09":"CT","10":"DE","11":"DC","12":"FL","13":"GA","15":"HI","16":"ID","17":"IL","18":"IN","19":"IA","20":"KS","21":"KY","22":"LA","23":"ME","24":"MD","25":"MA","26":"MI","27":"MN","28":"MS","29":"MO","30":"MT","31":"NE","32":"NV","33":"NH","34":"NJ","35":"NM","36":"NY","37":"NC","38":"ND","39":"OH","40":"OK","41":"OR","42":"PA","44":"RI","45":"SC","46":"SD","47":"TN","48":"TX","49":"UT","50":"VT","51":"VA","53":"WA","54":"WV","55":"WI","56":"WY"};
+
+function cgLoadMapDeps(cb){
+  if(cgMapDepsOK){cb();return;}
+  var s1=document.createElement('script');
+  s1.src='https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
+  s1.onload=function(){
+    var s2=document.createElement('script');
+    s2.src='https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js';
+    s2.onload=function(){cgMapDepsOK=true;cb();};
+    document.head.appendChild(s2);
+  };
+  document.head.appendChild(s1);
+}
+
+function cgInitMap(){
+  if(cgMapBuilt)return;
+  var wrap=document.getElementById('cg-map-wrap');
+  if(!wrap)return;
+  cgLoadMapDeps(function(){
+    var states=cgBuildStateData();
+    var gradeOf={};
+    states.forEach(function(s){gradeOf[s.abbr]=s;});
+    fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json')
+      .then(function(r){return r.json();})
+      .then(function(us){
+        var loading=document.getElementById('cg-map-loading');
+        var svgEl=document.getElementById('cg-us-map-svg');
+        if(loading)loading.style.display='none';
+        if(!svgEl)return;
+        svgEl.style.display='block';
+        var W=wrap.clientWidth-40;
+        var H=Math.max(220,Math.round(W*0.57));
+        var topo=topojson.feature(us,us.objects.states);
+        var features=topo.features;
+        var projection=d3.geoAlbersUsa().fitSize([W,H],topo);
+        var pathGen=d3.geoPath().projection(projection);
+        var tooltip=document.getElementById('cg-map-tooltip');
+        var svg=d3.select('#cg-us-map-svg')
+          .attr('viewBox','0 0 '+W+' '+H)
+          .attr('width','100%').attr('height',H);
+        /* background */
+        svg.append('rect').attr('width',W).attr('height',H).attr('fill','#08090e').attr('rx',6);
+        /* state fills */
+        svg.selectAll('path.cg-sp')
+          .data(features).enter().append('path').attr('class','cg-sp')
+          .attr('d',pathGen)
+          .attr('fill',function(d){
+            var abbr=FIPS_ABBR[('00'+d.id).slice(-2)];
+            var s=gradeOf[abbr];
+            return s?GC[s.grade].bg:'#1a2744';
+          })
+          .attr('stroke','#08090e').attr('stroke-width',0.8)
+          .attr('fill-opacity',0.75).style('cursor','pointer')
+          .on('mouseover',function(event,d){
+            d3.select(this).raise().attr('fill-opacity',1).attr('stroke','rgba(255,255,255,.5)').attr('stroke-width',1.6);
+            var abbr=FIPS_ABBR[('00'+d.id).slice(-2)];
+            var s=gradeOf[abbr];
+            if(s&&tooltip){
+              var gc=GC[s.grade]||GC.F;
+              tooltip.innerHTML='<div style="font-weight:800;color:'+gc.bg+';font-size:13px">'+s.name+'</div>'
+                +'<div style="color:rgba(255,255,255,.45);font-size:10px;margin-top:2px">Grade <span style="color:'+gc.bg+';font-weight:900">'+s.grade+'</span> · '+s.cities.length+' '+(s.cities.length===1?'city':'cities')+'</div>';
+              tooltip.style.display='block';
+              var rect=wrap.getBoundingClientRect();
+              tooltip.style.left=Math.min(event.clientX-rect.left+18,rect.width-170)+'px';
+              tooltip.style.top=Math.max(40,event.clientY-rect.top-60)+'px';
+            }
+          })
+          .on('mousemove',function(event){
+            if(tooltip&&tooltip.style.display==='block'){
+              var rect=wrap.getBoundingClientRect();
+              tooltip.style.left=Math.min(event.clientX-rect.left+18,rect.width-170)+'px';
+              tooltip.style.top=Math.max(40,event.clientY-rect.top-60)+'px';
+            }
+          })
+          .on('mouseout',function(){
+            d3.select(this).attr('fill-opacity',0.75).attr('stroke','#08090e').attr('stroke-width',0.8);
+            if(tooltip)tooltip.style.display='none';
+          })
+          .on('click',function(event,d){
+            var abbr=FIPS_ABBR[('00'+d.id).slice(-2)];
+            if(abbr)cgSelectState(abbr);
+          });
+        /* state border mesh */
+        svg.append('path')
+          .datum(topojson.mesh(us,us.objects.states,function(a,b){return a!==b;}))
+          .attr('fill','none').attr('stroke','rgba(255,255,255,.07)').attr('stroke-width',0.4)
+          .attr('d',pathGen);
+        /* state abbreviation labels */
+        svg.selectAll('text.cg-sl')
+          .data(features).enter().append('text').attr('class','cg-sl')
+          .attr('transform',function(d){var c=pathGen.centroid(d);return c&&isFinite(c[0])?'translate('+c+')':'translate(-9999,-9999)';})
+          .attr('text-anchor','middle').attr('dy','.35em')
+          .style('fill','rgba(255,255,255,.9)').style('font-size','7px').style('font-weight','800')
+          .style('pointer-events','none').style('text-shadow','0 1px 4px rgba(0,0,0,.95),0 0 8px rgba(0,0,0,.7)')
+          .text(function(d){return FIPS_ABBR[('00'+d.id).slice(-2)]||'';});
+        cgMapBuilt=true;
+      })
+      .catch(function(){
+        var l=document.getElementById('cg-map-loading');
+        if(l){l.innerHTML='Map unavailable';l.style.display='flex';}
+      });
+  });
+}
+window.cgInitMap=cgInitMap;
+
 function cgScrollToStates(){
   var hero=document.getElementById('cg-hero-section');
   var legend=document.getElementById('cg-legend-bar');
@@ -2249,6 +2389,7 @@ function cgScrollToStates(){
   if(legend)legend.style.display='';
   if(main)main.style.display='';
   window.scrollTo(0,0);
+  setTimeout(cgInitMap,80);
 }
 window.cgScrollToStates=cgScrollToStates;
 
