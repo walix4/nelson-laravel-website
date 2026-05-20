@@ -993,7 +993,7 @@
 </style>
 
 {{-- ── HERO ── --}}
-<section id="cg-hero-section" style="position:relative;height:calc(100vh - 78px);display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;background:#08090e">
+<section id="cg-hero-section" style="position:relative;height:calc(100vh - 78px);overflow:hidden;background:#08090e">
     {{-- Background: USA map SVG + subtle crime-density blobs --}}
     <div style="position:absolute;inset:0;overflow:hidden">
         {{-- USA Map SVG at low opacity --}}
@@ -1052,7 +1052,7 @@
     </div>
 
     {{-- Portal top bar --}}
-    <div style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:10px 32px;border-bottom:1px solid rgba(226,75,74,.18);background:rgba(0,0,0,.5);backdrop-filter:blur(8px)">
+    <div style="position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:10px 32px;border-bottom:1px solid rgba(226,75,74,.18);background:rgba(0,0,0,.5);backdrop-filter:blur(8px)">
         <div style="display:flex;align-items:center;gap:10px">
             <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#E24B4A;box-shadow:0 0 8px #E24B4A;animation:cgPulse 1.4s infinite"></span>
             <span style="font-size:9px;font-weight:800;letter-spacing:.22em;color:rgba(255,255,255,.4);text-transform:uppercase">Auxilio Crime Intelligence Portal</span>
@@ -1064,7 +1064,7 @@
     </div>
 
     {{-- Main centred content --}}
-    <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px 8px;text-align:center;min-height:0;overflow:hidden">
+    <div style="position:absolute;top:40px;bottom:65px;left:0;right:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px 8px;text-align:center;overflow:hidden">
 
         {{-- Corner reticle marks --}}
         <div style="position:absolute;top:24px;left:32px;width:28px;height:28px;border-top:2px solid rgba(226,75,74,.5);border-left:2px solid rgba(226,75,74,.5)"></div>
@@ -1111,7 +1111,7 @@
     </div>
 
     {{-- Stats strip --}}
-    <div style="position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.55);backdrop-filter:blur(10px)">
+    <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.55);backdrop-filter:blur(10px)">
         <div style="padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)">
             <p style="font-size:22px;font-weight:900;color:#fff;line-height:1;font-family:monospace;letter-spacing:-.02em">359</p>
             <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Nat. Violent /100K</p>
