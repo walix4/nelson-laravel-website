@@ -5226,8 +5226,15 @@
         });
     }
     function applyRoute() {
-        showView(getRoute());
+        var route = getRoute();
+        showView(route);
         window.scrollTo({top:0, behavior:'instant'});
+        // Update active underline on nav links
+        document.querySelectorAll('[data-route].nav-link').forEach(function(link) {
+            var href = link.getAttribute('href') || '';
+            var linkRoute = href.replace(/^#\//, '') || 'home';
+            link.classList.toggle('is-active', linkRoute === route);
+        });
     }
 
     /* ---------- Marker icon ---------- */
