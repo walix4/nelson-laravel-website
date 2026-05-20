@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="/nelson-laravel-website/favicon.png" />
     <link rel="apple-touch-icon" href="/nelson-laravel-website/favicon.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="preload" as="style" href="/nelson-laravel-website/build/assets/app-0y2qRxYD.css" /><link rel="modulepreload" as="script" href="/nelson-laravel-website/build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="/nelson-laravel-website/build/assets/app-0y2qRxYD.css" /><script type="module" src="/nelson-laravel-website/build/assets/app-C2cgr6mz.js"></script>    <style>
+    <link rel="preload" as="style" href="/nelson-laravel-website/build/assets/app-C4c_UgRV.css" /><link rel="modulepreload" as="script" href="/nelson-laravel-website/build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="/nelson-laravel-website/build/assets/app-C4c_UgRV.css" /><script type="module" src="/nelson-laravel-website/build/assets/app-C2cgr6mz.js"></script>    <style>
         [data-nav].is-scrolled {
             box-shadow: 0 8px 24px -12px rgba(10, 26, 74, .45);
         }
@@ -1537,15 +1537,15 @@
 .cg-pg-btn{padding:7px 13px;border:1px solid rgba(255,255,255,.1);border-radius:4px;font-size:12px;cursor:pointer;background:rgba(255,255,255,.05);color:#64748b;transition:all .15s;font-weight:500}
 .cg-pg-btn:hover{border-color:#E24B4A;color:#E24B4A}
 .cg-pg-btn.cg-pga{background:#E24B4A;border-color:#E24B4A;color:white}
-.cg-state-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:16px;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
-.cg-state-card:hover{background:rgba(255,255,255,.07);border-color:rgba(226,75,74,.45);transform:translateY(-2px)}
+.cg-state-card{background:#0d1129;border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative}
+.cg-state-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.5)!important;border-color:rgba(255,255,255,.2)}
 .cg-ai-panel{margin-top:20px;padding:20px 24px;border-radius:4px;border:1px solid rgba(56,189,248,.15);background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(16,185,129,.06));display:none}
 .cg-ai-panel.cg-show{display:block;animation:cgFadeUp .35s cubic-bezier(.16,1,.3,1) both}
 .cg-dn{color:#22c55e;font-weight:600}.cg-up{color:#f87171;font-weight:600}.cg-flat{color:#64748b}
 </style>
 
 
-<section id="cg-hero-section" style="position:relative;height:calc(100vh - 78px);display:flex;flex-direction:column;overflow:hidden;background:#08090e">
+<section id="cg-hero-section" style="position:relative;height:calc(100vh - 78px);overflow:hidden;background:#08090e">
     
     <div style="position:absolute;inset:0;overflow:hidden">
         
@@ -1604,7 +1604,7 @@
     </div>
 
     
-    <div style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:10px 32px;border-bottom:1px solid rgba(226,75,74,.18);background:rgba(0,0,0,.5);backdrop-filter:blur(8px)">
+    <div style="position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:10px 32px;border-bottom:1px solid rgba(226,75,74,.18);background:rgba(0,0,0,.5);backdrop-filter:blur(8px)">
         <div style="display:flex;align-items:center;gap:10px">
             <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#E24B4A;box-shadow:0 0 8px #E24B4A;animation:cgPulse 1.4s infinite"></span>
             <span style="font-size:9px;font-weight:800;letter-spacing:.22em;color:rgba(255,255,255,.4);text-transform:uppercase">Auxilio Crime Intelligence Portal</span>
@@ -1616,7 +1616,7 @@
     </div>
 
     
-    <div style="position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px 8px;text-align:center">
+    <div style="position:absolute;top:40px;bottom:0;left:0;right:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px;text-align:center;overflow:hidden">
 
         
         <div style="position:absolute;top:24px;left:32px;width:28px;height:28px;border-top:2px solid rgba(226,75,74,.5);border-left:2px solid rgba(226,75,74,.5)"></div>
@@ -1662,25 +1662,6 @@
 
     </div>
 
-    
-    <div style="position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.55);backdrop-filter:blur(10px)">
-        <div style="padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)">
-            <p style="font-size:22px;font-weight:900;color:#fff;line-height:1;font-family:monospace;letter-spacing:-.02em">359</p>
-            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Nat. Violent /100K</p>
-        </div>
-        <div style="padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)">
-            <p style="font-size:22px;font-weight:900;color:#86c232;line-height:1;font-family:monospace;letter-spacing:-.02em">−4.5%</p>
-            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Crime vs 2025</p>
-        </div>
-        <div style="padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)">
-            <p style="font-size:22px;font-weight:900;color:#ff8280;line-height:1;font-family:monospace;letter-spacing:-.02em">2,501</p>
-            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Highest — Memphis</p>
-        </div>
-        <div style="padding:14px 20px;text-align:center">
-            <p style="font-size:22px;font-weight:900;color:#86c232;line-height:1;font-family:monospace;letter-spacing:-.02em">66</p>
-            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Lowest — Carmel IN</p>
-        </div>
-    </div>
 </section>
 
 
@@ -1743,7 +1724,7 @@
                     <input id="cg-state-search" class="cg-search" style="padding-left:36px;width:210px" placeholder="Search state…" oninput="cgFilterStates()" />
                 </div>
             </div>
-            <div id="cg-state-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px"></div>
+            <div id="cg-state-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:16px"></div>
         </div>
 
         
@@ -1987,6 +1968,75 @@ var s2=document.getElementById('cg-s-cities2');if(s2)s2.textContent=CG_ALL.lengt
 
 var STATE_NAMES={AK:'Alaska',AL:'Alabama',AR:'Arkansas',AZ:'Arizona',CA:'California',CO:'Colorado',CT:'Connecticut',DC:'Wash. D.C.',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',IA:'Iowa',ID:'Idaho',IL:'Illinois',IN:'Indiana',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',MA:'Massachusetts',MD:'Maryland',ME:'Maine',MI:'Michigan',MN:'Minnesota',MO:'Missouri',MS:'Mississippi',MT:'Montana',NC:'North Carolina',ND:'North Dakota',NE:'Nebraska',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NV:'Nevada',NY:'New York',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VA:'Virginia',VT:'Vermont',WA:'Washington',WI:'Wisconsin',WV:'West Virginia',WY:'Wyoming'};
 
+/* US state flag primary colours — used as fallback header gradient */
+var STATE_COLORS={
+  AK:'#002868',AL:'#BF0A30',AR:'#BF0A30',AZ:'#002868',CA:'#003776',
+  CO:'#003DA5',CT:'#002868',DC:'#E31C3D',DE:'#002868',FL:'#F15A22',
+  GA:'#003087',HI:'#002868',IA:'#002868',ID:'#003087',IL:'#003087',
+  IN:'#002868',KS:'#003087',KY:'#003087',LA:'#003087',MA:'#003087',
+  MD:'#E31C3D',ME:'#003087',MI:'#002868',MN:'#003087',MO:'#003087',
+  MS:'#BF0A30',MT:'#003087',NC:'#003087',ND:'#003087',NE:'#003087',
+  NH:'#003087',NJ:'#D4A017',NM:'#FFCC00',NV:'#002868',NY:'#003087',
+  OH:'#003087',OK:'#003087',OR:'#003087',PA:'#003087',RI:'#002868',
+  SC:'#003087',SD:'#003087',TN:'#BF0A30',TX:'#BF0A30',UT:'#003087',
+  VA:'#003087',VT:'#003087',WA:'#005C2E',WI:'#003087',WV:'#003087',WY:'#003087'
+};
+
+/* Direct Wikimedia CDN thumbnails for all US state flags */
+var STATE_FLAGS={
+  AK:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Alaska.svg/250px-Flag_of_Alaska.svg.png',
+  AL:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Alabama.svg/250px-Flag_of_Alabama.svg.png',
+  AR:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Flag_of_Arkansas.svg/250px-Flag_of_Arkansas.svg.png',
+  AZ:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Flag_of_Arizona.svg/250px-Flag_of_Arizona.svg.png',
+  CA:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Flag_of_California.svg/250px-Flag_of_California.svg.png',
+  CO:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Flag_of_Colorado.svg/250px-Flag_of_Colorado.svg.png',
+  CT:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Flag_of_Connecticut.svg/250px-Flag_of_Connecticut.svg.png',
+  DC:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Washington%2C_D.C.svg/250px-Flag_of_Washington%2C_D.C.svg.png',
+  DE:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Flag_of_Delaware.svg/250px-Flag_of_Delaware.svg.png',
+  FL:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Flag_of_Florida.svg/250px-Flag_of_Florida.svg.png',
+  GA:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Flag_of_the_State_of_Georgia.svg/250px-Flag_of_the_State_of_Georgia.svg.png',
+  HI:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Flag_of_Hawaii.svg/250px-Flag_of_Hawaii.svg.png',
+  IA:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Flag_of_Iowa.svg/250px-Flag_of_Iowa.svg.png',
+  ID:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_Idaho.svg/250px-Flag_of_Idaho.svg.png',
+  IL:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Flag_of_Illinois.svg/250px-Flag_of_Illinois.svg.png',
+  IN:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Flag_of_Indiana.svg/250px-Flag_of_Indiana.svg.png',
+  KS:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Flag_of_Kansas.svg/250px-Flag_of_Kansas.svg.png',
+  KY:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Flag_of_Kentucky.svg/250px-Flag_of_Kentucky.svg.png',
+  LA:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Flag_of_Louisiana.svg/250px-Flag_of_Louisiana.svg.png',
+  MA:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Flag_of_Massachusetts.svg/250px-Flag_of_Massachusetts.svg.png',
+  MD:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Flag_of_Maryland.svg/250px-Flag_of_Maryland.svg.png',
+  ME:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Flag_of_the_State_of_Maine.svg/250px-Flag_of_the_State_of_Maine.svg.png',
+  MI:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Flag_of_Michigan.svg/250px-Flag_of_Michigan.svg.png',
+  MN:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Minnesota.svg/250px-Flag_of_Minnesota.svg.png',
+  MO:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Flag_of_Missouri.svg/250px-Flag_of_Missouri.svg.png',
+  MS:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Flag_of_Mississippi.svg/250px-Flag_of_Mississippi.svg.png',
+  MT:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_Montana.svg/250px-Flag_of_Montana.svg.png',
+  NC:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Flag_of_North_Carolina.svg/250px-Flag_of_North_Carolina.svg.png',
+  ND:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Flag_of_North_Dakota.svg/250px-Flag_of_North_Dakota.svg.png',
+  NE:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Flag_of_Nebraska.svg/250px-Flag_of_Nebraska.svg.png',
+  NH:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Flag_of_New_Hampshire.svg/250px-Flag_of_New_Hampshire.svg.png',
+  NJ:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Flag_of_New_Jersey.svg/250px-Flag_of_New_Jersey.svg.png',
+  NM:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_New_Mexico.svg/250px-Flag_of_New_Mexico.svg.png',
+  NV:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Flag_of_Nevada.svg/250px-Flag_of_Nevada.svg.png',
+  NY:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_New_York.svg/250px-Flag_of_New_York.svg.png',
+  OH:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Ohio.svg/250px-Flag_of_Ohio.svg.png',
+  OK:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Flag_of_Oklahoma.svg/250px-Flag_of_Oklahoma.svg.png',
+  OR:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Oregon.svg/250px-Flag_of_Oregon.svg.png',
+  PA:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Flag_of_Pennsylvania.svg/250px-Flag_of_Pennsylvania.svg.png',
+  RI:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Rhode_Island.svg/250px-Flag_of_Rhode_Island.svg.png',
+  SC:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Flag_of_South_Carolina.svg/250px-Flag_of_South_Carolina.svg.png',
+  SD:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_South_Dakota.svg/250px-Flag_of_South_Dakota.svg.png',
+  TN:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Tennessee.svg/250px-Flag_of_Tennessee.svg.png',
+  TX:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Flag_of_Texas.svg/250px-Flag_of_Texas.svg.png',
+  UT:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Flag_of_Utah.svg/250px-Flag_of_Utah.svg.png',
+  VA:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Flag_of_Virginia.svg/250px-Flag_of_Virginia.svg.png',
+  VT:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Vermont.svg/250px-Flag_of_Vermont.svg.png',
+  WA:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Flag_of_Washington.svg/250px-Flag_of_Washington.svg.png',
+  WI:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Flag_of_Wisconsin.svg/250px-Flag_of_Wisconsin.svg.png',
+  WV:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Flag_of_West_Virginia.svg/250px-Flag_of_West_Virginia.svg.png',
+  WY:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Wyoming.svg/250px-Flag_of_Wyoming.svg.png'
+};
+
 var cgSelectedState='';
 var cgSortKey='rank',cgSortDir=1,cgPage=1;
 var CG_PER=20;
@@ -2071,15 +2121,30 @@ function cgRenderStates(filter){
   var html='';
   states.forEach(function(s){
     var gc=GC[s.grade]||GC.F;
-    html+='<div class="cg-state-card" onclick="cgSelectState(\''+s.abbr+'\')">'
-      +'<div class="flex items-start justify-between mb-2">'
-        +'<span style="font-size:28px;font-weight:900;line-height:1;color:rgba(255,255,255,.88)">'+s.abbr+'</span>'
-        +'<span style="background:'+gc.bg+'20;color:'+gc.bg+';border:1px solid '+gc.bg+'55;padding:3px 8px;font-size:11px;font-weight:800;border-radius:3px">'+s.grade+'</span>'
+    var stColor=STATE_COLORS[s.abbr]||'#002868';
+    var flagSrc=STATE_FLAGS[s.abbr]||'';
+    html+='<div class="cg-state-card" onclick="cgSelectState(\''+s.abbr+'\')" style="box-shadow:0 6px 24px rgba(0,0,0,.35)">'
+      /* ── Flag header ── */
+      +'<div style="position:relative;height:80px;background:'+stColor+';overflow:hidden">'
+        /* Flag image — fills header, gentle overlay so abbr/badge remain legible */
+        +'<img src="'+flagSrc+'" alt="'+s.name+' flag" loading="lazy" '
+          +'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.9" '
+          +'onerror="this.parentNode.style.background=\''+stColor+'\';this.remove()">'
+        /* readability gradient */
+        +'<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,.5) 100%);pointer-events:none"></div>'
+        /* grade badge — top right */
+        +'<div style="position:absolute;top:8px;right:8px;background:'+gc.bg+';color:#fff;font-size:13px;font-weight:900;width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.5)">'+s.grade+'</div>'
+        /* state abbr — bottom left over flag */
+        +'<div style="position:absolute;bottom:7px;left:10px;font-size:20px;font-weight:900;color:#fff;letter-spacing:-.02em;text-shadow:0 1px 6px rgba(0,0,0,.9),0 0 12px rgba(0,0,0,.7)">'+s.abbr+'</div>'
       +'</div>'
-      +'<p style="font-size:11px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:3px">'+s.name+'</p>'
-      +'<p style="font-size:10px;color:rgba(255,255,255,.28)">'+s.cities.length+' cit'+(s.cities.length===1?'y':'ies')+'</p>'
-      +'<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">'
-        +'<p style="font-size:10px;color:rgba(255,255,255,.25)">avg violent: <span style="color:rgba(255,255,255,.48)">'+s.avgViolent+'</span></p>'
+      /* ── Card body ── */
+      +'<div style="padding:10px 12px 12px;background:#0d1129">'
+        +'<div style="height:2px;border-radius:2px;background:'+gc.bg+';opacity:.7;margin-bottom:8px"></div>'
+        +'<p style="font-size:11.5px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.name+'</p>'
+        +'<div style="display:flex;align-items:center;gap:4px">'
+          +'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="'+gc.bg+'" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>'
+          +'<span style="font-size:10px;color:rgba(255,255,255,.4)">'+s.cities.length+' cit'+(s.cities.length===1?'y':'ies')+'</span>'
+        +'</div>'
       +'</div>'
     +'</div>';
   });
