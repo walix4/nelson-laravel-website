@@ -1064,7 +1064,7 @@
     </div>
 
     {{-- Main centred content --}}
-    <div style="position:absolute;top:40px;bottom:65px;left:0;right:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px 8px;text-align:center;overflow:hidden">
+    <div style="position:absolute;top:40px;bottom:0;left:0;right:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px;text-align:center;overflow:hidden">
 
         {{-- Corner reticle marks --}}
         <div style="position:absolute;top:24px;left:32px;width:28px;height:28px;border-top:2px solid rgba(226,75,74,.5);border-left:2px solid rgba(226,75,74,.5)"></div>
@@ -1110,25 +1110,6 @@
 
     </div>
 
-    {{-- Stats strip --}}
-    <div style="position:absolute;bottom:0;left:0;right:0;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.55);backdrop-filter:blur(10px)">
-        <div style="padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)">
-            <p style="font-size:22px;font-weight:900;color:#fff;line-height:1;font-family:monospace;letter-spacing:-.02em">359</p>
-            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Nat. Violent /100K</p>
-        </div>
-        <div style="padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)">
-            <p style="font-size:22px;font-weight:900;color:#86c232;line-height:1;font-family:monospace;letter-spacing:-.02em">−4.5%</p>
-            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Crime vs 2025</p>
-        </div>
-        <div style="padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)">
-            <p style="font-size:22px;font-weight:900;color:#ff8280;line-height:1;font-family:monospace;letter-spacing:-.02em">2,501</p>
-            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Highest — Memphis</p>
-        </div>
-        <div style="padding:14px 20px;text-align:center">
-            <p style="font-size:22px;font-weight:900;color:#86c232;line-height:1;font-family:monospace;letter-spacing:-.02em">66</p>
-            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Lowest — Carmel IN</p>
-        </div>
-    </div>
 </section>
 
 {{-- ── GRADE LEGEND ── --}}
