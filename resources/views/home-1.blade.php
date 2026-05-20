@@ -1399,25 +1399,49 @@ var s2=document.getElementById('cg-s-cities2');if(s2)s2.textContent=CG_ALL.lengt
 
 var STATE_NAMES={AK:'Alaska',AL:'Alabama',AR:'Arkansas',AZ:'Arizona',CA:'California',CO:'Colorado',CT:'Connecticut',DC:'Wash. D.C.',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',IA:'Iowa',ID:'Idaho',IL:'Illinois',IN:'Indiana',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',MA:'Massachusetts',MD:'Maryland',ME:'Maine',MI:'Michigan',MN:'Minnesota',MO:'Missouri',MS:'Mississippi',MT:'Montana',NC:'North Carolina',ND:'North Dakota',NE:'Nebraska',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NV:'Nevada',NY:'New York',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VA:'Virginia',VT:'Vermont',WA:'Washington',WI:'Wisconsin',WV:'West Virginia',WY:'Wyoming'};
 
-var STATE_FLAGS={
-  AK:'Flag_of_Alaska.svg',AL:'Flag_of_Alabama.svg',AR:'Flag_of_Arkansas.svg',
-  AZ:'Flag_of_Arizona.svg',CA:'Flag_of_California.svg',CO:'Flag_of_Colorado.svg',
-  CT:'Flag_of_Connecticut.svg',DC:'Flag_of_Washington,_D.C..svg',DE:'Flag_of_Delaware.svg',
-  FL:'Flag_of_Florida.svg',GA:'Flag_of_Georgia_(U.S._state).svg',HI:'Flag_of_Hawaii.svg',
-  IA:'Flag_of_Iowa.svg',ID:'Flag_of_Idaho.svg',IL:'Flag_of_Illinois.svg',
-  IN:'Flag_of_Indiana.svg',KS:'Flag_of_Kansas.svg',KY:'Flag_of_Kentucky.svg',
-  LA:'Flag_of_Louisiana.svg',MA:'Flag_of_Massachusetts.svg',MD:'Flag_of_Maryland.svg',
-  ME:'Flag_of_Maine.svg',MI:'Flag_of_Michigan.svg',MN:'Flag_of_Minnesota.svg',
-  MO:'Flag_of_Missouri.svg',MS:'Flag_of_Mississippi.svg',MT:'Flag_of_Montana.svg',
-  NC:'Flag_of_North_Carolina.svg',ND:'Flag_of_North_Dakota.svg',NE:'Flag_of_Nebraska.svg',
-  NH:'Flag_of_New_Hampshire.svg',NJ:'Flag_of_New_Jersey.svg',NM:'Flag_of_New_Mexico.svg',
-  NV:'Flag_of_Nevada.svg',NY:'Flag_of_New_York.svg',OH:'Flag_of_Ohio.svg',
-  OK:'Flag_of_Oklahoma.svg',OR:'Flag_of_Oregon.svg',PA:'Flag_of_Pennsylvania.svg',
-  RI:'Flag_of_Rhode_Island.svg',SC:'Flag_of_South_Carolina.svg',SD:'Flag_of_South_Dakota.svg',
-  TN:'Flag_of_Tennessee.svg',TX:'Flag_of_Texas.svg',UT:'Flag_of_Utah.svg',
-  VA:'Flag_of_Virginia.svg',VT:'Flag_of_Vermont.svg',WA:'Flag_of_Washington_(state).svg',
-  WI:'Flag_of_Wisconsin.svg',WV:'Flag_of_West_Virginia.svg',WY:'Flag_of_Wyoming.svg'
-};
+/* State flag thumb URLs populated via Wikimedia API batch call */
+var FLAG_URLS={};
+(function(){
+  var files={
+    AK:'Flag_of_Alaska.svg',AL:'Flag_of_Alabama.svg',AR:'Flag_of_Arkansas.svg',
+    AZ:'Flag_of_Arizona.svg',CA:'Flag_of_California.svg',CO:'Flag_of_Colorado.svg',
+    CT:'Flag_of_Connecticut.svg',DC:'Flag_of_Washington,_D.C..svg',DE:'Flag_of_Delaware.svg',
+    FL:'Flag_of_Florida.svg',GA:'Flag_of_Georgia_(U.S._state).svg',HI:'Flag_of_Hawaii.svg',
+    IA:'Flag_of_Iowa.svg',ID:'Flag_of_Idaho.svg',IL:'Flag_of_Illinois.svg',
+    IN:'Flag_of_Indiana.svg',KS:'Flag_of_Kansas.svg',KY:'Flag_of_Kentucky.svg',
+    LA:'Flag_of_Louisiana.svg',MA:'Flag_of_Massachusetts.svg',MD:'Flag_of_Maryland.svg',
+    ME:'Flag_of_Maine.svg',MI:'Flag_of_Michigan.svg',MN:'Flag_of_Minnesota.svg',
+    MO:'Flag_of_Missouri.svg',MS:'Flag_of_Mississippi.svg',MT:'Flag_of_Montana.svg',
+    NC:'Flag_of_North_Carolina.svg',ND:'Flag_of_North_Dakota.svg',NE:'Flag_of_Nebraska.svg',
+    NH:'Flag_of_New_Hampshire.svg',NJ:'Flag_of_New_Jersey.svg',NM:'Flag_of_New_Mexico.svg',
+    NV:'Flag_of_Nevada.svg',NY:'Flag_of_New_York.svg',OH:'Flag_of_Ohio.svg',
+    OK:'Flag_of_Oklahoma.svg',OR:'Flag_of_Oregon.svg',PA:'Flag_of_Pennsylvania.svg',
+    RI:'Flag_of_Rhode_Island.svg',SC:'Flag_of_South_Carolina.svg',SD:'Flag_of_South_Dakota.svg',
+    TN:'Flag_of_Tennessee.svg',TX:'Flag_of_Texas.svg',UT:'Flag_of_Utah.svg',
+    VA:'Flag_of_Virginia.svg',VT:'Flag_of_Vermont.svg',WA:'Flag_of_Washington_(state).svg',
+    WI:'Flag_of_Wisconsin.svg',WV:'Flag_of_West_Virginia.svg',WY:'Flag_of_Wyoming.svg'
+  };
+  /* Build reverse map: "Flag_of_X.svg" → abbr */
+  var rev={};
+  Object.keys(files).forEach(function(ab){rev['File:'+files[ab]]=ab;});
+  var titles=Object.keys(files).map(function(ab){return'File:'+files[ab];}).join('|');
+  fetch('https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url&iiwidth=220&format=json&origin=*&titles='+encodeURIComponent(titles))
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var pages=data.query.pages;
+      Object.keys(pages).forEach(function(id){
+        var pg=pages[id];
+        var ab=rev[pg.title];
+        if(ab&&pg.imageinfo&&pg.imageinfo[0]&&pg.imageinfo[0].thumburl){
+          FLAG_URLS[ab]=pg.imageinfo[0].thumburl;
+        }
+      });
+      /* Re-render cards now that URLs are ready */
+      var srch=document.getElementById('cg-state-search');
+      if(document.getElementById('cg-state-grid').children.length>0)
+        cgRenderStates(srch?srch.value:'');
+    }).catch(function(){});
+})();
 
 var cgSelectedState='';
 var cgSortKey='rank',cgSortDir=1,cgPage=1;
@@ -1503,8 +1527,7 @@ function cgRenderStates(filter){
   var html='';
   states.forEach(function(s){
     var gc=GC[s.grade]||GC.F;
-    var flagFile=STATE_FLAGS[s.abbr]||'';
-    var flagUrl=flagFile?'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(flagFile)+'?width=240':'';
+    var flagUrl=FLAG_URLS[s.abbr]||'';
     html+='<div class="cg-state-card" onclick="cgSelectState(\''+s.abbr+'\')" style="box-shadow:0 6px 24px rgba(0,0,0,.35)">'
       /* ── Flag header ── */
       +'<div style="position:relative;height:80px;background:#0d1129;overflow:hidden">'
