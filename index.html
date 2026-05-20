@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="/nelson-laravel-website/favicon.png" />
     <link rel="apple-touch-icon" href="/nelson-laravel-website/favicon.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="preload" as="style" href="/nelson-laravel-website/build/assets/app-C4c_UgRV.css" /><link rel="modulepreload" as="script" href="/nelson-laravel-website/build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="/nelson-laravel-website/build/assets/app-C4c_UgRV.css" /><script type="module" src="/nelson-laravel-website/build/assets/app-C2cgr6mz.js"></script>    <style>
+    <link rel="preload" as="style" href="/nelson-laravel-website/build/assets/app-2nsf82pO.css" /><link rel="modulepreload" as="script" href="/nelson-laravel-website/build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="/nelson-laravel-website/build/assets/app-2nsf82pO.css" /><script type="module" src="/nelson-laravel-website/build/assets/app-C2cgr6mz.js"></script>    <style>
         [data-nav].is-scrolled {
             box-shadow: 0 8px 24px -12px rgba(10, 26, 74, .45);
         }
@@ -1501,8 +1501,9 @@
 .cg-stat:nth-child(1){animation-delay:.3s}.cg-stat:nth-child(2){animation-delay:.36s}
 .cg-stat:nth-child(3){animation-delay:.42s}.cg-stat:nth-child(4){animation-delay:.48s}
 .cg-stat:nth-child(5){animation-delay:.54s}.cg-stat:nth-child(6){animation-delay:.6s}
-.cg-legend-item{transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
-.cg-legend-item:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 16px 40px -10px rgba(0,0,0,.18)}
+.cg-legend-item{transition:all .22s cubic-bezier(.16,1,.3,1)}
+.cg-legend-item:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.35)}
+.cg-legend-active{transform:translateY(-2px)!important}
 .cg-grade-b{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;font-size:15px;font-weight:800;letter-spacing:-.03em;transition:transform .2s,box-shadow .2s}
 .cg-grade-b:hover{transform:scale(1.15)}
 .cg-decile-b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:11px;font-weight:700}
@@ -1669,39 +1670,54 @@
     <div class="mx-auto max-w-7xl px-5 sm:px-8 py-4">
         <div class="flex flex-wrap items-center gap-3">
             <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[.2em] shrink-0">Grade Scale</p>
-                                    <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2 cursor-default" style="background:#C0DD9715;border:1px solid #C0DD9740;">
-                <span class="cg-grade-b shrink-0" style="background:#C0DD9722;color:#C0DD97;border:1px solid #C0DD9760;width:28px;height:28px;border-radius:7px;font-size:13px;">A</span>
+                                    <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2.5 cursor-pointer"
+                 data-g="A"
+                 onclick="cgLegFilter('A')"
+                 style="background:#4ade8022;border:1px solid #4ade8055;">
+                <span class="cg-grade-b shrink-0 legend-badge" style="background:#4ade8030;color:#4ade80;border:1px solid #4ade8080;width:30px;height:30px;border-radius:8px;font-size:14px;font-weight:900;">A</span>
                 <div class="min-w-0">
-                    <p class="text-[11px] font-bold leading-none" style="color:#C0DD97">Safest 20%</p>
-                    <p class="text-[10px] text-slate-500 mt-0.5">Decile 9–10</p>
+                    <p class="text-[11.5px] font-bold leading-none legend-label" style="color:#4ade80">Safest 20%</p>
+                    <p class="text-[10px] mt-0.5 legend-sub" style="color:rgba(148,163,184,.6)">Decile 9–10</p>
                 </div>
             </div>
-                        <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2 cursor-default" style="background:#E1F5EE15;border:1px solid #E1F5EE40;">
-                <span class="cg-grade-b shrink-0" style="background:#E1F5EE22;color:#E1F5EE;border:1px solid #E1F5EE60;width:28px;height:28px;border-radius:7px;font-size:13px;">B</span>
+                        <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2.5 cursor-pointer"
+                 data-g="B"
+                 onclick="cgLegFilter('B')"
+                 style="background:#34d39922;border:1px solid #34d39955;">
+                <span class="cg-grade-b shrink-0 legend-badge" style="background:#34d39930;color:#34d399;border:1px solid #34d39980;width:30px;height:30px;border-radius:8px;font-size:14px;font-weight:900;">B</span>
                 <div class="min-w-0">
-                    <p class="text-[11px] font-bold leading-none" style="color:#E1F5EE">Below avg</p>
-                    <p class="text-[10px] text-slate-500 mt-0.5">Decile 7–8</p>
+                    <p class="text-[11.5px] font-bold leading-none legend-label" style="color:#34d399">Below avg</p>
+                    <p class="text-[10px] mt-0.5 legend-sub" style="color:rgba(148,163,184,.6)">Decile 7–8</p>
                 </div>
             </div>
-                        <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2 cursor-default" style="background:#E6F1FB15;border:1px solid #E6F1FB40;">
-                <span class="cg-grade-b shrink-0" style="background:#E6F1FB22;color:#E6F1FB;border:1px solid #E6F1FB60;width:28px;height:28px;border-radius:7px;font-size:13px;">C</span>
+                        <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2.5 cursor-pointer"
+                 data-g="C"
+                 onclick="cgLegFilter('C')"
+                 style="background:#60a5fa22;border:1px solid #60a5fa55;">
+                <span class="cg-grade-b shrink-0 legend-badge" style="background:#60a5fa30;color:#60a5fa;border:1px solid #60a5fa80;width:30px;height:30px;border-radius:8px;font-size:14px;font-weight:900;">C</span>
                 <div class="min-w-0">
-                    <p class="text-[11px] font-bold leading-none" style="color:#E6F1FB">Near avg</p>
-                    <p class="text-[10px] text-slate-500 mt-0.5">Decile 5–6</p>
+                    <p class="text-[11.5px] font-bold leading-none legend-label" style="color:#60a5fa">Near avg</p>
+                    <p class="text-[10px] mt-0.5 legend-sub" style="color:rgba(148,163,184,.6)">Decile 5–6</p>
                 </div>
             </div>
-                        <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2 cursor-default" style="background:#FAEEDA15;border:1px solid #FAEEDA40;">
-                <span class="cg-grade-b shrink-0" style="background:#FAEEDA22;color:#FAEEDA;border:1px solid #FAEEDA60;width:28px;height:28px;border-radius:7px;font-size:13px;">D</span>
+                        <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2.5 cursor-pointer"
+                 data-g="D"
+                 onclick="cgLegFilter('D')"
+                 style="background:#fbbf2422;border:1px solid #fbbf2455;">
+                <span class="cg-grade-b shrink-0 legend-badge" style="background:#fbbf2430;color:#fbbf24;border:1px solid #fbbf2480;width:30px;height:30px;border-radius:8px;font-size:14px;font-weight:900;">D</span>
                 <div class="min-w-0">
-                    <p class="text-[11px] font-bold leading-none" style="color:#FAEEDA">Above avg</p>
-                    <p class="text-[10px] text-slate-500 mt-0.5">Decile 3–4</p>
+                    <p class="text-[11.5px] font-bold leading-none legend-label" style="color:#fbbf24">Above avg</p>
+                    <p class="text-[10px] mt-0.5 legend-sub" style="color:rgba(148,163,184,.6)">Decile 3–4</p>
                 </div>
             </div>
-                        <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2 cursor-default" style="background:#FCEBEB15;border:1px solid #FCEBEB40;">
-                <span class="cg-grade-b shrink-0" style="background:#FCEBEB22;color:#FCEBEB;border:1px solid #FCEBEB60;width:28px;height:28px;border-radius:7px;font-size:13px;">F</span>
+                        <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2.5 cursor-pointer"
+                 data-g="F"
+                 onclick="cgLegFilter('F')"
+                 style="background:#f8717122;border:1px solid #f8717155;">
+                <span class="cg-grade-b shrink-0 legend-badge" style="background:#f8717130;color:#f87171;border:1px solid #f8717180;width:30px;height:30px;border-radius:8px;font-size:14px;font-weight:900;">F</span>
                 <div class="min-w-0">
-                    <p class="text-[11px] font-bold leading-none" style="color:#FCEBEB">Highest crime</p>
-                    <p class="text-[10px] text-slate-500 mt-0.5">Decile 1–2</p>
+                    <p class="text-[11.5px] font-bold leading-none legend-label" style="color:#f87171">Highest crime</p>
+                    <p class="text-[10px] mt-0.5 legend-sub" style="color:rgba(148,163,184,.6)">Decile 1–2</p>
                 </div>
             </div>
                     </div>
@@ -1945,7 +1961,53 @@ var CG_RAW=[
   {city:'Pasadena',state:'CA',pop:138000,violent:282,property:2480,murder:2.8,trend:'dn'}
 ];
 
-var GC={A:{bg:'#C0DD97',tx:'#27500A'},B:{bg:'#E1F5EE',tx:'#0F6E56'},C:{bg:'#E6F1FB',tx:'#185FA5'},D:{bg:'#FAEEDA',tx:'#854F0B'},F:{bg:'#FCEBEB',tx:'#A32D2D'}};
+var GC={A:{bg:'#4ade80',tx:'#14532d'},B:{bg:'#34d399',tx:'#064e3b'},C:{bg:'#60a5fa',tx:'#1e3a8a'},D:{bg:'#fbbf24',tx:'#78350f'},F:{bg:'#f87171',tx:'#7f1d1d'}};
+var LEGEND_COLORS={
+  A:{fill:'#4ade80',gradient:'linear-gradient(135deg,#15803d,#22c55e)',glow:'rgba(74,222,128,.45)'},
+  B:{fill:'#34d399',gradient:'linear-gradient(135deg,#0e7490,#06b6d4)',glow:'rgba(52,211,153,.45)'},
+  C:{fill:'#60a5fa',gradient:'linear-gradient(135deg,#1d4ed8,#3b82f6)',glow:'rgba(96,165,250,.45)'},
+  D:{fill:'#fbbf24',gradient:'linear-gradient(135deg,#b45309,#f59e0b)',glow:'rgba(251,191,36,.45)'},
+  F:{fill:'#f87171',gradient:'linear-gradient(135deg,#b91c1c,#ef4444)',glow:'rgba(248,113,113,.45)'}
+};
+var cgLegActive='';
+function cgLegFilter(g){
+  if(cgLegActive===g){cgLegActive='';g='';}else{cgLegActive=g;}
+  var gf=document.getElementById('cg-grade-f');if(gf)gf.value=cgLegActive;
+  document.querySelectorAll('.cg-legend-item').forEach(function(el){
+    var eg=el.getAttribute('data-g');
+    var c=LEGEND_COLORS[eg];if(!c)return;
+    var badge=el.querySelector('.legend-badge');
+    var label=el.querySelector('.legend-label');
+    var sub=el.querySelector('.legend-sub');
+    if(cgLegActive&&eg===cgLegActive){
+      el.style.background=c.gradient;
+      el.style.borderColor='transparent';
+      el.style.boxShadow='0 8px 28px '+c.glow+',0 0 0 1px rgba(255,255,255,.12)';
+      el.classList.add('cg-legend-active');
+      if(badge){badge.style.background='rgba(255,255,255,.22)';badge.style.color='#fff';badge.style.borderColor='rgba(255,255,255,.4)';}
+      if(label)label.style.color='#fff';
+      if(sub)sub.style.color='rgba(255,255,255,.65)';
+    } else if(cgLegActive&&eg!==cgLegActive){
+      el.style.background=c.fill+'12';
+      el.style.borderColor=c.fill+'30';
+      el.style.boxShadow='';
+      el.classList.remove('cg-legend-active');
+      if(badge){badge.style.background=c.fill+'20';badge.style.color=c.fill+'99';badge.style.borderColor=c.fill+'40';}
+      if(label)label.style.color=c.fill+'80';
+      if(sub)sub.style.color='rgba(148,163,184,.35)';
+    } else {
+      el.style.background=c.fill+'22';
+      el.style.borderColor=c.fill+'55';
+      el.style.boxShadow='';
+      el.classList.remove('cg-legend-active');
+      if(badge){badge.style.background=c.fill+'30';badge.style.color=c.fill;badge.style.borderColor=c.fill+'80';}
+      if(label)label.style.color=c.fill;
+      if(sub)sub.style.color='rgba(148,163,184,.6)';
+    }
+  });
+  if(typeof cgGoPage==='function')cgGoPage(1);
+  if(typeof cgCheckReset==='function')cgCheckReset();
+}
 var DC=['#E24B4A','#E24B4A','#D85A30','#EF9F27','#BA7517','#378ADD','#1D9E75','#1D9E75','#639922','#639922'];
 
 function cgBuildGrades(data){
