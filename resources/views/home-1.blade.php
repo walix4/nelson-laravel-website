@@ -985,8 +985,10 @@
 .cg-pg-btn{padding:7px 13px;border:1px solid rgba(255,255,255,.1);border-radius:4px;font-size:12px;cursor:pointer;background:rgba(255,255,255,.05);color:#64748b;transition:all .15s;font-weight:500}
 .cg-pg-btn:hover{border-color:#E24B4A;color:#E24B4A}
 .cg-pg-btn.cg-pga{background:#E24B4A;border-color:#E24B4A;color:white}
-.cg-state-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:16px;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
-.cg-state-card:hover{background:rgba(255,255,255,.07);border-color:rgba(226,75,74,.45);transform:translateY(-2px)}
+.cg-state-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative}
+.cg-state-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.18)}
+.cg-state-card .cs-bar{height:3px;width:100%}
+.cg-state-card .cs-body{padding:18px 16px 14px}
 .cg-ai-panel{margin-top:20px;padding:20px 24px;border-radius:4px;border:1px solid rgba(56,189,248,.15);background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(16,185,129,.06));display:none}
 .cg-ai-panel.cg-show{display:block;animation:cgFadeUp .35s cubic-bezier(.16,1,.3,1) both}
 .cg-dn{color:#22c55e;font-weight:600}.cg-up{color:#f87171;font-weight:600}.cg-flat{color:#64748b}
@@ -1155,7 +1157,7 @@
                     <input id="cg-state-search" class="cg-search" style="padding-left:36px;width:210px" placeholder="Search state…" oninput="cgFilterStates()" />
                 </div>
             </div>
-            <div id="cg-state-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px"></div>
+            <div id="cg-state-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px"></div>
         </div>
 
         {{-- ── CITY TABLE VIEW (drill-down) ── --}}
@@ -1483,15 +1485,25 @@ function cgRenderStates(filter){
   var html='';
   states.forEach(function(s){
     var gc=GC[s.grade]||GC.F;
-    html+='<div class="cg-state-card" onclick="cgSelectState(\''+s.abbr+'\')">'
-      +'<div class="flex items-start justify-between mb-2">'
-        +'<span style="font-size:28px;font-weight:900;line-height:1;color:rgba(255,255,255,.88)">'+s.abbr+'</span>'
-        +'<span style="background:'+gc.bg+'20;color:'+gc.bg+';border:1px solid '+gc.bg+'55;padding:3px 8px;font-size:11px;font-weight:800;border-radius:3px">'+s.grade+'</span>'
-      +'</div>'
-      +'<p style="font-size:11px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:3px">'+s.name+'</p>'
-      +'<p style="font-size:10px;color:rgba(255,255,255,.28)">'+s.cities.length+' cit'+(s.cities.length===1?'y':'ies')+'</p>'
-      +'<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">'
-        +'<p style="font-size:10px;color:rgba(255,255,255,.25)">avg violent: <span style="color:rgba(255,255,255,.48)">'+s.avgViolent+'</span></p>'
+    var pinSvg='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="'+gc.bg+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+    html+='<div class="cg-state-card" onclick="cgSelectState(\''+s.abbr+'\')" style="box-shadow:0 4px 20px rgba(0,0,0,.3)">'
+      /* Grade colour top bar */
+      +'<div class="cs-bar" style="background:'+gc.bg+'"></div>'
+      +'<div class="cs-body">'
+        /* Top row: abbreviation + grade badge */
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">'
+          +'<span style="font-size:34px;font-weight:900;letter-spacing:-.03em;line-height:1;color:#fff">'+s.abbr+'</span>'
+          +'<span style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:'+gc.bg+';color:#fff;font-size:14px;font-weight:900;border-radius:6px;flex-shrink:0">'+s.grade+'</span>'
+        +'</div>'
+        /* State name */
+        +'<p style="font-size:11.5px;font-weight:700;color:rgba(255,255,255,.65);margin-bottom:6px;letter-spacing:.01em">'+s.name+'</p>'
+        /* Divider */
+        +'<div style="height:1px;background:rgba(255,255,255,.07);margin-bottom:8px"></div>'
+        /* Bottom row: pin icon + city count */
+        +'<div style="display:flex;align-items:center;gap:5px">'
+          +pinSvg
+          +'<span style="font-size:10px;font-weight:600;color:rgba(255,255,255,.35)">'+s.cities.length+' cit'+(s.cities.length===1?'y':'ies')+'</span>'
+        +'</div>'
       +'</div>'
     +'</div>';
   });
