@@ -1982,7 +1982,7 @@ function cgLegFilter(g){
     if(cgLegActive&&eg===cgLegActive){
       el.style.background=c.gradient;
       el.style.borderColor='transparent';
-      el.style.boxShadow='0 8px 28px '+c.glow+',0 0 0 1px rgba(255,255,255,.12)';
+      el.style.boxShadow='none';
       el.classList.add('cg-legend-active');
       if(badge){badge.style.background='rgba(255,255,255,.22)';badge.style.color='#fff';badge.style.borderColor='rgba(255,255,255,.4)';}
       if(label)label.style.color='#fff';
