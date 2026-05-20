@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         [data-nav].is-scrolled {
-            box-shadow: 0 8px 24px -12px rgba(116, 25, 33, .45);
+            box-shadow: 0 8px 24px -12px rgba(10, 26, 74, .45);
         }
         [data-menu-panel] { transform: translateY(-12px); opacity: 0; pointer-events: none; transition: .25s ease; }
         [data-menu-panel].is-open { transform: none; opacity: 1; pointer-events: auto; }
@@ -38,7 +38,7 @@
 {{-- =======================================================================
      NAV
 ========================================================================--}}
-<header data-nav style="background-color:#FB0606" class="fixed inset-x-0 top-0 z-50 text-white">
+<header data-nav style="background-color:#0a1a4a" class="fixed inset-x-0 top-0 z-50 text-white">
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
         <div class="flex-1 flex items-center">
             <a href="#top" class="flex items-center gap-2.5 group">
@@ -56,11 +56,9 @@
                 Auxilio AI
             </a></li>
             <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
-            <li><a data-route href="#/sex-offender-map" class="nav-link hover:text-white transition">Sex Offender Map</a></li>
-            <li><a data-route href="#/how-it-works"     class="nav-link hover:text-white transition">How it works</a></li>
+            <li><a data-route href="#/crime-grade"      class="nav-link hover:text-white transition">Crime Grade</a></li>
             <li><a data-route href="#/agent-app"        class="nav-link hover:text-white transition">Agent App</a></li>
             <li><a data-route href="#/citizen-app"      class="nav-link hover:text-white transition">Citizen App</a></li>
-            <li><a data-route href="#/about"            class="nav-link hover:text-white transition">About us</a></li>
             <li><a data-route href="#/contact"          class="nav-link hover:text-white transition">Contact us</a></li>
         </ul>
 
@@ -80,11 +78,9 @@
                 Auxilio AI
             </a></li>
             <li><a data-route href="#/crime-map">Crime Map</a></li>
-            <li><a data-route href="#/sex-offender-map">Sex Offender Map</a></li>
-            <li><a data-route href="#/how-it-works">How it works</a></li>
+            <li><a data-route href="#/crime-grade">Crime Grade</a></li>
             <li><a data-route href="#/agent-app">Agent App</a></li>
             <li><a data-route href="#/citizen-app">Citizen App</a></li>
-            <li><a data-route href="#/about">About us</a></li>
             <li><a data-route href="#/contact">Contact us</a></li>
         </ul>
     </div>
@@ -617,42 +613,6 @@
 </section>
 
 
-{{-- =======================================================================
-     HOW IT WORKS — 3 simple steps
-========================================================================--}}
-<section class="relative py-20 lg:py-24 bg-white overflow-hidden">
-    <div class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[480px] rounded-full blur-3xl opacity-30" style="background:radial-gradient(ellipse, rgba(56,189,248,.20) 0%, transparent 65%);"></div>
-
-    <div class="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <div class="text-center max-w-2xl mx-auto">
-            <p class="reveal text-xs font-semibold uppercase tracking-[.2em]" style="color:#0ea5e9;">How it works</p>
-            <h2 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-3xl sm:text-4xl lg:text-[52px] leading-[1.05] tracking-tight text-navy-900">
-                Safety in <span style="background:linear-gradient(90deg,#0ea5e9,#6366f1); -webkit-background-clip:text; background-clip:text; color:transparent;">three taps.</span>
-            </h2>
-        </div>
-
-        @php
-            $steps = [
-                ['n'=>'01','t'=>'Open the app','d'=>'Auxilio loads your geofence and live feed the moment you launch.','color'=>'#0ea5e9','glyph'=>'M5 12l5 5L20 7'],
-                ['n'=>'02','t'=>'One tap to alert','d'=>'A single press sends your location, identity and situation to verified help.','color'=>'#6366f1','glyph'=>'M13 2L3 14h7l-1 8 10-12h-7l1-8z'],
-                ['n'=>'03','t'=>'Track help arrive','d'=>'Watch the responder’s live ETA — your family circle sees the same status.','color'=>'#22c55e','glyph'=>'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z'],
-            ];
-        @endphp
-        <div class="mt-14 stagger grid sm:grid-cols-3 gap-5">
-            @foreach ($steps as $s)
-                <article class="step-card group relative rounded-3xl border border-ink-100 bg-white p-7 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-18px_rgba(15,23,42,.18)]">
-                    <span class="absolute top-5 right-6 font-display font-extrabold text-[64px] leading-none tracking-tighter transition-opacity" style="color:{{ $s['color'] }}; opacity:.10;">{{ $s['n'] }}</span>
-                    <span class="grid place-items-center w-12 h-12 rounded-xl text-white shadow-lg transition-transform duration-500 group-hover:rotate-[-6deg] group-hover:scale-110" style="background:linear-gradient(135deg,{{ $s['color'] }},{{ $s['color'] }}cc);">
-                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $s['glyph'] }}"/></svg>
-                    </span>
-                    <h3 class="mt-6 font-display text-xl font-bold text-navy-900">{{ $s['t'] }}</h3>
-                    <p class="mt-2 text-[15px] text-navy-700/75 leading-relaxed">{{ $s['d'] }}</p>
-                    <div class="mt-6 h-0.5 w-12 rounded-full transition-all duration-500 group-hover:w-24" style="background:{{ $s['color'] }};"></div>
-                </article>
-            @endforeach
-        </div>
-    </div>
-</section>
 
 {{-- =======================================================================
      FAQ — interactive accordion w/ category icons + animated reveal
@@ -973,6 +933,741 @@
 {{-- ============================================================
      HOW IT WORKS VIEW
 ============================================================--}}
+{{-- =======================================================================
+     CRIME GRADE VIEW
+========================================================================--}}
+<div data-view="crime-grade" class="hidden">
+<style>
+@keyframes cgFadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cgSlideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
+@keyframes cgPulse{0%,100%{box-shadow:0 0 0 0 rgba(226,75,74,.35)}50%{box-shadow:0 0 0 8px rgba(226,75,74,0)}}
+@keyframes cgBtnGlow{0%,100%{box-shadow:0 0 0 1px rgba(226,75,74,.25),0 20px 50px -12px rgba(226,75,74,.5)}50%{box-shadow:0 0 0 2px rgba(226,75,74,.55),0 20px 50px -8px rgba(226,75,74,.85),0 0 40px rgba(226,75,74,.25)}}
+@keyframes cgBtnShimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+.cg-hero-in{animation:cgFadeUp .65s cubic-bezier(.16,1,.3,1) both}
+.cg-hero-in-1{animation-delay:.05s}.cg-hero-in-2{animation-delay:.12s}.cg-hero-in-3{animation-delay:.2s}.cg-hero-in-4{animation-delay:.28s}
+.cg-stat{animation:cgFadeUp .5s cubic-bezier(.16,1,.3,1) both}
+.cg-stat:nth-child(1){animation-delay:.3s}.cg-stat:nth-child(2){animation-delay:.36s}
+.cg-stat:nth-child(3){animation-delay:.42s}.cg-stat:nth-child(4){animation-delay:.48s}
+.cg-stat:nth-child(5){animation-delay:.54s}.cg-stat:nth-child(6){animation-delay:.6s}
+.cg-legend-item{transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
+.cg-legend-item:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 16px 40px -10px rgba(0,0,0,.18)}
+.cg-grade-b{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;font-size:15px;font-weight:800;letter-spacing:-.03em;transition:transform .2s,box-shadow .2s}
+.cg-grade-b:hover{transform:scale(1.15)}
+.cg-decile-b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:11px;font-weight:700}
+.cg-rbar{height:4px;border-radius:3px;background:rgba(0,0,0,.06);min-width:56px;margin-top:5px;overflow:hidden}
+.cg-rbar-f{height:100%;border-radius:3px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+.cg-tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cg-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.cg-tbl thead th{font-size:10.5px;font-weight:700;color:#64748b;text-align:left;padding:11px 13px;border-bottom:1px solid rgba(255,255,255,.07);cursor:pointer;white-space:nowrap;user-select:none;background:#131929;letter-spacing:.05em;text-transform:uppercase;transition:color .15s}
+.cg-tbl thead th:hover{color:#E24B4A}
+.cg-tbl thead th.cg-sorted{color:#E24B4A}
+.cg-tbl tbody tr{border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s}
+.cg-tbl tbody tr:hover{background:rgba(226,75,74,.06)}
+.cg-tbl tbody tr.cg-nat{background:rgba(255,255,255,.03)}
+.cg-tbl td{padding:11px 13px;vertical-align:middle}
+.cg-city{font-weight:700;color:#f1f5f9;font-size:13.5px;white-space:nowrap}
+.cg-stag{font-size:10px;color:#475569;margin-left:5px;font-weight:500}
+.cg-ptag{font-size:10px;color:#475569;display:block;margin-top:2px}
+.cg-row-in{animation:cgFadeUp .4s cubic-bezier(.16,1,.3,1) both}
+.cg-analyze-btn{padding:4px 11px;font-size:11px;border-radius:4px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#94a3b8;cursor:pointer;white-space:nowrap;transition:all .15s;font-weight:500}
+.cg-analyze-btn:hover{border-color:#E24B4A;color:#E24B4A;background:rgba(226,75,74,.1)}
+.cg-search-wrap{position:relative}
+.cg-search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:#475569}
+.cg-search{padding:10px 14px 10px 38px;border:1px solid rgba(255,255,255,.1);border-radius:4px;font-size:13.5px;background:rgba(255,255,255,.05);color:#f1f5f9;width:240px;transition:border-color .2s,box-shadow .2s}
+.cg-search::placeholder{color:#475569}
+.cg-search:focus{outline:none;border-color:#E24B4A;box-shadow:0 0 0 3px rgba(226,75,74,.15)}
+.cg-sel{padding:9px 30px 9px 13px;border:1px solid rgba(255,255,255,.1);border-radius:4px;font-size:12.5px;background:rgba(255,255,255,.05);color:#94a3b8;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2364748b'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:border-color .2s,box-shadow .2s}
+.cg-sel option{background:#131929;color:#f1f5f9}
+.cg-sel:focus{outline:none;border-color:#E24B4A;box-shadow:0 0 0 3px rgba(226,75,74,.15)}
+.cg-reset-btn{padding:9px 16px;border:1px solid rgba(226,75,74,.35);border-radius:4px;font-size:12.5px;background:rgba(226,75,74,.1);color:#ff8280;cursor:pointer;font-weight:600;display:none;align-items:center;gap:6px;transition:all .18s}
+.cg-reset-btn:hover{background:rgba(226,75,74,.2);border-color:#E24B4A;color:#fff}
+.cg-reset-btn.cg-visible{display:inline-flex}
+.cg-pg-btn{padding:7px 13px;border:1px solid rgba(255,255,255,.1);border-radius:4px;font-size:12px;cursor:pointer;background:rgba(255,255,255,.05);color:#64748b;transition:all .15s;font-weight:500}
+.cg-pg-btn:hover{border-color:#E24B4A;color:#E24B4A}
+.cg-pg-btn.cg-pga{background:#E24B4A;border-color:#E24B4A;color:white}
+.cg-state-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:16px;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
+.cg-state-card:hover{background:rgba(255,255,255,.07);border-color:rgba(226,75,74,.45);transform:translateY(-2px)}
+.cg-ai-panel{margin-top:20px;padding:20px 24px;border-radius:4px;border:1px solid rgba(56,189,248,.15);background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(16,185,129,.06));display:none}
+.cg-ai-panel.cg-show{display:block;animation:cgFadeUp .35s cubic-bezier(.16,1,.3,1) both}
+.cg-dn{color:#22c55e;font-weight:600}.cg-up{color:#f87171;font-weight:600}.cg-flat{color:#64748b}
+</style>
+
+{{-- ── HERO ── --}}
+<section id="cg-hero-section" style="position:relative;height:100vh;box-sizing:border-box;padding-top:78px;display:flex;flex-direction:column;overflow:hidden;background:#08090e">
+    {{-- Background: USA map SVG + subtle crime-density blobs --}}
+    <div style="position:absolute;inset:0;overflow:hidden">
+        {{-- USA Map SVG at low opacity --}}
+        <svg style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110%;height:auto;opacity:.09;min-width:900px" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white">
+            {{-- Contiguous 48 states outer boundary --}}
+            <path stroke-width="1.8" d="M72,88 L120,80 L200,72 L285,67 L360,63 L455,61 L545,60 L580,60 L598,52 L618,48 L632,56 L648,70 L665,60 L682,50 L700,46 L716,52 L732,60 L744,50 L757,46 L770,56 L784,70 L798,64 L813,57 L830,52 L847,52 L862,58 L876,72 L888,92 L898,114 L906,138 L908,162 L906,184 L913,206 L910,230 L914,254 L917,278 L921,302 L925,326 L929,350 L933,372 L937,394 L941,416 L944,440 L942,463 L936,484 L923,503 L909,518 L894,530 L878,540 L865,534 L851,522 L836,510 L820,500 L804,494 L788,497 L772,503 L756,509 L739,512 L722,511 L705,510 L688,513 L671,517 L654,512 L636,506 L619,509 L601,515 L583,513 L565,507 L547,500 L530,498 L512,502 L495,509 L478,516 L461,520 L445,519 L429,514 L413,505 L397,492 L381,480 L365,467 L350,453 L335,438 L320,423 L305,407 L289,390 L273,373 L257,357 L240,340 L223,323 L206,307 L189,291 L172,276 L155,262 L137,253 L119,251 L101,253 L86,254 L82,237 L78,218 L74,198 L71,177 L69,155 L68,133 L69,111 L71,92 L72,88 Z"/>
+            {{-- Pacific coast states --}}
+            <line x1="72" y1="188" x2="220" y2="183" stroke-width="1"/>
+            <line x1="72" y1="302" x2="210" y2="296" stroke-width="1"/>
+            {{-- Western mountain states --}}
+            <line x1="225" y1="70" x2="222" y2="296" stroke-width="1"/>
+            <line x1="340" y1="62" x2="338" y2="188" stroke-width="1"/>
+            <line x1="220" y1="183" x2="340" y2="180" stroke-width="1"/>
+            <line x1="210" y1="296" x2="338" y2="292" stroke-width="1"/>
+            <line x1="225" y1="183" x2="225" y2="296" stroke-width="1"/>
+            {{-- Great Plains states --}}
+            <line x1="338" y1="62" x2="336" y2="420" stroke-width="1"/>
+            <line x1="456" y1="60" x2="452" y2="420" stroke-width="1"/>
+            <line x1="338" y1="175" x2="456" y2="175" stroke-width="1"/>
+            <line x1="338" y1="290" x2="456" y2="288" stroke-width="1"/>
+            <line x1="338" y1="360" x2="456" y2="358" stroke-width="1"/>
+            {{-- Central states --}}
+            <line x1="452" y1="420" x2="556" y2="418" stroke-width="1"/>
+            <line x1="452" y1="250" x2="645" y2="248" stroke-width="1"/>
+            <line x1="452" y1="355" x2="638" y2="352" stroke-width="1"/>
+            {{-- Eastern states --}}
+            <line x1="558" y1="60" x2="554" y2="355" stroke-width="1"/>
+            <line x1="645" y1="70" x2="640" y2="355" stroke-width="1"/>
+            <line x1="735" y1="72" x2="730" y2="248" stroke-width="1"/>
+            <line x1="640" y1="248" x2="735" y2="248" stroke-width="1"/>
+            <line x1="556" y1="355" x2="638" y2="352" stroke-width="1"/>
+            {{-- Southeast states --}}
+            <line x1="640" y1="352" x2="640" y2="430" stroke-width="1"/>
+            <line x1="730" y1="248" x2="726" y2="350" stroke-width="1"/>
+            <line x1="640" y1="430" x2="730" y2="428" stroke-width="1"/>
+            {{-- Texas --}}
+            <line x1="338" y1="420" x2="452" y2="418" stroke-width="1"/>
+            {{-- Florida --}}
+            <line x1="730" y1="428" x2="822" y2="425" stroke-width="1"/>
+            {{-- Alaska (small, bottom-left corner) --}}
+            <g transform="translate(72,470) scale(0.28)">
+                <path stroke-width="3" d="M 0,0 L 50,-20 L 120,-30 L 180,-20 L 220,-40 L 260,-30 L 300,-50 L 340,-30 L 370,-50 L 400,-20 L 420,10 L 440,30 L 430,60 L 410,80 L 380,90 L 340,80 L 300,95 L 260,80 L 220,90 L 180,75 L 140,85 L 100,70 L 60,80 L 20,60 L 0,0 Z"/>
+            </g>
+            {{-- Hawaii (small, bottom-left) --}}
+            <ellipse cx="175" cy="530" rx="18" ry="8" stroke-width="1.2"/>
+            <ellipse cx="200" cy="540" rx="12" ry="6" stroke-width="1.2"/>
+            <ellipse cx="222" cy="535" rx="9" ry="5" stroke-width="1.2"/>
+        </svg>
+        {{-- Subtle crime-density blobs for atmosphere --}}
+        <div style="position:absolute;top:5%;left:5%;width:380px;height:320px;border-radius:50%;background:rgba(99,153,34,.18);filter:blur(90px)"></div>
+        <div style="position:absolute;top:5%;right:8%;width:420px;height:360px;border-radius:50%;background:rgba(226,75,74,.15);filter:blur(100px)"></div>
+        <div style="position:absolute;bottom:15%;left:30%;width:460px;height:340px;border-radius:50%;background:rgba(239,159,39,.1);filter:blur(110px)"></div>
+        <div style="position:absolute;bottom:10%;right:12%;width:320px;height:280px;border-radius:50%;background:rgba(99,153,34,.14);filter:blur(80px)"></div>
+        {{-- Dark overlay --}}
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,17,23,.65) 0%,rgba(13,17,23,.5) 50%,rgba(13,17,23,.75) 100%)"></div>
+    </div>
+
+    {{-- Portal top bar --}}
+    <div style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:10px 32px;border-bottom:1px solid rgba(226,75,74,.18);background:rgba(0,0,0,.5);backdrop-filter:blur(8px)">
+        <div style="display:flex;align-items:center;gap:10px">
+            <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#E24B4A;box-shadow:0 0 8px #E24B4A;animation:cgPulse 1.4s infinite"></span>
+            <span style="font-size:9px;font-weight:800;letter-spacing:.22em;color:rgba(255,255,255,.4);text-transform:uppercase">Auxilio Crime Intelligence Portal</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px">
+            <span style="font-size:9px;font-weight:600;letter-spacing:.12em;color:rgba(255,255,255,.28);text-transform:uppercase;font-family:monospace">Classification: Public</span>
+            <span style="font-size:9px;color:rgba(226,75,74,.7);font-weight:700;letter-spacing:.1em;text-transform:uppercase">FBI UCR 2026</span>
+        </div>
+    </div>
+
+    {{-- Main centred content --}}
+    <div style="position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px 8px;text-align:center">
+
+        {{-- Corner reticle marks --}}
+        <div style="position:absolute;top:24px;left:32px;width:28px;height:28px;border-top:2px solid rgba(226,75,74,.5);border-left:2px solid rgba(226,75,74,.5)"></div>
+        <div style="position:absolute;top:24px;right:32px;width:28px;height:28px;border-top:2px solid rgba(226,75,74,.5);border-right:2px solid rgba(226,75,74,.5)"></div>
+        <div style="position:absolute;bottom:24px;left:32px;width:28px;height:28px;border-bottom:2px solid rgba(226,75,74,.5);border-left:2px solid rgba(226,75,74,.5)"></div>
+        <div style="position:absolute;bottom:24px;right:32px;width:28px;height:28px;border-bottom:2px solid rgba(226,75,74,.5);border-right:2px solid rgba(226,75,74,.5)"></div>
+
+        {{-- Status badge --}}
+        <div class="cg-hero-in cg-hero-in-1" style="display:inline-flex;align-items:center;gap:10px;padding:6px 18px;background:rgba(226,75,74,.1);border:1px solid rgba(226,75,74,.35);margin-bottom:16px">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ff8280" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span style="font-size:10px;font-weight:800;letter-spacing:.18em;color:#ff8280;text-transform:uppercase">FBI UCR 2026 · Final Data</span>
+            <span style="width:1px;height:12px;background:rgba(226,75,74,.3)"></span>
+            <span style="width:6px;height:6px;border-radius:50%;background:#86c232;box-shadow:0 0 6px #86c232"></span>
+            <span style="font-size:9px;font-weight:800;letter-spacing:.14em;color:#86c232;text-transform:uppercase">Verified</span>
+        </div>
+
+        {{-- Title --}}
+        <h1 class="cg-hero-in cg-hero-in-2 font-display" style="font-size:clamp(40px,6.5vw,78px);font-weight:900;color:#fff;line-height:.85;letter-spacing:-.025em;text-transform:uppercase;margin-bottom:14px">
+            Find the<br>
+            <span style="background:linear-gradient(105deg,#E24B4A 0%,#ff7a35 50%,#ffc94a 100%);-webkit-background-clip:text;background-clip:text;color:transparent">Safest Areas</span>
+        </h1>
+
+        {{-- Divider line with diamonds --}}
+        <div class="cg-hero-in cg-hero-in-2" style="display:flex;align-items:center;gap:12px;max-width:460px;width:100%;margin:0 auto 12px">
+            <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(226,75,74,.5))"></div>
+            <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 10,5 5,10 0,5" fill="#E24B4A" opacity=".7"/></svg>
+            <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(226,75,74,.5))"></div>
+        </div>
+
+        {{-- Description --}}
+        <p class="cg-hero-in cg-hero-in-3" style="font-size:13px;color:rgba(255,255,255,.45);max-width:480px;margin:0 auto 18px;line-height:1.7;letter-spacing:.03em">
+            Letter-grade safety rankings for <strong style="color:rgba(255,255,255,.75);font-weight:700"><span id="cg-s-cities">125</span>+</strong> US cities — powered by FBI Uniform Crime Reporting, transparent &amp; updated annually.
+        </p>
+
+        {{-- CTA Button --}}
+        <div class="cg-hero-in cg-hero-in-4" style="margin-bottom:14px">
+            <button onclick="cgScrollToStates()" style="display:inline-flex;align-items:center;gap:12px;padding:14px 44px;font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#E24B4A,#b81f2e);border:1px solid rgba(226,75,74,.6);cursor:pointer;animation:cgBtnGlow 2.2s ease-in-out infinite;transition:transform .15s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                Explore States
+            </button>
+        </div>
+        <p class="cg-hero-in cg-hero-in-4" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.22)">30+ States &nbsp;·&nbsp; <span id="cg-s-cities2">125</span>+ Cities Graded A–F</p>
+
+    </div>
+
+    {{-- Stats strip --}}
+    <div style="position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.55);backdrop-filter:blur(10px)">
+        <div style="padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)">
+            <p style="font-size:22px;font-weight:900;color:#fff;line-height:1;font-family:monospace;letter-spacing:-.02em">359</p>
+            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Nat. Violent /100K</p>
+        </div>
+        <div style="padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)">
+            <p style="font-size:22px;font-weight:900;color:#86c232;line-height:1;font-family:monospace;letter-spacing:-.02em">−4.5%</p>
+            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Crime vs 2025</p>
+        </div>
+        <div style="padding:14px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07)">
+            <p style="font-size:22px;font-weight:900;color:#ff8280;line-height:1;font-family:monospace;letter-spacing:-.02em">2,501</p>
+            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Highest — Memphis</p>
+        </div>
+        <div style="padding:14px 20px;text-align:center">
+            <p style="font-size:22px;font-weight:900;color:#86c232;line-height:1;font-family:monospace;letter-spacing:-.02em">66</p>
+            <p style="font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px">Lowest — Carmel IN</p>
+        </div>
+    </div>
+</section>
+
+{{-- ── GRADE LEGEND ── --}}
+<div id="cg-legend-bar" class="sticky top-[78px] z-30 border-b border-white/8 shadow-lg" style="background:#0d1117;backdrop-filter:blur(12px);display:none">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 py-4">
+        <div class="flex flex-wrap items-center gap-3">
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[.2em] shrink-0">Grade Scale</p>
+            @php
+                $cgLeg=[
+                    ['g'=>'A','l'=>'Safest 20%','s'=>'Decile 9–10','bg'=>'#C0DD97','tx'=>'#27500A'],
+                    ['g'=>'B','l'=>'Below avg','s'=>'Decile 7–8','bg'=>'#E1F5EE','tx'=>'#0F6E56'],
+                    ['g'=>'C','l'=>'Near avg','s'=>'Decile 5–6','bg'=>'#E6F1FB','tx'=>'#185FA5'],
+                    ['g'=>'D','l'=>'Above avg','s'=>'Decile 3–4','bg'=>'#FAEEDA','tx'=>'#854F0B'],
+                    ['g'=>'F','l'=>'Highest crime','s'=>'Decile 1–2','bg'=>'#FCEBEB','tx'=>'#A32D2D'],
+                ];
+            @endphp
+            @foreach($cgLeg as $l)
+            <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2 cursor-default" style="background:{{ $l['bg'] }}15;border:1px solid {{ $l['bg'] }}40;">
+                <span class="cg-grade-b shrink-0" style="background:{{ $l['bg'] }}22;color:{{ $l['bg'] }};border:1px solid {{ $l['bg'] }}60;width:28px;height:28px;border-radius:7px;font-size:13px;">{{ $l['g'] }}</span>
+                <div class="min-w-0">
+                    <p class="text-[11px] font-bold leading-none" style="color:{{ $l['bg'] }}">{{ $l['l'] }}</p>
+                    <p class="text-[10px] text-slate-500 mt-0.5">{{ $l['s'] }}</p>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+{{-- ── MAIN SECTION ── --}}
+<section id="cg-main-section" class="min-h-screen" style="background:linear-gradient(180deg,#0d1117 0%,#0a0e1a 100%);display:none">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8 py-10">
+
+        {{-- ── STATE GRID VIEW (default) ── --}}
+        <div id="cg-states-view">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-7">
+                <div>
+                    <h2 class="text-lg font-bold text-white">All States</h2>
+                    <p class="text-xs mt-0.5" style="color:rgba(255,255,255,.35)">Select a state to explore city crime grades</p>
+                </div>
+                <div class="sm:ml-auto relative">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none" style="color:rgba(255,255,255,.3)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
+                    <input id="cg-state-search" class="cg-search" style="padding-left:36px;width:210px" placeholder="Search state…" oninput="cgFilterStates()" />
+                </div>
+            </div>
+            <div id="cg-state-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px"></div>
+        </div>
+
+        {{-- ── CITY TABLE VIEW (drill-down) ── --}}
+        <div id="cg-cities-view" style="display:none">
+            {{-- Breadcrumb --}}
+            <div class="flex items-center gap-3 mb-6">
+                <button onclick="cgBackToStates()" class="inline-flex items-center gap-2 text-sm font-semibold transition" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);padding:7px 14px;border-radius:4px;cursor:pointer">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    All States
+                </button>
+                <span style="color:rgba(255,255,255,.2)">/</span>
+                <span class="text-white font-semibold text-sm" id="cg-state-label">California</span>
+            </div>
+
+            {{-- Controls --}}
+            <div class="flex flex-wrap items-center gap-2.5 mb-5">
+                <div class="cg-search-wrap">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
+                    <input class="cg-search" id="cg-search" placeholder="Search city…" oninput="cgGoPage(1);cgCheckReset()" />
+                </div>
+                <select class="cg-sel" id="cg-grade-f" onchange="cgGoPage(1);cgCheckReset()">
+                    <option value="">All grades</option>
+                    <option value="A">A — Safest</option>
+                    <option value="B">B — Below avg</option>
+                    <option value="C">C — Near avg</option>
+                    <option value="D">D — Above avg</option>
+                    <option value="F">F — High crime</option>
+                </select>
+                <select class="cg-sel" id="cg-size-f" onchange="cgGoPage(1);cgCheckReset()">
+                    <option value="">All sizes</option>
+                    <option value="mega">Mega (1M+)</option>
+                    <option value="large">Large (500k–1M)</option>
+                    <option value="medium">Medium (100k–500k)</option>
+                    <option value="small">Smaller (&lt;100k)</option>
+                </select>
+                <button class="cg-reset-btn" id="cg-reset-btn" onclick="cgReset()">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v5h5"/></svg>
+                    Reset
+                </button>
+                <span class="ml-auto text-xs text-slate-500 font-medium" id="cg-count"></span>
+            </div>
+
+            {{-- Table card --}}
+            <div class="overflow-hidden border border-white/8" style="background:#131929;box-shadow:0 8px 40px -12px rgba(0,0,0,.6);border-radius:4px">
+                <div class="cg-tbl-wrap">
+                    <table class="cg-tbl">
+                        <thead>
+                            <tr>
+                                <th onclick="cgSort('rank')"># <span id="cg-a-rank">↕</span></th>
+                                <th onclick="cgSort('city')">City <span id="cg-a-city">↕</span></th>
+                                <th onclick="cgSort('grade')">Grade <span id="cg-a-grade">↕</span></th>
+                                <th onclick="cgSort('decile')">Decile <span id="cg-a-decile">↕</span></th>
+                                <th onclick="cgSort('violent')">Violent /100k <span id="cg-a-violent">↕</span></th>
+                                <th onclick="cgSort('property')">Property /100k <span id="cg-a-property">↕</span></th>
+                                <th onclick="cgSort('murder')">Murder /100k <span id="cg-a-murder">↕</span></th>
+                                <th onclick="cgSort('total')">Total /100k <span id="cg-a-total">↕</span></th>
+                                <th>Pop.</th>
+                                <th>Trend</th>
+                                <th>Analysis</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cg-tbody"></tbody>
+                    </table>
+                </div>
+                <div class="px-5 py-4 flex flex-wrap items-center gap-2" style="border-top:1px solid rgba(255,255,255,.07)" id="cg-pg"></div>
+            </div>
+        </div>
+
+        {{-- AI Panel --}}
+        <div class="cg-ai-panel" id="cg-ai-panel">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="grid place-items-center w-7 h-7 rounded-full flex-shrink-0" style="background:linear-gradient(135deg,#E24B4A,#ff8c42)">
+                    <svg class="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
+                </span>
+                <p class="text-sm font-bold text-white flex-1" id="cg-ai-title">City Analysis</p>
+                <span class="text-[10px] font-semibold rounded-full px-2.5 py-1" style="background:rgba(226,75,74,.18);color:#ff8280">2024 Final</span>
+                <button onclick="document.getElementById('cg-ai-panel').classList.remove('cg-show')" class="grid place-items-center w-6 h-6 rounded-full text-slate-400 hover:text-white transition" style="background:rgba(255,255,255,.07)">
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <p class="text-sm text-slate-300 leading-relaxed" id="cg-ai-body">Loading…</p>
+        </div>
+
+        <p class="mt-8 text-xs leading-relaxed max-w-4xl" style="color:rgba(255,255,255,.3)">
+            <strong style="color:rgba(255,255,255,.45)">Source:</strong> FBI Uniform Crime Reporting (UCR) Program, 2024 — final annual data released August 2025. Covers 120+ major US cities. Grades computed by decile rank among all cities in the dataset (violent crime weighted 60%, property 40%). The FBI recommends against city rankings for policy decisions; this data is provided for public awareness only.
+        </p>
+    </div>
+</section>
+
+<script>
+(function(){
+'use strict';
+var CG_RAW=[
+  {city:'Los Angeles',state:'CA',pop:3900000,violent:320,property:2410,murder:4.8,trend:'dn'},
+  {city:'Chicago',state:'IL',pop:2700000,violent:388,property:2620,murder:13.4,trend:'dn'},
+  {city:'Houston',state:'TX',pop:2300000,violent:1148,property:4293,murder:9.8,trend:'dn'},
+  {city:'Phoenix',state:'AZ',pop:1620000,violent:338,property:2980,murder:5.4,trend:'dn'},
+  {city:'Philadelphia',state:'PA',pop:1570000,violent:516,property:2580,murder:17.8,trend:'dn'},
+  {city:'San Antonio',state:'TX',pop:1430000,violent:622,property:4676,murder:7.1,trend:'dn'},
+  {city:'San Diego',state:'CA',pop:1390000,violent:248,property:2280,murder:2.8,trend:'dn'},
+  {city:'Dallas',state:'TX',pop:1304000,violent:810,property:3980,murder:9.2,trend:'dn'},
+  {city:'San Jose',state:'CA',pop:1015000,violent:242,property:2180,murder:3.1,trend:'dn'},
+  {city:'New York',state:'NY',pop:8300000,violent:580,property:1620,murder:4.2,trend:'dn'},
+  {city:'Austin',state:'TX',pop:978000,violent:298,property:2640,murder:3.9,trend:'dn'},
+  {city:'Jacksonville',state:'FL',pop:954000,violent:690,property:3800,murder:12.1,trend:'dn'},
+  {city:'Fort Worth',state:'TX',pop:927000,violent:410,property:3210,murder:5.1,trend:'dn'},
+  {city:'Columbus',state:'OH',pop:905000,violent:612,property:3460,murder:10.4,trend:'dn'},
+  {city:'Charlotte',state:'NC',pop:898000,violent:488,property:2940,murder:7.2,trend:'dn'},
+  {city:'Indianapolis',state:'IN',pop:887000,violent:1240,property:4120,murder:22.8,trend:'dn'},
+  {city:'San Francisco',state:'CA',pop:874000,violent:490,property:3929,murder:5.4,trend:'dn'},
+  {city:'Seattle',state:'WA',pop:750000,violent:402,property:5008,murder:3.1,trend:'dn'},
+  {city:'Denver',state:'CO',pop:715000,violent:410,property:4762,murder:6.2,trend:'dn'},
+  {city:'Nashville',state:'TN',pop:694000,violent:742,property:3890,murder:10.1,trend:'dn'},
+  {city:'Oklahoma City',state:'OK',pop:681000,violent:780,property:4180,murder:8.4,trend:'dn'},
+  {city:'El Paso',state:'TX',pop:678000,violent:255,property:1760,murder:2.2,trend:'dn'},
+  {city:'Washington D.C.',state:'DC',pop:670000,violent:748,property:3620,murder:22.1,trend:'dn'},
+  {city:'Las Vegas',state:'NV',pop:650000,violent:590,property:3240,murder:8.2,trend:'dn'},
+  {city:'Louisville',state:'KY',pop:633000,violent:780,property:3640,murder:14.6,trend:'dn'},
+  {city:'Memphis',state:'TN',pop:620000,violent:2501,property:6899,murder:40.6,trend:'dn'},
+  {city:'Baltimore',state:'MD',pop:579000,violent:1380,property:4157,murder:34.8,trend:'dn'},
+  {city:'Milwaukee',state:'WI',pop:576000,violent:1180,property:3240,murder:19.4,trend:'dn'},
+  {city:'Albuquerque',state:'NM',pop:562000,violent:1182,property:4629,murder:9.4,trend:'dn'},
+  {city:'Tucson',state:'AZ',pop:546000,violent:780,property:4120,murder:6.8,trend:'dn'},
+  {city:'Fresno',state:'CA',pop:540000,violent:760,property:3890,murder:8.1,trend:'dn'},
+  {city:'Mesa',state:'AZ',pop:504000,violent:310,property:2640,murder:3.8,trend:'dn'},
+  {city:'Sacramento',state:'CA',pop:524000,violent:720,property:3780,murder:8.4,trend:'dn'},
+  {city:'Atlanta',state:'GA',pop:500000,violent:1379,property:4800,murder:24.0,trend:'flat'},
+  {city:'Kansas City',state:'MO',pop:496000,violent:1580,property:4980,murder:30.1,trend:'dn'},
+  {city:'Omaha',state:'NE',pop:486000,violent:520,property:3120,murder:7.6,trend:'dn'},
+  {city:'Colorado Springs',state:'CO',pop:478000,violent:410,property:3480,murder:4.2,trend:'dn'},
+  {city:'Raleigh',state:'NC',pop:476000,violent:320,property:2680,murder:4.1,trend:'dn'},
+  {city:'Long Beach',state:'CA',pop:457000,violent:440,property:2940,murder:6.2,trend:'dn'},
+  {city:'Virginia Beach',state:'VA',pop:450000,violent:198,property:2010,murder:3.2,trend:'dn'},
+  {city:'Minneapolis',state:'MN',pop:425000,violent:898,property:3980,murder:12.5,trend:'dn'},
+  {city:'New Orleans',state:'LA',pop:383000,violent:1350,property:4100,murder:38.2,trend:'flat'},
+  {city:'Tampa',state:'FL',pop:394000,violent:580,property:3150,murder:7.9,trend:'dn'},
+  {city:'Arlington',state:'TX',pop:392000,violent:380,property:3020,murder:4.8,trend:'dn'},
+  {city:'Bakersfield',state:'CA',pop:380000,violent:620,property:3580,murder:7.2,trend:'dn'},
+  {city:'Wichita',state:'KS',pop:396000,violent:680,property:3840,murder:7.9,trend:'dn'},
+  {city:'Aurora',state:'CO',pop:389000,violent:542,property:4180,murder:6.4,trend:'dn'},
+  {city:'Oakland',state:'CA',pop:440000,violent:1925,property:7230,murder:19.8,trend:'dn'},
+  {city:'St. Louis',state:'MO',pop:285000,violent:1610,property:5707,murder:26.4,trend:'dn'},
+  {city:'Boston',state:'MA',pop:675000,violent:312,property:2150,murder:4.1,trend:'dn'},
+  {city:'Portland',state:'OR',pop:636000,violent:720,property:4850,murder:6.4,trend:'dn'},
+  {city:'Detroit',state:'MI',pop:632000,violent:1781,property:4340,murder:28.6,trend:'dn'},
+  {city:'Cincinnati',state:'OH',pop:310000,violent:1035,property:3820,murder:24.0,trend:'dn'},
+  {city:'Pittsburgh',state:'PA',pop:304000,violent:680,property:2940,murder:13.2,trend:'dn'},
+  {city:'Lexington',state:'KY',pop:323000,violent:380,property:2980,murder:5.4,trend:'dn'},
+  {city:'Anchorage',state:'AK',pop:291000,violent:980,property:4180,murder:5.4,trend:'dn'},
+  {city:'Stockton',state:'CA',pop:320000,violent:940,property:3960,murder:11.8,trend:'dn'},
+  {city:'Corpus Christi',state:'TX',pop:317000,violent:480,property:3480,murder:4.8,trend:'dn'},
+  {city:'St. Paul',state:'MN',pop:308000,violent:780,property:3640,murder:8.2,trend:'dn'},
+  {city:'Toledo',state:'OH',pop:270000,violent:880,property:3820,murder:15.2,trend:'dn'},
+  {city:'Greensboro',state:'NC',pop:296000,violent:520,property:2980,murder:8.9,trend:'dn'},
+  {city:'Newark',state:'NJ',pop:311000,violent:880,property:2720,murder:12.4,trend:'dn'},
+  {city:'Plano',state:'TX',pop:285000,violent:214,property:1890,murder:2.0,trend:'dn'},
+  {city:'Henderson',state:'NV',pop:332000,violent:195,property:1640,murder:1.8,trend:'dn'},
+  {city:'Orlando',state:'FL',pop:307000,violent:620,property:3740,murder:8.4,trend:'flat'},
+  {city:'Chandler',state:'AZ',pop:270000,violent:192,property:1980,murder:1.6,trend:'dn'},
+  {city:'St. Petersburg',state:'FL',pop:263000,violent:498,property:3020,murder:6.2,trend:'dn'},
+  {city:'Laredo',state:'TX',pop:258000,violent:320,property:2980,murder:2.8,trend:'dn'},
+  {city:'Norfolk',state:'VA',pop:237000,violent:680,property:2840,murder:12.1,trend:'dn'},
+  {city:'Madison',state:'WI',pop:269000,violent:298,property:2480,murder:2.8,trend:'dn'},
+  {city:'Durham',state:'NC',pop:283000,violent:680,property:3240,murder:12.4,trend:'dn'},
+  {city:'Lubbock',state:'TX',pop:258000,violent:780,property:4280,murder:7.4,trend:'dn'},
+  {city:'Winston-Salem',state:'NC',pop:248000,violent:580,property:3120,murder:10.4,trend:'dn'},
+  {city:'Garland',state:'TX',pop:240000,violent:310,property:2640,murder:3.8,trend:'dn'},
+  {city:'Glendale',state:'AZ',pop:250000,violent:390,property:2980,murder:4.1,trend:'dn'},
+  {city:'Hialeah',state:'FL',pop:224000,violent:210,property:2120,murder:2.4,trend:'dn'},
+  {city:'Reno',state:'NV',pop:264000,violent:640,property:3840,murder:5.8,trend:'dn'},
+  {city:'Baton Rouge',state:'LA',pop:225000,violent:1120,property:4080,murder:28.4,trend:'dn'},
+  {city:'Irvine',state:'CA',pop:307000,violent:112,property:1180,murder:0.6,trend:'dn'},
+  {city:'Chesapeake',state:'VA',pop:244000,violent:218,property:2140,murder:3.4,trend:'dn'},
+  {city:'Irving',state:'TX',pop:239000,violent:320,property:2980,murder:3.6,trend:'dn'},
+  {city:'Scottsdale',state:'AZ',pop:241000,violent:162,property:1580,murder:1.4,trend:'dn'},
+  {city:'North Las Vegas',state:'NV',pop:274000,violent:480,property:3120,murder:5.2,trend:'dn'},
+  {city:'Fremont',state:'CA',pop:230000,violent:148,property:1320,murder:1.1,trend:'dn'},
+  {city:'Gilbert',state:'AZ',pop:267000,violent:102,property:1050,murder:0.9,trend:'dn'},
+  {city:'San Bernardino',state:'CA',pop:218000,violent:920,property:4280,murder:14.2,trend:'dn'},
+  {city:'Birmingham',state:'AL',pop:213000,violent:1680,property:4920,murder:38.1,trend:'dn'},
+  {city:'Rochester',state:'NY',pop:211000,violent:980,property:3480,murder:16.8,trend:'dn'},
+  {city:'Richmond',state:'VA',pop:227000,violent:820,property:3280,murder:18.2,trend:'dn'},
+  {city:'Spokane',state:'WA',pop:228000,violent:540,property:4280,murder:4.8,trend:'dn'},
+  {city:'Des Moines',state:'IA',pop:214000,violent:640,property:3640,murder:9.8,trend:'dn'},
+  {city:'Montgomery',state:'AL',pop:200000,violent:1180,property:4520,murder:24.8,trend:'dn'},
+  {city:'Modesto',state:'CA',pop:215000,violent:680,property:3840,murder:8.4,trend:'dn'},
+  {city:'Fayetteville',state:'NC',pop:208000,violent:820,property:3640,murder:12.4,trend:'dn'},
+  {city:'Tacoma',state:'WA',pop:219000,violent:620,property:4280,murder:6.4,trend:'dn'},
+  {city:'Akron',state:'OH',pop:190000,violent:880,property:3640,murder:18.2,trend:'dn'},
+  {city:'Little Rock',state:'AR',pop:198000,violent:1380,property:5120,murder:28.4,trend:'dn'},
+  {city:'Salt Lake City',state:'UT',pop:200000,violent:620,property:4280,murder:5.4,trend:'dn'},
+  {city:'Huntsville',state:'AL',pop:210000,violent:540,property:3480,murder:8.1,trend:'dn'},
+  {city:'Tallahassee',state:'FL',pop:198000,violent:780,property:4120,murder:10.4,trend:'dn'},
+  {city:'Cape Coral',state:'FL',pop:220000,violent:198,property:1840,murder:2.4,trend:'dn'},
+  {city:'Tempe',state:'AZ',pop:190000,violent:420,property:3280,murder:4.8,trend:'dn'},
+  {city:'Overland Park',state:'KS',pop:196000,violent:158,property:2040,murder:1.8,trend:'dn'},
+  {city:'Naperville',state:'IL',pop:150000,violent:89,property:920,murder:0.8,trend:'dn'},
+  {city:'Carmel',state:'IN',pop:102000,violent:66,property:813,murder:0.5,trend:'dn'},
+  {city:'Frisco',state:'TX',pop:200000,violent:120,property:1480,murder:0.9,trend:'dn'},
+  {city:'Riverside',state:'CA',pop:314000,violent:380,property:2840,murder:4.2,trend:'dn'},
+  {city:'Anaheim',state:'CA',pop:346000,violent:298,property:2380,murder:2.8,trend:'dn'},
+  {city:'Santa Ana',state:'CA',pop:310000,violent:320,property:2280,murder:3.2,trend:'dn'},
+  {city:'Fort Wayne',state:'IN',pop:265000,violent:480,property:3120,murder:8.4,trend:'dn'},
+  {city:'Jackson',state:'MS',pop:153000,violent:1840,property:5120,murder:48.2,trend:'dn'},
+  {city:'Shreveport',state:'LA',pop:181000,violent:1480,property:5240,murder:32.4,trend:'dn'},
+  {city:'Flint',state:'MI',pop:96000,violent:1620,property:4480,murder:34.2,trend:'dn'},
+  {city:'Miami',state:'FL',pop:462000,violent:680,property:3600,murder:9.4,trend:'flat'},
+  {city:'Providence',state:'RI',pop:190000,violent:620,property:2980,murder:6.4,trend:'dn'},
+  {city:'Grand Rapids',state:'MI',pop:198000,violent:720,property:3280,murder:8.4,trend:'dn'},
+  {city:'Knoxville',state:'TN',pop:190000,violent:920,property:4480,murder:10.8,trend:'dn'},
+  {city:'Worcester',state:'MA',pop:186000,violent:380,property:2140,murder:4.8,trend:'dn'},
+  {city:'Fort Lauderdale',state:'FL',pop:182000,violent:580,property:4120,murder:8.4,trend:'dn'},
+  {city:'Aurora',state:'IL',pop:180000,violent:310,property:2480,murder:4.2,trend:'dn'},
+  {city:'Oxnard',state:'CA',pop:210000,violent:360,property:2280,murder:4.2,trend:'dn'},
+  {city:'Fontana',state:'CA',pop:212000,violent:320,property:2180,murder:3.6,trend:'dn'},
+  {city:'Glendale',state:'CA',pop:202000,violent:168,property:1940,murder:1.4,trend:'dn'},
+  {city:'Huntington Beach',state:'CA',pop:198000,violent:224,property:2080,murder:2.1,trend:'dn'},
+  {city:'Pasadena',state:'CA',pop:138000,violent:282,property:2480,murder:2.8,trend:'dn'}
+];
+
+var GC={A:{bg:'#C0DD97',tx:'#27500A'},B:{bg:'#E1F5EE',tx:'#0F6E56'},C:{bg:'#E6F1FB',tx:'#185FA5'},D:{bg:'#FAEEDA',tx:'#854F0B'},F:{bg:'#FCEBEB',tx:'#A32D2D'}};
+var DC=['#E24B4A','#E24B4A','#D85A30','#EF9F27','#BA7517','#378ADD','#1D9E75','#1D9E75','#639922','#639922'];
+
+function cgBuildGrades(data){
+  var sc=data.map(function(d){return Object.assign({},d,{score:d.violent*0.6+d.property*0.4,total:d.violent+d.property});});
+  sc.sort(function(a,b){return a.score-b.score;});
+  var n=sc.length;
+  return sc.map(function(d,i){
+    var decile=Math.min(10,Math.ceil((i+1)/n*10));
+    var grade='F';
+    if(decile>=9)grade='A'; else if(decile>=7)grade='B'; else if(decile>=5)grade='C'; else if(decile>=3)grade='D';
+    return Object.assign({},d,{decile:decile,grade:grade,rank:i+1});
+  });
+}
+
+var CG_ALL=cgBuildGrades(CG_RAW);
+var CG_MAX_V=Math.max.apply(null,CG_ALL.map(function(d){return d.violent;}));
+var CG_MAX_P=Math.max.apply(null,CG_ALL.map(function(d){return d.property;}));
+document.getElementById('cg-s-cities').textContent=CG_ALL.length;
+var s2=document.getElementById('cg-s-cities2');if(s2)s2.textContent=CG_ALL.length;
+
+var STATE_NAMES={AK:'Alaska',AL:'Alabama',AR:'Arkansas',AZ:'Arizona',CA:'California',CO:'Colorado',CT:'Connecticut',DC:'Wash. D.C.',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',IA:'Iowa',ID:'Idaho',IL:'Illinois',IN:'Indiana',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',MA:'Massachusetts',MD:'Maryland',ME:'Maine',MI:'Michigan',MN:'Minnesota',MO:'Missouri',MS:'Mississippi',MT:'Montana',NC:'North Carolina',ND:'North Dakota',NE:'Nebraska',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NV:'Nevada',NY:'New York',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VA:'Virginia',VT:'Vermont',WA:'Washington',WI:'Wisconsin',WV:'West Virginia',WY:'Wyoming'};
+
+var cgSelectedState='';
+var cgSortKey='rank',cgSortDir=1,cgPage=1;
+var CG_PER=20;
+
+function cgFmtPop(p){return p>=1e6?(p/1e6).toFixed(1)+'M':(p/1000).toFixed(0)+'K';}
+function cgSizeOf(p){if(p>=1e6)return'mega';if(p>=5e5)return'large';if(p>=1e5)return'medium';return'small';}
+
+function cgGetFiltered(){
+  var se=document.getElementById('cg-search');
+  var q=se?(se.value||'').toLowerCase():'';
+  var gr=document.getElementById('cg-grade-f')?document.getElementById('cg-grade-f').value:'';
+  var sz=document.getElementById('cg-size-f')?document.getElementById('cg-size-f').value:'';
+  return CG_ALL.filter(function(d){
+    if(cgSelectedState&&d.state!==cgSelectedState)return false;
+    if(q&&!d.city.toLowerCase().includes(q)&&!d.state.toLowerCase().includes(q))return false;
+    if(gr&&d.grade!==gr)return false;
+    if(sz&&cgSizeOf(d.pop)!==sz)return false;
+    return true;
+  }).sort(function(a,b){
+    var av=a[cgSortKey],bv=b[cgSortKey];
+    if(typeof av==='string')return av.localeCompare(bv)*cgSortDir;
+    return(av-bv)*cgSortDir;
+  });
+}
+
+function cgSort(key){
+  if(cgSortKey===key)cgSortDir*=-1; else{cgSortKey=key;cgSortDir=1;}
+  ['rank','city','grade','decile','violent','property','murder','total'].forEach(function(k){
+    var el=document.getElementById('cg-a-'+k);
+    if(el)el.textContent=k===cgSortKey?(cgSortDir===1?'↑':'↓'):'↕';
+    if(el)el.style.color=k===cgSortKey?'#E24B4A':'#cbd5e1';
+  });
+  cgRender();
+}
+window.cgSort=cgSort;
+
+function cgGoPage(p){cgPage=p;cgRender();}
+window.cgGoPage=cgGoPage;
+
+function cgCheckReset(){
+  var s=document.getElementById('cg-search');
+  var g=document.getElementById('cg-grade-f');
+  var sz=document.getElementById('cg-size-f');
+  var hasFilter=(s&&s.value)||(g&&g.value)||(sz&&sz.value);
+  var btn=document.getElementById('cg-reset-btn');
+  if(btn){hasFilter?btn.classList.add('cg-visible'):btn.classList.remove('cg-visible');}
+}
+window.cgCheckReset=cgCheckReset;
+
+function cgReset(){
+  var s=document.getElementById('cg-search');if(s)s.value='';
+  var g=document.getElementById('cg-grade-f');if(g)g.value='';
+  var sz=document.getElementById('cg-size-f');if(sz)sz.value='';
+  var btn=document.getElementById('cg-reset-btn');
+  if(btn)btn.classList.remove('cg-visible');
+  cgGoPage(1);
+}
+window.cgReset=cgReset;
+
+/* ── State grid functions ── */
+function cgBuildStateData(){
+  var map={};
+  CG_ALL.forEach(function(d){
+    if(!map[d.state])map[d.state]={abbr:d.state,name:STATE_NAMES[d.state]||d.state,cities:[]};
+    map[d.state].cities.push(d);
+  });
+  return Object.keys(map).sort().map(function(s){
+    var sd=map[s];
+    var avgD=sd.cities.reduce(function(sum,c){return sum+c.decile;},0)/sd.cities.length;
+    var grade='F';
+    if(avgD>=8.5)grade='A';else if(avgD>=6.5)grade='B';else if(avgD>=4.5)grade='C';else if(avgD>=2.5)grade='D';
+    sd.grade=grade;
+    sd.avgViolent=Math.round(sd.cities.reduce(function(s,c){return s+c.violent;},0)/sd.cities.length);
+    return sd;
+  });
+}
+
+function cgRenderStates(filter){
+  var states=cgBuildStateData();
+  var f=filter?filter.toLowerCase():'';
+  if(f)states=states.filter(function(s){return s.abbr.toLowerCase().includes(f)||s.name.toLowerCase().includes(f);});
+  var html='';
+  states.forEach(function(s){
+    var gc=GC[s.grade]||GC.F;
+    html+='<div class="cg-state-card" onclick="cgSelectState(\''+s.abbr+'\')">'
+      +'<div class="flex items-start justify-between mb-2">'
+        +'<span style="font-size:28px;font-weight:900;line-height:1;color:rgba(255,255,255,.88)">'+s.abbr+'</span>'
+        +'<span style="background:'+gc.bg+'20;color:'+gc.bg+';border:1px solid '+gc.bg+'55;padding:3px 8px;font-size:11px;font-weight:800;border-radius:3px">'+s.grade+'</span>'
+      +'</div>'
+      +'<p style="font-size:11px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:3px">'+s.name+'</p>'
+      +'<p style="font-size:10px;color:rgba(255,255,255,.28)">'+s.cities.length+' cit'+(s.cities.length===1?'y':'ies')+'</p>'
+      +'<div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)">'
+        +'<p style="font-size:10px;color:rgba(255,255,255,.25)">avg violent: <span style="color:rgba(255,255,255,.48)">'+s.avgViolent+'</span></p>'
+      +'</div>'
+    +'</div>';
+  });
+  if(!html)html='<p style="grid-column:1/-1;text-align:center;padding:40px 0;font-size:13px;color:rgba(255,255,255,.3)">No states match</p>';
+  document.getElementById('cg-state-grid').innerHTML=html;
+}
+
+function cgFilterStates(){
+  cgRenderStates(document.getElementById('cg-state-search').value);
+}
+window.cgFilterStates=cgFilterStates;
+
+function cgSelectState(st){
+  cgSelectedState=st;
+  cgPage=1;
+  var s=document.getElementById('cg-search');if(s)s.value='';
+  var g=document.getElementById('cg-grade-f');if(g)g.value='';
+  var sz=document.getElementById('cg-size-f');if(sz)sz.value='';
+  var rb=document.getElementById('cg-reset-btn');if(rb)rb.classList.remove('cg-visible');
+  var lbl=document.getElementById('cg-state-label');
+  if(lbl)lbl.textContent=(STATE_NAMES[st]||st)+' ('+st+')';
+  document.getElementById('cg-states-view').style.display='none';
+  document.getElementById('cg-cities-view').style.display='block';
+  cgRender();
+}
+window.cgSelectState=cgSelectState;
+
+function cgBackToStates(){
+  cgSelectedState='';
+  var ap=document.getElementById('cg-ai-panel');if(ap)ap.classList.remove('cg-show');
+  document.getElementById('cg-cities-view').style.display='none';
+  document.getElementById('cg-states-view').style.display='block';
+}
+window.cgBackToStates=cgBackToStates;
+
+function cgScrollToStates(){
+  var hero=document.getElementById('cg-hero-section');
+  var legend=document.getElementById('cg-legend-bar');
+  var main=document.getElementById('cg-main-section');
+  if(hero)hero.style.display='none';
+  if(legend)legend.style.display='';
+  if(main)main.style.display='';
+  window.scrollTo(0,0);
+}
+window.cgScrollToStates=cgScrollToStates;
+
+function cgRenderGradeDist(){
+  var el=document.getElementById('cg-grade-dist');if(!el)return;
+  var grades=['A','B','C','D','F'];
+  var counts={A:0,B:0,C:0,D:0,F:0};
+  CG_ALL.forEach(function(d){if(counts[d.grade]!==undefined)counts[d.grade]++;});
+  var max=Math.max.apply(null,grades.map(function(g){return counts[g];}));
+  var html='';
+  grades.forEach(function(g){
+    var gc=GC[g];
+    var pct=max>0?Math.round(counts[g]/max*100):0;
+    html+='<div style="display:flex;align-items:center;gap:10px">'
+      +'<span style="background:'+gc.bg+'20;color:'+gc.bg+';border:1px solid '+gc.bg+'55;padding:2px 7px;font-size:11px;font-weight:800;border-radius:3px;min-width:26px;text-align:center">'+g+'</span>'
+      +'<div style="flex:1;height:6px;border-radius:2px;background:rgba(255,255,255,.06);overflow:hidden">'
+        +'<div style="height:100%;width:'+pct+'%;background:'+gc.bg+';border-radius:2px"></div>'
+      +'</div>'
+      +'<span style="font-size:11px;color:rgba(255,255,255,.4);min-width:22px;text-align:right">'+counts[g]+'</span>'
+    +'</div>';
+  });
+  el.innerHTML=html;
+}
+
+function cgRender(){
+  var data=cgGetFiltered();
+  var total=data.length;
+  var pages=Math.ceil(total/CG_PER)||1;
+  if(cgPage>pages)cgPage=1;
+  var slice=data.slice((cgPage-1)*CG_PER,cgPage*CG_PER);
+
+  document.getElementById('cg-count').textContent=total+' cities';
+
+  var NAT={city:'🇺🇸 National avg',state:'USA',pop:330e6,violent:359,property:1760,murder:5.0,total:2119,grade:'C',decile:5,rank:'—',trend:'dn',nat:true};
+  var rows=[NAT].concat(slice).map(function(d,idx){
+    var gc=GC[d.grade]||GC.C;
+    var dc=d.nat?'#94a3b8':DC[(d.decile||5)-1];
+    var vw=Math.round(d.violent/CG_MAX_V*100);
+    var pw=Math.round(d.property/CG_MAX_P*100);
+    var tr=d.trend==='dn'
+      ?'<span class="cg-dn" title="Improving">↓</span>'
+      :d.trend==='up'?'<span class="cg-up" title="Worsening">↑</span>'
+      :'<span class="cg-flat">→</span>';
+    var ab=d.nat?'':'<button class="cg-analyze-btn" onclick="cgAnalyze(\''+d.city.replace(/'/g,"\\'")+'\',\''+d.state+'\','+d.violent+','+d.property+','+d.murder+',\''+d.grade+'\','+d.decile+')">Analyze ›</button>';
+    var delay=(idx*0.03).toFixed(2);
+    return '<tr class="cg-row-in'+(d.nat?' cg-nat':'')+'" style="animation-delay:'+delay+'s">'
+      +'<td style="font-size:11px;color:#94a3b8;font-weight:600">'+d.rank+'</td>'
+      +'<td><span class="cg-city">'+d.city+'<span class="cg-stag">'+d.state+'</span></span><span class="cg-ptag">'+cgFmtPop(d.pop||0)+'</span></td>'
+      +'<td><span class="cg-grade-b" style="background:'+gc.bg+';color:'+gc.tx+'">'+d.grade+'</span></td>'
+      +'<td><span class="cg-decile-b" style="background:'+dc+'22;color:'+dc+';border:1px solid '+dc+'55">'+d.decile+'</span></td>'
+      +'<td><div style="font-size:12.5px;font-weight:600;color:#e2e8f0">'+d.violent.toLocaleString()+'</div><div class="cg-rbar"><div class="cg-rbar-f" style="width:'+vw+'%;background:#E24B4A"></div></div></td>'
+      +'<td><div style="font-size:12.5px;font-weight:600;color:#e2e8f0">'+d.property.toLocaleString()+'</div><div class="cg-rbar"><div class="cg-rbar-f" style="width:'+pw+'%;background:#378ADD"></div></div></td>'
+      +'<td style="font-size:12.5px;color:#94a3b8">'+d.murder+'</td>'
+      +'<td style="font-size:12.5px;font-weight:700;color:#e2e8f0">'+(d.violent+d.property).toLocaleString()+'</td>'
+      +'<td style="font-size:11px;color:#94a3b8">'+cgFmtPop(d.pop||0)+'</td>'
+      +'<td>'+tr+'</td>'
+      +'<td>'+ab+'</td>'
+      +'</tr>';
+  }).join('');
+  document.getElementById('cg-tbody').innerHTML=rows;
+
+  var pg='<span style="font-size:12px;color:#94a3b8;margin-right:8px">Showing '+Math.min((cgPage-1)*CG_PER+1,total)+'–'+Math.min(cgPage*CG_PER,total)+' of '+total+'</span>';
+  if(pages>1){
+    if(cgPage>1)pg+='<button class="cg-pg-btn" onclick="cgGoPage('+(cgPage-1)+')">← Prev</button>';
+    var s=Math.max(1,cgPage-2),e=Math.min(pages,cgPage+2);
+    for(var i=s;i<=e;i++)pg+='<button class="cg-pg-btn'+(i===cgPage?' cg-pga':'')+'" onclick="cgGoPage('+i+')">'+i+'</button>';
+    if(cgPage<pages)pg+='<button class="cg-pg-btn" onclick="cgGoPage('+(cgPage+1)+')">Next →</button>';
+  }
+  document.getElementById('cg-pg').innerHTML=pg;
+}
+
+function cgAnalyze(city,state,violent,property,murder,grade,decile){
+  var panel=document.getElementById('cg-ai-panel');
+  var gc=GC[grade]||GC.C;
+  document.getElementById('cg-ai-title').textContent=city+', '+state+' — Grade '+grade+' · Decile '+decile+'/10';
+  var natViolent=359,natProp=1760,natMurder=5.0;
+  var vPct=Math.round((violent/natViolent-1)*100);
+  var pPct=Math.round((property/natProp-1)*100);
+  var mPct=Math.round((murder/natMurder-1)*100);
+  var vComp=vPct>0?((vPct>50?'significantly ':'')+(vPct>0?'above':'below')+' the national average (+'+vPct+'%)'):'below the national average ('+(vPct)+'%)';
+  var gradeDesc={A:'among the safest cities in the US',B:'safer than most US cities',C:'near the national average for safety',D:'above average in crime compared to most US cities',F:'one of the highest-crime cities in the dataset'};
+  var safetyTip=grade==='A'||grade==='B'?'Residents generally enjoy a lower risk of crime. Standard urban precautions apply.':grade==='C'?'Exercise normal urban awareness, particularly at night and in unfamiliar areas.':'Exercise heightened vigilance, especially in high-crime neighborhoods. Avoid walking alone at night in unfamiliar areas and keep valuables out of sight.';
+  var analysis='Overall 2024 Safety: '+city+' earned a Grade '+grade+' (Decile '+decile+'/10), '+gradeDesc[grade]+'. With '+violent.toLocaleString()+' violent crimes per 100,000 residents, the city is '+vComp+' (national: 359). Property crime stands at '+property.toLocaleString()+'/100k, '+(pPct>0?'+'+ pPct+'%':''+pPct+'%')+' vs. the national average of 1,760.\n\nWhat it means for daily life: The murder rate of '+murder+' per 100,000 is '+(mPct>0?Math.abs(mPct)+'% above':'within range of')+' the national average of 5.0. Total crime index: '+(violent+property).toLocaleString()+'/100k. These figures reflect the overall risk environment — individual neighborhoods within the city can vary significantly.\n\nStay safe: '+safetyTip+' The Auxilio app provides real-time alerts and one-tap emergency response for residents and visitors of '+city+'.';
+  document.getElementById('cg-ai-body').style.whiteSpace='pre-line';
+  document.getElementById('cg-ai-body').textContent=analysis;
+  panel.classList.add('cg-show');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+window.cgAnalyze=cgAnalyze;
+
+/* Init on first render — triggered by router when view becomes visible */
+window.cgInit=function(){
+  cgPage=1;
+  cgSelectedState='';
+  cgRenderStates();
+  document.getElementById('cg-states-view').style.display='block';
+  document.getElementById('cg-cities-view').style.display='none';
+  var ap=document.getElementById('cg-ai-panel');if(ap)ap.classList.remove('cg-show');
+  /* Show hero, hide legend + main until "Explore States" clicked */
+  var hero=document.getElementById('cg-hero-section');
+  var legend=document.getElementById('cg-legend-bar');
+  var main=document.getElementById('cg-main-section');
+  if(hero)hero.style.display='';
+  if(legend)legend.style.display='none';
+  if(main)main.style.display='none';
+  window.scrollTo(0,0);
+};
+cgRenderStates();
+cgRenderGradeDist();
+
+})();
+</script>
+</div>
+
 <div data-view="how-it-works" class="hidden">
     {{-- =======================================================================
          REPORT FLOW — 5-step capture (moved from home)
@@ -1989,14 +2684,12 @@
 
     <script>
     (function(){
-        // Header color: navy on /agent-app, brand red elsewhere
+        // Header always navy blue
         var navEl = document.querySelector('header[data-nav]');
-        var RED = '#FB0606';
-        var NAVY = '#0c1126';
+        var NAVY = '#0a1a4a';
         function setNav() {
             if (!navEl) return;
-            var isAgent = (location.hash || '#/').indexOf('#/agent-app') === 0;
-            navEl.style.backgroundColor = isAgent ? NAVY : RED;
+            navEl.style.backgroundColor = NAVY;
         }
         setNav();
         window.addEventListener('hashchange', setNav);
@@ -4916,6 +5609,36 @@
 ========================================================================--}}
 <footer class="bg-navy-950 text-navy-200">
     <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-20 pb-10">
+
+        {{-- How It Works — highlighted strip --}}
+        <div class="mb-16 rounded-2xl border border-sky-500/20 bg-white/[.04] px-6 py-8 backdrop-blur-sm" style="box-shadow:0 0 40px -10px rgba(14,165,233,.18), inset 0 1px 0 rgba(255,255,255,.06);">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-6">
+                <p class="text-xs font-semibold uppercase tracking-[.22em] text-sky-400">How it works</p>
+                <span class="hidden sm:block h-px flex-1 bg-white/10 mx-4"></span>
+                <p class="text-xs text-navy-400">Safety in three taps</p>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-4">
+                @php
+                    $footerSteps = [
+                        ['n'=>'01','t'=>'Open the app','d'=>'Auxilio loads your geofence and live feed the moment you launch.','color'=>'#0ea5e9','glyph'=>'M5 12l5 5L20 7'],
+                        ['n'=>'02','t'=>'One tap to alert','d'=>'A single press sends your location, identity and situation to verified help.','color'=>'#818cf8','glyph'=>'M13 2L3 14h7l-1 8 10-12h-7l1-8z'],
+                        ['n'=>'03','t'=>'Track help arrive','d'=>'Watch the responder\'s live ETA — your family circle sees the same status.','color'=>'#22c55e','glyph'=>'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z'],
+                    ];
+                @endphp
+                @foreach ($footerSteps as $s)
+                    <div class="flex items-start gap-3 group">
+                        <span class="shrink-0 grid place-items-center w-9 h-9 rounded-lg text-white" style="background:linear-gradient(135deg,{{ $s['color'] }}33,{{ $s['color'] }}18); border:1px solid {{ $s['color'] }}40;">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="{{ $s['color'] }}" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $s['glyph'] }}"/></svg>
+                        </span>
+                        <div>
+                            <p class="text-xs font-bold text-white/80 uppercase tracking-wide">{{ $s['n'] }} · {{ $s['t'] }}</p>
+                            <p class="mt-0.5 text-xs text-navy-400 leading-relaxed">{{ $s['d'] }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
         <div class="grid lg:grid-cols-12 gap-12">
             <div class="lg:col-span-5">
                 <a href="#top" class="inline-flex items-center gap-2.5 group">
@@ -4936,7 +5659,8 @@
                         <li><a data-route href="#/auxilio-ai" class="hover:text-white transition">Auxilio AI</a></li>
                         <li><a data-route href="#/citizen-app" class="hover:text-white transition">Citizen App</a></li>
                         <li><a data-route href="#/agent-app"  class="hover:text-white transition">Agent App</a></li>
-                        <li><a data-route href="#/crime-map"  class="hover:text-white transition">Crime Map</a></li>
+                        <li><a data-route href="#/crime-map"   class="hover:text-white transition">Crime Map</a></li>
+                        <li><a data-route href="#/crime-grade" class="hover:text-white transition">Crime Grade</a></li>
                         <li><a href="#contact"     class="hover:text-white transition">Download</a></li>
                     </ul>
                 </div>
@@ -5195,7 +5919,7 @@
 
     function getRoute() {
         var h = (window.location.hash || '').replace(/^#\//, '');
-        var allowed = ['crime-map','sex-offender-map','how-it-works','agent-app','citizen-app','about','contact','privacy','terms','auxilio-ai'];
+        var allowed = ['crime-map','crime-grade','sex-offender-map','how-it-works','agent-app','citizen-app','about','contact','privacy','terms','auxilio-ai'];
         if (allowed.indexOf(h) !== -1) return h;
         return 'home';
     }
@@ -5219,6 +5943,10 @@
         if (dispatchSec) dispatchSec.classList.add('hidden');
         if (view === 'crime-map') initCrimeMap();
         if (view === 'sex-offender-map') initSOMap();
+        if (view === 'crime-grade' && typeof cgInit === 'function') cgInit();
+        /* Hide footer & how-it-works strip on crime-grade, show on all other views */
+        var globalFooter = document.querySelector('footer');
+        if (globalFooter) globalFooter.style.display = (view === 'crime-grade') ? 'none' : '';
         // Re-trigger reveal animations on the now-visible view
         document.querySelectorAll('[data-view="'+view+'"] .reveal').forEach(function(el){
             el.classList.remove('is-visible');
