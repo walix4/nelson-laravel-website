@@ -1850,9 +1850,10 @@ function cgRender(){
       ?'<span class="cg-dn" title="Improving">↓</span>'
       :d.trend==='up'?'<span class="cg-up" title="Worsening">↑</span>'
       :'<span class="cg-flat">→</span>';
-    var ab=d.nat?'':'<button class="cg-analyze-btn" onclick="cgAnalyze(\''+d.city.replace(/'/g,"\\'")+'\',\''+d.state+'\','+d.violent+','+d.property+','+d.murder+',\''+d.grade+'\','+d.decile+')">Analyze ›</button>';
+    var ab=d.nat?'':'<button class="cg-analyze-btn" onclick="event.stopPropagation();cgAnalyze(\''+d.city.replace(/'/g,"\\'")+'\',\''+d.state+'\','+d.violent+','+d.property+','+d.murder+',\''+d.grade+'\','+d.decile+')">View ›</button>';
     var delay=(idx*0.03).toFixed(2);
-    return '<tr class="cg-row-in'+(d.nat?' cg-nat':'')+'" style="animation-delay:'+delay+'s">'
+    var clickAttr=d.nat?'':' onclick="cgAnalyze(\''+d.city.replace(/'/g,"\\'")+'\',\''+d.state+'\','+d.violent+','+d.property+','+d.murder+',\''+d.grade+'\','+d.decile+')" style="cursor:pointer;animation-delay:'+delay+'s" onmouseover="this.style.background=\'#fafbfd\'" onmouseout="this.style.background=\'\'"';
+    return '<tr class="cg-row-in'+(d.nat?' cg-nat':'')+'"'+(d.nat?' style="animation-delay:'+delay+'s"':clickAttr)+'>'
       +'<td style="font-size:11px;color:#94a3b8;font-weight:600">'+d.rank+'</td>'
       +'<td><span class="cg-city">'+d.city+'<span class="cg-stag">'+d.state+'</span></span><span class="cg-ptag">'+cgFmtPop(d.pop||0)+'</span></td>'
       +'<td><span class="cg-grade-b" style="background:'+gc.bg+';color:'+gc.tx+'">'+d.grade+'</span></td>'
@@ -1905,14 +1906,16 @@ window.cgInit=function(){
   document.getElementById('cg-states-view').style.display='block';
   document.getElementById('cg-cities-view').style.display='none';
   var ap=document.getElementById('cg-ai-panel');if(ap)ap.classList.remove('cg-show');
-  /* Show hero, hide legend + main until "Explore States" clicked */
+  /* Skip hero — show map + legend directly */
   var hero=document.getElementById('cg-hero-section');
   var legend=document.getElementById('cg-legend-bar');
   var main=document.getElementById('cg-main-section');
-  if(hero)hero.style.display='';
-  if(legend)legend.style.display='none';
-  if(main)main.style.display='none';
+  if(hero)hero.style.display='none';
+  if(legend)legend.style.display='';
+  if(main)main.style.display='block';
   window.scrollTo(0,0);
+  /* Build the interactive US map now that the wrap is visible */
+  setTimeout(cgInitMap, 80);
 };
 cgRenderStates();
 cgRenderGradeDist();
@@ -5918,471 +5921,976 @@ cgRenderGradeDist();
 </div>
 
 {{-- =======================================================================
-     EA — EMERGENCY ALERTS VIEW  (v2 — full redesign)
+     EA — LIVE EMERGENCY ALERTS  (v3 — premium dispatch dashboard)
 ========================================================================--}}
 <div data-view="ea" class="hidden">
 
+{{-- Alpine.js (loaded only when EA view exists in DOM) --}}
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js" defer></script>
+
 <style>
-/* ============================================================
-   EA PAGE v2 — Cinematic Ops-Center
-============================================================ */
+/* ═══════════════════════════════════════════════════════════════
+   EA v3 — Premium Emergency Dispatch UI
+═══════════════════════════════════════════════════════════════ */
 [data-view="ea"] {
-    background: #03080f;
+    --ea-bg-0: #050810;
+    --ea-bg-1: #0a1020;
+    --ea-bg-2: #0e1530;
+    --ea-glass: rgba(255,255,255,.035);
+    --ea-glass-hi: rgba(255,255,255,.07);
+    --ea-border: rgba(255,255,255,.07);
+    --ea-border-hi: rgba(255,255,255,.14);
+    --ea-text: #e6eaf2;
+    --ea-text-dim: rgba(230,234,242,.55);
+    --ea-text-faint: rgba(230,234,242,.35);
+
+    --sev-critical: #ef4444;
+    --sev-high:     #f97316;
+    --sev-active:   #3b82f6;
+    --sev-resolved: #10b981;
+
+    background: var(--ea-bg-0);
     min-height: 100vh;
-    color: #e2e8f0;
-    font-family: inherit;
+    color: var(--ea-text);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
 }
 
-/* ----- Scanline texture ----- */
-[data-view="ea"] .ea-scanlines {
-    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,200,255,.018) 3px, rgba(0,200,255,.018) 4px);
+/* ───── Hero — navy with grid (matches home hero palette) ───── */
+[data-view="ea"] .ea-hero-bg {
+    background:
+        radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%),
+        linear-gradient(160deg, #050d2a 0%, #0a1a4a 30%, #0d1f56 55%, #061229 100%);
+}
+[data-view="ea"] .ea-grid-bg {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 90% at 50% 30%, black, transparent 85%);
+}
+[data-view="ea"] .ea-glow-1 {
+    position: absolute; pointer-events: none; z-index: 0;
+    width: 560px; height: 560px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(56,189,248,.30) 0%, transparent 70%);
+    top: -240px; left: -180px; filter: blur(40px);
+}
+[data-view="ea"] .ea-glow-2 {
+    position: absolute; pointer-events: none; z-index: 0;
+    width: 580px; height: 580px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,102,241,.28) 0%, transparent 70%);
+    bottom: -240px; right: -200px; filter: blur(40px);
+}
+
+/* ───── Live ticker ───── */
+@keyframes ea-ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+[data-view="ea"] .ea-ticker { animation: ea-ticker 40s linear infinite; }
+
+/* ───── Pulse dot ───── */
+@keyframes ea-pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(239,68,68,.7); }
+    70%  { box-shadow: 0 0 0 10px rgba(239,68,68,0); }
+    100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+}
+[data-view="ea"] .ea-pulse-dot { animation: ea-pulse-ring 1.6s ease infinite; }
+
+/* ───── Radar ───── */
+@keyframes ea-radar-spin { to { transform: rotate(360deg); } }
+[data-view="ea"] .ea-radar-sweep { animation: ea-radar-spin 4s linear infinite; transform-origin: center; }
+
+/* ───── Card stagger entrance ───── */
+@keyframes ea-card-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+}
+[data-view="ea"] .ea-card-anim { animation: ea-card-in .55s cubic-bezier(.16,1,.3,1) both; }
+
+/* ───── Critical pulse (active red cards) ───── */
+@keyframes ea-critical-glow {
+    0%,100% { box-shadow: 0 0 0 1px rgba(239,68,68,.18), 0 12px 32px -8px rgba(239,68,68,.08); }
+    50%     { box-shadow: 0 0 0 1px rgba(239,68,68,.35), 0 12px 32px -4px rgba(239,68,68,.25); }
+}
+[data-view="ea"] .ea-glow-critical { animation: ea-critical-glow 2.4s ease infinite; }
+
+/* ───── Skeleton shimmer ───── */
+@keyframes ea-shimmer { 0%{background-position:-400px 0;} 100%{background-position:400px 0;} }
+[data-view="ea"] .ea-skel {
+    background: linear-gradient(90deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.1) 50%, rgba(255,255,255,.04) 100%);
+    background-size: 800px 100%;
+    animation: ea-shimmer 1.4s linear infinite;
+}
+
+/* ───── Severity badges ───── */
+[data-view="ea"] .ea-sev-critical { background: rgba(239,68,68,.13); color: #fca5a5; border: 1px solid rgba(239,68,68,.35); }
+[data-view="ea"] .ea-sev-high     { background: rgba(249,115,22,.13); color: #fdba74; border: 1px solid rgba(249,115,22,.35); }
+[data-view="ea"] .ea-sev-active   { background: rgba(59,130,246,.13); color: #93c5fd; border: 1px solid rgba(59,130,246,.35); }
+[data-view="ea"] .ea-sev-resolved { background: rgba(16,185,129,.13); color: #6ee7b7; border: 1px solid rgba(16,185,129,.35); }
+
+/* Severity top bar (full-width gradient inside card) */
+[data-view="ea"] .ea-bar-critical { background: linear-gradient(90deg, #ef4444, #f87171); }
+[data-view="ea"] .ea-bar-high     { background: linear-gradient(90deg, #f97316, #fdba74); }
+[data-view="ea"] .ea-bar-active   { background: linear-gradient(90deg, #3b82f6, #93c5fd); }
+[data-view="ea"] .ea-bar-resolved { background: linear-gradient(90deg, #10b981, #6ee7b7); }
+
+/* Card hover glow per severity */
+[data-view="ea"] .ea-card:hover.ea-card-critical { box-shadow: 0 0 0 1px rgba(239,68,68,.4), 0 24px 50px -12px rgba(239,68,68,.25); }
+[data-view="ea"] .ea-card:hover.ea-card-high     { box-shadow: 0 0 0 1px rgba(249,115,22,.4), 0 24px 50px -12px rgba(249,115,22,.25); }
+[data-view="ea"] .ea-card:hover.ea-card-active   { box-shadow: 0 0 0 1px rgba(59,130,246,.4),  0 24px 50px -12px rgba(59,130,246,.22); }
+[data-view="ea"] .ea-card:hover.ea-card-resolved { box-shadow: 0 0 0 1px rgba(16,185,129,.35), 0 24px 50px -12px rgba(16,185,129,.18); }
+
+/* ───── Filter pills ───── */
+[data-view="ea"] .ea-pill {
+    transition: all .18s ease;
+    border: 1px solid var(--ea-border);
+    background: var(--ea-glass);
+    color: var(--ea-text-dim);
+}
+[data-view="ea"] .ea-pill:hover { border-color: var(--ea-border-hi); color: var(--ea-text); background: var(--ea-glass-hi); }
+[data-view="ea"] .ea-pill.is-on { background: rgba(239,68,68,.16); border-color: rgba(239,68,68,.5); color: #fca5a5; }
+
+/* Inputs */
+[data-view="ea"] .ea-input {
+    background: var(--ea-glass);
+    border: 1px solid var(--ea-border);
+    color: var(--ea-text);
+    transition: border-color .18s ease, background .18s ease;
+}
+[data-view="ea"] .ea-input::placeholder { color: var(--ea-text-faint); }
+[data-view="ea"] .ea-input:focus { outline: none; border-color: rgba(59,130,246,.5); background: var(--ea-glass-hi); }
+
+/* Card hover lift */
+[data-view="ea"] .ea-card { transition: transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s, border-color .28s, background .28s; }
+[data-view="ea"] .ea-card:hover { transform: translateY(-3px); }
+
+/* Card details expand */
+[data-view="ea"] .ea-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .45s cubic-bezier(.4,0,.2,1), opacity .25s;
+    opacity: 0;
+}
+[data-view="ea"] .ea-details.is-open { max-height: 420px; opacity: 1; }
+
+/* Counter — tabular for steady width */
+[data-view="ea"] .ea-counter { font-variant-numeric: tabular-nums; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    [data-view="ea"] *, [data-view="ea"] *::before, [data-view="ea"] *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+    [data-view="ea"] .ea-hero-title { font-size: 2.4rem !important; line-height: 1.05 !important; }
+    [data-view="ea"] .ea-radar-wrap { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CINEMATIC DASHBOARD — premium dark ops center for cards section
+═══════════════════════════════════════════════════════════════ */
+[data-view="ea"] .ea-light {
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(59,130,246,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(239,68,68,.05) 0%, transparent 60%),
+        linear-gradient(180deg, #060b1a 0%, #050810 50%, #04060f 100%);
+    color: #e6eaf2;
+    position: relative;
+}
+[data-view="ea"] .ea-light::before {
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:1;
+    background-image:
+        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 70% 80% at 50% 30%, black, transparent 90%);
+    z-index: 0;
+}
+[data-view="ea"] .ea-light > * { position: relative; z-index: 1; }
+
+/* ───── INPUTS / SEARCH ───── */
+[data-view="ea"] .ea-light .ea-input {
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.07);
+    color: #e6eaf2;
+    backdrop-filter: blur(12px);
+}
+[data-view="ea"] .ea-light .ea-input::placeholder { color: rgba(230,234,242,.32); }
+[data-view="ea"] .ea-light .ea-input:focus {
+    outline: none;
+    border-color: rgba(239,68,68,.4);
+    background: rgba(255,255,255,.04);
+    box-shadow: 0 0 0 4px rgba(239,68,68,.08), 0 4px 16px -4px rgba(239,68,68,.15);
+}
+
+/* ───── PILLS ───── */
+[data-view="ea"] .ea-light .ea-pill {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.07);
+    color: rgba(230,234,242,.55);
+    backdrop-filter: blur(12px);
+}
+[data-view="ea"] .ea-light .ea-pill:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); color: #fff; }
+[data-view="ea"] .ea-light .ea-pill.is-on {
+    background: rgba(239,68,68,.15);
+    border-color: rgba(239,68,68,.4);
+    color: #fca5a5;
+    box-shadow: 0 0 18px -6px rgba(239,68,68,.35);
+}
+
+/* ───── LABELS ───── */
+[data-view="ea"] .ea-light .ea-feed-label { color: rgba(230,234,242,.65); }
+[data-view="ea"] .ea-light .ea-text-faint { color: rgba(230,234,242,.35); }
+[data-view="ea"] .ea-light .ea-toolbar-label { color: rgba(230,234,242,.3); }
+
+/* ───── STATS CARDS — dark glass ───── */
+[data-view="ea"] .ea-light .ea-stat-card {
+    background: linear-gradient(180deg, rgba(20,28,50,.55) 0%, rgba(10,15,28,.4) 100%);
+    border: 1px solid rgba(255,255,255,.07);
+    backdrop-filter: blur(24px);
+    box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 12px 32px -16px rgba(0,0,0,.6);
+}
+[data-view="ea"] .ea-light .ea-stat-label { color: rgba(230,234,242,.65); }
+[data-view="ea"] .ea-light .ea-stat-sub   { color: rgba(230,234,242,.35); }
+
+/* ═══════════════════════════════════════════════════════════════
+   CINEMATIC INCIDENT CARDS — frosted glass + severity glow
+═══════════════════════════════════════════════════════════════ */
+[data-view="ea"] .ea-light .ea-card {
+    background: linear-gradient(180deg, rgba(22,30,52,.6) 0%, rgba(10,15,30,.5) 100%) !important;
+    border: 1px solid rgba(255,255,255,.06) !important;
+    backdrop-filter: blur(24px);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 1px 4px rgba(0,0,0,.4),
+        0 12px 32px -16px rgba(0,0,0,.5);
+    isolation: isolate;
+}
+
+/* Hover spotlight effect */
+[data-view="ea"] .ea-light .ea-card::after {
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(circle 320px at var(--ea-mx, 50%) var(--ea-my, 0%), rgba(255,255,255,.06) 0%, transparent 50%);
+    opacity: 0; transition: opacity .3s ease; pointer-events: none; border-radius: inherit;
+    z-index: 0;
+}
+[data-view="ea"] .ea-light .ea-card:hover::after { opacity: 1; }
+[data-view="ea"] .ea-light .ea-card > * { position: relative; z-index: 1; }
+
+/* Severity-tinted hover glow */
+[data-view="ea"] .ea-light .ea-card:hover.ea-card-critical {
+    border-color: rgba(239,68,68,.45) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 0 0 1px rgba(239,68,68,.15),
+        0 20px 50px -16px rgba(239,68,68,.4),
+        0 4px 12px rgba(239,68,68,.15);
+}
+[data-view="ea"] .ea-light .ea-card:hover.ea-card-high {
+    border-color: rgba(249,115,22,.45) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 0 0 1px rgba(249,115,22,.15),
+        0 20px 50px -16px rgba(249,115,22,.4),
+        0 4px 12px rgba(249,115,22,.15);
+}
+[data-view="ea"] .ea-light .ea-card:hover.ea-card-active {
+    border-color: rgba(59,130,246,.45) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 0 0 1px rgba(59,130,246,.15),
+        0 20px 50px -16px rgba(59,130,246,.4),
+        0 4px 12px rgba(59,130,246,.15);
+}
+[data-view="ea"] .ea-light .ea-card:hover.ea-card-resolved {
+    border-color: rgba(16,185,129,.35) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 0 0 1px rgba(16,185,129,.12),
+        0 20px 50px -16px rgba(16,185,129,.3);
+}
+
+/* Card text */
+[data-view="ea"] .ea-light .ea-card-title  { color: #f8fafc !important; letter-spacing: -.01em; }
+[data-view="ea"] .ea-light .ea-card-meta   { color: rgba(255,255,255,.32) !important; }
+[data-view="ea"] .ea-light .ea-card-addr   { color: rgba(255,255,255,.88) !important; }
+[data-view="ea"] .ea-light .ea-card-note   { color: rgba(255,255,255,.55) !important; }
+[data-view="ea"] .ea-light .ea-card-addr-icon { color: rgba(255,255,255,.4) !important; }
+
+/* Note box */
+[data-view="ea"] .ea-light .ea-card-note-box {
+    background: rgba(255,255,255,.025) !important;
+    border: 1px solid rgba(255,255,255,.05) !important;
+}
+
+/* Stat tiles within a card */
+[data-view="ea"] .ea-light .ea-card-stat {
+    background: rgba(255,255,255,.025) !important;
+    border: 1px solid rgba(255,255,255,.05) !important;
+}
+[data-view="ea"] .ea-light .ea-card-stat-label { color: rgba(255,255,255,.4) !important; letter-spacing: .08em; }
+[data-view="ea"] .ea-light .ea-card-stat-val   { color: #fff !important; }
+
+/* Progress bar */
+[data-view="ea"] .ea-light .ea-progress-track { background: rgba(255,255,255,.06) !important; }
+[data-view="ea"] .ea-light .ea-progress-stage { color: rgba(255,255,255,.18) !important; }
+[data-view="ea"] .ea-light .ea-progress-pct   { color: rgba(255,255,255,.4) !important; }
+[data-view="ea"] .ea-light .ea-stage-lbl    { color: rgba(255,255,255,.18) !important; }
+
+/* Severity badges & icons — neon accent */
+[data-view="ea"] .ea-light .ea-sev-critical { background: rgba(239,68,68,.13); color: #fca5a5; border-color: rgba(239,68,68,.4); box-shadow: 0 0 12px -4px rgba(239,68,68,.35); }
+[data-view="ea"] .ea-light .ea-sev-high     { background: rgba(249,115,22,.13); color: #fdba74; border-color: rgba(249,115,22,.4); box-shadow: 0 0 12px -4px rgba(249,115,22,.3); }
+[data-view="ea"] .ea-light .ea-sev-active   { background: rgba(59,130,246,.13); color: #93c5fd; border-color: rgba(59,130,246,.4); box-shadow: 0 0 12px -4px rgba(59,130,246,.3); }
+[data-view="ea"] .ea-light .ea-sev-resolved { background: rgba(16,185,129,.13); color: #6ee7b7; border-color: rgba(16,185,129,.4); box-shadow: 0 0 12px -4px rgba(16,185,129,.25); }
+
+/* Icon chip severity glow */
+@keyframes ea-icon-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(var(--ea-sev-rgb), 0); }
+    50%      { box-shadow: 0 0 18px -2px rgba(var(--ea-sev-rgb), .45); }
+}
+[data-view="ea"] .ea-light .ea-icon-critical { background: rgba(239,68,68,.13) !important; border-color: rgba(239,68,68,.4) !important; --ea-sev-rgb: 239,68,68; animation: ea-icon-pulse 2.4s ease-in-out infinite; }
+[data-view="ea"] .ea-light .ea-icon-high     { background: rgba(249,115,22,.13) !important; border-color: rgba(249,115,22,.4) !important; --ea-sev-rgb: 249,115,22; animation: ea-icon-pulse 2.8s ease-in-out infinite; }
+[data-view="ea"] .ea-light .ea-icon-active   { background: rgba(59,130,246,.13) !important; border-color: rgba(59,130,246,.4) !important; --ea-sev-rgb: 59,130,246; animation: ea-icon-pulse 3.2s ease-in-out infinite; }
+[data-view="ea"] .ea-light .ea-icon-resolved { background: rgba(16,185,129,.10) !important; border-color: rgba(16,185,129,.3) !important; --ea-sev-rgb: 16,185,129; }
+
+/* View Details button */
+[data-view="ea"] .ea-light .ea-details-btn {
+    background: rgba(255,255,255,.025) !important;
+    border: 1px solid rgba(255,255,255,.06) !important;
+    color: rgba(255,255,255,.6) !important;
+}
+[data-view="ea"] .ea-light .ea-details-btn:hover { background: rgba(255,255,255,.06) !important; border-color: rgba(255,255,255,.14) !important; color: #fff !important; }
+
+/* Expanded details rows */
+[data-view="ea"] .ea-light .ea-details-row-label { color: rgba(255,255,255,.4) !important; }
+[data-view="ea"] .ea-light .ea-details-row-val   { color: #fff !important; }
+[data-view="ea"] .ea-light .ea-details-divider { border-color: rgba(255,255,255,.06) !important; }
+
+/* Skeleton shimmer (dark) */
+[data-view="ea"] .ea-light .ea-skel {
+    background: linear-gradient(90deg, rgba(255,255,255,.03) 0%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.03) 100%);
+    background-size: 800px 100%;
+}
+
+/* Empty state */
+[data-view="ea"] .ea-light .ea-empty {
+    background: rgba(255,255,255,.025);
+    border: 1px dashed rgba(255,255,255,.08);
+}
+[data-view="ea"] .ea-light .ea-empty-icon { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); color: rgba(255,255,255,.5); }
+[data-view="ea"] .ea-light .ea-empty-title { color: #fff; }
+[data-view="ea"] .ea-light .ea-empty-text  { color: rgba(255,255,255,.4); }
+
+/* AI confidence chip */
+[data-view="ea"] .ea-ai-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 2px 7px; border-radius: 4px;
+    background: linear-gradient(135deg, rgba(139,92,246,.18), rgba(59,130,246,.12));
+    border: 1px solid rgba(139,92,246,.3);
+    color: #c4b5fd;
+    font-size: 9px; font-weight: 800; letter-spacing: .06em;
+    text-transform: uppercase;
+}
+[data-view="ea"] .ea-ai-chip svg { width: 9px; height: 9px; }
+
+/* Subtle scanline animation on active cards */
+@keyframes ea-scan {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+[data-view="ea"] .ea-light .ea-card-critical .ea-scanline {
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(239,68,68,.6), transparent);
+    animation: ea-scan 3s linear infinite;
+    z-index: 2;
     pointer-events: none;
 }
-
-/* ----- Ticker ----- */
-@keyframes ea2-ticker { from { transform:translateX(100%); } to { transform:translateX(-200%); } }
-[data-view="ea"] .ea-ticker-track { animation: ea2-ticker 35s linear infinite; white-space:nowrap; }
-
-/* ----- Radar sweep ----- */
-@keyframes ea2-sweep { to { transform: rotate(360deg); } }
-[data-view="ea"] .ea-sweep { animation: ea2-sweep 4s linear infinite; transform-origin: center; }
-
-/* ----- Pulse rings ----- */
-@keyframes ea2-ring {
-    0%   { transform:scale(.5); opacity:.9; }
-    100% { transform:scale(3); opacity:0; }
-}
-[data-view="ea"] .ea-ring { animation: ea2-ring 2.8s ease-out infinite; }
-[data-view="ea"] .ea-ring:nth-child(2) { animation-delay:.93s; }
-[data-view="ea"] .ea-ring:nth-child(3) { animation-delay:1.86s; }
-
-/* ----- Live dot ----- */
-@keyframes ea2-dot { 0%,100%{box-shadow:0 0 0 0 rgba(251,6,6,.7);} 50%{box-shadow:0 0 0 8px rgba(251,6,6,0);} }
-[data-view="ea"] .ea-ldot { animation: ea2-dot 1.5s ease infinite; }
-
-/* ----- Card entrance ----- */
-@keyframes ea2-in { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:none;} }
-[data-view="ea"] .ea-card { animation: ea2-in .5s cubic-bezier(.16,1,.3,1) both; }
-[data-view="ea"] .ea-card:nth-child(1){animation-delay:.00s}[data-view="ea"] .ea-card:nth-child(2){animation-delay:.06s}
-[data-view="ea"] .ea-card:nth-child(3){animation-delay:.12s}[data-view="ea"] .ea-card:nth-child(4){animation-delay:.18s}
-[data-view="ea"] .ea-card:nth-child(5){animation-delay:.24s}[data-view="ea"] .ea-card:nth-child(6){animation-delay:.30s}
-[data-view="ea"] .ea-card:nth-child(7){animation-delay:.36s}[data-view="ea"] .ea-card:nth-child(8){animation-delay:.42s}
-[data-view="ea"] .ea-card:nth-child(9){animation-delay:.48s}[data-view="ea"] .ea-card:nth-child(10){animation-delay:.54s}
-[data-view="ea"] .ea-card:nth-child(11){animation-delay:.60s}[data-view="ea"] .ea-card:nth-child(12){animation-delay:.66s}
-
-/* ----- Bar grow ----- */
-@keyframes ea2-bar { from{width:0;} }
-[data-view="ea"] .ea-bar { animation: ea2-bar 1s cubic-bezier(.22,1,.36,1) both; }
-
-/* ----- New alert flash ----- */
-@keyframes ea2-flash { 0%,100%{background:rgba(251,6,6,0);} 25%{background:rgba(251,6,6,.15);} }
-[data-view="ea"] .ea-new-flash { animation: ea2-flash 2s ease 1; }
-
-/* ----- Glitch title ----- */
-@keyframes ea2-glitch1 { 0%,94%,100%{clip-path:none;transform:none;} 95%{clip-path:inset(20% 0 60% 0);transform:translateX(-4px);} 97%{clip-path:inset(70% 0 5% 0);transform:translateX(4px);} }
-[data-view="ea"] .ea-glitch { animation: ea2-glitch1 8s ease infinite; }
-
-/* ----- Type badge colours ----- */
-[data-view="ea"] .eab-shooting  { background:rgba(239,68,68,.15); color:#fca5a5; border-color:rgba(239,68,68,.4); }
-[data-view="ea"] .eab-robbery   { background:rgba(249,115,22,.15); color:#fdba74; border-color:rgba(249,115,22,.4); }
-[data-view="ea"] .eab-assault   { background:rgba(234,179,8,.15);  color:#fde047; border-color:rgba(234,179,8,.4); }
-[data-view="ea"] .eab-domestic  { background:rgba(168,85,247,.15); color:#d8b4fe; border-color:rgba(168,85,247,.4); }
-[data-view="ea"] .eab-breakin   { background:rgba(59,130,246,.15); color:#93c5fd; border-color:rgba(59,130,246,.4); }
-[data-view="ea"] .eab-fire      { background:rgba(239,68,68,.15);  color:#fca5a5; border-color:rgba(239,68,68,.4); }
-[data-view="ea"] .eab-medical   { background:rgba(16,185,129,.15); color:#6ee7b7; border-color:rgba(16,185,129,.4); }
-[data-view="ea"] .eab-carjack   { background:rgba(236,72,153,.15); color:#f9a8d4; border-color:rgba(236,72,153,.4); }
-
-/* Left border colours per type */
-[data-view="ea"] [data-ealeft="shooting"] { border-left:3px solid #ef4444; }
-[data-view="ea"] [data-ealeft="robbery"]  { border-left:3px solid #f97316; }
-[data-view="ea"] [data-ealeft="assault"]  { border-left:3px solid #eab308; }
-[data-view="ea"] [data-ealeft="domestic"] { border-left:3px solid #a855f7; }
-[data-view="ea"] [data-ealeft="breakin"]  { border-left:3px solid #3b82f6; }
-[data-view="ea"] [data-ealeft="fire"]     { border-left:3px solid #ef4444; }
-[data-view="ea"] [data-ealeft="medical"]  { border-left:3px solid #10b981; }
-[data-view="ea"] [data-ealeft="carjack"]  { border-left:3px solid #ec4899; }
-
-/* Bar progress fill colours */
-[data-view="ea"] .eas-dispatched { color:#fbbf24; } [data-view="ea"] .ea-fill-dispatched { background:#fbbf24; }
-[data-view="ea"] .eas-enroute    { color:#60a5fa; } [data-view="ea"] .ea-fill-enroute    { background:#60a5fa; }
-[data-view="ea"] .eas-onscene    { color:#fb923c; } [data-view="ea"] .ea-fill-onscene    { background:#fb923c; }
-[data-view="ea"] .eas-resolved   { color:#34d399; } [data-view="ea"] .ea-fill-resolved   { background:#34d399; }
-
-/* Filter pill */
-[data-view="ea"] .ea-fp { border:1px solid rgba(255,255,255,.10); color:rgba(255,255,255,.55); cursor:pointer; transition:all .18s ease; }
-[data-view="ea"] .ea-fp:hover { border-color:rgba(255,255,255,.28); color:#fff; background:rgba(255,255,255,.07); }
-[data-view="ea"] .ea-fp.ea-on  { background:rgba(239,68,68,.2); border-color:rgba(239,68,68,.55); color:#fca5a5; }
-
-/* Stat cards */
-[data-view="ea"] .ea-stat { transition:transform .2s,box-shadow .2s; }
-[data-view="ea"] .ea-stat:hover { transform:translateY(-4px); box-shadow:0 20px 40px -10px rgba(0,0,0,.6); }
-
-/* Section divider label */
-[data-view="ea"] .ea-section-label {
-    display:flex; align-items:center; gap:12px; color:rgba(255,255,255,.3);
-    font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; margin-bottom:20px;
-}
-[data-view="ea"] .ea-section-label::after { content:""; flex:1; height:1px; background:rgba(255,255,255,.07); }
-
-/* Officer badge */
-[data-view="ea"] .ea-ofbadge { display:inline-flex; align-items:center; justify-content:center;
-    width:24px; height:24px; border-radius:50%; background:#0f2044; border:1.5px solid rgba(96,165,250,.4);
-    font-size:10px; font-weight:700; color:#93c5fd; }
-
-/* Number counter */
-@keyframes ea2-count { from{opacity:0;transform:scale(.7);} to{opacity:1;transform:none;} }
-[data-view="ea"] .ea-count-num { animation: ea2-count .6s cubic-bezier(.34,1.56,.64,1) .3s both; }
 </style>
 
-{{-- ══════════════════════════════════════════
-     LIVE TICKER
-══════════════════════════════════════════ --}}
-<div class="relative overflow-hidden" style="background:rgba(220,38,38,.12); border-bottom:1px solid rgba(220,38,38,.25); height:32px;">
-    <div class="ea-ticker-track inline-flex items-center gap-0 h-full" style="will-change:transform;">
-        @foreach(range(0,1) as $_)
-        <span class="inline-flex items-center gap-6 px-8 text-[11px] font-bold uppercase tracking-[.18em] text-red-400">
-            <span class="inline-flex items-center gap-1.5"><span class="ea-ldot inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span> LIVE FEED</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">3 Critical Incidents Active</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">24 Officers Deployed</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">Avg Response: 2m 14s</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">Last update: <span class="ea-tick-time font-mono">--:--:--</span></span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">Auxilio Emergency Network Active</span>
-            <span class="text-red-500/60">·</span>
-        </span>
-        @endforeach
-    </div>
-</div>
-
-{{-- ══════════════════════════════════════════
-     HERO  — ops-center cinematic
-══════════════════════════════════════════ --}}
-<section class="relative overflow-hidden" style="min-height:560px; background:radial-gradient(ellipse 90% 70% at 50% -10%, rgba(220,38,38,.18) 0%, transparent 65%), linear-gradient(170deg,#06101f 0%,#03080f 100%);">
-    <div class="ea-scanlines absolute inset-0 z-0 pointer-events-none"></div>
-
-    {{-- Grid overlay --}}
-    <div class="absolute inset-0 z-0 pointer-events-none" style="background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 100% at 50% 0%,black,transparent 90%);"></div>
-
-    {{-- Radar graphic --}}
-    <div class="absolute right-8 top-1/2 -translate-y-1/2 pointer-events-none z-0 hidden lg:block" style="width:360px;height:360px;opacity:.25;">
-        <svg viewBox="0 0 200 200" class="w-full h-full">
-            {{-- rings --}}
-            <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(239,68,68,.5)" stroke-width=".5"/>
-            <circle cx="100" cy="100" r="65" fill="none" stroke="rgba(239,68,68,.4)" stroke-width=".5"/>
-            <circle cx="100" cy="100" r="40" fill="none" stroke="rgba(239,68,68,.3)" stroke-width=".5"/>
-            <circle cx="100" cy="100" r="15" fill="none" stroke="rgba(239,68,68,.3)" stroke-width=".5"/>
-            {{-- crosshairs --}}
-            <line x1="100" y1="5"   x2="100" y2="195" stroke="rgba(239,68,68,.2)" stroke-width=".5"/>
-            <line x1="5"   y1="100" x2="195" y2="100" stroke="rgba(239,68,68,.2)" stroke-width=".5"/>
-            {{-- sweep gradient --}}
-            <g class="ea-sweep">
-                <defs>
-                    <radialGradient id="sweepGrad" cx="50%" cy="50%">
-                        <stop offset="0%"   stop-color="#ef4444" stop-opacity=".7"/>
-                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
-                    </radialGradient>
-                </defs>
-                <path d="M100 100 L100 10 A90 90 0 0 1 175 145 Z" fill="url(#sweepGrad)" opacity=".6"/>
-            </g>
-            {{-- blips --}}
-            <circle cx="130" cy="60"  r="3" fill="#ef4444" opacity=".9"><animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/></circle>
-            <circle cx="75"  cy="140" r="2" fill="#fb923c" opacity=".9"><animate attributeName="opacity" values="1;.3;1" dur="2.3s" repeatCount="indefinite"/></circle>
-            <circle cx="155" cy="110" r="2" fill="#ef4444" opacity=".8"><animate attributeName="opacity" values="1;.2;1" dur="1.5s" repeatCount="indefinite"/></circle>
-            <circle cx="55"  cy="75"  r="1.5" fill="#fbbf24" opacity=".9"><animate attributeName="opacity" values="1;.4;1" dur="2.8s" repeatCount="indefinite"/></circle>
-        </svg>
-    </div>
-
-    {{-- Pulse rings behind center dot --}}
-    <div class="absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" style="width:6px;height:6px;">
-        <div class="ea-ring absolute rounded-full border border-red-500/40" style="width:200px;height:200px;margin:-97px;"></div>
-        <div class="ea-ring absolute rounded-full border border-red-500/30" style="width:200px;height:200px;margin:-97px;"></div>
-        <div class="ea-ring absolute rounded-full border border-red-500/20" style="width:200px;height:200px;margin:-97px;"></div>
-    </div>
-
-    <div class="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pt-14 pb-16 lg:pt-20">
-
-        {{-- Live badge --}}
-        <div class="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-8" style="background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);">
-            <span class="ea-ldot w-2 h-2 rounded-full bg-red-500"></span>
-            <span class="text-[11px] font-bold uppercase tracking-[.22em] text-red-400">Live Emergency Alerts</span>
-        </div>
-
-        <h1 class="ea-glitch font-black text-5xl sm:text-6xl lg:text-7xl tracking-tight text-white leading-[.95] mb-6" style="text-shadow:0 0 60px rgba(220,38,38,.3);">
-            Emergency<br>
-            <span style="background:linear-gradient(90deg,#ef4444 0%,#f97316 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Alert Center</span>
-        </h1>
-        <p class="text-white/50 text-base sm:text-lg max-w-lg leading-relaxed mb-12">
-            Real-time dispatches — incident type, address, officer count, and live status as events unfold.
-        </p>
-
-        {{-- Stat strip --}}
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-2xl">
-            @foreach([
-                ['n'=>'3',     'l'=>'Active Incidents',  'c'=>'#ef4444', 'g'=>'rgba(239,68,68,.15)'],
-                ['n'=>'24',    'l'=>'Officers Deployed', 'c'=>'#60a5fa', 'g'=>'rgba(96,165,250,.12)'],
-                ['n'=>'2m14s', 'l'=>'Avg Response',      'c'=>'#fbbf24', 'g'=>'rgba(251,191,36,.12)'],
-                ['n'=>'17',    'l'=>'Resolved Today',    'c'=>'#34d399', 'g'=>'rgba(52,211,153,.12)'],
-            ] as $s)
-            <div class="ea-stat rounded-xl px-4 py-4 text-center" style="background:{{ $s['g'] }};border:1px solid {{ $s['c'] }}30;">
-                <div class="ea-count-num text-2xl sm:text-3xl font-black mb-1" style="color:{{ $s['c'] }};">{{ $s['n'] }}</div>
-                <div class="text-[10px] font-bold uppercase tracking-[.14em] text-white/40">{{ $s['l'] }}</div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-{{-- ══════════════════════════════════════════
-     FILTER + COUNT BAR
-══════════════════════════════════════════ --}}
-<div class="sticky top-[78px] z-30" style="background:rgba(3,8,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);">
-    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-2.5 flex items-center gap-2 overflow-x-auto" style="scrollbar-width:none;">
-        <span class="text-[10px] font-bold uppercase tracking-[.18em] text-white/25 shrink-0 mr-1">Filter</span>
-        @foreach([
-            ['k'=>'all',      'l'=>'All'],
-            ['k'=>'shooting', 'l'=>'Shooting'],
-            ['k'=>'robbery',  'l'=>'Robbery'],
-            ['k'=>'assault',  'l'=>'Assault'],
-            ['k'=>'breakin',  'l'=>'Break-In'],
-            ['k'=>'domestic', 'l'=>'Domestic'],
-            ['k'=>'fire',     'l'=>'Fire'],
-            ['k'=>'medical',  'l'=>'Medical'],
-            ['k'=>'carjack',  'l'=>'Carjacking'],
-        ] as $f)
-        <button class="ea-fp{{ $f['k']==='all'?' ea-on':'' }} shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="{{ $f['k'] }}">{{ $f['l'] }}</button>
-        @endforeach
-        <span class="ml-auto shrink-0 text-[11px] text-white/25 hidden sm:block"><span id="ea-count">18</span> incidents</span>
-    </div>
-</div>
-
-{{-- ══════════════════════════════════════════
-     INCIDENT FEED
-══════════════════════════════════════════ --}}
+{{-- ══════════════════════════════════════════════════════════════
+     ALPINE COMPONENT — eaApp()
+══════════════════════════════════════════════════════════════ --}}
 @php
-$incidents = [
-    ['type'=>'shooting', 'label'=>'SHOOTING',   'address'=>'847 Clinton Ave, Newark, NJ',            'officers'=>6, 'status'=>'onscene',    'pct'=>85, 'ago'=>'3m ago',  'id'=>'NW-2491','note'=>'Multiple shots fired — 2 units on scene, perimeter set'],
-    ['type'=>'robbery',  'label'=>'ROBBERY',    'address'=>'1204 Springfield Ave, Irvington, NJ',    'officers'=>4, 'status'=>'enroute',    'pct'=>55, 'ago'=>'6m ago',  'id'=>'IR-0882','note'=>'Armed suspect, blue hoodie — fled north on foot'],
-    ['type'=>'assault',  'label'=>'ASSAULT',    'address'=>'390 Market St, Newark, NJ',              'officers'=>3, 'status'=>'onscene',    'pct'=>90, 'ago'=>'9m ago',  'id'=>'NW-2489','note'=>'Victim conscious — EMS en route'],
-    ['type'=>'breakin',  'label'=>'BREAK-IN',   'address'=>'55 Park Ave, East Orange, NJ',           'officers'=>2, 'status'=>'dispatched', 'pct'=>22, 'ago'=>'11m ago', 'id'=>'EO-0341','note'=>'Residential break-in — rear window forced'],
-    ['type'=>'domestic', 'label'=>'DOMESTIC',   'address'=>'721 South Orange Ave, Newark, NJ',       'officers'=>3, 'status'=>'enroute',    'pct'=>60, 'ago'=>'14m ago', 'id'=>'NW-2488','note'=>'Verbal altercation escalating — caller still on line'],
-    ['type'=>'shooting', 'label'=>'SHOOTING',   'address'=>'3310 Kennedy Blvd, Jersey City, NJ',     'officers'=>7, 'status'=>'onscene',    'pct'=>95, 'ago'=>'17m ago', 'id'=>'JC-1142','note'=>'Drive-by — K9 deployed, 2 suspects detained'],
-    ['type'=>'fire',     'label'=>'FIRE',       'address'=>'220 Avon Ave, Newark, NJ',               'officers'=>5, 'status'=>'onscene',    'pct'=>75, 'ago'=>'20m ago', 'id'=>'NW-2487','note'=>'Structure fire — 2nd floor residential, building evacuated'],
-    ['type'=>'carjack',  'label'=>'CARJACKING', 'address'=>'I-78 Westbound, Exit 54, Newark, NJ',    'officers'=>4, 'status'=>'enroute',    'pct'=>45, 'ago'=>'22m ago', 'id'=>'NW-2486','note'=>'Silver Honda Civic NJ-HJ492 — BOLO issued'],
-    ['type'=>'medical',  'label'=>'MEDICAL',    'address'=>'940 Bergen Ave, Jersey City, NJ',        'officers'=>2, 'status'=>'onscene',    'pct'=>80, 'ago'=>'25m ago', 'id'=>'JC-1141','note'=>'Unresponsive male — AED deployed, EMS on scene'],
-    ['type'=>'robbery',  'label'=>'ROBBERY',    'address'=>'670 Frelinghuysen Ave, Newark, NJ',      'officers'=>3, 'status'=>'dispatched', 'pct'=>18, 'ago'=>'28m ago', 'id'=>'NW-2485','note'=>'Gas station hold-up — suspect armed with handgun'],
-    ['type'=>'breakin',  'label'=>'BREAK-IN',   'address'=>'102 Roseville Ave, Newark, NJ',          'officers'=>2, 'status'=>'enroute',    'pct'=>50, 'ago'=>'31m ago', 'id'=>'NW-2484','note'=>'Commercial break-in — silent alarm triggered'],
-    ['type'=>'assault',  'label'=>'ASSAULT',    'address'=>'444 Bloomfield Ave, Montclair, NJ',      'officers'=>2, 'status'=>'resolved',   'pct'=>100,'ago'=>'34m ago', 'id'=>'MC-0215','note'=>'Suspect in custody — victim transported to hospital'],
-    ['type'=>'carjack',  'label'=>'CARJACKING', 'address'=>'Raymond Blvd & Mulberry St, Newark, NJ', 'officers'=>5, 'status'=>'onscene',    'pct'=>70, 'ago'=>'41m ago', 'id'=>'NW-2483','note'=>'Suspect detained — vehicle recovered two blocks east'],
-    ['type'=>'fire',     'label'=>'FIRE',       'address'=>'1847 Broad St, Newark, NJ',              'officers'=>4, 'status'=>'resolved',   'pct'=>100,'ago'=>'45m ago', 'id'=>'NW-2482','note'=>'Fire extinguished — arson investigation underway'],
-    ['type'=>'medical',  'label'=>'MEDICAL',    'address'=>'250 Washington St, Newark, NJ',          'officers'=>1, 'status'=>'resolved',   'pct'=>100,'ago'=>'49m ago', 'id'=>'NW-2481','note'=>'Patient stabilised — transported to University Hospital'],
-    ['type'=>'robbery',  'label'=>'ROBBERY',    'address'=>'2300 McCarter Hwy, Newark, NJ',          'officers'=>3, 'status'=>'resolved',   'pct'=>100,'ago'=>'53m ago', 'id'=>'NW-2480','note'=>'Suspect apprehended — stolen property recovered'],
-    ['type'=>'shooting', 'label'=>'SHOOTING',   'address'=>'100 Jones St, Newark, NJ',               'officers'=>8, 'status'=>'resolved',   'pct'=>100,'ago'=>'58m ago', 'id'=>'NW-2479','note'=>'Scene cleared — 1 victim at hospital, 2 in custody'],
-    ['type'=>'domestic', 'label'=>'DOMESTIC',   'address'=>'58 William St, East Orange, NJ',         'officers'=>2, 'status'=>'resolved',   'pct'=>100,'ago'=>'63m ago', 'id'=>'EO-0339','note'=>'De-escalated — report filed, no injuries'],
-];
-$sm = [
-    'dispatched'=>['l'=>'Dispatched','c'=>'eas-dispatched','f'=>'ea-fill-dispatched'],
-    'enroute'   =>['l'=>'En Route',  'c'=>'eas-enroute',   'f'=>'ea-fill-enroute'],
-    'onscene'   =>['l'=>'On Scene',  'c'=>'eas-onscene',   'f'=>'ea-fill-onscene'],
-    'resolved'  =>['l'=>'Resolved',  'c'=>'eas-resolved',  'f'=>'ea-fill-resolved'],
+$eaIncidents = [
+    ['id'=>'NW-2491', 'type'=>'shots-fired',      'title'=>'Shots Fired',          'severity'=>'critical','status'=>'on-scene',  'pct'=>85, 'address'=>'847 Clinton Ave, Newark, NJ',           'officers'=>6,'units'=>3,'minutes'=>3, 'note'=>'Multiple shots fired in residential area. Two units arrived on scene, perimeter set up around the building.','priority'=>'P1','dispatchAt'=>'14:32:18','responseTime'=>'1m 42s'],
+    ['id'=>'IR-0882', 'type'=>'armed-robbery',    'title'=>'Armed Robbery',        'severity'=>'critical','status'=>'en-route',  'pct'=>55, 'address'=>'1204 Springfield Ave, Irvington, NJ',    'officers'=>4,'units'=>2,'minutes'=>6, 'note'=>'Armed suspect in blue hoodie, fled on foot northbound after holding up convenience store.','priority'=>'P1','dispatchAt'=>'14:29:05','responseTime'=>'pending'],
+    ['id'=>'NW-2489', 'type'=>'assault',          'title'=>'Assault',              'severity'=>'high',    'status'=>'on-scene',  'pct'=>90, 'address'=>'390 Market St, Newark, NJ',              'officers'=>3,'units'=>2,'minutes'=>9, 'note'=>'Victim conscious and responsive. EMS en route. Witnesses being interviewed on scene.','priority'=>'P2','dispatchAt'=>'14:26:11','responseTime'=>'2m 04s'],
+    ['id'=>'EO-0341', 'type'=>'break-in',         'title'=>'Break-In',             'severity'=>'active',  'status'=>'dispatched','pct'=>22, 'address'=>'55 Park Ave, East Orange, NJ',           'officers'=>2,'units'=>1,'minutes'=>11,'note'=>'Residential break-in reported. Rear window forced open. Neighbour called it in.','priority'=>'P3','dispatchAt'=>'14:24:32','responseTime'=>'pending'],
+    ['id'=>'NW-2488', 'type'=>'domestic',         'title'=>'Domestic Disturbance', 'severity'=>'active',  'status'=>'en-route',  'pct'=>60, 'address'=>'721 South Orange Ave, Newark, NJ',       'officers'=>3,'units'=>2,'minutes'=>14,'note'=>'Verbal altercation escalating. Caller still on the line with dispatcher.','priority'=>'P3','dispatchAt'=>'14:21:48','responseTime'=>'pending'],
+    ['id'=>'JC-1142', 'type'=>'shots-fired',      'title'=>'Shots Fired',          'severity'=>'critical','status'=>'on-scene',  'pct'=>95, 'address'=>'3310 Kennedy Blvd, Jersey City, NJ',     'officers'=>7,'units'=>4,'minutes'=>17,'note'=>'Drive-by shooting reported. K9 unit deployed. Two suspects detained pending identification.','priority'=>'P1','dispatchAt'=>'14:18:55','responseTime'=>'1m 21s'],
+    ['id'=>'NW-2487', 'type'=>'structure-fire',   'title'=>'Structure Fire',       'severity'=>'critical','status'=>'on-scene',  'pct'=>75, 'address'=>'220 Avon Ave, Newark, NJ',               'officers'=>5,'units'=>3,'minutes'=>20,'note'=>'Two-alarm fire on 2nd floor residential. Building evacuated. NFD on scene with three engines.','priority'=>'P1','dispatchAt'=>'14:15:42','responseTime'=>'2m 38s'],
+    ['id'=>'NW-2486', 'type'=>'carjacking',       'title'=>'Carjacking',           'severity'=>'high',    'status'=>'en-route',  'pct'=>45, 'address'=>'I-78 Westbound, Exit 54, Newark, NJ',    'officers'=>4,'units'=>2,'minutes'=>22,'note'=>'Silver Honda Civic, plate NJ-HJ492. BOLO issued statewide. State Police coordinating pursuit.','priority'=>'P2','dispatchAt'=>'14:13:29','responseTime'=>'pending'],
+    ['id'=>'JC-1141', 'type'=>'medical',          'title'=>'Medical Emergency',    'severity'=>'active',  'status'=>'on-scene',  'pct'=>80, 'address'=>'940 Bergen Ave, Jersey City, NJ',        'officers'=>2,'units'=>2,'minutes'=>25,'note'=>'Unresponsive male, mid-50s. AED deployed. EMS performing CPR on scene.','priority'=>'P2','dispatchAt'=>'14:10:14','responseTime'=>'3m 12s'],
+    ['id'=>'NW-2485', 'type'=>'armed-robbery',    'title'=>'Armed Robbery',        'severity'=>'critical','status'=>'dispatched','pct'=>18, 'address'=>'670 Frelinghuysen Ave, Newark, NJ',      'officers'=>3,'units'=>2,'minutes'=>28,'note'=>'Gas station hold-up. Suspect armed with handgun. Last seen heading east on Frelinghuysen.','priority'=>'P1','dispatchAt'=>'14:07:33','responseTime'=>'pending'],
+    ['id'=>'NW-2484', 'type'=>'break-in',         'title'=>'Break-In',             'severity'=>'active',  'status'=>'en-route',  'pct'=>50, 'address'=>'102 Roseville Ave, Newark, NJ',          'officers'=>2,'units'=>1,'minutes'=>31,'note'=>'Commercial break-in. Silent alarm triggered. K9 unit en route for property search.','priority'=>'P3','dispatchAt'=>'14:04:51','responseTime'=>'pending'],
+    ['id'=>'NW-2486V','type'=>'vehicle-accident', 'title'=>'Vehicle Accident',     'severity'=>'high',    'status'=>'on-scene',  'pct'=>70, 'address'=>'Garden State Pkwy, MM 145N, Newark, NJ', 'officers'=>4,'units'=>3,'minutes'=>33,'note'=>'Two-vehicle collision with injuries. Right lane blocked. Tow truck en route. EMS treating two patients.','priority'=>'P2','dispatchAt'=>'14:02:47','responseTime'=>'2m 55s'],
+    ['id'=>'MC-0215', 'type'=>'assault',          'title'=>'Assault',              'severity'=>'resolved','status'=>'resolved',  'pct'=>100,'address'=>'444 Bloomfield Ave, Montclair, NJ',      'officers'=>2,'units'=>1,'minutes'=>34,'note'=>'Suspect in custody. Victim transported to hospital for non-life-threatening injuries.','priority'=>'P2','dispatchAt'=>'13:58:12','responseTime'=>'4m 18s'],
+    ['id'=>'NW-2482', 'type'=>'structure-fire',   'title'=>'Structure Fire',       'severity'=>'resolved','status'=>'resolved',  'pct'=>100,'address'=>'1847 Broad St, Newark, NJ',              'officers'=>4,'units'=>2,'minutes'=>45,'note'=>'Fire extinguished. Arson investigation underway. No injuries reported.','priority'=>'P1','dispatchAt'=>'13:47:33','responseTime'=>'3m 21s'],
+    ['id'=>'NW-2479', 'type'=>'shots-fired',      'title'=>'Shots Fired',          'severity'=>'resolved','status'=>'resolved',  'pct'=>100,'address'=>'100 Jones St, Newark, NJ',               'officers'=>8,'units'=>4,'minutes'=>58,'note'=>'Scene cleared. One victim at hospital, two suspects in custody. Investigation ongoing.','priority'=>'P1','dispatchAt'=>'13:34:09','responseTime'=>'1m 58s'],
 ];
 @endphp
 
-<div class="mx-auto max-w-6xl px-5 sm:px-8 py-10">
-
-    <div class="ea-section-label">Live Incident Feed <span class="flex items-center gap-1.5"><span class="ea-ldot w-1.5 h-1.5 rounded-full bg-green-400"></span>Auto-refreshing</span></div>
-
-    <div id="ea-feed" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-
-    @foreach($incidents as $i => $inc)
-    @php $s = $sm[$inc['status']]; $resolved = $inc['status']==='resolved'; @endphp
-    <div class="ea-card{{ $resolved ? ' opacity-50' : '' }}" data-ea-type="{{ $inc['type'] }}" style="animation-delay:{{ $i * 0.06 }}s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="{{ $inc['type'] }}"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            {{-- Card header --}}
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-{{ $inc['type'] }} text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">{{ $inc['label'] }}</span>
-                    @if(!$resolved)
-                    <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                    @endif
-                </div>
-                <span class="font-mono text-[10px] text-white/25">{{ $inc['id'] }}</span>
-            </div>
-
-            {{-- Card body --}}
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                {{-- Address — most prominent info --}}
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">{{ $inc['address'] }}</span>
-                </div>
-
-                {{-- Note --}}
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">{{ $inc['note'] }}</p>
-
-                {{-- Officers row --}}
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        @for($o=0;$o<min($inc['officers'],5);$o++)<span class="ea-ofbadge">{{ $o+1 }}</span>@endfor
-                        @if($inc['officers']>5)<span class="text-[11px] text-white/40 ml-1">+{{ $inc['officers']-5 }}</span>@endif
-                    </div>
-                    <span class="text-[11px] font-bold text-blue-400">{{ $inc['officers'] }} officer{{ $inc['officers']>1?'s':'' }}</span>
-                </div>
-
-                {{-- Status + bar --}}
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] {{ $s['c'] }}">{{ $s['l'] }}</span>
-                        <span class="text-[11px] text-white/30 font-mono">{{ $inc['ago'] }}</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full {{ $s['f'] }}" style="width:{{ $inc['pct'] }}%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endforeach
-
-    </div>
-
-    {{-- New alert zone --}}
-    <div class="mt-6 rounded-xl py-5 px-6 text-center text-xs text-white/20" style="border:1px dashed rgba(255,255,255,.07);">
-        <span class="ea-ldot inline-block w-1.5 h-1.5 rounded-full bg-green-400 mr-2 align-middle"></span>
-        New incidents appear here as they come in
-    </div>
-</div>
-
-{{-- ══════════════════════════════════════════
-     HOW IT WORKS
-══════════════════════════════════════════ --}}
-<section class="py-20" style="background:linear-gradient(180deg,#03080f 0%,#060f1d 100%);border-top:1px solid rgba(255,255,255,.05);">
-    <div class="mx-auto max-w-5xl px-5 sm:px-8">
-        <div class="text-center mb-14">
-            <p class="text-[10px] font-bold uppercase tracking-[.25em] text-red-400 mb-3">How It Works</p>
-            <h2 class="text-3xl sm:text-4xl font-black text-white">Incident to officer — in seconds</h2>
-        </div>
-        <div class="grid sm:grid-cols-3 gap-5">
-            @foreach([
-                ['n'=>'01','t'=>'Incident Detected', 'b'=>'Citizen taps SOS or AI detects an anomaly. Type, GPS, and caller details are logged instantly.','c'=>'#ef4444','path'=>'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'],
-                ['n'=>'02','t'=>'Officers Assigned',  'b'=>'The dispatch engine matches closest verified officers — by type, severity, and live availability.','c'=>'#60a5fa','path'=>'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z'],
-                ['n'=>'03','t'=>'Live Status Updates','b'=>'Every change — dispatched, en route, on scene, resolved — pushed to reporter and feed in real time.','c'=>'#34d399','path'=>'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'],
-            ] as $step)
-            <div class="relative rounded-2xl p-6 overflow-hidden" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);">
-                <div class="absolute top-4 right-5 text-6xl font-black" style="color:{{ $step['c'] }};opacity:.08;">{{ $step['n'] }}</div>
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:{{ $step['c'] }}18;border:1px solid {{ $step['c'] }}35;">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="{{ $step['c'] }}" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $step['path'] }}"/></svg>
-                </div>
-                <h3 class="text-base font-bold text-white mb-2">{{ $step['t'] }}</h3>
-                <p class="text-sm text-white/40 leading-relaxed">{{ $step['b'] }}</p>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</section>
-
-{{-- ══════════════════════════════════════════
-     CTA
-══════════════════════════════════════════ --}}
-<section class="py-16 text-center" style="background:#03080f;border-top:1px solid rgba(255,255,255,.05);">
-    <div class="mx-auto max-w-lg px-5">
-        <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);">
-            <span class="ea-ldot w-1.5 h-1.5 rounded-full bg-red-500"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[.2em] text-red-400">Stay Alert. Stay Safe.</span>
-        </div>
-        <h2 class="text-3xl font-black text-white mb-3">Get alerts on your phone</h2>
-        <p class="text-white/40 text-sm mb-8 leading-relaxed">Enable push notifications for emergencies in your area — the moment an incident is reported, you know.</p>
-        <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a data-route href="#/citizen-app" class="inline-flex items-center justify-center gap-2 rounded-xl text-white px-7 py-3.5 text-sm font-bold transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#dc2626,#b91c1c);">
-                Get Citizen App
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </a>
-            <a data-route href="#/contact" class="inline-flex items-center justify-center gap-2 rounded-xl text-white/60 px-7 py-3.5 text-sm font-semibold border border-white/10 transition hover:border-white/25 hover:text-white">
-                Contact Us
-            </a>
-        </div>
-    </div>
-</section>
-
 <script>
-(function(){
-    function pad(n){ return n<10?'0'+n:n; }
-    function tick(){
-        var d=new Date(), s=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
-        document.querySelectorAll('.ea-tick-time').forEach(function(el){ el.textContent=s; });
-    }
-    tick(); setInterval(tick,1000);
+function eaApp() {
+    return {
+        // ───── Data ─────
+        incidents: {!! json_encode($eaIncidents) !!},
 
-    document.querySelectorAll('.ea-fp').forEach(function(btn){
-        btn.addEventListener('click',function(){
-            var k=btn.getAttribute('data-ea-filter');
-            document.querySelectorAll('.ea-fp').forEach(function(b){ b.classList.remove('ea-on'); });
-            btn.classList.add('ea-on');
-            var cards=document.querySelectorAll('#ea-feed .ea-card'), v=0;
-            cards.forEach(function(c){
-                var show=(k==='all'||c.getAttribute('data-ea-type')===k);
-                c.style.display=show?'':'none';
-                if(show)v++;
+        // ───── UI State ─────
+        search: '',
+        activeFilter: 'all',
+        activeSeverity: 'all',
+        expanded: null,
+        loading: true,
+        liveTime: '--:--:--',
+        liveCount: 0,
+        spawnTimer: null,
+        clockTimer: null,
+        newIdSeed: 9000,
+
+        // ───── Lifecycle ─────
+        init() {
+            // brief skeleton then reveal
+            setTimeout(() => { this.loading = false; }, 600);
+            this.updateClock();
+            this.clockTimer = setInterval(() => this.updateClock(), 1000);
+            this.animateCounter();
+            this.startAutoSpawn();
+            // re-start spawn on route change
+            window.addEventListener('hashchange', () => {
+                if (location.hash === '#/ea') this.startAutoSpawn();
+                else this.stopAutoSpawn();
             });
-            var el=document.getElementById('ea-count');
-            if(el) el.textContent=v;
-        });
-    });
+        },
 
-    /* auto-spawn new incident every 20s on EA view */
-    var pool=[
-        {type:'shooting',label:'SHOOTING', address:'512 Bergen St, Newark, NJ',         officers:5, note:'Shots heard near intersection — units responding'},
-        {type:'robbery', label:'ROBBERY',  address:'88 Jefferson Ave, Elizabeth, NJ',   officers:3, note:'Store hold-up — suspect fled south on foot'},
-        {type:'medical', label:'MEDICAL',  address:'200 Lyons Ave, Newark, NJ',         officers:2, note:'Chest pains, elderly male — EMS en route'},
-        {type:'assault', label:'ASSAULT',  address:'330 Mt Prospect Ave, Newark, NJ',   officers:3, note:'Fight outside venue — 2 injured'},
-        {type:'breakin', label:'BREAK-IN', address:'775 Chancellor Ave, Irvington, NJ', officers:2, note:'Pharmacy alarm triggered — safe forced'},
-    ];
-    var pi=0,eaIv=null;
-    function spawn(){
-        var feed=document.getElementById('ea-feed'); if(!feed) return;
-        var inc=pool[pi%pool.length]; pi++;
-        var id='EA-'+(Math.floor(Math.random()*9000)+1000);
-        var d=new Date(), ts=pad(d.getHours())+':'+pad(d.getMinutes());
-        var html='<div class="ea-card ea-new-flash" data-ea-type="'+inc.type+'" style="animation:none;">'
-            +'<div class="rounded-2xl overflow-hidden" data-ealeft="'+inc.type+'" style="background:rgba(255,255,255,.05);border:1px solid rgba(220,38,38,.35);">'
-            +'<div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">'
-            +'<div class="flex items-center gap-2"><span class="eab-'+inc.type+' text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">'+inc.label+'</span>'
-            +'<span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>'
-            +'<span class="text-[9px] font-black uppercase tracking-wider text-red-400 animate-pulse">NEW</span></div>'
-            +'<span class="font-mono text-[10px] text-white/25">'+id+'</span></div>'
-            +'<div class="px-4 py-3.5 space-y-2.5">'
-            +'<div class="flex items-start gap-2.5"><svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>'
-            +'<span class="text-sm font-semibold text-white">'+inc.address+'</span></div>'
-            +'<p class="text-[12px] text-white/45 pl-6">'+inc.note+'</p>'
-            +'<div class="pl-6 pt-1"><div class="flex items-center justify-between mb-2">'
-            +'<span class="text-[11px] font-black uppercase tracking-[.12em] eas-dispatched">Dispatched</span>'
-            +'<span class="text-[11px] text-white/30 font-mono">Just now · '+ts+'</span></div>'
-            +'<div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);"><div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-dispatched" style="width:18%;"></div></div>'
-            +'</div></div></div></div>';
-        feed.insertAdjacentHTML('afterbegin',html);
-        var el=document.getElementById('ea-count');
-        if(el) el.textContent=parseInt(el.textContent||0)+1;
-    }
-    window.addEventListener('hashchange',function(){
-        if(location.hash==='#/ea'){ eaIv=setInterval(spawn,20000); }
-        else { clearInterval(eaIv); }
-    });
-    if(location.hash==='#/ea') eaIv=setInterval(spawn,20000);
-})();
+        // ───── Computed ─────
+        get filtered() {
+            const q = this.search.trim().toLowerCase();
+            return this.incidents.filter(i => {
+                if (this.activeSeverity !== 'all' && i.severity !== this.activeSeverity) return false;
+                if (this.activeFilter !== 'all' && i.type !== this.activeFilter) return false;
+                if (!q) return true;
+                return (i.title + ' ' + i.address + ' ' + i.note + ' ' + i.id).toLowerCase().includes(q);
+            });
+        },
+        get activeCount()   { return this.incidents.filter(i => i.severity !== 'resolved').length; },
+        get criticalCount() { return this.incidents.filter(i => i.severity === 'critical').length; },
+        get officersDeployed() { return this.incidents.filter(i=>i.severity!=='resolved').reduce((s,i)=>s+i.officers, 0); },
+        get resolvedToday() { return this.incidents.filter(i => i.severity === 'resolved').length; },
+
+        // ───── Helpers ─────
+        sevLabel(s)  { return ({critical:'Critical', high:'High Priority', active:'Active', resolved:'Resolved'})[s] || s; },
+        statusLabel(s){ return ({'dispatched':'Dispatched','en-route':'En Route','on-scene':'On Scene','resolved':'Resolved'})[s] || s; },
+        typeIcon(t) {
+            const icons = {
+                'shots-fired':      '<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"/>',
+                'armed-robbery':    '<path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>',
+                'structure-fire':   '<path stroke-linecap="round" stroke-linejoin="round" d="M17.66 11.2c-.23-.3-.51-.56-.77-.82-.67-.6-1.43-1.03-2.07-1.66C13.33 7.26 13 4.85 13.95 3c-.95.23-1.78.75-2.49 1.32a10.84 10.84 0 00-3.69 8.04 8.69 8.69 0 003.36 6.97A10.16 10.16 0 0017 21c2.74-.8 4.41-3.27 4.41-5.83a8.84 8.84 0 00-3.75-3.97z"/>',
+                'assault':          '<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>',
+                'vehicle-accident': '<path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8m-8 0V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2m4 0H4v4m8 0h4m0 0V5a1 1 0 011-1h2a1 1 0 011 1v2m-4 0h4v4M4 11v6a1 1 0 001 1h2a1 1 0 001-1v-1h8v1a1 1 0 001 1h2a1 1 0 001-1v-6M4 11h16"/>',
+                'carjacking':       '<path stroke-linecap="round" stroke-linejoin="round" d="M3 13l1.5-4.5A2 2 0 016.4 7h11.2a2 2 0 011.9 1.5L21 13M5 17h.01M19 17h.01M3 13v4a1 1 0 001 1h16a1 1 0 001-1v-4M3 13h18"/>',
+                'break-in':         '<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>',
+                'domestic':         '<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10h14V10"/>',
+                'medical':          '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>',
+            };
+            return icons[t] || icons['assault'];
+        },
+        typeImage(t) {
+            const images = {
+                'shots-fired':      'https://images.unsplash.com/photo-1453873531674-2151bcd01707?w=240&h=240&fit=crop&q=80',
+                'armed-robbery':    'https://images.unsplash.com/photo-1582213782179-e0d4d3cce33a?w=240&h=240&fit=crop&q=80',
+                'structure-fire':   'https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?w=240&h=240&fit=crop&q=80',
+                'assault':          'https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?w=240&h=240&fit=crop&q=80',
+                'vehicle-accident': 'https://images.unsplash.com/photo-1597007030739-6d2e7172ee87?w=240&h=240&fit=crop&q=80',
+                'carjacking':       'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=240&h=240&fit=crop&q=80',
+                'break-in':         'https://images.unsplash.com/photo-1582539512170-bb3f9d63f961?w=240&h=240&fit=crop&q=80',
+                'domestic':         'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=240&h=240&fit=crop&q=80',
+                'medical':          'https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=240&h=240&fit=crop&q=80',
+            };
+            return images[t] || images['assault'];
+        },
+        agentAvatars(inc) {
+            const pool = [
+                '/images/officer-1.jpg',
+                '/images/officer-2.jpg',
+                '/images/officer-3.jpg',
+                '/images/officer-4.jpg',
+            ];
+            const seed = inc.id.charCodeAt(0) + inc.id.charCodeAt(inc.id.length-1);
+            const shown = Math.min(inc.officers, 3);
+            const out = [];
+            for (let i = 0; i < shown; i++) out.push(pool[(seed + i) % pool.length]);
+            return out;
+        },
+        extraOfficers(inc) { return Math.max(0, inc.officers - 3); },
+        timeAgo(min) {
+            if (min < 1)  return 'Just now';
+            if (min < 60) return min + 'm ago';
+            const h = Math.floor(min/60); return h + 'h ago';
+        },
+        toggleExpand(id) { this.expanded = (this.expanded === id) ? null : id; },
+
+        // ───── Live clock ─────
+        updateClock() {
+            const d = new Date();
+            const p = n => n.toString().padStart(2, '0');
+            this.liveTime = `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+        },
+
+        // ───── Counter animation ─────
+        animateCounter() {
+            const target = this.activeCount;
+            let current = 0;
+            const step = Math.max(1, Math.ceil(target / 30));
+            const tick = () => {
+                current = Math.min(target, current + step);
+                this.liveCount = current;
+                if (current < target) requestAnimationFrame(tick);
+            };
+            tick();
+        },
+
+        // ───── Auto-spawn ─────
+        startAutoSpawn() {
+            this.stopAutoSpawn();
+            this.spawnTimer = setInterval(() => this.spawnIncident(), 22000);
+        },
+        stopAutoSpawn() {
+            if (this.spawnTimer) { clearInterval(this.spawnTimer); this.spawnTimer = null; }
+        },
+        spawnIncident() {
+            const pool = [
+                {type:'shots-fired',     title:'Shots Fired',         severity:'critical',address:'512 Bergen St, Newark, NJ',           note:'Multiple gunshots heard near intersection. Units responding from three directions.'},
+                {type:'armed-robbery',   title:'Armed Robbery',       severity:'critical',address:'88 Jefferson Ave, Elizabeth, NJ',     note:'Store hold-up in progress. Suspect description: male, 6ft, dark jacket.'},
+                {type:'medical',         title:'Medical Emergency',   severity:'active',  address:'200 Lyons Ave, Newark, NJ',           note:'Chest pains reported. Elderly male, EMS en route with priority response.'},
+                {type:'assault',         title:'Assault',             severity:'high',    address:'330 Mt Prospect Ave, Newark, NJ',     note:'Fight reported outside venue. Multiple parties involved. Backup requested.'},
+                {type:'break-in',        title:'Break-In',            severity:'active',  address:'775 Chancellor Ave, Irvington, NJ',   note:'Pharmacy break-in alarm triggered. Safe forced. K9 deploying to track suspect.'},
+                {type:'vehicle-accident',title:'Vehicle Accident',    severity:'high',    address:'Route 22 East, Hillside, NJ',         note:'Three-car pile-up with injuries. Two lanes blocked. Tow trucks en route.'},
+                {type:'structure-fire',  title:'Structure Fire',      severity:'critical',address:'445 Lyons Ave, Irvington, NJ',        note:'Reports of smoke from upper floors. Fire department dispatched with full response.'},
+            ];
+            const sample = pool[Math.floor(Math.random()*pool.length)];
+            this.newIdSeed++;
+            const newInc = {
+                id: 'EA-' + this.newIdSeed,
+                ...sample,
+                status: 'dispatched',
+                pct: 15,
+                officers: Math.floor(Math.random()*4)+2,
+                units: Math.floor(Math.random()*2)+1,
+                minutes: 0,
+                priority: sample.severity === 'critical' ? 'P1' : (sample.severity === 'high' ? 'P2' : 'P3'),
+                dispatchAt: this.liveTime,
+                responseTime: 'pending',
+                isNew: true,
+            };
+            this.incidents.unshift(newInc);
+            this.animateCounter();
+            setTimeout(() => { newInc.isNew = false; }, 4000);
+        },
+    };
+}
 </script>
 
+{{-- ══════════════════════════════════════════════════════════════
+     MAIN APP ROOT
+══════════════════════════════════════════════════════════════ --}}
+<div x-data="eaApp()" x-init="init()" x-cloak>
+
+    {{-- ─── LIVE TICKER ─── --}}
+    <div class="relative overflow-hidden" style="background:rgba(220,38,38,.10);border-bottom:1px solid rgba(220,38,38,.22);height:34px;">
+        <div class="ea-ticker absolute inset-y-0 flex items-center whitespace-nowrap">
+            <template x-for="n in 2" :key="n">
+                <span class="inline-flex items-center gap-6 px-8 text-[11px] font-semibold uppercase tracking-[.16em] text-red-400">
+                    <span class="inline-flex items-center gap-2"><span class="ea-pulse-dot inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span>Live Feed</span>
+                    <span class="text-red-500/40">·</span>
+                    <span class="text-white/70"><span class="ea-counter" x-text="activeCount"></span> Active Incidents</span>
+                    <span class="text-red-500/40">·</span>
+                    <span class="text-white/70"><span class="ea-counter" x-text="officersDeployed"></span> Officers Deployed</span>
+                    <span class="text-red-500/40">·</span>
+                    <span class="text-white/70"><span class="ea-counter" x-text="criticalCount"></span> Critical · <span x-text="resolvedToday"></span> Resolved Today</span>
+                    <span class="text-red-500/40">·</span>
+                    <span class="text-white/70 font-mono">System Time: <span x-text="liveTime"></span></span>
+                    <span class="text-red-500/40">·</span>
+                    <span class="text-white/70">Auxilio Emergency Response Network</span>
+                    <span class="text-red-500/40">·</span>
+                </span>
+            </template>
+        </div>
+    </div>
+
+    {{-- ─── HERO ─── --}}
+    <section class="ea-hero-bg relative overflow-hidden" style="min-height:540px;">
+        <div class="ea-grid-bg"></div>
+        <div class="ea-glow-1"></div>
+        <div class="ea-glow-2"></div>
+
+        {{-- radar art --}}
+        <div class="ea-radar-wrap absolute right-6 lg:right-16 top-1/2 -translate-y-1/2 pointer-events-none z-0 hidden md:block" style="width:320px;height:320px;opacity:.5;">
+            <svg viewBox="0 0 200 200" class="w-full h-full">
+                <defs>
+                    <radialGradient id="ea-sweep-grad">
+                        <stop offset="0%" stop-color="#ef4444" stop-opacity=".55"/>
+                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+                    </radialGradient>
+                </defs>
+                <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(239,68,68,.35)" stroke-width=".5"/>
+                <circle cx="100" cy="100" r="65" fill="none" stroke="rgba(239,68,68,.25)" stroke-width=".5"/>
+                <circle cx="100" cy="100" r="38" fill="none" stroke="rgba(239,68,68,.2)"  stroke-width=".5"/>
+                <line x1="100" y1="8"  x2="100" y2="192" stroke="rgba(239,68,68,.15)" stroke-width=".5"/>
+                <line x1="8"   y1="100" x2="192" y2="100" stroke="rgba(239,68,68,.15)" stroke-width=".5"/>
+                <g class="ea-radar-sweep">
+                    <path d="M100 100 L100 8 A92 92 0 0 1 178 145 Z" fill="url(#ea-sweep-grad)"/>
+                </g>
+                <circle cx="135" cy="55" r="2.5" fill="#ef4444"><animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/></circle>
+                <circle cx="70"  cy="140" r="2"  fill="#fbbf24"><animate attributeName="opacity" values="1;.3;1" dur="2.3s" repeatCount="indefinite"/></circle>
+                <circle cx="155" cy="115" r="2"  fill="#ef4444"><animate attributeName="opacity" values="1;.2;1" dur="1.5s" repeatCount="indefinite"/></circle>
+                <circle cx="60"  cy="80"  r="1.5" fill="#fbbf24"><animate attributeName="opacity" values="1;.4;1" dur="2.8s" repeatCount="indefinite"/></circle>
+            </svg>
+        </div>
+
+        <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-12 lg:pt-20 lg:pb-16">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-7" style="background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);">
+                        <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                        <span class="text-[10.5px] font-bold uppercase tracking-[.22em] text-red-400">Live Emergency Alerts</span>
+                    </div>
+                    <h1 class="ea-hero-title font-black text-5xl lg:text-[64px] leading-[1.02] tracking-tight text-white mb-5">
+                        Real-time<br>
+                        <span style="background:linear-gradient(90deg,#ef4444 0%,#f97316 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Emergency Response</span>
+                    </h1>
+                    <p class="text-white/55 text-base lg:text-lg max-w-md leading-relaxed mb-9">
+                        Monitor active incidents, dispatch updates, and unit responses across the network — as events unfold.
+                    </p>
+
+                    <div class="flex items-center gap-5">
+                        <div>
+                            <div class="flex items-baseline gap-2.5">
+                                <span class="ea-counter text-6xl lg:text-7xl font-black text-white leading-none" x-text="liveCount">0</span>
+                                <span class="ea-pulse-dot w-2.5 h-2.5 rounded-full bg-red-500 self-center"></span>
+                            </div>
+                            <p class="text-[11px] font-bold uppercase tracking-[.2em] text-red-400 mt-2">Active Incidents Now</p>
+                        </div>
+                        <div class="h-14 w-px bg-white/10"></div>
+                        <div>
+                            <div class="font-mono text-2xl font-bold text-white/90" x-text="liveTime">--:--:--</div>
+                            <p class="text-[10.5px] font-semibold uppercase tracking-[.18em] text-white/40 mt-1.5">System Time · EST</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ═══════════════════════════════════════════════════
+         LIGHT MODE SECTION — stats, cards, CTA
+    ═══════════════════════════════════════════════════ --}}
+    <div class="ea-light pt-8 pb-2">
+
+    {{-- ─── STATS ─── --}}
+    <section class="relative -mt-12 z-20">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+                <template x-for="(stat, idx) in [
+                    {label:'Active Incidents',  value: activeCount,      sub:'Live',         color:'#ef4444', icon:'M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z'},
+                    {label:'Officers Deployed', value: officersDeployed, sub:'On duty',      color:'#3b82f6', icon:'M17 20h5v-2a3 3 0 00-5.36-1.86M17 20H7m10 0v-2c0-.66-.13-1.28-.36-1.86M7 20H2v-2a3 3 0 015.36-1.86M7 20v-2c0-.66.13-1.28.36-1.86m0 0a5 5 0 019.29 0M15 7a3 3 0 11-6 0 3 3 0 016 0z'},
+                    {label:'Critical Priority', value: criticalCount,    sub:'P1 events',    color:'#f97316', icon:'M13 10V3L4 14h7v7l9-11h-7z'},
+                    {label:'Resolved Today',    value: resolvedToday,    sub:'Closed cases', color:'#10b981', icon:'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'}
+                ])" :key="idx">
+                    <div class="ea-card-anim ea-stat-card rounded-2xl p-4 lg:p-5"
+                         :style="`animation-delay:${idx * 0.1}s; border-top: 3px solid ${stat.color};`">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" :style="`background:${stat.color}14; border:1px solid ${stat.color}33;`">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" :stroke="stat.color" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" :d="stat.icon"/></svg>
+                            </div>
+                            <span class="ea-stat-sub text-[10px] font-bold uppercase tracking-wider" x-text="stat.sub"></span>
+                        </div>
+                        <div class="ea-counter text-3xl lg:text-4xl font-black leading-none mb-1" :style="`color:${stat.color}`" x-text="stat.value">0</div>
+                        <div class="ea-stat-label text-xs font-semibold mt-2" x-text="stat.label"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    {{-- ─── TOOLBAR (Search + Severity tabs) ─── --}}
+    <section class="mx-auto max-w-7xl px-5 sm:px-8 mt-10">
+        <div class="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
+
+            {{-- Search --}}
+            <div class="relative w-full lg:max-w-md">
+                <svg class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" placeholder="Search by type, address, ID, or note..." class="ea-input w-full rounded-xl pl-11 pr-4 py-3 text-sm" x-model="search" />
+                <button x-show="search" @click="search=''" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-900" aria-label="Clear search">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            {{-- Severity tabs --}}
+            <div class="flex items-center gap-1.5 overflow-x-auto" style="scrollbar-width:none;">
+                <template x-for="sev in [
+                    {k:'all',     l:'All',      c:'#ffffff'},
+                    {k:'critical',l:'Critical', c:'#ef4444'},
+                    {k:'high',    l:'High',     c:'#f97316'},
+                    {k:'active',  l:'Active',   c:'#3b82f6'},
+                    {k:'resolved',l:'Resolved', c:'#10b981'}
+                ]" :key="sev.k">
+                    <button @click="activeSeverity = sev.k" class="ea-pill shrink-0 px-3.5 py-1.5 rounded-full text-[12px] font-semibold inline-flex items-center gap-1.5"
+                            :class="activeSeverity === sev.k ? 'is-on' : ''"
+                            :style="activeSeverity === sev.k ? `background:${sev.c}1f;border-color:${sev.c}55;color:${sev.c}` : ''">
+                        <span x-show="sev.k !== 'all'" class="w-1.5 h-1.5 rounded-full" :style="`background:${sev.c}`"></span>
+                        <span x-text="sev.l"></span>
+                    </button>
+                </template>
+            </div>
+        </div>
+
+        {{-- Type filter row --}}
+        <div class="mt-3 flex items-center gap-1.5 overflow-x-auto" style="scrollbar-width:none;">
+            <span class="ea-toolbar-label text-[10px] font-bold uppercase tracking-[.18em] shrink-0 mr-1">Type</span>
+            <template x-for="t in [
+                {k:'all',              l:'All Types'},
+                {k:'shots-fired',      l:'Shots Fired'},
+                {k:'armed-robbery',    l:'Armed Robbery'},
+                {k:'assault',          l:'Assault'},
+                {k:'break-in',         l:'Break-In'},
+                {k:'domestic',         l:'Domestic'},
+                {k:'structure-fire',   l:'Structure Fire'},
+                {k:'medical',          l:'Medical'},
+                {k:'vehicle-accident', l:'Vehicle Accident'},
+                {k:'carjacking',       l:'Carjacking'}
+            ]" :key="t.k">
+                <button @click="activeFilter = t.k" class="ea-pill shrink-0 px-3 py-1 rounded-full text-[11px] font-semibold"
+                        :class="activeFilter === t.k ? 'is-on' : ''" x-text="t.l"></button>
+            </template>
+        </div>
+    </section>
+
+    {{-- ─── FEED HEADER ─── --}}
+    <section class="mx-auto max-w-7xl px-5 sm:px-8 mt-10 mb-4">
+        <div class="flex items-center justify-between">
+            <h2 class="ea-feed-label text-sm font-bold uppercase tracking-[.16em] flex items-center gap-2.5">
+                <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                Incident Feed
+            </h2>
+            <div class="ea-text-faint text-xs">
+                Showing <span class="font-bold text-slate-900" x-text="filtered.length"></span> of <span x-text="incidents.length"></span>
+            </div>
+        </div>
+    </section>
+
+    {{-- ─── SKELETONS (briefly on load) ─── --}}
+    <section x-show="loading" class="mx-auto max-w-7xl px-5 sm:px-8 mb-12">
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <template x-for="i in 6" :key="i">
+                <div class="rounded-2xl p-5 border border-white/5 bg-white/[.02]">
+                    <div class="ea-skel h-3 w-20 rounded mb-4"></div>
+                    <div class="ea-skel h-5 w-3/4 rounded mb-2"></div>
+                    <div class="ea-skel h-3 w-1/2 rounded mb-4"></div>
+                    <div class="ea-skel h-12 w-full rounded mb-3"></div>
+                    <div class="ea-skel h-8 w-full rounded"></div>
+                </div>
+            </template>
+        </div>
+    </section>
+
+    {{-- ─── ALERT CARDS GRID ─── --}}
+    <section x-show="!loading" class="mx-auto max-w-7xl px-5 sm:px-8 mb-16">
+
+        {{-- Empty state --}}
+        <div x-show="filtered.length === 0" class="ea-empty rounded-2xl py-16 text-center">
+            <div class="ea-empty-icon inline-flex w-14 h-14 rounded-2xl border items-center justify-center mb-4">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+            <h3 class="ea-empty-title font-bold text-base mb-1.5">No matching incidents</h3>
+            <p class="ea-empty-text text-sm max-w-sm mx-auto">Try clearing the search or selecting a different filter to see more results.</p>
+            <button @click="search=''; activeFilter='all'; activeSeverity='all'" class="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-red-600 hover:text-red-700 transition">
+                Reset filters
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+
+        {{-- Cards --}}
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <template x-for="(inc, idx) in filtered" :key="inc.id">
+                <div class="ea-card ea-card-anim rounded-2xl relative overflow-hidden"
+                     :class="[`ea-card-${inc.severity}`, inc.severity === 'critical' ? 'ea-glow-critical' : '']"
+                     :style="`animation-delay:${Math.min(idx * 0.05, 0.5)}s;`"
+                     @mousemove="$el.style.setProperty('--ea-mx', ($event.offsetX/$el.offsetWidth*100)+'%'); $el.style.setProperty('--ea-my', ($event.offsetY/$el.offsetHeight*100)+'%');">
+
+                    {{-- Critical scanline (animated thin line crossing top) --}}
+                    <div class="ea-scanline" x-show="inc.severity === 'critical'"></div>
+
+                    {{-- Severity gradient bar at top --}}
+                    <div class="absolute top-0 left-0 right-0 h-[3px]" :class="`ea-bar-${inc.severity}`"></div>
+
+                    {{-- NEW pill --}}
+                    <div x-show="inc.isNew" class="absolute top-3 right-3 z-10 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-black tracking-widest uppercase animate-pulse" style="background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.4);">
+                        <span class="w-1 h-1 rounded-full bg-red-400 animate-pulse"></span>
+                        New
+                    </div>
+
+                    <div class="p-5">
+                        {{-- Top row: icon + title + status --}}
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="shrink-0 w-12 h-12 rounded-xl overflow-hidden relative"
+                                 style="border: 1px solid rgba(255,255,255,.1); box-shadow: 0 4px 12px -2px rgba(0,0,0,.4);">
+                                {{-- Stock photo (clean, no tint) --}}
+                                <img :src="typeImage(inc.type)" alt="" loading="lazy"
+                                     class="absolute inset-0 w-full h-full object-cover"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                                {{-- SVG fallback if image fails --}}
+                                <div class="absolute inset-0 hidden items-center justify-center" style="background:#1a1a2e;">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="#ef4444" x-html="typeIcon(inc.type)"></svg>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <h3 class="ea-card-title font-bold text-[17px] truncate" x-text="inc.title"></h3>
+                                    <span class="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0 border" x-text="inc.priority"
+                                          :class="`ea-sev-${inc.severity}`"></span>
+                                </div>
+                                <div class="ea-card-meta flex items-center gap-1.5 text-[11px] font-mono">
+                                    <span x-text="inc.id"></span>
+                                    <span class="text-white/15">·</span>
+                                    <span x-text="inc.dispatchAt"></span>
+                                    <span class="text-white/15">·</span>
+                                    <span class="ea-ai-chip">
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.5 5 5 1.5-5 1.5L12 15l-1.5-5-5-1.5 5-1.5L12 2z"/></svg>
+                                        AI <span :class="'ml-0.5'" x-text="(85 + (inc.id.charCodeAt(inc.id.length-1) % 14)) + '%'"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="shrink-0 flex flex-col items-end gap-1.5">
+                                <span class="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider px-2 py-1 rounded-md border"
+                                      :class="`ea-sev-${inc.severity}`">
+                                    <span x-show="inc.severity !== 'resolved'" class="relative flex h-1.5 w-1.5">
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" :style="`background:${inc.severity==='critical'?'#ef4444':inc.severity==='high'?'#f97316':'#3b82f6'};`"></span>
+                                        <span class="relative inline-flex rounded-full h-1.5 w-1.5" :style="`background:${inc.severity==='critical'?'#ef4444':inc.severity==='high'?'#f97316':'#3b82f6'};`"></span>
+                                    </span>
+                                    <span x-text="statusLabel(inc.status)"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        {{-- Address --}}
+                        <div class="flex items-start gap-2 mb-3 pl-1">
+                            <svg class="ea-card-addr-icon w-3.5 h-3.5 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.66 16.66L13.41 20.9a2 2 0 01-2.83 0l-4.24-4.24a8 8 0 1111.32 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            <span class="ea-card-addr text-[13.5px] font-medium leading-snug" x-text="inc.address"></span>
+                        </div>
+
+                        {{-- Dispatch note --}}
+                        <div class="ea-card-note-box rounded-xl px-3.5 py-3 mb-4">
+                            <p class="ea-card-note text-[12.5px] leading-relaxed" x-text="inc.note"></p>
+                        </div>
+
+                        {{-- Agents row — officer avatars --}}
+                        <div class="mb-4 flex items-center justify-between">
+                            <div>
+                                <div class="text-[10px] font-bold uppercase tracking-[.16em] text-red-400/85 mb-2">Officers Assisting</div>
+                                <div class="flex items-center -space-x-2">
+                                    <template x-for="(av, i) in agentAvatars(inc)" :key="i">
+                                        <img :src="av" alt="" class="w-8 h-8 rounded-full object-cover" style="box-shadow: 0 0 0 2px #0a1020, 0 2px 6px rgba(0,0,0,.5);" />
+                                    </template>
+                                    <span x-show="extraOfficers(inc) > 0"
+                                          class="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black"
+                                          style="background: rgba(239,68,68,.15); color: #fca5a5; box-shadow: 0 0 0 2px #0a1020;"
+                                          x-text="'+' + extraOfficers(inc)"></span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-[10px] font-bold uppercase tracking-[.16em] text-white/40 mb-2">Total</div>
+                                <div class="text-2xl font-black leading-none" style="color:#ef4444;" x-text="inc.officers"></div>
+                            </div>
+                        </div>
+
+                        {{-- Progress bar (solid red) --}}
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider mb-2">
+                                <span class="text-red-400 font-mono"><span x-text="inc.pct"></span>% complete</span>
+                                <span class="text-white/35 font-mono" x-text="timeAgo(inc.minutes)"></span>
+                            </div>
+                            <div class="ea-progress-track relative h-1 rounded-full overflow-hidden">
+                                <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700"
+                                     :style="`width:${inc.pct}%; background: linear-gradient(90deg, #dc2626, #ef4444 60%, #f87171); box-shadow: 0 0 12px rgba(239,68,68,.6);`"></div>
+                            </div>
+                            <div class="flex justify-between mt-1.5 text-[9px] font-mono uppercase tracking-wider">
+                                <span :class="inc.pct >= 5  ? 'text-red-400/85' : 'text-white/20'">Report</span>
+                                <span :class="inc.pct >= 25 ? 'text-red-400/85' : 'text-white/20'">Dispatch</span>
+                                <span :class="inc.pct >= 50 ? 'text-red-400/85' : 'text-white/20'">Route</span>
+                                <span :class="inc.pct >= 75 ? 'text-red-400/85' : 'text-white/20'">Scene</span>
+                                <span :class="inc.pct >= 100? 'text-red-400/85' : 'text-white/20'">Closed</span>
+                            </div>
+                        </div>
+
+                        {{-- Stats row — 3 tiles (Units · ETA · Time) --}}
+                        <div class="grid grid-cols-3 gap-2 mb-4">
+                            <div class="ea-card-stat rounded-lg px-2.5 py-2.5">
+                                <div class="ea-card-stat-label flex items-center gap-1 text-[9px] mb-1 font-bold">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13l1.5-4.5A2 2 0 016.4 7h11.2a2 2 0 011.9 1.5L21 13M5 17h.01M19 17h.01M3 13v4a1 1 0 001 1h16a1 1 0 001-1v-4M3 13h18"/></svg>
+                                    UNITS
+                                </div>
+                                <div class="ea-card-stat-val text-base font-bold leading-none" x-text="inc.units"></div>
+                            </div>
+                            <div class="ea-card-stat rounded-lg px-2.5 py-2.5">
+                                <div class="ea-card-stat-label flex items-center gap-1 text-[9px] mb-1 font-bold">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7"/></svg>
+                                    ETA
+                                </div>
+                                <div class="ea-card-stat-val text-base font-bold leading-none font-mono" x-text="inc.status === 'resolved' ? '—' : (inc.status === 'on-scene' ? 'On site' : (inc.responseTime !== 'pending' ? inc.responseTime : '~' + Math.max(1, 5 - Math.floor(inc.pct/25)) + 'm'))"></div>
+                            </div>
+                            <div class="ea-card-stat rounded-lg px-2.5 py-2.5">
+                                <div class="ea-card-stat-label flex items-center gap-1 text-[9px] mb-1 font-bold">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    TIME
+                                </div>
+                                <div class="ea-card-stat-val text-base font-bold leading-none" x-text="timeAgo(inc.minutes)"></div>
+                            </div>
+                        </div>
+
+                        {{-- View Details button --}}
+                        <button @click="toggleExpand(inc.id)"
+                                class="ea-details-btn w-full flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-semibold transition">
+                            <span>View Details</span>
+                            <svg class="w-3.5 h-3.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" :style="expanded === inc.id ? 'transform: rotate(180deg);' : ''">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+
+                        {{-- Expanded details --}}
+                        <div class="ea-details" :class="expanded === inc.id ? 'is-open' : ''">
+                            <div class="ea-details-divider pt-4 mt-1 border-t space-y-2.5 text-[12px]">
+                                <div class="flex justify-between"><span class="ea-details-row-label">Dispatched at</span><span class="ea-details-row-val font-mono" x-text="inc.dispatchAt"></span></div>
+                                <div class="flex justify-between"><span class="ea-details-row-label">Response time</span><span class="ea-details-row-val font-mono" x-text="inc.responseTime"></span></div>
+                                <div class="flex justify-between"><span class="ea-details-row-label">Severity</span><span class="font-semibold" :class="`ea-sev-${inc.severity}`" x-text="sevLabel(inc.severity)" style="border:none;background:transparent;padding:0;"></span></div>
+                                <div class="flex justify-between"><span class="ea-details-row-label">Status</span><span class="ea-details-row-val" x-text="statusLabel(inc.status)"></span></div>
+                                <div class="flex justify-between"><span class="ea-details-row-label">Incident ID</span><span class="ea-details-row-val font-mono" x-text="inc.id"></span></div>
+                                <div class="ea-details-divider pt-2 mt-1 border-t">
+                                    <button class="w-full rounded-lg px-3 py-2 text-[11px] font-bold uppercase tracking-wider transition"
+                                            :style="`color:${inc.severity==='critical'?'#b91c1c':inc.severity==='high'?'#c2410c':inc.severity==='active'?'#1d4ed8':'#047857'}; background:rgba(${inc.severity==='critical'?'239,68,68':inc.severity==='high'?'249,115,22':inc.severity==='active'?'59,130,246':'16,185,129'},.1); border:1px solid rgba(${inc.severity==='critical'?'239,68,68':inc.severity==='high'?'249,115,22':inc.severity==='active'?'59,130,246':'16,185,129'},.3);`">
+                                        Open full incident report →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </template>
+        </div>
+
+    </section>
+
+    </div>{{-- /.ea-light --}}
+
+</div>{{-- /Alpine root --}}
+
 </div>{{-- /data-view=ea --}}
+
 
 
 </main>
@@ -6392,35 +6900,6 @@ $sm = [
 ========================================================================--}}
 <footer class="bg-navy-950 text-navy-200">
     <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-20 pb-10">
-
-        {{-- How It Works — highlighted strip --}}
-        <div class="mb-16 rounded-2xl border border-sky-500/20 bg-white/[.04] px-6 py-8 backdrop-blur-sm" style="box-shadow:0 0 40px -10px rgba(14,165,233,.18), inset 0 1px 0 rgba(255,255,255,.06);">
-            <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-6">
-                <p class="text-xs font-semibold uppercase tracking-[.22em] text-sky-400">How it works</p>
-                <span class="hidden sm:block h-px flex-1 bg-white/10 mx-4"></span>
-                <p class="text-xs text-navy-400">Safety in three taps</p>
-            </div>
-            <div class="grid sm:grid-cols-3 gap-4">
-                @php
-                    $footerSteps = [
-                        ['n'=>'01','t'=>'Open the app','d'=>'Auxilio loads your geofence and live feed the moment you launch.','color'=>'#0ea5e9','glyph'=>'M5 12l5 5L20 7'],
-                        ['n'=>'02','t'=>'One tap to alert','d'=>'A single press sends your location, identity and situation to verified help.','color'=>'#818cf8','glyph'=>'M13 2L3 14h7l-1 8 10-12h-7l1-8z'],
-                        ['n'=>'03','t'=>'Track help arrive','d'=>'Watch the responder\'s live ETA — your family circle sees the same status.','color'=>'#22c55e','glyph'=>'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z'],
-                    ];
-                @endphp
-                @foreach ($footerSteps as $s)
-                    <div class="flex items-start gap-3 group">
-                        <span class="shrink-0 grid place-items-center w-9 h-9 rounded-lg text-white" style="background:linear-gradient(135deg,{{ $s['color'] }}33,{{ $s['color'] }}18); border:1px solid {{ $s['color'] }}40;">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="{{ $s['color'] }}" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $s['glyph'] }}"/></svg>
-                        </span>
-                        <div>
-                            <p class="text-xs font-bold text-white/80 uppercase tracking-wide">{{ $s['n'] }} · {{ $s['t'] }}</p>
-                            <p class="mt-0.5 text-xs text-navy-400 leading-relaxed">{{ $s['d'] }}</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
 
         <div class="grid lg:grid-cols-12 gap-12">
             <div class="lg:col-span-5">
@@ -6729,7 +7208,9 @@ $sm = [
         if (view === 'crime-grade' && typeof cgInit === 'function') cgInit();
         /* Hide footer & how-it-works strip on crime-grade, show on all other views */
         var globalFooter = document.querySelector('footer');
-        if (globalFooter) globalFooter.style.display = (view === 'crime-grade' || view === 'ea') ? 'none' : '';
+        if (globalFooter) globalFooter.style.display = (view === 'crime-grade') ? 'none' : '';
+        /* Match body background to the EA dark theme so no white gap shows between sections */
+        document.body.style.background = (view === 'ea') ? '#04060f' : '';
         // Re-trigger reveal animations on the now-visible view
         document.querySelectorAll('[data-view="'+view+'"] .reveal').forEach(function(el){
             el.classList.remove('is-visible');
