@@ -71,7 +71,7 @@
             <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
             <li><a data-route href="#/crime-grade"      class="nav-link hover:text-white transition">Crime Grade</a></li>
             <li><a data-route href="#/er"               class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
-                <span class="relative flex h-2 w-2"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-2 w-2"></span></span>
+                <span class="relative flex h-1.5 w-1.5"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-1.5 w-1.5"></span></span>
                 Live ER
             </a></li>
             <li><a data-route href="#/agent-app"        class="nav-link hover:text-white transition">Agent App</a></li>
@@ -97,7 +97,7 @@
             <li><a data-route href="#/crime-map">Crime Map</a></li>
             <li><a data-route href="#/crime-grade">Crime Grade</a></li>
             <li><a data-route href="#/er" class="inline-flex items-center gap-1.5 text-red-600 font-semibold">
-                <span class="relative flex h-2 w-2"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-2 w-2"></span></span>
+                <span class="relative flex h-1.5 w-1.5"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-1.5 w-1.5"></span></span>
                 Live ER
             </a></li>
             <li><a data-route href="#/agent-app">Agent App</a></li>
@@ -6344,6 +6344,12 @@ cgRenderGradeDist();
     z-index: 2;
     pointer-events: none;
 }
+
+/* ═══ Square + flat — no rounded corners, no shadows on the ER page ═══ */
+[data-view="er"] *,
+[data-view="er"] *::before,
+[data-view="er"] *::after { border-radius: 0 !important; }
+[data-view="er"] *:not(.ea-pulse-dot) { box-shadow: none !important; }
 </style>
 
 {{-- ══════════════════════════════════════════════════════════════
@@ -6603,7 +6609,7 @@ function eaApp() {
         </div>
 
         <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-12 lg:pt-20 lg:pb-16">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
                 <div>
                     <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-7" style="background:rgba(255,255,255,.6);border:1px solid rgba(120,53,15,.22);">
                         <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-600"></span>
@@ -6611,7 +6617,7 @@ function eaApp() {
                     </div>
                     <h1 class="ea-hero-title font-black text-5xl lg:text-[64px] leading-[1.02] tracking-tight mb-5" style="color:#0a1a4a">
                         Real-time<br>
-                        <span style="background:linear-gradient(90deg,#dc2626 0%,#991b1b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Emergency Response</span>
+                        <span class="lg:whitespace-nowrap" style="background:linear-gradient(90deg,#dc2626 0%,#991b1b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Emergency Response</span>
                     </h1>
                     <p class="text-base lg:text-lg max-w-md leading-relaxed mb-9" style="color:rgba(10,26,74,.72)">
                         Monitor active incidents, dispatch updates, and unit responses across the network — as events unfold.
@@ -6735,7 +6741,7 @@ function eaApp() {
 
     {{-- ─── SKELETONS (briefly on load) ─── --}}
     <section x-show="loading" class="mx-auto max-w-7xl px-5 sm:px-8 mb-12">
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="grid md:grid-cols-2 gap-4">
             <template x-for="i in 6" :key="i">
                 <div class="rounded-2xl p-5 border border-slate-200 bg-white">
                     <div class="ea-skel h-3 w-20 rounded mb-4"></div>
@@ -6765,7 +6771,7 @@ function eaApp() {
         </div>
 
         {{-- Cards --}}
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="grid md:grid-cols-2 gap-4">
             <template x-for="(inc, idx) in filtered" :key="inc.id">
                 <div class="ea-card ea-card-anim rounded-2xl relative overflow-hidden"
                      :class="[`ea-card-${inc.severity}`, inc.severity === 'critical' ? 'ea-glow-critical' : '']"
@@ -6784,9 +6790,9 @@ function eaApp() {
                         New
                     </div>
 
-                    <div class="p-5">
+                    <div class="p-4">
                         {{-- Top row: icon + title + status --}}
-                        <div class="flex items-start gap-3 mb-4">
+                        <div class="flex items-start gap-3 mb-3">
                             {{-- Crime-map tag badge (colour + tag per incident type) --}}
                             <div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
                                  :style="`background:${typeTag(inc.type).color}; box-shadow: 0 4px 12px -2px ${typeTag(inc.type).color}73, inset 0 1px 0 rgba(255,255,255,.25);`">
@@ -6830,32 +6836,18 @@ function eaApp() {
                         </div>
 
                         {{-- Dispatch note --}}
-                        <div class="ea-card-note-box rounded-xl px-3.5 py-3 mb-4">
+                        <div class="ea-card-note-box rounded-xl px-3.5 py-2.5 mb-3">
                             <p class="ea-card-note text-[12.5px] leading-relaxed" x-text="inc.note"></p>
                         </div>
 
-                        {{-- Agents row — officer avatars --}}
-                        <div class="mb-4 flex items-center justify-between">
-                            <div>
-                                <div class="text-[10px] font-bold uppercase tracking-[.16em] text-red-600 mb-2">Officers Assisting</div>
-                                <div class="flex items-center -space-x-2">
-                                    <template x-for="(av, i) in agentAvatars(inc)" :key="i">
-                                        <img :src="av" alt="" class="w-8 h-8 rounded-full object-cover" style="box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(15,23,42,.18);" />
-                                    </template>
-                                    <span x-show="extraOfficers(inc) > 0"
-                                          class="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black"
-                                          style="background: rgba(239,68,68,.12); color: #dc2626; box-shadow: 0 0 0 2px #fff;"
-                                          x-text="'+' + extraOfficers(inc)"></span>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-[10px] font-bold uppercase tracking-[.16em] text-slate-400 mb-2">Total</div>
-                                <div class="text-2xl font-black leading-none" style="color:#ef4444;" x-text="inc.officers"></div>
-                            </div>
+                        {{-- Officers count --}}
+                        <div class="mb-3 flex items-center justify-between">
+                            <div class="text-[10px] font-bold uppercase tracking-[.16em] text-red-600">Officers Assisting</div>
+                            <div class="text-xl font-black leading-none" style="color:#ef4444;" x-text="inc.officers"></div>
                         </div>
 
                         {{-- Progress bar (solid red) --}}
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider mb-2">
                                 <span class="text-red-600 font-mono"><span x-text="inc.pct"></span>% complete</span>
                                 <span class="text-slate-400 font-mono" x-text="timeAgo(inc.minutes)"></span>
@@ -6874,7 +6866,7 @@ function eaApp() {
                         </div>
 
                         {{-- Stats row — 3 tiles (Units · ETA · Time) --}}
-                        <div class="grid grid-cols-3 gap-2 mb-4">
+                        <div class="grid grid-cols-3 gap-2 mb-3">
                             <div class="ea-card-stat rounded-lg px-2.5 py-2.5">
                                 <div class="ea-card-stat-label flex items-center gap-1 text-[9px] mb-1 font-bold">
                                     <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13l1.5-4.5A2 2 0 016.4 7h11.2a2 2 0 011.9 1.5L21 13M5 17h.01M19 17h.01M3 13v4a1 1 0 001 1h16a1 1 0 001-1v-4M3 13h18"/></svg>
