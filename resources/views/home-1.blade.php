@@ -79,7 +79,7 @@
             <li><a data-route href="#/contact"          class="nav-link hover:text-white transition">Contact us</a></li>
             <li class="flex items-center gap-2 pl-3 ml-1 border-l border-white/20">
                 <a href="https://auxilionetwork.com/siteadmin/login" target="_blank" rel="noopener" class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-bold text-white rounded transition hover:opacity-90" style="background:#FB0606;">Sign In</a>
-                <a data-route href="#/get-started" class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-bold text-[#0a1a4a] bg-white rounded transition hover:bg-white/90">Get Started</a>
+                <a href="https://auxilionetwork.com/siteadmin/register" target="_blank" rel="noopener" class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-bold text-[#0a1a4a] bg-white rounded transition hover:bg-white/90">Get Started</a>
             </li>
         </ul>
 
@@ -109,7 +109,7 @@
             <li><a data-route href="#/contact">Contact us</a></li>
             <li class="pt-2 flex flex-col gap-2">
                 <a href="https://auxilionetwork.com/siteadmin/login" target="_blank" rel="noopener" class="flex items-center justify-center py-2.5 text-sm font-semibold text-white rounded" style="background:#FB0606;">Sign In</a>
-                <a data-route href="#/get-started" class="flex items-center justify-center py-2.5 text-sm font-semibold text-navy-900 bg-white rounded border border-ink-200">Get Started</a>
+                <a href="https://auxilionetwork.com/siteadmin/register" target="_blank" rel="noopener" class="flex items-center justify-center py-2.5 text-sm font-semibold text-navy-900 bg-white rounded border border-ink-200">Get Started</a>
             </li>
         </ul>
     </div>
