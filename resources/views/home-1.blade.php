@@ -57,6 +57,10 @@
             </a></li>
             <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
             <li><a data-route href="#/crime-grade"      class="nav-link hover:text-white transition">Crime Grade</a></li>
+            <li><a data-route href="#/ea"               class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
+                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span></span>
+                Live EA
+            </a></li>
             <li><a data-route href="#/agent-app"        class="nav-link hover:text-white transition">Agent App</a></li>
             <li><a data-route href="#/citizen-app"      class="nav-link hover:text-white transition">Citizen App</a></li>
             <li><a data-route href="#/contact"          class="nav-link hover:text-white transition">Contact us</a></li>
@@ -79,6 +83,10 @@
             </a></li>
             <li><a data-route href="#/crime-map">Crime Map</a></li>
             <li><a data-route href="#/crime-grade">Crime Grade</a></li>
+            <li><a data-route href="#/ea" class="inline-flex items-center gap-1.5 text-red-600 font-semibold">
+                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span></span>
+                Live EA
+            </a></li>
             <li><a data-route href="#/agent-app">Agent App</a></li>
             <li><a data-route href="#/citizen-app">Citizen App</a></li>
             <li><a data-route href="#/contact">Contact us</a></li>
@@ -949,57 +957,59 @@
 .cg-stat:nth-child(1){animation-delay:.3s}.cg-stat:nth-child(2){animation-delay:.36s}
 .cg-stat:nth-child(3){animation-delay:.42s}.cg-stat:nth-child(4){animation-delay:.48s}
 .cg-stat:nth-child(5){animation-delay:.54s}.cg-stat:nth-child(6){animation-delay:.6s}
-.cg-legend-item{transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}
-.cg-legend-item:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 16px 40px -10px rgba(0,0,0,.18)}
+.cg-legend-item{transition:all .22s cubic-bezier(.16,1,.3,1)}
+.cg-legend-item:hover:not(.cg-legend-active){transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.cg-legend-active{transform:translateY(-2px)!important}
 .cg-grade-b{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;font-size:15px;font-weight:800;letter-spacing:-.03em;transition:transform .2s,box-shadow .2s}
 .cg-grade-b:hover{transform:scale(1.15)}
 .cg-decile-b{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:11px;font-weight:700}
-.cg-rbar{height:4px;border-radius:3px;background:rgba(0,0,0,.06);min-width:56px;margin-top:5px;overflow:hidden}
+.cg-rbar{height:4px;border-radius:3px;background:rgba(0,0,0,.08);min-width:56px;margin-top:5px;overflow:hidden}
 .cg-rbar-f{height:100%;border-radius:3px;transition:width .7s cubic-bezier(.4,0,.2,1)}
+@keyframes cgMapSpin{to{transform:rotate(360deg)}}
 .cg-tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .cg-tbl{width:100%;border-collapse:collapse;font-size:13px}
-.cg-tbl thead th{font-size:10.5px;font-weight:700;color:#64748b;text-align:left;padding:11px 13px;border-bottom:1px solid rgba(255,255,255,.07);cursor:pointer;white-space:nowrap;user-select:none;background:#131929;letter-spacing:.05em;text-transform:uppercase;transition:color .15s}
+.cg-tbl thead th{font-size:10.5px;font-weight:700;color:#64748b;text-align:left;padding:11px 13px;border-bottom:1px solid rgba(0,0,0,.07);cursor:pointer;white-space:nowrap;user-select:none;background:#f8fafc;letter-spacing:.05em;text-transform:uppercase;transition:color .15s}
 .cg-tbl thead th:hover{color:#E24B4A}
 .cg-tbl thead th.cg-sorted{color:#E24B4A}
-.cg-tbl tbody tr{border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s}
-.cg-tbl tbody tr:hover{background:rgba(226,75,74,.06)}
-.cg-tbl tbody tr.cg-nat{background:rgba(255,255,255,.03)}
+.cg-tbl tbody tr{border-bottom:1px solid rgba(0,0,0,.05);transition:background .15s}
+.cg-tbl tbody tr:hover{background:rgba(226,75,74,.05)}
+.cg-tbl tbody tr.cg-nat{background:rgba(0,0,0,.015)}
 .cg-tbl td{padding:11px 13px;vertical-align:middle}
-.cg-city{font-weight:700;color:#f1f5f9;font-size:13.5px;white-space:nowrap}
-.cg-stag{font-size:10px;color:#475569;margin-left:5px;font-weight:500}
-.cg-ptag{font-size:10px;color:#475569;display:block;margin-top:2px}
+.cg-city{font-weight:700;color:#0f172a;font-size:13.5px;white-space:nowrap}
+.cg-stag{font-size:10px;color:#94a3b8;margin-left:5px;font-weight:500}
+.cg-ptag{font-size:10px;color:#94a3b8;display:block;margin-top:2px}
 .cg-row-in{animation:cgFadeUp .4s cubic-bezier(.16,1,.3,1) both}
-.cg-analyze-btn{padding:4px 11px;font-size:11px;border-radius:4px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#94a3b8;cursor:pointer;white-space:nowrap;transition:all .15s;font-weight:500}
-.cg-analyze-btn:hover{border-color:#E24B4A;color:#E24B4A;background:rgba(226,75,74,.1)}
+.cg-analyze-btn{padding:4px 11px;font-size:11px;border-radius:4px;border:1px solid rgba(0,0,0,.1);background:rgba(0,0,0,.04);color:#64748b;cursor:pointer;white-space:nowrap;transition:all .15s;font-weight:500}
+.cg-analyze-btn:hover{border-color:#E24B4A;color:#E24B4A;background:rgba(226,75,74,.08)}
 .cg-search-wrap{position:relative}
-.cg-search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:#475569}
-.cg-search{padding:10px 14px 10px 38px;border:1px solid rgba(255,255,255,.1);border-radius:4px;font-size:13.5px;background:rgba(255,255,255,.05);color:#f1f5f9;width:240px;transition:border-color .2s,box-shadow .2s}
-.cg-search::placeholder{color:#475569}
-.cg-search:focus{outline:none;border-color:#E24B4A;box-shadow:0 0 0 3px rgba(226,75,74,.15)}
-.cg-sel{padding:9px 30px 9px 13px;border:1px solid rgba(255,255,255,.1);border-radius:4px;font-size:12.5px;background:rgba(255,255,255,.05);color:#94a3b8;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2364748b'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:border-color .2s,box-shadow .2s}
-.cg-sel option{background:#131929;color:#f1f5f9}
-.cg-sel:focus{outline:none;border-color:#E24B4A;box-shadow:0 0 0 3px rgba(226,75,74,.15)}
-.cg-reset-btn{padding:9px 16px;border:1px solid rgba(226,75,74,.35);border-radius:4px;font-size:12.5px;background:rgba(226,75,74,.1);color:#ff8280;cursor:pointer;font-weight:600;display:none;align-items:center;gap:6px;transition:all .18s}
-.cg-reset-btn:hover{background:rgba(226,75,74,.2);border-color:#E24B4A;color:#fff}
+.cg-search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:#94a3b8}
+.cg-search{padding:10px 14px 10px 38px;border:1px solid rgba(0,0,0,.12);border-radius:4px;font-size:13.5px;background:#fff;color:#0f172a;width:240px;transition:border-color .2s,box-shadow .2s}
+.cg-search::placeholder{color:#94a3b8}
+.cg-search:focus{outline:none;border-color:#E24B4A;box-shadow:0 0 0 3px rgba(226,75,74,.12)}
+.cg-sel{padding:9px 30px 9px 13px;border:1px solid rgba(0,0,0,.12);border-radius:4px;font-size:12.5px;background:#fff;color:#475569;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2394a3b8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:border-color .2s,box-shadow .2s}
+.cg-sel option{background:#fff;color:#0f172a}
+.cg-sel:focus{outline:none;border-color:#E24B4A;box-shadow:0 0 0 3px rgba(226,75,74,.12)}
+.cg-reset-btn{padding:9px 16px;border:1px solid rgba(226,75,74,.3);border-radius:4px;font-size:12.5px;background:rgba(226,75,74,.08);color:#E24B4A;cursor:pointer;font-weight:600;display:none;align-items:center;gap:6px;transition:all .18s}
+.cg-reset-btn:hover{background:rgba(226,75,74,.15);border-color:#E24B4A}
 .cg-reset-btn.cg-visible{display:inline-flex}
-.cg-pg-btn{padding:7px 13px;border:1px solid rgba(255,255,255,.1);border-radius:4px;font-size:12px;cursor:pointer;background:rgba(255,255,255,.05);color:#64748b;transition:all .15s;font-weight:500}
+.cg-pg-btn{padding:7px 13px;border:1px solid rgba(0,0,0,.1);border-radius:4px;font-size:12px;cursor:pointer;background:#fff;color:#64748b;transition:all .15s;font-weight:500}
 .cg-pg-btn:hover{border-color:#E24B4A;color:#E24B4A}
 .cg-pg-btn.cg-pga{background:#E24B4A;border-color:#E24B4A;color:white}
-.cg-state-card{background:#0d1129;border:1px solid rgba(255,255,255,.07);border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative}
-.cg-state-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.5)!important;border-color:rgba(255,255,255,.2)}
-.cg-ai-panel{margin-top:20px;padding:20px 24px;border-radius:4px;border:1px solid rgba(56,189,248,.15);background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(16,185,129,.06));display:none}
+.cg-state-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:10px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative}
+.cg-state-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.12)!important;border-color:rgba(0,0,0,.15)}
+.cg-ai-panel{margin-top:20px;padding:20px 24px;border-radius:8px;border:1px solid rgba(56,189,248,.2);background:linear-gradient(135deg,rgba(14,165,233,.05),rgba(16,185,129,.04));display:none}
 .cg-ai-panel.cg-show{display:block;animation:cgFadeUp .35s cubic-bezier(.16,1,.3,1) both}
-.cg-dn{color:#22c55e;font-weight:600}.cg-up{color:#f87171;font-weight:600}.cg-flat{color:#64748b}
+.cg-dn{color:#16a34a;font-weight:600}.cg-up{color:#dc2626;font-weight:600}.cg-flat{color:#64748b}
 </style>
 
 {{-- ── HERO ── --}}
-<section id="cg-hero-section" style="position:relative;height:calc(100vh - 78px);overflow:hidden;background:#08090e">
+<section id="cg-hero-section" style="position:relative;height:calc(100vh - 78px);overflow:hidden;background:#f8fafc">
     {{-- Background: USA map SVG + subtle crime-density blobs --}}
     <div style="position:absolute;inset:0;overflow:hidden">
-        {{-- USA Map SVG at low opacity --}}
-        <svg style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110%;height:auto;opacity:.09;min-width:900px" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="white">
-            {{-- Contiguous 48 states outer boundary --}}
-            <path stroke-width="1.8" d="M72,88 L120,80 L200,72 L285,67 L360,63 L455,61 L545,60 L580,60 L598,52 L618,48 L632,56 L648,70 L665,60 L682,50 L700,46 L716,52 L732,60 L744,50 L757,46 L770,56 L784,70 L798,64 L813,57 L830,52 L847,52 L862,58 L876,72 L888,92 L898,114 L906,138 L908,162 L906,184 L913,206 L910,230 L914,254 L917,278 L921,302 L925,326 L929,350 L933,372 L937,394 L941,416 L944,440 L942,463 L936,484 L923,503 L909,518 L894,530 L878,540 L865,534 L851,522 L836,510 L820,500 L804,494 L788,497 L772,503 L756,509 L739,512 L722,511 L705,510 L688,513 L671,517 L654,512 L636,506 L619,509 L601,515 L583,513 L565,507 L547,500 L530,498 L512,502 L495,509 L478,516 L461,520 L445,519 L429,514 L413,505 L397,492 L381,480 L365,467 L350,453 L335,438 L320,423 L305,407 L289,390 L273,373 L257,357 L240,340 L223,323 L206,307 L189,291 L172,276 L155,262 L137,253 L119,251 L101,253 L86,254 L82,237 L78,218 L74,198 L71,177 L69,155 L68,133 L69,111 L71,92 L72,88 Z"/>
+        {{-- USA Map SVG background silhouette --}}
+        <svg style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110%;height:auto;opacity:1;min-width:900px" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#c8d3de">
+            {{-- Contiguous 48 states outer boundary — filled light grey --}}
+            <path fill="#dde4ec" stroke="#c8d3de" stroke-width="1.2" d="M72,88 L120,80 L200,72 L285,67 L360,63 L455,61 L545,60 L580,60 L598,52 L618,48 L632,56 L648,70 L665,60 L682,50 L700,46 L716,52 L732,60 L744,50 L757,46 L770,56 L784,70 L798,64 L813,57 L830,52 L847,52 L862,58 L876,72 L888,92 L898,114 L906,138 L908,162 L906,184 L913,206 L910,230 L914,254 L917,278 L921,302 L925,326 L929,350 L933,372 L937,394 L941,416 L944,440 L942,463 L936,484 L923,503 L909,518 L894,530 L878,540 L865,534 L851,522 L836,510 L820,500 L804,494 L788,497 L772,503 L756,509 L739,512 L722,511 L705,510 L688,513 L671,517 L654,512 L636,506 L619,509 L601,515 L583,513 L565,507 L547,500 L530,498 L512,502 L495,509 L478,516 L461,520 L445,519 L429,514 L413,505 L397,492 L381,480 L365,467 L350,453 L335,438 L320,423 L305,407 L289,390 L273,373 L257,357 L240,340 L223,323 L206,307 L189,291 L172,276 L155,262 L137,253 L119,251 L101,253 L86,254 L82,237 L78,218 L74,198 L71,177 L69,155 L68,133 L69,111 L71,92 L72,88 Z"/>
             {{-- Pacific coast states --}}
             <line x1="72" y1="188" x2="220" y2="183" stroke-width="1"/>
             <line x1="72" y1="302" x2="210" y2="296" stroke-width="1"/>
@@ -1035,31 +1045,30 @@
             <line x1="730" y1="428" x2="822" y2="425" stroke-width="1"/>
             {{-- Alaska (small, bottom-left corner) --}}
             <g transform="translate(72,470) scale(0.28)">
-                <path stroke-width="3" d="M 0,0 L 50,-20 L 120,-30 L 180,-20 L 220,-40 L 260,-30 L 300,-50 L 340,-30 L 370,-50 L 400,-20 L 420,10 L 440,30 L 430,60 L 410,80 L 380,90 L 340,80 L 300,95 L 260,80 L 220,90 L 180,75 L 140,85 L 100,70 L 60,80 L 20,60 L 0,0 Z"/>
+                <path fill="#dde4ec" stroke="#c8d3de" stroke-width="3" d="M 0,0 L 50,-20 L 120,-30 L 180,-20 L 220,-40 L 260,-30 L 300,-50 L 340,-30 L 370,-50 L 400,-20 L 420,10 L 440,30 L 430,60 L 410,80 L 380,90 L 340,80 L 300,95 L 260,80 L 220,90 L 180,75 L 140,85 L 100,70 L 60,80 L 20,60 L 0,0 Z"/>
             </g>
             {{-- Hawaii (small, bottom-left) --}}
-            <ellipse cx="175" cy="530" rx="18" ry="8" stroke-width="1.2"/>
-            <ellipse cx="200" cy="540" rx="12" ry="6" stroke-width="1.2"/>
-            <ellipse cx="222" cy="535" rx="9" ry="5" stroke-width="1.2"/>
+            <ellipse cx="175" cy="530" rx="18" ry="8" fill="#dde4ec" stroke="#c8d3de" stroke-width="1.2"/>
+            <ellipse cx="200" cy="540" rx="12" ry="6" fill="#dde4ec" stroke="#c8d3de" stroke-width="1.2"/>
+            <ellipse cx="222" cy="535" rx="9" ry="5" fill="#dde4ec" stroke="#c8d3de" stroke-width="1.2"/>
         </svg>
-        {{-- Subtle crime-density blobs for atmosphere --}}
-        <div style="position:absolute;top:5%;left:5%;width:380px;height:320px;border-radius:50%;background:rgba(99,153,34,.18);filter:blur(90px)"></div>
-        <div style="position:absolute;top:5%;right:8%;width:420px;height:360px;border-radius:50%;background:rgba(226,75,74,.15);filter:blur(100px)"></div>
-        <div style="position:absolute;bottom:15%;left:30%;width:460px;height:340px;border-radius:50%;background:rgba(239,159,39,.1);filter:blur(110px)"></div>
-        <div style="position:absolute;bottom:10%;right:12%;width:320px;height:280px;border-radius:50%;background:rgba(99,153,34,.14);filter:blur(80px)"></div>
-        {{-- Dark overlay --}}
-        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,17,23,.65) 0%,rgba(13,17,23,.5) 50%,rgba(13,17,23,.75) 100%)"></div>
+        {{-- Subtle colour blobs --}}
+        <div style="position:absolute;top:5%;left:5%;width:360px;height:300px;border-radius:50%;background:rgba(74,222,128,.07);filter:blur(90px)"></div>
+        <div style="position:absolute;top:5%;right:8%;width:400px;height:340px;border-radius:50%;background:rgba(226,75,74,.07);filter:blur(100px)"></div>
+        <div style="position:absolute;bottom:10%;right:12%;width:300px;height:260px;border-radius:50%;background:rgba(96,165,250,.07);filter:blur(80px)"></div>
+        {{-- Light overlay keeps content readable --}}
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(248,250,252,.55) 0%,rgba(248,250,252,.35) 50%,rgba(248,250,252,.6) 100%)"></div>
     </div>
 
     {{-- Portal top bar --}}
-    <div style="position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:10px 32px;border-bottom:1px solid rgba(226,75,74,.18);background:rgba(0,0,0,.5);backdrop-filter:blur(8px)">
+    <div style="position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:10px 32px;border-bottom:1px solid rgba(226,75,74,.15);background:rgba(255,255,255,.85);backdrop-filter:blur(8px)">
         <div style="display:flex;align-items:center;gap:10px">
-            <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#E24B4A;box-shadow:0 0 8px #E24B4A;animation:cgPulse 1.4s infinite"></span>
-            <span style="font-size:9px;font-weight:800;letter-spacing:.22em;color:rgba(255,255,255,.4);text-transform:uppercase">Auxilio Crime Intelligence Portal</span>
+            <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#E24B4A;box-shadow:0 0 8px rgba(226,75,74,.5);animation:cgPulse 1.4s infinite"></span>
+            <span style="font-size:9px;font-weight:800;letter-spacing:.22em;color:#94a3b8;text-transform:uppercase">Auxilio Crime Intelligence Portal</span>
         </div>
         <div style="display:flex;align-items:center;gap:20px">
-            <span style="font-size:9px;font-weight:600;letter-spacing:.12em;color:rgba(255,255,255,.28);text-transform:uppercase;font-family:monospace">Classification: Public</span>
-            <span style="font-size:9px;color:rgba(226,75,74,.7);font-weight:700;letter-spacing:.1em;text-transform:uppercase">FBI UCR 2026</span>
+            <span style="font-size:9px;font-weight:600;letter-spacing:.12em;color:#cbd5e1;text-transform:uppercase;font-family:monospace">Classification: Public</span>
+            <span style="font-size:9px;color:#E24B4A;font-weight:700;letter-spacing:.1em;text-transform:uppercase">FBI UCR 2026</span>
         </div>
     </div>
 
@@ -1073,65 +1082,68 @@
         <div style="position:absolute;bottom:24px;right:32px;width:28px;height:28px;border-bottom:2px solid rgba(226,75,74,.5);border-right:2px solid rgba(226,75,74,.5)"></div>
 
         {{-- Status badge --}}
-        <div class="cg-hero-in cg-hero-in-1" style="display:inline-flex;align-items:center;gap:10px;padding:6px 18px;background:rgba(226,75,74,.1);border:1px solid rgba(226,75,74,.35);margin-bottom:16px">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ff8280" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span style="font-size:10px;font-weight:800;letter-spacing:.18em;color:#ff8280;text-transform:uppercase">FBI UCR 2026 · Final Data</span>
-            <span style="width:1px;height:12px;background:rgba(226,75,74,.3)"></span>
-            <span style="width:6px;height:6px;border-radius:50%;background:#86c232;box-shadow:0 0 6px #86c232"></span>
-            <span style="font-size:9px;font-weight:800;letter-spacing:.14em;color:#86c232;text-transform:uppercase">Verified</span>
+        <div class="cg-hero-in cg-hero-in-1" style="display:inline-flex;align-items:center;gap:10px;padding:6px 18px;background:rgba(226,75,74,.08);border:1px solid rgba(226,75,74,.25);border-radius:4px;margin-bottom:16px">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span style="font-size:10px;font-weight:800;letter-spacing:.18em;color:#E24B4A;text-transform:uppercase">FBI UCR 2026 · Final Data</span>
+            <span style="width:1px;height:12px;background:rgba(226,75,74,.2)"></span>
+            <span style="width:6px;height:6px;border-radius:50%;background:#16a34a;box-shadow:0 0 6px rgba(22,163,74,.5)"></span>
+            <span style="font-size:9px;font-weight:800;letter-spacing:.14em;color:#16a34a;text-transform:uppercase">Verified</span>
         </div>
 
         {{-- Title --}}
-        <h1 class="cg-hero-in cg-hero-in-2 font-display" style="font-size:clamp(40px,6.5vw,78px);font-weight:900;color:#fff;line-height:.85;letter-spacing:-.025em;text-transform:uppercase;margin-bottom:14px">
+        <h1 class="cg-hero-in cg-hero-in-2 font-display" style="font-size:clamp(40px,6.5vw,78px);font-weight:900;color:#0f172a;line-height:.85;letter-spacing:-.025em;text-transform:uppercase;margin-bottom:14px">
             Find the<br>
-            <span style="background:linear-gradient(105deg,#E24B4A 0%,#ff7a35 50%,#ffc94a 100%);-webkit-background-clip:text;background-clip:text;color:transparent">Safest Areas</span>
+            <span style="background:linear-gradient(105deg,#E24B4A 0%,#ff7a35 50%,#f59e0b 100%);-webkit-background-clip:text;background-clip:text;color:transparent">Safest Areas</span>
         </h1>
 
         {{-- Divider line with diamonds --}}
         <div class="cg-hero-in cg-hero-in-2" style="display:flex;align-items:center;gap:12px;max-width:460px;width:100%;margin:0 auto 12px">
-            <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(226,75,74,.5))"></div>
-            <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 10,5 5,10 0,5" fill="#E24B4A" opacity=".7"/></svg>
-            <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(226,75,74,.5))"></div>
+            <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(226,75,74,.4))"></div>
+            <svg width="10" height="10" viewBox="0 0 10 10"><polygon points="5,0 10,5 5,10 0,5" fill="#E24B4A" opacity=".6"/></svg>
+            <div style="flex:1;height:1px;background:linear-gradient(to left,transparent,rgba(226,75,74,.4))"></div>
         </div>
 
         {{-- Description --}}
-        <p class="cg-hero-in cg-hero-in-3" style="font-size:13px;color:rgba(255,255,255,.45);max-width:480px;margin:0 auto 18px;line-height:1.7;letter-spacing:.03em">
-            Letter-grade safety rankings for <strong style="color:rgba(255,255,255,.75);font-weight:700"><span id="cg-s-cities">125</span>+</strong> US cities — powered by FBI Uniform Crime Reporting, transparent &amp; updated annually.
+        <p class="cg-hero-in cg-hero-in-3" style="font-size:13px;color:#64748b;max-width:480px;margin:0 auto 18px;line-height:1.7;letter-spacing:.03em">
+            Letter-grade safety rankings for <strong style="color:#334155;font-weight:700"><span id="cg-s-cities">125</span>+</strong> US cities — powered by FBI Uniform Crime Reporting, transparent &amp; updated annually.
         </p>
 
         {{-- CTA Button --}}
         <div class="cg-hero-in cg-hero-in-4" style="margin-bottom:14px">
-            <button onclick="cgScrollToStates()" style="display:inline-flex;align-items:center;gap:12px;padding:14px 44px;font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#E24B4A,#b81f2e);border:1px solid rgba(226,75,74,.6);cursor:pointer;animation:cgBtnGlow 2.2s ease-in-out infinite;transition:transform .15s" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+            <button onclick="cgScrollToStates()" style="display:inline-flex;align-items:center;gap:12px;padding:14px 44px;font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,#E24B4A,#b81f2e);border:none;border-radius:6px;cursor:pointer;animation:cgBtnGlow 2.2s ease-in-out infinite;transition:transform .15s;box-shadow:0 4px 20px rgba(226,75,74,.35)" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
                 Explore States
             </button>
         </div>
-        <p class="cg-hero-in cg-hero-in-4" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.22)">30+ States &nbsp;·&nbsp; <span id="cg-s-cities2">125</span>+ Cities Graded A–F</p>
+        <p class="cg-hero-in cg-hero-in-4" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8">30+ States &nbsp;·&nbsp; <span id="cg-s-cities2">125</span>+ Cities Graded A–F</p>
 
     </div>
 
 </section>
 
 {{-- ── GRADE LEGEND ── --}}
-<div id="cg-legend-bar" class="sticky top-[78px] z-30 border-b border-white/8 shadow-lg" style="background:#0d1117;backdrop-filter:blur(12px);display:none">
+<div id="cg-legend-bar" class="sticky top-[78px] z-30 border-b border-slate-100 shadow-sm" style="background:#fff;backdrop-filter:blur(12px);display:none">
     <div class="mx-auto max-w-7xl px-5 sm:px-8 py-4">
         <div class="flex flex-wrap items-center gap-3">
             <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[.2em] shrink-0">Grade Scale</p>
             @php
                 $cgLeg=[
-                    ['g'=>'A','l'=>'Safest 20%','s'=>'Decile 9–10','bg'=>'#C0DD97','tx'=>'#27500A'],
-                    ['g'=>'B','l'=>'Below avg','s'=>'Decile 7–8','bg'=>'#E1F5EE','tx'=>'#0F6E56'],
-                    ['g'=>'C','l'=>'Near avg','s'=>'Decile 5–6','bg'=>'#E6F1FB','tx'=>'#185FA5'],
-                    ['g'=>'D','l'=>'Above avg','s'=>'Decile 3–4','bg'=>'#FAEEDA','tx'=>'#854F0B'],
-                    ['g'=>'F','l'=>'Highest crime','s'=>'Decile 1–2','bg'=>'#FCEBEB','tx'=>'#A32D2D'],
+                    ['g'=>'A','l'=>'Safest 20%','s'=>'Decile 9–10','fill'=>'#4ade80','g1'=>'#15803d','g2'=>'#22c55e','glow'=>'rgba(74,222,128,.4)'],
+                    ['g'=>'B','l'=>'Below avg',  's'=>'Decile 7–8', 'fill'=>'#34d399','g1'=>'#0e7490','g2'=>'#06b6d4','glow'=>'rgba(52,211,153,.4)'],
+                    ['g'=>'C','l'=>'Near avg',   's'=>'Decile 5–6', 'fill'=>'#60a5fa','g1'=>'#1d4ed8','g2'=>'#3b82f6','glow'=>'rgba(96,165,250,.4)'],
+                    ['g'=>'D','l'=>'Above avg',  's'=>'Decile 3–4', 'fill'=>'#fbbf24','g1'=>'#b45309','g2'=>'#f59e0b','glow'=>'rgba(251,191,36,.4)'],
+                    ['g'=>'F','l'=>'Highest crime','s'=>'Decile 1–2','fill'=>'#f87171','g1'=>'#b91c1c','g2'=>'#ef4444','glow'=>'rgba(248,113,113,.4)'],
                 ];
             @endphp
             @foreach($cgLeg as $l)
-            <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2 cursor-default" style="background:{{ $l['bg'] }}15;border:1px solid {{ $l['bg'] }}40;">
-                <span class="cg-grade-b shrink-0" style="background:{{ $l['bg'] }}22;color:{{ $l['bg'] }};border:1px solid {{ $l['bg'] }}60;width:28px;height:28px;border-radius:7px;font-size:13px;">{{ $l['g'] }}</span>
+            <div class="cg-legend-item flex items-center gap-2 rounded-xl px-3.5 py-2.5 cursor-pointer"
+                 data-g="{{ $l['g'] }}"
+                 onclick="cgLegFilter('{{ $l['g'] }}')"
+                 style="background:{{ $l['fill'] }}28;border:1.5px solid {{ $l['fill'] }}80;">
+                <span class="cg-grade-b shrink-0 legend-badge" style="background:{{ $l['fill'] }}45;color:{{ $l['g1'] }};border:1.5px solid {{ $l['fill'] }}aa;width:30px;height:30px;border-radius:8px;font-size:14px;font-weight:900;">{{ $l['g'] }}</span>
                 <div class="min-w-0">
-                    <p class="text-[11px] font-bold leading-none" style="color:{{ $l['bg'] }}">{{ $l['l'] }}</p>
-                    <p class="text-[10px] text-slate-500 mt-0.5">{{ $l['s'] }}</p>
+                    <p class="text-[11.5px] font-bold leading-none legend-label" style="color:{{ $l['g1'] }}">{{ $l['l'] }}</p>
+                    <p class="text-[10px] mt-0.5 legend-sub" style="color:rgba(71,85,105,.6)">{{ $l['s'] }}</p>
                 </div>
             </div>
             @endforeach
@@ -1140,15 +1152,36 @@
 </div>
 
 {{-- ── MAIN SECTION ── --}}
-<section id="cg-main-section" class="min-h-screen" style="background:linear-gradient(180deg,#0d1117 0%,#0a0e1a 100%);display:none">
+<section id="cg-main-section" class="min-h-screen" style="background:#f8fafc;display:none">
     <div class="mx-auto max-w-7xl px-5 sm:px-8 py-10">
 
         {{-- ── STATE GRID VIEW (default) ── --}}
         <div id="cg-states-view">
+
+            {{-- Interactive US Map --}}
+            <div id="cg-map-wrap" style="position:relative;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:16px;margin-bottom:32px;padding:18px 20px 14px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.06)">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+                    <p style="font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.18em;text-transform:uppercase">Crime Grade Map · Click a state to explore</p>
+                    <div style="display:flex;align-items:center;gap:10px">
+                        @foreach([['A','#4ade80'],['B','#34d399'],['C','#60a5fa'],['D','#fbbf24'],['F','#f87171']] as $mg)
+                        <span style="display:flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:{{ $mg[1] }}">
+                            <span style="width:8px;height:8px;border-radius:2px;background:{{ $mg[1] }};display:inline-block"></span>{{ $mg[0] }}
+                        </span>
+                        @endforeach
+                    </div>
+                </div>
+                <div id="cg-map-loading" style="display:flex;align-items:center;justify-content:center;height:300px;color:#94a3b8;font-size:12px;gap:8px">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" style="animation:cgMapSpin 1s linear infinite;flex-shrink:0"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-opacity=".2"/><path d="M21 12a9 9 0 00-9-9"/></svg>
+                    Loading map…
+                </div>
+                <svg id="cg-us-map-svg" style="display:none;width:100%;border-radius:6px"></svg>
+                <div id="cg-map-tooltip" style="position:absolute;pointer-events:none;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:9px;padding:9px 13px;font-size:12px;color:#0f172a;display:none;z-index:20;box-shadow:0 8px 24px rgba(0,0,0,.12);white-space:nowrap;line-height:1.5"></div>
+            </div>
+
             <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-7">
                 <div>
-                    <h2 class="text-lg font-bold text-white">All States</h2>
-                    <p class="text-xs mt-0.5" style="color:rgba(255,255,255,.35)">Select a state to explore city crime grades</p>
+                    <h2 class="text-lg font-bold text-slate-800">All States</h2>
+                    <p class="text-xs mt-0.5 text-slate-400">Select a state to explore city crime grades</p>
                 </div>
                 <div class="sm:ml-auto relative">
                     <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none" style="color:rgba(255,255,255,.3)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
@@ -1162,12 +1195,12 @@
         <div id="cg-cities-view" style="display:none">
             {{-- Breadcrumb --}}
             <div class="flex items-center gap-3 mb-6">
-                <button onclick="cgBackToStates()" class="inline-flex items-center gap-2 text-sm font-semibold transition" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);padding:7px 14px;border-radius:4px;cursor:pointer">
+                <button onclick="cgBackToStates()" class="inline-flex items-center gap-2 text-sm font-semibold transition" style="background:#f1f5f9;border:1px solid rgba(0,0,0,.1);color:#475569;padding:7px 14px;border-radius:4px;cursor:pointer">
                     <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 12H5M12 19l-7-7 7-7"/></svg>
                     All States
                 </button>
-                <span style="color:rgba(255,255,255,.2)">/</span>
-                <span class="text-white font-semibold text-sm" id="cg-state-label">California</span>
+                <span class="text-slate-300">/</span>
+                <span class="text-slate-800 font-semibold text-sm" id="cg-state-label">California</span>
             </div>
 
             {{-- Controls --}}
@@ -1199,7 +1232,7 @@
             </div>
 
             {{-- Table card --}}
-            <div class="overflow-hidden border border-white/8" style="background:#131929;box-shadow:0 8px 40px -12px rgba(0,0,0,.6);border-radius:4px">
+            <div class="overflow-hidden border border-slate-200" style="background:#fff;box-shadow:0 4px 24px rgba(0,0,0,.07);border-radius:8px">
                 <div class="cg-tbl-wrap">
                     <table class="cg-tbl">
                         <thead>
@@ -1220,7 +1253,7 @@
                         <tbody id="cg-tbody"></tbody>
                     </table>
                 </div>
-                <div class="px-5 py-4 flex flex-wrap items-center gap-2" style="border-top:1px solid rgba(255,255,255,.07)" id="cg-pg"></div>
+                <div class="px-5 py-4 flex flex-wrap items-center gap-2" style="border-top:1px solid rgba(0,0,0,.07)" id="cg-pg"></div>
             </div>
         </div>
 
@@ -1230,17 +1263,17 @@
                 <span class="grid place-items-center w-7 h-7 rounded-full flex-shrink-0" style="background:linear-gradient(135deg,#E24B4A,#ff8c42)">
                     <svg class="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
                 </span>
-                <p class="text-sm font-bold text-white flex-1" id="cg-ai-title">City Analysis</p>
-                <span class="text-[10px] font-semibold rounded-full px-2.5 py-1" style="background:rgba(226,75,74,.18);color:#ff8280">2024 Final</span>
-                <button onclick="document.getElementById('cg-ai-panel').classList.remove('cg-show')" class="grid place-items-center w-6 h-6 rounded-full text-slate-400 hover:text-white transition" style="background:rgba(255,255,255,.07)">
+                <p class="text-sm font-bold text-slate-800 flex-1" id="cg-ai-title">City Analysis</p>
+                <span class="text-[10px] font-semibold rounded-full px-2.5 py-1" style="background:rgba(226,75,74,.1);color:#E24B4A">2024 Final</span>
+                <button onclick="document.getElementById('cg-ai-panel').classList.remove('cg-show')" class="grid place-items-center w-6 h-6 rounded-full text-slate-400 hover:text-slate-700 transition" style="background:rgba(0,0,0,.06)">
                     <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
             </div>
-            <p class="text-sm text-slate-300 leading-relaxed" id="cg-ai-body">Loading…</p>
+            <p class="text-sm text-slate-600 leading-relaxed" id="cg-ai-body">Loading…</p>
         </div>
 
-        <p class="mt-8 text-xs leading-relaxed max-w-4xl" style="color:rgba(255,255,255,.3)">
-            <strong style="color:rgba(255,255,255,.45)">Source:</strong> FBI Uniform Crime Reporting (UCR) Program, 2024 — final annual data released August 2025. Covers 120+ major US cities. Grades computed by decile rank among all cities in the dataset (violent crime weighted 60%, property 40%). The FBI recommends against city rankings for policy decisions; this data is provided for public awareness only.
+        <p class="mt-8 text-xs leading-relaxed max-w-4xl text-slate-400">
+            <strong class="text-slate-500">Source:</strong> FBI Uniform Crime Reporting (UCR) Program, 2024 — final annual data released August 2025. Covers 120+ major US cities. Grades computed by decile rank among all cities in the dataset (violent crime weighted 60%, property 40%). The FBI recommends against city rankings for policy decisions; this data is provided for public awareness only.
         </p>
     </div>
 </section>
@@ -1376,7 +1409,54 @@ var CG_RAW=[
   {city:'Pasadena',state:'CA',pop:138000,violent:282,property:2480,murder:2.8,trend:'dn'}
 ];
 
-var GC={A:{bg:'#C0DD97',tx:'#27500A'},B:{bg:'#E1F5EE',tx:'#0F6E56'},C:{bg:'#E6F1FB',tx:'#185FA5'},D:{bg:'#FAEEDA',tx:'#854F0B'},F:{bg:'#FCEBEB',tx:'#A32D2D'}};
+var GC={A:{bg:'#4ade80',tx:'#14532d'},B:{bg:'#34d399',tx:'#064e3b'},C:{bg:'#60a5fa',tx:'#1e3a8a'},D:{bg:'#fbbf24',tx:'#78350f'},F:{bg:'#f87171',tx:'#7f1d1d'}};
+var LEGEND_COLORS={
+  A:{fill:'#4ade80',g1:'#15803d',gradient:'linear-gradient(135deg,#15803d,#22c55e)',glow:'rgba(74,222,128,.45)'},
+  B:{fill:'#34d399',g1:'#0e7490',gradient:'linear-gradient(135deg,#0e7490,#06b6d4)',glow:'rgba(52,211,153,.45)'},
+  C:{fill:'#60a5fa',g1:'#1d4ed8',gradient:'linear-gradient(135deg,#1d4ed8,#3b82f6)',glow:'rgba(96,165,250,.45)'},
+  D:{fill:'#fbbf24',g1:'#b45309',gradient:'linear-gradient(135deg,#b45309,#f59e0b)',glow:'rgba(251,191,36,.45)'},
+  F:{fill:'#f87171',g1:'#b91c1c',gradient:'linear-gradient(135deg,#b91c1c,#ef4444)',glow:'rgba(248,113,113,.45)'}
+};
+var cgLegActive='';
+function cgLegFilter(g){
+  if(cgLegActive===g){cgLegActive='';g='';}else{cgLegActive=g;}
+  var gf=document.getElementById('cg-grade-f');if(gf)gf.value=cgLegActive;
+  document.querySelectorAll('.cg-legend-item').forEach(function(el){
+    var eg=el.getAttribute('data-g');
+    var c=LEGEND_COLORS[eg];if(!c)return;
+    var badge=el.querySelector('.legend-badge');
+    var label=el.querySelector('.legend-label');
+    var sub=el.querySelector('.legend-sub');
+    if(cgLegActive&&eg===cgLegActive){
+      el.style.background=c.gradient;
+      el.style.borderColor='transparent';
+      el.style.boxShadow='none';
+      el.classList.add('cg-legend-active');
+      if(badge){badge.style.background='rgba(255,255,255,.22)';badge.style.color='#fff';badge.style.borderColor='rgba(255,255,255,.4)';}
+      if(label)label.style.color='#fff';
+      if(sub)sub.style.color='rgba(255,255,255,.65)';
+    } else if(cgLegActive&&eg!==cgLegActive){
+      el.style.background=c.fill+'14';
+      el.style.border='1.5px solid '+c.fill+'40';
+      el.style.boxShadow='';
+      el.classList.remove('cg-legend-active');
+      if(badge){badge.style.background=c.fill+'20';badge.style.color=c.fill+'99';badge.style.borderColor=c.fill+'50';}
+      if(label)label.style.color=c.fill+'88';
+      if(sub)sub.style.color='rgba(71,85,105,.35)';
+    } else {
+      el.style.background=c.fill+'28';
+      el.style.borderColor=c.fill+'80';
+      el.style.border='1.5px solid '+c.fill+'80';
+      el.style.boxShadow='';
+      el.classList.remove('cg-legend-active');
+      if(badge){badge.style.background=c.fill+'45';badge.style.color=c.g1||c.fill;badge.style.borderColor=c.fill+'aa';}
+      if(label)label.style.color=c.g1||c.fill;
+      if(sub)sub.style.color='rgba(71,85,105,.6)';
+    }
+  });
+  if(typeof cgGoPage==='function')cgGoPage(1);
+  if(typeof cgCheckReset==='function')cgCheckReset();
+}
 var DC=['#E24B4A','#E24B4A','#D85A30','#EF9F27','#BA7517','#378ADD','#1D9E75','#1D9E75','#639922','#639922'];
 
 function cgBuildGrades(data){
@@ -1411,6 +1491,61 @@ var STATE_COLORS={
   OH:'#003087',OK:'#003087',OR:'#003087',PA:'#003087',RI:'#002868',
   SC:'#003087',SD:'#003087',TN:'#BF0A30',TX:'#BF0A30',UT:'#003087',
   VA:'#003087',VT:'#003087',WA:'#005C2E',WI:'#003087',WV:'#003087',WY:'#003087'
+};
+
+/* Direct Wikimedia CDN thumbnails for all US state flags */
+var STATE_FLAGS={
+  AK:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Alaska.svg/250px-Flag_of_Alaska.svg.png',
+  AL:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Alabama.svg/250px-Flag_of_Alabama.svg.png',
+  AR:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Flag_of_Arkansas.svg/250px-Flag_of_Arkansas.svg.png',
+  AZ:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Flag_of_Arizona.svg/250px-Flag_of_Arizona.svg.png',
+  CA:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Flag_of_California.svg/250px-Flag_of_California.svg.png',
+  CO:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Flag_of_Colorado.svg/250px-Flag_of_Colorado.svg.png',
+  CT:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Flag_of_Connecticut.svg/250px-Flag_of_Connecticut.svg.png',
+  DC:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Washington%2C_D.C.svg/250px-Flag_of_Washington%2C_D.C.svg.png',
+  DE:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Flag_of_Delaware.svg/250px-Flag_of_Delaware.svg.png',
+  FL:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Flag_of_Florida.svg/250px-Flag_of_Florida.svg.png',
+  GA:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Flag_of_the_State_of_Georgia.svg/250px-Flag_of_the_State_of_Georgia.svg.png',
+  HI:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Flag_of_Hawaii.svg/250px-Flag_of_Hawaii.svg.png',
+  IA:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Flag_of_Iowa.svg/250px-Flag_of_Iowa.svg.png',
+  ID:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_Idaho.svg/250px-Flag_of_Idaho.svg.png',
+  IL:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Flag_of_Illinois.svg/250px-Flag_of_Illinois.svg.png',
+  IN:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Flag_of_Indiana.svg/250px-Flag_of_Indiana.svg.png',
+  KS:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Flag_of_Kansas.svg/250px-Flag_of_Kansas.svg.png',
+  KY:'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Flag_of_Kentucky.svg/250px-Flag_of_Kentucky.svg.png',
+  LA:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Flag_of_Louisiana.svg/250px-Flag_of_Louisiana.svg.png',
+  MA:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Flag_of_Massachusetts.svg/250px-Flag_of_Massachusetts.svg.png',
+  MD:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Flag_of_Maryland.svg/250px-Flag_of_Maryland.svg.png',
+  ME:'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Flag_of_the_State_of_Maine.svg/250px-Flag_of_the_State_of_Maine.svg.png',
+  MI:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Flag_of_Michigan.svg/250px-Flag_of_Michigan.svg.png',
+  MN:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Minnesota.svg/250px-Flag_of_Minnesota.svg.png',
+  MO:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Flag_of_Missouri.svg/250px-Flag_of_Missouri.svg.png',
+  MS:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Flag_of_Mississippi.svg/250px-Flag_of_Mississippi.svg.png',
+  MT:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Flag_of_Montana.svg/250px-Flag_of_Montana.svg.png',
+  NC:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Flag_of_North_Carolina.svg/250px-Flag_of_North_Carolina.svg.png',
+  ND:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Flag_of_North_Dakota.svg/250px-Flag_of_North_Dakota.svg.png',
+  NE:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Flag_of_Nebraska.svg/250px-Flag_of_Nebraska.svg.png',
+  NH:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Flag_of_New_Hampshire.svg/250px-Flag_of_New_Hampshire.svg.png',
+  NJ:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Flag_of_New_Jersey.svg/250px-Flag_of_New_Jersey.svg.png',
+  NM:'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_New_Mexico.svg/250px-Flag_of_New_Mexico.svg.png',
+  NV:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Flag_of_Nevada.svg/250px-Flag_of_Nevada.svg.png',
+  NY:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_New_York.svg/250px-Flag_of_New_York.svg.png',
+  OH:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Flag_of_Ohio.svg/250px-Flag_of_Ohio.svg.png',
+  OK:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Flag_of_Oklahoma.svg/250px-Flag_of_Oklahoma.svg.png',
+  OR:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Flag_of_Oregon.svg/250px-Flag_of_Oregon.svg.png',
+  PA:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Flag_of_Pennsylvania.svg/250px-Flag_of_Pennsylvania.svg.png',
+  RI:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Rhode_Island.svg/250px-Flag_of_Rhode_Island.svg.png',
+  SC:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Flag_of_South_Carolina.svg/250px-Flag_of_South_Carolina.svg.png',
+  SD:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Flag_of_South_Dakota.svg/250px-Flag_of_South_Dakota.svg.png',
+  TN:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Tennessee.svg/250px-Flag_of_Tennessee.svg.png',
+  TX:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Flag_of_Texas.svg/250px-Flag_of_Texas.svg.png',
+  UT:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Flag_of_Utah.svg/250px-Flag_of_Utah.svg.png',
+  VA:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Flag_of_Virginia.svg/250px-Flag_of_Virginia.svg.png',
+  VT:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Vermont.svg/250px-Flag_of_Vermont.svg.png',
+  WA:'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Flag_of_Washington.svg/250px-Flag_of_Washington.svg.png',
+  WI:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Flag_of_Wisconsin.svg/250px-Flag_of_Wisconsin.svg.png',
+  WV:'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Flag_of_West_Virginia.svg/250px-Flag_of_West_Virginia.svg.png',
+  WY:'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Wyoming.svg/250px-Flag_of_Wyoming.svg.png'
 };
 
 var cgSelectedState='';
@@ -1498,8 +1633,8 @@ function cgRenderStates(filter){
   states.forEach(function(s){
     var gc=GC[s.grade]||GC.F;
     var stColor=STATE_COLORS[s.abbr]||'#002868';
-    var flagSrc='https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/flags/4x3/us-'+s.abbr.toLowerCase()+'.svg';
-    html+='<div class="cg-state-card" onclick="cgSelectState(\''+s.abbr+'\')" style="box-shadow:0 6px 24px rgba(0,0,0,.35)">'
+    var flagSrc=STATE_FLAGS[s.abbr]||'';
+    html+='<div class="cg-state-card" onclick="cgSelectState(\''+s.abbr+'\')" style="box-shadow:0 2px 12px rgba(0,0,0,.07)">'
       /* ── Flag header ── */
       +'<div style="position:relative;height:80px;background:'+stColor+';overflow:hidden">'
         /* Flag image — fills header, gentle overlay so abbr/badge remain legible */
@@ -1507,19 +1642,17 @@ function cgRenderStates(filter){
           +'style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:.9" '
           +'onerror="this.parentNode.style.background=\''+stColor+'\';this.remove()">'
         /* readability gradient */
-        +'<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,.5) 100%);pointer-events:none"></div>'
-        /* grade badge — top right */
-        +'<div style="position:absolute;top:8px;right:8px;background:'+gc.bg+';color:#fff;font-size:13px;font-weight:900;width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.5)">'+s.grade+'</div>'
+        +'<div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.05) 0%,rgba(0,0,0,.45) 100%);pointer-events:none"></div>'
         /* state abbr — bottom left over flag */
         +'<div style="position:absolute;bottom:7px;left:10px;font-size:20px;font-weight:900;color:#fff;letter-spacing:-.02em;text-shadow:0 1px 6px rgba(0,0,0,.9),0 0 12px rgba(0,0,0,.7)">'+s.abbr+'</div>'
       +'</div>'
       /* ── Card body ── */
-      +'<div style="padding:10px 12px 12px;background:#0d1129">'
-        +'<div style="height:2px;border-radius:2px;background:'+gc.bg+';opacity:.7;margin-bottom:8px"></div>'
-        +'<p style="font-size:11.5px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.name+'</p>'
+      +'<div style="padding:10px 12px 12px;background:#fff">'
+        +'<div style="height:2px;border-radius:2px;background:'+gc.bg+';opacity:.8;margin-bottom:8px"></div>'
+        +'<p style="font-size:11.5px;font-weight:700;color:#1e293b;margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+s.name+'</p>'
         +'<div style="display:flex;align-items:center;gap:4px">'
           +'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="'+gc.bg+'" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>'
-          +'<span style="font-size:10px;color:rgba(255,255,255,.4)">'+s.cities.length+' cit'+(s.cities.length===1?'y':'ies')+'</span>'
+          +'<span style="font-size:10px;color:#94a3b8">'+s.cities.length+' cit'+(s.cities.length===1?'y':'ies')+'</span>'
         +'</div>'
       +'</div>'
     +'</div>';
@@ -1532,6 +1665,7 @@ function cgFilterStates(){
   cgRenderStates(document.getElementById('cg-state-search').value);
 }
 window.cgFilterStates=cgFilterStates;
+window.cgLegFilter=cgLegFilter;
 
 function cgSelectState(st){
   cgSelectedState=st;
@@ -1556,6 +1690,114 @@ function cgBackToStates(){
 }
 window.cgBackToStates=cgBackToStates;
 
+/* ── Interactive US Map ── */
+var cgMapBuilt=false,cgMapDepsOK=false;
+var FIPS_ABBR={"01":"AL","02":"AK","04":"AZ","05":"AR","06":"CA","08":"CO","09":"CT","10":"DE","11":"DC","12":"FL","13":"GA","15":"HI","16":"ID","17":"IL","18":"IN","19":"IA","20":"KS","21":"KY","22":"LA","23":"ME","24":"MD","25":"MA","26":"MI","27":"MN","28":"MS","29":"MO","30":"MT","31":"NE","32":"NV","33":"NH","34":"NJ","35":"NM","36":"NY","37":"NC","38":"ND","39":"OH","40":"OK","41":"OR","42":"PA","44":"RI","45":"SC","46":"SD","47":"TN","48":"TX","49":"UT","50":"VT","51":"VA","53":"WA","54":"WV","55":"WI","56":"WY"};
+
+function cgLoadMapDeps(cb){
+  if(cgMapDepsOK){cb();return;}
+  var s1=document.createElement('script');
+  s1.src='https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js';
+  s1.onload=function(){
+    var s2=document.createElement('script');
+    s2.src='https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js';
+    s2.onload=function(){cgMapDepsOK=true;cb();};
+    document.head.appendChild(s2);
+  };
+  document.head.appendChild(s1);
+}
+
+function cgInitMap(){
+  if(cgMapBuilt)return;
+  var wrap=document.getElementById('cg-map-wrap');
+  if(!wrap)return;
+  cgLoadMapDeps(function(){
+    var states=cgBuildStateData();
+    var gradeOf={};
+    states.forEach(function(s){gradeOf[s.abbr]=s;});
+    fetch('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json')
+      .then(function(r){return r.json();})
+      .then(function(us){
+        var loading=document.getElementById('cg-map-loading');
+        var svgEl=document.getElementById('cg-us-map-svg');
+        if(loading)loading.style.display='none';
+        if(!svgEl)return;
+        svgEl.style.display='block';
+        var W=wrap.clientWidth-40;
+        var H=Math.max(220,Math.round(W*0.57));
+        var topo=topojson.feature(us,us.objects.states);
+        var features=topo.features;
+        var projection=d3.geoAlbersUsa().fitSize([W,H],topo);
+        var pathGen=d3.geoPath().projection(projection);
+        var tooltip=document.getElementById('cg-map-tooltip');
+        var svg=d3.select('#cg-us-map-svg')
+          .attr('viewBox','0 0 '+W+' '+H)
+          .attr('width','100%').attr('height',H);
+        /* background */
+        svg.append('rect').attr('width',W).attr('height',H).attr('fill','#f1f5f9').attr('rx',6);
+        /* state fills */
+        svg.selectAll('path.cg-sp')
+          .data(features).enter().append('path').attr('class','cg-sp')
+          .attr('d',pathGen)
+          .attr('fill',function(d){
+            var abbr=FIPS_ABBR[('00'+d.id).slice(-2)];
+            var s=gradeOf[abbr];
+            return s?GC[s.grade].bg:'#1a2744';
+          })
+          .attr('stroke','#f1f5f9').attr('stroke-width',0.8)
+          .attr('fill-opacity',0.88).style('cursor','pointer')
+          .on('mouseover',function(event,d){
+            d3.select(this).raise().attr('fill-opacity',1).attr('stroke','rgba(255,255,255,.7)').attr('stroke-width',1.8);
+            var abbr=FIPS_ABBR[('00'+d.id).slice(-2)];
+            var s=gradeOf[abbr];
+            if(s&&tooltip){
+              var gc=GC[s.grade]||GC.F;
+              tooltip.innerHTML='<div style="font-weight:800;color:'+gc.bg+';font-size:13px">'+s.name+'</div>'
+                +'<div style="color:#64748b;font-size:10px;margin-top:2px">Grade <span style="color:'+gc.bg+';font-weight:900">'+s.grade+'</span> · '+s.cities.length+' '+(s.cities.length===1?'city':'cities')+'</div>';
+              tooltip.style.display='block';
+              var rect=wrap.getBoundingClientRect();
+              tooltip.style.left=Math.min(event.clientX-rect.left+18,rect.width-170)+'px';
+              tooltip.style.top=Math.max(40,event.clientY-rect.top-60)+'px';
+            }
+          })
+          .on('mousemove',function(event){
+            if(tooltip&&tooltip.style.display==='block'){
+              var rect=wrap.getBoundingClientRect();
+              tooltip.style.left=Math.min(event.clientX-rect.left+18,rect.width-170)+'px';
+              tooltip.style.top=Math.max(40,event.clientY-rect.top-60)+'px';
+            }
+          })
+          .on('mouseout',function(){
+            d3.select(this).attr('fill-opacity',0.88).attr('stroke','#f1f5f9').attr('stroke-width',0.8);
+            if(tooltip)tooltip.style.display='none';
+          })
+          .on('click',function(event,d){
+            var abbr=FIPS_ABBR[('00'+d.id).slice(-2)];
+            if(abbr)cgSelectState(abbr);
+          });
+        /* state border mesh */
+        svg.append('path')
+          .datum(topojson.mesh(us,us.objects.states,function(a,b){return a!==b;}))
+          .attr('fill','none').attr('stroke','rgba(255,255,255,.07)').attr('stroke-width',0.4)
+          .attr('d',pathGen);
+        /* state abbreviation labels */
+        svg.selectAll('text.cg-sl')
+          .data(features).enter().append('text').attr('class','cg-sl')
+          .attr('transform',function(d){var c=pathGen.centroid(d);return c&&isFinite(c[0])?'translate('+c+')':'translate(-9999,-9999)';})
+          .attr('text-anchor','middle').attr('dy','.35em')
+          .style('fill','rgba(255,255,255,.95)').style('font-size','7px').style('font-weight','800')
+          .style('pointer-events','none').style('text-shadow','0 1px 3px rgba(0,0,0,.7),0 0 6px rgba(0,0,0,.5)')
+          .text(function(d){return FIPS_ABBR[('00'+d.id).slice(-2)]||'';});
+        cgMapBuilt=true;
+      })
+      .catch(function(){
+        var l=document.getElementById('cg-map-loading');
+        if(l){l.innerHTML='Map unavailable';l.style.display='flex';}
+      });
+  });
+}
+window.cgInitMap=cgInitMap;
+
 function cgScrollToStates(){
   var hero=document.getElementById('cg-hero-section');
   var legend=document.getElementById('cg-legend-bar');
@@ -1564,6 +1806,7 @@ function cgScrollToStates(){
   if(legend)legend.style.display='';
   if(main)main.style.display='';
   window.scrollTo(0,0);
+  setTimeout(cgInitMap,80);
 }
 window.cgScrollToStates=cgScrollToStates;
 
@@ -1614,10 +1857,10 @@ function cgRender(){
       +'<td><span class="cg-city">'+d.city+'<span class="cg-stag">'+d.state+'</span></span><span class="cg-ptag">'+cgFmtPop(d.pop||0)+'</span></td>'
       +'<td><span class="cg-grade-b" style="background:'+gc.bg+';color:'+gc.tx+'">'+d.grade+'</span></td>'
       +'<td><span class="cg-decile-b" style="background:'+dc+'22;color:'+dc+';border:1px solid '+dc+'55">'+d.decile+'</span></td>'
-      +'<td><div style="font-size:12.5px;font-weight:600;color:#e2e8f0">'+d.violent.toLocaleString()+'</div><div class="cg-rbar"><div class="cg-rbar-f" style="width:'+vw+'%;background:#E24B4A"></div></div></td>'
-      +'<td><div style="font-size:12.5px;font-weight:600;color:#e2e8f0">'+d.property.toLocaleString()+'</div><div class="cg-rbar"><div class="cg-rbar-f" style="width:'+pw+'%;background:#378ADD"></div></div></td>'
-      +'<td style="font-size:12.5px;color:#94a3b8">'+d.murder+'</td>'
-      +'<td style="font-size:12.5px;font-weight:700;color:#e2e8f0">'+(d.violent+d.property).toLocaleString()+'</td>'
+      +'<td><div style="font-size:12.5px;font-weight:600;color:#334155">'+d.violent.toLocaleString()+'</div><div class="cg-rbar"><div class="cg-rbar-f" style="width:'+vw+'%;background:#E24B4A"></div></div></td>'
+      +'<td><div style="font-size:12.5px;font-weight:600;color:#334155">'+d.property.toLocaleString()+'</div><div class="cg-rbar"><div class="cg-rbar-f" style="width:'+pw+'%;background:#3b82f6"></div></div></td>'
+      +'<td style="font-size:12.5px;color:#64748b">'+d.murder+'</td>'
+      +'<td style="font-size:12.5px;font-weight:700;color:#334155">'+(d.violent+d.property).toLocaleString()+'</td>'
       +'<td style="font-size:11px;color:#94a3b8">'+cgFmtPop(d.pop||0)+'</td>'
       +'<td>'+tr+'</td>'
       +'<td>'+ab+'</td>'
@@ -2791,30 +3034,30 @@ cgRenderGradeDist();
             --c-amber: #f5c844;
         }
 
-        /* ---- HERO (light, family-warm) ---- */
+        /* ---- HERO (dark red, premium) ---- */
         [data-view="citizen-app"] .citizen-hero {
             background:
-                radial-gradient(900px 600px at 12% 18%, rgba(251,6,6,.10), transparent 60%),
-                radial-gradient(700px 500px at 88% 25%, rgba(245,200,68,.12), transparent 55%),
-                radial-gradient(700px 500px at 50% 100%, rgba(70,130,255,.08), transparent 60%),
-                linear-gradient(180deg, #f7f3ee 0%, #fbf8f3 50%, #ffffff 100%);
+                radial-gradient(ellipse 80% 60% at 0% 50%, rgba(251,6,6,.30) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 80% at 100% 30%, rgba(160,0,0,.25) 0%, transparent 60%),
+                radial-gradient(ellipse 100% 50% at 50% 100%, rgba(80,0,0,.40) 0%, transparent 70%),
+                linear-gradient(160deg, #1a0005 0%, #2d0008 30%, #1a0a0a 60%, #0d0505 100%);
         }
         [data-view="citizen-app"] .citizen-hero::before {
-            content:""; position:absolute; inset:0; pointer-events:none; opacity:.4;
+            content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
             background-image:
-                linear-gradient(rgba(15,20,40,.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(15,20,40,.06) 1px, transparent 1px);
+                linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
             background-size: 56px 56px;
-            mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);
+            mask-image: radial-gradient(circle at 30% 50%, black, transparent 75%);
         }
         [data-view="citizen-app"] .citizen-hero::after {
             content:""; position:absolute; inset:0; pointer-events:none;
             background:
-                radial-gradient(2px 2px at 20% 30%, rgba(251,6,6,.18) 0, transparent 50%),
-                radial-gradient(1px 1px at 80% 60%, rgba(245,200,68,.30) 0, transparent 50%),
-                radial-gradient(1.5px 1.5px at 60% 20%, rgba(251,6,6,.20) 0, transparent 50%),
-                radial-gradient(1px 1px at 35% 75%, rgba(70,130,255,.18) 0, transparent 50%),
-                radial-gradient(1.5px 1.5px at 90% 35%, rgba(245,200,68,.22) 0, transparent 50%);
+                radial-gradient(2px 2px at 20% 30%, rgba(251,6,6,.45) 0, transparent 50%),
+                radial-gradient(1px 1px at 80% 60%, rgba(255,80,80,.30) 0, transparent 50%),
+                radial-gradient(1.5px 1.5px at 60% 20%, rgba(251,6,6,.35) 0, transparent 50%),
+                radial-gradient(1px 1px at 35% 75%, rgba(200,0,0,.25) 0, transparent 50%),
+                radial-gradient(1.5px 1.5px at 90% 35%, rgba(255,100,100,.28) 0, transparent 50%);
             background-size: 100% 100%;
             animation: starsTwinkle 6s ease-in-out infinite alternate;
         }
@@ -3013,21 +3256,21 @@ cgRenderGradeDist();
     </style>
 
     {{-- ========== HERO — light, emotional, family-focused ========== --}}
-    <section class="citizen-hero relative overflow-hidden text-navy-900">
-        {{-- ambient floating shapes (warm, soft on light bg) --}}
-        <span class="deco-shape" style="top:8%;  left:6%;  width:120px; height:120px; background:radial-gradient(circle, rgba(251,6,6,.18) 0%, transparent 70%); opacity:.6;"></span>
-        <span class="deco-shape" style="top:62%; left:3%;  width:80px;  height:80px;  background:radial-gradient(circle, rgba(245,200,68,.32) 0%, transparent 70%); animation-delay:1.2s;"></span>
-        <span class="deco-shape" style="top:18%; right:5%; width:140px; height:140px; background:radial-gradient(circle, rgba(70,130,255,.22) 0%, transparent 70%); animation-delay:2.4s;"></span>
-        <span class="deco-shape" style="bottom:8%; right:18%; width:100px; height:100px; background:radial-gradient(circle, rgba(251,6,6,.16) 0%, transparent 70%); animation-delay:3.6s;"></span>
+    <section class="citizen-hero relative overflow-hidden text-white">
+        {{-- ambient floating shapes (dark red bg) --}}
+        <span class="deco-shape" style="top:8%;  left:6%;  width:180px; height:180px; background:radial-gradient(circle, rgba(251,6,6,.30) 0%, transparent 70%); opacity:.7;"></span>
+        <span class="deco-shape" style="top:62%; left:3%;  width:120px; height:120px; background:radial-gradient(circle, rgba(200,0,0,.35) 0%, transparent 70%); animation-delay:1.2s;"></span>
+        <span class="deco-shape" style="top:18%; right:5%; width:160px; height:160px; background:radial-gradient(circle, rgba(251,6,6,.25) 0%, transparent 70%); animation-delay:2.4s;"></span>
+        <span class="deco-shape" style="bottom:8%; right:18%; width:140px; height:140px; background:radial-gradient(circle, rgba(160,0,0,.30) 0%, transparent 70%); animation-delay:3.6s;"></span>
 
         <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
             <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 <div class="lg:col-span-6">
-                    <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight text-navy-900">
+                    <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight text-white">
                         <span class="block whitespace-nowrap">Protect the people</span>
                         <span class="grad-red block whitespace-nowrap">you love most.</span>
                     </h1>
-                    <p class="reveal reveal-delay-3 mt-6 text-lg text-navy-700/80 max-w-xl leading-relaxed">
+                    <p class="reveal reveal-delay-3 mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
                         From a child's walk home, to a parent's late-night drive, to a sudden emergency in the kitchen — Auxilio puts real, verified help one tap away. Built for families. Trusted by communities.
                     </p>
                     <div class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center gap-3">
@@ -3042,8 +3285,8 @@ cgRenderGradeDist();
                             ['v'=>'Free','l'=>'forever for families'],
                         ] as $s)
                             <div>
-                                <dt class="font-display text-2xl font-bold tracking-tight text-navy-900">{{ $s['v'] }}</dt>
-                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-ink-500">{{ $s['l'] }}</dd>
+                                <dt class="font-display text-2xl font-bold tracking-tight text-white">{{ $s['v'] }}</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/50">{{ $s['l'] }}</dd>
                             </div>
                         @endforeach
                     </dl>
@@ -3052,15 +3295,15 @@ cgRenderGradeDist();
                     <div class="reveal reveal-delay-4 mt-10 max-w-xl">
                         <div class="flex items-center gap-4">
                             <div class="flex items-center -space-x-3 shrink-0">
-                                <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                                <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                                <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                                <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                                <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-white bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
+                                <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                                <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                                <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                                <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                                <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-red-900/60 bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
                             </div>
-                            <p class="font-display text-base font-semibold text-navy-900">5,000+ Verified Officers</p>
+                            <p class="font-display text-base font-semibold text-white">5,000+ Verified Officers</p>
                         </div>
-                        <p class="mt-3 text-sm text-navy-700/75 leading-relaxed max-w-md">
+                        <p class="mt-3 text-sm text-white/60 leading-relaxed max-w-md">
                             Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
                         </p>
                     </div>
@@ -4452,72 +4695,134 @@ cgRenderGradeDist();
      CONTACT US VIEW
 ============================================================--}}
 <div data-view="contact" class="hidden">
-    <section class="relative overflow-hidden hero-bg">
-        <div class="pointer-events-none absolute inset-0 -z-10">
-            <div class="absolute -top-32 right-1/4 w-[520px] h-[520px] rounded-full bg-navy-100/60 blur-3xl"></div>
-            <div class="absolute bottom-0 left-0 w-[420px] h-[420px] rounded-full bg-brand-100/40 blur-3xl"></div>
-        </div>
-        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
-            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-ink-500">
-                <a data-route href="#/" class="hover:text-brand-600 transition">Home</a><span>›</span><span class="text-navy-900">Contact us</span>
-            </div>
-            <h1 class="reveal reveal-delay-1 mt-3 font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight text-navy-900">
-                Talk to <span class="text-brand-600">us.</span>
-            </h1>
-            <p class="reveal reveal-delay-2 mt-4 text-lg text-navy-700/80 max-w-2xl">
-                Press, partnerships, agent applications, or just questions — drop us a line and a real human will reply within one business day.
-            </p>
+    <style>
+        [data-view="contact"] .contact-hero {
+            background:
+                radial-gradient(ellipse 70% 60% at 0% 30%, rgba(14,30,80,.8) 0%, transparent 65%),
+                radial-gradient(ellipse 60% 80% at 100% 70%, rgba(5,15,50,.9) 0%, transparent 65%),
+                linear-gradient(160deg, #04112e 0%, #071730 40%, #050e26 100%);
+            position: relative;
+        }
+        [data-view="contact"] .contact-hero::before {
+            content:""; position:absolute; inset:0; pointer-events:none;
+            background-image:
+                linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.055) 1px, transparent 1px);
+            background-size: 52px 52px;
+            mask-image: radial-gradient(ellipse 80% 80% at 30% 50%, black, transparent 80%);
+        }
+        [data-view="contact"] .contact-input {
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.12);
+            color: #fff;
+            transition: border-color .2s ease, background .2s ease;
+        }
+        [data-view="contact"] .contact-input::placeholder { color: rgba(255,255,255,.35); }
+        [data-view="contact"] .contact-input:focus {
+            outline: none;
+            border-color: rgba(59,130,246,.6);
+            background: rgba(255,255,255,.09);
+        }
+        [data-view="contact"] .contact-input option { background: #071730; color: #fff; }
+        [data-view="contact"] .contact-photo-wrap {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08);
+        }
+        [data-view="contact"] .contact-photo-wrap::after {
+            content:""; position:absolute; inset:0; pointer-events:none;
+            background: linear-gradient(180deg, transparent 40%, rgba(4,17,46,.85) 100%);
+        }
+    </style>
 
-            <div class="mt-12 grid lg:grid-cols-12 gap-10">
-                <div class="reveal reveal-left lg:col-span-5 space-y-4">
-                    @foreach ([
-                        ['i'=>'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z','t'=>'Email','v'=>'support@auxilio.app','h'=>'mailto:support@auxilio.app'],
-                        ['i'=>'M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z','t'=>'Phone','v'=>'(704) 555-0127','h'=>'tel:+17045550127'],
-                        ['i'=>'M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z','t'=>'Headquarters','v'=>'1 Mission Way, San Francisco, CA 94103','h'=>'#'],
-                    ] as $info)
-                        <a href="{{ $info['h'] }}" class="flex items-start gap-4 rounded-md border border-ink-100 bg-white p-5 hover:shadow-lg transition">
-                            <span class="grid place-items-center w-11 h-11 rounded-md bg-brand-50 text-brand-600 shrink-0">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $info['i'] }}"/></svg>
+    <section class="contact-hero relative overflow-hidden min-h-screen">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
+
+            {{-- Breadcrumb --}}
+            <div class="reveal flex items-center gap-2 text-xs font-mono uppercase tracking-[.2em] text-white/40 mb-10">
+                <a data-route href="#/" class="hover:text-white transition">Home</a>
+                <span>›</span>
+                <span class="text-white/70">Contact us</span>
+            </div>
+
+            {{-- Two-column: form left, photo right --}}
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+                {{-- LEFT: heading + form --}}
+                <div>
+                    <h1 class="reveal font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] tracking-tight text-white leading-[1.05] mb-4">
+                        Talk to <span style="background:linear-gradient(90deg,#FB0606,#f56565);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">us.</span>
+                    </h1>
+                    <p class="reveal mt-2 text-base text-white/60 max-w-lg leading-relaxed mb-8">
+                        Press, partnerships, agent applications, or just questions — drop us a line and a real human will reply within one business day.
+                    </p>
+
+                    {{-- Email chip --}}
+                    <div class="reveal mb-8">
+                        <a href="mailto:support@auxilio.app" class="inline-flex items-center gap-3 rounded-xl border border-white/10 bg-white/[.05] px-5 py-3.5 hover:bg-white/[.09] transition">
+                            <span class="grid place-items-center w-9 h-9 rounded-lg bg-brand-600/20 border border-brand-500/30 text-brand-400">
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                             </span>
                             <div>
-                                <p class="text-xs font-bold uppercase tracking-wider text-ink-500">{{ $info['t'] }}</p>
-                                <p class="mt-1 font-semibold text-navy-900">{{ $info['v'] }}</p>
+                                <p class="text-[10px] font-bold uppercase tracking-wider text-white/40">Email</p>
+                                <p class="text-sm font-semibold text-white">support@auxilio.app</p>
                             </div>
                         </a>
-                    @endforeach
+                    </div>
+
+                    <form action="#contact" method="POST" class="reveal space-y-5">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <label class="block">
+                                <span class="text-xs font-bold uppercase tracking-wider text-white/60 block mb-1.5">Your name</span>
+                                <input type="text" name="name" required class="contact-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Jane Doe" />
+                            </label>
+                            <label class="block">
+                                <span class="text-xs font-bold uppercase tracking-wider text-white/60 block mb-1.5">Email</span>
+                                <input type="email" name="email" required class="contact-input w-full rounded-xl px-4 py-3 text-sm" placeholder="you@example.com" />
+                            </label>
+                        </div>
+                        <label class="block">
+                            <span class="text-xs font-bold uppercase tracking-wider text-white/60 block mb-1.5">Topic</span>
+                            <select name="topic" class="contact-input w-full rounded-xl px-4 py-3 text-sm">
+                                <option>General question</option>
+                                <option>Become a Super Agent</option>
+                                <option>Partnership / press</option>
+                                <option>Bug report</option>
+                                <option>Account help</option>
+                            </select>
+                        </label>
+                        <label class="block">
+                            <span class="text-xs font-bold uppercase tracking-wider text-white/60 block mb-1.5">Message</span>
+                            <textarea name="message" rows="5" required class="contact-input w-full rounded-xl px-4 py-3 text-sm" placeholder="Tell us what's on your mind…"></textarea>
+                        </label>
+                        <div class="flex items-center gap-4">
+                            <button type="submit" class="inline-flex items-center gap-2 rounded-xl text-white text-sm font-bold px-7 py-3.5 transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#FB0606,#c8202f);">
+                                Send message
+                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+                            </button>
+                        </div>
+                        <p class="text-xs text-white/30">By submitting you agree to our privacy policy. We never share your details.</p>
+                    </form>
                 </div>
 
-                <form action="#contact" method="POST" class="reveal reveal-right lg:col-span-7 rounded-md border border-ink-100 bg-white p-7 shadow-sm space-y-5">
-                    <div class="grid sm:grid-cols-2 gap-5">
-                        <label class="block">
-                            <span class="text-xs font-bold uppercase tracking-wider text-navy-900">Your name</span>
-                            <input type="text" name="name" required class="mt-1.5 w-full rounded-md border border-ink-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100 transition" placeholder="Jane Doe" />
-                        </label>
-                        <label class="block">
-                            <span class="text-xs font-bold uppercase tracking-wider text-navy-900">Email</span>
-                            <input type="email" name="email" required class="mt-1.5 w-full rounded-md border border-ink-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100 transition" placeholder="you@example.com" />
-                        </label>
+                {{-- RIGHT: dispatch operator photo --}}
+                <div class="reveal reveal-right hidden lg:block">
+                    <div class="contact-photo-wrap aspect-[4/5]">
+                        <img src="/images/contact-dispatch.jpg" alt="Auxilio dispatch operator monitoring live emergency feeds"
+                            class="w-full h-full object-cover object-center"
+                            onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1a4a,#1e3a5f)'; this.style.display='none';" />
+                        {{-- overlay caption --}}
+                        <div class="absolute bottom-0 left-0 right-0 z-10 p-6">
+                            <div class="flex items-center gap-2.5 mb-2">
+                                <span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span></span>
+                                <span class="text-xs font-bold uppercase tracking-[.2em] text-red-400">Live Dispatch Center</span>
+                            </div>
+                            <p class="text-sm text-white/80 leading-relaxed">Our trained operators monitor incoming alerts 24/7 and coordinate verified responders in real time.</p>
+                        </div>
                     </div>
-                    <label class="block">
-                        <span class="text-xs font-bold uppercase tracking-wider text-navy-900">Topic</span>
-                        <select name="topic" class="mt-1.5 w-full rounded-md border border-ink-200 px-4 py-3 text-sm bg-white focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100 transition">
-                            <option>General question</option>
-                            <option>Become a Super Agent</option>
-                            <option>Partnership / press</option>
-                            <option>Bug report</option>
-                            <option>Account help</option>
-                        </select>
-                    </label>
-                    <label class="block">
-                        <span class="text-xs font-bold uppercase tracking-wider text-navy-900">Message</span>
-                        <textarea name="message" rows="5" required class="mt-1.5 w-full rounded-md border border-ink-200 px-4 py-3 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100 transition" placeholder="Tell us what's on your mind…"></textarea>
-                    </label>
-                    <button type="submit" class="inline-flex items-center gap-2 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold px-6 py-3 transition">
-                        Send message
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
-                    </button>
-                    <p class="text-xs text-ink-500">By submitting you agree to our privacy policy. We never share your details.</p>
-                </form>
+                </div>
+
             </div>
         </div>
     </section>
@@ -5612,6 +5917,474 @@ cgRenderGradeDist();
     </section>
 </div>
 
+{{-- =======================================================================
+     EA — EMERGENCY ALERTS VIEW  (v2 — full redesign)
+========================================================================--}}
+<div data-view="ea" class="hidden">
+
+<style>
+/* ============================================================
+   EA PAGE v2 — Cinematic Ops-Center
+============================================================ */
+[data-view="ea"] {
+    background: #03080f;
+    min-height: 100vh;
+    color: #e2e8f0;
+    font-family: inherit;
+}
+
+/* ----- Scanline texture ----- */
+[data-view="ea"] .ea-scanlines {
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,200,255,.018) 3px, rgba(0,200,255,.018) 4px);
+    pointer-events: none;
+}
+
+/* ----- Ticker ----- */
+@keyframes ea2-ticker { from { transform:translateX(100%); } to { transform:translateX(-200%); } }
+[data-view="ea"] .ea-ticker-track { animation: ea2-ticker 35s linear infinite; white-space:nowrap; }
+
+/* ----- Radar sweep ----- */
+@keyframes ea2-sweep { to { transform: rotate(360deg); } }
+[data-view="ea"] .ea-sweep { animation: ea2-sweep 4s linear infinite; transform-origin: center; }
+
+/* ----- Pulse rings ----- */
+@keyframes ea2-ring {
+    0%   { transform:scale(.5); opacity:.9; }
+    100% { transform:scale(3); opacity:0; }
+}
+[data-view="ea"] .ea-ring { animation: ea2-ring 2.8s ease-out infinite; }
+[data-view="ea"] .ea-ring:nth-child(2) { animation-delay:.93s; }
+[data-view="ea"] .ea-ring:nth-child(3) { animation-delay:1.86s; }
+
+/* ----- Live dot ----- */
+@keyframes ea2-dot { 0%,100%{box-shadow:0 0 0 0 rgba(251,6,6,.7);} 50%{box-shadow:0 0 0 8px rgba(251,6,6,0);} }
+[data-view="ea"] .ea-ldot { animation: ea2-dot 1.5s ease infinite; }
+
+/* ----- Card entrance ----- */
+@keyframes ea2-in { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:none;} }
+[data-view="ea"] .ea-card { animation: ea2-in .5s cubic-bezier(.16,1,.3,1) both; }
+[data-view="ea"] .ea-card:nth-child(1){animation-delay:.00s}[data-view="ea"] .ea-card:nth-child(2){animation-delay:.06s}
+[data-view="ea"] .ea-card:nth-child(3){animation-delay:.12s}[data-view="ea"] .ea-card:nth-child(4){animation-delay:.18s}
+[data-view="ea"] .ea-card:nth-child(5){animation-delay:.24s}[data-view="ea"] .ea-card:nth-child(6){animation-delay:.30s}
+[data-view="ea"] .ea-card:nth-child(7){animation-delay:.36s}[data-view="ea"] .ea-card:nth-child(8){animation-delay:.42s}
+[data-view="ea"] .ea-card:nth-child(9){animation-delay:.48s}[data-view="ea"] .ea-card:nth-child(10){animation-delay:.54s}
+[data-view="ea"] .ea-card:nth-child(11){animation-delay:.60s}[data-view="ea"] .ea-card:nth-child(12){animation-delay:.66s}
+
+/* ----- Bar grow ----- */
+@keyframes ea2-bar { from{width:0;} }
+[data-view="ea"] .ea-bar { animation: ea2-bar 1s cubic-bezier(.22,1,.36,1) both; }
+
+/* ----- New alert flash ----- */
+@keyframes ea2-flash { 0%,100%{background:rgba(251,6,6,0);} 25%{background:rgba(251,6,6,.15);} }
+[data-view="ea"] .ea-new-flash { animation: ea2-flash 2s ease 1; }
+
+/* ----- Glitch title ----- */
+@keyframes ea2-glitch1 { 0%,94%,100%{clip-path:none;transform:none;} 95%{clip-path:inset(20% 0 60% 0);transform:translateX(-4px);} 97%{clip-path:inset(70% 0 5% 0);transform:translateX(4px);} }
+[data-view="ea"] .ea-glitch { animation: ea2-glitch1 8s ease infinite; }
+
+/* ----- Type badge colours ----- */
+[data-view="ea"] .eab-shooting  { background:rgba(239,68,68,.15); color:#fca5a5; border-color:rgba(239,68,68,.4); }
+[data-view="ea"] .eab-robbery   { background:rgba(249,115,22,.15); color:#fdba74; border-color:rgba(249,115,22,.4); }
+[data-view="ea"] .eab-assault   { background:rgba(234,179,8,.15);  color:#fde047; border-color:rgba(234,179,8,.4); }
+[data-view="ea"] .eab-domestic  { background:rgba(168,85,247,.15); color:#d8b4fe; border-color:rgba(168,85,247,.4); }
+[data-view="ea"] .eab-breakin   { background:rgba(59,130,246,.15); color:#93c5fd; border-color:rgba(59,130,246,.4); }
+[data-view="ea"] .eab-fire      { background:rgba(239,68,68,.15);  color:#fca5a5; border-color:rgba(239,68,68,.4); }
+[data-view="ea"] .eab-medical   { background:rgba(16,185,129,.15); color:#6ee7b7; border-color:rgba(16,185,129,.4); }
+[data-view="ea"] .eab-carjack   { background:rgba(236,72,153,.15); color:#f9a8d4; border-color:rgba(236,72,153,.4); }
+
+/* Left border colours per type */
+[data-view="ea"] [data-ealeft="shooting"] { border-left:3px solid #ef4444; }
+[data-view="ea"] [data-ealeft="robbery"]  { border-left:3px solid #f97316; }
+[data-view="ea"] [data-ealeft="assault"]  { border-left:3px solid #eab308; }
+[data-view="ea"] [data-ealeft="domestic"] { border-left:3px solid #a855f7; }
+[data-view="ea"] [data-ealeft="breakin"]  { border-left:3px solid #3b82f6; }
+[data-view="ea"] [data-ealeft="fire"]     { border-left:3px solid #ef4444; }
+[data-view="ea"] [data-ealeft="medical"]  { border-left:3px solid #10b981; }
+[data-view="ea"] [data-ealeft="carjack"]  { border-left:3px solid #ec4899; }
+
+/* Bar progress fill colours */
+[data-view="ea"] .eas-dispatched { color:#fbbf24; } [data-view="ea"] .ea-fill-dispatched { background:#fbbf24; }
+[data-view="ea"] .eas-enroute    { color:#60a5fa; } [data-view="ea"] .ea-fill-enroute    { background:#60a5fa; }
+[data-view="ea"] .eas-onscene    { color:#fb923c; } [data-view="ea"] .ea-fill-onscene    { background:#fb923c; }
+[data-view="ea"] .eas-resolved   { color:#34d399; } [data-view="ea"] .ea-fill-resolved   { background:#34d399; }
+
+/* Filter pill */
+[data-view="ea"] .ea-fp { border:1px solid rgba(255,255,255,.10); color:rgba(255,255,255,.55); cursor:pointer; transition:all .18s ease; }
+[data-view="ea"] .ea-fp:hover { border-color:rgba(255,255,255,.28); color:#fff; background:rgba(255,255,255,.07); }
+[data-view="ea"] .ea-fp.ea-on  { background:rgba(239,68,68,.2); border-color:rgba(239,68,68,.55); color:#fca5a5; }
+
+/* Stat cards */
+[data-view="ea"] .ea-stat { transition:transform .2s,box-shadow .2s; }
+[data-view="ea"] .ea-stat:hover { transform:translateY(-4px); box-shadow:0 20px 40px -10px rgba(0,0,0,.6); }
+
+/* Section divider label */
+[data-view="ea"] .ea-section-label {
+    display:flex; align-items:center; gap:12px; color:rgba(255,255,255,.3);
+    font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; margin-bottom:20px;
+}
+[data-view="ea"] .ea-section-label::after { content:""; flex:1; height:1px; background:rgba(255,255,255,.07); }
+
+/* Officer badge */
+[data-view="ea"] .ea-ofbadge { display:inline-flex; align-items:center; justify-content:center;
+    width:24px; height:24px; border-radius:50%; background:#0f2044; border:1.5px solid rgba(96,165,250,.4);
+    font-size:10px; font-weight:700; color:#93c5fd; }
+
+/* Number counter */
+@keyframes ea2-count { from{opacity:0;transform:scale(.7);} to{opacity:1;transform:none;} }
+[data-view="ea"] .ea-count-num { animation: ea2-count .6s cubic-bezier(.34,1.56,.64,1) .3s both; }
+</style>
+
+{{-- ══════════════════════════════════════════
+     LIVE TICKER
+══════════════════════════════════════════ --}}
+<div class="relative overflow-hidden" style="background:rgba(220,38,38,.12); border-bottom:1px solid rgba(220,38,38,.25); height:32px;">
+    <div class="ea-ticker-track inline-flex items-center gap-0 h-full" style="will-change:transform;">
+        @foreach(range(0,1) as $_)
+        <span class="inline-flex items-center gap-6 px-8 text-[11px] font-bold uppercase tracking-[.18em] text-red-400">
+            <span class="inline-flex items-center gap-1.5"><span class="ea-ldot inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span> LIVE FEED</span>
+            <span class="text-red-500/60">·</span>
+            <span class="text-white/70">3 Critical Incidents Active</span>
+            <span class="text-red-500/60">·</span>
+            <span class="text-white/70">24 Officers Deployed</span>
+            <span class="text-red-500/60">·</span>
+            <span class="text-white/70">Avg Response: 2m 14s</span>
+            <span class="text-red-500/60">·</span>
+            <span class="text-white/70">Last update: <span class="ea-tick-time font-mono">--:--:--</span></span>
+            <span class="text-red-500/60">·</span>
+            <span class="text-white/70">Auxilio Emergency Network Active</span>
+            <span class="text-red-500/60">·</span>
+        </span>
+        @endforeach
+    </div>
+</div>
+
+{{-- ══════════════════════════════════════════
+     HERO  — ops-center cinematic
+══════════════════════════════════════════ --}}
+<section class="relative overflow-hidden" style="min-height:560px; background:radial-gradient(ellipse 90% 70% at 50% -10%, rgba(220,38,38,.18) 0%, transparent 65%), linear-gradient(170deg,#06101f 0%,#03080f 100%);">
+    <div class="ea-scanlines absolute inset-0 z-0 pointer-events-none"></div>
+
+    {{-- Grid overlay --}}
+    <div class="absolute inset-0 z-0 pointer-events-none" style="background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 100% at 50% 0%,black,transparent 90%);"></div>
+
+    {{-- Radar graphic --}}
+    <div class="absolute right-8 top-1/2 -translate-y-1/2 pointer-events-none z-0 hidden lg:block" style="width:360px;height:360px;opacity:.25;">
+        <svg viewBox="0 0 200 200" class="w-full h-full">
+            {{-- rings --}}
+            <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(239,68,68,.5)" stroke-width=".5"/>
+            <circle cx="100" cy="100" r="65" fill="none" stroke="rgba(239,68,68,.4)" stroke-width=".5"/>
+            <circle cx="100" cy="100" r="40" fill="none" stroke="rgba(239,68,68,.3)" stroke-width=".5"/>
+            <circle cx="100" cy="100" r="15" fill="none" stroke="rgba(239,68,68,.3)" stroke-width=".5"/>
+            {{-- crosshairs --}}
+            <line x1="100" y1="5"   x2="100" y2="195" stroke="rgba(239,68,68,.2)" stroke-width=".5"/>
+            <line x1="5"   y1="100" x2="195" y2="100" stroke="rgba(239,68,68,.2)" stroke-width=".5"/>
+            {{-- sweep gradient --}}
+            <g class="ea-sweep">
+                <defs>
+                    <radialGradient id="sweepGrad" cx="50%" cy="50%">
+                        <stop offset="0%"   stop-color="#ef4444" stop-opacity=".7"/>
+                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+                    </radialGradient>
+                </defs>
+                <path d="M100 100 L100 10 A90 90 0 0 1 175 145 Z" fill="url(#sweepGrad)" opacity=".6"/>
+            </g>
+            {{-- blips --}}
+            <circle cx="130" cy="60"  r="3" fill="#ef4444" opacity=".9"><animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/></circle>
+            <circle cx="75"  cy="140" r="2" fill="#fb923c" opacity=".9"><animate attributeName="opacity" values="1;.3;1" dur="2.3s" repeatCount="indefinite"/></circle>
+            <circle cx="155" cy="110" r="2" fill="#ef4444" opacity=".8"><animate attributeName="opacity" values="1;.2;1" dur="1.5s" repeatCount="indefinite"/></circle>
+            <circle cx="55"  cy="75"  r="1.5" fill="#fbbf24" opacity=".9"><animate attributeName="opacity" values="1;.4;1" dur="2.8s" repeatCount="indefinite"/></circle>
+        </svg>
+    </div>
+
+    {{-- Pulse rings behind center dot --}}
+    <div class="absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" style="width:6px;height:6px;">
+        <div class="ea-ring absolute rounded-full border border-red-500/40" style="width:200px;height:200px;margin:-97px;"></div>
+        <div class="ea-ring absolute rounded-full border border-red-500/30" style="width:200px;height:200px;margin:-97px;"></div>
+        <div class="ea-ring absolute rounded-full border border-red-500/20" style="width:200px;height:200px;margin:-97px;"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pt-14 pb-16 lg:pt-20">
+
+        {{-- Live badge --}}
+        <div class="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-8" style="background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);">
+            <span class="ea-ldot w-2 h-2 rounded-full bg-red-500"></span>
+            <span class="text-[11px] font-bold uppercase tracking-[.22em] text-red-400">Live Emergency Alerts</span>
+        </div>
+
+        <h1 class="ea-glitch font-black text-5xl sm:text-6xl lg:text-7xl tracking-tight text-white leading-[.95] mb-6" style="text-shadow:0 0 60px rgba(220,38,38,.3);">
+            Emergency<br>
+            <span style="background:linear-gradient(90deg,#ef4444 0%,#f97316 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Alert Center</span>
+        </h1>
+        <p class="text-white/50 text-base sm:text-lg max-w-lg leading-relaxed mb-12">
+            Real-time dispatches — incident type, address, officer count, and live status as events unfold.
+        </p>
+
+        {{-- Stat strip --}}
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-2xl">
+            @foreach([
+                ['n'=>'3',     'l'=>'Active Incidents',  'c'=>'#ef4444', 'g'=>'rgba(239,68,68,.15)'],
+                ['n'=>'24',    'l'=>'Officers Deployed', 'c'=>'#60a5fa', 'g'=>'rgba(96,165,250,.12)'],
+                ['n'=>'2m14s', 'l'=>'Avg Response',      'c'=>'#fbbf24', 'g'=>'rgba(251,191,36,.12)'],
+                ['n'=>'17',    'l'=>'Resolved Today',    'c'=>'#34d399', 'g'=>'rgba(52,211,153,.12)'],
+            ] as $s)
+            <div class="ea-stat rounded-xl px-4 py-4 text-center" style="background:{{ $s['g'] }};border:1px solid {{ $s['c'] }}30;">
+                <div class="ea-count-num text-2xl sm:text-3xl font-black mb-1" style="color:{{ $s['c'] }};">{{ $s['n'] }}</div>
+                <div class="text-[10px] font-bold uppercase tracking-[.14em] text-white/40">{{ $s['l'] }}</div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- ══════════════════════════════════════════
+     FILTER + COUNT BAR
+══════════════════════════════════════════ --}}
+<div class="sticky top-[78px] z-30" style="background:rgba(3,8,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);">
+    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-2.5 flex items-center gap-2 overflow-x-auto" style="scrollbar-width:none;">
+        <span class="text-[10px] font-bold uppercase tracking-[.18em] text-white/25 shrink-0 mr-1">Filter</span>
+        @foreach([
+            ['k'=>'all',      'l'=>'All'],
+            ['k'=>'shooting', 'l'=>'Shooting'],
+            ['k'=>'robbery',  'l'=>'Robbery'],
+            ['k'=>'assault',  'l'=>'Assault'],
+            ['k'=>'breakin',  'l'=>'Break-In'],
+            ['k'=>'domestic', 'l'=>'Domestic'],
+            ['k'=>'fire',     'l'=>'Fire'],
+            ['k'=>'medical',  'l'=>'Medical'],
+            ['k'=>'carjack',  'l'=>'Carjacking'],
+        ] as $f)
+        <button class="ea-fp{{ $f['k']==='all'?' ea-on':'' }} shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="{{ $f['k'] }}">{{ $f['l'] }}</button>
+        @endforeach
+        <span class="ml-auto shrink-0 text-[11px] text-white/25 hidden sm:block"><span id="ea-count">18</span> incidents</span>
+    </div>
+</div>
+
+{{-- ══════════════════════════════════════════
+     INCIDENT FEED
+══════════════════════════════════════════ --}}
+@php
+$incidents = [
+    ['type'=>'shooting', 'label'=>'SHOOTING',   'address'=>'847 Clinton Ave, Newark, NJ',            'officers'=>6, 'status'=>'onscene',    'pct'=>85, 'ago'=>'3m ago',  'id'=>'NW-2491','note'=>'Multiple shots fired — 2 units on scene, perimeter set'],
+    ['type'=>'robbery',  'label'=>'ROBBERY',    'address'=>'1204 Springfield Ave, Irvington, NJ',    'officers'=>4, 'status'=>'enroute',    'pct'=>55, 'ago'=>'6m ago',  'id'=>'IR-0882','note'=>'Armed suspect, blue hoodie — fled north on foot'],
+    ['type'=>'assault',  'label'=>'ASSAULT',    'address'=>'390 Market St, Newark, NJ',              'officers'=>3, 'status'=>'onscene',    'pct'=>90, 'ago'=>'9m ago',  'id'=>'NW-2489','note'=>'Victim conscious — EMS en route'],
+    ['type'=>'breakin',  'label'=>'BREAK-IN',   'address'=>'55 Park Ave, East Orange, NJ',           'officers'=>2, 'status'=>'dispatched', 'pct'=>22, 'ago'=>'11m ago', 'id'=>'EO-0341','note'=>'Residential break-in — rear window forced'],
+    ['type'=>'domestic', 'label'=>'DOMESTIC',   'address'=>'721 South Orange Ave, Newark, NJ',       'officers'=>3, 'status'=>'enroute',    'pct'=>60, 'ago'=>'14m ago', 'id'=>'NW-2488','note'=>'Verbal altercation escalating — caller still on line'],
+    ['type'=>'shooting', 'label'=>'SHOOTING',   'address'=>'3310 Kennedy Blvd, Jersey City, NJ',     'officers'=>7, 'status'=>'onscene',    'pct'=>95, 'ago'=>'17m ago', 'id'=>'JC-1142','note'=>'Drive-by — K9 deployed, 2 suspects detained'],
+    ['type'=>'fire',     'label'=>'FIRE',       'address'=>'220 Avon Ave, Newark, NJ',               'officers'=>5, 'status'=>'onscene',    'pct'=>75, 'ago'=>'20m ago', 'id'=>'NW-2487','note'=>'Structure fire — 2nd floor residential, building evacuated'],
+    ['type'=>'carjack',  'label'=>'CARJACKING', 'address'=>'I-78 Westbound, Exit 54, Newark, NJ',    'officers'=>4, 'status'=>'enroute',    'pct'=>45, 'ago'=>'22m ago', 'id'=>'NW-2486','note'=>'Silver Honda Civic NJ-HJ492 — BOLO issued'],
+    ['type'=>'medical',  'label'=>'MEDICAL',    'address'=>'940 Bergen Ave, Jersey City, NJ',        'officers'=>2, 'status'=>'onscene',    'pct'=>80, 'ago'=>'25m ago', 'id'=>'JC-1141','note'=>'Unresponsive male — AED deployed, EMS on scene'],
+    ['type'=>'robbery',  'label'=>'ROBBERY',    'address'=>'670 Frelinghuysen Ave, Newark, NJ',      'officers'=>3, 'status'=>'dispatched', 'pct'=>18, 'ago'=>'28m ago', 'id'=>'NW-2485','note'=>'Gas station hold-up — suspect armed with handgun'],
+    ['type'=>'breakin',  'label'=>'BREAK-IN',   'address'=>'102 Roseville Ave, Newark, NJ',          'officers'=>2, 'status'=>'enroute',    'pct'=>50, 'ago'=>'31m ago', 'id'=>'NW-2484','note'=>'Commercial break-in — silent alarm triggered'],
+    ['type'=>'assault',  'label'=>'ASSAULT',    'address'=>'444 Bloomfield Ave, Montclair, NJ',      'officers'=>2, 'status'=>'resolved',   'pct'=>100,'ago'=>'34m ago', 'id'=>'MC-0215','note'=>'Suspect in custody — victim transported to hospital'],
+    ['type'=>'carjack',  'label'=>'CARJACKING', 'address'=>'Raymond Blvd & Mulberry St, Newark, NJ', 'officers'=>5, 'status'=>'onscene',    'pct'=>70, 'ago'=>'41m ago', 'id'=>'NW-2483','note'=>'Suspect detained — vehicle recovered two blocks east'],
+    ['type'=>'fire',     'label'=>'FIRE',       'address'=>'1847 Broad St, Newark, NJ',              'officers'=>4, 'status'=>'resolved',   'pct'=>100,'ago'=>'45m ago', 'id'=>'NW-2482','note'=>'Fire extinguished — arson investigation underway'],
+    ['type'=>'medical',  'label'=>'MEDICAL',    'address'=>'250 Washington St, Newark, NJ',          'officers'=>1, 'status'=>'resolved',   'pct'=>100,'ago'=>'49m ago', 'id'=>'NW-2481','note'=>'Patient stabilised — transported to University Hospital'],
+    ['type'=>'robbery',  'label'=>'ROBBERY',    'address'=>'2300 McCarter Hwy, Newark, NJ',          'officers'=>3, 'status'=>'resolved',   'pct'=>100,'ago'=>'53m ago', 'id'=>'NW-2480','note'=>'Suspect apprehended — stolen property recovered'],
+    ['type'=>'shooting', 'label'=>'SHOOTING',   'address'=>'100 Jones St, Newark, NJ',               'officers'=>8, 'status'=>'resolved',   'pct'=>100,'ago'=>'58m ago', 'id'=>'NW-2479','note'=>'Scene cleared — 1 victim at hospital, 2 in custody'],
+    ['type'=>'domestic', 'label'=>'DOMESTIC',   'address'=>'58 William St, East Orange, NJ',         'officers'=>2, 'status'=>'resolved',   'pct'=>100,'ago'=>'63m ago', 'id'=>'EO-0339','note'=>'De-escalated — report filed, no injuries'],
+];
+$sm = [
+    'dispatched'=>['l'=>'Dispatched','c'=>'eas-dispatched','f'=>'ea-fill-dispatched'],
+    'enroute'   =>['l'=>'En Route',  'c'=>'eas-enroute',   'f'=>'ea-fill-enroute'],
+    'onscene'   =>['l'=>'On Scene',  'c'=>'eas-onscene',   'f'=>'ea-fill-onscene'],
+    'resolved'  =>['l'=>'Resolved',  'c'=>'eas-resolved',  'f'=>'ea-fill-resolved'],
+];
+@endphp
+
+<div class="mx-auto max-w-6xl px-5 sm:px-8 py-10">
+
+    <div class="ea-section-label">Live Incident Feed <span class="flex items-center gap-1.5"><span class="ea-ldot w-1.5 h-1.5 rounded-full bg-green-400"></span>Auto-refreshing</span></div>
+
+    <div id="ea-feed" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+
+    @foreach($incidents as $i => $inc)
+    @php $s = $sm[$inc['status']]; $resolved = $inc['status']==='resolved'; @endphp
+    <div class="ea-card{{ $resolved ? ' opacity-50' : '' }}" data-ea-type="{{ $inc['type'] }}" style="animation-delay:{{ $i * 0.06 }}s;">
+        <div class="rounded-2xl overflow-hidden" data-ealeft="{{ $inc['type'] }}"
+             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
+             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
+             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
+
+            {{-- Card header --}}
+            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
+                <div class="flex items-center gap-2">
+                    <span class="eab-{{ $inc['type'] }} text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">{{ $inc['label'] }}</span>
+                    @if(!$resolved)
+                    <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
+                    @endif
+                </div>
+                <span class="font-mono text-[10px] text-white/25">{{ $inc['id'] }}</span>
+            </div>
+
+            {{-- Card body --}}
+            <div class="px-4 py-3.5 space-y-2.5">
+
+                {{-- Address — most prominent info --}}
+                <div class="flex items-start gap-2.5">
+                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <span class="text-sm font-semibold text-white leading-snug">{{ $inc['address'] }}</span>
+                </div>
+
+                {{-- Note --}}
+                <p class="text-[12px] text-white/45 leading-relaxed pl-6">{{ $inc['note'] }}</p>
+
+                {{-- Officers row --}}
+                <div class="flex items-center justify-between pl-6 pt-0.5">
+                    <div class="flex items-center gap-1.5">
+                        @for($o=0;$o<min($inc['officers'],5);$o++)<span class="ea-ofbadge">{{ $o+1 }}</span>@endfor
+                        @if($inc['officers']>5)<span class="text-[11px] text-white/40 ml-1">+{{ $inc['officers']-5 }}</span>@endif
+                    </div>
+                    <span class="text-[11px] font-bold text-blue-400">{{ $inc['officers'] }} officer{{ $inc['officers']>1?'s':'' }}</span>
+                </div>
+
+                {{-- Status + bar --}}
+                <div class="pl-6 pt-1">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-[11px] font-black uppercase tracking-[.12em] {{ $s['c'] }}">{{ $s['l'] }}</span>
+                        <span class="text-[11px] text-white/30 font-mono">{{ $inc['ago'] }}</span>
+                    </div>
+                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
+                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full {{ $s['f'] }}" style="width:{{ $inc['pct'] }}%;"></div>
+                    </div>
+                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
+                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+
+    </div>
+
+    {{-- New alert zone --}}
+    <div class="mt-6 rounded-xl py-5 px-6 text-center text-xs text-white/20" style="border:1px dashed rgba(255,255,255,.07);">
+        <span class="ea-ldot inline-block w-1.5 h-1.5 rounded-full bg-green-400 mr-2 align-middle"></span>
+        New incidents appear here as they come in
+    </div>
+</div>
+
+{{-- ══════════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════════ --}}
+<section class="py-20" style="background:linear-gradient(180deg,#03080f 0%,#060f1d 100%);border-top:1px solid rgba(255,255,255,.05);">
+    <div class="mx-auto max-w-5xl px-5 sm:px-8">
+        <div class="text-center mb-14">
+            <p class="text-[10px] font-bold uppercase tracking-[.25em] text-red-400 mb-3">How It Works</p>
+            <h2 class="text-3xl sm:text-4xl font-black text-white">Incident to officer — in seconds</h2>
+        </div>
+        <div class="grid sm:grid-cols-3 gap-5">
+            @foreach([
+                ['n'=>'01','t'=>'Incident Detected', 'b'=>'Citizen taps SOS or AI detects an anomaly. Type, GPS, and caller details are logged instantly.','c'=>'#ef4444','path'=>'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z'],
+                ['n'=>'02','t'=>'Officers Assigned',  'b'=>'The dispatch engine matches closest verified officers — by type, severity, and live availability.','c'=>'#60a5fa','path'=>'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z'],
+                ['n'=>'03','t'=>'Live Status Updates','b'=>'Every change — dispatched, en route, on scene, resolved — pushed to reporter and feed in real time.','c'=>'#34d399','path'=>'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'],
+            ] as $step)
+            <div class="relative rounded-2xl p-6 overflow-hidden" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);">
+                <div class="absolute top-4 right-5 text-6xl font-black" style="color:{{ $step['c'] }};opacity:.08;">{{ $step['n'] }}</div>
+                <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:{{ $step['c'] }}18;border:1px solid {{ $step['c'] }}35;">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="{{ $step['c'] }}" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="{{ $step['path'] }}"/></svg>
+                </div>
+                <h3 class="text-base font-bold text-white mb-2">{{ $step['t'] }}</h3>
+                <p class="text-sm text-white/40 leading-relaxed">{{ $step['b'] }}</p>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- ══════════════════════════════════════════
+     CTA
+══════════════════════════════════════════ --}}
+<section class="py-16 text-center" style="background:#03080f;border-top:1px solid rgba(255,255,255,.05);">
+    <div class="mx-auto max-w-lg px-5">
+        <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);">
+            <span class="ea-ldot w-1.5 h-1.5 rounded-full bg-red-500"></span>
+            <span class="text-[10px] font-bold uppercase tracking-[.2em] text-red-400">Stay Alert. Stay Safe.</span>
+        </div>
+        <h2 class="text-3xl font-black text-white mb-3">Get alerts on your phone</h2>
+        <p class="text-white/40 text-sm mb-8 leading-relaxed">Enable push notifications for emergencies in your area — the moment an incident is reported, you know.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a data-route href="#/citizen-app" class="inline-flex items-center justify-center gap-2 rounded-xl text-white px-7 py-3.5 text-sm font-bold transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#dc2626,#b91c1c);">
+                Get Citizen App
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </a>
+            <a data-route href="#/contact" class="inline-flex items-center justify-center gap-2 rounded-xl text-white/60 px-7 py-3.5 text-sm font-semibold border border-white/10 transition hover:border-white/25 hover:text-white">
+                Contact Us
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+(function(){
+    function pad(n){ return n<10?'0'+n:n; }
+    function tick(){
+        var d=new Date(), s=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+        document.querySelectorAll('.ea-tick-time').forEach(function(el){ el.textContent=s; });
+    }
+    tick(); setInterval(tick,1000);
+
+    document.querySelectorAll('.ea-fp').forEach(function(btn){
+        btn.addEventListener('click',function(){
+            var k=btn.getAttribute('data-ea-filter');
+            document.querySelectorAll('.ea-fp').forEach(function(b){ b.classList.remove('ea-on'); });
+            btn.classList.add('ea-on');
+            var cards=document.querySelectorAll('#ea-feed .ea-card'), v=0;
+            cards.forEach(function(c){
+                var show=(k==='all'||c.getAttribute('data-ea-type')===k);
+                c.style.display=show?'':'none';
+                if(show)v++;
+            });
+            var el=document.getElementById('ea-count');
+            if(el) el.textContent=v;
+        });
+    });
+
+    /* auto-spawn new incident every 20s on EA view */
+    var pool=[
+        {type:'shooting',label:'SHOOTING', address:'512 Bergen St, Newark, NJ',         officers:5, note:'Shots heard near intersection — units responding'},
+        {type:'robbery', label:'ROBBERY',  address:'88 Jefferson Ave, Elizabeth, NJ',   officers:3, note:'Store hold-up — suspect fled south on foot'},
+        {type:'medical', label:'MEDICAL',  address:'200 Lyons Ave, Newark, NJ',         officers:2, note:'Chest pains, elderly male — EMS en route'},
+        {type:'assault', label:'ASSAULT',  address:'330 Mt Prospect Ave, Newark, NJ',   officers:3, note:'Fight outside venue — 2 injured'},
+        {type:'breakin', label:'BREAK-IN', address:'775 Chancellor Ave, Irvington, NJ', officers:2, note:'Pharmacy alarm triggered — safe forced'},
+    ];
+    var pi=0,eaIv=null;
+    function spawn(){
+        var feed=document.getElementById('ea-feed'); if(!feed) return;
+        var inc=pool[pi%pool.length]; pi++;
+        var id='EA-'+(Math.floor(Math.random()*9000)+1000);
+        var d=new Date(), ts=pad(d.getHours())+':'+pad(d.getMinutes());
+        var html='<div class="ea-card ea-new-flash" data-ea-type="'+inc.type+'" style="animation:none;">'
+            +'<div class="rounded-2xl overflow-hidden" data-ealeft="'+inc.type+'" style="background:rgba(255,255,255,.05);border:1px solid rgba(220,38,38,.35);">'
+            +'<div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">'
+            +'<div class="flex items-center gap-2"><span class="eab-'+inc.type+' text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">'+inc.label+'</span>'
+            +'<span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>'
+            +'<span class="text-[9px] font-black uppercase tracking-wider text-red-400 animate-pulse">NEW</span></div>'
+            +'<span class="font-mono text-[10px] text-white/25">'+id+'</span></div>'
+            +'<div class="px-4 py-3.5 space-y-2.5">'
+            +'<div class="flex items-start gap-2.5"><svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>'
+            +'<span class="text-sm font-semibold text-white">'+inc.address+'</span></div>'
+            +'<p class="text-[12px] text-white/45 pl-6">'+inc.note+'</p>'
+            +'<div class="pl-6 pt-1"><div class="flex items-center justify-between mb-2">'
+            +'<span class="text-[11px] font-black uppercase tracking-[.12em] eas-dispatched">Dispatched</span>'
+            +'<span class="text-[11px] text-white/30 font-mono">Just now · '+ts+'</span></div>'
+            +'<div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);"><div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-dispatched" style="width:18%;"></div></div>'
+            +'</div></div></div></div>';
+        feed.insertAdjacentHTML('afterbegin',html);
+        var el=document.getElementById('ea-count');
+        if(el) el.textContent=parseInt(el.textContent||0)+1;
+    }
+    window.addEventListener('hashchange',function(){
+        if(location.hash==='#/ea'){ eaIv=setInterval(spawn,20000); }
+        else { clearInterval(eaIv); }
+    });
+    if(location.hash==='#/ea') eaIv=setInterval(spawn,20000);
+})();
+</script>
+
+</div>{{-- /data-view=ea --}}
+
+
 </main>
 
 {{-- =======================================================================
@@ -5929,7 +6702,7 @@ cgRenderGradeDist();
 
     function getRoute() {
         var h = (window.location.hash || '').replace(/^#\//, '');
-        var allowed = ['crime-map','crime-grade','sex-offender-map','how-it-works','agent-app','citizen-app','about','contact','privacy','terms','auxilio-ai'];
+        var allowed = ['crime-map','crime-grade','sex-offender-map','how-it-works','agent-app','citizen-app','about','contact','privacy','terms','auxilio-ai','ea'];
         if (allowed.indexOf(h) !== -1) return h;
         return 'home';
     }
@@ -5956,7 +6729,7 @@ cgRenderGradeDist();
         if (view === 'crime-grade' && typeof cgInit === 'function') cgInit();
         /* Hide footer & how-it-works strip on crime-grade, show on all other views */
         var globalFooter = document.querySelector('footer');
-        if (globalFooter) globalFooter.style.display = (view === 'crime-grade') ? 'none' : '';
+        if (globalFooter) globalFooter.style.display = (view === 'crime-grade' || view === 'ea') ? 'none' : '';
         // Re-trigger reveal animations on the now-visible view
         document.querySelectorAll('[data-view="'+view+'"] .reveal').forEach(function(el){
             el.classList.remove('is-visible');
