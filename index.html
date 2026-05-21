@@ -2441,9 +2441,10 @@ function cgRender(){
       ?'<span class="cg-dn" title="Improving">↓</span>'
       :d.trend==='up'?'<span class="cg-up" title="Worsening">↑</span>'
       :'<span class="cg-flat">→</span>';
-    var ab=d.nat?'':'<button class="cg-analyze-btn" onclick="cgAnalyze(\''+d.city.replace(/'/g,"\\'")+'\',\''+d.state+'\','+d.violent+','+d.property+','+d.murder+',\''+d.grade+'\','+d.decile+')">Analyze ›</button>';
+    var ab=d.nat?'':'<button class="cg-analyze-btn" onclick="event.stopPropagation();cgAnalyze(\''+d.city.replace(/'/g,"\\'")+'\',\''+d.state+'\','+d.violent+','+d.property+','+d.murder+',\''+d.grade+'\','+d.decile+')">View ›</button>';
     var delay=(idx*0.03).toFixed(2);
-    return '<tr class="cg-row-in'+(d.nat?' cg-nat':'')+'" style="animation-delay:'+delay+'s">'
+    var clickAttr=d.nat?'':' onclick="cgAnalyze(\''+d.city.replace(/'/g,"\\'")+'\',\''+d.state+'\','+d.violent+','+d.property+','+d.murder+',\''+d.grade+'\','+d.decile+')" style="cursor:pointer;animation-delay:'+delay+'s" onmouseover="this.style.background=\'#fafbfd\'" onmouseout="this.style.background=\'\'"';
+    return '<tr class="cg-row-in'+(d.nat?' cg-nat':'')+'"'+(d.nat?' style="animation-delay:'+delay+'s"':clickAttr)+'>'
       +'<td style="font-size:11px;color:#94a3b8;font-weight:600">'+d.rank+'</td>'
       +'<td><span class="cg-city">'+d.city+'<span class="cg-stag">'+d.state+'</span></span><span class="cg-ptag">'+cgFmtPop(d.pop||0)+'</span></td>'
       +'<td><span class="cg-grade-b" style="background:'+gc.bg+';color:'+gc.tx+'">'+d.grade+'</span></td>'
