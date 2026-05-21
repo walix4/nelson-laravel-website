@@ -1423,8 +1423,8 @@ var CG_RAW=[
 ];
 
 var GC={A:{bg:'#4ade80',tx:'#14532d'},B:{bg:'#34d399',tx:'#064e3b'},C:{bg:'#60a5fa',tx:'#1e3a8a'},D:{bg:'#fbbf24',tx:'#78350f'},F:{bg:'#f87171',tx:'#7f1d1d'}};
-/* States-map fill ramp — reuses the Crime Map incident-pin palette (green→red) */
-var CG_MAP_GRADE={A:'#10b981',B:'#3b82f6',C:'#f59e0b',D:'#f97316',F:'#dc2626'};
+/* States-map fill ramp — exact tag palette (green→blue→yellow→orange→red) */
+var CG_MAP_GRADE={A:'#22A620',B:'#399CD8',C:'#F1B72C',D:'#EE7728',F:'#E6201A'};
 var LEGEND_COLORS={
   A:{fill:'#4ade80',g1:'#15803d',gradient:'linear-gradient(135deg,#15803d,#22c55e)',glow:'rgba(74,222,128,.45)'},
   B:{fill:'#34d399',g1:'#0e7490',gradient:'linear-gradient(135deg,#0e7490,#06b6d4)',glow:'rgba(52,211,153,.45)'},
@@ -6448,6 +6448,21 @@ function eaApp() {
             };
             return images[t] || images['assault'];
         },
+        /* Crime-map tag + exact tag colour per incident type */
+        typeTag(t) {
+            const map = {
+                'shots-fired':      {tag:'H',  color:'#E6201A'},
+                'armed-robbery':    {tag:'RC', color:'#EE7728'},
+                'structure-fire':   {tag:'H',  color:'#E6201A'},
+                'assault':          {tag:'SC', color:'#F1B72C'},
+                'vehicle-accident': {tag:'PV', color:'#399CD8'},
+                'carjacking':       {tag:'RC', color:'#EE7728'},
+                'break-in':         {tag:'RC', color:'#EE7728'},
+                'domestic':         {tag:'SC', color:'#F1B72C'},
+                'medical':          {tag:'O',  color:'#22A620'},
+            };
+            return map[t] || {tag:'O', color:'#22A620'};
+        },
         agentAvatars(inc) {
             const pool = [
                 '/images/officer-1.jpg',
@@ -6772,16 +6787,12 @@ function eaApp() {
                     <div class="p-5">
                         {{-- Top row: icon + title + status --}}
                         <div class="flex items-start gap-3 mb-4">
-                            <div class="shrink-0 w-12 h-12 rounded-xl overflow-hidden relative"
-                                 style="border: 1px solid rgba(255,255,255,.1); box-shadow: 0 4px 12px -2px rgba(0,0,0,.4);">
-                                {{-- Stock photo (clean, no tint) --}}
-                                <img :src="typeImage(inc.type)" alt="" loading="lazy"
-                                     class="absolute inset-0 w-full h-full object-cover"
-                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                                {{-- SVG fallback if image fails --}}
-                                <div class="absolute inset-0 hidden items-center justify-center" style="background:#1a1a2e;">
-                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="#ef4444" x-html="typeIcon(inc.type)"></svg>
-                                </div>
+                            {{-- Crime-map tag badge (colour + tag per incident type) --}}
+                            <div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+                                 :style="`background:${typeTag(inc.type).color}; box-shadow: 0 4px 12px -2px ${typeTag(inc.type).color}73, inset 0 1px 0 rgba(255,255,255,.25);`">
+                                <span class="font-black text-white leading-none tracking-tight"
+                                      :class="typeTag(inc.type).tag.length > 1 ? 'text-base' : 'text-xl'"
+                                      x-text="typeTag(inc.type).tag"></span>
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-2 mb-1">
