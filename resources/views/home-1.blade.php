@@ -1817,11 +1817,11 @@ function cgScrollToStates(){
   var hero=document.getElementById('cg-hero-section');
   var legend=document.getElementById('cg-legend-bar');
   var main=document.getElementById('cg-main-section');
-  if(hero)hero.style.display='none';
+  if(hero)hero.style.display='';
   if(legend)legend.style.display='';
   if(main)main.style.display='';
-  window.scrollTo(0,0);
   setTimeout(cgInitMap,80);
+  if(main)main.scrollIntoView({behavior:'smooth'});
 }
 window.cgScrollToStates=cgScrollToStates;
 
@@ -1921,11 +1921,11 @@ window.cgInit=function(){
   document.getElementById('cg-states-view').style.display='block';
   document.getElementById('cg-cities-view').style.display='none';
   var ap=document.getElementById('cg-ai-panel');if(ap)ap.classList.remove('cg-show');
-  /* Skip hero — show map + legend directly */
+  /* Show hero section above, then legend + map section below */
   var hero=document.getElementById('cg-hero-section');
   var legend=document.getElementById('cg-legend-bar');
   var main=document.getElementById('cg-main-section');
-  if(hero)hero.style.display='none';
+  if(hero)hero.style.display='';
   if(legend)legend.style.display='';
   if(main)main.style.display='block';
   window.scrollTo(0,0);
