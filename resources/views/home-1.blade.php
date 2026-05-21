@@ -63,7 +63,7 @@
         </a>
 
         {{-- Desktop nav — fills remaining space, right-aligned --}}
-        <ul class="hidden lg:flex flex-1 items-center justify-end gap-5 xl:gap-6 text-sm font-medium text-white/80 whitespace-nowrap">
+        <ul class="hidden lg:flex flex-1 items-center justify-center gap-5 xl:gap-6 text-sm font-medium text-white/80 whitespace-nowrap">
             <li><a data-route href="#/"            class="nav-link hover:text-white transition">Home</a></li>
             <li><a data-route href="#/auxilio-ai"  class="nav-link inline-flex items-center gap-1 hover:text-white transition">
                 <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
