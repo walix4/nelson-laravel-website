@@ -4729,13 +4729,32 @@ cgRenderGradeDist();
         [data-view="contact"] .contact-input option { background: #071730; color: #fff; }
         [data-view="contact"] .contact-photo-wrap {
             position: relative;
-            border-radius: 20px;
+            border-radius: 22px;
             overflow: hidden;
-            box-shadow: 0 40px 80px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08);
+            box-shadow: 0 50px 90px -25px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.09);
         }
         [data-view="contact"] .contact-photo-wrap::after {
-            content:""; position:absolute; inset:0; pointer-events:none;
-            background: linear-gradient(180deg, transparent 40%, rgba(4,17,46,.85) 100%);
+            content:""; position:absolute; inset:0; pointer-events:none; z-index:1;
+            background:
+                radial-gradient(ellipse 90% 50% at 50% 0%, rgba(251,6,6,.16) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(4,17,46,.15) 0%, transparent 32%, rgba(4,17,46,.62) 72%, rgba(4,17,46,.96) 100%);
+        }
+        [data-view="contact"] .contact-photo-img {
+            transition: transform 1.1s cubic-bezier(.16,1,.3,1);
+        }
+        [data-view="contact"] .contact-photo-wrap:hover .contact-photo-img {
+            transform: scale(1.045);
+        }
+        [data-view="contact"] .contact-stat {
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.1);
+            backdrop-filter: blur(8px);
+        }
+        [data-view="contact"] .contact-photo-wrap.contact-photo-fallback {
+            background:
+                radial-gradient(ellipse 70% 50% at 70% 25%, rgba(56,189,248,.28) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 25% 80%, rgba(251,6,6,.22) 0%, transparent 60%),
+                linear-gradient(155deg, #0a1a4a 0%, #0d1f56 45%, #050e26 100%);
         }
     </style>
 
@@ -4810,18 +4829,43 @@ cgRenderGradeDist();
                 </div>
 
                 {{-- RIGHT: dispatch operator photo --}}
-                <div class="reveal reveal-right hidden lg:block">
+                <div class="reveal reveal-right hidden lg:block lg:sticky lg:top-28">
                     <div class="contact-photo-wrap aspect-[4/5]">
                         <img src="/images/contact-dispatch.jpg" alt="Auxilio dispatch operator monitoring live emergency feeds"
-                            class="w-full h-full object-cover object-center"
-                            onerror="this.parentElement.style.background='linear-gradient(135deg,#0a1a4a,#1e3a5f)'; this.style.display='none';" />
+                            class="contact-photo-img w-full h-full object-cover object-center"
+                            onerror="this.parentElement.classList.add('contact-photo-fallback'); this.style.display='none';" />
+
+                        {{-- top-left floating status badge --}}
+                        <div class="absolute top-5 left-5 z-10 inline-flex items-center gap-2 rounded-full px-3 py-1.5"
+                             style="background:rgba(4,17,46,.6);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);">
+                            <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span></span>
+                            <span class="text-[10px] font-bold uppercase tracking-[.18em] text-white/90">Operations Online</span>
+                        </div>
+
                         {{-- overlay caption --}}
-                        <div class="absolute bottom-0 left-0 right-0 z-10 p-6">
-                            <div class="flex items-center gap-2.5 mb-2">
+                        <div class="absolute bottom-0 left-0 right-0 z-10 p-6 sm:p-7">
+                            <div class="flex items-center gap-2.5 mb-2.5">
                                 <span class="relative flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span></span>
                                 <span class="text-xs font-bold uppercase tracking-[.2em] text-red-400">Live Dispatch Center</span>
                             </div>
-                            <p class="text-sm text-white/80 leading-relaxed">Our trained operators monitor incoming alerts 24/7 and coordinate verified responders in real time.</p>
+                            <p class="text-[15px] font-semibold text-white leading-snug mb-1">Real people, watching in real time.</p>
+                            <p class="text-sm text-white/65 leading-relaxed mb-5">Trained operators monitor incoming alerts 24/7 and coordinate verified responders the moment a call comes in.</p>
+
+                            {{-- trust stats --}}
+                            <div class="grid grid-cols-3 gap-2.5">
+                                <div class="contact-stat rounded-xl px-3 py-2.5">
+                                    <p class="text-lg font-extrabold text-white leading-none">&lt;8s</p>
+                                    <p class="text-[10px] font-semibold uppercase tracking-wider text-white/45 mt-1">Avg pickup</p>
+                                </div>
+                                <div class="contact-stat rounded-xl px-3 py-2.5">
+                                    <p class="text-lg font-extrabold text-white leading-none">24/7</p>
+                                    <p class="text-[10px] font-semibold uppercase tracking-wider text-white/45 mt-1">Coverage</p>
+                                </div>
+                                <div class="contact-stat rounded-xl px-3 py-2.5">
+                                    <p class="text-lg font-extrabold text-white leading-none">100%</p>
+                                    <p class="text-[10px] font-semibold uppercase tracking-wider text-white/45 mt-1">Verified</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
