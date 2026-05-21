@@ -8483,1287 +8483,670 @@ cgRenderGradeDist();
 
 <div data-view="ea" class="hidden">
 
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js" defer></script>
+
 <style>
-/* ============================================================
-   EA PAGE v2 — Cinematic Ops-Center
-============================================================ */
+/* ═══════════════════════════════════════════════════════════════
+   EA v3 — Premium Emergency Dispatch UI
+═══════════════════════════════════════════════════════════════ */
 [data-view="ea"] {
-    background: #03080f;
+    --ea-bg-0: #050810;
+    --ea-bg-1: #0a1020;
+    --ea-bg-2: #0e1530;
+    --ea-glass: rgba(255,255,255,.035);
+    --ea-glass-hi: rgba(255,255,255,.07);
+    --ea-border: rgba(255,255,255,.07);
+    --ea-border-hi: rgba(255,255,255,.14);
+    --ea-text: #e6eaf2;
+    --ea-text-dim: rgba(230,234,242,.55);
+    --ea-text-faint: rgba(230,234,242,.35);
+
+    --sev-critical: #ef4444;
+    --sev-high:     #f97316;
+    --sev-active:   #3b82f6;
+    --sev-resolved: #10b981;
+
+    background: var(--ea-bg-0);
     min-height: 100vh;
-    color: #e2e8f0;
-    font-family: inherit;
+    color: var(--ea-text);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv11";
 }
 
-/* ----- Scanline texture ----- */
-[data-view="ea"] .ea-scanlines {
-    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,200,255,.018) 3px, rgba(0,200,255,.018) 4px);
-    pointer-events: none;
+/* ───── Animated background grid ───── */
+[data-view="ea"] .ea-grid-bg {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 90% at 50% 0%, black, transparent 80%);
+}
+[data-view="ea"] .ea-glow-1 {
+    position: absolute; pointer-events: none; z-index: 0;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(239,68,68,.22) 0%, transparent 70%);
+    top: -300px; right: -200px; filter: blur(40px);
+}
+[data-view="ea"] .ea-glow-2 {
+    position: absolute; pointer-events: none; z-index: 0;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,130,246,.18) 0%, transparent 70%);
+    top: 100px; left: -200px; filter: blur(40px);
 }
 
-/* ----- Ticker ----- */
-@keyframes ea2-ticker { from { transform:translateX(100%); } to { transform:translateX(-200%); } }
-[data-view="ea"] .ea-ticker-track { animation: ea2-ticker 35s linear infinite; white-space:nowrap; }
+/* ───── Live ticker ───── */
+@keyframes ea-ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+[data-view="ea"] .ea-ticker { animation: ea-ticker 40s linear infinite; }
 
-/* ----- Radar sweep ----- */
-@keyframes ea2-sweep { to { transform: rotate(360deg); } }
-[data-view="ea"] .ea-sweep { animation: ea2-sweep 4s linear infinite; transform-origin: center; }
-
-/* ----- Pulse rings ----- */
-@keyframes ea2-ring {
-    0%   { transform:scale(.5); opacity:.9; }
-    100% { transform:scale(3); opacity:0; }
+/* ───── Pulse dot ───── */
+@keyframes ea-pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(239,68,68,.7); }
+    70%  { box-shadow: 0 0 0 10px rgba(239,68,68,0); }
+    100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
 }
-[data-view="ea"] .ea-ring { animation: ea2-ring 2.8s ease-out infinite; }
-[data-view="ea"] .ea-ring:nth-child(2) { animation-delay:.93s; }
-[data-view="ea"] .ea-ring:nth-child(3) { animation-delay:1.86s; }
+[data-view="ea"] .ea-pulse-dot { animation: ea-pulse-ring 1.6s ease infinite; }
 
-/* ----- Live dot ----- */
-@keyframes ea2-dot { 0%,100%{box-shadow:0 0 0 0 rgba(251,6,6,.7);} 50%{box-shadow:0 0 0 8px rgba(251,6,6,0);} }
-[data-view="ea"] .ea-ldot { animation: ea2-dot 1.5s ease infinite; }
+/* ───── Radar ───── */
+@keyframes ea-radar-spin { to { transform: rotate(360deg); } }
+[data-view="ea"] .ea-radar-sweep { animation: ea-radar-spin 4s linear infinite; transform-origin: center; }
 
-/* ----- Card entrance ----- */
-@keyframes ea2-in { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:none;} }
-[data-view="ea"] .ea-card { animation: ea2-in .5s cubic-bezier(.16,1,.3,1) both; }
-[data-view="ea"] .ea-card:nth-child(1){animation-delay:.00s}[data-view="ea"] .ea-card:nth-child(2){animation-delay:.06s}
-[data-view="ea"] .ea-card:nth-child(3){animation-delay:.12s}[data-view="ea"] .ea-card:nth-child(4){animation-delay:.18s}
-[data-view="ea"] .ea-card:nth-child(5){animation-delay:.24s}[data-view="ea"] .ea-card:nth-child(6){animation-delay:.30s}
-[data-view="ea"] .ea-card:nth-child(7){animation-delay:.36s}[data-view="ea"] .ea-card:nth-child(8){animation-delay:.42s}
-[data-view="ea"] .ea-card:nth-child(9){animation-delay:.48s}[data-view="ea"] .ea-card:nth-child(10){animation-delay:.54s}
-[data-view="ea"] .ea-card:nth-child(11){animation-delay:.60s}[data-view="ea"] .ea-card:nth-child(12){animation-delay:.66s}
-
-/* ----- Bar grow ----- */
-@keyframes ea2-bar { from{width:0;} }
-[data-view="ea"] .ea-bar { animation: ea2-bar 1s cubic-bezier(.22,1,.36,1) both; }
-
-/* ----- New alert flash ----- */
-@keyframes ea2-flash { 0%,100%{background:rgba(251,6,6,0);} 25%{background:rgba(251,6,6,.15);} }
-[data-view="ea"] .ea-new-flash { animation: ea2-flash 2s ease 1; }
-
-/* ----- Glitch title ----- */
-@keyframes ea2-glitch1 { 0%,94%,100%{clip-path:none;transform:none;} 95%{clip-path:inset(20% 0 60% 0);transform:translateX(-4px);} 97%{clip-path:inset(70% 0 5% 0);transform:translateX(4px);} }
-[data-view="ea"] .ea-glitch { animation: ea2-glitch1 8s ease infinite; }
-
-/* ----- Type badge colours ----- */
-[data-view="ea"] .eab-shooting  { background:rgba(239,68,68,.15); color:#fca5a5; border-color:rgba(239,68,68,.4); }
-[data-view="ea"] .eab-robbery   { background:rgba(249,115,22,.15); color:#fdba74; border-color:rgba(249,115,22,.4); }
-[data-view="ea"] .eab-assault   { background:rgba(234,179,8,.15);  color:#fde047; border-color:rgba(234,179,8,.4); }
-[data-view="ea"] .eab-domestic  { background:rgba(168,85,247,.15); color:#d8b4fe; border-color:rgba(168,85,247,.4); }
-[data-view="ea"] .eab-breakin   { background:rgba(59,130,246,.15); color:#93c5fd; border-color:rgba(59,130,246,.4); }
-[data-view="ea"] .eab-fire      { background:rgba(239,68,68,.15);  color:#fca5a5; border-color:rgba(239,68,68,.4); }
-[data-view="ea"] .eab-medical   { background:rgba(16,185,129,.15); color:#6ee7b7; border-color:rgba(16,185,129,.4); }
-[data-view="ea"] .eab-carjack   { background:rgba(236,72,153,.15); color:#f9a8d4; border-color:rgba(236,72,153,.4); }
-
-/* Left border colours per type */
-[data-view="ea"] [data-ealeft="shooting"] { border-left:3px solid #ef4444; }
-[data-view="ea"] [data-ealeft="robbery"]  { border-left:3px solid #f97316; }
-[data-view="ea"] [data-ealeft="assault"]  { border-left:3px solid #eab308; }
-[data-view="ea"] [data-ealeft="domestic"] { border-left:3px solid #a855f7; }
-[data-view="ea"] [data-ealeft="breakin"]  { border-left:3px solid #3b82f6; }
-[data-view="ea"] [data-ealeft="fire"]     { border-left:3px solid #ef4444; }
-[data-view="ea"] [data-ealeft="medical"]  { border-left:3px solid #10b981; }
-[data-view="ea"] [data-ealeft="carjack"]  { border-left:3px solid #ec4899; }
-
-/* Bar progress fill colours */
-[data-view="ea"] .eas-dispatched { color:#fbbf24; } [data-view="ea"] .ea-fill-dispatched { background:#fbbf24; }
-[data-view="ea"] .eas-enroute    { color:#60a5fa; } [data-view="ea"] .ea-fill-enroute    { background:#60a5fa; }
-[data-view="ea"] .eas-onscene    { color:#fb923c; } [data-view="ea"] .ea-fill-onscene    { background:#fb923c; }
-[data-view="ea"] .eas-resolved   { color:#34d399; } [data-view="ea"] .ea-fill-resolved   { background:#34d399; }
-
-/* Filter pill */
-[data-view="ea"] .ea-fp { border:1px solid rgba(255,255,255,.10); color:rgba(255,255,255,.55); cursor:pointer; transition:all .18s ease; }
-[data-view="ea"] .ea-fp:hover { border-color:rgba(255,255,255,.28); color:#fff; background:rgba(255,255,255,.07); }
-[data-view="ea"] .ea-fp.ea-on  { background:rgba(239,68,68,.2); border-color:rgba(239,68,68,.55); color:#fca5a5; }
-
-/* Stat cards */
-[data-view="ea"] .ea-stat { transition:transform .2s,box-shadow .2s; }
-[data-view="ea"] .ea-stat:hover { transform:translateY(-4px); box-shadow:0 20px 40px -10px rgba(0,0,0,.6); }
-
-/* Section divider label */
-[data-view="ea"] .ea-section-label {
-    display:flex; align-items:center; gap:12px; color:rgba(255,255,255,.3);
-    font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; margin-bottom:20px;
+/* ───── Card stagger entrance ───── */
+@keyframes ea-card-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
 }
-[data-view="ea"] .ea-section-label::after { content:""; flex:1; height:1px; background:rgba(255,255,255,.07); }
+[data-view="ea"] .ea-card-anim { animation: ea-card-in .55s cubic-bezier(.16,1,.3,1) both; }
 
-/* Officer badge */
-[data-view="ea"] .ea-ofbadge { display:inline-flex; align-items:center; justify-content:center;
-    width:24px; height:24px; border-radius:50%; background:#0f2044; border:1.5px solid rgba(96,165,250,.4);
-    font-size:10px; font-weight:700; color:#93c5fd; }
+/* ───── Critical pulse (active red cards) ───── */
+@keyframes ea-critical-glow {
+    0%,100% { box-shadow: 0 0 0 1px rgba(239,68,68,.18), 0 12px 32px -8px rgba(239,68,68,.08); }
+    50%     { box-shadow: 0 0 0 1px rgba(239,68,68,.35), 0 12px 32px -4px rgba(239,68,68,.25); }
+}
+[data-view="ea"] .ea-glow-critical { animation: ea-critical-glow 2.4s ease infinite; }
 
-/* Number counter */
-@keyframes ea2-count { from{opacity:0;transform:scale(.7);} to{opacity:1;transform:none;} }
-[data-view="ea"] .ea-count-num { animation: ea2-count .6s cubic-bezier(.34,1.56,.64,1) .3s both; }
+/* ───── Skeleton shimmer ───── */
+@keyframes ea-shimmer { 0%{background-position:-400px 0;} 100%{background-position:400px 0;} }
+[data-view="ea"] .ea-skel {
+    background: linear-gradient(90deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.1) 50%, rgba(255,255,255,.04) 100%);
+    background-size: 800px 100%;
+    animation: ea-shimmer 1.4s linear infinite;
+}
+
+/* ───── Severity badges ───── */
+[data-view="ea"] .ea-sev-critical { background: rgba(239,68,68,.13); color: #fca5a5; border: 1px solid rgba(239,68,68,.35); }
+[data-view="ea"] .ea-sev-high     { background: rgba(249,115,22,.13); color: #fdba74; border: 1px solid rgba(249,115,22,.35); }
+[data-view="ea"] .ea-sev-active   { background: rgba(59,130,246,.13); color: #93c5fd; border: 1px solid rgba(59,130,246,.35); }
+[data-view="ea"] .ea-sev-resolved { background: rgba(16,185,129,.13); color: #6ee7b7; border: 1px solid rgba(16,185,129,.35); }
+
+/* Severity top bar (full-width gradient inside card) */
+[data-view="ea"] .ea-bar-critical { background: linear-gradient(90deg, #ef4444, #f87171); }
+[data-view="ea"] .ea-bar-high     { background: linear-gradient(90deg, #f97316, #fdba74); }
+[data-view="ea"] .ea-bar-active   { background: linear-gradient(90deg, #3b82f6, #93c5fd); }
+[data-view="ea"] .ea-bar-resolved { background: linear-gradient(90deg, #10b981, #6ee7b7); }
+
+/* Card hover glow per severity */
+[data-view="ea"] .ea-card:hover.ea-card-critical { box-shadow: 0 0 0 1px rgba(239,68,68,.4), 0 24px 50px -12px rgba(239,68,68,.25); }
+[data-view="ea"] .ea-card:hover.ea-card-high     { box-shadow: 0 0 0 1px rgba(249,115,22,.4), 0 24px 50px -12px rgba(249,115,22,.25); }
+[data-view="ea"] .ea-card:hover.ea-card-active   { box-shadow: 0 0 0 1px rgba(59,130,246,.4),  0 24px 50px -12px rgba(59,130,246,.22); }
+[data-view="ea"] .ea-card:hover.ea-card-resolved { box-shadow: 0 0 0 1px rgba(16,185,129,.35), 0 24px 50px -12px rgba(16,185,129,.18); }
+
+/* ───── Filter pills ───── */
+[data-view="ea"] .ea-pill {
+    transition: all .18s ease;
+    border: 1px solid var(--ea-border);
+    background: var(--ea-glass);
+    color: var(--ea-text-dim);
+}
+[data-view="ea"] .ea-pill:hover { border-color: var(--ea-border-hi); color: var(--ea-text); background: var(--ea-glass-hi); }
+[data-view="ea"] .ea-pill.is-on { background: rgba(239,68,68,.16); border-color: rgba(239,68,68,.5); color: #fca5a5; }
+
+/* Inputs */
+[data-view="ea"] .ea-input {
+    background: var(--ea-glass);
+    border: 1px solid var(--ea-border);
+    color: var(--ea-text);
+    transition: border-color .18s ease, background .18s ease;
+}
+[data-view="ea"] .ea-input::placeholder { color: var(--ea-text-faint); }
+[data-view="ea"] .ea-input:focus { outline: none; border-color: rgba(59,130,246,.5); background: var(--ea-glass-hi); }
+
+/* Card hover lift */
+[data-view="ea"] .ea-card { transition: transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s, border-color .28s, background .28s; }
+[data-view="ea"] .ea-card:hover { transform: translateY(-3px); }
+
+/* Card details expand */
+[data-view="ea"] .ea-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .45s cubic-bezier(.4,0,.2,1), opacity .25s;
+    opacity: 0;
+}
+[data-view="ea"] .ea-details.is-open { max-height: 420px; opacity: 1; }
+
+/* Counter — tabular for steady width */
+[data-view="ea"] .ea-counter { font-variant-numeric: tabular-nums; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    [data-view="ea"] *, [data-view="ea"] *::before, [data-view="ea"] *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+    [data-view="ea"] .ea-hero-title { font-size: 2.4rem !important; line-height: 1.05 !important; }
+    [data-view="ea"] .ea-radar-wrap { display: none; }
+}
 </style>
 
 
-<div class="relative overflow-hidden" style="background:rgba(220,38,38,.12); border-bottom:1px solid rgba(220,38,38,.25); height:32px;">
-    <div class="ea-ticker-track inline-flex items-center gap-0 h-full" style="will-change:transform;">
-                <span class="inline-flex items-center gap-6 px-8 text-[11px] font-bold uppercase tracking-[.18em] text-red-400">
-            <span class="inline-flex items-center gap-1.5"><span class="ea-ldot inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span> LIVE FEED</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">3 Critical Incidents Active</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">24 Officers Deployed</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">Avg Response: 2m 14s</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">Last update: <span class="ea-tick-time font-mono">--:--:--</span></span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">Auxilio Emergency Network Active</span>
-            <span class="text-red-500/60">·</span>
-        </span>
-                <span class="inline-flex items-center gap-6 px-8 text-[11px] font-bold uppercase tracking-[.18em] text-red-400">
-            <span class="inline-flex items-center gap-1.5"><span class="ea-ldot inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span> LIVE FEED</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">3 Critical Incidents Active</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">24 Officers Deployed</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">Avg Response: 2m 14s</span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">Last update: <span class="ea-tick-time font-mono">--:--:--</span></span>
-            <span class="text-red-500/60">·</span>
-            <span class="text-white/70">Auxilio Emergency Network Active</span>
-            <span class="text-red-500/60">·</span>
-        </span>
-            </div>
-</div>
+
+<script>
+function eaApp() {
+    return {
+        // ───── Data ─────
+        incidents: [{"id":"NW-2491","type":"shots-fired","title":"Shots Fired","severity":"critical","status":"on-scene","pct":85,"address":"847 Clinton Ave, Newark, NJ","officers":6,"units":3,"minutes":3,"note":"Multiple shots fired in residential area. Two units arrived on scene, perimeter set up around the building.","priority":"P1","dispatchAt":"14:32:18","responseTime":"1m 42s"},{"id":"IR-0882","type":"armed-robbery","title":"Armed Robbery","severity":"critical","status":"en-route","pct":55,"address":"1204 Springfield Ave, Irvington, NJ","officers":4,"units":2,"minutes":6,"note":"Armed suspect in blue hoodie, fled on foot northbound after holding up convenience store.","priority":"P1","dispatchAt":"14:29:05","responseTime":"pending"},{"id":"NW-2489","type":"assault","title":"Assault","severity":"high","status":"on-scene","pct":90,"address":"390 Market St, Newark, NJ","officers":3,"units":2,"minutes":9,"note":"Victim conscious and responsive. EMS en route. Witnesses being interviewed on scene.","priority":"P2","dispatchAt":"14:26:11","responseTime":"2m 04s"},{"id":"EO-0341","type":"break-in","title":"Break-In","severity":"active","status":"dispatched","pct":22,"address":"55 Park Ave, East Orange, NJ","officers":2,"units":1,"minutes":11,"note":"Residential break-in reported. Rear window forced open. Neighbour called it in.","priority":"P3","dispatchAt":"14:24:32","responseTime":"pending"},{"id":"NW-2488","type":"domestic","title":"Domestic Disturbance","severity":"active","status":"en-route","pct":60,"address":"721 South Orange Ave, Newark, NJ","officers":3,"units":2,"minutes":14,"note":"Verbal altercation escalating. Caller still on the line with dispatcher.","priority":"P3","dispatchAt":"14:21:48","responseTime":"pending"},{"id":"JC-1142","type":"shots-fired","title":"Shots Fired","severity":"critical","status":"on-scene","pct":95,"address":"3310 Kennedy Blvd, Jersey City, NJ","officers":7,"units":4,"minutes":17,"note":"Drive-by shooting reported. K9 unit deployed. Two suspects detained pending identification.","priority":"P1","dispatchAt":"14:18:55","responseTime":"1m 21s"},{"id":"NW-2487","type":"structure-fire","title":"Structure Fire","severity":"critical","status":"on-scene","pct":75,"address":"220 Avon Ave, Newark, NJ","officers":5,"units":3,"minutes":20,"note":"Two-alarm fire on 2nd floor residential. Building evacuated. NFD on scene with three engines.","priority":"P1","dispatchAt":"14:15:42","responseTime":"2m 38s"},{"id":"NW-2486","type":"carjacking","title":"Carjacking","severity":"high","status":"en-route","pct":45,"address":"I-78 Westbound, Exit 54, Newark, NJ","officers":4,"units":2,"minutes":22,"note":"Silver Honda Civic, plate NJ-HJ492. BOLO issued statewide. State Police coordinating pursuit.","priority":"P2","dispatchAt":"14:13:29","responseTime":"pending"},{"id":"JC-1141","type":"medical","title":"Medical Emergency","severity":"active","status":"on-scene","pct":80,"address":"940 Bergen Ave, Jersey City, NJ","officers":2,"units":2,"minutes":25,"note":"Unresponsive male, mid-50s. AED deployed. EMS performing CPR on scene.","priority":"P2","dispatchAt":"14:10:14","responseTime":"3m 12s"},{"id":"NW-2485","type":"armed-robbery","title":"Armed Robbery","severity":"critical","status":"dispatched","pct":18,"address":"670 Frelinghuysen Ave, Newark, NJ","officers":3,"units":2,"minutes":28,"note":"Gas station hold-up. Suspect armed with handgun. Last seen heading east on Frelinghuysen.","priority":"P1","dispatchAt":"14:07:33","responseTime":"pending"},{"id":"NW-2484","type":"break-in","title":"Break-In","severity":"active","status":"en-route","pct":50,"address":"102 Roseville Ave, Newark, NJ","officers":2,"units":1,"minutes":31,"note":"Commercial break-in. Silent alarm triggered. K9 unit en route for property search.","priority":"P3","dispatchAt":"14:04:51","responseTime":"pending"},{"id":"NW-2486V","type":"vehicle-accident","title":"Vehicle Accident","severity":"high","status":"on-scene","pct":70,"address":"Garden State Pkwy, MM 145N, Newark, NJ","officers":4,"units":3,"minutes":33,"note":"Two-vehicle collision with injuries. Right lane blocked. Tow truck en route. EMS treating two patients.","priority":"P2","dispatchAt":"14:02:47","responseTime":"2m 55s"},{"id":"MC-0215","type":"assault","title":"Assault","severity":"resolved","status":"resolved","pct":100,"address":"444 Bloomfield Ave, Montclair, NJ","officers":2,"units":1,"minutes":34,"note":"Suspect in custody. Victim transported to hospital for non-life-threatening injuries.","priority":"P2","dispatchAt":"13:58:12","responseTime":"4m 18s"},{"id":"NW-2482","type":"structure-fire","title":"Structure Fire","severity":"resolved","status":"resolved","pct":100,"address":"1847 Broad St, Newark, NJ","officers":4,"units":2,"minutes":45,"note":"Fire extinguished. Arson investigation underway. No injuries reported.","priority":"P1","dispatchAt":"13:47:33","responseTime":"3m 21s"},{"id":"NW-2479","type":"shots-fired","title":"Shots Fired","severity":"resolved","status":"resolved","pct":100,"address":"100 Jones St, Newark, NJ","officers":8,"units":4,"minutes":58,"note":"Scene cleared. One victim at hospital, two suspects in custody. Investigation ongoing.","priority":"P1","dispatchAt":"13:34:09","responseTime":"1m 58s"}],
+
+        // ───── UI State ─────
+        search: '',
+        activeFilter: 'all',
+        activeSeverity: 'all',
+        expanded: null,
+        loading: true,
+        liveTime: '--:--:--',
+        liveCount: 0,
+        spawnTimer: null,
+        clockTimer: null,
+        newIdSeed: 9000,
+
+        // ───── Lifecycle ─────
+        init() {
+            // brief skeleton then reveal
+            setTimeout(() => { this.loading = false; }, 600);
+            this.updateClock();
+            this.clockTimer = setInterval(() => this.updateClock(), 1000);
+            this.animateCounter();
+            this.startAutoSpawn();
+            // re-start spawn on route change
+            window.addEventListener('hashchange', () => {
+                if (location.hash === '#/ea') this.startAutoSpawn();
+                else this.stopAutoSpawn();
+            });
+        },
+
+        // ───── Computed ─────
+        get filtered() {
+            const q = this.search.trim().toLowerCase();
+            return this.incidents.filter(i => {
+                if (this.activeSeverity !== 'all' && i.severity !== this.activeSeverity) return false;
+                if (this.activeFilter !== 'all' && i.type !== this.activeFilter) return false;
+                if (!q) return true;
+                return (i.title + ' ' + i.address + ' ' + i.note + ' ' + i.id).toLowerCase().includes(q);
+            });
+        },
+        get activeCount()   { return this.incidents.filter(i => i.severity !== 'resolved').length; },
+        get criticalCount() { return this.incidents.filter(i => i.severity === 'critical').length; },
+        get officersDeployed() { return this.incidents.filter(i=>i.severity!=='resolved').reduce((s,i)=>s+i.officers, 0); },
+        get resolvedToday() { return this.incidents.filter(i => i.severity === 'resolved').length; },
+
+        // ───── Helpers ─────
+        sevLabel(s)  { return ({critical:'Critical', high:'High Priority', active:'Active', resolved:'Resolved'})[s] || s; },
+        statusLabel(s){ return ({'dispatched':'Dispatched','en-route':'En Route','on-scene':'On Scene','resolved':'Resolved'})[s] || s; },
+        typeIcon(t) {
+            const icons = {
+                'shots-fired':      '<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"/>',
+                'armed-robbery':    '<path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>',
+                'structure-fire':   '<path stroke-linecap="round" stroke-linejoin="round" d="M17.66 11.2c-.23-.3-.51-.56-.77-.82-.67-.6-1.43-1.03-2.07-1.66C13.33 7.26 13 4.85 13.95 3c-.95.23-1.78.75-2.49 1.32a10.84 10.84 0 00-3.69 8.04 8.69 8.69 0 003.36 6.97A10.16 10.16 0 0017 21c2.74-.8 4.41-3.27 4.41-5.83a8.84 8.84 0 00-3.75-3.97z"/>',
+                'assault':          '<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>',
+                'vehicle-accident': '<path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8m-8 0V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2m4 0H4v4m8 0h4m0 0V5a1 1 0 011-1h2a1 1 0 011 1v2m-4 0h4v4M4 11v6a1 1 0 001 1h2a1 1 0 001-1v-1h8v1a1 1 0 001 1h2a1 1 0 001-1v-6M4 11h16"/>',
+                'carjacking':       '<path stroke-linecap="round" stroke-linejoin="round" d="M3 13l1.5-4.5A2 2 0 016.4 7h11.2a2 2 0 011.9 1.5L21 13M5 17h.01M19 17h.01M3 13v4a1 1 0 001 1h16a1 1 0 001-1v-4M3 13h18"/>',
+                'break-in':         '<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>',
+                'domestic':         '<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10h14V10"/>',
+                'medical':          '<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>',
+            };
+            return icons[t] || icons['assault'];
+        },
+        timeAgo(min) {
+            if (min < 1)  return 'Just now';
+            if (min < 60) return min + 'm ago';
+            const h = Math.floor(min/60); return h + 'h ago';
+        },
+        toggleExpand(id) { this.expanded = (this.expanded === id) ? null : id; },
+
+        // ───── Live clock ─────
+        updateClock() {
+            const d = new Date();
+            const p = n => n.toString().padStart(2, '0');
+            this.liveTime = `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+        },
+
+        // ───── Counter animation ─────
+        animateCounter() {
+            const target = this.activeCount;
+            let current = 0;
+            const step = Math.max(1, Math.ceil(target / 30));
+            const tick = () => {
+                current = Math.min(target, current + step);
+                this.liveCount = current;
+                if (current < target) requestAnimationFrame(tick);
+            };
+            tick();
+        },
+
+        // ───── Auto-spawn ─────
+        startAutoSpawn() {
+            this.stopAutoSpawn();
+            this.spawnTimer = setInterval(() => this.spawnIncident(), 22000);
+        },
+        stopAutoSpawn() {
+            if (this.spawnTimer) { clearInterval(this.spawnTimer); this.spawnTimer = null; }
+        },
+        spawnIncident() {
+            const pool = [
+                {type:'shots-fired',     title:'Shots Fired',         severity:'critical',address:'512 Bergen St, Newark, NJ',           note:'Multiple gunshots heard near intersection. Units responding from three directions.'},
+                {type:'armed-robbery',   title:'Armed Robbery',       severity:'critical',address:'88 Jefferson Ave, Elizabeth, NJ',     note:'Store hold-up in progress. Suspect description: male, 6ft, dark jacket.'},
+                {type:'medical',         title:'Medical Emergency',   severity:'active',  address:'200 Lyons Ave, Newark, NJ',           note:'Chest pains reported. Elderly male, EMS en route with priority response.'},
+                {type:'assault',         title:'Assault',             severity:'high',    address:'330 Mt Prospect Ave, Newark, NJ',     note:'Fight reported outside venue. Multiple parties involved. Backup requested.'},
+                {type:'break-in',        title:'Break-In',            severity:'active',  address:'775 Chancellor Ave, Irvington, NJ',   note:'Pharmacy break-in alarm triggered. Safe forced. K9 deploying to track suspect.'},
+                {type:'vehicle-accident',title:'Vehicle Accident',    severity:'high',    address:'Route 22 East, Hillside, NJ',         note:'Three-car pile-up with injuries. Two lanes blocked. Tow trucks en route.'},
+                {type:'structure-fire',  title:'Structure Fire',      severity:'critical',address:'445 Lyons Ave, Irvington, NJ',        note:'Reports of smoke from upper floors. Fire department dispatched with full response.'},
+            ];
+            const sample = pool[Math.floor(Math.random()*pool.length)];
+            this.newIdSeed++;
+            const newInc = {
+                id: 'EA-' + this.newIdSeed,
+                ...sample,
+                status: 'dispatched',
+                pct: 15,
+                officers: Math.floor(Math.random()*4)+2,
+                units: Math.floor(Math.random()*2)+1,
+                minutes: 0,
+                priority: sample.severity === 'critical' ? 'P1' : (sample.severity === 'high' ? 'P2' : 'P3'),
+                dispatchAt: this.liveTime,
+                responseTime: 'pending',
+                isNew: true,
+            };
+            this.incidents.unshift(newInc);
+            this.animateCounter();
+            setTimeout(() => { newInc.isNew = false; }, 4000);
+        },
+    };
+}
+</script>
 
 
-<section class="relative overflow-hidden" style="min-height:560px; background:radial-gradient(ellipse 90% 70% at 50% -10%, rgba(220,38,38,.18) 0%, transparent 65%), linear-gradient(170deg,#06101f 0%,#03080f 100%);">
-    <div class="ea-scanlines absolute inset-0 z-0 pointer-events-none"></div>
+<div x-data="eaApp()" x-init="init()" x-cloak>
 
     
-    <div class="absolute inset-0 z-0 pointer-events-none" style="background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 100% at 50% 0%,black,transparent 90%);"></div>
+    <div class="relative overflow-hidden" style="background:rgba(220,38,38,.10);border-bottom:1px solid rgba(220,38,38,.22);height:34px;">
+        <div class="ea-ticker absolute inset-y-0 flex items-center whitespace-nowrap">
+            <template x-for="n in 2" :key="n">
+                <span class="inline-flex items-center gap-6 px-8 text-[11px] font-semibold uppercase tracking-[.16em] text-red-400">
+                    <span class="inline-flex items-center gap-2"><span class="ea-pulse-dot inline-block w-1.5 h-1.5 rounded-full bg-red-500"></span>Live Feed</span>
+                    <span class="text-red-500/40">·</span>
+                    <span class="text-white/70"><span class="ea-counter" x-text="activeCount"></span> Active Incidents</span>
+                    <span class="text-red-500/40">·</span>
+                    <span class="text-white/70"><span class="ea-counter" x-text="officersDeployed"></span> Officers Deployed</span>
+                    <span class="text-red-500/40">·</span>
+                    <span class="text-white/70"><span class="ea-counter" x-text="criticalCount"></span> Critical · <span x-text="resolvedToday"></span> Resolved Today</span>
+                    <span class="text-red-500/40">·</span>
+                    <span class="text-white/70 font-mono">System Time: <span x-text="liveTime"></span></span>
+                    <span class="text-red-500/40">·</span>
+                    <span class="text-white/70">Auxilio Emergency Response Network</span>
+                    <span class="text-red-500/40">·</span>
+                </span>
+            </template>
+        </div>
+    </div>
 
     
-    <div class="absolute right-8 top-1/2 -translate-y-1/2 pointer-events-none z-0 hidden lg:block" style="width:360px;height:360px;opacity:.25;">
-        <svg viewBox="0 0 200 200" class="w-full h-full">
-            
-            <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(239,68,68,.5)" stroke-width=".5"/>
-            <circle cx="100" cy="100" r="65" fill="none" stroke="rgba(239,68,68,.4)" stroke-width=".5"/>
-            <circle cx="100" cy="100" r="40" fill="none" stroke="rgba(239,68,68,.3)" stroke-width=".5"/>
-            <circle cx="100" cy="100" r="15" fill="none" stroke="rgba(239,68,68,.3)" stroke-width=".5"/>
-            
-            <line x1="100" y1="5"   x2="100" y2="195" stroke="rgba(239,68,68,.2)" stroke-width=".5"/>
-            <line x1="5"   y1="100" x2="195" y2="100" stroke="rgba(239,68,68,.2)" stroke-width=".5"/>
-            
-            <g class="ea-sweep">
+    <section class="relative overflow-hidden" style="min-height:540px;">
+        <div class="ea-grid-bg"></div>
+        <div class="ea-glow-1"></div>
+        <div class="ea-glow-2"></div>
+
+        
+        <div class="ea-radar-wrap absolute right-6 lg:right-16 top-1/2 -translate-y-1/2 pointer-events-none z-0 hidden md:block" style="width:320px;height:320px;opacity:.5;">
+            <svg viewBox="0 0 200 200" class="w-full h-full">
                 <defs>
-                    <radialGradient id="sweepGrad" cx="50%" cy="50%">
-                        <stop offset="0%"   stop-color="#ef4444" stop-opacity=".7"/>
+                    <radialGradient id="ea-sweep-grad">
+                        <stop offset="0%" stop-color="#ef4444" stop-opacity=".55"/>
                         <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
                     </radialGradient>
                 </defs>
-                <path d="M100 100 L100 10 A90 90 0 0 1 175 145 Z" fill="url(#sweepGrad)" opacity=".6"/>
-            </g>
-            
-            <circle cx="130" cy="60"  r="3" fill="#ef4444" opacity=".9"><animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/></circle>
-            <circle cx="75"  cy="140" r="2" fill="#fb923c" opacity=".9"><animate attributeName="opacity" values="1;.3;1" dur="2.3s" repeatCount="indefinite"/></circle>
-            <circle cx="155" cy="110" r="2" fill="#ef4444" opacity=".8"><animate attributeName="opacity" values="1;.2;1" dur="1.5s" repeatCount="indefinite"/></circle>
-            <circle cx="55"  cy="75"  r="1.5" fill="#fbbf24" opacity=".9"><animate attributeName="opacity" values="1;.4;1" dur="2.8s" repeatCount="indefinite"/></circle>
-        </svg>
-    </div>
+                <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(239,68,68,.35)" stroke-width=".5"/>
+                <circle cx="100" cy="100" r="65" fill="none" stroke="rgba(239,68,68,.25)" stroke-width=".5"/>
+                <circle cx="100" cy="100" r="38" fill="none" stroke="rgba(239,68,68,.2)"  stroke-width=".5"/>
+                <line x1="100" y1="8"  x2="100" y2="192" stroke="rgba(239,68,68,.15)" stroke-width=".5"/>
+                <line x1="8"   y1="100" x2="192" y2="100" stroke="rgba(239,68,68,.15)" stroke-width=".5"/>
+                <g class="ea-radar-sweep">
+                    <path d="M100 100 L100 8 A92 92 0 0 1 178 145 Z" fill="url(#ea-sweep-grad)"/>
+                </g>
+                <circle cx="135" cy="55" r="2.5" fill="#ef4444"><animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/></circle>
+                <circle cx="70"  cy="140" r="2"  fill="#fbbf24"><animate attributeName="opacity" values="1;.3;1" dur="2.3s" repeatCount="indefinite"/></circle>
+                <circle cx="155" cy="115" r="2"  fill="#ef4444"><animate attributeName="opacity" values="1;.2;1" dur="1.5s" repeatCount="indefinite"/></circle>
+                <circle cx="60"  cy="80"  r="1.5" fill="#fbbf24"><animate attributeName="opacity" values="1;.4;1" dur="2.8s" repeatCount="indefinite"/></circle>
+            </svg>
+        </div>
+
+        <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-12 lg:pt-20 lg:pb-16">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-7" style="background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);">
+                        <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                        <span class="text-[10.5px] font-bold uppercase tracking-[.22em] text-red-400">Live Emergency Alerts</span>
+                    </div>
+                    <h1 class="ea-hero-title font-black text-5xl lg:text-[64px] leading-[1.02] tracking-tight text-white mb-5">
+                        Real-time<br>
+                        <span style="background:linear-gradient(90deg,#ef4444 0%,#f97316 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Emergency Response</span>
+                    </h1>
+                    <p class="text-white/55 text-base lg:text-lg max-w-md leading-relaxed mb-9">
+                        Monitor active incidents, dispatch updates, and unit responses across the network — as events unfold.
+                    </p>
+
+                    <div class="flex items-center gap-5">
+                        <div>
+                            <div class="flex items-baseline gap-2.5">
+                                <span class="ea-counter text-6xl lg:text-7xl font-black text-white leading-none" x-text="liveCount">0</span>
+                                <span class="ea-pulse-dot w-2.5 h-2.5 rounded-full bg-red-500 self-center"></span>
+                            </div>
+                            <p class="text-[11px] font-bold uppercase tracking-[.2em] text-red-400 mt-2">Active Incidents Now</p>
+                        </div>
+                        <div class="h-14 w-px bg-white/10"></div>
+                        <div>
+                            <div class="font-mono text-2xl font-bold text-white/90" x-text="liveTime">--:--:--</div>
+                            <p class="text-[10.5px] font-semibold uppercase tracking-[.18em] text-white/40 mt-1.5">System Time · EST</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     
-    <div class="absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" style="width:6px;height:6px;">
-        <div class="ea-ring absolute rounded-full border border-red-500/40" style="width:200px;height:200px;margin:-97px;"></div>
-        <div class="ea-ring absolute rounded-full border border-red-500/30" style="width:200px;height:200px;margin:-97px;"></div>
-        <div class="ea-ring absolute rounded-full border border-red-500/20" style="width:200px;height:200px;margin:-97px;"></div>
-    </div>
+    <section class="relative -mt-4 z-20">
+        <div class="mx-auto max-w-7xl px-5 sm:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+                <template x-for="(stat, idx) in [
+                    {label:'Active Incidents',  value: activeCount,      sub:'Live',         color:'#ef4444', icon:'M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z'},
+                    {label:'Officers Deployed', value: officersDeployed, sub:'On duty',      color:'#3b82f6', icon:'M17 20h5v-2a3 3 0 00-5.36-1.86M17 20H7m10 0v-2c0-.66-.13-1.28-.36-1.86M7 20H2v-2a3 3 0 015.36-1.86M7 20v-2c0-.66.13-1.28.36-1.86m0 0a5 5 0 019.29 0M15 7a3 3 0 11-6 0 3 3 0 016 0z'},
+                    {label:'Critical Priority', value: criticalCount,    sub:'P1 events',    color:'#f97316', icon:'M13 10V3L4 14h7v7l9-11h-7z'},
+                    {label:'Resolved Today',    value: resolvedToday,    sub:'Closed cases', color:'#10b981', icon:'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'}
+                ])" :key="idx">
+                    <div class="ea-card-anim rounded-2xl p-4 lg:p-5"
+                         :style="`animation-delay:${idx * 0.1}s; background:linear-gradient(135deg, ${stat.color}12, transparent 60%), ${'rgba(255,255,255,.035)'}; border:1px solid ${stat.color}30; backdrop-filter: blur(20px);`">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" :style="`background:${stat.color}1f; border:1px solid ${stat.color}40;`">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" :stroke="stat.color" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" :d="stat.icon"/></svg>
+                            </div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-white/30" x-text="stat.sub"></span>
+                        </div>
+                        <div class="ea-counter text-3xl lg:text-4xl font-black leading-none mb-1" :style="`color:${stat.color}`" x-text="stat.value">0</div>
+                        <div class="text-xs font-semibold text-white/55 mt-2" x-text="stat.label"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
 
-    <div class="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 pt-14 pb-16 lg:pt-20">
+    
+    <section class="mx-auto max-w-7xl px-5 sm:px-8 mt-10">
+        <div class="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
+
+            
+            <div class="relative w-full lg:max-w-md">
+                <svg class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-white/30 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" placeholder="Search by type, address, ID, or note..." class="ea-input w-full rounded-xl pl-11 pr-4 py-3 text-sm" x-model="search" />
+                <button x-show="search" @click="search=''" class="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white" aria-label="Clear search">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            
+            <div class="flex items-center gap-1.5 overflow-x-auto" style="scrollbar-width:none;">
+                <template x-for="sev in [
+                    {k:'all',     l:'All',      c:'#ffffff'},
+                    {k:'critical',l:'Critical', c:'#ef4444'},
+                    {k:'high',    l:'High',     c:'#f97316'},
+                    {k:'active',  l:'Active',   c:'#3b82f6'},
+                    {k:'resolved',l:'Resolved', c:'#10b981'}
+                ]" :key="sev.k">
+                    <button @click="activeSeverity = sev.k" class="ea-pill shrink-0 px-3.5 py-1.5 rounded-full text-[12px] font-semibold inline-flex items-center gap-1.5"
+                            :class="activeSeverity === sev.k ? 'is-on' : ''"
+                            :style="activeSeverity === sev.k ? `background:${sev.c}1f;border-color:${sev.c}55;color:${sev.c}` : ''">
+                        <span x-show="sev.k !== 'all'" class="w-1.5 h-1.5 rounded-full" :style="`background:${sev.c}`"></span>
+                        <span x-text="sev.l"></span>
+                    </button>
+                </template>
+            </div>
+        </div>
 
         
-        <div class="inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 mb-8" style="background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);">
-            <span class="ea-ldot w-2 h-2 rounded-full bg-red-500"></span>
-            <span class="text-[11px] font-bold uppercase tracking-[.22em] text-red-400">Live Emergency Alerts</span>
+        <div class="mt-3 flex items-center gap-1.5 overflow-x-auto" style="scrollbar-width:none;">
+            <span class="text-[10px] font-bold uppercase tracking-[.18em] text-white/30 shrink-0 mr-1">Type</span>
+            <template x-for="t in [
+                {k:'all',              l:'All Types'},
+                {k:'shots-fired',      l:'Shots Fired'},
+                {k:'armed-robbery',    l:'Armed Robbery'},
+                {k:'assault',          l:'Assault'},
+                {k:'break-in',         l:'Break-In'},
+                {k:'domestic',         l:'Domestic'},
+                {k:'structure-fire',   l:'Structure Fire'},
+                {k:'medical',          l:'Medical'},
+                {k:'vehicle-accident', l:'Vehicle Accident'},
+                {k:'carjacking',       l:'Carjacking'}
+            ]" :key="t.k">
+                <button @click="activeFilter = t.k" class="ea-pill shrink-0 px-3 py-1 rounded-full text-[11px] font-semibold"
+                        :class="activeFilter === t.k ? 'is-on' : ''" x-text="t.l"></button>
+            </template>
         </div>
+    </section>
 
-        <h1 class="ea-glitch font-black text-5xl sm:text-6xl lg:text-7xl tracking-tight text-white leading-[.95] mb-6" style="text-shadow:0 0 60px rgba(220,38,38,.3);">
-            Emergency<br>
-            <span style="background:linear-gradient(90deg,#ef4444 0%,#f97316 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Alert Center</span>
-        </h1>
-        <p class="text-white/50 text-base sm:text-lg max-w-lg leading-relaxed mb-12">
-            Real-time dispatches — incident type, address, officer count, and live status as events unfold.
-        </p>
+    
+    <section class="mx-auto max-w-7xl px-5 sm:px-8 mt-10 mb-4">
+        <div class="flex items-center justify-between">
+            <h2 class="text-sm font-bold uppercase tracking-[.16em] text-white/55 flex items-center gap-2.5">
+                <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                Incident Feed
+            </h2>
+            <div class="text-xs text-white/40">
+                Showing <span class="font-bold text-white" x-text="filtered.length"></span> of <span x-text="incidents.length"></span>
+            </div>
+        </div>
+    </section>
+
+    
+    <section x-show="loading" class="mx-auto max-w-7xl px-5 sm:px-8 mb-12">
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <template x-for="i in 6" :key="i">
+                <div class="rounded-2xl p-5 border border-white/5 bg-white/[.02]">
+                    <div class="ea-skel h-3 w-20 rounded mb-4"></div>
+                    <div class="ea-skel h-5 w-3/4 rounded mb-2"></div>
+                    <div class="ea-skel h-3 w-1/2 rounded mb-4"></div>
+                    <div class="ea-skel h-12 w-full rounded mb-3"></div>
+                    <div class="ea-skel h-8 w-full rounded"></div>
+                </div>
+            </template>
+        </div>
+    </section>
+
+    
+    <section x-show="!loading" class="mx-auto max-w-7xl px-5 sm:px-8 mb-16">
 
         
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 max-w-2xl">
-                        <div class="ea-stat rounded-xl px-4 py-4 text-center" style="background:rgba(239,68,68,.15);border:1px solid #ef444430;">
-                <div class="ea-count-num text-2xl sm:text-3xl font-black mb-1" style="color:#ef4444;">3</div>
-                <div class="text-[10px] font-bold uppercase tracking-[.14em] text-white/40">Active Incidents</div>
+        <div x-show="filtered.length === 0" class="rounded-2xl border border-dashed border-white/10 py-16 text-center">
+            <div class="inline-flex w-14 h-14 rounded-2xl bg-white/[.04] border border-white/10 items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </div>
-                        <div class="ea-stat rounded-xl px-4 py-4 text-center" style="background:rgba(96,165,250,.12);border:1px solid #60a5fa30;">
-                <div class="ea-count-num text-2xl sm:text-3xl font-black mb-1" style="color:#60a5fa;">24</div>
-                <div class="text-[10px] font-bold uppercase tracking-[.14em] text-white/40">Officers Deployed</div>
-            </div>
-                        <div class="ea-stat rounded-xl px-4 py-4 text-center" style="background:rgba(251,191,36,.12);border:1px solid #fbbf2430;">
-                <div class="ea-count-num text-2xl sm:text-3xl font-black mb-1" style="color:#fbbf24;">2m14s</div>
-                <div class="text-[10px] font-bold uppercase tracking-[.14em] text-white/40">Avg Response</div>
-            </div>
-                        <div class="ea-stat rounded-xl px-4 py-4 text-center" style="background:rgba(52,211,153,.12);border:1px solid #34d39930;">
-                <div class="ea-count-num text-2xl sm:text-3xl font-black mb-1" style="color:#34d399;">17</div>
-                <div class="text-[10px] font-bold uppercase tracking-[.14em] text-white/40">Resolved Today</div>
-            </div>
-                    </div>
-    </div>
-</section>
-
-
-<div class="sticky top-[78px] z-30" style="background:rgba(3,8,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);">
-    <div class="mx-auto max-w-6xl px-5 sm:px-8 py-2.5 flex items-center gap-2 overflow-x-auto" style="scrollbar-width:none;">
-        <span class="text-[10px] font-bold uppercase tracking-[.18em] text-white/25 shrink-0 mr-1">Filter</span>
-                <button class="ea-fp ea-on shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="all">All</button>
-                <button class="ea-fp shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="shooting">Shooting</button>
-                <button class="ea-fp shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="robbery">Robbery</button>
-                <button class="ea-fp shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="assault">Assault</button>
-                <button class="ea-fp shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="breakin">Break-In</button>
-                <button class="ea-fp shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="domestic">Domestic</button>
-                <button class="ea-fp shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="fire">Fire</button>
-                <button class="ea-fp shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="medical">Medical</button>
-                <button class="ea-fp shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold" data-ea-filter="carjack">Carjacking</button>
-                <span class="ml-auto shrink-0 text-[11px] text-white/25 hidden sm:block"><span id="ea-count">18</span> incidents</span>
-    </div>
-</div>
-
-
-
-<div class="mx-auto max-w-6xl px-5 sm:px-8 py-10">
-
-    <div class="ea-section-label">Live Incident Feed <span class="flex items-center gap-1.5"><span class="ea-ldot w-1.5 h-1.5 rounded-full bg-green-400"></span>Auto-refreshing</span></div>
-
-    <div id="ea-feed" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-
-            <div class="ea-card" data-ea-type="shooting" style="animation-delay:0s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="shooting"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-shooting text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">SHOOTING</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2491</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">847 Clinton Ave, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Multiple shots fired — 2 units on scene, perimeter set</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span><span class="ea-ofbadge">4</span><span class="ea-ofbadge">5</span>                        <span class="text-[11px] text-white/40 ml-1">+1</span>                    </div>
-                    <span class="text-[11px] font-bold text-blue-400">6 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-onscene">On Scene</span>
-                        <span class="text-[11px] text-white/30 font-mono">3m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-onscene" style="width:85%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
+            <h3 class="text-white font-bold text-base mb-1.5">No matching incidents</h3>
+            <p class="text-sm text-white/40 max-w-sm mx-auto">Try clearing the search or selecting a different filter to see more results.</p>
+            <button @click="search=''; activeFilter='all'; activeSeverity='all'" class="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-red-400 hover:text-red-300 transition">
+                Reset filters
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </button>
         </div>
-    </div>
-            <div class="ea-card" data-ea-type="robbery" style="animation-delay:0.06s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="robbery"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
 
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-robbery text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">ROBBERY</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">IR-0882</span>
-            </div>
+        
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <template x-for="(inc, idx) in filtered" :key="inc.id">
+                <div class="ea-card ea-card-anim rounded-2xl relative overflow-hidden"
+                     :class="[`ea-card-${inc.severity}`, inc.severity === 'critical' ? 'ea-glow-critical' : '']"
+                     :style="`animation-delay:${Math.min(idx * 0.05, 0.5)}s; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07); backdrop-filter: blur(20px);`">
 
-            
-            <div class="px-4 py-3.5 space-y-2.5">
+                    
+                    <div class="absolute top-0 left-0 right-0 h-[3px]" :class="`ea-bar-${inc.severity}`"></div>
 
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">1204 Springfield Ave, Irvington, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Armed suspect, blue hoodie — fled north on foot</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span><span class="ea-ofbadge">4</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">4 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-enroute">En Route</span>
-                        <span class="text-[11px] text-white/30 font-mono">6m ago</span>
+                    
+                    <div x-show="inc.isNew" class="absolute top-3 right-3 z-10 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-black tracking-widest uppercase animate-pulse" style="background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.4);">
+                        New
                     </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-enroute" style="width:55%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
+
+                    <div class="p-5">
+                        
+                        <div class="flex items-start gap-3 mb-3">
+                            <div class="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
+                                 :style="`background:rgba(${inc.severity==='critical'?'239,68,68':inc.severity==='high'?'249,115,22':inc.severity==='active'?'59,130,246':'16,185,129'},.13); border:1px solid rgba(${inc.severity==='critical'?'239,68,68':inc.severity==='high'?'249,115,22':inc.severity==='active'?'59,130,246':'16,185,129'},.35);`">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke-width="2" :style="`stroke:${inc.severity==='critical'?'#fca5a5':inc.severity==='high'?'#fdba74':inc.severity==='active'?'#93c5fd':'#6ee7b7'};`" x-html="typeIcon(inc.type)"></svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-0.5">
+                                    <h3 class="font-bold text-[15px] text-white truncate" x-text="inc.title"></h3>
+                                    <span class="ea-sev-${inc.severity} text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0" x-text="inc.priority"
+                                          :class="`ea-sev-${inc.severity}`"></span>
+                                </div>
+                                <div class="flex items-center gap-1.5 text-[11px] text-white/35 font-mono">
+                                    <span x-text="inc.id"></span>
+                                    <span>·</span>
+                                    <span x-text="inc.dispatchAt"></span>
+                                </div>
+                            </div>
+                            <span class="shrink-0 text-[10px] font-black uppercase tracking-wider px-2 py-1 rounded-md"
+                                  :class="`ea-sev-${inc.severity}`"
+                                  x-text="statusLabel(inc.status)"></span>
+                        </div>
+
+                        
+                        <div class="flex items-start gap-2 mb-3 pl-1">
+                            <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.66 16.66L13.41 20.9a2 2 0 01-2.83 0l-4.24-4.24a8 8 0 1111.32 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            <span class="text-[13.5px] text-white/85 font-medium leading-snug" x-text="inc.address"></span>
+                        </div>
+
+                        
+                        <div class="rounded-xl px-3 py-2.5 mb-3" style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.04);">
+                            <p class="text-[12px] text-white/55 leading-relaxed" x-text="inc.note"></p>
+                        </div>
+
+                        
+                        <div class="grid grid-cols-3 gap-2 mb-3">
+                            <div class="rounded-lg px-2.5 py-2" style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.04);">
+                                <div class="flex items-center gap-1.5 text-[10px] text-white/40 mb-0.5">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.36-1.86M17 20H7m10 0v-2c0-.66-.13-1.28-.36-1.86M7 20H2v-2a3 3 0 015.36-1.86M7 20v-2c0-.66.13-1.28.36-1.86m0 0a5 5 0 019.29 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                    OFFICERS
+                                </div>
+                                <div class="text-sm font-bold text-white"><span x-text="inc.officers"></span></div>
+                            </div>
+                            <div class="rounded-lg px-2.5 py-2" style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.04);">
+                                <div class="flex items-center gap-1.5 text-[10px] text-white/40 mb-0.5">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13l1.5-4.5A2 2 0 016.4 7h11.2a2 2 0 011.9 1.5L21 13M5 17h.01M19 17h.01M3 13v4a1 1 0 001 1h16a1 1 0 001-1v-4M3 13h18"/></svg>
+                                    UNITS
+                                </div>
+                                <div class="text-sm font-bold text-white"><span x-text="inc.units"></span></div>
+                            </div>
+                            <div class="rounded-lg px-2.5 py-2" style="background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.04);">
+                                <div class="flex items-center gap-1.5 text-[10px] text-white/40 mb-0.5">
+                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    TIME
+                                </div>
+                                <div class="text-sm font-bold text-white" x-text="timeAgo(inc.minutes)"></div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="mb-3">
+                            <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider mb-1.5">
+                                <span :class="`ea-sev-${inc.severity}`" class="px-1.5 py-0.5 rounded text-[9px]" x-text="statusLabel(inc.status)"></span>
+                                <span class="text-white/30"><span x-text="inc.pct"></span>%</span>
+                            </div>
+                            <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.05);">
+                                <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700"
+                                     :class="`ea-bar-${inc.severity}`"
+                                     :style="`width:${inc.pct}%`"></div>
+                            </div>
+                            <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
+                                <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Closed</span>
+                            </div>
+                        </div>
+
+                        
+                        <button @click="toggleExpand(inc.id)"
+                                class="w-full flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-semibold transition"
+                                style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.7);"
+                                onmouseenter="this.style.background='rgba(255,255,255,.06)';this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#fff';"
+                                onmouseleave="this.style.background='rgba(255,255,255,.03)';this.style.borderColor='rgba(255,255,255,.06)';this.style.color='rgba(255,255,255,.7)';">
+                            <span>View Details</span>
+                            <svg class="w-3.5 h-3.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" :style="expanded === inc.id ? 'transform: rotate(180deg);' : ''">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+
+                        
+                        <div class="ea-details" :class="expanded === inc.id ? 'is-open' : ''">
+                            <div class="pt-4 mt-1 border-t border-white/5 space-y-2.5 text-[12px]">
+                                <div class="flex justify-between"><span class="text-white/40">Dispatched at</span><span class="text-white/85 font-mono" x-text="inc.dispatchAt"></span></div>
+                                <div class="flex justify-between"><span class="text-white/40">Response time</span><span class="text-white/85 font-mono" x-text="inc.responseTime"></span></div>
+                                <div class="flex justify-between"><span class="text-white/40">Severity</span><span class="font-semibold" :class="`ea-sev-${inc.severity}`" x-text="sevLabel(inc.severity)" style="border:none;background:transparent;padding:0;"></span></div>
+                                <div class="flex justify-between"><span class="text-white/40">Status</span><span class="text-white/85" x-text="statusLabel(inc.status)"></span></div>
+                                <div class="flex justify-between"><span class="text-white/40">Incident ID</span><span class="text-white/85 font-mono" x-text="inc.id"></span></div>
+                                <div class="pt-2 mt-1 border-t border-white/5">
+                                    <button class="w-full rounded-lg px-3 py-2 text-[11px] font-bold uppercase tracking-wider transition"
+                                            :style="`color:${inc.severity==='critical'?'#fca5a5':inc.severity==='high'?'#fdba74':inc.severity==='active'?'#93c5fd':'#6ee7b7'}; background:rgba(${inc.severity==='critical'?'239,68,68':inc.severity==='high'?'249,115,22':inc.severity==='active'?'59,130,246':'16,185,129'},.1); border:1px solid rgba(${inc.severity==='critical'?'239,68,68':inc.severity==='high'?'249,115,22':inc.severity==='active'?'59,130,246':'16,185,129'},.3);`">
+                                        Open full incident report →
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
+            </template>
         </div>
-    </div>
-            <div class="ea-card" data-ea-type="assault" style="animation-delay:0.12s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="assault"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
 
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-assault text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">ASSAULT</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2489</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">390 Market St, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Victim conscious — EMS en route</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">3 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-onscene">On Scene</span>
-                        <span class="text-[11px] text-white/30 font-mono">9m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-onscene" style="width:90%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
+        
+        <div class="mt-6 rounded-xl py-5 px-6 text-center text-xs text-white/30" style="border:1px dashed rgba(255,255,255,.08);background:rgba(255,255,255,.015);">
+            <span class="ea-pulse-dot inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 mr-2 align-middle"></span>
+            Listening for new incidents · Last poll <span x-text="liveTime"></span>
         </div>
-    </div>
-            <div class="ea-card" data-ea-type="breakin" style="animation-delay:0.18s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="breakin"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-breakin text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">BREAK-IN</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">EO-0341</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">55 Park Ave, East Orange, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Residential break-in — rear window forced</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">2 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-dispatched">Dispatched</span>
-                        <span class="text-[11px] text-white/30 font-mono">11m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-dispatched" style="width:22%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card" data-ea-type="domestic" style="animation-delay:0.24s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="domestic"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-domestic text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">DOMESTIC</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2488</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">721 South Orange Ave, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Verbal altercation escalating — caller still on line</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">3 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-enroute">En Route</span>
-                        <span class="text-[11px] text-white/30 font-mono">14m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-enroute" style="width:60%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card" data-ea-type="shooting" style="animation-delay:0.3s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="shooting"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-shooting text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">SHOOTING</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">JC-1142</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">3310 Kennedy Blvd, Jersey City, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Drive-by — K9 deployed, 2 suspects detained</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span><span class="ea-ofbadge">4</span><span class="ea-ofbadge">5</span>                        <span class="text-[11px] text-white/40 ml-1">+2</span>                    </div>
-                    <span class="text-[11px] font-bold text-blue-400">7 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-onscene">On Scene</span>
-                        <span class="text-[11px] text-white/30 font-mono">17m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-onscene" style="width:95%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card" data-ea-type="fire" style="animation-delay:0.36s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="fire"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-fire text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">FIRE</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2487</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">220 Avon Ave, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Structure fire — 2nd floor residential, building evacuated</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span><span class="ea-ofbadge">4</span><span class="ea-ofbadge">5</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">5 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-onscene">On Scene</span>
-                        <span class="text-[11px] text-white/30 font-mono">20m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-onscene" style="width:75%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card" data-ea-type="carjack" style="animation-delay:0.42s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="carjack"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-carjack text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">CARJACKING</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2486</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">I-78 Westbound, Exit 54, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Silver Honda Civic NJ-HJ492 — BOLO issued</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span><span class="ea-ofbadge">4</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">4 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-enroute">En Route</span>
-                        <span class="text-[11px] text-white/30 font-mono">22m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-enroute" style="width:45%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card" data-ea-type="medical" style="animation-delay:0.48s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="medical"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-medical text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">MEDICAL</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">JC-1141</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">940 Bergen Ave, Jersey City, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Unresponsive male — AED deployed, EMS on scene</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">2 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-onscene">On Scene</span>
-                        <span class="text-[11px] text-white/30 font-mono">25m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-onscene" style="width:80%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card" data-ea-type="robbery" style="animation-delay:0.54s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="robbery"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-robbery text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">ROBBERY</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2485</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">670 Frelinghuysen Ave, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Gas station hold-up — suspect armed with handgun</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">3 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-dispatched">Dispatched</span>
-                        <span class="text-[11px] text-white/30 font-mono">28m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-dispatched" style="width:18%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card" data-ea-type="breakin" style="animation-delay:0.6s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="breakin"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-breakin text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">BREAK-IN</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2484</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">102 Roseville Ave, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Commercial break-in — silent alarm triggered</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">2 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-enroute">En Route</span>
-                        <span class="text-[11px] text-white/30 font-mono">31m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-enroute" style="width:50%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card opacity-50" data-ea-type="assault" style="animation-delay:0.66s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="assault"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-assault text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">ASSAULT</span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">MC-0215</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">444 Bloomfield Ave, Montclair, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Suspect in custody — victim transported to hospital</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">2 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-resolved">Resolved</span>
-                        <span class="text-[11px] text-white/30 font-mono">34m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-resolved" style="width:100%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card" data-ea-type="carjack" style="animation-delay:0.72s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="carjack"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-carjack text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">CARJACKING</span>
-                                        <span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2483</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">Raymond Blvd &amp; Mulberry St, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Suspect detained — vehicle recovered two blocks east</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span><span class="ea-ofbadge">4</span><span class="ea-ofbadge">5</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">5 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-onscene">On Scene</span>
-                        <span class="text-[11px] text-white/30 font-mono">41m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-onscene" style="width:70%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card opacity-50" data-ea-type="fire" style="animation-delay:0.78s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="fire"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-fire text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">FIRE</span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2482</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">1847 Broad St, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Fire extinguished — arson investigation underway</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span><span class="ea-ofbadge">4</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">4 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-resolved">Resolved</span>
-                        <span class="text-[11px] text-white/30 font-mono">45m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-resolved" style="width:100%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card opacity-50" data-ea-type="medical" style="animation-delay:0.84s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="medical"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-medical text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">MEDICAL</span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2481</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">250 Washington St, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Patient stabilised — transported to University Hospital</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">1 officer</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-resolved">Resolved</span>
-                        <span class="text-[11px] text-white/30 font-mono">49m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-resolved" style="width:100%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card opacity-50" data-ea-type="robbery" style="animation-delay:0.9s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="robbery"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-robbery text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">ROBBERY</span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2480</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">2300 McCarter Hwy, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Suspect apprehended — stolen property recovered</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">3 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-resolved">Resolved</span>
-                        <span class="text-[11px] text-white/30 font-mono">53m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-resolved" style="width:100%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card opacity-50" data-ea-type="shooting" style="animation-delay:0.96s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="shooting"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-shooting text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">SHOOTING</span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">NW-2479</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">100 Jones St, Newark, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">Scene cleared — 1 victim at hospital, 2 in custody</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span><span class="ea-ofbadge">3</span><span class="ea-ofbadge">4</span><span class="ea-ofbadge">5</span>                        <span class="text-[11px] text-white/40 ml-1">+3</span>                    </div>
-                    <span class="text-[11px] font-bold text-blue-400">8 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-resolved">Resolved</span>
-                        <span class="text-[11px] text-white/30 font-mono">58m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-resolved" style="width:100%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-            <div class="ea-card opacity-50" data-ea-type="domestic" style="animation-delay:1.02s;">
-        <div class="rounded-2xl overflow-hidden" data-ealeft="domestic"
-             style="background:rgba(255,255,255,.032);border:1px solid rgba(255,255,255,.07);transition:border-color .2s,background .2s;"
-             onmouseenter="this.style.borderColor='rgba(255,255,255,.14)';this.style.background='rgba(255,255,255,.055)';"
-             onmouseleave="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.032)';">
-
-            
-            <div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">
-                <div class="flex items-center gap-2">
-                    <span class="eab-domestic text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">DOMESTIC</span>
-                                    </div>
-                <span class="font-mono text-[10px] text-white/25">EO-0339</span>
-            </div>
-
-            
-            <div class="px-4 py-3.5 space-y-2.5">
-
-                
-                <div class="flex items-start gap-2.5">
-                    <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="text-sm font-semibold text-white leading-snug">58 William St, East Orange, NJ</span>
-                </div>
-
-                
-                <p class="text-[12px] text-white/45 leading-relaxed pl-6">De-escalated — report filed, no injuries</p>
-
-                
-                <div class="flex items-center justify-between pl-6 pt-0.5">
-                    <div class="flex items-center gap-1.5">
-                        <span class="ea-ofbadge">1</span><span class="ea-ofbadge">2</span>                                            </div>
-                    <span class="text-[11px] font-bold text-blue-400">2 officers</span>
-                </div>
-
-                
-                <div class="pl-6 pt-1">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-[11px] font-black uppercase tracking-[.12em] eas-resolved">Resolved</span>
-                        <span class="text-[11px] text-white/30 font-mono">63m ago</span>
-                    </div>
-                    <div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);">
-                        <div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-resolved" style="width:100%;"></div>
-                    </div>
-                    <div class="flex justify-between mt-1.5 text-[9px] text-white/20 font-mono uppercase tracking-wider">
-                        <span>Report</span><span>Dispatch</span><span>Route</span><span>Scene</span><span>Close</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    </div>
+    </section>
 
     
-    <div class="mt-6 rounded-xl py-5 px-6 text-center text-xs text-white/20" style="border:1px dashed rgba(255,255,255,.07);">
-        <span class="ea-ldot inline-block w-1.5 h-1.5 rounded-full bg-green-400 mr-2 align-middle"></span>
-        New incidents appear here as they come in
-    </div>
+    <section class="mt-4 py-14" style="background:linear-gradient(180deg, transparent 0%, rgba(220,38,38,.06) 100%); border-top:1px solid rgba(255,255,255,.05);">
+        <div class="mx-auto max-w-3xl px-5 text-center">
+            <div class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 mb-5" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.25);">
+                <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                <span class="text-[10px] font-bold uppercase tracking-[.22em] text-red-400">Stay Alert · Stay Safe</span>
+            </div>
+            <h2 class="text-3xl lg:text-4xl font-black text-white mb-3 tracking-tight">Get instant emergency alerts on your phone</h2>
+            <p class="text-white/50 text-sm mb-7 max-w-md mx-auto leading-relaxed">Push notifications for incidents in your neighbourhood — the moment they're reported.</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a data-route href="#/citizen-app" class="inline-flex items-center justify-center gap-2 rounded-xl text-white px-6 py-3 text-sm font-bold transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#dc2626,#b91c1c); box-shadow: 0 12px 30px -8px rgba(220,38,38,.45);">
+                    Get the Citizen App
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <a data-route href="#/contact" class="inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white/70 transition hover:text-white" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1);">
+                    Contact Dispatch
+                </a>
+            </div>
+        </div>
+    </section>
+
 </div>
 
-
-<section class="py-20" style="background:linear-gradient(180deg,#03080f 0%,#060f1d 100%);border-top:1px solid rgba(255,255,255,.05);">
-    <div class="mx-auto max-w-5xl px-5 sm:px-8">
-        <div class="text-center mb-14">
-            <p class="text-[10px] font-bold uppercase tracking-[.25em] text-red-400 mb-3">How It Works</p>
-            <h2 class="text-3xl sm:text-4xl font-black text-white">Incident to officer — in seconds</h2>
-        </div>
-        <div class="grid sm:grid-cols-3 gap-5">
-                        <div class="relative rounded-2xl p-6 overflow-hidden" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);">
-                <div class="absolute top-4 right-5 text-6xl font-black" style="color:#ef4444;opacity:.08;">01</div>
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:#ef444418;border:1px solid #ef444435;">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                </div>
-                <h3 class="text-base font-bold text-white mb-2">Incident Detected</h3>
-                <p class="text-sm text-white/40 leading-relaxed">Citizen taps SOS or AI detects an anomaly. Type, GPS, and caller details are logged instantly.</p>
-            </div>
-                        <div class="relative rounded-2xl p-6 overflow-hidden" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);">
-                <div class="absolute top-4 right-5 text-6xl font-black" style="color:#60a5fa;opacity:.08;">02</div>
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:#60a5fa18;border:1px solid #60a5fa35;">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                </div>
-                <h3 class="text-base font-bold text-white mb-2">Officers Assigned</h3>
-                <p class="text-sm text-white/40 leading-relaxed">The dispatch engine matches closest verified officers — by type, severity, and live availability.</p>
-            </div>
-                        <div class="relative rounded-2xl p-6 overflow-hidden" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);">
-                <div class="absolute top-4 right-5 text-6xl font-black" style="color:#34d399;opacity:.08;">03</div>
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:#34d39918;border:1px solid #34d39935;">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
-                <h3 class="text-base font-bold text-white mb-2">Live Status Updates</h3>
-                <p class="text-sm text-white/40 leading-relaxed">Every change — dispatched, en route, on scene, resolved — pushed to reporter and feed in real time.</p>
-            </div>
-                    </div>
-    </div>
-</section>
-
-
-<section class="py-16 text-center" style="background:#03080f;border-top:1px solid rgba(255,255,255,.05);">
-    <div class="mx-auto max-w-lg px-5">
-        <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);">
-            <span class="ea-ldot w-1.5 h-1.5 rounded-full bg-red-500"></span>
-            <span class="text-[10px] font-bold uppercase tracking-[.2em] text-red-400">Stay Alert. Stay Safe.</span>
-        </div>
-        <h2 class="text-3xl font-black text-white mb-3">Get alerts on your phone</h2>
-        <p class="text-white/40 text-sm mb-8 leading-relaxed">Enable push notifications for emergencies in your area — the moment an incident is reported, you know.</p>
-        <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a data-route href="#/citizen-app" class="inline-flex items-center justify-center gap-2 rounded-xl text-white px-7 py-3.5 text-sm font-bold transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#dc2626,#b91c1c);">
-                Get Citizen App
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-            </a>
-            <a data-route href="#/contact" class="inline-flex items-center justify-center gap-2 rounded-xl text-white/60 px-7 py-3.5 text-sm font-semibold border border-white/10 transition hover:border-white/25 hover:text-white">
-                Contact Us
-            </a>
-        </div>
-    </div>
-</section>
-
-<script>
-(function(){
-    function pad(n){ return n<10?'0'+n:n; }
-    function tick(){
-        var d=new Date(), s=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
-        document.querySelectorAll('.ea-tick-time').forEach(function(el){ el.textContent=s; });
-    }
-    tick(); setInterval(tick,1000);
-
-    document.querySelectorAll('.ea-fp').forEach(function(btn){
-        btn.addEventListener('click',function(){
-            var k=btn.getAttribute('data-ea-filter');
-            document.querySelectorAll('.ea-fp').forEach(function(b){ b.classList.remove('ea-on'); });
-            btn.classList.add('ea-on');
-            var cards=document.querySelectorAll('#ea-feed .ea-card'), v=0;
-            cards.forEach(function(c){
-                var show=(k==='all'||c.getAttribute('data-ea-type')===k);
-                c.style.display=show?'':'none';
-                if(show)v++;
-            });
-            var el=document.getElementById('ea-count');
-            if(el) el.textContent=v;
-        });
-    });
-
-    /* auto-spawn new incident every 20s on EA view */
-    var pool=[
-        {type:'shooting',label:'SHOOTING', address:'512 Bergen St, Newark, NJ',         officers:5, note:'Shots heard near intersection — units responding'},
-        {type:'robbery', label:'ROBBERY',  address:'88 Jefferson Ave, Elizabeth, NJ',   officers:3, note:'Store hold-up — suspect fled south on foot'},
-        {type:'medical', label:'MEDICAL',  address:'200 Lyons Ave, Newark, NJ',         officers:2, note:'Chest pains, elderly male — EMS en route'},
-        {type:'assault', label:'ASSAULT',  address:'330 Mt Prospect Ave, Newark, NJ',   officers:3, note:'Fight outside venue — 2 injured'},
-        {type:'breakin', label:'BREAK-IN', address:'775 Chancellor Ave, Irvington, NJ', officers:2, note:'Pharmacy alarm triggered — safe forced'},
-    ];
-    var pi=0,eaIv=null;
-    function spawn(){
-        var feed=document.getElementById('ea-feed'); if(!feed) return;
-        var inc=pool[pi%pool.length]; pi++;
-        var id='EA-'+(Math.floor(Math.random()*9000)+1000);
-        var d=new Date(), ts=pad(d.getHours())+':'+pad(d.getMinutes());
-        var html='<div class="ea-card ea-new-flash" data-ea-type="'+inc.type+'" style="animation:none;">'
-            +'<div class="rounded-2xl overflow-hidden" data-ealeft="'+inc.type+'" style="background:rgba(255,255,255,.05);border:1px solid rgba(220,38,38,.35);">'
-            +'<div class="flex items-center justify-between px-4 pt-3.5 pb-3 border-b border-white/5">'
-            +'<div class="flex items-center gap-2"><span class="eab-'+inc.type+' text-[10px] font-black uppercase tracking-[.12em] px-2.5 py-1 rounded-lg border">'+inc.label+'</span>'
-            +'<span class="relative flex h-1.5 w-1.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-70"></span><span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span></span>'
-            +'<span class="text-[9px] font-black uppercase tracking-wider text-red-400 animate-pulse">NEW</span></div>'
-            +'<span class="font-mono text-[10px] text-white/25">'+id+'</span></div>'
-            +'<div class="px-4 py-3.5 space-y-2.5">'
-            +'<div class="flex items-start gap-2.5"><svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-white/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>'
-            +'<span class="text-sm font-semibold text-white">'+inc.address+'</span></div>'
-            +'<p class="text-[12px] text-white/45 pl-6">'+inc.note+'</p>'
-            +'<div class="pl-6 pt-1"><div class="flex items-center justify-between mb-2">'
-            +'<span class="text-[11px] font-black uppercase tracking-[.12em] eas-dispatched">Dispatched</span>'
-            +'<span class="text-[11px] text-white/30 font-mono">Just now · '+ts+'</span></div>'
-            +'<div class="relative h-1 rounded-full overflow-hidden" style="background:rgba(255,255,255,.07);"><div class="ea-bar absolute left-0 top-0 h-full rounded-full ea-fill-dispatched" style="width:18%;"></div></div>'
-            +'</div></div></div></div>';
-        feed.insertAdjacentHTML('afterbegin',html);
-        var el=document.getElementById('ea-count');
-        if(el) el.textContent=parseInt(el.textContent||0)+1;
-    }
-    window.addEventListener('hashchange',function(){
-        if(location.hash==='#/ea'){ eaIv=setInterval(spawn,20000); }
-        else { clearInterval(eaIv); }
-    });
-    if(location.hash==='#/ea') eaIv=setInterval(spawn,20000);
-})();
-</script>
-
 </div>
+
 
 
 </main>
