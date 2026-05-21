@@ -2250,19 +2250,19 @@ cgRenderGradeDist();
 ============================================================--}}
 <div data-view="agent-app" class="hidden">
     {{-- ========== HERO ========== --}}
-    <section class="relative overflow-hidden hero-bg">
-        <div class="pointer-events-none absolute inset-0 -z-10">
-            <div class="absolute -top-32 left-1/4 w-[520px] h-[520px] rounded-full bg-navy-100/60 blur-3xl"></div>
-            <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-brand-100/40 blur-3xl"></div>
-        </div>
+    <section class="relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%), linear-gradient(160deg, #050d2a 0%, #0a1a4a 30%, #0d1f56 55%, #061229 100%);">
+        <span class="pointer-events-none absolute -top-32 left-1/4 w-[520px] h-[520px] rounded-full blur-3xl" style="background:radial-gradient(circle,rgba(56,189,248,.25) 0%,transparent 70%);"></span>
+        <span class="pointer-events-none absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle,rgba(99,102,241,.25) 0%,transparent 70%);"></span>
+        {{-- grid overlay --}}
+        <div style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(125,211,252,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(125,211,252,.07) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 90% at 50% 40%,black,transparent 85%);mask-image:radial-gradient(ellipse 80% 90% at 50% 40%,black,transparent 85%)"></div>
         <div class="mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
             <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 <div class="lg:col-span-6">
-                    <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight text-navy-900">
+                    <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight text-white">
                         <span class="block whitespace-nowrap">The badge in</span>
-                        <span class="text-brand-600 block whitespace-nowrap">your pocket.</span>
+                        <span class="block whitespace-nowrap" style="color:#7dd3fc;">your pocket.</span>
                     </h1>
-                    <p class="reveal reveal-delay-3 mt-4 text-lg text-navy-700/80 max-w-xl">
+                    <p class="reveal reveal-delay-3 mt-4 text-lg text-white/75 max-w-xl">
                         Auxilio Agente turns every officer into a node in the dispatch network. Accept emergencies in one tap, navigate live to the incident, and capture everything that matters — straight from the field.
                     </p>
                     <div class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center gap-3">
@@ -2277,8 +2277,8 @@ cgRenderGradeDist();
                             ['v'=>'Offline','l'=>'incident capture'],
                         ] as $s)
                             <div>
-                                <dt class="font-display text-2xl font-bold tracking-tight text-navy-900">{{ $s['v'] }}</dt>
-                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-ink-500">{{ $s['l'] }}</dd>
+                                <dt class="font-display text-2xl font-bold tracking-tight text-white">{{ $s['v'] }}</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/50">{{ $s['l'] }}</dd>
                             </div>
                         @endforeach
                     </dl>
@@ -2293,9 +2293,9 @@ cgRenderGradeDist();
                                 <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
                                 <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-white bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
                             </div>
-                            <p class="font-display text-base font-semibold text-navy-900">5,000+ Verified Officers</p>
+                            <p class="font-display text-base font-semibold text-white">5,000+ Verified Officers</p>
                         </div>
-                        <p class="mt-3 text-sm text-navy-700/75 leading-relaxed max-w-md">
+                        <p class="mt-3 text-sm text-white/65 leading-relaxed max-w-md">
                             Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
                         </p>
                     </div>
