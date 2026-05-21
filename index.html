@@ -2496,13 +2496,13 @@ window.cgInit=function(){
   document.getElementById('cg-states-view').style.display='block';
   document.getElementById('cg-cities-view').style.display='none';
   var ap=document.getElementById('cg-ai-panel');if(ap)ap.classList.remove('cg-show');
-  /* Show hero, hide legend + main until "Explore States" clicked */
+  /* Skip hero — show map + legend directly */
   var hero=document.getElementById('cg-hero-section');
   var legend=document.getElementById('cg-legend-bar');
   var main=document.getElementById('cg-main-section');
-  if(hero)hero.style.display='';
-  if(legend)legend.style.display='none';
-  if(main)main.style.display='none';
+  if(hero)hero.style.display='none';
+  if(legend)legend.style.display='';
+  if(main)main.style.display='block';
   window.scrollTo(0,0);
 };
 cgRenderStates();
