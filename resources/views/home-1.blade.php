@@ -79,7 +79,9 @@
             <li><a data-route href="#/contact"          class="nav-link hover:text-white transition">Contact us</a></li>
         </ul>
 
-        <div class="flex-1 flex items-center justify-end">
+        <div class="flex-1 flex items-center justify-end gap-2.5">
+            <a data-route href="#/login"       class="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white rounded transition" style="background:#FB0606;">Sign In</a>
+            <a data-route href="#/get-started" class="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-navy-900 bg-white rounded border border-white/30 hover:bg-white/90 transition">Get Started</a>
             <button data-menu-btn aria-expanded="false" aria-controls="mobile-menu" class="md:hidden relative w-10 h-10 grid place-items-center rounded-lg hover:bg-white/10 transition">
                 <span class="sr-only">Toggle menu</span>
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
@@ -103,6 +105,10 @@
             </a></li>
             <li><a data-route href="#/crime-map">Crime Map</a></li>
             <li><a data-route href="#/contact">Contact us</a></li>
+            <li class="pt-2 flex flex-col gap-2">
+                <a data-route href="#/login"       class="flex items-center justify-center py-2.5 text-sm font-semibold text-white rounded" style="background:#FB0606;">Sign In</a>
+                <a data-route href="#/get-started" class="flex items-center justify-center py-2.5 text-sm font-semibold text-navy-900 bg-white rounded border border-ink-200">Get Started</a>
+            </li>
         </ul>
     </div>
 </header>
