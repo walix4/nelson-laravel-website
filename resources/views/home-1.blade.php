@@ -68,14 +68,14 @@
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
                 Auxilio AI
             </a></li>
-            <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
+            <li><a data-route href="#/citizen-app"      class="nav-link hover:text-white transition">Citizen App</a></li>
+            <li><a data-route href="#/agent-app"        class="nav-link hover:text-white transition">Agent App</a></li>
             <li><a data-route href="#/crime-grade"      class="nav-link hover:text-white transition">Crime Grade</a></li>
             <li><a data-route href="#/er"               class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
                 <span class="relative flex h-1.5 w-1.5"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-1.5 w-1.5"></span></span>
                 Live ER
             </a></li>
-            <li><a data-route href="#/agent-app"        class="nav-link hover:text-white transition">Agent App</a></li>
-            <li><a data-route href="#/citizen-app"      class="nav-link hover:text-white transition">Citizen App</a></li>
+            <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
             <li><a data-route href="#/contact"          class="nav-link hover:text-white transition">Contact us</a></li>
         </ul>
 
@@ -94,14 +94,14 @@
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
                 Auxilio AI
             </a></li>
-            <li><a data-route href="#/crime-map">Crime Map</a></li>
+            <li><a data-route href="#/citizen-app">Citizen App</a></li>
+            <li><a data-route href="#/agent-app">Agent App</a></li>
             <li><a data-route href="#/crime-grade">Crime Grade</a></li>
             <li><a data-route href="#/er" class="inline-flex items-center gap-1.5 text-red-600 font-semibold">
                 <span class="relative flex h-1.5 w-1.5"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-1.5 w-1.5"></span></span>
                 Live ER
             </a></li>
-            <li><a data-route href="#/agent-app">Agent App</a></li>
-            <li><a data-route href="#/citizen-app">Citizen App</a></li>
+            <li><a data-route href="#/crime-map">Crime Map</a></li>
             <li><a data-route href="#/contact">Contact us</a></li>
         </ul>
     </div>
