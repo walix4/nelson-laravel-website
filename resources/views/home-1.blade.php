@@ -62,7 +62,7 @@
             </a>
         </div>
 
-        <ul class="hidden md:flex items-center gap-6 lg:gap-7 text-sm font-medium text-white/90 shrink-0 whitespace-nowrap">
+        <ul class="hidden md:flex items-center gap-4 lg:gap-5 text-sm font-medium text-white/90 shrink-0 whitespace-nowrap">
             <li><a data-route href="#/"                 class="nav-link hover:text-white transition">Home</a></li>
             <li><a data-route href="#/auxilio-ai"        class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
                 <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
@@ -77,11 +77,13 @@
             </a></li>
             <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
             <li><a data-route href="#/contact"          class="nav-link hover:text-white transition">Contact us</a></li>
+            <li class="flex items-center gap-2 pl-3 ml-1 border-l border-white/20">
+                <a data-route href="#/login"       class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-bold text-white rounded transition hover:opacity-90" style="background:#FB0606;">Sign In</a>
+                <a data-route href="#/get-started" class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-bold text-[#0a1a4a] bg-white rounded transition hover:bg-white/90">Get Started</a>
+            </li>
         </ul>
 
-        <div class="flex-1 flex items-center justify-end gap-2.5">
-            <a data-route href="#/login"       class="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white rounded transition" style="background:#FB0606;">Sign In</a>
-            <a data-route href="#/get-started" class="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-navy-900 bg-white rounded border border-white/30 hover:bg-white/90 transition">Get Started</a>
+        <div class="flex-1 flex items-center justify-end">
             <button data-menu-btn aria-expanded="false" aria-controls="mobile-menu" class="md:hidden relative w-10 h-10 grid place-items-center rounded-lg hover:bg-white/10 transition">
                 <span class="sr-only">Toggle menu</span>
                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
