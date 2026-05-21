@@ -6315,7 +6315,7 @@ function eaApp() {
             <template x-for="(inc, idx) in filtered" :key="inc.id">
                 <div class="ea-card ea-card-anim rounded-2xl relative overflow-hidden"
                      :class="[`ea-card-${inc.severity}`, inc.severity === 'critical' ? 'ea-glow-critical' : '']"
-                     :style="`animation-delay:${Math.min(idx * 0.05, 0.5)}s; background:${typeTag(inc.type).color}20;`"
+                     :style="`animation-delay:${Math.min(idx * 0.05, 0.5)}s; background:${typeTag(inc.type).color}1A;`"
                      @mousemove="$el.style.setProperty('--ea-mx', ($event.offsetX/$el.offsetWidth*100)+'%'); $el.style.setProperty('--ea-my', ($event.offsetY/$el.offsetHeight*100)+'%');">
 
                     {{-- Critical scanline (animated thin line crossing top) --}}
