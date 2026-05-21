@@ -8950,6 +8950,20 @@ function eaApp() {
             };
             return images[t] || images['assault'];
         },
+        agentAvatars(inc) {
+            const pool = [
+                '/images/officer-1.jpg',
+                '/images/officer-2.jpg',
+                '/images/officer-3.jpg',
+                '/images/officer-4.jpg',
+            ];
+            const seed = inc.id.charCodeAt(0) + inc.id.charCodeAt(inc.id.length-1);
+            const shown = Math.min(inc.officers, 3);
+            const out = [];
+            for (let i = 0; i < shown; i++) out.push(pool[(seed + i) % pool.length]);
+            return out;
+        },
+        extraOfficers(inc) { return Math.max(0, inc.officers - 3); },
         timeAgo(min) {
             if (min < 1)  return 'Just now';
             if (min < 60) return min + 'm ago';
@@ -9257,17 +9271,14 @@ function eaApp() {
                         
                         <div class="flex items-start gap-3 mb-4">
                             <div class="shrink-0 w-12 h-12 rounded-xl overflow-hidden relative"
-                                 :class="`ea-icon-${inc.severity}`">
+                                 style="border: 1px solid rgba(255,255,255,.1); box-shadow: 0 4px 12px -2px rgba(0,0,0,.4);">
                                 
                                 <img :src="typeImage(inc.type)" alt="" loading="lazy"
                                      class="absolute inset-0 w-full h-full object-cover"
                                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
                                 
-                                <div class="absolute inset-0 pointer-events-none"
-                                     :style="`background: linear-gradient(135deg, rgba(${inc.severity==='critical'?'239,68,68':inc.severity==='high'?'249,115,22':inc.severity==='active'?'59,130,246':'16,185,129'},.45) 0%, rgba(${inc.severity==='critical'?'239,68,68':inc.severity==='high'?'249,115,22':inc.severity==='active'?'59,130,246':'16,185,129'},.15) 100%);`"></div>
-                                
-                                <div class="absolute inset-0 hidden items-center justify-center">
-                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke-width="2" :style="`stroke:${inc.severity==='critical'?'#fca5a5':inc.severity==='high'?'#fdba74':inc.severity==='active'?'#93c5fd':'#6ee7b7'};`" x-html="typeIcon(inc.type)"></svg>
+                                <div class="absolute inset-0 hidden items-center justify-center" style="background:#1a1a2e;">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="#ef4444" x-html="typeIcon(inc.type)"></svg>
                                 </div>
                             </div>
                             <div class="flex-1 min-w-0">
@@ -9311,34 +9322,46 @@ function eaApp() {
                         </div>
 
                         
-                        <div class="mb-4">
-                            <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider mb-2">
-                                <span class="ea-progress-pct text-[10px] font-mono"><span x-text="inc.pct"></span>% complete</span>
-                                <span class="ea-progress-pct text-[10px] font-mono" x-text="timeAgo(inc.minutes)"></span>
+                        <div class="mb-4 flex items-center justify-between">
+                            <div>
+                                <div class="text-[10px] font-bold uppercase tracking-[.16em] text-red-400/85 mb-2">Officers Assisting</div>
+                                <div class="flex items-center -space-x-2">
+                                    <template x-for="(av, i) in agentAvatars(inc)" :key="i">
+                                        <img :src="av" alt="" class="w-8 h-8 rounded-full object-cover" style="box-shadow: 0 0 0 2px #0a1020, 0 2px 6px rgba(0,0,0,.5);" />
+                                    </template>
+                                    <span x-show="extraOfficers(inc) > 0"
+                                          class="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black"
+                                          style="background: rgba(239,68,68,.15); color: #fca5a5; box-shadow: 0 0 0 2px #0a1020;"
+                                          x-text="'+' + extraOfficers(inc)"></span>
+                                </div>
                             </div>
-                            <div class="ea-progress-track relative h-1 rounded-full overflow-hidden">
-                                <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700"
-                                     :class="`ea-bar-${inc.severity}`"
-                                     :style="`width:${inc.pct}%; box-shadow: 0 0 12px ${inc.severity==='critical'?'rgba(239,68,68,.6)':inc.severity==='high'?'rgba(249,115,22,.5)':inc.severity==='active'?'rgba(59,130,246,.5)':'rgba(16,185,129,.4)'};`"></div>
-                            </div>
-                            <div class="ea-stage-lbl flex justify-between mt-1.5 text-[9px] font-mono uppercase tracking-wider">
-                                <span :class="inc.pct >= 5 ? 'text-white/40' : ''">Report</span>
-                                <span :class="inc.pct >= 25 ? 'text-white/40' : ''">Dispatch</span>
-                                <span :class="inc.pct >= 50 ? 'text-white/40' : ''">Route</span>
-                                <span :class="inc.pct >= 75 ? 'text-white/40' : ''">Scene</span>
-                                <span :class="inc.pct >= 100 ? 'text-white/40' : ''">Closed</span>
+                            <div class="text-right">
+                                <div class="text-[10px] font-bold uppercase tracking-[.16em] text-white/40 mb-2">Total</div>
+                                <div class="text-2xl font-black leading-none" style="color:#ef4444;" x-text="inc.officers"></div>
                             </div>
                         </div>
 
                         
-                        <div class="grid grid-cols-4 gap-2 mb-4">
-                            <div class="ea-card-stat rounded-lg px-2.5 py-2.5">
-                                <div class="ea-card-stat-label flex items-center gap-1 text-[9px] mb-1 font-bold">
-                                    <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.36-1.86M17 20H7m10 0v-2c0-.66-.13-1.28-.36-1.86M7 20H2v-2a3 3 0 015.36-1.86M7 20v-2c0-.66.13-1.28.36-1.86m0 0a5 5 0 019.29 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                    OFFICERS
-                                </div>
-                                <div class="ea-card-stat-val text-base font-bold leading-none" x-text="inc.officers"></div>
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider mb-2">
+                                <span class="text-red-400 font-mono"><span x-text="inc.pct"></span>% complete</span>
+                                <span class="text-white/35 font-mono" x-text="timeAgo(inc.minutes)"></span>
                             </div>
+                            <div class="ea-progress-track relative h-1 rounded-full overflow-hidden">
+                                <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700"
+                                     :style="`width:${inc.pct}%; background: linear-gradient(90deg, #dc2626, #ef4444 60%, #f87171); box-shadow: 0 0 12px rgba(239,68,68,.6);`"></div>
+                            </div>
+                            <div class="flex justify-between mt-1.5 text-[9px] font-mono uppercase tracking-wider">
+                                <span :class="inc.pct >= 5  ? 'text-red-400/85' : 'text-white/20'">Report</span>
+                                <span :class="inc.pct >= 25 ? 'text-red-400/85' : 'text-white/20'">Dispatch</span>
+                                <span :class="inc.pct >= 50 ? 'text-red-400/85' : 'text-white/20'">Route</span>
+                                <span :class="inc.pct >= 75 ? 'text-red-400/85' : 'text-white/20'">Scene</span>
+                                <span :class="inc.pct >= 100? 'text-red-400/85' : 'text-white/20'">Closed</span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="grid grid-cols-3 gap-2 mb-4">
                             <div class="ea-card-stat rounded-lg px-2.5 py-2.5">
                                 <div class="ea-card-stat-label flex items-center gap-1 text-[9px] mb-1 font-bold">
                                     <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13l1.5-4.5A2 2 0 016.4 7h11.2a2 2 0 011.9 1.5L21 13M5 17h.01M19 17h.01M3 13v4a1 1 0 001 1h16a1 1 0 001-1v-4M3 13h18"/></svg>
