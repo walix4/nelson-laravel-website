@@ -8514,26 +8514,32 @@ cgRenderGradeDist();
     font-feature-settings: "ss01", "cv11";
 }
 
-/* ───── Animated background grid ───── */
+/* ───── Hero — navy with grid (matches home hero palette) ───── */
+[data-view="ea"] .ea-hero-bg {
+    background:
+        radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%),
+        linear-gradient(160deg, #050d2a 0%, #0a1a4a 30%, #0d1f56 55%, #061229 100%);
+}
 [data-view="ea"] .ea-grid-bg {
     position: absolute; inset: 0; pointer-events: none; z-index: 0;
     background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse 80% 90% at 50% 0%, black, transparent 80%);
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 90% at 50% 30%, black, transparent 85%);
 }
 [data-view="ea"] .ea-glow-1 {
     position: absolute; pointer-events: none; z-index: 0;
-    width: 600px; height: 600px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(239,68,68,.22) 0%, transparent 70%);
-    top: -300px; right: -200px; filter: blur(40px);
+    width: 560px; height: 560px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(56,189,248,.30) 0%, transparent 70%);
+    top: -240px; left: -180px; filter: blur(40px);
 }
 [data-view="ea"] .ea-glow-2 {
     position: absolute; pointer-events: none; z-index: 0;
-    width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(59,130,246,.18) 0%, transparent 70%);
-    top: 100px; left: -200px; filter: blur(40px);
+    width: 580px; height: 580px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,102,241,.28) 0%, transparent 70%);
+    bottom: -240px; right: -200px; filter: blur(40px);
 }
 
 /* ───── Live ticker ───── */
@@ -8959,7 +8965,7 @@ function eaApp() {
     </div>
 
     
-    <section class="relative overflow-hidden" style="min-height:540px;">
+    <section class="ea-hero-bg relative overflow-hidden" style="min-height:540px;">
         <div class="ea-grid-bg"></div>
         <div class="ea-glow-1"></div>
         <div class="ea-glow-2"></div>
@@ -9271,32 +9277,6 @@ function eaApp() {
             </template>
         </div>
 
-        
-        <div class="ea-tail mt-6 rounded-xl py-5 px-6 text-center text-xs">
-            <span class="ea-pulse-dot inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2 align-middle"></span>
-            Listening for new incidents · Last poll <span x-text="liveTime"></span>
-        </div>
-    </section>
-
-    
-    <section class="ea-cta-strip mt-4 py-14">
-        <div class="mx-auto max-w-3xl px-5 text-center">
-            <div class="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 mb-5" style="background:#fef2f2;border:1px solid #fecaca;">
-                <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-500"></span>
-                <span class="text-[10px] font-bold uppercase tracking-[.22em] text-red-700">Stay Alert · Stay Safe</span>
-            </div>
-            <h2 class="ea-cta-title text-3xl lg:text-4xl font-black mb-3 tracking-tight">Get instant emergency alerts on your phone</h2>
-            <p class="ea-cta-text text-sm mb-7 max-w-md mx-auto leading-relaxed">Push notifications for incidents in your neighbourhood — the moment they're reported.</p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                <a data-route href="#/citizen-app" class="inline-flex items-center justify-center gap-2 rounded-xl text-white px-6 py-3 text-sm font-bold transition hover:-translate-y-0.5" style="background:linear-gradient(135deg,#dc2626,#b91c1c); box-shadow: 0 12px 30px -8px rgba(220,38,38,.45);">
-                    Get the Citizen App
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-                </a>
-                <a data-route href="#/contact" class="ea-cta-secondary inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition">
-                    Contact Dispatch
-                </a>
-            </div>
-        </div>
     </section>
 
     </div>
