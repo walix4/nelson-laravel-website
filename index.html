@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <link rel="preload" as="style" href="build/assets/app-BFd-kIH4.css" /><link rel="modulepreload" as="script" href="build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="build/assets/app-BFd-kIH4.css" /><script type="module" src="build/assets/app-C2cgr6mz.js"></script>    <style>
+    <link rel="preload" as="style" href="build/assets/app-Dy-yGLDo.css" /><link rel="modulepreload" as="script" href="build/assets/app-C2cgr6mz.js" /><link rel="stylesheet" href="build/assets/app-Dy-yGLDo.css" /><script type="module" src="build/assets/app-C2cgr6mz.js"></script>    <style>
         [data-nav].is-scrolled {
             box-shadow: 0 8px 24px -12px rgba(10, 26, 74, .45);
         }
@@ -35,6 +35,19 @@
 <body class="font-sans">
 
 
+<style>
+    /* Live EA nav indicator — blinks between red and green */
+    @keyframes eaLiveBlink {
+        0%, 44%   { background-color:#ef4444; }
+        50%, 94%  { background-color:#22c55e; }
+        100%      { background-color:#ef4444; }
+    }
+    @keyframes eaLivePing {
+        75%, 100% { transform: scale(2); opacity: 0; }
+    }
+    .ea-live-dot  { animation: eaLiveBlink 1.6s steps(1,end) infinite; }
+    .ea-live-ping { animation: eaLiveBlink 1.6s steps(1,end) infinite, eaLivePing 1.6s cubic-bezier(0,0,.2,1) infinite; }
+</style>
 <header data-nav style="background-color:#0a1a4a" class="fixed inset-x-0 top-0 z-50 text-white">
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
         <div class="flex-1 flex items-center">
@@ -55,7 +68,7 @@
             <li><a data-route href="#/crime-map"        class="nav-link hover:text-white transition">Crime Map</a></li>
             <li><a data-route href="#/crime-grade"      class="nav-link hover:text-white transition">Crime Grade</a></li>
             <li><a data-route href="#/ea"               class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
-                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span></span>
+                <span class="relative flex h-2 w-2"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-2 w-2"></span></span>
                 Live EA
             </a></li>
             <li><a data-route href="#/agent-app"        class="nav-link hover:text-white transition">Agent App</a></li>
@@ -81,7 +94,7 @@
             <li><a data-route href="#/crime-map">Crime Map</a></li>
             <li><a data-route href="#/crime-grade">Crime Grade</a></li>
             <li><a data-route href="#/ea" class="inline-flex items-center gap-1.5 text-red-600 font-semibold">
-                <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span></span>
+                <span class="relative flex h-2 w-2"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-2 w-2"></span></span>
                 Live EA
             </a></li>
             <li><a data-route href="#/agent-app">Agent App</a></li>
@@ -2001,6 +2014,8 @@ var CG_RAW=[
 ];
 
 var GC={A:{bg:'#4ade80',tx:'#14532d'},B:{bg:'#34d399',tx:'#064e3b'},C:{bg:'#60a5fa',tx:'#1e3a8a'},D:{bg:'#fbbf24',tx:'#78350f'},F:{bg:'#f87171',tx:'#7f1d1d'}};
+/* States-map fill ramp — reuses the Crime Map incident-pin palette (green→red) */
+var CG_MAP_GRADE={A:'#10b981',B:'#3b82f6',C:'#f59e0b',D:'#f97316',F:'#dc2626'};
 var LEGEND_COLORS={
   A:{fill:'#4ade80',g1:'#15803d',gradient:'linear-gradient(135deg,#15803d,#22c55e)',glow:'rgba(74,222,128,.45)'},
   B:{fill:'#34d399',g1:'#0e7490',gradient:'linear-gradient(135deg,#0e7490,#06b6d4)',glow:'rgba(52,211,153,.45)'},
@@ -2333,7 +2348,7 @@ function cgInitMap(){
           .attr('fill',function(d){
             var abbr=FIPS_ABBR[('00'+d.id).slice(-2)];
             var s=gradeOf[abbr];
-            return s?GC[s.grade].bg:'#1a2744';
+            return s?CG_MAP_GRADE[s.grade]:'#1a2744';
           })
           .attr('stroke','#f1f5f9').attr('stroke-width',0.8)
           .attr('fill-opacity',0.88).style('cursor','pointer')
@@ -2342,9 +2357,9 @@ function cgInitMap(){
             var abbr=FIPS_ABBR[('00'+d.id).slice(-2)];
             var s=gradeOf[abbr];
             if(s&&tooltip){
-              var gc=GC[s.grade]||GC.F;
-              tooltip.innerHTML='<div style="font-weight:800;color:'+gc.bg+';font-size:13px">'+s.name+'</div>'
-                +'<div style="color:#64748b;font-size:10px;margin-top:2px">Grade <span style="color:'+gc.bg+';font-weight:900">'+s.grade+'</span> · '+s.cities.length+' '+(s.cities.length===1?'city':'cities')+'</div>';
+              var gc=CG_MAP_GRADE[s.grade]||CG_MAP_GRADE.F;
+              tooltip.innerHTML='<div style="font-weight:800;color:'+gc+';font-size:13px">'+s.name+'</div>'
+                +'<div style="color:#64748b;font-size:10px;margin-top:2px">Grade <span style="color:'+gc+';font-weight:900">'+s.grade+'</span> · '+s.cities.length+' '+(s.cities.length===1?'city':'cities')+'</div>';
               tooltip.style.display='block';
               var rect=wrap.getBoundingClientRect();
               tooltip.style.left=Math.min(event.clientX-rect.left+18,rect.width-170)+'px';
@@ -8564,28 +8579,28 @@ cgRenderGradeDist();
 /* ───── Hero — navy with grid (matches home hero palette) ───── */
 [data-view="ea"] .ea-hero-bg {
     background:
-        radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%),
-        radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%),
-        linear-gradient(160deg, #050d2a 0%, #0a1a4a 30%, #0d1f56 55%, #061229 100%);
+        radial-gradient(ellipse at 18% -10%, rgba(255,255,255,.55) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 100%, rgba(245,158,11,.6) 0%, transparent 55%),
+        linear-gradient(160deg, #fde047 0%, #facc15 42%, #fbbf24 72%, #f59e0b 100%);
 }
 [data-view="ea"] .ea-grid-bg {
     position: absolute; inset: 0; pointer-events: none; z-index: 0;
     background-image:
-        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+        linear-gradient(rgba(120,53,15,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120,53,15,.07) 1px, transparent 1px);
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse 80% 90% at 50% 30%, black, transparent 85%);
 }
 [data-view="ea"] .ea-glow-1 {
     position: absolute; pointer-events: none; z-index: 0;
     width: 560px; height: 560px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(56,189,248,.30) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255,255,255,.55) 0%, transparent 70%);
     top: -240px; left: -180px; filter: blur(40px);
 }
 [data-view="ea"] .ea-glow-2 {
     position: absolute; pointer-events: none; z-index: 0;
     width: 580px; height: 580px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(99,102,241,.28) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(249,115,22,.4) 0%, transparent 70%);
     bottom: -240px; right: -200px; filter: blur(40px);
 }
 
@@ -8699,18 +8714,15 @@ cgRenderGradeDist();
    CINEMATIC DASHBOARD — premium dark ops center for cards section
 ═══════════════════════════════════════════════════════════════ */
 [data-view="ea"] .ea-light {
-    background:
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(59,130,246,.08) 0%, transparent 60%),
-        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(239,68,68,.05) 0%, transparent 60%),
-        linear-gradient(180deg, #060b1a 0%, #050810 50%, #04060f 100%);
-    color: #e6eaf2;
+    background: #f4f6fb;
+    color: #0f172a;
     position: relative;
 }
 [data-view="ea"] .ea-light::before {
     content:""; position:absolute; inset:0; pointer-events:none; opacity:1;
     background-image:
-        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+        linear-gradient(rgba(15,23,42,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,23,42,.04) 1px, transparent 1px);
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse 70% 80% at 50% 30%, black, transparent 90%);
     z-index: 0;
@@ -8719,67 +8731,61 @@ cgRenderGradeDist();
 
 /* ───── INPUTS / SEARCH ───── */
 [data-view="ea"] .ea-light .ea-input {
-    background: rgba(255,255,255,.025);
-    border: 1px solid rgba(255,255,255,.07);
-    color: #e6eaf2;
-    backdrop-filter: blur(12px);
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
 }
-[data-view="ea"] .ea-light .ea-input::placeholder { color: rgba(230,234,242,.32); }
+[data-view="ea"] .ea-light .ea-input::placeholder { color: #94a3b8; }
 [data-view="ea"] .ea-light .ea-input:focus {
     outline: none;
-    border-color: rgba(239,68,68,.4);
-    background: rgba(255,255,255,.04);
-    box-shadow: 0 0 0 4px rgba(239,68,68,.08), 0 4px 16px -4px rgba(239,68,68,.15);
+    border-color: rgba(239,68,68,.5);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(239,68,68,.1);
 }
 
 /* ───── PILLS ───── */
 [data-view="ea"] .ea-light .ea-pill {
-    background: rgba(255,255,255,.03);
-    border: 1px solid rgba(255,255,255,.07);
-    color: rgba(230,234,242,.55);
-    backdrop-filter: blur(12px);
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
 }
-[data-view="ea"] .ea-light .ea-pill:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); color: #fff; }
+[data-view="ea"] .ea-light .ea-pill:hover { background: #f8fafc; border-color: #cbd5e1; color: #0f172a; }
 [data-view="ea"] .ea-light .ea-pill.is-on {
-    background: rgba(239,68,68,.15);
+    background: rgba(239,68,68,.1);
     border-color: rgba(239,68,68,.4);
-    color: #fca5a5;
-    box-shadow: 0 0 18px -6px rgba(239,68,68,.35);
+    color: #dc2626;
 }
 
 /* ───── LABELS ───── */
-[data-view="ea"] .ea-light .ea-feed-label { color: rgba(230,234,242,.65); }
-[data-view="ea"] .ea-light .ea-text-faint { color: rgba(230,234,242,.35); }
-[data-view="ea"] .ea-light .ea-toolbar-label { color: rgba(230,234,242,.3); }
+[data-view="ea"] .ea-light .ea-feed-label { color: #475569; }
+[data-view="ea"] .ea-light .ea-text-faint { color: #94a3b8; }
+[data-view="ea"] .ea-light .ea-toolbar-label { color: #94a3b8; }
 
-/* ───── STATS CARDS — dark glass ───── */
+/* ───── STATS CARDS — white ───── */
 [data-view="ea"] .ea-light .ea-stat-card {
-    background: linear-gradient(180deg, rgba(20,28,50,.55) 0%, rgba(10,15,28,.4) 100%);
-    border: 1px solid rgba(255,255,255,.07);
-    backdrop-filter: blur(24px);
-    box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 12px 32px -16px rgba(0,0,0,.6);
+    background: #fff;
+    border: 1px solid #e7ebf2;
+    box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 12px 28px -18px rgba(15,23,42,.25);
 }
-[data-view="ea"] .ea-light .ea-stat-label { color: rgba(230,234,242,.65); }
-[data-view="ea"] .ea-light .ea-stat-sub   { color: rgba(230,234,242,.35); }
+[data-view="ea"] .ea-light .ea-stat-label { color: #475569; }
+[data-view="ea"] .ea-light .ea-stat-sub   { color: #94a3b8; }
 
 /* ═══════════════════════════════════════════════════════════════
-   CINEMATIC INCIDENT CARDS — frosted glass + severity glow
+   INCIDENT CARDS — white surface
 ═══════════════════════════════════════════════════════════════ */
 [data-view="ea"] .ea-light .ea-card {
-    background: linear-gradient(180deg, rgba(22,30,52,.6) 0%, rgba(10,15,30,.5) 100%) !important;
-    border: 1px solid rgba(255,255,255,.06) !important;
-    backdrop-filter: blur(24px);
+    background: #fff !important;
+    border: 1px solid #e7ebf2 !important;
     box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 1px 4px rgba(0,0,0,.4),
-        0 12px 32px -16px rgba(0,0,0,.5);
+        0 1px 2px rgba(15,23,42,.04),
+        0 12px 32px -18px rgba(15,23,42,.22);
     isolation: isolate;
 }
 
 /* Hover spotlight effect */
 [data-view="ea"] .ea-light .ea-card::after {
     content:""; position:absolute; inset:0;
-    background: radial-gradient(circle 320px at var(--ea-mx, 50%) var(--ea-my, 0%), rgba(255,255,255,.06) 0%, transparent 50%);
+    background: radial-gradient(circle 320px at var(--ea-mx, 50%) var(--ea-my, 0%), rgba(15,23,42,.04) 0%, transparent 50%);
     opacity: 0; transition: opacity .3s ease; pointer-events: none; border-radius: inherit;
     z-index: 0;
 }
@@ -8788,115 +8794,100 @@ cgRenderGradeDist();
 
 /* Severity-tinted hover glow */
 [data-view="ea"] .ea-light .ea-card:hover.ea-card-critical {
-    border-color: rgba(239,68,68,.45) !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 0 0 1px rgba(239,68,68,.15),
-        0 20px 50px -16px rgba(239,68,68,.4),
-        0 4px 12px rgba(239,68,68,.15);
+    border-color: rgba(239,68,68,.4) !important;
+    box-shadow: 0 0 0 1px rgba(239,68,68,.12), 0 20px 44px -18px rgba(239,68,68,.4);
 }
 [data-view="ea"] .ea-light .ea-card:hover.ea-card-high {
-    border-color: rgba(249,115,22,.45) !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 0 0 1px rgba(249,115,22,.15),
-        0 20px 50px -16px rgba(249,115,22,.4),
-        0 4px 12px rgba(249,115,22,.15);
+    border-color: rgba(249,115,22,.4) !important;
+    box-shadow: 0 0 0 1px rgba(249,115,22,.12), 0 20px 44px -18px rgba(249,115,22,.4);
 }
 [data-view="ea"] .ea-light .ea-card:hover.ea-card-active {
-    border-color: rgba(59,130,246,.45) !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 0 0 1px rgba(59,130,246,.15),
-        0 20px 50px -16px rgba(59,130,246,.4),
-        0 4px 12px rgba(59,130,246,.15);
+    border-color: rgba(59,130,246,.4) !important;
+    box-shadow: 0 0 0 1px rgba(59,130,246,.12), 0 20px 44px -18px rgba(59,130,246,.4);
 }
 [data-view="ea"] .ea-light .ea-card:hover.ea-card-resolved {
     border-color: rgba(16,185,129,.35) !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 0 0 1px rgba(16,185,129,.12),
-        0 20px 50px -16px rgba(16,185,129,.3);
+    box-shadow: 0 0 0 1px rgba(16,185,129,.1), 0 20px 44px -18px rgba(16,185,129,.3);
 }
 
 /* Card text */
-[data-view="ea"] .ea-light .ea-card-title  { color: #f8fafc !important; letter-spacing: -.01em; }
-[data-view="ea"] .ea-light .ea-card-meta   { color: rgba(255,255,255,.32) !important; }
-[data-view="ea"] .ea-light .ea-card-addr   { color: rgba(255,255,255,.88) !important; }
-[data-view="ea"] .ea-light .ea-card-note   { color: rgba(255,255,255,.55) !important; }
-[data-view="ea"] .ea-light .ea-card-addr-icon { color: rgba(255,255,255,.4) !important; }
+[data-view="ea"] .ea-light .ea-card-title  { color: #0f172a !important; letter-spacing: -.01em; }
+[data-view="ea"] .ea-light .ea-card-meta   { color: #94a3b8 !important; }
+[data-view="ea"] .ea-light .ea-card-addr   { color: #1e293b !important; }
+[data-view="ea"] .ea-light .ea-card-note   { color: #64748b !important; }
+[data-view="ea"] .ea-light .ea-card-addr-icon { color: #94a3b8 !important; }
 
 /* Note box */
 [data-view="ea"] .ea-light .ea-card-note-box {
-    background: rgba(255,255,255,.025) !important;
-    border: 1px solid rgba(255,255,255,.05) !important;
+    background: #f8fafc !important;
+    border: 1px solid #eef1f6 !important;
 }
 
 /* Stat tiles within a card */
 [data-view="ea"] .ea-light .ea-card-stat {
-    background: rgba(255,255,255,.025) !important;
-    border: 1px solid rgba(255,255,255,.05) !important;
+    background: #f8fafc !important;
+    border: 1px solid #eef1f6 !important;
 }
-[data-view="ea"] .ea-light .ea-card-stat-label { color: rgba(255,255,255,.4) !important; letter-spacing: .08em; }
-[data-view="ea"] .ea-light .ea-card-stat-val   { color: #fff !important; }
+[data-view="ea"] .ea-light .ea-card-stat-label { color: #94a3b8 !important; letter-spacing: .08em; }
+[data-view="ea"] .ea-light .ea-card-stat-val   { color: #0f172a !important; }
 
 /* Progress bar */
-[data-view="ea"] .ea-light .ea-progress-track { background: rgba(255,255,255,.06) !important; }
-[data-view="ea"] .ea-light .ea-progress-stage { color: rgba(255,255,255,.18) !important; }
-[data-view="ea"] .ea-light .ea-progress-pct   { color: rgba(255,255,255,.4) !important; }
-[data-view="ea"] .ea-light .ea-stage-lbl    { color: rgba(255,255,255,.18) !important; }
+[data-view="ea"] .ea-light .ea-progress-track { background: #eef1f6 !important; }
+[data-view="ea"] .ea-light .ea-progress-stage { color: #cbd5e1 !important; }
+[data-view="ea"] .ea-light .ea-progress-pct   { color: #94a3b8 !important; }
+[data-view="ea"] .ea-light .ea-stage-lbl    { color: #cbd5e1 !important; }
 
-/* Severity badges & icons — neon accent */
-[data-view="ea"] .ea-light .ea-sev-critical { background: rgba(239,68,68,.13); color: #fca5a5; border-color: rgba(239,68,68,.4); box-shadow: 0 0 12px -4px rgba(239,68,68,.35); }
-[data-view="ea"] .ea-light .ea-sev-high     { background: rgba(249,115,22,.13); color: #fdba74; border-color: rgba(249,115,22,.4); box-shadow: 0 0 12px -4px rgba(249,115,22,.3); }
-[data-view="ea"] .ea-light .ea-sev-active   { background: rgba(59,130,246,.13); color: #93c5fd; border-color: rgba(59,130,246,.4); box-shadow: 0 0 12px -4px rgba(59,130,246,.3); }
-[data-view="ea"] .ea-light .ea-sev-resolved { background: rgba(16,185,129,.13); color: #6ee7b7; border-color: rgba(16,185,129,.4); box-shadow: 0 0 12px -4px rgba(16,185,129,.25); }
+/* Severity badges & icons */
+[data-view="ea"] .ea-light .ea-sev-critical { background: rgba(239,68,68,.1); color: #dc2626; border-color: rgba(239,68,68,.3); }
+[data-view="ea"] .ea-light .ea-sev-high     { background: rgba(249,115,22,.1); color: #ea580c; border-color: rgba(249,115,22,.3); }
+[data-view="ea"] .ea-light .ea-sev-active   { background: rgba(59,130,246,.1); color: #2563eb; border-color: rgba(59,130,246,.3); }
+[data-view="ea"] .ea-light .ea-sev-resolved { background: rgba(16,185,129,.1); color: #059669; border-color: rgba(16,185,129,.3); }
 
 /* Icon chip severity glow */
 @keyframes ea-icon-pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(var(--ea-sev-rgb), 0); }
-    50%      { box-shadow: 0 0 18px -2px rgba(var(--ea-sev-rgb), .45); }
+    50%      { box-shadow: 0 0 16px -3px rgba(var(--ea-sev-rgb), .4); }
 }
-[data-view="ea"] .ea-light .ea-icon-critical { background: rgba(239,68,68,.13) !important; border-color: rgba(239,68,68,.4) !important; --ea-sev-rgb: 239,68,68; animation: ea-icon-pulse 2.4s ease-in-out infinite; }
-[data-view="ea"] .ea-light .ea-icon-high     { background: rgba(249,115,22,.13) !important; border-color: rgba(249,115,22,.4) !important; --ea-sev-rgb: 249,115,22; animation: ea-icon-pulse 2.8s ease-in-out infinite; }
-[data-view="ea"] .ea-light .ea-icon-active   { background: rgba(59,130,246,.13) !important; border-color: rgba(59,130,246,.4) !important; --ea-sev-rgb: 59,130,246; animation: ea-icon-pulse 3.2s ease-in-out infinite; }
-[data-view="ea"] .ea-light .ea-icon-resolved { background: rgba(16,185,129,.10) !important; border-color: rgba(16,185,129,.3) !important; --ea-sev-rgb: 16,185,129; }
+[data-view="ea"] .ea-light .ea-icon-critical { background: rgba(239,68,68,.1) !important; border-color: rgba(239,68,68,.3) !important; --ea-sev-rgb: 239,68,68; animation: ea-icon-pulse 2.4s ease-in-out infinite; }
+[data-view="ea"] .ea-light .ea-icon-high     { background: rgba(249,115,22,.1) !important; border-color: rgba(249,115,22,.3) !important; --ea-sev-rgb: 249,115,22; animation: ea-icon-pulse 2.8s ease-in-out infinite; }
+[data-view="ea"] .ea-light .ea-icon-active   { background: rgba(59,130,246,.1) !important; border-color: rgba(59,130,246,.3) !important; --ea-sev-rgb: 59,130,246; animation: ea-icon-pulse 3.2s ease-in-out infinite; }
+[data-view="ea"] .ea-light .ea-icon-resolved { background: rgba(16,185,129,.08) !important; border-color: rgba(16,185,129,.25) !important; --ea-sev-rgb: 16,185,129; }
 
 /* View Details button */
 [data-view="ea"] .ea-light .ea-details-btn {
-    background: rgba(255,255,255,.025) !important;
-    border: 1px solid rgba(255,255,255,.06) !important;
-    color: rgba(255,255,255,.6) !important;
+    background: #f8fafc !important;
+    border: 1px solid #e7ebf2 !important;
+    color: #475569 !important;
 }
-[data-view="ea"] .ea-light .ea-details-btn:hover { background: rgba(255,255,255,.06) !important; border-color: rgba(255,255,255,.14) !important; color: #fff !important; }
+[data-view="ea"] .ea-light .ea-details-btn:hover { background: #f1f5f9 !important; border-color: #cbd5e1 !important; color: #0f172a !important; }
 
 /* Expanded details rows */
-[data-view="ea"] .ea-light .ea-details-row-label { color: rgba(255,255,255,.4) !important; }
-[data-view="ea"] .ea-light .ea-details-row-val   { color: #fff !important; }
-[data-view="ea"] .ea-light .ea-details-divider { border-color: rgba(255,255,255,.06) !important; }
+[data-view="ea"] .ea-light .ea-details-row-label { color: #94a3b8 !important; }
+[data-view="ea"] .ea-light .ea-details-row-val   { color: #0f172a !important; }
+[data-view="ea"] .ea-light .ea-details-divider { border-color: #eef1f6 !important; }
 
-/* Skeleton shimmer (dark) */
+/* Skeleton shimmer (light) */
 [data-view="ea"] .ea-light .ea-skel {
-    background: linear-gradient(90deg, rgba(255,255,255,.03) 0%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.03) 100%);
+    background: linear-gradient(90deg, rgba(15,23,42,.04) 0%, rgba(15,23,42,.09) 50%, rgba(15,23,42,.04) 100%);
     background-size: 800px 100%;
 }
 
 /* Empty state */
 [data-view="ea"] .ea-light .ea-empty {
-    background: rgba(255,255,255,.025);
-    border: 1px dashed rgba(255,255,255,.08);
+    background: #fff;
+    border: 1px dashed #cbd5e1;
 }
-[data-view="ea"] .ea-light .ea-empty-icon { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); color: rgba(255,255,255,.5); }
-[data-view="ea"] .ea-light .ea-empty-title { color: #fff; }
-[data-view="ea"] .ea-light .ea-empty-text  { color: rgba(255,255,255,.4); }
+[data-view="ea"] .ea-light .ea-empty-icon { background: #f1f5f9; border-color: #e2e8f0; color: #64748b; }
+[data-view="ea"] .ea-light .ea-empty-title { color: #0f172a; }
+[data-view="ea"] .ea-light .ea-empty-text  { color: #64748b; }
 
 /* AI confidence chip */
 [data-view="ea"] .ea-ai-chip {
     display: inline-flex; align-items: center; gap: 4px;
     padding: 2px 7px; border-radius: 4px;
-    background: linear-gradient(135deg, rgba(139,92,246,.18), rgba(59,130,246,.12));
+    background: rgba(139,92,246,.1);
     border: 1px solid rgba(139,92,246,.3);
-    color: #c4b5fd;
+    color: #7c3aed;
     font-size: 9px; font-weight: 800; letter-spacing: .06em;
     text-transform: uppercase;
 }
@@ -9128,39 +9119,39 @@ function eaApp() {
                     <path d="M100 100 L100 8 A92 92 0 0 1 178 145 Z" fill="url(#ea-sweep-grad)"/>
                 </g>
                 <circle cx="135" cy="55" r="2.5" fill="#ef4444"><animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/></circle>
-                <circle cx="70"  cy="140" r="2"  fill="#fbbf24"><animate attributeName="opacity" values="1;.3;1" dur="2.3s" repeatCount="indefinite"/></circle>
+                <circle cx="70"  cy="140" r="2"  fill="#0a1a4a"><animate attributeName="opacity" values="1;.3;1" dur="2.3s" repeatCount="indefinite"/></circle>
                 <circle cx="155" cy="115" r="2"  fill="#ef4444"><animate attributeName="opacity" values="1;.2;1" dur="1.5s" repeatCount="indefinite"/></circle>
-                <circle cx="60"  cy="80"  r="1.5" fill="#fbbf24"><animate attributeName="opacity" values="1;.4;1" dur="2.8s" repeatCount="indefinite"/></circle>
+                <circle cx="60"  cy="80"  r="1.5" fill="#0a1a4a"><animate attributeName="opacity" values="1;.4;1" dur="2.8s" repeatCount="indefinite"/></circle>
             </svg>
         </div>
 
         <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-12 lg:pt-20 lg:pb-16">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-7" style="background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);">
-                        <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-500"></span>
-                        <span class="text-[10.5px] font-bold uppercase tracking-[.22em] text-red-400">Live Emergency Alerts</span>
+                    <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-7" style="background:rgba(255,255,255,.6);border:1px solid rgba(120,53,15,.22);">
+                        <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-600"></span>
+                        <span class="text-[10.5px] font-bold uppercase tracking-[.22em]" style="color:#b91c1c">Live Emergency Alerts</span>
                     </div>
-                    <h1 class="ea-hero-title font-black text-5xl lg:text-[64px] leading-[1.02] tracking-tight text-white mb-5">
+                    <h1 class="ea-hero-title font-black text-5xl lg:text-[64px] leading-[1.02] tracking-tight mb-5" style="color:#0a1a4a">
                         Real-time<br>
-                        <span style="background:linear-gradient(90deg,#ef4444 0%,#f97316 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Emergency Response</span>
+                        <span style="background:linear-gradient(90deg,#dc2626 0%,#991b1b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Emergency Response</span>
                     </h1>
-                    <p class="text-white/55 text-base lg:text-lg max-w-md leading-relaxed mb-9">
+                    <p class="text-base lg:text-lg max-w-md leading-relaxed mb-9" style="color:rgba(10,26,74,.72)">
                         Monitor active incidents, dispatch updates, and unit responses across the network — as events unfold.
                     </p>
 
                     <div class="flex items-center gap-5">
                         <div>
                             <div class="flex items-baseline gap-2.5">
-                                <span class="ea-counter text-6xl lg:text-7xl font-black text-white leading-none" x-text="liveCount">0</span>
-                                <span class="ea-pulse-dot w-2.5 h-2.5 rounded-full bg-red-500 self-center"></span>
+                                <span class="ea-counter text-6xl lg:text-7xl font-black leading-none" style="color:#0a1a4a" x-text="liveCount">0</span>
+                                <span class="ea-pulse-dot w-2.5 h-2.5 rounded-full bg-red-600 self-center"></span>
                             </div>
-                            <p class="text-[11px] font-bold uppercase tracking-[.2em] text-red-400 mt-2">Active Incidents Now</p>
+                            <p class="text-[11px] font-bold uppercase tracking-[.2em] text-red-700 mt-2">Active Incidents Now</p>
                         </div>
-                        <div class="h-14 w-px bg-white/10"></div>
+                        <div class="h-14 w-px" style="background:rgba(10,26,74,.22)"></div>
                         <div>
-                            <div class="font-mono text-2xl font-bold text-white/90" x-text="liveTime">--:--:--</div>
-                            <p class="text-[10.5px] font-semibold uppercase tracking-[.18em] text-white/40 mt-1.5">System Time · EST</p>
+                            <div class="font-mono text-2xl font-bold" style="color:#0a1a4a" x-text="liveTime">--:--:--</div>
+                            <p class="text-[10.5px] font-semibold uppercase tracking-[.18em] mt-1.5" style="color:rgba(10,26,74,.55)">System Time · EST</p>
                         </div>
                     </div>
                 </div>
@@ -9213,7 +9204,7 @@ function eaApp() {
             
             <div class="flex items-center gap-1.5 overflow-x-auto" style="scrollbar-width:none;">
                 <template x-for="sev in [
-                    {k:'all',     l:'All',      c:'#ffffff'},
+                    {k:'all',     l:'All',      c:'#0f172a'},
                     {k:'critical',l:'Critical', c:'#ef4444'},
                     {k:'high',    l:'High',     c:'#f97316'},
                     {k:'active',  l:'Active',   c:'#3b82f6'},
@@ -9267,7 +9258,7 @@ function eaApp() {
     <section x-show="loading" class="mx-auto max-w-7xl px-5 sm:px-8 mb-12">
         <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
             <template x-for="i in 6" :key="i">
-                <div class="rounded-2xl p-5 border border-white/5 bg-white/[.02]">
+                <div class="rounded-2xl p-5 border border-slate-200 bg-white">
                     <div class="ea-skel h-3 w-20 rounded mb-4"></div>
                     <div class="ea-skel h-5 w-3/4 rounded mb-2"></div>
                     <div class="ea-skel h-3 w-1/2 rounded mb-4"></div>
@@ -9309,7 +9300,7 @@ function eaApp() {
                     <div class="absolute top-0 left-0 right-0 h-[3px]" :class="`ea-bar-${inc.severity}`"></div>
 
                     
-                    <div x-show="inc.isNew" class="absolute top-3 right-3 z-10 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-black tracking-widest uppercase animate-pulse" style="background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.4);">
+                    <div x-show="inc.isNew" class="absolute top-3 right-3 z-10 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-black tracking-widest uppercase animate-pulse" style="background:rgba(239,68,68,.12);color:#dc2626;border:1px solid rgba(239,68,68,.35);">
                         <span class="w-1 h-1 rounded-full bg-red-400 animate-pulse"></span>
                         New
                     </div>
@@ -9336,9 +9327,9 @@ function eaApp() {
                                 </div>
                                 <div class="ea-card-meta flex items-center gap-1.5 text-[11px] font-mono">
                                     <span x-text="inc.id"></span>
-                                    <span class="text-white/15">·</span>
+                                    <span class="text-slate-300">·</span>
                                     <span x-text="inc.dispatchAt"></span>
-                                    <span class="text-white/15">·</span>
+                                    <span class="text-slate-300">·</span>
                                     <span class="ea-ai-chip">
                                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.5 5 5 1.5-5 1.5L12 15l-1.5-5-5-1.5 5-1.5L12 2z"/></svg>
                                         AI <span :class="'ml-0.5'" x-text="(85 + (inc.id.charCodeAt(inc.id.length-1) % 14)) + '%'"></span>
@@ -9371,19 +9362,19 @@ function eaApp() {
                         
                         <div class="mb-4 flex items-center justify-between">
                             <div>
-                                <div class="text-[10px] font-bold uppercase tracking-[.16em] text-red-400/85 mb-2">Officers Assisting</div>
+                                <div class="text-[10px] font-bold uppercase tracking-[.16em] text-red-600 mb-2">Officers Assisting</div>
                                 <div class="flex items-center -space-x-2">
                                     <template x-for="(av, i) in agentAvatars(inc)" :key="i">
-                                        <img :src="av" alt="" class="w-8 h-8 rounded-full object-cover" style="box-shadow: 0 0 0 2px #0a1020, 0 2px 6px rgba(0,0,0,.5);" />
+                                        <img :src="av" alt="" class="w-8 h-8 rounded-full object-cover" style="box-shadow: 0 0 0 2px #fff, 0 2px 6px rgba(15,23,42,.18);" />
                                     </template>
                                     <span x-show="extraOfficers(inc) > 0"
                                           class="w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-black"
-                                          style="background: rgba(239,68,68,.15); color: #fca5a5; box-shadow: 0 0 0 2px #0a1020;"
+                                          style="background: rgba(239,68,68,.12); color: #dc2626; box-shadow: 0 0 0 2px #fff;"
                                           x-text="'+' + extraOfficers(inc)"></span>
                                 </div>
                             </div>
                             <div class="text-right">
-                                <div class="text-[10px] font-bold uppercase tracking-[.16em] text-white/40 mb-2">Total</div>
+                                <div class="text-[10px] font-bold uppercase tracking-[.16em] text-slate-400 mb-2">Total</div>
                                 <div class="text-2xl font-black leading-none" style="color:#ef4444;" x-text="inc.officers"></div>
                             </div>
                         </div>
@@ -9391,19 +9382,19 @@ function eaApp() {
                         
                         <div class="mb-4">
                             <div class="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider mb-2">
-                                <span class="text-red-400 font-mono"><span x-text="inc.pct"></span>% complete</span>
-                                <span class="text-white/35 font-mono" x-text="timeAgo(inc.minutes)"></span>
+                                <span class="text-red-600 font-mono"><span x-text="inc.pct"></span>% complete</span>
+                                <span class="text-slate-400 font-mono" x-text="timeAgo(inc.minutes)"></span>
                             </div>
                             <div class="ea-progress-track relative h-1 rounded-full overflow-hidden">
                                 <div class="absolute inset-y-0 left-0 rounded-full transition-all duration-700"
                                      :style="`width:${inc.pct}%; background: linear-gradient(90deg, #dc2626, #ef4444 60%, #f87171); box-shadow: 0 0 12px rgba(239,68,68,.6);`"></div>
                             </div>
                             <div class="flex justify-between mt-1.5 text-[9px] font-mono uppercase tracking-wider">
-                                <span :class="inc.pct >= 5  ? 'text-red-400/85' : 'text-white/20'">Report</span>
-                                <span :class="inc.pct >= 25 ? 'text-red-400/85' : 'text-white/20'">Dispatch</span>
-                                <span :class="inc.pct >= 50 ? 'text-red-400/85' : 'text-white/20'">Route</span>
-                                <span :class="inc.pct >= 75 ? 'text-red-400/85' : 'text-white/20'">Scene</span>
-                                <span :class="inc.pct >= 100? 'text-red-400/85' : 'text-white/20'">Closed</span>
+                                <span :class="inc.pct >= 5  ? 'text-red-600' : 'text-slate-300'">Report</span>
+                                <span :class="inc.pct >= 25 ? 'text-red-600' : 'text-slate-300'">Dispatch</span>
+                                <span :class="inc.pct >= 50 ? 'text-red-600' : 'text-slate-300'">Route</span>
+                                <span :class="inc.pct >= 75 ? 'text-red-600' : 'text-slate-300'">Scene</span>
+                                <span :class="inc.pct >= 100? 'text-red-600' : 'text-slate-300'">Closed</span>
                             </div>
                         </div>
 
