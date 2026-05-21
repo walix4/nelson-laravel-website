@@ -8936,6 +8936,20 @@ function eaApp() {
             };
             return icons[t] || icons['assault'];
         },
+        typeImage(t) {
+            const images = {
+                'shots-fired':      'https://images.unsplash.com/photo-1453873531674-2151bcd01707?w=240&h=240&fit=crop&q=80',
+                'armed-robbery':    'https://images.unsplash.com/photo-1582213782179-e0d4d3cce33a?w=240&h=240&fit=crop&q=80',
+                'structure-fire':   'https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?w=240&h=240&fit=crop&q=80',
+                'assault':          'https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?w=240&h=240&fit=crop&q=80',
+                'vehicle-accident': 'https://images.unsplash.com/photo-1597007030739-6d2e7172ee87?w=240&h=240&fit=crop&q=80',
+                'carjacking':       'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=240&h=240&fit=crop&q=80',
+                'break-in':         'https://images.unsplash.com/photo-1582539512170-bb3f9d63f961?w=240&h=240&fit=crop&q=80',
+                'domestic':         'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=240&h=240&fit=crop&q=80',
+                'medical':          'https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=240&h=240&fit=crop&q=80',
+            };
+            return images[t] || images['assault'];
+        },
         timeAgo(min) {
             if (min < 1)  return 'Just now';
             if (min < 60) return min + 'm ago';
@@ -9242,9 +9256,19 @@ function eaApp() {
                     <div class="p-5">
                         
                         <div class="flex items-start gap-3 mb-4">
-                            <div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center relative"
+                            <div class="shrink-0 w-12 h-12 rounded-xl overflow-hidden relative"
                                  :class="`ea-icon-${inc.severity}`">
-                                <svg class="w-5 h-5 relative z-10" viewBox="0 0 24 24" fill="none" stroke-width="2" :style="`stroke:${inc.severity==='critical'?'#fca5a5':inc.severity==='high'?'#fdba74':inc.severity==='active'?'#93c5fd':'#6ee7b7'};`" x-html="typeIcon(inc.type)"></svg>
+                                
+                                <img :src="typeImage(inc.type)" alt="" loading="lazy"
+                                     class="absolute inset-0 w-full h-full object-cover"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                                
+                                <div class="absolute inset-0 pointer-events-none"
+                                     :style="`background: linear-gradient(135deg, rgba(${inc.severity==='critical'?'239,68,68':inc.severity==='high'?'249,115,22':inc.severity==='active'?'59,130,246':'16,185,129'},.45) 0%, rgba(${inc.severity==='critical'?'239,68,68':inc.severity==='high'?'249,115,22':inc.severity==='active'?'59,130,246':'16,185,129'},.15) 100%);`"></div>
+                                
+                                <div class="absolute inset-0 hidden items-center justify-center">
+                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke-width="2" :style="`stroke:${inc.severity==='critical'?'#fca5a5':inc.severity==='high'?'#fdba74':inc.severity==='active'?'#93c5fd':'#6ee7b7'};`" x-html="typeIcon(inc.type)"></svg>
+                                </div>
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-2 mb-1">
@@ -9384,44 +9408,6 @@ function eaApp() {
 
 <footer class="bg-navy-950 text-navy-200">
     <div class="mx-auto max-w-7xl px-5 sm:px-8 pt-20 pb-10">
-
-        
-        <div class="mb-16 rounded-2xl border border-sky-500/20 bg-white/[.04] px-6 py-8 backdrop-blur-sm" style="box-shadow:0 0 40px -10px rgba(14,165,233,.18), inset 0 1px 0 rgba(255,255,255,.06);">
-            <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-6">
-                <p class="text-xs font-semibold uppercase tracking-[.22em] text-sky-400">How it works</p>
-                <span class="hidden sm:block h-px flex-1 bg-white/10 mx-4"></span>
-                <p class="text-xs text-navy-400">Safety in three taps</p>
-            </div>
-            <div class="grid sm:grid-cols-3 gap-4">
-                                                    <div class="flex items-start gap-3 group">
-                        <span class="shrink-0 grid place-items-center w-9 h-9 rounded-lg text-white" style="background:linear-gradient(135deg,#0ea5e933,#0ea5e918); border:1px solid #0ea5e940;">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l5 5L20 7"/></svg>
-                        </span>
-                        <div>
-                            <p class="text-xs font-bold text-white/80 uppercase tracking-wide">01 · Open the app</p>
-                            <p class="mt-0.5 text-xs text-navy-400 leading-relaxed">Auxilio loads your geofence and live feed the moment you launch.</p>
-                        </div>
-                    </div>
-                                    <div class="flex items-start gap-3 group">
-                        <span class="shrink-0 grid place-items-center w-9 h-9 rounded-lg text-white" style="background:linear-gradient(135deg,#818cf833,#818cf818); border:1px solid #818cf840;">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
-                        </span>
-                        <div>
-                            <p class="text-xs font-bold text-white/80 uppercase tracking-wide">02 · One tap to alert</p>
-                            <p class="mt-0.5 text-xs text-navy-400 leading-relaxed">A single press sends your location, identity and situation to verified help.</p>
-                        </div>
-                    </div>
-                                    <div class="flex items-start gap-3 group">
-                        <span class="shrink-0 grid place-items-center w-9 h-9 rounded-lg text-white" style="background:linear-gradient(135deg,#22c55e33,#22c55e18); border:1px solid #22c55e40;">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-7.5 8-13a8 8 0 10-16 0c0 5.5 8 13 8 13z"/></svg>
-                        </span>
-                        <div>
-                            <p class="text-xs font-bold text-white/80 uppercase tracking-wide">03 · Track help arrive</p>
-                            <p class="mt-0.5 text-xs text-navy-400 leading-relaxed">Watch the responder&#039;s live ETA — your family circle sees the same status.</p>
-                        </div>
-                    </div>
-                            </div>
-        </div>
 
         <div class="grid lg:grid-cols-12 gap-12">
             <div class="lg:col-span-5">
@@ -9731,6 +9717,8 @@ function eaApp() {
         /* Hide footer & how-it-works strip on crime-grade, show on all other views */
         var globalFooter = document.querySelector('footer');
         if (globalFooter) globalFooter.style.display = (view === 'crime-grade') ? 'none' : '';
+        /* Match body background to the EA dark theme so no white gap shows between sections */
+        document.body.style.background = (view === 'ea') ? '#04060f' : '';
         // Re-trigger reveal animations on the now-visible view
         document.querySelectorAll('[data-view="'+view+'"] .reveal').forEach(function(el){
             el.classList.remove('is-visible');
