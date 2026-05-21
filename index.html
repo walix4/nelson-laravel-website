@@ -2505,6 +2505,8 @@ window.cgInit=function(){
   if(legend)legend.style.display='';
   if(main)main.style.display='block';
   window.scrollTo(0,0);
+  /* Build the interactive US map now that the wrap is visible */
+  setTimeout(cgInitMap, 80);
 };
 cgRenderStates();
 cgRenderGradeDist();
