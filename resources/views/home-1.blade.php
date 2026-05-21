@@ -4832,7 +4832,7 @@ cgRenderGradeDist();
                 <div class="reveal reveal-right hidden lg:block lg:sticky lg:top-28">
                     <div class="contact-photo-wrap aspect-[4/5]">
                         <img src="/images/contact-dispatch.jpg" alt="Auxilio dispatch operator monitoring live emergency feeds"
-                            class="contact-photo-img w-full h-full object-cover object-center"
+                            class="contact-photo-img w-full h-full object-cover" style="object-position:70% 38%;"
                             onerror="this.parentElement.classList.add('contact-photo-fallback'); this.style.display='none';" />
 
                         {{-- top-left floating status badge --}}
