@@ -7305,42 +7305,42 @@ cgRenderGradeDist();
         <div class="absolute inset-0 scifi-grid opacity-50 pointer-events-none"></div>
         <span class="pointer-events-none absolute -top-32 right-1/4 w-[520px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle, rgba(226,75,74,.18) 0%, transparent 70%);"></span>
         <style>
-            [data-view="auxilio-ai"] .aux-dash { --aux-red:#E24B4A; --aux-blue:#378ADD; --aux-amber:#BA7517; --aux-green:#0F6E56; --aux-purple:#533b8a; --aux-rose:#993556; --aux-olive:#3B6D11; --aux-deep:#A32D2D; }
-            [data-view="auxilio-ai"] .aux-tab-btn { padding: 8px 18px; border-radius: 9999px; font-size: 13px; font-weight: 600; cursor: pointer; background:#ffffff; color:#475569; border:1px solid #e2e8f0; transition: all .18s ease; display:inline-flex; align-items:center; gap:6px; }
-            [data-view="auxilio-ai"] .aux-tab-btn:hover { color:#0f172a; border-color:#cbd5e1; }
+            [data-view="auxilio-ai"] .aux-dash { --aux-red:#E24B4A; --aux-blue:#378ADD; --aux-amber:#e09c3b; --aux-green:#34d399; --aux-purple:#a78bfa; --aux-rose:#fb7185; --aux-olive:#86efac; --aux-deep:#f87171; }
+            [data-view="auxilio-ai"] .aux-tab-btn { padding: 8px 18px; border-radius: 9999px; font-size: 13px; font-weight: 600; cursor: pointer; background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.65); border:1px solid rgba(255,255,255,0.12); transition: all .18s ease; display:inline-flex; align-items:center; gap:6px; }
+            [data-view="auxilio-ai"] .aux-tab-btn:hover { color:#fff; border-color:rgba(255,255,255,0.25); background:rgba(255,255,255,0.12); }
             [data-view="auxilio-ai"] .aux-tab-btn.active { background: linear-gradient(135deg,#E24B4A,#c1272d); color:#fff; border-color:transparent; box-shadow: 0 10px 24px -10px rgba(226,75,74,.6); }
             [data-view="auxilio-ai"] .aux-panel { display:none; }
             [data-view="auxilio-ai"] .aux-panel.active { display:block; animation: auxPanelIn .25s ease both; }
             @keyframes auxPanelIn { from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
-            [data-view="auxilio-ai"] .aux-crime-btn { padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight:500; cursor: pointer; background:#ffffff; color:#475569; border:1px solid #e2e8f0; transition: all .15s ease; }
-            [data-view="auxilio-ai"] .aux-crime-btn:hover { color:#0f172a; }
-            [data-view="auxilio-ai"] .aux-crime-btn.on { color:#fff; border-color:transparent; box-shadow: 0 6px 14px -6px rgba(0,0,0,.25); }
+            [data-view="auxilio-ai"] .aux-crime-btn { padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight:500; cursor: pointer; background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.6); border:1px solid rgba(255,255,255,0.12); transition: all .15s ease; }
+            [data-view="auxilio-ai"] .aux-crime-btn:hover { color:#fff; background:rgba(255,255,255,0.12); }
+            [data-view="auxilio-ai"] .aux-crime-btn.on { color:#fff; border-color:transparent; box-shadow: 0 6px 14px -6px rgba(0,0,0,.4); }
             [data-view="auxilio-ai"] .aux-bar-row { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
-            [data-view="auxilio-ai"] .aux-bar-label { font-size:12px; color:#64748b; min-width:78px; text-align:right; font-variant-numeric: tabular-nums; }
-            [data-view="auxilio-ai"] .aux-bar-track { flex:1; height:22px; background:#e8edf5; border-radius:6px; overflow:hidden; }
+            [data-view="auxilio-ai"] .aux-bar-label { font-size:12px; color:rgba(255,255,255,0.45); min-width:78px; text-align:right; font-variant-numeric: tabular-nums; }
+            [data-view="auxilio-ai"] .aux-bar-track { flex:1; height:22px; background:rgba(255,255,255,0.08); border-radius:6px; overflow:hidden; }
             [data-view="auxilio-ai"] .aux-bar-fill { height:100%; border-radius:6px; display:flex; align-items:center; padding-left:8px; font-size:11px; font-weight:600; color:#fff; transition: width .5s cubic-bezier(.22,1,.36,1); white-space:nowrap; }
-            [data-view="auxilio-ai"] .aux-bar-val { font-size:11px; color:#64748b; min-width:36px; font-weight:500; }
-            [data-view="auxilio-ai"] .aux-stat-card { background:#ffffff; border-radius:14px; padding: 14px 16px; border:1px solid #e2e8f0; }
-            [data-view="auxilio-ai"] .aux-stat-num { font-size:22px; font-weight:800; color:#0f172a; font-family: var(--font-display, inherit); }
-            [data-view="auxilio-ai"] .aux-stat-lbl { font-size:12px; color:#64748b; margin-top:2px; line-height:1.35; }
-            [data-view="auxilio-ai"] .aux-stat-num.red { color:#E24B4A; }
-            [data-view="auxilio-ai"] .aux-stat-num.amber { color:#BA7517; }
-            [data-view="auxilio-ai"] .aux-stat-num.dn { color:#15803d; }
+            [data-view="auxilio-ai"] .aux-bar-val { font-size:11px; color:rgba(255,255,255,0.45); min-width:36px; font-weight:500; }
+            [data-view="auxilio-ai"] .aux-stat-card { background:rgba(255,255,255,0.06); border-radius:14px; padding: 14px 16px; border:1px solid rgba(255,255,255,0.1); }
+            [data-view="auxilio-ai"] .aux-stat-num { font-size:22px; font-weight:800; color:#ffffff; font-family: var(--font-display, inherit); }
+            [data-view="auxilio-ai"] .aux-stat-lbl { font-size:12px; color:rgba(255,255,255,0.5); margin-top:2px; line-height:1.35; }
+            [data-view="auxilio-ai"] .aux-stat-num.red { color:#fb7185; }
+            [data-view="auxilio-ai"] .aux-stat-num.amber { color:#fbbf24; }
+            [data-view="auxilio-ai"] .aux-stat-num.dn { color:#34d399; }
             [data-view="auxilio-ai"] .aux-legend { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:12px; }
-            [data-view="auxilio-ai"] .aux-legend-item { display:flex; align-items:center; gap:6px; font-size:12px; color:#64748b; }
+            [data-view="auxilio-ai"] .aux-legend-item { display:flex; align-items:center; gap:6px; font-size:12px; color:rgba(255,255,255,0.5); }
             [data-view="auxilio-ai"] .aux-legend-dot { width:10px; height:10px; border-radius:50%; }
-            [data-view="auxilio-ai"] .aux-trend-row { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid #eef2f7; }
-            [data-view="auxilio-ai"] .aux-trend-year { font-size:13px; font-weight:600; color:#0f172a; min-width:48px; }
-            [data-view="auxilio-ai"] .aux-trend-track { flex:1; height:18px; background:#e8edf5; border-radius:6px; overflow:hidden; }
+            [data-view="auxilio-ai"] .aux-trend-row { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.08); }
+            [data-view="auxilio-ai"] .aux-trend-year { font-size:13px; font-weight:600; color:#fff; min-width:48px; }
+            [data-view="auxilio-ai"] .aux-trend-track { flex:1; height:18px; background:rgba(255,255,255,0.08); border-radius:6px; overflow:hidden; }
             [data-view="auxilio-ai"] .aux-trend-fill { height:100%; border-radius:6px; display:flex; align-items:center; padding-left:8px; font-size:10px; font-weight:600; color:#fff; transition: width .5s cubic-bezier(.22,1,.36,1); }
-            [data-view="auxilio-ai"] .aux-trend-pct { font-size:11px; min-width:54px; text-align:right; font-weight:600; }
-            [data-view="auxilio-ai"] .aux-source { font-size:11px; color:#94a3b8; margin-top:18px; line-height:1.6; }
-            [data-view="auxilio-ai"] .aux-divider { border:none; border-top:1px solid #e2e8f0; margin:20px 0; }
-            [data-view="auxilio-ai"] .aux-peak { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid #eef2f7; flex-wrap:wrap; }
-            [data-view="auxilio-ai"] .aux-peak-name { font-size:13px; font-weight:600; color:#0f172a; min-width:150px; }
+            [data-view="auxilio-ai"] .aux-trend-pct { font-size:11px; min-width:54px; text-align:right; font-weight:600; color:rgba(255,255,255,0.7); }
+            [data-view="auxilio-ai"] .aux-source { font-size:11px; color:rgba(255,255,255,0.35); margin-top:18px; line-height:1.6; }
+            [data-view="auxilio-ai"] .aux-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:20px 0; }
+            [data-view="auxilio-ai"] .aux-peak { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.08); flex-wrap:wrap; }
+            [data-view="auxilio-ai"] .aux-peak-name { font-size:13px; font-weight:600; color:#fff; min-width:150px; }
             [data-view="auxilio-ai"] .aux-peak-meta { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
-            [data-view="auxilio-ai"] .aux-peak-meta span { font-size:12px; color:#64748b; display:inline-flex; align-items:center; gap:5px; }
-            [data-view="auxilio-ai"] .aux-peak-chip { background:#eef2f7; padding:3px 10px; border-radius:10px; color:#475569; font-weight:500; }
+            [data-view="auxilio-ai"] .aux-peak-meta span { font-size:12px; color:rgba(255,255,255,0.5); display:inline-flex; align-items:center; gap:5px; }
+            [data-view="auxilio-ai"] .aux-peak-chip { background:rgba(255,255,255,0.1); padding:3px 10px; border-radius:10px; color:rgba(255,255,255,0.7); font-weight:500; }
         </style>
 
         <div class="relative mx-auto max-w-6xl px-5 sm:px-8 aux-dash">
@@ -7383,10 +7383,10 @@ cgRenderGradeDist();
             </div>
 
             
-            <div class="ai-anim ai-d2 mt-8 rounded-3xl bg-white border border-ink-100 p-6 sm:p-8 shadow-[0_30px_60px_-40px_rgba(8,15,40,.18)]">
+            <div class="ai-anim ai-d2 mt-8 rounded-3xl p-6 sm:p-8" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(8px)">
                 
                 <div class="aux-panel active" data-aux-panel="hour">
-                    <p class="text-xs font-semibold uppercase tracking-[.16em] text-navy-700/60 mb-4">Crime activity by hour of day</p>
+                    <p class="text-xs font-semibold uppercase tracking-[.16em] mb-4" style="color:rgba(255,255,255,0.4)">Crime activity by hour of day</p>
                     <div id="aux-hour-select" class="flex flex-wrap gap-2 mb-5">
                         <button type="button" class="aux-crime-btn on" data-crime="assault" style="background:#E24B4A">Assault</button>
                         <button type="button" class="aux-crime-btn" data-crime="burglary">Burglary</button>
