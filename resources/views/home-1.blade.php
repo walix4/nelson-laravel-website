@@ -141,6 +141,9 @@
     <span class="pointer-events-none absolute bottom-0 -right-20 w-[560px] h-[560px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(99,102,241,.28) 0%, transparent 70%);"></span>
     <span class="pointer-events-none absolute top-1/3 right-1/3 w-[320px] h-[320px] rounded-full blur-3xl opacity-50" style="background: radial-gradient(circle, rgba(125,211,252,.18) 0%, transparent 70%);"></span>
 
+    {{-- grid overlay --}}
+    <div style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(125,211,252,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(125,211,252,.07) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 90% at 50% 40%,black,transparent 85%);mask-image:radial-gradient(ellipse 80% 90% at 50% 40%,black,transparent 85%)"></div>
+
     <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-16 sm:pt-20 lg:pt-24 pb-20 lg:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
 
         {{-- LEFT: copy + CTAs + stats --}}
