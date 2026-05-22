@@ -350,8 +350,8 @@
                         </span>
                     @endif
                     <div class="flex flex-col">
-                        <span class="font-display font-extrabold text-lg tracking-tight leading-none" style="color:{{ $d['color'] }}; filter:brightness(1.4);">{{ $d['name'] }}</span>
-                        <span class="mt-1 text-[10px] uppercase tracking-[.18em] font-semibold text-white/40">{{ $d['sub'] }}</span>
+                        <span class="font-display font-extrabold text-lg tracking-tight leading-none text-white">{{ $d['name'] }}</span>
+                        <span class="mt-1 text-[10px] uppercase tracking-[.18em] font-semibold text-white/60">{{ $d['sub'] }}</span>
                     </div>
                 </div>
             @endforeach
