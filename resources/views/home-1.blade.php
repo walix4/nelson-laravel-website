@@ -81,9 +81,9 @@
         </ul>
 
         {{-- Buttons — always visible, same fixed height --}}
-        <div class="ml-auto lg:ml-6 flex items-center gap-2 lg:border-l lg:border-white/20 lg:pl-6">
-            <a href="https://auxilionetwork.com/siteadmin/login"    target="_blank" rel="noopener" class="inline-flex items-center justify-center h-9 px-5 text-sm font-semibold text-white rounded transition hover:opacity-85" style="background:#FB0606;">Sign In</a>
-            <a href="https://auxilionetwork.com/siteadmin/register" target="_blank" rel="noopener" class="inline-flex items-center justify-center h-9 px-5 text-sm font-semibold text-white rounded border border-white/40 hover:bg-white hover:text-[#0a1a4a] transition">Get Started</a>
+        <div class="ml-auto lg:ml-6 flex items-center gap-2.5 lg:border-l lg:border-white/20 lg:pl-6">
+            <a href="https://auxilionetwork.com/siteadmin/login"    target="_blank" rel="noopener" class="inline-flex items-center justify-center h-10 px-5 text-sm font-bold rounded-lg transition hover:bg-white/90" style="background:#ffffff; color:#9b1c1c;">Login</a>
+            <a href="https://auxilionetwork.com/siteadmin/register" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 h-10 px-5 text-sm font-bold text-white rounded-lg transition hover:opacity-90" style="background:#9b1c1c;">Get started <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
         </div>
     </nav>
 
@@ -104,8 +104,8 @@
             <li><a data-route href="#/crime-map">Crime Map</a></li>
             <li><a data-route href="#/contact">Contact us</a></li>
             <li class="pt-2 flex flex-col gap-2">
-                <a href="https://auxilionetwork.com/siteadmin/login" target="_blank" rel="noopener" class="flex items-center justify-center py-2.5 text-sm font-semibold text-white rounded" style="background:#FB0606;">Sign In</a>
-                <a href="https://auxilionetwork.com/siteadmin/register" target="_blank" rel="noopener" class="flex items-center justify-center py-2.5 text-sm font-semibold text-navy-900 bg-white rounded border border-ink-200">Get Started</a>
+                <a href="https://auxilionetwork.com/siteadmin/login"    target="_blank" rel="noopener" class="flex items-center justify-center py-2.5 text-sm font-bold rounded-lg border border-ink-200" style="background:#ffffff; color:#9b1c1c;">Login</a>
+                <a href="https://auxilionetwork.com/siteadmin/register" target="_blank" rel="noopener" class="flex items-center justify-center gap-1.5 py-2.5 text-sm font-bold text-white rounded-lg" style="background:#9b1c1c;">Get started <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
             </li>
         </ul>
     </div>
