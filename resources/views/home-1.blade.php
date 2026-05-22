@@ -1017,7 +1017,7 @@
 </style>
 
 {{-- ── HERO ── --}}
-<section id="cg-hero-section" class="relative overflow-hidden" style="background:radial-gradient(ellipse at 18% -10%,rgba(255,255,255,.5) 0%,transparent 55%),radial-gradient(ellipse at 90% 110%,rgba(13,90,30,.55) 0%,transparent 55%),linear-gradient(160deg,#34d058 0%,#22A620 44%,#1c8a1a 72%,#15691a 100%)">
+<section id="cg-hero-section" class="relative overflow-hidden" style="min-height:680px;background:radial-gradient(ellipse at 18% -10%,rgba(255,255,255,.5) 0%,transparent 55%),radial-gradient(ellipse at 90% 110%,rgba(13,90,30,.55) 0%,transparent 55%),linear-gradient(160deg,#34d058 0%,#22A620 44%,#1c8a1a 72%,#15691a 100%)">
 
     {{-- grid overlay --}}
     <div style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(6,52,15,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(6,52,15,.08) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 90% at 50% 30%,black,transparent 85%);mask-image:radial-gradient(ellipse 80% 90% at 50% 30%,black,transparent 85%)"></div>
@@ -1031,7 +1031,7 @@
     </div>
 
     {{-- content --}}
-    <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8" style="display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:96px">
+    <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8" style="display:flex;flex-direction:column;justify-content:center;padding-top:140px;padding-bottom:140px">
 
         {{-- badge --}}
         <div class="inline-flex items-center gap-2.5" style="align-self:flex-start;background:rgba(255,255,255,.65);border:1px solid rgba(6,52,15,.2);border-radius:9999px;padding:6px 14px;margin-bottom:24px">
