@@ -1017,7 +1017,7 @@
 </style>
 
 {{-- ── HERO ── --}}
-<section id="cg-hero-section" class="relative overflow-hidden" style="min-height:540px;background:radial-gradient(ellipse at 18% -10%,rgba(255,255,255,.5) 0%,transparent 55%),radial-gradient(ellipse at 90% 110%,rgba(13,90,30,.55) 0%,transparent 55%),linear-gradient(160deg,#34d058 0%,#22A620 44%,#1c8a1a 72%,#15691a 100%)">
+<section id="cg-hero-section" class="relative overflow-hidden" style="background:radial-gradient(ellipse at 18% -10%,rgba(255,255,255,.5) 0%,transparent 55%),radial-gradient(ellipse at 90% 110%,rgba(13,90,30,.55) 0%,transparent 55%),linear-gradient(160deg,#34d058 0%,#22A620 44%,#1c8a1a 72%,#15691a 100%)">
 
     {{-- grid overlay --}}
     <div style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(6,52,15,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(6,52,15,.08) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 90% at 50% 30%,black,transparent 85%);mask-image:radial-gradient(ellipse 80% 90% at 50% 30%,black,transparent 85%)"></div>
@@ -1031,7 +1031,7 @@
     </div>
 
     {{-- content --}}
-    <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8" style="min-height:540px;display:flex;flex-direction:column;justify-content:center;padding-top:64px;padding-bottom:64px">
+    <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8" style="display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:96px">
 
         {{-- badge --}}
         <div class="inline-flex items-center gap-2.5" style="align-self:flex-start;background:rgba(255,255,255,.65);border:1px solid rgba(6,52,15,.2);border-radius:9999px;padding:6px 14px;margin-bottom:24px">
@@ -6102,7 +6102,7 @@ function eaApp() {
     </div>
 
     {{-- ─── HERO ─── --}}
-    <section class="ea-hero-bg relative overflow-hidden" style="min-height:540px;">
+    <section class="ea-hero-bg relative overflow-hidden">
         <div class="ea-grid-bg"></div>
         <div class="ea-glow-1"></div>
         <div class="ea-glow-2"></div>
@@ -6131,7 +6131,7 @@ function eaApp() {
             </svg>
         </div>
 
-        <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-12 lg:pt-20 lg:pb-16">
+        <div class="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
             <div>
                 <div>
                     <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-7" style="background:rgba(255,255,255,.6);border:1px solid rgba(120,53,15,.22);">
