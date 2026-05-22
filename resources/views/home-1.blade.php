@@ -3366,21 +3366,7 @@ cgRenderGradeDist();
                 </div>
             </div>
 
-            {{-- Trust marquee — extra top space to clear floating cards above --}}
-            <div class="reveal mt-32 lg:mt-40 overflow-hidden relative z-0">
-                <p class="text-center text-[10.5px] font-mono uppercase tracking-[.28em] text-ink-500 mb-5">Trusted by neighborhoods · families · school districts</p>
-                <div class="relative">
-                    <div class="marquee-track">
-                        @foreach (['Newark PD','Hudson County','Safer Schools NJ','BlockWatch','Bergen Family Trust','Auxilio Network','Newark PD','Hudson County','Safer Schools NJ','BlockWatch','Bergen Family Trust','Auxilio Network'] as $logo)
-                            <span class="font-display font-bold text-lg text-navy-900/40 whitespace-nowrap px-6 py-2 rounded-md ring-1 ring-ink-100 bg-white/70">{{ $logo }}</span>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
         </div>
-
-        {{-- soft bottom transition into next section --}}
-        <div class="absolute inset-x-0 -bottom-px h-24 pointer-events-none" style="background:linear-gradient(180deg, transparent 0%, #ffffff 100%);"></div>
     </section>
 
     {{-- ========== REAL-LIFE SCENARIOS ========== --}}
