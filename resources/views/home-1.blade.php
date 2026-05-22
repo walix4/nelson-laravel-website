@@ -4927,15 +4927,15 @@ cgRenderGradeDist();
                                 width:118%; height:auto;
                                 opacity:0; will-change:opacity;
                             }
-                            .ai-phone-slide:nth-child(2) { animation: aiPhoneSlide 8s ease-in-out infinite; animation-delay:0s; opacity:1; }
-                            .ai-phone-slide:nth-child(3) { animation: aiPhoneSlide 8s ease-in-out infinite; animation-delay:4s; }
+                            .ai-phone-slide-a { animation: aiPhoneSlide 8s ease-in-out infinite; animation-delay:0s; opacity:1; }
+                            .ai-phone-slide-b { animation: aiPhoneSlide 8s ease-in-out infinite; animation-delay:4s; }
                         </style>
                         {{-- top dark fade — hides the white bg of image 1 --}}
                         <div class="absolute inset-x-0 top-0 z-[2] pointer-events-none" style="height:38%; background:linear-gradient(to bottom,#050d2a 30%,transparent);"></div>
                         {{-- scifi grid --}}
                         <div class="absolute inset-0 scifi-grid opacity-30"></div>
-                        <img src="/images/ai-phone-splash.png" alt="Auxilio app splash screen" class="ai-phone-slide" />
-                        <img src="/images/ai-phone-map.png"    alt="Auxilio app map view"     class="ai-phone-slide" />
+                        <img src="/images/ai-phone-splash.png" alt="Auxilio app splash screen" class="ai-phone-slide ai-phone-slide-a" />
+                        <img src="/images/ai-phone-map.png"    alt="Auxilio app map view"     class="ai-phone-slide ai-phone-slide-b" />
                         {{-- HUD ticker --}}
                         <div class="absolute top-3 left-3 right-3 z-[3] flex items-center justify-between scifi-mono text-[9px] text-cyan-300/85">
                             <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full" style="background:#34d399; animation: auxTickerDot 1.4s infinite;"></span>NODE-01 / SYNC</span>
