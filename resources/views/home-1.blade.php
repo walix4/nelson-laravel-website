@@ -281,15 +281,15 @@
 {{-- =======================================================================
      POLICE BADGE MARQUEE — moving bar of US PD insignia under hero
 ========================================================================--}}
-<section class="relative bg-white border-y border-ink-100 py-12 overflow-hidden">
-    <p class="text-center text-sm font-medium text-navy-900/65">
-        Trusted alongside <span class="font-semibold" style="color:#FB0606;">law enforcement &amp; first responders</span> nationwide.
+<section class="relative py-12 overflow-hidden" style="background:#0a1a4a;">
+    <p class="text-center text-sm font-medium text-white/60">
+        Trusted alongside <span class="font-semibold" style="color:#fb7185;">law enforcement &amp; first responders</span> nationwide.
     </p>
 
     <div class="mt-8 relative">
         {{-- fade edges --}}
-        <div class="pointer-events-none absolute inset-y-0 left-0 w-24 z-10" style="background:linear-gradient(90deg,#fff 10%,rgba(255,255,255,0));"></div>
-        <div class="pointer-events-none absolute inset-y-0 right-0 w-24 z-10" style="background:linear-gradient(-90deg,#fff 10%,rgba(255,255,255,0));"></div>
+        <div class="pointer-events-none absolute inset-y-0 left-0 w-24 z-10" style="background:linear-gradient(90deg,#0a1a4a 10%,rgba(10,26,74,0));"></div>
+        <div class="pointer-events-none absolute inset-y-0 right-0 w-24 z-10" style="background:linear-gradient(-90deg,#0a1a4a 10%,rgba(10,26,74,0));"></div>
 
         <div class="flex items-center gap-14 badge-marquee whitespace-nowrap">
             @php
@@ -356,8 +356,8 @@
                         </span>
                     @endif
                     <div class="flex flex-col">
-                        <span class="font-display font-extrabold text-lg tracking-tight leading-none" style="color:{{ $d['color'] }};">{{ $d['name'] }}</span>
-                        <span class="mt-1 text-[10px] uppercase tracking-[.18em] font-semibold text-ink-500">{{ $d['sub'] }}</span>
+                        <span class="font-display font-extrabold text-lg tracking-tight leading-none" style="color:{{ $d['color'] }}; filter:brightness(1.4);">{{ $d['name'] }}</span>
+                        <span class="mt-1 text-[10px] uppercase tracking-[.18em] font-semibold text-white/40">{{ $d['sub'] }}</span>
                     </div>
                 </div>
             @endforeach
