@@ -4825,10 +4825,10 @@ cgRenderGradeDist();
     <style>
         /* ----- AI page scroll-triggered animations ----- */
         [data-view="auxilio-ai"] .ai-anim {
-            opacity:0; transform: translateY(28px); filter: blur(6px);
-            transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1), filter .9s ease;
+            opacity:0; transform: translateY(20px);
+            transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
         }
-        [data-view="auxilio-ai"] .ai-anim.is-in { opacity:1; transform: none; filter: blur(0); }
+        [data-view="auxilio-ai"] .ai-anim.is-in { opacity:1; transform: none; }
         [data-view="auxilio-ai"] .ai-anim.from-left  { transform: translateX(-40px); }
         [data-view="auxilio-ai"] .ai-anim.from-right { transform: translateX(40px); }
         [data-view="auxilio-ai"] .ai-anim.from-left.is-in,
@@ -4840,8 +4840,8 @@ cgRenderGradeDist();
         [data-view="auxilio-ai"] .ai-d3 { transition-delay: .28s; }
         [data-view="auxilio-ai"] .ai-d4 { transition-delay: .38s; }
         [data-view="auxilio-ai"] .ai-d5 { transition-delay: .48s; }
-        [data-view="auxilio-ai"] .ai-stagger > * { opacity:0; transform: translateY(22px); filter: blur(4px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1), filter .6s ease; }
-        [data-view="auxilio-ai"] .ai-stagger.is-in > * { opacity:1; transform:none; filter: blur(0); }
+        [data-view="auxilio-ai"] .ai-stagger > * { opacity:0; transform: translateY(16px); transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1); }
+        [data-view="auxilio-ai"] .ai-stagger.is-in > * { opacity:1; transform:none; }
         [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(1) { transition-delay: .05s; }
         [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(2) { transition-delay: .15s; }
         [data-view="auxilio-ai"] .ai-stagger.is-in > *:nth-child(3) { transition-delay: .25s; }
@@ -4862,13 +4862,7 @@ cgRenderGradeDist();
             background-size: 48px 48px;
             background-position: -1px -1px;
         }
-        [data-view="auxilio-ai"] .scifi-scan {
-            position:absolute; inset:0; pointer-events:none;
-            background: linear-gradient(180deg, transparent 0%, transparent 49%, rgba(125,211,252,.18) 50%, transparent 51%, transparent 100%);
-            background-size: 100% 6px;
-            opacity:.25; mix-blend-mode: screen; animation: scifiScan 8s linear infinite;
-        }
-        @keyframes scifiScan { from{background-position-y:0;} to{background-position-y:200px;} }
+        [data-view="auxilio-ai"] .scifi-scan { display:none; }
         [data-view="auxilio-ai"] .scifi-mono { font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace; letter-spacing:.18em; text-transform:uppercase; }
         [data-view="auxilio-ai"] .scifi-chip {
             display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:4px;
@@ -4918,8 +4912,6 @@ cgRenderGradeDist();
                     <span class="absolute -bottom-12 -right-6 w-48 h-48 rounded-full blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(99,102,241,.36) 0%, transparent 70%);"></span>
 
                     {{-- orbit rings around the box --}}
-                    <span class="hidden md:block pointer-events-none absolute inset-0 -m-12 rounded-full" style="border:1px dashed rgba(125,211,252,.20); animation: auxOrbit 60s linear infinite;"></span>
-                    <span class="hidden md:block pointer-events-none absolute inset-0 -m-24 rounded-full" style="border:1px dashed rgba(165,180,252,.16); animation: auxOrbit 90s linear infinite reverse;"></span>
 
                     {{-- main mockup box (square — matches phone+hand 4:3 image better than 4:5 portrait) --}}
                     <div class="relative rounded-[32px] overflow-hidden aspect-square ring-1 ring-white/15 scifi-glow-cyan scifi-corner" style="background:radial-gradient(ellipse at 50% 40%, #112a5e 0%, #050d2a 70%); box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
@@ -4935,9 +4927,6 @@ cgRenderGradeDist();
                             <span>SIG · 99.4%</span>
                         </div>
                         {{-- subtle sweep line --}}
-                        <span class="absolute inset-x-0 top-1/3 h-px z-[3] overflow-hidden">
-                            <span class="block h-full w-1/2" style="background:linear-gradient(90deg, transparent, #7dd3fc, transparent); animation: auxLineSweep 4s ease-in-out infinite;"></span>
-                        </span>
                         {{-- bottom HUD strip --}}
                         <div class="absolute bottom-3 left-3 right-3 z-[3] scifi-hud rounded-lg px-3 py-2 flex items-center gap-2">
                             <span class="w-2 h-2 rounded-full" style="background:#38bdf8; box-shadow:0 0 8px #38bdf8;"></span>
