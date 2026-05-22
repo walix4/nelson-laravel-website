@@ -276,7 +276,7 @@
      POLICE BADGE MARQUEE — moving bar of US PD insignia under hero
 ========================================================================--}}
 <section class="relative py-12 overflow-hidden" style="background:#0a1a4a;">
-    <p class="text-center text-sm font-medium text-white/60">
+    <p class="text-center text-sm font-medium text-white">
         Trusted alongside <span class="font-semibold" style="color:#fb7185;">law enforcement &amp; first responders</span> nationwide.
     </p>
 
