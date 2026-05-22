@@ -180,7 +180,6 @@
 
                 
                 <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 hero-slideshow" style="box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
-                    <img src="/nelson-laravel-website/images/hero-slide-1.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
                     <img src="/nelson-laravel-website/images/hero-slide-2.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
                     <img src="/nelson-laravel-website/images/hero-slide-3.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
                     <img src="/nelson-laravel-website/images/hero-slide-4.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
@@ -190,29 +189,26 @@
                         <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/90"></span>
                         <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
                         <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
-                        <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
                     </div>
                 </div>
                 <style>
-                    /* Slide 1 visible from the start; others fade in on cue */
+                    /* 3 slides × ~6.7s each in a 20s cycle */
                     .hero-slideshow .hero-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; animation: heroSlide 20s infinite; will-change: opacity; }
                     .hero-slideshow .hero-slide:nth-child(1) { animation-delay: 0s; opacity: 1; }
-                    .hero-slideshow .hero-slide:nth-child(2) { animation-delay: 5s; }
-                    .hero-slideshow .hero-slide:nth-child(3) { animation-delay: 10s; }
-                    .hero-slideshow .hero-slide:nth-child(4) { animation-delay: 15s; }
+                    .hero-slideshow .hero-slide:nth-child(2) { animation-delay: 6.7s; }
+                    .hero-slideshow .hero-slide:nth-child(3) { animation-delay: 13.3s; }
                     @keyframes heroSlide {
-                        0%, 23%   { opacity: 1; }
-                        27%, 98%  { opacity: 0; }
+                        0%, 30%   { opacity: 1; }
+                        35%, 98%  { opacity: 0; }
                         100%      { opacity: 1; }
                     }
                     .hero-slideshow .hero-dot { transition: all .3s ease; animation: heroDot 20s infinite; }
                     .hero-slideshow .hero-dot:nth-child(1) { animation-delay: 0s; }
-                    .hero-slideshow .hero-dot:nth-child(2) { animation-delay: 5s; }
-                    .hero-slideshow .hero-dot:nth-child(3) { animation-delay: 10s; }
-                    .hero-slideshow .hero-dot:nth-child(4) { animation-delay: 15s; }
+                    .hero-slideshow .hero-dot:nth-child(2) { animation-delay: 6.7s; }
+                    .hero-slideshow .hero-dot:nth-child(3) { animation-delay: 13.3s; }
                     @keyframes heroDot {
-                        0%, 24% { background:rgba(255,255,255,.95); width:18px; border-radius:9999px; }
-                        27%, 100% { background:rgba(255,255,255,.45); width:6px; border-radius:9999px; }
+                        0%, 31% { background:rgba(255,255,255,.95); width:18px; border-radius:9999px; }
+                        35%, 100% { background:rgba(255,255,255,.45); width:6px; border-radius:9999px; }
                     }
                 </style>
 
