@@ -1595,48 +1595,52 @@
 
 
     
-    <div class="hidden md:block" style="position:absolute;right:8%;top:50%;transform:translateY(-50%);width:clamp(380px,26vw,480px);height:clamp(380px,26vw,480px);pointer-events:none;z-index:0;">
+    <div class="hidden md:block" style="position:absolute;right:8%;top:50%;transform:translateY(-50%);width:clamp(320px,24vw,420px);height:clamp(320px,24vw,420px);pointer-events:none;z-index:0;">
         <svg viewBox="0 0 200 200" class="w-full h-full">
             <defs>
-                <radialGradient id="cg-shield-glow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity=".18"/>
+                <radialGradient id="cg-rank-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity=".1"/>
                     <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
                 </radialGradient>
             </defs>
+            <circle cx="100" cy="100" r="92" fill="url(#cg-rank-glow)"/>
+            <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+
             
-            <circle cx="100" cy="100" r="93" fill="url(#cg-shield-glow)"/>
-            <circle cx="100" cy="100" r="93" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-            <circle cx="100" cy="100" r="68" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+            <text x="100" y="24" text-anchor="middle" font-size="6.5" font-weight="700" fill="rgba(255,255,255,.55)" font-family="system-ui,sans-serif" letter-spacing="1.8">US CITY SAFETY RANKINGS</text>
+
             
-            <line x1="100" y1="7"   x2="100" y2="14"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="146" y1="20"  x2="143" y2="25"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="180" y1="54"  x2="175" y2="57"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="192" y1="100" x2="186" y2="100" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="180" y1="146" x2="175" y2="143" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="146" y1="180" x2="143" y2="175" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="100" y1="192" x2="100" y2="186" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="54"  y1="180" x2="57"  y2="175" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="20"  y1="146" x2="25"  y2="143" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="8"   y1="100" x2="14"  y2="100" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="20"  y1="54"  x2="25"  y2="57"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="54"  y1="20"  x2="57"  y2="25"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <rect x="15" y="34" width="170" height="30" rx="5" fill="rgba(255,255,255,.16)" stroke="rgba(255,255,255,.32)" stroke-width=".7"/>
+            <rect x="155" y="38" width="24" height="22" rx="4" fill="#15803d"/>
+            <text x="167" y="54" text-anchor="middle" font-size="12" font-weight="900" fill="white" font-family="system-ui,sans-serif">A</text>
+            <text x="25" y="53" font-size="7" font-weight="800" fill="rgba(255,255,255,.45)" font-family="system-ui,sans-serif">01</text>
+            <text x="40" y="53" font-size="8.5" font-weight="600" fill="rgba(255,255,255,.95)" font-family="system-ui,sans-serif">Austin, TX</text>
+
             
-            <line x1="100" y1="7"   x2="100" y2="193" stroke="rgba(255,255,255,.14)" stroke-width=".8"/>
-            <line x1="7"   y1="100" x2="193" y2="100" stroke="rgba(255,255,255,.14)" stroke-width=".8"/>
-            <line x1="34"  y1="34"  x2="166" y2="166" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
-            <line x1="166" y1="34"  x2="34"  y2="166" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <rect x="15" y="72" width="170" height="30" rx="5" fill="rgba(255,255,255,.11)" stroke="rgba(255,255,255,.24)" stroke-width=".7"/>
+            <rect x="155" y="76" width="24" height="22" rx="4" fill="#2563eb"/>
+            <text x="167" y="92" text-anchor="middle" font-size="12" font-weight="900" fill="white" font-family="system-ui,sans-serif">B</text>
+            <text x="25" y="91" font-size="7" font-weight="800" fill="rgba(255,255,255,.45)" font-family="system-ui,sans-serif">02</text>
+            <text x="40" y="91" font-size="8.5" font-weight="600" fill="rgba(255,255,255,.82)" font-family="system-ui,sans-serif">Denver, CO</text>
+
             
-            <path d="M100 165 C100 165 60 148 60 115 L60 82 L100 68 L140 82 L140 115 C140 148 100 165 100 165Z"
-                  fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.75)" stroke-width="1.2" stroke-linejoin="round"/>
+            <rect x="15" y="110" width="170" height="30" rx="5" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)" stroke-width=".7"/>
+            <rect x="155" y="114" width="24" height="22" rx="4" fill="#ca8a04"/>
+            <text x="167" y="130" text-anchor="middle" font-size="12" font-weight="900" fill="white" font-family="system-ui,sans-serif">C</text>
+            <text x="25" y="129" font-size="7" font-weight="800" fill="rgba(255,255,255,.45)" font-family="system-ui,sans-serif">03</text>
+            <text x="40" y="129" font-size="8.5" font-weight="600" fill="rgba(255,255,255,.68)" font-family="system-ui,sans-serif">Chicago, IL</text>
+
             
-            <path d="M85 117 L95 127 L118 104" stroke="rgba(255,255,255,.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <rect x="15" y="148" width="170" height="30" rx="5" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.13)" stroke-width=".7"/>
+            <rect x="155" y="152" width="24" height="22" rx="4" fill="#dc2626"/>
+            <text x="167" y="168" text-anchor="middle" font-size="12" font-weight="900" fill="white" font-family="system-ui,sans-serif">F</text>
+            <text x="25" y="167" font-size="7" font-weight="800" fill="rgba(255,255,255,.45)" font-family="system-ui,sans-serif">04</text>
+            <text x="40" y="167" font-size="8.5" font-weight="600" fill="rgba(255,255,255,.52)" font-family="system-ui,sans-serif">Memphis, TN</text>
+
             
-            <text x="100" y="108" text-anchor="middle" font-size="28" font-weight="900" fill="rgba(255,255,255,.22)" font-family="system-ui,sans-serif" letter-spacing="-1">A</text>
-            
-            <circle cx="148" cy="52"  r="4" fill="rgba(255,255,255,.7)"><animate attributeName="opacity" values="1;.3;1" dur="2.2s" repeatCount="indefinite"/></circle>
-            <circle cx="60"  cy="148" r="3" fill="rgba(255,255,255,.5)"><animate attributeName="opacity" values=".5;.1;.5" dur="2.8s" repeatCount="indefinite"/></circle>
-            <circle cx="155" cy="128" r="3.5" fill="rgba(230,32,26,.8)"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
-            <circle cx="52"  cy="72"  r="2.5" fill="rgba(255,255,255,.45)"><animate attributeName="opacity" values=".45;.1;.45" dur="3s" repeatCount="indefinite"/></circle>
+            <circle cx="8" cy="64" r="2" fill="rgba(255,255,255,.3)"><animate attributeName="opacity" values="1;.2;1" dur="2.2s" repeatCount="indefinite"/></circle>
+            <circle cx="192" cy="118" r="2" fill="rgba(255,255,255,.25)"><animate attributeName="opacity" values=".6;.1;.6" dur="3s" repeatCount="indefinite"/></circle>
+            <circle cx="8" cy="158" r="1.5" fill="rgba(255,255,255,.2)"><animate attributeName="opacity" values=".4;.1;.4" dur="2.7s" repeatCount="indefinite"/></circle>
         </svg>
     </div>
 
