@@ -6232,7 +6232,7 @@ function eaApp() {
             </svg>
         </div>
 
-        <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8 py-12 lg:py-16">
+        <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8" style="padding-top:2rem;padding-bottom:3rem;">
             <div>
                 <div>
                     {{-- Live stats — above badge --}}
@@ -6286,12 +6286,12 @@ function eaApp() {
 
                     {{-- Social proof --}}
                     <div class="flex items-center gap-4 mb-2">
-                        <div class="flex items-center -space-x-3 shrink-0">
-                            <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
-                            <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
-                            <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
-                            <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
-                            <span class="w-10 h-10 grid place-items-center rounded-full bg-emerald-500 font-bold text-[11px] text-white ring-2 ring-amber-400/60">5K</span>
+                        <div class="flex items-center shrink-0" style="gap:-12px;">
+                            <img src="/images/officer-1.jpg" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(251,191,36,.7);margin-right:-12px;" />
+                            <img src="/images/officer-2.jpg" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(251,191,36,.7);margin-right:-12px;" />
+                            <img src="/images/officer-3.jpg" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(251,191,36,.7);margin-right:-12px;" />
+                            <img src="/images/officer-4.jpg" alt="" style="width:40px;height:40px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(251,191,36,.7);margin-right:-12px;" />
+                            <span style="width:40px;height:40px;border-radius:50%;background:#10b981;display:grid;place-items:center;font-weight:700;font-size:11px;color:#fff;box-shadow:0 0 0 2px rgba(251,191,36,.7);flex-shrink:0;">5K</span>
                         </div>
                         <p class="font-display text-base font-semibold" style="color:#0a1a4a">5,000+ Verified Officers</p>
                     </div>
