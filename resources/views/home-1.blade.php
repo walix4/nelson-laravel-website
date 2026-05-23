@@ -6232,7 +6232,7 @@ function eaApp() {
             </svg>
         </div>
 
-        <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8 pb-16 lg:pb-24" style="padding-top:4rem;">
+        <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8 py-12 lg:py-16">
             <div>
                 <div>
                     {{-- Live stats — above badge --}}
