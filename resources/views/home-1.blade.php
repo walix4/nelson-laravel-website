@@ -6236,41 +6236,41 @@ function eaApp() {
             <div>
                 <div>
                     {{-- Live stats — above badge --}}
-                    <div class="flex items-center gap-5 mb-7">
+                    <div class="flex items-center gap-5 mb-5">
                         <div>
-                            <div class="flex items-baseline gap-2.5">
-                                <span class="ea-counter text-6xl lg:text-7xl font-black leading-none" style="color:#0a1a4a" x-text="liveCount">0</span>
-                                <span class="ea-pulse-dot w-2.5 h-2.5 rounded-full bg-red-600 self-center"></span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="font-mono font-black leading-none" style="font-size:clamp(36px,4vw,56px);color:#0a1a4a" x-text="liveCount">0</span>
+                                <span class="ea-pulse-dot w-2 h-2 rounded-full bg-red-600 self-center"></span>
                             </div>
-                            <p class="text-[11px] font-bold uppercase tracking-[.2em] text-red-700 mt-2">Active Incidents Now</p>
+                            <p class="text-[10px] font-bold uppercase tracking-[.2em] text-red-700 mt-1">Active Incidents Now</p>
                         </div>
-                        <div class="h-14 w-px" style="background:rgba(10,26,74,.22)"></div>
+                        <div class="h-10 w-px" style="background:rgba(10,26,74,.22)"></div>
                         <div>
-                            <div class="font-mono text-2xl font-bold" style="color:#0a1a4a" x-text="liveTime">--:--:--</div>
-                            <p class="text-[10.5px] font-semibold uppercase tracking-[.18em] mt-1.5" style="color:rgba(10,26,74,.55)">System Time · EST</p>
+                            <div class="font-mono text-xl font-bold" style="color:#0a1a4a" x-text="liveTime">--:--:--</div>
+                            <p class="text-[10px] font-semibold uppercase tracking-[.18em] mt-1" style="color:rgba(10,26,74,.55)">System Time · EST</p>
                         </div>
                     </div>
 
-                    <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-7" style="background:rgba(255,255,255,.6);border:1px solid rgba(120,53,15,.22);">
+                    <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-5" style="background:rgba(255,255,255,.6);border:1px solid rgba(120,53,15,.22);">
                         <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-600"></span>
                         <span class="text-[10.5px] font-bold uppercase tracking-[.22em]" style="color:#b91c1c">Live Emergency Response</span>
                     </div>
-                    <h1 class="ea-hero-title font-black text-5xl lg:text-[64px] leading-[1.02] tracking-tight mb-5" style="color:#0a1a4a">
+                    <h1 class="ea-hero-title font-black text-5xl lg:text-[64px] leading-[1.02] tracking-tight mb-4" style="color:#0a1a4a">
                         Real-time<br>
                         <span class="lg:whitespace-nowrap" style="background:linear-gradient(90deg,#dc2626 0%,#991b1b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Emergency Response</span>
                     </h1>
-                    <p class="text-base lg:text-lg max-w-md leading-relaxed mb-6" style="color:rgba(10,26,74,.72)">
+                    <p class="text-base lg:text-lg max-w-md leading-relaxed mb-5" style="color:rgba(10,26,74,.72)">
                         Monitor active incidents, dispatch updates, and unit responses across the network — as events unfold.
                     </p>
 
                     {{-- Download badges --}}
-                    <div class="flex flex-wrap items-center gap-3 mb-8">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
                         <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-90 rounded-lg"><img src="/images/app-store-badge.png" alt="Download on the App Store" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                         <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-90 rounded-lg"><img src="/images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                     </div>
 
                     {{-- 4-col stat pills --}}
-                    <div class="grid grid-cols-4 gap-x-6 gap-y-4 max-w-lg mb-8">
+                    <div class="grid grid-cols-4 gap-x-6 gap-y-3 max-w-lg mb-6">
                         @foreach([
                             ['v'=>'1-tap','l'=>'SOS to Dispatch'],
                             ['v'=>'24/7', 'l'=>'Family Monitoring'],
@@ -6287,11 +6287,11 @@ function eaApp() {
                     {{-- Social proof --}}
                     <div class="flex items-center gap-4 mb-2">
                         <div class="flex items-center -space-x-3 shrink-0">
-                            <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full object-cover" style="outline:2px solid rgba(10,26,74,.3)" />
-                            <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full object-cover" style="outline:2px solid rgba(10,26,74,.3)" />
-                            <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full object-cover" style="outline:2px solid rgba(10,26,74,.3)" />
-                            <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full object-cover" style="outline:2px solid rgba(10,26,74,.3)" />
-                            <span class="w-10 h-10 grid place-items-center rounded-full bg-emerald-500 font-bold text-[11px] text-white" style="outline:2px solid rgba(10,26,74,.3)">5K</span>
+                            <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
+                            <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
+                            <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
+                            <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
+                            <span class="w-10 h-10 grid place-items-center rounded-full bg-emerald-500 font-bold text-[11px] text-white ring-2 ring-amber-400/60">5K</span>
                         </div>
                         <p class="font-display text-base font-semibold" style="color:#0a1a4a">5,000+ Verified Officers</p>
                     </div>
