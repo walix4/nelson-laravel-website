@@ -6097,7 +6097,7 @@ function eaApp() {
         <div class="ea-glow-2"></div>
 
         {{-- radar art --}}
-        <div class="ea-radar-wrap absolute right-[12%] top-1/2 -translate-y-1/2 pointer-events-none z-0 hidden md:block" style="width:320px;height:320px;opacity:.5;">
+        <div class="hidden md:block" style="position:absolute;right:12%;top:50%;transform:translateY(-50%);width:320px;height:320px;opacity:.5;pointer-events:none;z-index:0;">
             <svg viewBox="0 0 200 200" class="w-full h-full">
                 <defs>
                     <radialGradient id="ea-sweep-grad">
