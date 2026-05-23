@@ -33,6 +33,14 @@
         .modal-panel { transform: translateX(100%); transition: transform .45s cubic-bezier(.16,1,.3,1); }
     </style>
 </head>
+<script>
+/* Set body bg immediately to avoid flash when deep-linking to a colored page */
+(function(){
+    var h=(window.location.hash||'').replace(/^#\//,'');
+    if(h==='er') document.documentElement.style.background='#f59e0b';
+    else if(h==='crime-grade') document.documentElement.style.background='#22A620';
+})();
+</script>
 <body class="font-sans">
 
 {{-- =======================================================================
@@ -1025,30 +1033,78 @@
     <div style="position:absolute;pointer-events:none;z-index:0;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.5) 0%,transparent 70%);top:-240px;left:-180px;filter:blur(40px)"></div>
     <div style="position:absolute;pointer-events:none;z-index:0;width:580px;height:580px;border-radius:50%;background:radial-gradient(circle,rgba(13,90,30,.5) 0%,transparent 70%);bottom:-240px;right:-200px;filter:blur(40px)"></div>
 
-    {{-- decorative shield art --}}
-    <div class="hidden md:block" style="position:absolute;right:12%;top:50%;transform:translateY(-50%);width:300px;height:300px;opacity:.16;pointer-events:none;z-index:0">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#06340f" stroke-width="1" style="width:100%;height:100%"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+
+    {{-- decorative shield art (absolutely positioned, matching ER radar style) --}}
+    <div class="hidden md:block" style="position:absolute;right:8%;top:50%;transform:translateY(-50%);width:clamp(380px,26vw,480px);height:clamp(380px,26vw,480px);pointer-events:none;z-index:0;">
+        <svg viewBox="0 0 200 200" class="w-full h-full">
+            <defs>
+                <radialGradient id="cg-shield-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity=".18"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                </radialGradient>
+            </defs>
+            {{-- outer glow circle --}}
+            <circle cx="100" cy="100" r="93" fill="url(#cg-shield-glow)"/>
+            <circle cx="100" cy="100" r="93" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+            <circle cx="100" cy="100" r="68" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+            {{-- tick marks --}}
+            <line x1="100" y1="7"   x2="100" y2="14"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="146" y1="20"  x2="143" y2="25"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="180" y1="54"  x2="175" y2="57"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="192" y1="100" x2="186" y2="100" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="180" y1="146" x2="175" y2="143" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="146" y1="180" x2="143" y2="175" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="100" y1="192" x2="100" y2="186" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="54"  y1="180" x2="57"  y2="175" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="20"  y1="146" x2="25"  y2="143" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="8"   y1="100" x2="14"  y2="100" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="20"  y1="54"  x2="25"  y2="57"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            <line x1="54"  y1="20"  x2="57"  y2="25"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
+            {{-- cross lines --}}
+            <line x1="100" y1="7"   x2="100" y2="193" stroke="rgba(255,255,255,.14)" stroke-width=".8"/>
+            <line x1="7"   y1="100" x2="193" y2="100" stroke="rgba(255,255,255,.14)" stroke-width=".8"/>
+            <line x1="34"  y1="34"  x2="166" y2="166" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            <line x1="166" y1="34"  x2="34"  y2="166" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
+            {{-- shield shape --}}
+            <path d="M100 165 C100 165 60 148 60 115 L60 82 L100 68 L140 82 L140 115 C140 148 100 165 100 165Z"
+                  fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.75)" stroke-width="1.2" stroke-linejoin="round"/>
+            {{-- checkmark --}}
+            <path d="M85 117 L95 127 L118 104" stroke="rgba(255,255,255,.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            {{-- grade A inside shield --}}
+            <text x="100" y="108" text-anchor="middle" font-size="28" font-weight="900" fill="rgba(255,255,255,.22)" font-family="system-ui,sans-serif" letter-spacing="-1">A</text>
+            {{-- grade blips (positioned like radar blips) --}}
+            <circle cx="148" cy="52"  r="4" fill="rgba(255,255,255,.7)"><animate attributeName="opacity" values="1;.3;1" dur="2.2s" repeatCount="indefinite"/></circle>
+            <circle cx="60"  cy="148" r="3" fill="rgba(255,255,255,.5)"><animate attributeName="opacity" values=".5;.1;.5" dur="2.8s" repeatCount="indefinite"/></circle>
+            <circle cx="155" cy="128" r="3.5" fill="rgba(230,32,26,.8)"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
+            <circle cx="52"  cy="72"  r="2.5" fill="rgba(255,255,255,.45)"><animate attributeName="opacity" values=".45;.1;.45" dur="3s" repeatCount="indefinite"/></circle>
+        </svg>
     </div>
 
     {{-- content --}}
-    <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
+    <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8 pb-16 lg:pb-24" style="padding-top:4rem;">
 
-        {{-- badge --}}
-        <div class="inline-flex items-center gap-2.5" style="align-self:flex-start;background:rgba(255,255,255,.65);border:1px solid rgba(6,52,15,.2);border-radius:9999px;padding:6px 14px;margin-bottom:24px">
+        {{-- badge - less rounded --}}
+        <div class="inline-flex items-center gap-2.5" style="background:rgba(255,255,255,.65);border:1px solid rgba(6,52,15,.2);border-radius:8px;padding:6px 14px;margin-bottom:24px">
             <span style="width:7px;height:7px;border-radius:50%;background:#15803d;box-shadow:0 0 7px rgba(21,128,61,.7)"></span>
             <span style="font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#15691a">US City Safety Rankings</span>
         </div>
 
         {{-- heading --}}
-        <h1 class="font-display" style="font-size:clamp(40px,6.2vw,64px);font-weight:900;line-height:1.03;letter-spacing:-.02em;color:#06340f;margin-bottom:20px">
+        <h1 class="font-display" style="font-size:clamp(40px,4.5vw,72px);font-weight:900;line-height:1.03;letter-spacing:-.02em;color:#06340f;margin-bottom:20px">
             Find the<br>
-            <span class="lg:whitespace-nowrap" style="color:#ffffff">Safest Areas</span>
+            <span style="color:#ffffff">Safest Areas</span>
         </h1>
 
         {{-- subtitle --}}
-        <p style="font-size:16px;line-height:1.6;color:rgba(6,52,15,.78);max-width:30rem;margin-bottom:30px">
+        <p style="font-size:17px;line-height:1.65;color:rgba(6,52,15,.78);max-width:32rem;margin-bottom:28px">
             Letter-grade safety rankings for <strong style="font-weight:800;color:#06340f"><span id="cg-s-cities">125</span>+</strong> US cities — transparent, data-driven, and updated annually.
         </p>
+
+        {{-- Download badges --}}
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px">
+            <a href="#download" style="display:inline-flex;transition:transform .15s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><img src="/images/app-store-badge.png" alt="Download on the App Store" style="height:52px;width:auto;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.18)" /></a>
+            <a href="#download" style="display:inline-flex;transition:transform .15s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><img src="/images/google-play-badge.png" alt="Get it on Google Play" style="height:52px;width:auto;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.18)" /></a>
+        </div>
 
         {{-- CTA + stats --}}
         <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap">
@@ -5569,7 +5625,9 @@ cgRenderGradeDist();
 
 /* ───── Radar ───── */
 @keyframes ea-radar-spin { to { transform: rotate(360deg); } }
-[data-view="er"] .ea-radar-sweep { animation: ea-radar-spin 4s linear infinite; transform-origin: center; }
+[data-view="er"] .ea-radar-sweep { animation: ea-radar-spin 3.5s linear infinite; transform-origin: 100px 100px; }
+@keyframes ea-blip-pulse { 0%,100%{r:3;opacity:1;} 50%{r:5;opacity:.3;} }
+@keyframes ea-blip-slow  { 0%,100%{opacity:.7;} 50%{opacity:.15;} }
 
 /* ───── Card stagger entrance ───── */
 @keyframes ea-card-in {
@@ -6097,30 +6155,84 @@ function eaApp() {
         <div class="ea-glow-2"></div>
 
         {{-- radar art --}}
-        <div class="hidden md:block" style="position:absolute;right:12%;top:50%;transform:translateY(-50%);width:320px;height:320px;opacity:.5;pointer-events:none;z-index:0;">
+        <div class="hidden md:block" style="position:absolute;right:8%;top:50%;transform:translateY(-50%);width:clamp(380px,26vw,480px);height:clamp(380px,26vw,480px);pointer-events:none;z-index:0;">
             <svg viewBox="0 0 200 200" class="w-full h-full">
                 <defs>
-                    <radialGradient id="ea-sweep-grad">
-                        <stop offset="0%" stop-color="#ef4444" stop-opacity=".55"/>
-                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+                    <radialGradient id="ea-sweep-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#b91c1c" stop-opacity=".9"/>
+                        <stop offset="75%" stop-color="#dc2626" stop-opacity=".3"/>
+                        <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
+                    </radialGradient>
+                    <radialGradient id="ea-bg-grad" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#0a1a4a" stop-opacity=".08"/>
+                        <stop offset="100%" stop-color="#0a1a4a" stop-opacity="0"/>
                     </radialGradient>
                 </defs>
-                <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(239,68,68,.35)" stroke-width=".5"/>
-                <circle cx="100" cy="100" r="65" fill="none" stroke="rgba(239,68,68,.25)" stroke-width=".5"/>
-                <circle cx="100" cy="100" r="38" fill="none" stroke="rgba(239,68,68,.2)"  stroke-width=".5"/>
-                <line x1="100" y1="8"  x2="100" y2="192" stroke="rgba(239,68,68,.15)" stroke-width=".5"/>
-                <line x1="8"   y1="100" x2="192" y2="100" stroke="rgba(239,68,68,.15)" stroke-width=".5"/>
+
+                {{-- subtle fill --}}
+                <circle cx="100" cy="100" r="93" fill="url(#ea-bg-grad)"/>
+
+                {{-- rings --}}
+                <circle cx="100" cy="100" r="92" fill="none" stroke="#0a1a4a" stroke-width="1.4" stroke-opacity=".55"/>
+                <circle cx="100" cy="100" r="65" fill="none" stroke="#0a1a4a" stroke-width="1"   stroke-opacity=".35"/>
+                <circle cx="100" cy="100" r="38" fill="none" stroke="#0a1a4a" stroke-width="1"   stroke-opacity=".28"/>
+                <circle cx="100" cy="100" r="14" fill="none" stroke="#0a1a4a" stroke-width=".8"  stroke-opacity=".22"/>
+
+                {{-- cross lines --}}
+                <line x1="100" y1="7"   x2="100" y2="193" stroke="#0a1a4a" stroke-width=".9" stroke-opacity=".28"/>
+                <line x1="7"   y1="100" x2="193" y2="100" stroke="#0a1a4a" stroke-width=".9" stroke-opacity=".28"/>
+                <line x1="35"  y1="35"  x2="165" y2="165" stroke="#0a1a4a" stroke-width=".5" stroke-opacity=".16"/>
+                <line x1="165" y1="35"  x2="35"  y2="165" stroke="#0a1a4a" stroke-width=".5" stroke-opacity=".16"/>
+
+                {{-- tick marks on outer ring (every 30°) --}}
+                <line x1="100" y1="8"   x2="100" y2="14"  stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="146" y1="20"  x2="143" y2="25"  stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="180" y1="54"  x2="175" y2="57"  stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="192" y1="100" x2="186" y2="100" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="180" y1="146" x2="175" y2="143" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="146" y1="180" x2="143" y2="175" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="100" y1="192" x2="100" y2="186" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="54"  y1="180" x2="57"  y2="175" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="20"  y1="146" x2="25"  y2="143" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="8"   y1="100" x2="14"  y2="100" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="20"  y1="54"  x2="25"  y2="57"  stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+                <line x1="54"  y1="20"  x2="57"  y2="25"  stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
+
+                {{-- center dot --}}
+                <circle cx="100" cy="100" r="2.5" fill="#0a1a4a" fill-opacity=".5"/>
+
+                {{-- sweep --}}
                 <g class="ea-radar-sweep">
-                    <path d="M100 100 L100 8 A92 92 0 0 1 178 145 Z" fill="url(#ea-sweep-grad)"/>
+                    <path d="M100 100 L100 8 A92 92 0 0 1 183 146 Z" fill="url(#ea-sweep-grad)"/>
                 </g>
-                <circle cx="135" cy="55" r="2.5" fill="#ef4444"><animate attributeName="opacity" values="1;.2;1" dur="1.8s" repeatCount="indefinite"/></circle>
-                <circle cx="70"  cy="140" r="2"  fill="#0a1a4a"><animate attributeName="opacity" values="1;.3;1" dur="2.3s" repeatCount="indefinite"/></circle>
-                <circle cx="155" cy="115" r="2"  fill="#ef4444"><animate attributeName="opacity" values="1;.2;1" dur="1.5s" repeatCount="indefinite"/></circle>
-                <circle cx="60"  cy="80"  r="1.5" fill="#0a1a4a"><animate attributeName="opacity" values="1;.4;1" dur="2.8s" repeatCount="indefinite"/></circle>
+
+                {{-- active incident blips (red) --}}
+                <circle cx="135" cy="52" r="3.5" fill="#dc2626">
+                    <animate attributeName="opacity" values="1;.1;1" dur="1.8s" repeatCount="indefinite"/>
+                    <animate attributeName="r" values="3.5;5.5;3.5" dur="1.8s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="155" cy="118" r="3" fill="#dc2626">
+                    <animate attributeName="opacity" values="1;.15;1" dur="1.4s" repeatCount="indefinite"/>
+                    <animate attributeName="r" values="3;4.5;3" dur="1.4s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="118" cy="155" r="2.8" fill="#dc2626">
+                    <animate attributeName="opacity" values="1;.2;1" dur="2.1s" repeatCount="indefinite"/>
+                </circle>
+
+                {{-- unit blips (navy) --}}
+                <circle cx="70" cy="142" r="2.5" fill="#0a1a4a" fill-opacity=".75">
+                    <animate attributeName="opacity" values=".75;.2;.75" dur="2.4s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="58" cy="78" r="2" fill="#0a1a4a" fill-opacity=".6">
+                    <animate attributeName="opacity" values=".6;.15;.6" dur="2.9s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="85" cy="48" r="2" fill="#0a1a4a" fill-opacity=".55">
+                    <animate attributeName="opacity" values=".55;.1;.55" dur="3.3s" repeatCount="indefinite"/>
+                </circle>
             </svg>
         </div>
 
-        <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
+        <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8 pb-16 lg:pb-24" style="padding-top:4rem;">
             <div>
                 <div>
                     <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-7" style="background:rgba(255,255,255,.6);border:1px solid rgba(120,53,15,.22);">
@@ -6131,9 +6243,15 @@ function eaApp() {
                         Real-time<br>
                         <span class="lg:whitespace-nowrap" style="background:linear-gradient(90deg,#dc2626 0%,#991b1b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Emergency Response</span>
                     </h1>
-                    <p class="text-base lg:text-lg max-w-md leading-relaxed mb-9" style="color:rgba(10,26,74,.72)">
+                    <p class="text-base lg:text-lg max-w-md leading-relaxed mb-6" style="color:rgba(10,26,74,.72)">
                         Monitor active incidents, dispatch updates, and unit responses across the network — as events unfold.
                     </p>
+
+                    {{-- Download badges --}}
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                        <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-90 rounded-lg"><img src="/images/app-store-badge.png" alt="Download on the App Store" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
+                        <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-90 rounded-lg"><img src="/images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
+                    </div>
 
                     <div class="flex items-center gap-5">
                         <div>
