@@ -4936,17 +4936,6 @@ cgRenderGradeDist();
                         <div class="absolute inset-0 scifi-grid opacity-30"></div>
                         <img src="/images/ai-phone-splash.png" alt="Auxilio app splash screen" class="ai-phone-slide ai-phone-slide-a" />
                         <img src="/images/ai-phone-map.png"    alt="Auxilio app map view"     class="ai-phone-slide ai-phone-slide-b" />
-                        {{-- HUD ticker --}}
-                        <div class="absolute top-3 left-3 right-3 z-[3] flex items-center justify-between scifi-mono text-[9px] text-cyan-300/85">
-                            <span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full" style="background:#34d399; animation: auxTickerDot 1.4s infinite;"></span>NODE-01 / SYNC</span>
-                            <span>SIG · 99.4%</span>
-                        </div>
-                        {{-- bottom HUD strip --}}
-                        <div class="absolute bottom-3 left-3 right-3 z-[3] rounded-lg px-3 py-2 flex items-center gap-2" style="background:rgba(7,23,48,0.80);">
-                            <span class="w-2 h-2 rounded-full" style="background:#38bdf8; box-shadow:0 0 8px #38bdf8;"></span>
-                            <span class="scifi-mono text-[9px] text-cyan-200/80">AI · LIVE FEED</span>
-                            <span class="ml-auto scifi-mono text-[9px] text-white/60">PINGS · 14/s</span>
-                        </div>
                     </div>
 
                 </div>
