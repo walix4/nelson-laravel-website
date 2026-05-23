@@ -8536,6 +8536,22 @@ function eaApp() {
         <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8 pb-16 lg:pb-24" style="padding-top:4rem;">
             <div>
                 <div>
+                    
+                    <div class="flex items-center gap-5 mb-7">
+                        <div>
+                            <div class="flex items-baseline gap-2.5">
+                                <span class="ea-counter text-6xl lg:text-7xl font-black leading-none" style="color:#0a1a4a" x-text="liveCount">0</span>
+                                <span class="ea-pulse-dot w-2.5 h-2.5 rounded-full bg-red-600 self-center"></span>
+                            </div>
+                            <p class="text-[11px] font-bold uppercase tracking-[.2em] text-red-700 mt-2">Active Incidents Now</p>
+                        </div>
+                        <div class="h-14 w-px" style="background:rgba(10,26,74,.22)"></div>
+                        <div>
+                            <div class="font-mono text-2xl font-bold" style="color:#0a1a4a" x-text="liveTime">--:--:--</div>
+                            <p class="text-[10.5px] font-semibold uppercase tracking-[.18em] mt-1.5" style="color:rgba(10,26,74,.55)">System Time · EST</p>
+                        </div>
+                    </div>
+
                     <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-7" style="background:rgba(255,255,255,.6);border:1px solid rgba(120,53,15,.22);">
                         <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-600"></span>
                         <span class="text-[10.5px] font-bold uppercase tracking-[.22em]" style="color:#b91c1c">Live Emergency Response</span>
@@ -8549,24 +8565,9 @@ function eaApp() {
                     </p>
 
                     
-                    <div class="flex flex-wrap items-center gap-3 mb-6">
+                    <div class="flex flex-wrap items-center gap-3">
                         <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-90 rounded-lg"><img src="/nelson-laravel-website/images/app-store-badge.png" alt="Download on the App Store" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                         <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-90 rounded-lg"><img src="/nelson-laravel-website/images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
-                    </div>
-
-                    <div class="flex items-center gap-5">
-                        <div>
-                            <div class="flex items-baseline gap-2.5">
-                                <span class="ea-counter text-6xl lg:text-7xl font-black leading-none" style="color:#0a1a4a" x-text="liveCount">0</span>
-                                <span class="ea-pulse-dot w-2.5 h-2.5 rounded-full bg-red-600 self-center"></span>
-                            </div>
-                            <p class="text-[11px] font-bold uppercase tracking-[.2em] text-red-700 mt-2">Active Incidents Now</p>
-                        </div>
-                        <div class="h-14 w-px" style="background:rgba(10,26,74,.22)"></div>
-                        <div>
-                            <div class="font-mono text-2xl font-bold" style="color:#0a1a4a" x-text="liveTime">--:--:--</div>
-                            <p class="text-[10.5px] font-semibold uppercase tracking-[.18em] mt-1.5" style="color:rgba(10,26,74,.55)">System Time · EST</p>
-                        </div>
                     </div>
                 </div>
             </div>
