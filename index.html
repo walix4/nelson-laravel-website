@@ -8289,10 +8289,11 @@ cgRenderGradeDist();
 }
 
 /* ═══ Flat + lightly rounded — small uniform radius, no shadows on ER ═══ */
-[data-view="er"] *:not(.ea-pulse-dot),
+[data-view="er"] *:not(.ea-pulse-dot):not(.ea-circle-badge),
 [data-view="er"] *::before,
 [data-view="er"] *::after { border-radius: 6px !important; }
 [data-view="er"] *:not(.ea-pulse-dot) { box-shadow: none !important; }
+[data-view="er"] .ea-circle-badge { border-radius: 50% !important; }
 </style>
 
 
@@ -8859,7 +8860,7 @@ function eaApp() {
                         
                         <div class="mb-3 flex flex-col items-start gap-1.5">
                             <div class="text-[10px] font-bold uppercase tracking-[.16em] text-slate-400">Officers Assisting</div>
-                            <div x-text="inc.officers" style="width:32px;height:32px;border-radius:50%;background:#ef4444;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0;"></div>
+                            <div x-text="inc.officers" class="ea-circle-badge" style="width:32px;height:32px;background:#ef4444;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0;"></div>
                         </div>
 
                         
