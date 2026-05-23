@@ -1115,12 +1115,43 @@
         </div>
 
         {{-- CTA + stats --}}
-        <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:32px">
             <button onclick="cgScrollToStates()" style="display:inline-flex;align-items:center;gap:10px;padding:14px 32px;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#15691a;background:#ffffff;border:none;border-radius:8px;cursor:pointer;transition:transform .15s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
                 Explore States
             </button>
             <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(6,52,15,.7)">30+ States &nbsp;·&nbsp; <span id="cg-s-cities2">125</span>+ Cities Graded A–F</span>
+        </div>
+
+        {{-- 4-col stats + social proof (exact citizen-app hero) --}}
+        <dl class="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl mb-8">
+            @foreach ([
+                ['v'=>'1-tap','l'=>'SOS to dispatch'],
+                ['v'=>'24/7','l'=>'family monitoring'],
+                ['v'=>'Live','l'=>'safety alerts'],
+                ['v'=>'Free','l'=>'forever for families'],
+            ] as $s)
+                <div>
+                    <dt class="font-display text-2xl font-bold tracking-tight" style="color:#06340f">{{ $s['v'] }}</dt>
+                    <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em]" style="color:rgba(6,52,15,.5)">{{ $s['l'] }}</dd>
+                </div>
+            @endforeach
+        </dl>
+
+        <div class="max-w-xl">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center -space-x-3 shrink-0">
+                    <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                    <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                    <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                    <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                    <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-red-900/60 bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
+                </div>
+                <p class="font-display text-base font-semibold" style="color:#06340f">5,000+ Verified Officers</p>
+            </div>
+            <p class="mt-3 text-sm leading-relaxed max-w-md" style="color:rgba(6,52,15,.65)">
+                Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
+            </p>
         </div>
 
     </div>
@@ -6277,34 +6308,32 @@ function eaApp() {
                         <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-90 rounded-lg"><img src="/images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                     </div>
 
-                    {{-- 4-col stat pills --}}
-                    <div class="grid grid-cols-4 gap-x-6 gap-y-3 max-w-lg mb-6">
-                        @foreach([
-                            ['v'=>'1-tap','l'=>'SOS to Dispatch'],
-                            ['v'=>'24/7', 'l'=>'Family Monitoring'],
-                            ['v'=>'Live', 'l'=>'Safety Alerts'],
-                            ['v'=>'Free', 'l'=>'Forever for Families'],
+                    <dl class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl">
+                        @foreach ([
+                            ['v'=>'1-tap','l'=>'SOS to dispatch'],
+                            ['v'=>'24/7','l'=>'family monitoring'],
+                            ['v'=>'Live','l'=>'safety alerts'],
+                            ['v'=>'Free','l'=>'forever for families'],
                         ] as $s)
-                        <div>
-                            <div class="font-display text-2xl font-black leading-none" style="color:#0a1a4a">{{ $s['v'] }}</div>
-                            <div class="mt-1 text-[10px] uppercase tracking-[.16em] font-semibold leading-tight" style="color:rgba(10,26,74,.55)">{{ $s['l'] }}</div>
-                        </div>
+                            <div>
+                                <dt class="font-display text-2xl font-bold tracking-tight text-white">{{ $s['v'] }}</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/50">{{ $s['l'] }}</dd>
+                            </div>
                         @endforeach
-                    </div>
+                    </dl>
 
-                    {{-- Social proof (copied from citizen hero) --}}
-                    <div class="mt-2 max-w-xl">
+                    <div class="mt-8 max-w-xl">
                         <div class="flex items-center gap-4">
                             <div class="flex items-center -space-x-3 shrink-0">
-                                <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                                <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                                <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                                <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                                <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-white bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
+                                <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                                <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                                <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                                <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
+                                <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-red-900/60 bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
                             </div>
-                            <p class="font-display text-base font-semibold" style="color:#0a1a4a">5,000+ Verified Officers</p>
+                            <p class="font-display text-base font-semibold text-white">5,000+ Verified Officers</p>
                         </div>
-                        <p class="mt-3 text-sm leading-relaxed max-w-md" style="color:rgba(10,26,74,.72)">
+                        <p class="mt-3 text-sm text-white/60 leading-relaxed max-w-md">
                             Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
                         </p>
                     </div>
