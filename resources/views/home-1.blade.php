@@ -1042,49 +1042,53 @@
     <div style="position:absolute;pointer-events:none;z-index:0;width:580px;height:580px;border-radius:50%;background:radial-gradient(circle,rgba(13,90,30,.5) 0%,transparent 70%);bottom:-240px;right:-200px;filter:blur(40px)"></div>
 
 
-    {{-- decorative shield art (absolutely positioned, matching ER radar style) --}}
-    <div class="hidden md:block" style="position:absolute;right:8%;top:50%;transform:translateY(-50%);width:clamp(380px,26vw,480px);height:clamp(380px,26vw,480px);pointer-events:none;z-index:0;">
+    {{-- decorative city rankings art (absolutely positioned) --}}
+    <div class="hidden md:block" style="position:absolute;right:15%;top:50%;transform:translateY(-50%);width:clamp(340px,26vw,430px);height:clamp(340px,26vw,430px);pointer-events:none;z-index:0;">
         <svg viewBox="0 0 200 200" class="w-full h-full">
             <defs>
-                <radialGradient id="cg-shield-glow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#ffffff" stop-opacity=".18"/>
+                <radialGradient id="cg-rank-glow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity=".1"/>
                     <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
                 </radialGradient>
             </defs>
-            {{-- outer glow circle --}}
-            <circle cx="100" cy="100" r="93" fill="url(#cg-shield-glow)"/>
-            <circle cx="100" cy="100" r="93" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-            <circle cx="100" cy="100" r="68" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
-            {{-- tick marks --}}
-            <line x1="100" y1="7"   x2="100" y2="14"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="146" y1="20"  x2="143" y2="25"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="180" y1="54"  x2="175" y2="57"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="192" y1="100" x2="186" y2="100" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="180" y1="146" x2="175" y2="143" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="146" y1="180" x2="143" y2="175" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="100" y1="192" x2="100" y2="186" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="54"  y1="180" x2="57"  y2="175" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="20"  y1="146" x2="25"  y2="143" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="8"   y1="100" x2="14"  y2="100" stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="20"  y1="54"  x2="25"  y2="57"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            <line x1="54"  y1="20"  x2="57"  y2="25"  stroke="rgba(255,255,255,.45)" stroke-width="1.2"/>
-            {{-- cross lines --}}
-            <line x1="100" y1="7"   x2="100" y2="193" stroke="rgba(255,255,255,.14)" stroke-width=".8"/>
-            <line x1="7"   y1="100" x2="193" y2="100" stroke="rgba(255,255,255,.14)" stroke-width=".8"/>
-            <line x1="34"  y1="34"  x2="166" y2="166" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
-            <line x1="166" y1="34"  x2="34"  y2="166" stroke="rgba(255,255,255,.08)" stroke-width=".5"/>
-            {{-- shield shape --}}
-            <path d="M100 165 C100 165 60 148 60 115 L60 82 L100 68 L140 82 L140 115 C140 148 100 165 100 165Z"
-                  fill="rgba(255,255,255,.15)" stroke="rgba(255,255,255,.75)" stroke-width="1.2" stroke-linejoin="round"/>
-            {{-- checkmark --}}
-            <path d="M85 117 L95 127 L118 104" stroke="rgba(255,255,255,.9)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            {{-- grade A inside shield --}}
-            <text x="100" y="108" text-anchor="middle" font-size="28" font-weight="900" fill="rgba(255,255,255,.22)" font-family="system-ui,sans-serif" letter-spacing="-1">A</text>
-            {{-- grade blips (positioned like radar blips) --}}
-            <circle cx="148" cy="52"  r="4" fill="rgba(255,255,255,.7)"><animate attributeName="opacity" values="1;.3;1" dur="2.2s" repeatCount="indefinite"/></circle>
-            <circle cx="60"  cy="148" r="3" fill="rgba(255,255,255,.5)"><animate attributeName="opacity" values=".5;.1;.5" dur="2.8s" repeatCount="indefinite"/></circle>
-            <circle cx="155" cy="128" r="3.5" fill="rgba(230,32,26,.8)"><animate attributeName="opacity" values="1;.2;1" dur="1.6s" repeatCount="indefinite"/></circle>
-            <circle cx="52"  cy="72"  r="2.5" fill="rgba(255,255,255,.45)"><animate attributeName="opacity" values=".45;.1;.45" dur="3s" repeatCount="indefinite"/></circle>
+            <circle cx="100" cy="100" r="92" fill="url(#cg-rank-glow)"/>
+            <circle cx="100" cy="100" r="92" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+
+            {{-- header label --}}
+            <text x="100" y="24" text-anchor="middle" font-size="6.5" font-weight="700" fill="rgba(255,255,255,.55)" font-family="system-ui,sans-serif" letter-spacing="1.8">US CITY SAFETY RANKINGS</text>
+
+            {{-- Card 1: Austin A --}}
+            <rect x="15" y="34" width="170" height="30" rx="5" fill="rgba(255,255,255,.16)" stroke="rgba(255,255,255,.32)" stroke-width=".7"/>
+            <rect x="155" y="38" width="24" height="22" rx="4" fill="#15803d"/>
+            <text x="167" y="54" text-anchor="middle" font-size="12" font-weight="900" fill="white" font-family="system-ui,sans-serif">A</text>
+            <text x="25" y="53" font-size="7" font-weight="800" fill="rgba(255,255,255,.45)" font-family="system-ui,sans-serif">01</text>
+            <text x="40" y="53" font-size="8.5" font-weight="600" fill="rgba(255,255,255,.95)" font-family="system-ui,sans-serif">Austin, TX</text>
+
+            {{-- Card 2: Denver B --}}
+            <rect x="15" y="72" width="170" height="30" rx="5" fill="rgba(255,255,255,.11)" stroke="rgba(255,255,255,.24)" stroke-width=".7"/>
+            <rect x="155" y="76" width="24" height="22" rx="4" fill="#2563eb"/>
+            <text x="167" y="92" text-anchor="middle" font-size="12" font-weight="900" fill="white" font-family="system-ui,sans-serif">B</text>
+            <text x="25" y="91" font-size="7" font-weight="800" fill="rgba(255,255,255,.45)" font-family="system-ui,sans-serif">02</text>
+            <text x="40" y="91" font-size="8.5" font-weight="600" fill="rgba(255,255,255,.82)" font-family="system-ui,sans-serif">Denver, CO</text>
+
+            {{-- Card 3: Chicago C --}}
+            <rect x="15" y="110" width="170" height="30" rx="5" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)" stroke-width=".7"/>
+            <rect x="155" y="114" width="24" height="22" rx="4" fill="#ca8a04"/>
+            <text x="167" y="130" text-anchor="middle" font-size="12" font-weight="900" fill="white" font-family="system-ui,sans-serif">C</text>
+            <text x="25" y="129" font-size="7" font-weight="800" fill="rgba(255,255,255,.45)" font-family="system-ui,sans-serif">03</text>
+            <text x="40" y="129" font-size="8.5" font-weight="600" fill="rgba(255,255,255,.68)" font-family="system-ui,sans-serif">Chicago, IL</text>
+
+            {{-- Card 4: Memphis F --}}
+            <rect x="15" y="148" width="170" height="30" rx="5" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.13)" stroke-width=".7"/>
+            <rect x="155" y="152" width="24" height="22" rx="4" fill="#dc2626"/>
+            <text x="167" y="168" text-anchor="middle" font-size="12" font-weight="900" fill="white" font-family="system-ui,sans-serif">F</text>
+            <text x="25" y="167" font-size="7" font-weight="800" fill="rgba(255,255,255,.45)" font-family="system-ui,sans-serif">04</text>
+            <text x="40" y="167" font-size="8.5" font-weight="600" fill="rgba(255,255,255,.52)" font-family="system-ui,sans-serif">Memphis, TN</text>
+
+            {{-- subtle animated dots --}}
+            <circle cx="8" cy="64" r="2" fill="rgba(255,255,255,.3)"><animate attributeName="opacity" values="1;.2;1" dur="2.2s" repeatCount="indefinite"/></circle>
+            <circle cx="192" cy="118" r="2" fill="rgba(255,255,255,.25)"><animate attributeName="opacity" values=".6;.1;.6" dur="3s" repeatCount="indefinite"/></circle>
+            <circle cx="8" cy="158" r="1.5" fill="rgba(255,255,255,.2)"><animate attributeName="opacity" values=".4;.1;.4" dur="2.7s" repeatCount="indefinite"/></circle>
         </svg>
     </div>
 
@@ -1114,26 +1118,17 @@
             <a href="#download" style="display:inline-flex;transition:transform .15s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'"><img src="/images/google-play-badge.png" alt="Get it on Google Play" style="height:52px;width:auto;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.18)" /></a>
         </div>
 
-        {{-- CTA + stats --}}
-        <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-bottom:32px">
-            <button onclick="cgScrollToStates()" style="display:inline-flex;align-items:center;gap:10px;padding:14px 32px;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#15691a;background:#ffffff;border:none;border-radius:8px;cursor:pointer;transition:transform .15s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-                Explore States
-            </button>
-            <span style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(6,52,15,.7)">30+ States &nbsp;·&nbsp; <span id="cg-s-cities2">125</span>+ Cities Graded A–F</span>
-        </div>
-
         {{-- 4-col stats + social proof (exact citizen-app hero) --}}
         <dl class="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl mb-8">
             @foreach ([
-                ['v'=>'1-tap','l'=>'SOS to dispatch'],
-                ['v'=>'24/7','l'=>'family monitoring'],
-                ['v'=>'Live','l'=>'safety alerts'],
-                ['v'=>'Free','l'=>'forever for families'],
+                ['v'=>'1-tap','l'=>'accept dispatch'],
+                ['v'=>'Live','l'=>'turn-by-turn'],
+                ['v'=>'Encrypted','l'=>'officer channel'],
+                ['v'=>'Offline','l'=>'incident capture'],
             ] as $s)
                 <div>
-                    <dt class="font-display text-2xl font-bold tracking-tight" style="color:#06340f">{{ $s['v'] }}</dt>
-                    <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em]" style="color:rgba(6,52,15,.5)">{{ $s['l'] }}</dd>
+                    <dt class="font-display text-2xl font-bold tracking-tight text-white">{{ $s['v'] }}</dt>
+                    <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/50">{{ $s['l'] }}</dd>
                 </div>
             @endforeach
         </dl>
@@ -1147,9 +1142,9 @@
                     <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
                     <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-red-900/60 bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
                 </div>
-                <p class="font-display text-base font-semibold" style="color:#06340f">5,000+ Verified Officers</p>
+                <p class="font-display text-base font-semibold text-white">5,000+ Verified Officers</p>
             </div>
-            <p class="mt-3 text-sm leading-relaxed max-w-md" style="color:rgba(6,52,15,.65)">
+            <p class="mt-3 text-sm leading-relaxed max-w-md text-white/65">
                 Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
             </p>
         </div>
@@ -6166,7 +6161,7 @@ function eaApp() {
 <div x-data="eaApp()" x-init="init()" x-cloak>
 
     {{-- ─── LIVE TICKER ─── --}}
-    <div class="relative overflow-hidden" style="background:rgba(220,38,38,.10);border-bottom:1px solid rgba(220,38,38,.22);height:34px;">
+    <div class="overflow-hidden" style="position:sticky;top:78px;z-index:40;background:#0a0f1a;border-bottom:1px solid rgba(220,38,38,.3);height:34px;">
         <div class="ea-ticker absolute inset-y-0 flex items-center whitespace-nowrap">
             <template x-for="n in 2" :key="n">
                 <span class="inline-flex items-center gap-6 px-8 text-[11px] font-semibold uppercase tracking-[.16em] text-red-400">
@@ -6310,10 +6305,10 @@ function eaApp() {
 
                     <dl class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl">
                         @foreach ([
-                            ['v'=>'1-tap','l'=>'SOS to dispatch'],
-                            ['v'=>'24/7','l'=>'family monitoring'],
-                            ['v'=>'Live','l'=>'safety alerts'],
-                            ['v'=>'Free','l'=>'forever for families'],
+                            ['v'=>'1-tap','l'=>'accept dispatch'],
+                            ['v'=>'Live','l'=>'turn-by-turn'],
+                            ['v'=>'Encrypted','l'=>'officer channel'],
+                            ['v'=>'Offline','l'=>'incident capture'],
                         ] as $s)
                             <div>
                                 <dt class="font-display text-2xl font-bold tracking-tight text-white">{{ $s['v'] }}</dt>
@@ -6324,19 +6319,20 @@ function eaApp() {
 
                     <div class="mt-8 max-w-xl">
                         <div class="flex items-center gap-4">
-                            <div class="flex items-center -space-x-3 shrink-0">
-                                <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
-                                <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
-                                <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
-                                <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
-                                <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-red-900/60 bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
+                            <div class="flex items-center shrink-0" style="margin-left:0">
+                                <img src="/images/officer-1.jpg" alt="" style="width:40px;height:40px;border-radius:9999px;object-fit:cover;box-shadow:0 0 0 2px rgba(127,29,29,0.6);margin-left:0;" />
+                                <img src="/images/officer-2.jpg" alt="" style="width:40px;height:40px;border-radius:9999px;object-fit:cover;box-shadow:0 0 0 2px rgba(127,29,29,0.6);margin-left:-12px;" />
+                                <img src="/images/officer-3.jpg" alt="" style="width:40px;height:40px;border-radius:9999px;object-fit:cover;box-shadow:0 0 0 2px rgba(127,29,29,0.6);margin-left:-12px;" />
+                                <img src="/images/officer-4.jpg" alt="" style="width:40px;height:40px;border-radius:9999px;object-fit:cover;box-shadow:0 0 0 2px rgba(127,29,29,0.6);margin-left:-12px;" />
+                                <span style="width:40px;height:40px;display:grid;place-items:center;border-radius:9999px;box-shadow:0 0 0 2px rgba(127,29,29,0.6);background:#10b981;color:#fff;font-weight:700;font-size:11px;flex-shrink:0;margin-left:-12px;">5K</span>
                             </div>
                             <p class="font-display text-base font-semibold text-white">5,000+ Verified Officers</p>
                         </div>
-                        <p class="mt-3 text-sm text-white/60 leading-relaxed max-w-md">
+                        <p class="mt-3 text-sm leading-relaxed max-w-md text-white/65">
                             Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
                         </p>
                     </div>
+
                 </div>
             </div>
         </div>
