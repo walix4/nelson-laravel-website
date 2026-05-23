@@ -6292,20 +6292,22 @@ function eaApp() {
                         @endforeach
                     </div>
 
-                    {{-- Social proof --}}
-                    <div class="flex items-center gap-4 mb-2">
-                        <div class="flex items-center -space-x-3 shrink-0">
-                            <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                            <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                            <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                            <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
-                            <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-white bg-emerald-500 text-white font-bold text-[11px]">5K</span>
+                    {{-- Social proof (copied from citizen hero) --}}
+                    <div class="mt-2 max-w-xl">
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center -space-x-3 shrink-0">
+                                <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
+                                <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
+                                <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
+                                <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white object-cover" />
+                                <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-white bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
+                            </div>
+                            <p class="font-display text-base font-semibold" style="color:#0a1a4a">5,000+ Verified Officers</p>
                         </div>
-                        <p class="font-display text-base font-semibold" style="color:#0a1a4a">5,000+ Verified Officers</p>
+                        <p class="mt-3 text-sm leading-relaxed max-w-md" style="color:rgba(10,26,74,.72)">
+                            Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
+                        </p>
                     </div>
-                    <p class="text-sm leading-relaxed max-w-md" style="color:rgba(10,26,74,.65)">
-                        Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
-                    </p>
                 </div>
             </div>
         </div>
