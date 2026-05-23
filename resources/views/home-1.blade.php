@@ -55,17 +55,27 @@
      NAV
 ========================================================================--}}
 <style>
-    /* Live EA nav indicator — blinks between red and green */
-    @keyframes eaLiveBlink {
-        0%, 44%   { background-color:#ef4444; }
-        50%, 94%  { background-color:#22c55e; }
-        100%      { background-color:#ef4444; }
+    /* Live ER nav — text + animated dot, no pill */
+    .ea-live-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
     }
-    @keyframes eaLivePing {
-        75%, 100% { transform: scale(2); opacity: 0; }
+    .ea-live-pill-text { color: #fca5a5; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .ea-live-pill:hover .ea-live-pill-text { color: #ffffff; }
+    @keyframes eaLivePulse {
+        0%   { background: #ef4444; box-shadow: 0 0 0 0 rgba(239,68,68,.8); }
+        30%  { background: #ef4444; box-shadow: 0 0 0 5px rgba(239,68,68,0); }
+        50%  { background: #3b82f6; box-shadow: 0 0 0 0 rgba(59,130,246,.8); }
+        80%  { background: #3b82f6; box-shadow: 0 0 0 5px rgba(59,130,246,0); }
+        100% { background: #ef4444; box-shadow: 0 0 0 0 rgba(239,68,68,.8); }
     }
-    .ea-live-dot  { animation: eaLiveBlink 1.6s steps(1,end) infinite; }
-    .ea-live-ping { animation: eaLiveBlink 1.6s steps(1,end) infinite, eaLivePing 1.6s cubic-bezier(0,0,.2,1) infinite; }
+    .ea-live-dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: #ef4444;
+        animation: eaLivePulse 2s ease-in-out infinite;
+        flex-shrink: 0;
+    }
 </style>
 <header data-nav style="background-color:#0a1a4a" class="fixed inset-x-0 top-0 z-50 text-white">
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
@@ -88,9 +98,9 @@
             <li><a data-route href="#/citizen-app" class="nav-link hover:text-white transition">Citizen App</a></li>
             <li><a data-route href="#/agent-app"   class="nav-link hover:text-white transition">Agent App</a></li>
             <li><a data-route href="#/crime-grade" class="nav-link hover:text-white transition">Crime Grade</a></li>
-            <li><a data-route href="#/er"          class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
-                <span class="relative flex h-1.5 w-1.5"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-1.5 w-1.5"></span></span>
-                Live ER
+            <li><a data-route href="#/er" class="nav-link ea-live-pill">
+                <span class="ea-live-dot"></span>
+                <span class="ea-live-pill-text">Live ER</span>
             </a></li>
             <li><a data-route href="#/crime-map"   class="nav-link hover:text-white transition">Crime Map</a></li>
         </ul>
@@ -112,8 +122,8 @@
             <li><a data-route href="#/citizen-app">Citizen App</a></li>
             <li><a data-route href="#/agent-app">Agent App</a></li>
             <li><a data-route href="#/crime-grade">Crime Grade</a></li>
-            <li><a data-route href="#/er" class="inline-flex items-center gap-1.5 text-red-600 font-semibold">
-                <span class="relative flex h-1.5 w-1.5"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-1.5 w-1.5"></span></span>
+            <li><a data-route href="#/er" class="inline-flex items-center gap-2 font-semibold" style="color:#ef4444;">
+                <span class="ea-live-dot" style="width:8px;height:8px;"></span>
                 Live ER
             </a></li>
             <li><a data-route href="#/crime-map">Crime Map</a></li>
@@ -5817,7 +5827,7 @@ cgRenderGradeDist();
    INCIDENT CARDS — white surface
 ═══════════════════════════════════════════════════════════════ */
 [data-view="er"] .ea-light .ea-card {
-    background: #fff;
+    background: #fff !important;
     border: 1px solid #e7ebf2 !important;
     box-shadow:
         0 1px 2px rgba(15,23,42,.04),
@@ -5881,20 +5891,20 @@ cgRenderGradeDist();
 [data-view="er"] .ea-light .ea-stage-lbl    { color: #cbd5e1 !important; }
 
 /* Severity badges & icons */
-[data-view="er"] .ea-light .ea-sev-critical { background: rgba(239,68,68,.1); color: #dc2626; border-color: rgba(239,68,68,.3); }
-[data-view="er"] .ea-light .ea-sev-high     { background: rgba(249,115,22,.1); color: #ea580c; border-color: rgba(249,115,22,.3); }
-[data-view="er"] .ea-light .ea-sev-active   { background: rgba(59,130,246,.1); color: #2563eb; border-color: rgba(59,130,246,.3); }
-[data-view="er"] .ea-light .ea-sev-resolved { background: rgba(16,185,129,.1); color: #059669; border-color: rgba(16,185,129,.3); }
+[data-view="er"] .ea-light .ea-sev-critical { background: rgba(239,68,68,.07); color: #ef4444; border-color: rgba(239,68,68,.2); }
+[data-view="er"] .ea-light .ea-sev-high     { background: rgba(249,115,22,.07); color: #f97316; border-color: rgba(249,115,22,.2); }
+[data-view="er"] .ea-light .ea-sev-active   { background: rgba(59,130,246,.07); color: #3b82f6; border-color: rgba(59,130,246,.2); }
+[data-view="er"] .ea-light .ea-sev-resolved { background: rgba(16,185,129,.07); color: #10b981; border-color: rgba(16,185,129,.2); }
 
 /* Icon chip severity glow */
 @keyframes ea-icon-pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(var(--ea-sev-rgb), 0); }
     50%      { box-shadow: 0 0 16px -3px rgba(var(--ea-sev-rgb), .4); }
 }
-[data-view="er"] .ea-light .ea-icon-critical { background: rgba(239,68,68,.1) !important; border-color: rgba(239,68,68,.3) !important; --ea-sev-rgb: 239,68,68; animation: ea-icon-pulse 2.4s ease-in-out infinite; }
-[data-view="er"] .ea-light .ea-icon-high     { background: rgba(249,115,22,.1) !important; border-color: rgba(249,115,22,.3) !important; --ea-sev-rgb: 249,115,22; animation: ea-icon-pulse 2.8s ease-in-out infinite; }
-[data-view="er"] .ea-light .ea-icon-active   { background: rgba(59,130,246,.1) !important; border-color: rgba(59,130,246,.3) !important; --ea-sev-rgb: 59,130,246; animation: ea-icon-pulse 3.2s ease-in-out infinite; }
-[data-view="er"] .ea-light .ea-icon-resolved { background: rgba(16,185,129,.08) !important; border-color: rgba(16,185,129,.25) !important; --ea-sev-rgb: 16,185,129; }
+[data-view="er"] .ea-light .ea-icon-critical { background: rgba(239,68,68,.07) !important; border-color: rgba(239,68,68,.18) !important; --ea-sev-rgb: 239,68,68; animation: ea-icon-pulse 2.4s ease-in-out infinite; }
+[data-view="er"] .ea-light .ea-icon-high     { background: rgba(249,115,22,.07) !important; border-color: rgba(249,115,22,.18) !important; --ea-sev-rgb: 249,115,22; animation: ea-icon-pulse 2.8s ease-in-out infinite; }
+[data-view="er"] .ea-light .ea-icon-active   { background: rgba(59,130,246,.07) !important; border-color: rgba(59,130,246,.18) !important; --ea-sev-rgb: 59,130,246; animation: ea-icon-pulse 3.2s ease-in-out infinite; }
+[data-view="er"] .ea-light .ea-icon-resolved { background: rgba(16,185,129,.06) !important; border-color: rgba(16,185,129,.18) !important; --ea-sev-rgb: 16,185,129; }
 
 /* View Details button */
 [data-view="er"] .ea-light .ea-details-btn {
@@ -5950,10 +5960,11 @@ cgRenderGradeDist();
 }
 
 /* ═══ Flat + lightly rounded — small uniform radius, no shadows on ER ═══ */
-[data-view="er"] *:not(.ea-pulse-dot),
+[data-view="er"] *:not(.ea-pulse-dot):not(.ea-circle-badge),
 [data-view="er"] *::before,
 [data-view="er"] *::after { border-radius: 6px !important; }
 [data-view="er"] *:not(.ea-pulse-dot) { box-shadow: none !important; }
+[data-view="er"] .ea-circle-badge { border-radius: 50% !important; }
 </style>
 
 {{-- ══════════════════════════════════════════════════════════════
@@ -6303,7 +6314,7 @@ function eaApp() {
                         <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-90 rounded-lg"><img src="/images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                     </div>
 
-                    <dl class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl">
+                    <dl class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 max-w-xl">
                         @foreach ([
                             ['v'=>'1-tap','l'=>'accept dispatch'],
                             ['v'=>'Live','l'=>'turn-by-turn'],
@@ -6317,18 +6328,18 @@ function eaApp() {
                         @endforeach
                     </dl>
 
-                    <div class="mt-8 max-w-xl">
+                    <div class="mt-10 max-w-xl">
                         <div class="flex items-center gap-4">
-                            <div class="flex items-center shrink-0" style="margin-left:0">
-                                <img src="/images/officer-1.jpg" alt="" style="width:40px;height:40px;border-radius:9999px;object-fit:cover;box-shadow:0 0 0 2px rgba(127,29,29,0.6);margin-left:0;" />
-                                <img src="/images/officer-2.jpg" alt="" style="width:40px;height:40px;border-radius:9999px;object-fit:cover;box-shadow:0 0 0 2px rgba(127,29,29,0.6);margin-left:-12px;" />
-                                <img src="/images/officer-3.jpg" alt="" style="width:40px;height:40px;border-radius:9999px;object-fit:cover;box-shadow:0 0 0 2px rgba(127,29,29,0.6);margin-left:-12px;" />
-                                <img src="/images/officer-4.jpg" alt="" style="width:40px;height:40px;border-radius:9999px;object-fit:cover;box-shadow:0 0 0 2px rgba(127,29,29,0.6);margin-left:-12px;" />
-                                <span style="width:40px;height:40px;display:grid;place-items:center;border-radius:9999px;box-shadow:0 0 0 2px rgba(127,29,29,0.6);background:#10b981;color:#fff;font-weight:700;font-size:11px;flex-shrink:0;margin-left:-12px;">5K</span>
+                            <div class="flex items-center -space-x-3 shrink-0">
+                                <img src="/images/officer-1.jpg" alt="" class="ea-circle-badge w-10 h-10 object-cover" style="box-shadow:0 0 0 2px #fff;" />
+                                <img src="/images/officer-2.jpg" alt="" class="ea-circle-badge w-10 h-10 object-cover" style="box-shadow:0 0 0 2px #fff;" />
+                                <img src="/images/officer-3.jpg" alt="" class="ea-circle-badge w-10 h-10 object-cover" style="box-shadow:0 0 0 2px #fff;" />
+                                <img src="/images/officer-4.jpg" alt="" class="ea-circle-badge w-10 h-10 object-cover" style="box-shadow:0 0 0 2px #fff;" />
+                                <span class="ea-circle-badge w-10 h-10 grid place-items-center bg-emerald-500 text-white font-display font-bold text-[11px]" style="box-shadow:0 0 0 2px #fff;">5K</span>
                             </div>
                             <p class="font-display text-base font-semibold text-white">5,000+ Verified Officers</p>
                         </div>
-                        <p class="mt-3 text-sm leading-relaxed max-w-md text-white/65">
+                        <p class="mt-3 text-sm text-white/65 leading-relaxed max-w-md">
                             Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
                         </p>
                     </div>
@@ -6490,10 +6501,11 @@ function eaApp() {
                         {{-- Top row: icon + title + status --}}
                         <div class="flex items-start gap-3 mb-3">
                             {{-- Crime-map tag badge (colour + tag per incident type) --}}
-                            <div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
-                                 :style="`background:${typeTag(inc.type).color}; box-shadow: 0 4px 12px -2px ${typeTag(inc.type).color}73, inset 0 1px 0 rgba(255,255,255,.25);`">
-                                <span class="font-black text-white leading-none tracking-tight"
+                            <div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center border"
+                                 :style="`background:${typeTag(inc.type).color}14; border-color:${typeTag(inc.type).color}35;`">
+                                <span class="font-black leading-none tracking-tight"
                                       :class="typeTag(inc.type).tag.length >= 4 ? 'text-[10px]' : typeTag(inc.type).tag.length === 3 ? 'text-xs' : typeTag(inc.type).tag.length === 2 ? 'text-sm' : 'text-xl'"
+                                      :style="`color:${typeTag(inc.type).color};`"
                                       x-text="typeTag(inc.type).tag"></span>
                             </div>
                             <div class="flex-1 min-w-0">
@@ -6537,9 +6549,9 @@ function eaApp() {
                         </div>
 
                         {{-- Officers count --}}
-                        <div class="mb-3 flex items-center justify-between">
-                            <div class="text-[10px] font-bold uppercase tracking-[.16em] text-red-600">Officers Assisting</div>
-                            <div class="text-xl font-black leading-none" style="color:#ef4444;" x-text="inc.officers"></div>
+                        <div class="mb-3 flex flex-col items-start gap-1.5">
+                            <div class="text-[10px] font-bold uppercase tracking-[.16em] text-slate-400">Officers Assisting</div>
+                            <div x-text="inc.officers" class="ea-circle-badge" style="width:32px;height:32px;background:#ef4444;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0;"></div>
                         </div>
 
                         {{-- Progress bar (solid red) --}}
