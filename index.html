@@ -8537,38 +8537,73 @@ function eaApp() {
             <div>
                 <div>
                     
-                    <div class="flex items-center gap-5 mb-7">
+                    <div class="flex items-center gap-5 mb-5">
                         <div>
-                            <div class="flex items-baseline gap-2.5">
-                                <span class="ea-counter text-6xl lg:text-7xl font-black leading-none" style="color:#0a1a4a" x-text="liveCount">0</span>
-                                <span class="ea-pulse-dot w-2.5 h-2.5 rounded-full bg-red-600 self-center"></span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="font-mono font-black leading-none" style="font-size:clamp(36px,4vw,56px);color:#0a1a4a" x-text="liveCount">0</span>
+                                <span class="ea-pulse-dot w-2 h-2 rounded-full bg-red-600 self-center"></span>
                             </div>
-                            <p class="text-[11px] font-bold uppercase tracking-[.2em] text-red-700 mt-2">Active Incidents Now</p>
+                            <p class="text-[10px] font-bold uppercase tracking-[.2em] text-red-700 mt-1">Active Incidents Now</p>
                         </div>
-                        <div class="h-14 w-px" style="background:rgba(10,26,74,.22)"></div>
+                        <div class="h-10 w-px" style="background:rgba(10,26,74,.22)"></div>
                         <div>
-                            <div class="font-mono text-2xl font-bold" style="color:#0a1a4a" x-text="liveTime">--:--:--</div>
-                            <p class="text-[10.5px] font-semibold uppercase tracking-[.18em] mt-1.5" style="color:rgba(10,26,74,.55)">System Time · EST</p>
+                            <div class="font-mono text-xl font-bold" style="color:#0a1a4a" x-text="liveTime">--:--:--</div>
+                            <p class="text-[10px] font-semibold uppercase tracking-[.18em] mt-1" style="color:rgba(10,26,74,.55)">System Time · EST</p>
                         </div>
                     </div>
 
-                    <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-7" style="background:rgba(255,255,255,.6);border:1px solid rgba(120,53,15,.22);">
+                    <div class="inline-flex items-center gap-2.5 rounded-full px-3.5 py-1.5 mb-5" style="background:rgba(255,255,255,.6);border:1px solid rgba(120,53,15,.22);">
                         <span class="ea-pulse-dot w-1.5 h-1.5 rounded-full bg-red-600"></span>
                         <span class="text-[10.5px] font-bold uppercase tracking-[.22em]" style="color:#b91c1c">Live Emergency Response</span>
                     </div>
-                    <h1 class="ea-hero-title font-black text-5xl lg:text-[64px] leading-[1.02] tracking-tight mb-5" style="color:#0a1a4a">
+                    <h1 class="ea-hero-title font-black text-5xl lg:text-[64px] leading-[1.02] tracking-tight mb-4" style="color:#0a1a4a">
                         Real-time<br>
                         <span class="lg:whitespace-nowrap" style="background:linear-gradient(90deg,#dc2626 0%,#991b1b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Emergency Response</span>
                     </h1>
-                    <p class="text-base lg:text-lg max-w-md leading-relaxed mb-6" style="color:rgba(10,26,74,.72)">
+                    <p class="text-base lg:text-lg max-w-md leading-relaxed mb-5" style="color:rgba(10,26,74,.72)">
                         Monitor active incidents, dispatch updates, and unit responses across the network — as events unfold.
                     </p>
 
                     
-                    <div class="flex flex-wrap items-center gap-3">
+                    <div class="flex flex-wrap items-center gap-3 mb-6">
                         <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-90 rounded-lg"><img src="/nelson-laravel-website/images/app-store-badge.png" alt="Download on the App Store" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                         <a href="#download" class="inline-flex shrink-0 transition hover:-translate-y-0.5 hover:opacity-90 rounded-lg"><img src="/nelson-laravel-website/images/google-play-badge.png" alt="Get it on Google Play" class="h-12 sm:h-14 w-auto rounded-lg shadow-md" /></a>
                     </div>
+
+                    
+                    <div class="grid grid-cols-4 gap-x-6 gap-y-3 max-w-lg mb-6">
+                                                <div>
+                            <div class="font-display text-2xl font-black leading-none" style="color:#0a1a4a">1-tap</div>
+                            <div class="mt-1 text-[10px] uppercase tracking-[.16em] font-semibold leading-tight" style="color:rgba(10,26,74,.55)">SOS to Dispatch</div>
+                        </div>
+                                                <div>
+                            <div class="font-display text-2xl font-black leading-none" style="color:#0a1a4a">24/7</div>
+                            <div class="mt-1 text-[10px] uppercase tracking-[.16em] font-semibold leading-tight" style="color:rgba(10,26,74,.55)">Family Monitoring</div>
+                        </div>
+                                                <div>
+                            <div class="font-display text-2xl font-black leading-none" style="color:#0a1a4a">Live</div>
+                            <div class="mt-1 text-[10px] uppercase tracking-[.16em] font-semibold leading-tight" style="color:rgba(10,26,74,.55)">Safety Alerts</div>
+                        </div>
+                                                <div>
+                            <div class="font-display text-2xl font-black leading-none" style="color:#0a1a4a">Free</div>
+                            <div class="mt-1 text-[10px] uppercase tracking-[.16em] font-semibold leading-tight" style="color:rgba(10,26,74,.55)">Forever for Families</div>
+                        </div>
+                                            </div>
+
+                    
+                    <div class="flex items-center gap-4 mb-2">
+                        <div class="flex items-center -space-x-3 shrink-0">
+                            <img src="/nelson-laravel-website/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
+                            <img src="/nelson-laravel-website/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
+                            <img src="/nelson-laravel-website/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
+                            <img src="/nelson-laravel-website/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-amber-400/60" />
+                            <span class="w-10 h-10 grid place-items-center rounded-full bg-emerald-500 font-bold text-[11px] text-white ring-2 ring-amber-400/60">5K</span>
+                        </div>
+                        <p class="font-display text-base font-semibold" style="color:#0a1a4a">5,000+ Verified Officers</p>
+                    </div>
+                    <p class="text-sm leading-relaxed max-w-md" style="color:rgba(10,26,74,.65)">
+                        Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
+                    </p>
                 </div>
             </div>
         </div>
