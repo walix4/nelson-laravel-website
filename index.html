@@ -52,27 +52,25 @@
 
 
 <style>
-    /* Live ER nav pill */
+    /* Live ER nav — text + animated dot, no pill */
     .ea-live-pill {
-        background: rgba(239,68,68,.18);
-        border: 1px solid rgba(239,68,68,.45);
-        border-radius: 9999px;
-        padding: 3px 11px 3px 8px;
         display: inline-flex;
         align-items: center;
-        gap: 7px;
-        transition: background .2s;
+        gap: 6px;
     }
-    .ea-live-pill:hover { background: rgba(239,68,68,.28); }
-    .ea-live-pill-text { color: #fca5a5; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .ea-live-pill-text { color: #fca5a5; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .ea-live-pill:hover .ea-live-pill-text { color: #ffffff; }
     @keyframes eaLivePulse {
-        0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,.7); }
-        70%      { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
+        0%   { background: #ef4444; box-shadow: 0 0 0 0 rgba(239,68,68,.8); }
+        30%  { background: #ef4444; box-shadow: 0 0 0 5px rgba(239,68,68,0); }
+        50%  { background: #3b82f6; box-shadow: 0 0 0 0 rgba(59,130,246,.8); }
+        80%  { background: #3b82f6; box-shadow: 0 0 0 5px rgba(59,130,246,0); }
+        100% { background: #ef4444; box-shadow: 0 0 0 0 rgba(239,68,68,.8); }
     }
     .ea-live-dot {
         width: 8px; height: 8px; border-radius: 50%;
         background: #ef4444;
-        animation: eaLivePulse 1.4s ease-out infinite;
+        animation: eaLivePulse 2s ease-in-out infinite;
         flex-shrink: 0;
     }
 </style>
