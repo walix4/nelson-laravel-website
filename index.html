@@ -52,17 +52,29 @@
 
 
 <style>
-    /* Live EA nav indicator — blinks between red and green */
-    @keyframes eaLiveBlink {
-        0%, 44%   { background-color:#ef4444; }
-        50%, 94%  { background-color:#22c55e; }
-        100%      { background-color:#ef4444; }
+    /* Live ER nav pill */
+    .ea-live-pill {
+        background: rgba(239,68,68,.18);
+        border: 1px solid rgba(239,68,68,.45);
+        border-radius: 9999px;
+        padding: 3px 11px 3px 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: background .2s;
     }
-    @keyframes eaLivePing {
-        75%, 100% { transform: scale(2); opacity: 0; }
+    .ea-live-pill:hover { background: rgba(239,68,68,.28); }
+    .ea-live-pill-text { color: #fca5a5; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    @keyframes eaLivePulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,.7); }
+        70%      { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
     }
-    .ea-live-dot  { animation: eaLiveBlink 1.6s steps(1,end) infinite; }
-    .ea-live-ping { animation: eaLiveBlink 1.6s steps(1,end) infinite, eaLivePing 1.6s cubic-bezier(0,0,.2,1) infinite; }
+    .ea-live-dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: #ef4444;
+        animation: eaLivePulse 1.4s ease-out infinite;
+        flex-shrink: 0;
+    }
 </style>
 <header data-nav style="background-color:#0a1a4a" class="fixed inset-x-0 top-0 z-50 text-white">
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
@@ -85,9 +97,9 @@
             <li><a data-route href="#/citizen-app" class="nav-link hover:text-white transition">Citizen App</a></li>
             <li><a data-route href="#/agent-app"   class="nav-link hover:text-white transition">Agent App</a></li>
             <li><a data-route href="#/crime-grade" class="nav-link hover:text-white transition">Crime Grade</a></li>
-            <li><a data-route href="#/er"          class="nav-link inline-flex items-center gap-1.5 hover:text-white transition">
-                <span class="relative flex h-1.5 w-1.5"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-1.5 w-1.5"></span></span>
-                Live ER
+            <li><a data-route href="#/er" class="nav-link ea-live-pill">
+                <span class="ea-live-dot"></span>
+                <span class="ea-live-pill-text">Live ER</span>
             </a></li>
             <li><a data-route href="#/crime-map"   class="nav-link hover:text-white transition">Crime Map</a></li>
         </ul>
@@ -109,8 +121,8 @@
             <li><a data-route href="#/citizen-app">Citizen App</a></li>
             <li><a data-route href="#/agent-app">Agent App</a></li>
             <li><a data-route href="#/crime-grade">Crime Grade</a></li>
-            <li><a data-route href="#/er" class="inline-flex items-center gap-1.5 text-red-600 font-semibold">
-                <span class="relative flex h-1.5 w-1.5"><span class="ea-live-ping absolute inline-flex h-full w-full rounded-full opacity-75"></span><span class="ea-live-dot relative inline-flex rounded-full h-1.5 w-1.5"></span></span>
+            <li><a data-route href="#/er" class="inline-flex items-center gap-2 font-semibold" style="color:#ef4444;">
+                <span class="ea-live-dot" style="width:8px;height:8px;"></span>
                 Live ER
             </a></li>
             <li><a data-route href="#/crime-map">Crime Map</a></li>
