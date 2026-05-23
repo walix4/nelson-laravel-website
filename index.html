@@ -33,11 +33,19 @@
     </style>
 </head>
 <script>
-/* Set body bg immediately to avoid flash when deep-linking to a colored page */
+/* Hide all content until router runs — prevents home-hero flash on deep-link reload */
 (function(){
     var h=(window.location.hash||'').replace(/^#\//,'');
     if(h==='er') document.documentElement.style.background='#f59e0b';
     else if(h==='crime-grade') document.documentElement.style.background='#22A620';
+    /* If visiting a non-home route, hide body until JS applies the correct view */
+    var allowed=['crime-map','crime-grade','sex-offender-map','how-it-works','agent-app','citizen-app','about','contact','privacy','terms','auxilio-ai','er'];
+    if(allowed.indexOf(h)!==-1){
+        document.documentElement.style.visibility='hidden';
+        window.addEventListener('DOMContentLoaded',function(){
+            setTimeout(function(){ document.documentElement.style.visibility=''; },0);
+        });
+    }
 })();
 </script>
 <body class="font-sans">
