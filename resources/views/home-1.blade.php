@@ -61,7 +61,7 @@
         align-items: center;
         gap: 6px;
     }
-    .ea-live-pill-text { color: #fca5a5; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .ea-live-pill-text { color: #fca5a5; font-size: 13px; font-weight: 700; letter-spacing: .06em; }
     .ea-live-pill:hover .ea-live-pill-text { color: #ffffff; }
     @keyframes eaLivePulse {
         0%   { background: #ef4444; box-shadow: 0 0 0 0 rgba(239,68,68,.8); }
@@ -160,7 +160,7 @@
 {{-- =======================================================================
      HERO — DARK split (text + stats left, officer photo + floating cards right)
 ========================================================================--}}
-<section class="home-hero relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%), linear-gradient(160deg, #050d2a 0%, #0a1a4a 30%, #0d1f56 55%, #061229 100%);">
+<section class="home-hero relative overflow-hidden text-white" style="min-height:calc(100vh - 78px);display:flex;align-items:center;background: radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%), linear-gradient(160deg, #050d2a 0%, #0a1a4a 30%, #0d1f56 55%, #061229 100%);">
     <span class="pointer-events-none absolute -top-32 -left-20 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(56,189,248,.28) 0%, transparent 70%);"></span>
     <span class="pointer-events-none absolute bottom-0 -right-20 w-[560px] h-[560px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(99,102,241,.28) 0%, transparent 70%);"></span>
     <span class="pointer-events-none absolute top-1/3 right-1/3 w-[320px] h-[320px] rounded-full blur-3xl opacity-50" style="background: radial-gradient(circle, rgba(125,211,252,.18) 0%, transparent 70%);"></span>
@@ -168,7 +168,7 @@
     {{-- grid overlay --}}
     <div style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(125,211,252,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(125,211,252,.07) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 90% at 50% 40%,black,transparent 85%);mask-image:radial-gradient(ellipse 80% 90% at 50% 40%,black,transparent 85%)"></div>
 
-    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-16 sm:pt-20 lg:pt-24 pb-20 lg:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center" style="padding-top:2rem;padding-bottom:3rem;">
 
         {{-- LEFT: copy + CTAs + stats --}}
         <div class="lg:col-span-6">
@@ -1043,7 +1043,7 @@
 </style>
 
 {{-- ── HERO ── --}}
-<section id="cg-hero-section" class="relative overflow-hidden" style="min-height:90vh;display:flex;align-items:center;background:radial-gradient(ellipse at 18% -10%,rgba(255,255,255,.5) 0%,transparent 55%),radial-gradient(ellipse at 90% 110%,rgba(13,90,30,.55) 0%,transparent 55%),linear-gradient(160deg,#34d058 0%,#22A620 44%,#1c8a1a 72%,#15691a 100%)">
+<section id="cg-hero-section" class="relative overflow-hidden" style="min-height:calc(100vh - 78px);display:flex;align-items:center;background:radial-gradient(ellipse at 18% -10%,rgba(255,255,255,.5) 0%,transparent 55%),radial-gradient(ellipse at 90% 110%,rgba(13,90,30,.55) 0%,transparent 55%),linear-gradient(160deg,#34d058 0%,#22A620 44%,#1c8a1a 72%,#15691a 100%)">
 
     {{-- grid overlay --}}
     <div style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(6,52,15,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(6,52,15,.08) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 90% at 50% 30%,black,transparent 85%);mask-image:radial-gradient(ellipse 80% 90% at 50% 30%,black,transparent 85%)"></div>
@@ -1103,7 +1103,7 @@
     </div>
 
     {{-- content --}}
-    <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8 pb-16 lg:pb-24" style="padding-top:4rem;">
+    <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8" style="padding-top:2rem;padding-bottom:3rem;">
 
         {{-- badge - less rounded --}}
         <div class="inline-flex items-center gap-2.5" style="background:rgba(255,255,255,.65);border:1px solid rgba(6,52,15,.2);border-radius:8px;padding:6px 14px;margin-bottom:24px">
@@ -2344,7 +2344,7 @@ cgRenderGradeDist();
 ============================================================--}}
 <div data-view="agent-app" class="hidden">
     {{-- ========== HERO ========== --}}
-    <section class="relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%), linear-gradient(160deg, #050d2a 0%, #0a1a4a 30%, #0d1f56 55%, #061229 100%);">
+    <section class="relative overflow-hidden text-white" style="min-height:calc(100vh - 78px);display:flex;align-items:center;background: radial-gradient(ellipse at 18% -10%, rgba(56,189,248,.22) 0%, transparent 55%), radial-gradient(ellipse at 90% 100%, rgba(99,102,241,.28) 0%, transparent 55%), linear-gradient(160deg, #050d2a 0%, #0a1a4a 30%, #0d1f56 55%, #061229 100%);">
         <span class="pointer-events-none absolute -top-32 left-1/4 w-[520px] h-[520px] rounded-full blur-3xl" style="background:radial-gradient(circle,rgba(56,189,248,.25) 0%,transparent 70%);"></span>
         <span class="pointer-events-none absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full blur-3xl" style="background:radial-gradient(circle,rgba(99,102,241,.25) 0%,transparent 70%);"></span>
         {{-- grid overlay --}}
@@ -3083,6 +3083,9 @@ cgRenderGradeDist();
 
         /* ---- HERO (dark red, premium) ---- */
         [data-view="citizen-app"] .citizen-hero {
+            min-height: calc(100vh - 78px);
+            display: flex;
+            align-items: center;
             background:
                 radial-gradient(ellipse 80% 60% at 0% 50%, rgba(251,6,6,.30) 0%, transparent 60%),
                 radial-gradient(ellipse 60% 80% at 100% 30%, rgba(160,0,0,.25) 0%, transparent 60%),
@@ -4993,7 +4996,7 @@ cgRenderGradeDist();
 
     {{-- HERO — split: phone mockup LEFT (in home-style box), AI orb + copy RIGHT --}}
     {{-- Base bg matches the orb GIF backdrop (#0a0826) so it tiles seamlessly into the section --}}
-    <section class="relative overflow-hidden text-white" style="background: radial-gradient(ellipse at 12% -10%, rgba(56,189,248,.20) 0%, transparent 55%), radial-gradient(ellipse at 92% 110%, rgba(99,102,241,.26) 0%, transparent 55%), #0a0826;">
+    <section class="relative overflow-hidden text-white" style="min-height:calc(100vh - 78px);display:flex;align-items:center;background: radial-gradient(ellipse at 12% -10%, rgba(56,189,248,.20) 0%, transparent 55%), radial-gradient(ellipse at 92% 110%, rgba(99,102,241,.26) 0%, transparent 55%), #0a0826;">
         <div class="absolute inset-0 scifi-grid opacity-60 pointer-events-none"></div>
         <span class="pointer-events-none absolute -top-32 -left-20 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(56,189,248,.32) 0%, transparent 70%);"></span>
         <span class="pointer-events-none absolute bottom-0 -right-20 w-[560px] h-[560px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(99,102,241,.32) 0%, transparent 70%);"></span>
@@ -5002,7 +5005,7 @@ cgRenderGradeDist();
         {{-- subtle scan-line overlay --}}
         <div class="absolute inset-0 pointer-events-none scifi-scan"></div>
 
-        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 pt-16 sm:pt-20 lg:pt-24 pb-20 lg:pb-28 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div class="relative mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center" style="padding-top:2rem;padding-bottom:3rem;">
 
             {{-- LEFT: phone-in-hand mockup inside the home-style hero box --}}
             <div class="lg:col-span-6 order-2 lg:order-1 relative">
@@ -6501,11 +6504,10 @@ function eaApp() {
                         {{-- Top row: icon + title + status --}}
                         <div class="flex items-start gap-3 mb-3">
                             {{-- Crime-map tag badge (colour + tag per incident type) --}}
-                            <div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center border"
-                                 :style="`background:${typeTag(inc.type).color}14; border-color:${typeTag(inc.type).color}35;`">
-                                <span class="font-black leading-none tracking-tight"
+                            <div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+                                 :style="`background:${typeTag(inc.type).color};`">
+                                <span class="font-black leading-none tracking-tight text-white"
                                       :class="typeTag(inc.type).tag.length >= 4 ? 'text-[10px]' : typeTag(inc.type).tag.length === 3 ? 'text-xs' : typeTag(inc.type).tag.length === 2 ? 'text-sm' : 'text-xl'"
-                                      :style="`color:${typeTag(inc.type).color};`"
                                       x-text="typeTag(inc.type).tag"></span>
                             </div>
                             <div class="flex-1 min-w-0">
