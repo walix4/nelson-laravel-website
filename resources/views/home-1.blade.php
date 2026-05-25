@@ -1043,7 +1043,7 @@
 </style>
 
 {{-- ── HERO ── --}}
-<section id="cg-hero-section" class="relative overflow-hidden" style="min-height:calc(100vh - 78px);display:flex;align-items:center;background:radial-gradient(ellipse at 18% -10%,rgba(255,255,255,.5) 0%,transparent 55%),radial-gradient(ellipse at 90% 110%,rgba(13,90,30,.55) 0%,transparent 55%),linear-gradient(160deg,#34d058 0%,#22A620 44%,#1c8a1a 72%,#15691a 100%)">
+<section id="cg-hero-section" class="relative overflow-hidden" style="min-height:calc(100vh - 78px);display:flex;flex-direction:column;justify-content:center;background:radial-gradient(ellipse at 18% -10%,rgba(255,255,255,.5) 0%,transparent 55%),radial-gradient(ellipse at 90% 110%,rgba(13,90,30,.55) 0%,transparent 55%),linear-gradient(160deg,#34d058 0%,#22A620 44%,#1c8a1a 72%,#15691a 100%)">
 
     {{-- grid overlay --}}
     <div style="position:absolute;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(6,52,15,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(6,52,15,.08) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse 80% 90% at 50% 30%,black,transparent 85%);mask-image:radial-gradient(ellipse 80% 90% at 50% 30%,black,transparent 85%)"></div>
@@ -1846,7 +1846,7 @@ function cgScrollToStates(){
   var hero=document.getElementById('cg-hero-section');
   var legend=document.getElementById('cg-legend-bar');
   var main=document.getElementById('cg-main-section');
-  if(hero)hero.style.display='';
+  if(hero)hero.style.display='flex';
   if(legend)legend.style.display='';
   if(main)main.style.display='';
   setTimeout(cgInitMap,80);
@@ -1954,7 +1954,7 @@ window.cgInit=function(){
   var hero=document.getElementById('cg-hero-section');
   var legend=document.getElementById('cg-legend-bar');
   var main=document.getElementById('cg-main-section');
-  if(hero)hero.style.display='';
+  if(hero)hero.style.display='flex';
   if(legend)legend.style.display='';
   if(main)main.style.display='block';
   window.scrollTo(0,0);
