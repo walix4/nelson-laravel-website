@@ -172,7 +172,7 @@
 
         {{-- LEFT: copy + CTAs + stats --}}
         <div class="lg:col-span-6">
-            <span class="reveal inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-wider" style="background:rgba(56,189,248,.16); color:#fff; box-shadow: inset 0 0 0 1px rgba(125,211,252,.45);">
+            <span class="reveal inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-bold uppercase tracking-wider" style="background:rgba(56,189,248,.16); color:#fff; box-shadow: inset 0 0 0 1px rgba(125,211,252,.45);">
                 <span class="relative flex w-1.5 h-1.5">
                     <span class="absolute inset-0 rounded-full animate-ping opacity-70" style="background:#38bdf8;"></span>
                     <span class="relative w-1.5 h-1.5 rounded-full" style="background:#38bdf8;"></span>
@@ -3087,18 +3087,18 @@ cgRenderGradeDist();
             display: flex;
             align-items: center;
             background:
-                radial-gradient(ellipse 80% 60% at 0% 50%, rgba(251,6,6,.30) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 80% at 100% 30%, rgba(160,0,0,.25) 0%, transparent 60%),
-                radial-gradient(ellipse 100% 50% at 50% 100%, rgba(80,0,0,.40) 0%, transparent 70%),
-                linear-gradient(160deg, #1a0005 0%, #2d0008 30%, #1a0a0a 60%, #0d0505 100%);
+                radial-gradient(ellipse 70% 60% at 15% 50%, rgba(255,80,80,.25) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 70% at 90% 20%, rgba(180,0,0,.30) 0%, transparent 60%),
+                linear-gradient(160deg, #b91c1c 0%, #dc2626 40%, #b91c1c 72%, #991b1b 100%);
         }
         [data-view="citizen-app"] .citizen-hero::before {
-            content:""; position:absolute; inset:0; pointer-events:none; opacity:.18;
+            content:""; position:absolute; inset:0; pointer-events:none; opacity:1;
             background-image:
-                linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
+                linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
             background-size: 56px 56px;
-            mask-image: radial-gradient(circle at 30% 50%, black, transparent 75%);
+            mask-image: radial-gradient(ellipse 80% 90% at 50% 40%, black, transparent 85%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 40%, black, transparent 85%);
         }
         [data-view="citizen-app"] .citizen-hero::after {
             content:""; position:absolute; inset:0; pointer-events:none;
@@ -3318,7 +3318,7 @@ cgRenderGradeDist();
                 <div class="lg:col-span-6">
                     <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight text-white">
                         <span class="block whitespace-nowrap">Protect the people</span>
-                        <span class="grad-red block whitespace-nowrap">you love most.</span>
+                        <span class="text-white block whitespace-nowrap">you love most.</span>
                     </h1>
                     <p class="reveal reveal-delay-3 mt-6 text-lg text-white/75 max-w-xl leading-relaxed">
                         From a child's walk home, to a parent's late-night drive, to a sudden emergency in the kitchen — Auxilio puts real, verified help one tap away. Built for families. Trusted by communities.
