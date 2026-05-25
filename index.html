@@ -8813,11 +8813,10 @@ function eaApp() {
                         
                         <div class="flex items-start gap-3 mb-3">
                             
-                            <div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center border"
-                                 :style="`background:${typeTag(inc.type).color}14; border-color:${typeTag(inc.type).color}35;`">
-                                <span class="font-black leading-none tracking-tight"
+                            <div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+                                 :style="`background:${typeTag(inc.type).color};`">
+                                <span class="font-black leading-none tracking-tight text-white"
                                       :class="typeTag(inc.type).tag.length >= 4 ? 'text-[10px]' : typeTag(inc.type).tag.length === 3 ? 'text-xs' : typeTag(inc.type).tag.length === 2 ? 'text-sm' : 'text-xl'"
-                                      :style="`color:${typeTag(inc.type).color};`"
                                       x-text="typeTag(inc.type).tag"></span>
                             </div>
                             <div class="flex-1 min-w-0">
