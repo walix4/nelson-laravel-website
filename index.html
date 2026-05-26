@@ -8843,15 +8843,15 @@ function eaApp() {
 
                         
                         <div class="grid grid-cols-3 gap-2 mb-4">
-                            <div class="border border-dashed border-slate-300 rounded-lg py-2 text-center">
+                            <div class="rounded-lg py-2 text-center" style="border:1px dashed #cbd5e1;">
                                 <div class="text-[9px] uppercase tracking-[.14em] text-slate-400 font-semibold">UNITS</div>
                                 <div class="text-[13px] font-extrabold text-slate-900 mt-1" x-text="inc.units"></div>
                             </div>
-                            <div class="border border-dashed border-slate-300 rounded-lg py-2 text-center">
+                            <div class="rounded-lg py-2 text-center" style="border:1px dashed #cbd5e1;">
                                 <div class="text-[9px] uppercase tracking-[.14em] text-slate-400 font-semibold">ETA</div>
                                 <div class="text-[13px] font-extrabold text-slate-900 mt-1 font-mono" x-text="inc.status === 'resolved' ? '—' : (inc.status === 'on-scene' ? 'On site' : (inc.responseTime !== 'pending' ? inc.responseTime : '~' + Math.max(1, 5 - Math.floor(inc.pct/25)) + 'm'))"></div>
                             </div>
-                            <div class="border border-dashed border-slate-300 rounded-lg py-2 text-center">
+                            <div class="rounded-lg py-2 text-center" style="border:1px dashed #cbd5e1;">
                                 <div class="text-[9px] uppercase tracking-[.14em] text-slate-400 font-semibold">TIME</div>
                                 <div class="text-[13px] font-extrabold text-slate-900 mt-1 font-mono" x-text="timeAgo(inc.minutes)"></div>
                             </div>
