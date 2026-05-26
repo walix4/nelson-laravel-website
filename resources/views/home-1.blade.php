@@ -5968,7 +5968,7 @@ cgRenderGradeDist();
 [data-view="er"] .ea-circle-badge,
 [data-view="er"] .ea-avatar,
 [data-view="er"] .ea-radio { border-radius: 9999px !important; }
-[data-view="er"] .ea-status-pill { border-radius: 9999px !important; }
+[data-view="er"] .ea-status-pill { border-radius: 8px !important; }
 </style>
 
 {{-- ══════════════════════════════════════════════════════════════
@@ -6563,7 +6563,7 @@ function eaApp() {
                                 <span class="ea-avatar w-8 h-8 bg-slate-900 ring-2 ring-white text-white font-bold text-[10px] grid place-items-center" style="border-radius:9999px;" x-text="`+${inc.officers}`"></span>
                             </div>
                             <span class="ea-status-pill inline-flex items-center gap-1.5 px-3.5 py-2 text-[11px] font-bold uppercase tracking-wider whitespace-nowrap"
-                                  :style="`background:${inc.severity==='critical'?'#fee2e2':inc.severity==='high'?'#ffedd5':inc.severity==='active'?'#dbeafe':'#dcfce7'}; color:${inc.severity==='critical'?'#dc2626':inc.severity==='high'?'#ea580c':inc.severity==='active'?'#2563eb':'#16a34a'}; border-radius:9999px;`">
+                                  :style="`background:${inc.severity==='critical'?'#fee2e2':inc.severity==='high'?'#ffedd5':inc.severity==='active'?'#dbeafe':'#dcfce7'}; color:${inc.severity==='critical'?'#dc2626':inc.severity==='high'?'#ea580c':inc.severity==='active'?'#2563eb':'#16a34a'}; border-radius:8px;`">
                                 <span class="ea-pulse-dot w-1.5 h-1.5"
                                       :style="`background:${inc.severity==='critical'?'#ef4444':inc.severity==='high'?'#f97316':inc.severity==='active'?'#3b82f6':'#22c55e'}; border-radius:9999px;`"></span>
                                 <span x-text="statusLabel(inc.status)"></span>
