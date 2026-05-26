@@ -17,6 +17,38 @@
         var lang = langMap[h] || 'en';
         document.documentElement.lang = lang;
 
+        // Apply our own short Spanish nav labels (run as soon as DOM is parseable),
+        // then mark them notranslate so Google Translate leaves them alone.
+        function applyI18n(){
+          var es = lang.indexOf('es') === 0;
+          var attr = es ? 'data-i18n-es' : 'data-i18n-en';
+          document.querySelectorAll('[' + attr + ']').forEach(function(el){
+            el.textContent = el.getAttribute(attr);
+            el.classList.add('notranslate');
+            el.setAttribute('translate', 'no');
+          });
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', applyI18n);
+        } else { applyI18n(); }
+
+        // Per-country Crime Grade page override (Mexico)
+        function applyCountryPages(){
+          if (h.endsWith('auxilio.mx')) {
+            document.querySelectorAll('a[href="#/crime-grade"]').forEach(function(a){
+              a.setAttribute('href','/mx/crime-grade.html');
+              a.removeAttribute('data-route');
+            });
+            // If the user landed on #/crime-grade directly, redirect
+            if (location.hash === '#/crime-grade') {
+              location.replace('/mx/crime-grade.html');
+            }
+          }
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', applyCountryPages);
+        } else { applyCountryPages(); }
+
         // Auto-translate via Google Translate for Spanish-locale domains
         if (lang.indexOf('es') === 0) {
           // Set the googtrans cookie BEFORE the widget loads so it picks up the target language
@@ -126,7 +158,7 @@
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
 
         
-        <a href="#top" class="flex shrink-0 items-center gap-2.5 group mr-8">
+        <a href="#top" class="flex shrink-0 items-center gap-2.5 group mr-8 notranslate" translate="no">
             <span class="grid place-items-center h-10 w-10 rounded-md bg-white shadow-sm p-1 transition-transform group-hover:rotate-[-4deg]">
                 <img src="/nelson-laravel-website/images/auxilio-logo-new.png" alt="" class="h-full w-auto object-contain" />
             </span>
@@ -135,25 +167,25 @@
 
         
         <ul class="hidden lg:flex flex-1 items-center justify-center gap-5 xl:gap-6 text-sm font-medium text-white/80 whitespace-nowrap">
-            <li><a data-route href="#/"            class="nav-link hover:text-white transition">Home</a></li>
+            <li><a data-route href="#/"            class="nav-link hover:text-white transition" data-i18n-en="Home" data-i18n-es="Inicio">Home</a></li>
             <li><a data-route href="#/auxilio-ai"  class="nav-link inline-flex items-center gap-1 hover:text-white transition">
                 <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
-                Auxilio AI
+                <span class="notranslate" translate="no">Auxilio AI</span>
             </a></li>
-            <li><a data-route href="#/citizen-app" class="nav-link hover:text-white transition">Citizen App</a></li>
-            <li><a data-route href="#/agent-app"   class="nav-link hover:text-white transition">Agent App</a></li>
-            <li><a data-route href="#/crime-grade" class="nav-link hover:text-white transition">Crime Grade</a></li>
+            <li><a data-route href="#/citizen-app" class="nav-link hover:text-white transition" data-i18n-en="Citizen App" data-i18n-es="Ciudadano">Citizen App</a></li>
+            <li><a data-route href="#/agent-app"   class="nav-link hover:text-white transition" data-i18n-en="Agent App" data-i18n-es="Agente">Agent App</a></li>
+            <li><a data-route href="#/crime-grade" class="nav-link hover:text-white transition" data-i18n-en="Crime Grade" data-i18n-es="Índice">Crime Grade</a></li>
             <li><a data-route href="#/er" class="nav-link ea-live-pill">
                 <span class="ea-live-dot"></span>
-                <span class="ea-live-pill-text">Live ER</span>
+                <span class="ea-live-pill-text" data-i18n-en="Live ER" data-i18n-es="En vivo">Live ER</span>
             </a></li>
-            <li><a data-route href="#/crime-map"   class="nav-link hover:text-white transition">Crime Map</a></li>
+            <li><a data-route href="#/crime-map"   class="nav-link hover:text-white transition" data-i18n-en="Crime Map" data-i18n-es="Mapa">Crime Map</a></li>
         </ul>
 
         
         <div class="ml-auto lg:ml-6 flex items-center gap-2.5 lg:border-l lg:border-white/20 lg:pl-6">
-            <a href="https://auxilionetwork.com/siteadmin/login"    target="_blank" rel="noopener" class="inline-flex items-center justify-center h-10 px-5 text-sm font-bold rounded-lg transition hover:bg-white/90" style="background:#ffffff; color:#9b1c1c;">Login</a>
-            <a href="https://auxilionetwork.com/siteadmin/register" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 h-10 px-5 text-sm font-bold text-white rounded-lg transition hover:opacity-90" style="background:#9b1c1c;">Get started <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
+            <a href="https://auxilionetwork.com/siteadmin/login"    target="_blank" rel="noopener" class="inline-flex items-center justify-center h-10 px-5 text-sm font-bold rounded-lg transition hover:bg-white/90" style="background:#ffffff; color:#9b1c1c;" data-i18n-en="Login" data-i18n-es="Entrar">Login</a>
+            <a href="https://auxilionetwork.com/siteadmin/register" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 h-10 px-5 text-sm font-bold text-white rounded-lg transition hover:opacity-90" style="background:#9b1c1c;"><span data-i18n-en="Get started" data-i18n-es="Empezar">Get started</span> <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg></a>
         </div>
     </nav>
 
