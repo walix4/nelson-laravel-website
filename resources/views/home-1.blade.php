@@ -32,16 +32,20 @@
           document.addEventListener('DOMContentLoaded', applyI18n);
         } else { applyI18n(); }
 
-        // Per-country Crime Grade page override (Mexico)
+        // Per-country Crime Grade page override
         function applyCountryPages(){
-          if (h.endsWith('auxilio.mx')) {
+          var pageMap = {
+            'auxilio.mx': '/mx/crime-grade.html', 'www.auxilio.mx': '/mx/crime-grade.html',
+            'auxilio.ca': '/ca/crime-grade.html', 'www.auxilio.ca': '/ca/crime-grade.html'
+          };
+          var target = pageMap[h];
+          if (target) {
             document.querySelectorAll('a[href="#/crime-grade"]').forEach(function(a){
-              a.setAttribute('href','/mx/crime-grade.html');
+              a.setAttribute('href', target);
               a.removeAttribute('data-route');
             });
-            // If the user landed on #/crime-grade directly, redirect
             if (location.hash === '#/crime-grade') {
-              location.replace('/mx/crime-grade.html');
+              location.replace(target);
             }
           }
         }
