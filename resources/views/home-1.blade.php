@@ -3081,15 +3081,15 @@ cgRenderGradeDist();
             --c-amber: #f5c844;
         }
 
-        /* ---- HERO (dark red, premium) ---- */
+        /* ---- HERO (light red, soft) ---- */
         [data-view="citizen-app"] .citizen-hero {
             min-height: calc(100vh - 78px);
             display: flex;
             align-items: center;
             background:
-                radial-gradient(ellipse 70% 60% at 15% 50%, rgba(255,80,80,.25) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 70% at 90% 20%, rgba(180,0,0,.30) 0%, transparent 60%),
-                linear-gradient(160deg, #b91c1c 0%, #dc2626 40%, #b91c1c 72%, #991b1b 100%);
+                radial-gradient(ellipse 70% 60% at 15% 50%, rgba(255,200,200,.30) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 70% at 90% 20%, rgba(255,120,120,.18) 0%, transparent 60%),
+                linear-gradient(160deg, #fb7a7a 0%, #f87171 40%, #fb7a7a 72%, #ef6a6a 100%);
         }
         [data-view="citizen-app"] .citizen-hero::before {
             content:""; position:absolute; inset:0; pointer-events:none; opacity:1;
@@ -3103,11 +3103,11 @@ cgRenderGradeDist();
         [data-view="citizen-app"] .citizen-hero::after {
             content:""; position:absolute; inset:0; pointer-events:none;
             background:
-                radial-gradient(2px 2px at 20% 30%, rgba(251,6,6,.45) 0, transparent 50%),
-                radial-gradient(1px 1px at 80% 60%, rgba(255,80,80,.30) 0, transparent 50%),
-                radial-gradient(1.5px 1.5px at 60% 20%, rgba(251,6,6,.35) 0, transparent 50%),
-                radial-gradient(1px 1px at 35% 75%, rgba(200,0,0,.25) 0, transparent 50%),
-                radial-gradient(1.5px 1.5px at 90% 35%, rgba(255,100,100,.28) 0, transparent 50%);
+                radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.35) 0, transparent 50%),
+                radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,.22) 0, transparent 50%),
+                radial-gradient(1.5px 1.5px at 60% 20%, rgba(255,255,255,.28) 0, transparent 50%),
+                radial-gradient(1px 1px at 35% 75%, rgba(255,255,255,.18) 0, transparent 50%),
+                radial-gradient(1.5px 1.5px at 90% 35%, rgba(255,255,255,.22) 0, transparent 50%);
             background-size: 100% 100%;
             animation: starsTwinkle 6s ease-in-out infinite alternate;
         }
