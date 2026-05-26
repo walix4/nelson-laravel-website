@@ -34,7 +34,7 @@ sshpass -e rsync -az --checksum -e "ssh -o StrictHostKeyChecking=no" \
 
 echo "▶  Fixing permissions..."
 sshpass -e ssh -o StrictHostKeyChecking=no "$VPS" \
-  "find $VPS_DIR/public/images -type f -exec chmod 644 {} \;"
+  "find $VPS_DIR/public/images -type f -exec chmod 644 {} \; && find $VPS_DIR/public/images -type d -exec chmod 755 {} \;"
 
 echo "▶  Clearing view cache..."
 sshpass -e ssh -o StrictHostKeyChecking=no "$VPS" \
