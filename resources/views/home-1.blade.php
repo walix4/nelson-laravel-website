@@ -2,6 +2,20 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8" />
+    <script>
+      // Per-country lang attribute (content is currently English; this is for screen readers + browsers)
+      (function(){
+        var h = location.hostname;
+        var lang = h.endsWith('auxilio.mx') ? 'es-MX'
+                 : h.endsWith('auxilio.do') ? 'es-DO'
+                 : h.endsWith('auxilio.ec') ? 'es-EC'
+                 : h.endsWith('auxilio.pr') ? 'es-PR'
+                 : h.endsWith('auxilio.sv') ? 'es-SV'
+                 : h.endsWith('auxilio.ca') ? 'en-CA'
+                 : 'en';
+        document.documentElement.lang = lang;
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Auxilio APP LLC — Real-time crime maps, registered sex-offender alerts, and one-tap emergency response. Designed for the safety of families, accessible for citizens." />
     <meta property="og:title" content="Auxilio APP LLC — Your Safety, Your Control" />
