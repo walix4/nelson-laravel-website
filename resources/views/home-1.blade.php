@@ -3081,15 +3081,12 @@ cgRenderGradeDist();
             --c-amber: #f5c844;
         }
 
-        /* ---- HERO (light red, soft) ---- */
+        /* ---- HERO (solid light red) ---- */
         [data-view="citizen-app"] .citizen-hero {
             min-height: calc(100vh - 78px);
             display: flex;
             align-items: center;
-            background:
-                radial-gradient(ellipse 70% 60% at 15% 50%, rgba(255,200,200,.30) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 70% at 90% 20%, rgba(255,120,120,.18) 0%, transparent 60%),
-                linear-gradient(160deg, #fb7a7a 0%, #f87171 40%, #fb7a7a 72%, #ef6a6a 100%);
+            background: #f87171;
         }
         [data-view="citizen-app"] .citizen-hero::before {
             content:""; position:absolute; inset:0; pointer-events:none; opacity:1;
