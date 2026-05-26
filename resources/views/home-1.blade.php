@@ -5020,9 +5020,9 @@ cgRenderGradeDist();
                                 100%     { opacity: 1; }
                             }
                             .ai-phone-slide {
-                                position:absolute; bottom:-2%; left:50%;
+                                position:absolute; bottom:-6%; left:50%;
                                 transform:translateX(-50%);
-                                width:260%; height:auto;
+                                width:355%; height:auto;
                                 opacity:0; will-change:opacity;
                             }
                             .ai-phone-slide-a { animation: aiPhoneSlide 8s ease-in-out infinite; animation-delay:0s; opacity:1; }
