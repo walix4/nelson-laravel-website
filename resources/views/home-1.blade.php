@@ -3330,8 +3330,8 @@ cgRenderGradeDist();
                             ['v'=>'Free','l'=>'forever for families'],
                         ] as $s)
                             <div>
-                                <dt class="font-display text-2xl font-bold tracking-tight text-white">{{ $s['v'] }}</dt>
-                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/50">{{ $s['l'] }}</dd>
+                                <dt class="font-display text-2xl font-bold tracking-tight text-slate-900">{{ $s['v'] }}</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-slate-500">{{ $s['l'] }}</dd>
                             </div>
                         @endforeach
                     </dl>
