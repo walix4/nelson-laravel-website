@@ -6499,54 +6499,56 @@ function eaApp() {
                     </div>
 
                     <div class="p-5">
-                        {{-- TOP: calendar badge + title + time --}}
+                        {{-- TOP: solid calendar badge + title + time --}}
                         <div class="flex items-start gap-3 mb-4">
-                            <div class="shrink-0 rounded-xl overflow-hidden border border-slate-200" style="width:56px;">
-                                <div class="text-center text-[10px] font-bold uppercase tracking-wider text-slate-600 bg-white py-1"
+                            <div class="shrink-0 rounded-xl flex flex-col items-center justify-center py-2.5 px-2"
+                                 style="width:74px; height:88px;"
+                                 :style="`width:74px; height:88px; background:${inc.severity==='critical'?'#ef4444':inc.severity==='high'?'#f97316':inc.severity==='active'?'#3b82f6':'#22c55e'};`">
+                                <div class="text-[11px] font-bold uppercase tracking-wider text-white leading-none"
                                      x-text="new Date(Date.now() - inc.minutes*60000).toLocaleDateString('en-US',{weekday:'short'})"></div>
-                                <div class="text-center text-[22px] font-extrabold text-white py-1.5 leading-none"
-                                     :style="`background:${inc.severity==='critical'?'#ef4444':inc.severity==='high'?'#f97316':inc.severity==='active'?'#3b82f6':'#10b981'};`"
+                                <div class="text-[34px] font-extrabold text-white leading-none mt-1.5"
                                      x-text="new Date(Date.now() - inc.minutes*60000).getDate()"></div>
+                                <div class="w-6 h-[2px] bg-white/95 rounded mt-1.5"></div>
                             </div>
-                            <div class="flex-1 min-w-0 pt-0.5">
-                                <h3 class="font-bold text-[17px] text-slate-900 truncate leading-tight" x-text="inc.title"></h3>
-                                <div class="text-[13px] text-slate-500 font-medium mt-1" x-text="inc.dispatchAt"></div>
+                            <div class="flex-1 min-w-0 pt-1">
+                                <h3 class="font-bold text-[19px] text-slate-900 truncate leading-tight" x-text="inc.title"></h3>
+                                <div class="text-[14px] text-slate-500 font-medium mt-1.5" x-text="inc.dispatchAt"></div>
                             </div>
                         </div>
 
                         {{-- ADDRESS --}}
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="inline-flex w-5 h-5 shrink-0 rounded-full border-[1.5px] border-slate-700 items-center justify-center">
-                                <span class="w-1.5 h-1.5 rounded-full bg-slate-700"></span>
+                        <div class="flex items-center gap-2.5 mb-3">
+                            <span class="inline-flex w-5 h-5 shrink-0 rounded-full border-[2px] border-slate-800 items-center justify-center">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span>
                             </span>
                             <span class="text-[13.5px] font-semibold text-slate-700 truncate" x-text="inc.address"></span>
                         </div>
 
                         {{-- DESCRIPTION BOX --}}
-                        <div class="rounded-lg border border-slate-200 px-3 py-2.5 mb-4">
+                        <div class="rounded-lg bg-slate-50 border border-slate-200 px-3.5 py-2.5 mb-4">
                             <p class="text-[12.5px] text-slate-600 leading-snug" x-text="inc.note"></p>
                         </div>
 
-                        {{-- 3 METRIC TILES --}}
+                        {{-- 3 METRIC TILES (dashed borders) --}}
                         <div class="grid grid-cols-3 gap-2 mb-4">
-                            <div class="border border-slate-200 rounded-lg py-2 text-center">
-                                <div class="text-[9px] uppercase tracking-[.14em] text-slate-400 font-bold">UNITS</div>
+                            <div class="border border-dashed border-slate-300 rounded-lg py-2 text-center">
+                                <div class="text-[9px] uppercase tracking-[.14em] text-slate-400 font-semibold">UNITS</div>
                                 <div class="text-[13px] font-extrabold text-slate-900 mt-1" x-text="inc.units"></div>
                             </div>
-                            <div class="border border-slate-200 rounded-lg py-2 text-center">
-                                <div class="text-[9px] uppercase tracking-[.14em] text-slate-400 font-bold">ETA</div>
+                            <div class="border border-dashed border-slate-300 rounded-lg py-2 text-center">
+                                <div class="text-[9px] uppercase tracking-[.14em] text-slate-400 font-semibold">ETA</div>
                                 <div class="text-[13px] font-extrabold text-slate-900 mt-1 font-mono" x-text="inc.status === 'resolved' ? '—' : (inc.status === 'on-scene' ? 'On site' : (inc.responseTime !== 'pending' ? inc.responseTime : '~' + Math.max(1, 5 - Math.floor(inc.pct/25)) + 'm'))"></div>
                             </div>
-                            <div class="border border-slate-200 rounded-lg py-2 text-center">
-                                <div class="text-[9px] uppercase tracking-[.14em] text-slate-400 font-bold">TIME</div>
+                            <div class="border border-dashed border-slate-300 rounded-lg py-2 text-center">
+                                <div class="text-[9px] uppercase tracking-[.14em] text-slate-400 font-semibold">TIME</div>
                                 <div class="text-[13px] font-extrabold text-slate-900 mt-1 font-mono" x-text="timeAgo(inc.minutes)"></div>
                             </div>
                         </div>
 
-                        {{-- PROGRESS BAR (solid red) --}}
-                        <div class="h-1 rounded-full bg-slate-100 overflow-hidden mb-4">
+                        {{-- PROGRESS BAR (solid red gradient) --}}
+                        <div class="h-1.5 rounded-full bg-slate-100 overflow-hidden mb-4">
                             <div class="h-full rounded-full transition-all duration-700"
-                                 :style="`width:${inc.pct}%; background:linear-gradient(90deg, #dc2626, #ef4444 60%, #f87171);`"></div>
+                                 :style="`width:${inc.pct}%; background:linear-gradient(90deg, #b91c1c 0%, #ef4444 30%, #ef4444 70%, #f87171 100%);`"></div>
                         </div>
 
                         {{-- BOTTOM: avatar stack + status pill --}}
@@ -6555,12 +6557,12 @@ function eaApp() {
                                 <span class="w-8 h-8 rounded-full bg-amber-400 ring-2 ring-white text-white font-extrabold text-[11px] grid place-items-center">A</span>
                                 <span class="w-8 h-8 rounded-full bg-rose-500 ring-2 ring-white text-white font-extrabold text-[11px] grid place-items-center">P</span>
                                 <img src="/images/officer-3.jpg" alt="" class="w-8 h-8 rounded-full ring-2 ring-white object-cover" />
-                                <span class="w-8 h-8 rounded-full bg-slate-100 ring-2 ring-white text-slate-700 font-bold text-[10px] grid place-items-center" x-text="`+${inc.officers}`"></span>
+                                <span class="w-8 h-8 rounded-full bg-slate-900 ring-2 ring-white text-white font-bold text-[10px] grid place-items-center" x-text="`+${inc.officers}`"></span>
                             </div>
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10.5px] font-bold uppercase tracking-wider whitespace-nowrap"
-                                  :style="`background:${inc.severity==='critical'?'rgba(239,68,68,.10)':inc.severity==='high'?'rgba(249,115,22,.10)':inc.severity==='active'?'rgba(59,130,246,.10)':'rgba(16,185,129,.10)'}; color:${inc.severity==='critical'?'#dc2626':inc.severity==='high'?'#ea580c':inc.severity==='active'?'#2563eb':'#059669'}; border:1px solid ${inc.severity==='critical'?'rgba(239,68,68,.25)':inc.severity==='high'?'rgba(249,115,22,.25)':inc.severity==='active'?'rgba(59,130,246,.25)':'rgba(16,185,129,.25)'};`">
-                                <span x-show="inc.severity !== 'resolved'" class="w-1.5 h-1.5 rounded-full"
-                                      :style="`background:${inc.severity==='critical'?'#ef4444':inc.severity==='high'?'#f97316':'#3b82f6'};`"></span>
+                            <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider whitespace-nowrap"
+                                  :style="`background:${inc.severity==='critical'?'#fee2e2':inc.severity==='high'?'#ffedd5':inc.severity==='active'?'#dbeafe':'#dcfce7'}; color:${inc.severity==='critical'?'#dc2626':inc.severity==='high'?'#ea580c':inc.severity==='active'?'#2563eb':'#16a34a'};`">
+                                <span class="w-1.5 h-1.5 rounded-full"
+                                      :style="`background:${inc.severity==='critical'?'#ef4444':inc.severity==='high'?'#f97316':inc.severity==='active'?'#3b82f6':'#22c55e'};`"></span>
                                 <span x-text="statusLabel(inc.status)"></span>
                             </span>
                         </div>
