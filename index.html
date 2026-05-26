@@ -8290,11 +8290,14 @@ cgRenderGradeDist();
 }
 
 /* ═══ Flat + lightly rounded — small uniform radius, no shadows on ER ═══ */
-[data-view="er"] *:not(.ea-pulse-dot):not(.ea-circle-badge),
+[data-view="er"] *:not(.ea-pulse-dot):not(.ea-circle-badge):not(.ea-avatar):not(.ea-radio):not(.ea-status-pill),
 [data-view="er"] *::before,
 [data-view="er"] *::after { border-radius: 6px !important; }
 [data-view="er"] *:not(.ea-pulse-dot) { box-shadow: none !important; }
-[data-view="er"] .ea-circle-badge { border-radius: 50% !important; }
+[data-view="er"] .ea-circle-badge,
+[data-view="er"] .ea-avatar,
+[data-view="er"] .ea-radio { border-radius: 9999px !important; }
+[data-view="er"] .ea-status-pill { border-radius: 9999px !important; }
 </style>
 
 
@@ -8827,8 +8830,8 @@ function eaApp() {
 
                         
                         <div class="flex items-center gap-2.5 mb-3">
-                            <span class="inline-flex w-5 h-5 shrink-0 rounded-full border-[2px] border-slate-800 items-center justify-center">
-                                <span class="w-1.5 h-1.5 rounded-full bg-slate-800"></span>
+                            <span class="ea-radio inline-flex w-5 h-5 shrink-0 items-center justify-center" style="border:2px solid #0a1a4a; border-radius:9999px;">
+                                <span class="ea-radio w-2 h-2" style="background:#0a1a4a; border-radius:9999px;"></span>
                             </span>
                             <span class="text-[13.5px] font-semibold text-slate-700 truncate" x-text="inc.address"></span>
                         </div>
@@ -8863,15 +8866,15 @@ function eaApp() {
                         
                         <div class="flex items-center justify-between gap-2">
                             <div class="flex items-center -space-x-2">
-                                <img src="/nelson-laravel-website/images/officer-1.jpg" alt="" class="w-8 h-8 rounded-full ring-2 ring-white object-cover" style="border-radius:9999px;" />
-                                <img src="/nelson-laravel-website/images/officer-2.jpg" alt="" class="w-8 h-8 rounded-full ring-2 ring-white object-cover" style="border-radius:9999px;" />
-                                <img src="/nelson-laravel-website/images/officer-3.jpg" alt="" class="w-8 h-8 rounded-full ring-2 ring-white object-cover" style="border-radius:9999px;" />
-                                <span class="w-8 h-8 rounded-full bg-slate-900 ring-2 ring-white text-white font-bold text-[10px] grid place-items-center" style="border-radius:9999px;" x-text="`+${inc.officers}`"></span>
+                                <img src="/nelson-laravel-website/images/officer-1.jpg" alt="" class="ea-avatar w-8 h-8 ring-2 ring-white object-cover" style="border-radius:9999px;" />
+                                <img src="/nelson-laravel-website/images/officer-2.jpg" alt="" class="ea-avatar w-8 h-8 ring-2 ring-white object-cover" style="border-radius:9999px;" />
+                                <img src="/nelson-laravel-website/images/officer-3.jpg" alt="" class="ea-avatar w-8 h-8 ring-2 ring-white object-cover" style="border-radius:9999px;" />
+                                <span class="ea-avatar w-8 h-8 bg-slate-900 ring-2 ring-white text-white font-bold text-[10px] grid place-items-center" style="border-radius:9999px;" x-text="`+${inc.officers}`"></span>
                             </div>
-                            <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider whitespace-nowrap"
-                                  :style="`background:${inc.severity==='critical'?'#fee2e2':inc.severity==='high'?'#ffedd5':inc.severity==='active'?'#dbeafe':'#dcfce7'}; color:${inc.severity==='critical'?'#dc2626':inc.severity==='high'?'#ea580c':inc.severity==='active'?'#2563eb':'#16a34a'};`">
-                                <span class="w-1.5 h-1.5 rounded-full"
-                                      :style="`background:${inc.severity==='critical'?'#ef4444':inc.severity==='high'?'#f97316':inc.severity==='active'?'#3b82f6':'#22c55e'};`"></span>
+                            <span class="ea-status-pill inline-flex items-center gap-1.5 px-3.5 py-2 text-[11px] font-bold uppercase tracking-wider whitespace-nowrap"
+                                  :style="`background:${inc.severity==='critical'?'#fee2e2':inc.severity==='high'?'#ffedd5':inc.severity==='active'?'#dbeafe':'#dcfce7'}; color:${inc.severity==='critical'?'#dc2626':inc.severity==='high'?'#ea580c':inc.severity==='active'?'#2563eb':'#16a34a'}; border-radius:9999px;`">
+                                <span class="ea-pulse-dot w-1.5 h-1.5"
+                                      :style="`background:${inc.severity==='critical'?'#ef4444':inc.severity==='high'?'#f97316':inc.severity==='active'?'#3b82f6':'#22c55e'}; border-radius:9999px;`"></span>
                                 <span x-text="statusLabel(inc.status)"></span>
                             </span>
                         </div>
