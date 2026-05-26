@@ -3081,32 +3081,30 @@ cgRenderGradeDist();
             --c-amber: #f5c844;
         }
 
-        /* ---- HERO (solid light red) ---- */
+        /* ---- HERO (matches Fast Response Network background) ---- */
         [data-view="citizen-app"] .citizen-hero {
             min-height: calc(100vh - 78px);
             display: flex;
             align-items: center;
-            background: #fca5a5;
+            background: linear-gradient(135deg, #1a0707 0%, #4a0606 40%, #07101f 100%);
         }
         [data-view="citizen-app"] .citizen-hero::before {
-            content:""; position:absolute; inset:0; pointer-events:none; opacity:1;
+            content:""; position:absolute; inset:0; pointer-events:none; opacity:.3;
             background-image:
-                linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
-            background-size: 56px 56px;
-            mask-image: radial-gradient(ellipse 80% 90% at 50% 40%, black, transparent 85%);
-            -webkit-mask-image: radial-gradient(ellipse 80% 90% at 50% 40%, black, transparent 85%);
+                radial-gradient(circle at 30% 30%, rgba(255,200,150,.6) 1px, transparent 1.5px),
+                radial-gradient(circle at 70% 70%, rgba(255,255,255,.4) 1px, transparent 1.5px);
+            background-size: 36px 36px;
+            mask-image: radial-gradient(circle at 50% 50%, black, transparent 75%);
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 75%);
         }
         [data-view="citizen-app"] .citizen-hero::after {
-            content:""; position:absolute; inset:0; pointer-events:none;
-            background:
-                radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.35) 0, transparent 50%),
-                radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,.22) 0, transparent 50%),
-                radial-gradient(1.5px 1.5px at 60% 20%, rgba(255,255,255,.28) 0, transparent 50%),
-                radial-gradient(1px 1px at 35% 75%, rgba(255,255,255,.18) 0, transparent 50%),
-                radial-gradient(1.5px 1.5px at 90% 35%, rgba(255,255,255,.22) 0, transparent 50%);
-            background-size: 100% 100%;
-            animation: starsTwinkle 6s ease-in-out infinite alternate;
+            content:""; position:absolute; top:50%; left:50%; width:820px; height:820px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: rgba(220,38,38,.15);
+            filter: blur(96px);
+            pointer-events:none;
+            animation: none;
         }
         @keyframes starsTwinkle { from { opacity:.35 } to { opacity:.85 } }
 
