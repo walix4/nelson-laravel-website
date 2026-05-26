@@ -3,19 +3,52 @@
 <head>
     <meta charset="UTF-8" />
     <script>
-      // Per-country lang attribute (content is currently English; this is for screen readers + browsers)
+      // Per-country lang attribute + auto-translate to Spanish on .mx/.do/.ec/.pr/.sv
       (function(){
         var h = location.hostname;
-        var lang = h.endsWith('auxilio.mx') ? 'es-MX'
-                 : h.endsWith('auxilio.do') ? 'es-DO'
-                 : h.endsWith('auxilio.ec') ? 'es-EC'
-                 : h.endsWith('auxilio.pr') ? 'es-PR'
-                 : h.endsWith('auxilio.sv') ? 'es-SV'
-                 : h.endsWith('auxilio.ca') ? 'en-CA'
-                 : 'en';
+        var langMap = {
+          'auxilio.mx': 'es-MX', 'www.auxilio.mx': 'es-MX',
+          'auxilio.do': 'es-DO', 'www.auxilio.do': 'es-DO',
+          'auxilio.ec': 'es-EC', 'www.auxilio.ec': 'es-EC',
+          'auxilio.pr': 'es-PR', 'www.auxilio.pr': 'es-PR',
+          'auxilio.sv': 'es-SV', 'www.auxilio.sv': 'es-SV',
+          'auxilio.ca': 'en-CA', 'www.auxilio.ca': 'en-CA'
+        };
+        var lang = langMap[h] || 'en';
         document.documentElement.lang = lang;
+
+        // Auto-translate via Google Translate for Spanish-locale domains
+        if (lang.indexOf('es') === 0) {
+          // Set the googtrans cookie BEFORE the widget loads so it picks up the target language
+          var domain = h.replace(/^www\./,'');
+          document.cookie = 'googtrans=/en/es;path=/;domain=.' + domain;
+          document.cookie = 'googtrans=/en/es;path=/';
+
+          // Initialize widget (hidden — banner CSS-hidden below)
+          window.googleTranslateElementInit = function(){
+            new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              includedLanguages: 'es',
+              autoDisplay: false,
+              layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'auxilio-gt-host');
+          };
+          var script = document.createElement('script');
+          script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          script.async = true;
+          document.head.appendChild(script);
+        }
       })();
     </script>
+    <style>
+      /* Hide Google Translate banner/iframe/skiptranslate body offset on auto-translate domains */
+      #auxilio-gt-host { display: none !important; }
+      .goog-te-banner-frame, .skiptranslate { display: none !important; }
+      body { top: 0 !important; }
+      font[style*="background-color"] { background-color: transparent !important; box-shadow: none !important; }
+      .goog-tooltip, .goog-tooltip:hover { display: none !important; }
+      .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Auxilio APP LLC — Real-time crime maps, registered sex-offender alerts, and one-tap emergency response. Designed for the safety of families, accessible for citizens." />
     <meta property="og:title" content="Auxilio APP LLC — Your Safety, Your Control" />
@@ -63,6 +96,7 @@
 })();
 </script>
 <body class="font-sans">
+<div id="auxilio-gt-host" aria-hidden="true"></div>
 
 
 <style>
