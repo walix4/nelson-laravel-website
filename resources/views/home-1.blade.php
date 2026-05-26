@@ -3086,7 +3086,7 @@ cgRenderGradeDist();
             min-height: calc(100vh - 78px);
             display: flex;
             align-items: center;
-            background: #f87171;
+            background: #fca5a5;
         }
         [data-view="citizen-app"] .citizen-hero::before {
             content:""; position:absolute; inset:0; pointer-events:none; opacity:1;
