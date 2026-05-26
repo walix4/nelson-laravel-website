@@ -6525,7 +6525,7 @@ function eaApp() {
                         </div>
 
                         {{-- DESCRIPTION BOX --}}
-                        <div class="rounded-lg bg-slate-50 border border-slate-200 px-3.5 py-2.5 mb-4">
+                        <div class="rounded-lg px-3.5 py-2.5 mb-4" style="background:#eef1f5;">
                             <p class="text-[12.5px] text-slate-600 leading-snug" x-text="inc.note"></p>
                         </div>
 
