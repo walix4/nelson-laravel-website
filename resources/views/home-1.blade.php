@@ -6523,9 +6523,6 @@ function eaApp() {
                     {{-- Critical scanline (animated thin line crossing top) --}}
                     <div class="ea-scanline" x-show="inc.severity === 'critical'"></div>
 
-                    {{-- Severity gradient bar at top --}}
-                    <div class="absolute top-0 left-0 right-0 h-[3px]" :class="`ea-bar-${inc.severity}`"></div>
-
                     {{-- NEW pill --}}
                     <div x-show="inc.isNew" class="absolute top-3 right-3 z-10 inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[9px] font-black tracking-widest uppercase animate-pulse" style="background:rgba(239,68,68,.12);color:#dc2626;border:1px solid rgba(239,68,68,.35);">
                         <span class="w-1 h-1 rounded-full bg-red-400 animate-pulse"></span>
