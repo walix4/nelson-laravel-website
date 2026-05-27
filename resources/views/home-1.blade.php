@@ -297,7 +297,7 @@
 
         {{-- RIGHT: family photo + floating live cards (sized like agent hero) --}}
         <div class="lg:col-span-6 relative">
-            <div class="reveal reveal-right relative mx-auto max-w-md">
+            <div class="reveal reveal-right relative mx-auto max-w-xl">
                 {{-- ambient blue halo --}}
                 <span class="absolute -inset-10 rounded-[44px] blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(56,189,248,.30) 0%, transparent 70%);"></span>
                 <span class="absolute -bottom-12 -right-6 w-48 h-48 rounded-full blur-3xl pointer-events-none" style="background:radial-gradient(circle, rgba(99,102,241,.34) 0%, transparent 70%);"></span>
