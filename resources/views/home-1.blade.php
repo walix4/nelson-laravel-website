@@ -352,9 +352,9 @@
 
                 {{-- main hero image — family at home (auxilio.mx swaps these via JS to MX photos + adds 4th slide) --}}
                 <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-white/15 hero-slideshow" style="box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
-                    <img src="/images/hero-slide-2.jpg" data-mx-src="/images/mx/hero-1.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                    <img src="/images/hero-slide-4.jpg" data-mx-src="/images/mx/hero-1.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
                     <img src="/images/hero-slide-3.jpg" data-mx-src="/images/mx/hero-2.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
-                    <img src="/images/hero-slide-4.jpg" data-mx-src="/images/mx/hero-3.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
+                    <img src="/images/hero-slide-2.jpg" data-mx-src="/images/mx/hero-3.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
                     <img data-mx-src="/images/mx/hero-4.jpg" alt="" class="hero-slide hero-mx-only absolute inset-0 w-full h-full object-cover" />
                     <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent z-10"></div>
                     {{-- progress dots --}}
