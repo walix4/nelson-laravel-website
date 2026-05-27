@@ -3526,12 +3526,11 @@ cgRenderGradeDist();
                             </div>
                         </div>
 
-                        {{-- pulsing ALERT ring badge --}}
-                        <div class="hidden md:flex absolute -left-7 top-1/3 items-center justify-center w-20 h-20 rounded-full bg-red-600 text-white shadow-2xl ring-4 ring-red-100 z-10">
-                            <span class="ring-pulse"></span>
-                            <span class="ring-pulse delay-1"></span>
-                            <span class="ring-pulse delay-2"></span>
-                            <span class="font-display font-extrabold text-[11px] tracking-wider">ALERT</span>
+                        {{-- ALERT circle badge — same animation as home hero --}}
+                        <div class="hidden md:flex absolute -left-7 top-1/3 items-center justify-center w-20 h-20 rounded-full shadow-2xl ring-4 ring-white/15 z-10" style="background:#FB0606;">
+                            <span class="absolute inset-0 rounded-full animate-ping opacity-50" style="background:#FB0606;"></span>
+                            <span class="absolute inset-2 rounded-full animate-ping opacity-30" style="background:#FB0606; animation-delay:.6s;"></span>
+                            <span class="relative font-display font-extrabold text-white text-[11px] tracking-[.12em]">ALERT</span>
                         </div>
                     </div>
                 </div>
