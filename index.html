@@ -68,20 +68,24 @@
           else if (h.endsWith('auxilio.ca')) locPrefix = '/images/ca';
           if (locPrefix) {
             var POOL = {
-              police: ['police-1.jpg','police-2.jpg','police-3.jpg','police-4.jpg','police-5.jpg','police-6.jpg'],
-              family: ['family-1.jpg','family-2.jpg','family-3.jpg','family-4.jpg','family-5.jpg'],
-              scene:  ['scene-1.jpg','scene-2.jpg','scene-3.jpg','scene-4.jpg']
+              police: ['police-1.jpg','police-2.jpg','police-3.jpg','police-4.jpg','police-5.jpg','police-6.jpg','police-7.jpg','police-8.jpg','police-9.jpg','police-10.jpg','police-11.jpg','police-12.jpg'],
+              family: ['family-1.jpg','family-2.jpg','family-3.jpg','family-4.jpg','family-5.jpg','family-6.jpg','family-7.jpg','family-8.jpg','family-9.jpg','family-10.jpg','family-11.jpg','family-12.jpg','family-13.jpg','family-14.jpg'],
+              scene:  ['scene-1.jpg','scene-2.jpg','scene-3.jpg','scene-4.jpg','scene-5.jpg','scene-6.jpg','scene-7.jpg','scene-8.jpg','scene-9.jpg','scene-10.jpg']
             };
             var SKIP = /(auxilio-logo|app-store-badge|google-play-badge|app-store\.svg|google-play\.svg|screen-|ai-phone|ai-orb|ai-hand-phone|favicon|flagcdn|\/build\/|\/images\/(mx|ca)\/)/i;
-            function strHash(s){ var n=0; for (var i=0;i<s.length;i++) n=((n<<5)-n+s.charCodeAt(i))|0; return Math.abs(n); }
-            function pick(pool, key){ return pool[strHash(key) % pool.length]; }
             function categorize(src){
               var s = src.toLowerCase();
-              if (/officer|agent|police|patrol|k9|dispatch|sketch|cruiser/.test(s)) return 'police';
-              if (/family|citizen|hero-citizen|grandma|kid|baby|mom|dad|couple|child|abused|night-walk/.test(s)) return 'family';
-              if (/scene|warning|emergency|hacker|accident|robbery|break-in|roadside|crim|assault|fire|disaster|elderly|hero-slide/.test(s)) return 'scene';
+              if (/officer|agent|police|patrol|k9|dispatch|sketch|cruiser|paramedic|ambulance/.test(s)) return 'police';
+              if (/family|citizen|hero-citizen|grandma|kid|baby|mom|dad|couple|child|abused|night-walk|elderly|woman/.test(s)) return 'family';
+              if (/scene|warning|emergency|hacker|accident|robbery|break-in|roadside|crim|assault|fire|disaster|hero-slide|threat/.test(s)) return 'scene';
               return null;
             }
+            // Round-robin assignment per category: same original src always maps
+            // to the same locale photo (so repeated <img> instances stay consistent),
+            // but different srcs in the same category get sequential pool entries
+            // so we don't see the same locale photo on two different cards in one view.
+            var assigned = { police: {}, family: {}, scene: {} };
+            var counts   = { police: 0,  family: 0,  scene: 0  };
             document.querySelectorAll('img[src]').forEach(function(img){
               if (img.hasAttribute('data-mx-src')) return;
               var src = img.getAttribute('src') || '';
@@ -89,7 +93,12 @@
               if (SKIP.test(src)) return;
               var cat = categorize(src);
               if (!cat) return;
-              img.src = locPrefix + '/' + pick(POOL[cat], src);
+              var key = src;
+              if (assigned[cat][key] === undefined) {
+                assigned[cat][key] = POOL[cat][counts[cat] % POOL[cat].length];
+                counts[cat]++;
+              }
+              img.src = locPrefix + '/' + assigned[cat][key];
             });
           }
         }
