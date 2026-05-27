@@ -6068,6 +6068,12 @@ $eaIncidents = [
     ['id'=>'NW-2482', 'type'=>'structure-fire',   'title'=>'Structure Fire',       'severity'=>'resolved','status'=>'resolved',  'pct'=>100,'address'=>'1847 Broad St, Newark, NJ',              'officers'=>4,'units'=>2,'minutes'=>45,'note'=>'Fire extinguished. Arson investigation underway. No injuries reported.','priority'=>'P1','dispatchAt'=>'13:47:33','responseTime'=>'3m 21s'],
     ['id'=>'NW-2479', 'type'=>'shots-fired',      'title'=>'Shots Fired',          'severity'=>'resolved','status'=>'resolved',  'pct'=>100,'address'=>'100 Jones St, Newark, NJ',               'officers'=>8,'units'=>4,'minutes'=>58,'note'=>'Scene cleared. One victim at hospital, two suspects in custody. Investigation ongoing.','priority'=>'P1','dispatchAt'=>'13:34:09','responseTime'=>'1m 58s'],
 ];
+
+// Synthesize a "case file" alphanumeric code per incident (stable per-id, random-looking)
+foreach ($eaIncidents as &$_inc) {
+    $_inc['code'] = '#' . strtoupper(substr(md5($_inc['id']), 0, 8));
+}
+unset($_inc);
 @endphp
 
 <script>
@@ -6225,8 +6231,10 @@ function eaApp() {
             ];
             const sample = pool[Math.floor(Math.random()*pool.length)];
             this.newIdSeed++;
+            const randCode = '#' + Array.from({length:8}, () => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[Math.floor(Math.random()*36)]).join('');
             const newInc = {
                 id: 'EA-' + this.newIdSeed,
+                code: randCode,
                 ...sample,
                 status: 'dispatched',
                 pct: 15,
@@ -6530,6 +6538,9 @@ function eaApp() {
                     </div>
 
                     <div class="p-5">
+                        {{-- Case-file code (random-looking alphanumeric) --}}
+                        <div class="font-mono text-[11px] font-extrabold tracking-wider text-red-600 mb-2" x-text="inc.code"></div>
+
                         {{-- TOP: solid calendar badge + title + time --}}
                         <div class="flex items-start gap-3 mb-4">
                             <div class="shrink-0 rounded-xl flex flex-col items-center justify-center py-2.5 px-2"
