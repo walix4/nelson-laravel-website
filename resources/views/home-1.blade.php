@@ -6279,13 +6279,13 @@ function eaApp() {
         <div class="ea-glow-1"></div>
         <div class="ea-glow-2"></div>
 
-        {{-- Big ALERT pulse (matches home hero badge animation, scaled up) + blinking dots overlay --}}
+        {{-- Compact translucent ALERT pulse (matches home hero animation) + blinking dots overlay --}}
         {{-- ea-circle-badge class needed: ER view has a *:not(.ea-*) rule forcing 6px border-radius --}}
-        <div class="hidden md:block" style="position:absolute;right:8%;top:50%;transform:translateY(-50%);width:clamp(380px,26vw,480px);height:clamp(380px,26vw,480px);pointer-events:none;z-index:0;">
-            <div class="ea-circle-badge absolute inset-0 ring-4 ring-white/15 flex items-center justify-center" style="background:#FB0606;">
-                <span class="ea-circle-badge absolute inset-0 animate-ping opacity-50" style="background:#FB0606;"></span>
-                <span class="ea-circle-badge absolute inset-8 animate-ping opacity-30" style="background:#FB0606; animation-delay:.6s;"></span>
-                <span class="relative font-display font-extrabold text-white tracking-[.22em]" style="font-size:clamp(28px,3.5vw,52px);">ALERT</span>
+        <div class="hidden md:block" style="position:absolute;right:16%;top:50%;transform:translateY(-50%);width:clamp(120px,8vw,150px);height:clamp(120px,8vw,150px);pointer-events:none;z-index:0;">
+            <div class="ea-circle-badge absolute inset-0 ring-4 ring-white/20 flex items-center justify-center" style="background:rgba(251,6,6,.55);">
+                <span class="ea-circle-badge absolute inset-0 animate-ping opacity-50" style="background:rgba(251,6,6,.55);"></span>
+                <span class="ea-circle-badge absolute inset-3 animate-ping opacity-30" style="background:rgba(251,6,6,.55); animation-delay:.6s;"></span>
+                <span class="relative font-display font-extrabold text-white tracking-[.2em] text-[13px]">ALERT</span>
             </div>
             {{-- blinking blips (white on red bg) --}}
             <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full">
