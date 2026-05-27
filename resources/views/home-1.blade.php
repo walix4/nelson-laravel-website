@@ -3210,7 +3210,7 @@ cgRenderGradeDist();
             min-height: calc(100vh - 78px);
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #fff8f3 0%, #fee2e2 40%, #eef2ff 100%);
+            background: linear-gradient(135deg, #3b0808 0%, #6b0f0f 45%, #2a0505 100%);
         }
         [data-view="citizen-app"] .citizen-hero::before {
             content:""; position:absolute; inset:0; pointer-events:none; opacity:.45;
@@ -3424,8 +3424,8 @@ cgRenderGradeDist();
         }
     </style>
 
-    {{-- ========== HERO — light, emotional, family-focused ========== --}}
-    <section class="citizen-hero relative overflow-hidden text-slate-900">
+    {{-- ========== HERO — dark red, emotional, family-focused ========== --}}
+    <section class="citizen-hero relative overflow-hidden text-white">
         {{-- ambient floating shapes --}}
         <span class="deco-shape" style="top:8%;  left:6%;  width:180px; height:180px; background:radial-gradient(circle, rgba(251,6,6,.30) 0%, transparent 70%); opacity:.7;"></span>
         <span class="deco-shape" style="top:62%; left:3%;  width:120px; height:120px; background:radial-gradient(circle, rgba(200,0,0,.35) 0%, transparent 70%); animation-delay:1.2s;"></span>
@@ -3435,11 +3435,11 @@ cgRenderGradeDist();
         <div class="relative mx-auto max-w-7xl px-5 sm:px-8 py-16 lg:py-24">
             <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                 <div class="lg:col-span-6">
-                    <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight text-slate-900">
+                    <h1 class="reveal reveal-delay-2 font-display font-extrabold text-4xl sm:text-5xl lg:text-[56px] xl:text-[64px] leading-[1.05] tracking-tight text-white">
                         <span class="block whitespace-nowrap">Protect the people</span>
-                        <span class="block whitespace-nowrap" style="color:#b91c1c;">you love most.</span>
+                        <span class="block whitespace-nowrap" style="color:#fca5a5;">you love most.</span>
                     </h1>
-                    <p class="reveal reveal-delay-3 mt-6 text-lg text-slate-700 max-w-xl leading-relaxed">
+                    <p class="reveal reveal-delay-3 mt-6 text-lg text-white/80 max-w-xl leading-relaxed">
                         From a child's walk home, to a parent's late-night drive, to a sudden emergency in the kitchen — Auxilio puts real, verified help one tap away. Built for families. Trusted by communities.
                     </p>
                     <div class="reveal reveal-delay-4 mt-8 flex flex-wrap items-center gap-3">
@@ -3454,8 +3454,8 @@ cgRenderGradeDist();
                             ['v'=>'Free','l'=>'forever for families'],
                         ] as $s)
                             <div>
-                                <dt class="font-display text-2xl font-bold tracking-tight text-slate-900">{{ $s['v'] }}</dt>
-                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-slate-500">{{ $s['l'] }}</dd>
+                                <dt class="font-display text-2xl font-bold tracking-tight text-white">{{ $s['v'] }}</dt>
+                                <dd class="mt-1 font-mono text-[10.5px] uppercase tracking-[.18em] text-white/60">{{ $s['l'] }}</dd>
                             </div>
                         @endforeach
                     </dl>
@@ -3464,15 +3464,15 @@ cgRenderGradeDist();
                     <div class="reveal reveal-delay-4 mt-10 max-w-xl">
                         <div class="flex items-center gap-4">
                             <div class="flex items-center -space-x-3 shrink-0">
-                                <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
-                                <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
-                                <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
-                                <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-red-900/60 object-cover" />
-                                <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-red-900/60 bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
+                                <img src="/images/officer-1.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white/70 object-cover" />
+                                <img src="/images/officer-2.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white/70 object-cover" />
+                                <img src="/images/officer-3.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white/70 object-cover" />
+                                <img src="/images/officer-4.jpg" alt="" class="w-10 h-10 rounded-full ring-2 ring-white/70 object-cover" />
+                                <span class="w-10 h-10 grid place-items-center rounded-full ring-2 ring-white/70 bg-emerald-500 text-white font-display font-bold text-[11px]">5K</span>
                             </div>
-                            <p class="font-display text-base font-semibold text-slate-900">5,000+ Verified Officers</p>
+                            <p class="font-display text-base font-semibold text-white">5,000+ Verified Officers</p>
                         </div>
-                        <p class="mt-3 text-sm text-slate-600 leading-relaxed max-w-md">
+                        <p class="mt-3 text-sm text-white/70 leading-relaxed max-w-md">
                             Over 5,000 sworn officers across 30+ departments are answering faster — thanks to Auxilio Agente.
                         </p>
                     </div>
@@ -3517,24 +3517,12 @@ cgRenderGradeDist();
                             <img src="/images/citizen/hero-citizen-slide-5.jpg" alt="A citizen reporting an incident on Auxilio" class="hero-slide absolute inset-0 w-full h-full object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-navy-950/65 via-navy-950/0 to-transparent z-[2]"></div>
                             {{-- progress dots --}}
-                            <div class="absolute bottom-20 left-1/2 -translate-x-1/2 z-[3] flex items-center gap-1.5">
+                            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-[3] flex items-center gap-1.5">
                                 <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/90"></span>
                                 <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
                                 <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
                                 <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
                                 <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
-                            </div>
-
-                            {{-- glass status bar --}}
-                            <div class="absolute inset-x-4 bottom-4 glass rounded-2xl px-4 py-3 flex items-center gap-3 text-white">
-                                <span class="flex w-10 h-10 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg" style="box-shadow:0 10px 24px -8px rgba(16,185,129,.45)">
-                                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l5 5L20 7"/></svg>
-                                </span>
-                                <div class="leading-tight">
-                                    <div class="font-mono text-[10px] uppercase tracking-[.18em] text-white/80">Family circle</div>
-                                    <div class="font-display text-sm font-bold">4 of 4 protected · Live</div>
-                                </div>
-                                <span class="ml-auto beacon"></span>
                             </div>
                         </div>
 
@@ -3544,39 +3532,6 @@ cgRenderGradeDist();
                             <span class="ring-pulse delay-1"></span>
                             <span class="ring-pulse delay-2"></span>
                             <span class="font-display font-extrabold text-[11px] tracking-wider">ALERT</span>
-                        </div>
-
-                        {{-- ALERT card — top right --}}
-                        <div class="hidden md:flex float-card absolute -right-6 top-8 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-2xl ring-1 ring-ink-100 z-10" style="min-width:230px;">
-                            <span class="flex w-11 h-11 items-center justify-center rounded-full bg-red-600 text-white shrink-0">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75M2.7 16.13c-.87 1.5.22 3.37 1.95 3.37h14.7c1.73 0 2.82-1.87 1.95-3.37L13.95 3.38c-.87-1.5-3.03-1.5-3.9 0L2.7 16.13z"/></svg>
-                            </span>
-                            <div class="leading-tight">
-                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-red-600 font-bold">SAFETY ALERT · 0.3 mi</div>
-                                <div class="font-display text-[14px] font-bold text-navy-900 mt-0.5">Maya is home safely</div>
-                            </div>
-                        </div>
-
-                        {{-- RESPONDER card — middle right --}}
-                        <div class="hidden md:flex float-card delay-2 absolute -right-12 items-center gap-3 rounded-2xl bg-navy-900 text-white px-4 py-3 shadow-2xl ring-1 ring-white/10 z-10" style="top:64%; min-width:235px;">
-                            <span class="flex w-11 h-11 items-center justify-center rounded-full bg-emerald-400 text-navy-900 shrink-0">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
-                            </span>
-                            <div class="leading-tight">
-                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-emerald-400 font-bold">RESPONDER · 90s</div>
-                                <div class="font-display text-[14px] font-bold mt-0.5">Help is on the way</div>
-                            </div>
-                        </div>
-
-                        {{-- HEARTBEAT mini card — bottom-left, kept well inside image bounds --}}
-                        <div class="hidden lg:flex float-card delay-1 absolute -left-10 bottom-28 items-center gap-3 rounded-2xl bg-white px-4 py-3 z-10 text-navy-900 shadow-2xl ring-1 ring-ink-100" style="min-width:200px;">
-                            <span class="flex w-10 h-10 items-center justify-center rounded-full bg-rose-500 text-white shrink-0 alert-bounce">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-7-10a5 5 0 019-3 5 5 0 019 3c0 5.65-7 10-7 10z"/></svg>
-                            </span>
-                            <div class="leading-tight">
-                                <div class="font-mono text-[10px] uppercase tracking-[.18em] text-rose-600 font-bold">Family pulse</div>
-                                <div class="font-display text-[13px] font-bold">All vitals · normal</div>
-                            </div>
                         </div>
                     </div>
                 </div>
