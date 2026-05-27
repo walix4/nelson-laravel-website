@@ -80,12 +80,11 @@
               if (/scene|warning|emergency|hacker|accident|robbery|break-in|roadside|crim|assault|fire|disaster|hero-slide|threat/.test(s)) return 'scene';
               return null;
             }
-            // Round-robin assignment per category: same original src always maps
-            // to the same locale photo (so repeated <img> instances stay consistent),
-            // but different srcs in the same category get sequential pool entries
-            // so we don't see the same locale photo on two different cards in one view.
-            var assigned = { police: {}, family: {}, scene: {} };
-            var counts   = { police: 0,  family: 0,  scene: 0  };
+            // Round-robin: every <img> placement on the page gets the next
+            // pool slot in DOM order. No memoization by src, so the same
+            // original image used in two views renders as two different
+            // locale photos — guarantees max uniqueness across the page.
+            var counts = { police: 0, family: 0, scene: 0 };
             document.querySelectorAll('img[src]').forEach(function(img){
               if (img.hasAttribute('data-mx-src')) return;
               var src = img.getAttribute('src') || '';
@@ -93,12 +92,8 @@
               if (SKIP.test(src)) return;
               var cat = categorize(src);
               if (!cat) return;
-              var key = src;
-              if (assigned[cat][key] === undefined) {
-                assigned[cat][key] = POOL[cat][counts[cat] % POOL[cat].length];
-                counts[cat]++;
-              }
-              img.src = locPrefix + '/' + assigned[cat][key];
+              img.src = locPrefix + '/' + POOL[cat][counts[cat] % POOL[cat].length];
+              counts[cat]++;
             });
           }
         }
