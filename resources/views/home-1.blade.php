@@ -58,6 +58,40 @@
               });
             }
           }
+
+          // Sitewide photo localization for auxilio.mx + auxilio.ca:
+          // every <img> whose src matches a category keyword gets swapped to a
+          // deterministic pick from the /images/{mx,ca}/ pool. Skips logos,
+          // store badges, UI screen mockups, and the home hero (data-mx-src).
+          var locPrefix = null;
+          if (h.endsWith('auxilio.mx')) locPrefix = '/images/mx';
+          else if (h.endsWith('auxilio.ca')) locPrefix = '/images/ca';
+          if (locPrefix) {
+            var POOL = {
+              police: ['police-1.jpg','police-2.jpg','police-3.jpg','police-4.jpg','police-5.jpg','police-6.jpg'],
+              family: ['family-1.jpg','family-2.jpg','family-3.jpg','family-4.jpg','family-5.jpg'],
+              scene:  ['scene-1.jpg','scene-2.jpg','scene-3.jpg','scene-4.jpg']
+            };
+            var SKIP = /(auxilio-logo|app-store-badge|google-play-badge|app-store\.svg|google-play\.svg|screen-|ai-phone|ai-orb|ai-hand-phone|favicon|flagcdn|\/build\/|\/images\/(mx|ca)\/)/i;
+            function strHash(s){ var n=0; for (var i=0;i<s.length;i++) n=((n<<5)-n+s.charCodeAt(i))|0; return Math.abs(n); }
+            function pick(pool, key){ return pool[strHash(key) % pool.length]; }
+            function categorize(src){
+              var s = src.toLowerCase();
+              if (/officer|agent|police|patrol|k9|dispatch|sketch|cruiser/.test(s)) return 'police';
+              if (/family|citizen|hero-citizen|grandma|kid|baby|mom|dad|couple|child|abused|night-walk/.test(s)) return 'family';
+              if (/scene|warning|emergency|hacker|accident|robbery|break-in|roadside|crim|assault|fire|disaster|elderly|hero-slide/.test(s)) return 'scene';
+              return null;
+            }
+            document.querySelectorAll('img[src]').forEach(function(img){
+              if (img.hasAttribute('data-mx-src')) return;
+              var src = img.getAttribute('src') || '';
+              if (src.indexOf('/images/') === -1) return;
+              if (SKIP.test(src)) return;
+              var cat = categorize(src);
+              if (!cat) return;
+              img.src = locPrefix + '/' + pick(POOL[cat], src);
+            });
+          }
         }
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', applyCountryPages);
