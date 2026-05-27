@@ -6279,80 +6279,34 @@ function eaApp() {
         <div class="ea-glow-1"></div>
         <div class="ea-glow-2"></div>
 
-        {{-- radar art --}}
+        {{-- Big ALERT pulse (matches home hero badge animation, scaled up) + blinking dots overlay --}}
         <div class="hidden md:block" style="position:absolute;right:8%;top:50%;transform:translateY(-50%);width:clamp(380px,26vw,480px);height:clamp(380px,26vw,480px);pointer-events:none;z-index:0;">
-            <svg viewBox="0 0 200 200" class="w-full h-full">
-                <defs>
-                    <radialGradient id="ea-sweep-grad" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#b91c1c" stop-opacity=".9"/>
-                        <stop offset="75%" stop-color="#dc2626" stop-opacity=".3"/>
-                        <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
-                    </radialGradient>
-                    <radialGradient id="ea-bg-grad" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#0a1a4a" stop-opacity=".08"/>
-                        <stop offset="100%" stop-color="#0a1a4a" stop-opacity="0"/>
-                    </radialGradient>
-                </defs>
-
-                {{-- subtle fill --}}
-                <circle cx="100" cy="100" r="93" fill="url(#ea-bg-grad)"/>
-
-                {{-- rings --}}
-                <circle cx="100" cy="100" r="92" fill="none" stroke="#0a1a4a" stroke-width="1.4" stroke-opacity=".55"/>
-                <circle cx="100" cy="100" r="65" fill="none" stroke="#0a1a4a" stroke-width="1"   stroke-opacity=".35"/>
-                <circle cx="100" cy="100" r="38" fill="none" stroke="#0a1a4a" stroke-width="1"   stroke-opacity=".28"/>
-                <circle cx="100" cy="100" r="14" fill="none" stroke="#0a1a4a" stroke-width=".8"  stroke-opacity=".22"/>
-
-                {{-- cross lines --}}
-                <line x1="100" y1="7"   x2="100" y2="193" stroke="#0a1a4a" stroke-width=".9" stroke-opacity=".28"/>
-                <line x1="7"   y1="100" x2="193" y2="100" stroke="#0a1a4a" stroke-width=".9" stroke-opacity=".28"/>
-                <line x1="35"  y1="35"  x2="165" y2="165" stroke="#0a1a4a" stroke-width=".5" stroke-opacity=".16"/>
-                <line x1="165" y1="35"  x2="35"  y2="165" stroke="#0a1a4a" stroke-width=".5" stroke-opacity=".16"/>
-
-                {{-- tick marks on outer ring (every 30°) --}}
-                <line x1="100" y1="8"   x2="100" y2="14"  stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="146" y1="20"  x2="143" y2="25"  stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="180" y1="54"  x2="175" y2="57"  stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="192" y1="100" x2="186" y2="100" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="180" y1="146" x2="175" y2="143" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="146" y1="180" x2="143" y2="175" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="100" y1="192" x2="100" y2="186" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="54"  y1="180" x2="57"  y2="175" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="20"  y1="146" x2="25"  y2="143" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="8"   y1="100" x2="14"  y2="100" stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="20"  y1="54"  x2="25"  y2="57"  stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-                <line x1="54"  y1="20"  x2="57"  y2="25"  stroke="#0a1a4a" stroke-width="1.2" stroke-opacity=".5"/>
-
-                {{-- center dot --}}
-                <circle cx="100" cy="100" r="2.5" fill="#0a1a4a" fill-opacity=".5"/>
-
-                {{-- sweep --}}
-                <g class="ea-radar-sweep">
-                    <path d="M100 100 L100 8 A92 92 0 0 1 183 146 Z" fill="url(#ea-sweep-grad)"/>
-                </g>
-
-                {{-- active incident blips (red) --}}
-                <circle cx="135" cy="52" r="3.5" fill="#dc2626">
+            <div class="absolute inset-0 rounded-full shadow-2xl ring-4 ring-white/15 flex items-center justify-center" style="background:#FB0606;">
+                <span class="absolute inset-0 rounded-full animate-ping opacity-50" style="background:#FB0606;"></span>
+                <span class="absolute inset-8 rounded-full animate-ping opacity-30" style="background:#FB0606; animation-delay:.6s;"></span>
+                <span class="relative font-display font-extrabold text-white tracking-[.22em]" style="font-size:clamp(28px,3.5vw,52px);">ALERT</span>
+            </div>
+            {{-- blinking blips (white on red bg) --}}
+            <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full">
+                <circle cx="135" cy="52" r="3.5" fill="#fff">
                     <animate attributeName="opacity" values="1;.1;1" dur="1.8s" repeatCount="indefinite"/>
                     <animate attributeName="r" values="3.5;5.5;3.5" dur="1.8s" repeatCount="indefinite"/>
                 </circle>
-                <circle cx="155" cy="118" r="3" fill="#dc2626">
+                <circle cx="155" cy="118" r="3" fill="#fff">
                     <animate attributeName="opacity" values="1;.15;1" dur="1.4s" repeatCount="indefinite"/>
                     <animate attributeName="r" values="3;4.5;3" dur="1.4s" repeatCount="indefinite"/>
                 </circle>
-                <circle cx="118" cy="155" r="2.8" fill="#dc2626">
+                <circle cx="118" cy="155" r="2.8" fill="#fff">
                     <animate attributeName="opacity" values="1;.2;1" dur="2.1s" repeatCount="indefinite"/>
                 </circle>
-
-                {{-- unit blips (navy) --}}
-                <circle cx="70" cy="142" r="2.5" fill="#0a1a4a" fill-opacity=".75">
-                    <animate attributeName="opacity" values=".75;.2;.75" dur="2.4s" repeatCount="indefinite"/>
+                <circle cx="70" cy="142" r="2.5" fill="#fff" fill-opacity=".85">
+                    <animate attributeName="opacity" values=".85;.2;.85" dur="2.4s" repeatCount="indefinite"/>
                 </circle>
-                <circle cx="58" cy="78" r="2" fill="#0a1a4a" fill-opacity=".6">
-                    <animate attributeName="opacity" values=".6;.15;.6" dur="2.9s" repeatCount="indefinite"/>
+                <circle cx="58" cy="78" r="2" fill="#fff" fill-opacity=".8">
+                    <animate attributeName="opacity" values=".8;.15;.8" dur="2.9s" repeatCount="indefinite"/>
                 </circle>
-                <circle cx="85" cy="48" r="2" fill="#0a1a4a" fill-opacity=".55">
-                    <animate attributeName="opacity" values=".55;.1;.55" dur="3.3s" repeatCount="indefinite"/>
+                <circle cx="85" cy="48" r="2" fill="#fff" fill-opacity=".75">
+                    <animate attributeName="opacity" values=".75;.1;.75" dur="3.3s" repeatCount="indefinite"/>
                 </circle>
             </svg>
         </div>
