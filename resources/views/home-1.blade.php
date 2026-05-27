@@ -5136,7 +5136,7 @@ cgRenderGradeDist();
                     {{-- orbit rings around the box --}}
 
                     {{-- main mockup box --}}
-                    <div class="relative rounded-[32px] overflow-hidden aspect-square ring-1 ring-white/15 scifi-glow-cyan scifi-corner" style="background:radial-gradient(ellipse at 50% 40%, #112a5e 0%, #050d2a 70%); box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
+                    <div class="relative rounded-[32px] overflow-hidden aspect-square ring-1 ring-white/15 scifi-glow-cyan scifi-corner" style="background:#112a5e; box-shadow: 0 40px 90px -20px rgba(8,15,40,.7);">
                         <style>
                             @keyframes aiPhoneSlide {
                                 0%, 42%  { opacity: 1; }
@@ -5155,8 +5155,6 @@ cgRenderGradeDist();
                             .ai-phone-slide-a { animation: aiPhoneSlide 8s ease-in-out infinite; animation-delay:0s; opacity:1; }
                             .ai-phone-slide-b { animation: aiPhoneSlide 8s ease-in-out infinite; animation-delay:4s; }
                         </style>
-                        {{-- top dark fade — hides the white bg of image 1 --}}
-                        <div class="absolute inset-x-0 top-0 z-[2] pointer-events-none" style="height:38%; background:linear-gradient(to bottom,#050d2a 30%,transparent);"></div>
                         {{-- scifi grid --}}
                         <div class="absolute inset-0 scifi-grid opacity-30"></div>
                         <img src="/images/ai-phone-splash.png" alt="Auxilio app splash screen" class="ai-phone-slide ai-phone-slide-a" />
