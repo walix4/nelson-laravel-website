@@ -388,27 +388,6 @@
                     <span class="relative font-display font-extrabold text-white text-[11px] tracking-[.12em]">ALERT</span>
                 </div>
 
-                {{-- RESPONDER card — middle right (lower) --}}
-                <div class="hidden md:flex absolute -right-12 items-center gap-3 rounded-2xl text-white px-4 py-3 shadow-2xl ring-1 ring-white/10 z-10" style="top:62%; min-width:235px; background:#0c1126; animation: floatY 6s ease-in-out infinite; animation-delay:1s;">
-                    <span class="flex w-11 h-11 items-center justify-center rounded-full text-navy-900 shrink-0" style="background:#34d399;">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
-                    </span>
-                    <div class="leading-tight">
-                        <div class="font-mono text-[10px] uppercase tracking-[.18em] font-bold" style="color:#34d399;">RESPONDER · 90S</div>
-                        <div class="font-display text-[14px] font-bold mt-0.5">Officer Reyes · 90s</div>
-                    </div>
-                </div>
-
-                {{-- PROTECTED card — bottom --}}
-                <div class="hidden md:flex absolute left-6 -bottom-6 items-center gap-3 rounded-2xl text-white px-4 py-3 shadow-2xl ring-1 ring-white/10 z-10" style="min-width:260px; background:#0c1126; animation: floatY 6s ease-in-out infinite; animation-delay:.4s;">
-                    <span class="flex w-10 h-10 items-center justify-center rounded-full text-navy-900 shrink-0" style="background:#34d399;">
-                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12l5 5L20 7"/></svg>
-                    </span>
-                    <div class="leading-tight">
-                        <div class="font-mono text-[10px] uppercase tracking-[.18em] font-bold" style="color:#34d399;">PROTECTED</div>
-                        <div class="font-display text-[14px] font-bold mt-0.5">All 4 family members</div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
