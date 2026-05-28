@@ -262,8 +262,8 @@
                 <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.7 5.6 5.6 1.7-5.6 1.7L12 16.6l-1.7-5.6-5.6-1.7 5.6-1.7L12 2z"/></svg>
                 <span class="notranslate" translate="no">Auxilio AI</span>
             </a></li>
-            <li><a data-route href="#/citizen-app" class="nav-link hover:text-white transition" data-i18n-en="Citizen App" data-i18n-es="Ciudadano">Citizen App</a></li>
-            <li><a data-route href="#/agent-app"   class="nav-link hover:text-white transition" data-i18n-en="Agent App" data-i18n-es="Agente">Agent App</a></li>
+            <li><a data-route href="#/citizen-app" class="nav-link hover:text-white transition" data-i18n-en="Citizen App" data-i18n-es="Usuario App">Citizen App</a></li>
+            <li><a data-route href="#/agent-app"   class="nav-link hover:text-white transition" data-i18n-en="Agent App" data-i18n-es="Agente App">Agent App</a></li>
             <li><a data-route href="#/crime-grade" class="nav-link hover:text-white transition" data-i18n-en="Crime Grade" data-i18n-es="Índice">Crime Grade</a></li>
             <li><a data-route href="#/crime-map"   class="nav-link hover:text-white transition" data-i18n-en="Crime Map" data-i18n-es="Mapa">Crime Map</a></li>
         </ul>
