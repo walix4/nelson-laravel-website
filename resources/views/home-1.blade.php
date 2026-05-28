@@ -264,8 +264,8 @@
             </a></li>
             <li><a data-route href="#/citizen-app" class="nav-link hover:text-white transition" data-i18n-en="Citizen App" data-i18n-es="Usuario App">Citizen App</a></li>
             <li><a data-route href="#/agent-app"   class="nav-link hover:text-white transition" data-i18n-en="Agent App" data-i18n-es="Agente App">Agent App</a></li>
-            <li><a data-route href="#/crime-grade" class="nav-link hover:text-white transition" data-i18n-en="Crime Grade" data-i18n-es="Índice">Crime Grade</a></li>
-            <li><a data-route href="#/crime-map"   class="nav-link hover:text-white transition" data-i18n-en="Crime Map" data-i18n-es="Mapa">Crime Map</a></li>
+            <li><a data-route href="#/crime-grade" class="nav-link hover:text-white transition" data-i18n-en="Crime Grade" data-i18n-es="Grado Crimen">Crime Grade</a></li>
+            <li><a data-route href="#/crime-map"   class="nav-link hover:text-white transition" data-i18n-en="Crime Map" data-i18n-es="Mapa Crimen">Crime Map</a></li>
         </ul>
 
         {{-- Buttons — always visible, same fixed height --}}
@@ -749,10 +749,10 @@
                     <div class="relative mt-3 h-12 overflow-hidden">
                         @php
                             $incidents = [
-                                ['tag'=>'ROBBERY',  'msg'=>'AI flagged: armed robbery, 870 Broadway',   'dot'=>'#FB0606'],
-                                ['tag'=>'DOMESTIC', 'msg'=>'AI flagged: domestic disturbance, Sector 4', 'dot'=>'#FB0606'],
-                                ['tag'=>'COLLISION','msg'=>'AI flagged: vehicle collision, EMT routed', 'dot'=>'#FB0606'],
-                                ['tag'=>'BREAK-IN', 'msg'=>'AI flagged: vehicle break-in, agent en-route','dot'=>'#FB0606'],
+                                ['tag'=>'ROBBERY',  'msg'=>'AI flagged: armed robbery, 870 Broadway',   'dot'=>'#22A620'],
+                                ['tag'=>'DOMESTIC', 'msg'=>'AI flagged: domestic disturbance, Sector 4', 'dot'=>'#399CD8'],
+                                ['tag'=>'COLLISION','msg'=>'AI flagged: vehicle collision, EMT routed', 'dot'=>'#E6201A'],
+                                ['tag'=>'BREAK-IN', 'msg'=>'AI flagged: vehicle break-in, agent en-route','dot'=>'#22A620'],
                             ];
                         @endphp
                         @foreach ($incidents as $i => $inc)
