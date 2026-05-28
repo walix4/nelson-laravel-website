@@ -208,6 +208,37 @@
         animation: eaLivePulse 2s ease-in-out infinite;
         flex-shrink: 0;
     }
+
+    /* Scroll-down arrow — appears at bottom of every hero, bounces */
+    .scroll-down-arrow {
+        position: absolute;
+        bottom: 28px;
+        left: 50%;
+        display: grid;
+        place-items: center;
+        width: 44px; height: 44px;
+        border-radius: 9999px;
+        background: rgba(255,255,255,.10);
+        border: 1px solid rgba(255,255,255,.30);
+        color: #fff;
+        z-index: 5;
+        cursor: pointer;
+        transition: background .2s;
+        animation: scrollDownBounce 1.8s ease-in-out infinite;
+    }
+    .scroll-down-arrow:hover { background: rgba(255,255,255,.22); }
+    .scroll-down-arrow svg { width: 18px; height: 18px; }
+    @keyframes scrollDownBounce {
+        0%, 100% { transform: translate(-50%, 0); }
+        50%      { transform: translate(-50%, 10px); }
+    }
+    /* ER view is light yellow → invert arrow contrast + tag w/ ea-circle-badge */
+    [data-view="er"] .scroll-down-arrow {
+        background: rgba(15,23,42,.10);
+        border-color: rgba(15,23,42,.30);
+        color: #0a1a4a;
+    }
+    [data-view="er"] .scroll-down-arrow:hover { background: rgba(15,23,42,.22); }
 </style>
 <header data-nav style="background-color:#0a1a4a" class="fixed inset-x-0 top-0 z-50 text-white">
     <nav class="mx-auto flex h-[78px] max-w-7xl items-center px-5 sm:px-8">
@@ -419,7 +450,10 @@
         </div>
     </div>
 
-
+    {{-- scroll-down arrow --}}
+    <button type="button" onclick="window.scrollBy({top:window.innerHeight*.85,behavior:'smooth'})" class="scroll-down-arrow ea-circle-badge" aria-label="Scroll down">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </button>
 </section>
 
 {{-- =======================================================================
@@ -2564,6 +2598,10 @@ cgRenderGradeDist();
                 </div>
             </div>
         </div>
+        {{-- scroll-down arrow --}}
+        <button type="button" onclick="window.scrollBy({top:window.innerHeight*.85,behavior:'smooth'})" class="scroll-down-arrow ea-circle-badge" aria-label="Scroll down">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </button>
     </section>
 
     {{-- ========== REAL-WORLD SCENARIOS ========== --}}
@@ -3537,6 +3575,10 @@ cgRenderGradeDist();
             </div>
 
         </div>
+        {{-- scroll-down arrow --}}
+        <button type="button" onclick="window.scrollBy({top:window.innerHeight*.85,behavior:'smooth'})" class="scroll-down-arrow ea-circle-badge" aria-label="Scroll down">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </button>
     </section>
 
     {{-- ========== REAL-LIFE SCENARIOS ========== --}}
@@ -5179,6 +5221,10 @@ cgRenderGradeDist();
             </div>
 
         </div>
+        {{-- scroll-down arrow --}}
+        <button type="button" onclick="window.scrollBy({top:window.innerHeight*.85,behavior:'smooth'})" class="scroll-down-arrow ea-circle-badge" aria-label="Scroll down">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </button>
     </section>
 
 
@@ -6390,6 +6436,10 @@ function eaApp() {
                 </div>
             </div>
         </div>
+        {{-- scroll-down arrow --}}
+        <button type="button" onclick="window.scrollBy({top:window.innerHeight*.85,behavior:'smooth'})" class="scroll-down-arrow ea-circle-badge" aria-label="Scroll down">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </button>
     </section>
 
     {{-- ═══════════════════════════════════════════════════
