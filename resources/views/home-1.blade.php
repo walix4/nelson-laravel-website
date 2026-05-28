@@ -6538,10 +6538,7 @@ function eaApp() {
                     </div>
 
                     <div class="p-5">
-                        {{-- Case-file code (random-looking alphanumeric) --}}
-                        <div class="font-mono text-[11px] font-extrabold tracking-wider text-red-600 mb-2" x-text="inc.code"></div>
-
-                        {{-- TOP: solid calendar badge + title + time --}}
+                        {{-- TOP: solid calendar badge + (title + case-code) + time --}}
                         <div class="flex items-start gap-3 mb-4">
                             <div class="shrink-0 rounded-xl flex flex-col items-center justify-center py-2.5 px-2"
                                  style="width:74px; height:88px;"
@@ -6553,7 +6550,10 @@ function eaApp() {
                                 <div class="w-6 h-[2px] bg-white/95 rounded mt-1.5"></div>
                             </div>
                             <div class="flex-1 min-w-0 pt-1">
-                                <h3 class="font-bold text-[19px] text-slate-900 truncate leading-tight" x-text="inc.title"></h3>
+                                <div class="flex items-start justify-between gap-2">
+                                    <h3 class="font-bold text-[19px] text-slate-900 truncate leading-tight" x-text="inc.title"></h3>
+                                    <div class="font-mono text-[11px] font-extrabold tracking-wider text-red-600 shrink-0 pt-1" x-text="inc.code"></div>
+                                </div>
                                 <div class="text-[14px] text-slate-500 font-medium mt-1.5" x-text="inc.dispatchAt"></div>
                             </div>
                         </div>
