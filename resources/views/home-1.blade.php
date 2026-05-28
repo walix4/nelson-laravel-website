@@ -193,7 +193,7 @@
         align-items: center;
         gap: 6px;
     }
-    .ea-live-pill-text { color: #fca5a5; font-size: 13px; font-weight: 700; letter-spacing: .06em; }
+    .ea-live-pill-text { color: #ffffff; font-size: 13px; font-weight: 700; letter-spacing: .06em; }
     .ea-live-pill:hover .ea-live-pill-text { color: #ffffff; }
     @keyframes eaLivePulse {
         0%   { background: #ef4444; box-shadow: 0 0 0 0 rgba(239,68,68,.8); }
@@ -6293,7 +6293,7 @@ function eaApp() {
             <div class="ea-circle-badge absolute inset-0 ring-4 ring-white/20 flex items-center justify-center" style="background:rgba(251,6,6,.55);">
                 <span class="ea-circle-badge absolute inset-0 animate-ping opacity-50" style="background:rgba(251,6,6,.55);"></span>
                 <span class="ea-circle-badge absolute inset-6 animate-ping opacity-30" style="background:rgba(251,6,6,.55); animation-delay:.6s;"></span>
-                <span class="relative font-display font-extrabold text-white tracking-[.22em]" style="font-size:clamp(22px,2vw,32px);">AUXILIO</span>
+                <span class="relative font-display font-extrabold text-white tracking-[.22em]" style="font-size:clamp(16px,1.4vw,22px);">AUXILIO</span>
             </div>
             {{-- blinking blips (white on red bg) --}}
             <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full">
