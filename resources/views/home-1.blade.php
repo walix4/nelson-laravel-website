@@ -48,15 +48,13 @@
               location.replace(target);
             }
           }
-          // Hero slideshow: swap to Mexico-specific photos on auxilio.mx
+          // Hero slideshows: swap any data-mx-src img (home + agent hero) to its Mexico photo on auxilio.mx
           if (h.endsWith('auxilio.mx')) {
             var ss = document.querySelector('.home-hero .hero-slideshow');
-            if (ss) {
-              ss.classList.add('mx-mode');
-              ss.querySelectorAll('img[data-mx-src]').forEach(function(img){
-                img.src = img.getAttribute('data-mx-src');
-              });
-            }
+            if (ss) ss.classList.add('mx-mode');
+            document.querySelectorAll('img[data-mx-src]').forEach(function(img){
+              img.src = img.getAttribute('data-mx-src');
+            });
           }
 
           // Sitewide photo localization for auxilio.mx + auxilio.ca:
@@ -2581,10 +2579,10 @@ cgRenderGradeDist();
                             }
                         </style>
                         <div class="relative rounded-[32px] overflow-hidden aspect-[4/5] ring-1 ring-ink-100 lush-shadow agent-slideshow">
-                            <img src="/images/hero-agent-slide-k9.jpg" alt="K-9 officer on duty" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
-                            <img src="/images/hero-agent-slide-officer.jpg" alt="Officer on duty" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
-                            <img src="/images/hero-agent-slide-3.jpg" alt="K-9 unit handler" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
-                            <img src="/images/hero-agent-slide-2.jpg" alt="Officer on patrol" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
+                            <img src="/images/hero-agent-slide-k9.jpg" data-mx-src="/images/mx/agent-1.avif" alt="K-9 officer on duty" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
+                            <img src="/images/hero-agent-slide-officer.jpg" data-mx-src="/images/mx/agent-2.jpg" alt="Officer on duty" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
+                            <img src="/images/hero-agent-slide-3.jpg" data-mx-src="/images/mx/agent-3.jpg" alt="K-9 unit handler" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
+                            <img src="/images/hero-agent-slide-2.jpg" data-mx-src="/images/mx/agent-4.jpg" alt="Officer on patrol" class="hero-slide absolute inset-0 w-full h-full object-cover object-center" />
                             <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-navy-950/0 to-transparent z-[2]"></div>
                             {{-- progress dots --}}
                             <div class="absolute bottom-5 left-1/2 -translate-x-1/2 z-[3] flex items-center gap-1.5">
