@@ -384,14 +384,12 @@
                     <img src="/images/hero-slide-4.jpg" data-mx-src="/images/mx/hero-1.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
                     <img src="/images/hero-slide-3.jpg" data-mx-src="/images/mx/hero-2.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
                     <img src="/images/hero-slide-2.jpg" data-mx-src="/images/mx/hero-3.jpg" alt="Auxilio partner officers" class="hero-slide absolute inset-0 w-full h-full object-cover" />
-                    <img data-mx-src="/images/mx/hero-4.jpg" alt="" class="hero-slide hero-mx-only absolute inset-0 w-full h-full object-cover" />
                     <div class="absolute inset-0 bg-gradient-to-t from-navy-950/55 via-transparent to-transparent z-10"></div>
                     {{-- progress dots --}}
                     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5">
                         <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/90"></span>
                         <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
                         <span class="hero-dot w-1.5 h-1.5 rounded-full bg-white/50"></span>
-                        <span class="hero-dot hero-mx-only w-1.5 h-1.5 rounded-full bg-white/50"></span>
                     </div>
                 </div>
                 <style>
@@ -413,28 +411,7 @@
                         0%, 31% { background:rgba(255,255,255,.95); width:18px; border-radius:9999px; }
                         35%, 100% { background:rgba(255,255,255,.45); width:6px; border-radius:9999px; }
                     }
-                    /* MX variant: 4 slides × 5s each in a 20s cycle */
-                    .hero-mx-only { display: none; }
-                    .hero-slideshow.mx-mode .hero-mx-only { display: block; }
-                    .hero-slideshow.mx-mode .hero-slide { animation: heroMxSlide 20s infinite; }
-                    .hero-slideshow.mx-mode .hero-slide:nth-child(1) { animation-delay: 0s; opacity: 1; }
-                    .hero-slideshow.mx-mode .hero-slide:nth-child(2) { animation-delay: 5s; }
-                    .hero-slideshow.mx-mode .hero-slide:nth-child(3) { animation-delay: 10s; }
-                    .hero-slideshow.mx-mode .hero-slide:nth-child(4) { animation-delay: 15s; }
-                    @keyframes heroMxSlide {
-                        0%, 22%   { opacity: 1; }
-                        27%, 98%  { opacity: 0; }
-                        100%      { opacity: 1; }
-                    }
-                    .hero-slideshow.mx-mode .hero-dot { animation: heroMxDot 20s infinite; }
-                    .hero-slideshow.mx-mode .hero-dot:nth-child(1) { animation-delay: 0s; }
-                    .hero-slideshow.mx-mode .hero-dot:nth-child(2) { animation-delay: 5s; }
-                    .hero-slideshow.mx-mode .hero-dot:nth-child(3) { animation-delay: 10s; }
-                    .hero-slideshow.mx-mode .hero-dot:nth-child(4) { animation-delay: 15s; }
-                    @keyframes heroMxDot {
-                        0%, 24% { background:rgba(255,255,255,.95); width:18px; border-radius:9999px; }
-                        27%, 100% { background:rgba(255,255,255,.45); width:6px; border-radius:9999px; }
-                    }
+                    /* MX uses the same 3-slide timing as default (4th slide removed) */
                 </style>
 
                 {{-- ALERT circle badge --}}
