@@ -253,7 +253,7 @@
         <ul class="hidden lg:flex flex-1 items-center justify-center gap-5 xl:gap-6 text-sm font-medium text-white/80 whitespace-nowrap">
             <li><a data-route href="#/er" class="nav-link ea-live-pill">
                 <span class="ea-live-dot"></span>
-                <span class="ea-live-pill-text" data-i18n-en="Live ER" data-i18n-es="En vivo">Live ER</span>
+                <span class="ea-live-pill-text" data-i18n-en="Live ER" data-i18n-es="Live ER">Live ER</span>
             </a></li>
             <li><a data-route href="#/"            class="nav-link hover:text-white transition" data-i18n-en="Home" data-i18n-es="Inicio">Home</a></li>
             <li><a data-route href="#/auxilio-ai"  class="nav-link inline-flex items-center gap-1 hover:text-white transition">
