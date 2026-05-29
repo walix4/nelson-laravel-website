@@ -1950,6 +1950,7 @@ function cgInitMap(){
           .attr('fill-opacity',0.88).style('cursor','pointer')
           .on('mouseover',function(event,d){
             d3.select(this).raise().attr('fill-opacity',1).attr('stroke','rgba(255,255,255,.7)').attr('stroke-width',1.8);
+            svg.selectAll('text.cg-sl').raise();
             var abbr=FIPS_ABBR[('00'+d.id).slice(-2)];
             var s=gradeOf[abbr];
             if(s&&tooltip){
