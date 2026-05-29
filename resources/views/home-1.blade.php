@@ -1264,8 +1264,8 @@
     <div class="relative z-10 w-full mx-auto max-w-7xl px-5 sm:px-8" style="padding-top:2rem;padding-bottom:3rem;">
 
         {{-- badge - less rounded --}}
-        <div class="inline-flex items-center gap-2.5" style="background:rgba(255,255,255,.65);border:1px solid rgba(6,52,15,.2);border-radius:8px;padding:6px 14px;margin-bottom:24px">
-            <span style="width:7px;height:7px;border-radius:50%;background:#15803d;box-shadow:0 0 7px rgba(21,128,61,.7)"></span>
+        <div class="inline-flex items-center gap-2.5" style="background:rgba(255,255,255,.7);border:1px solid rgba(6,52,15,.2);border-radius:8px;padding:6px 14px 6px 8px;margin-bottom:24px">
+            <img src="https://flagcdn.com/w80/us.png" alt="USA" style="width:26px;height:18px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.14),0 1px 3px rgba(0,0,0,.2)" />
             <span style="font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#15691a">US City Safety Rankings</span>
         </div>
 
@@ -1982,14 +1982,15 @@ function cgInitMap(){
           .datum(topojson.mesh(us,us.objects.states,function(a,b){return a!==b;}))
           .attr('fill','none').attr('stroke','rgba(255,255,255,.07)').attr('stroke-width',0.4)
           .attr('d',pathGen);
-        /* state abbreviation labels */
+        /* state name labels — full name where it fits, abbreviation for tiny states */
         svg.selectAll('text.cg-sl')
           .data(features).enter().append('text').attr('class','cg-sl')
           .attr('transform',function(d){var c=pathGen.centroid(d);return c&&isFinite(c[0])?'translate('+c+')':'translate(-9999,-9999)';})
           .attr('text-anchor','middle').attr('dy','.35em')
-          .style('fill','rgba(255,255,255,.95)').style('font-size','7px').style('font-weight','800')
-          .style('pointer-events','none').style('text-shadow','0 1px 3px rgba(0,0,0,.7),0 0 6px rgba(0,0,0,.5)')
-          .text(function(d){return FIPS_ABBR[('00'+d.id).slice(-2)]||'';});
+          .style('fill','rgba(255,255,255,.97)').style('font-weight','800')
+          .style('pointer-events','none').style('text-shadow','0 1px 3px rgba(0,0,0,.85),0 0 5px rgba(0,0,0,.55)')
+          .style('font-size',function(d){var ab=FIPS_ABBR[('00'+d.id).slice(-2)];var s=gradeOf[ab];if(!s)return '0px';var b=pathGen.bounds(d);var w=b[1][0]-b[0][0];var ff=w/((s.name.length||4)*0.55);if(ff>=6)return Math.min(14,ff).toFixed(1)+'px';return Math.max(6,Math.min(9,w/(((ab||'XX').length)*0.55))).toFixed(1)+'px';})
+          .text(function(d){var ab=FIPS_ABBR[('00'+d.id).slice(-2)];var s=gradeOf[ab];if(!s)return '';var b=pathGen.bounds(d);var w=b[1][0]-b[0][0];var ff=w/((s.name.length||4)*0.55);return ff>=6?s.name:ab;});
         cgMapBuilt=true;
       })
       .catch(function(){
