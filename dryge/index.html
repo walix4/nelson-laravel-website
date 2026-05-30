@@ -204,7 +204,8 @@
   <!-- Header -->
   <header class="sticky top-0 z-40 border-b" style="background:#0B2350;border-color:rgba(255,255,255,0.18);box-shadow:0 6px 24px -10px rgba(11,35,80,0.45);">
     <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="./" class="flex items-center">
+      <a href="./" class="flex items-center gap-2.5">
+        <img src="logo-mark.png" alt="" class="h-9 md:h-10 w-auto" />
         <span class="display text-white text-[22px] md:text-[24px] tracking-tight leading-none">Drayage <span style="color:var(--red);">Rate</span></span>
       </a>
       <nav class="hidden md:flex items-center gap-7 text-[13px] font-medium text-white/85">
