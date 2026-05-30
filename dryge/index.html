@@ -148,16 +148,16 @@
     .hiw-half{height:212px;display:flex;flex-direction:column;align-items:center;width:100%;}
     .hiw-half.top{justify-content:flex-end;}
     .hiw-half.bot{justify-content:flex-start;}
-    .hiw-node{width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--navy);z-index:3;flex:0 0 auto;box-shadow:0 0 0 6px var(--bg);}
-    .hiw-stub{width:3px;height:52px;background:var(--navy);border-radius:3px;flex:0 0 auto;}
+    .hiw-node{width:18px;height:18px;border-radius:50%;background:#0A1124;border:3px solid rgba(255,255,255,0.55);z-index:3;flex:0 0 auto;box-shadow:0 0 0 6px #080E1D;}
+    .hiw-stub{width:3px;height:52px;background:rgba(255,255,255,0.28);border-radius:3px;flex:0 0 auto;}
     .hiw-icon{width:116px;height:116px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:0 0 auto;box-shadow:0 22px 46px -18px rgba(11,31,68,0.42),0 6px 16px -8px rgba(11,31,68,0.18);animation:floatTag 5.5s ease-in-out infinite;}
     .hiw-icon svg{width:48px;height:48px;}
     .hiw-icon img{width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(11,31,68,0.14));}
     .hiw-text{text-align:center;max-width:240px;padding:0 8px;}
-    .hiw-title{font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--navy);font-size:15px;line-height:1.25;}
+    .hiw-title{font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:#fff;font-size:15px;line-height:1.25;}
     .hiw-uline{width:40px;height:3px;border-radius:3px;margin:10px auto 0;}
-    .hiw-desc{color:var(--muted);font-size:13px;line-height:1.65;margin-top:11px;}
-    .hiw-line{position:absolute;left:10%;right:10%;top:221px;height:3px;background:var(--navy);border-radius:3px;transform:scaleX(0);transform-origin:left center;transition:transform 1.15s cubic-bezier(.7,0,.3,1) .1s;z-index:1;}
+    .hiw-desc{color:rgba(255,255,255,0.62);font-size:13px;line-height:1.65;margin-top:11px;}
+    .hiw-line{position:absolute;left:10%;right:10%;top:221px;height:3px;background:rgba(255,255,255,0.28);border-radius:3px;transform:scaleX(0);transform-origin:left center;transition:transform 1.15s cubic-bezier(.7,0,.3,1) .1s;z-index:1;}
     .hiw.in .hiw-line{transform:scaleX(1);}
     .hiw-spark{position:absolute;left:10%;top:221px;width:12px;height:12px;margin-top:-4.5px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(255,59,48,0.22),0 0 14px rgba(255,59,48,0.7);opacity:0;z-index:2;}
     .hiw.in .hiw-spark{animation:hiwSpark 3.4s cubic-bezier(.5,0,.5,1) 1.15s infinite;}
@@ -456,14 +456,14 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section id="how" class="py-24 relative overflow-hidden" style="background:radial-gradient(760px 460px at 10% 12%,rgba(255,59,48,0.06),transparent 60%),radial-gradient(820px 520px at 92% 30%,rgba(77,163,255,0.07),transparent 60%),radial-gradient(680px 460px at 70% 100%,rgba(168,85,247,0.06),transparent 60%),linear-gradient(180deg,#FFFFFF,#EEF2F8);">
+  <section id="how" class="py-24 relative overflow-hidden text-white" style="background:radial-gradient(760px 460px at 10% 12%,rgba(255,59,48,0.16),transparent 60%),radial-gradient(820px 520px at 92% 30%,rgba(77,163,255,0.18),transparent 60%),radial-gradient(680px 460px at 70% 100%,rgba(168,85,247,0.16),transparent 60%),linear-gradient(180deg,#050B1A 0%,#0A1124 60%,#070D1C 100%);">
     <div class="max-w-[1400px] mx-auto px-6">
       <div class="flex items-end justify-between flex-wrap gap-6 reveal">
         <div class="max-w-xl">
           <div class="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">How it works</div>
-          <h2 class="display text-[40px] md:text-[48px] text-[var(--navy)] leading-[1.05] mt-2">Quote, route, book — one continuous flow.</h2>
+          <h2 class="display text-[40px] md:text-[48px] text-white leading-[1.05] mt-2">Quote, route, book — one continuous flow.</h2>
         </div>
-        <p class="max-w-md text-[var(--muted)] text-[15px]">From the first input to a customer-ready PDF, every drayage move is priced and visualized in under a minute.</p>
+        <p class="max-w-md text-white/60 text-[15px]">From the first input to a customer-ready PDF, every drayage move is priced and visualized in under a minute.</p>
       </div>
       <div class="hiw reveal mt-20">
         <div class="hiw-line"></div>
@@ -754,7 +754,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="text-white/85 py-14 border-t border-white/15" style="background:#00A5E7;">
+  <footer class="text-white/85 py-14 border-t border-white/10" style="background:#000000;">
     <div class="max-w-[1400px] mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 text-[13px]">
         <div class="md:col-span-2">
