@@ -97,6 +97,12 @@
     .btn-ghost:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.32);}
 
     .marquee-track{display:flex;gap:4rem;width:max-content;animation:marq 38s linear infinite;}
+    .brand-logo{display:inline-flex;align-items:center;gap:0.55rem;white-space:nowrap;}
+    .brand-logo svg{width:22px;height:22px;flex:0 0 auto;}
+    .ticker{overflow:hidden;position:relative;height:248px;}
+    .ticker-list{will-change:transform;}
+    .ticker-row{height:62px;}
+    .ticker::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46px;background:linear-gradient(transparent,#fff);pointer-events:none;}
     @keyframes marq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
     .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);}
@@ -426,29 +432,29 @@
       <div class="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-[var(--navy)]/55 reveal">Trusted by brokers, freight forwarders, importers & 3PLs</div>
       <div class="mt-6 overflow-hidden no-scrollbar" style="mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);">
         <div class="marquee-track">
-          <div class="flex gap-12 items-center text-[var(--navy)]/55">
-            <span class="display text-[20px] whitespace-nowrap">CARGOMAX</span>
-            <span class="display text-[20px] italic whitespace-nowrap">portlink</span>
-            <span class="display text-[20px] whitespace-nowrap">◆ NORDFREIGHT</span>
-            <span class="display text-[20px] whitespace-nowrap">veritas3pl</span>
-            <span class="display text-[20px] whitespace-nowrap">▲ ARC LOGISTICS</span>
-            <span class="display text-[20px] whitespace-nowrap">Halo Freight</span>
-            <span class="display text-[20px] whitespace-nowrap">CONTAINERWORKS</span>
-            <span class="display text-[20px] whitespace-nowrap">⬢ Meridian Drayage</span>
-            <span class="display text-[20px] whitespace-nowrap">Atlas BCO</span>
-            <span class="display text-[20px] whitespace-nowrap">↗ Northstar Cargo</span>
+          <div class="flex gap-14 items-center text-[var(--navy)]/55">
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8 4v8l-8 4-8-4V6l8-4z"/><path d="M4 6l8 4 8-4M12 10v8"/></svg><span class="text-[18px] font-extrabold tracking-tight">CARGOMAX</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9.5" cy="12" r="4.6"/><circle cx="14.5" cy="12" r="4.6"/></svg><span class="text-[19px] font-bold italic lowercase tracking-tight">portlink</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l9 17H3l9-17z" opacity=".22"/><path d="M12 3.5l9 17H3l9-17z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span class="text-[17px] font-extrabold tracking-[0.04em]">NORDFREIGHT</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M8.4 12l2.6 2.6 4.6-5.2"/></svg><span class="text-[18px] font-semibold tracking-tight">veritas<span class="font-bold">3pl</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3.5 18a8.5 8.5 0 0 1 17 0"/><circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg><span class="text-[17px] font-bold tracking-[0.08em]">ARC LOGISTICS</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><ellipse cx="12" cy="12" rx="9" ry="4.4" transform="rotate(-18 12 12)"/></svg><span class="text-[18px] font-semibold tracking-tight">Halo <span class="font-extrabold">Freight</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7.5" width="18" height="9" rx="1"/><path d="M7 7.5v9M11 7.5v9M15 7.5v9"/></svg><span class="text-[16px] font-extrabold tracking-[0.02em]">CONTAINERWORKS</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"/><path d="M12 7v10M7.5 9.5l9 5M16.5 9.5l-9 5" opacity=".5"/></svg><span class="text-[18px] font-semibold tracking-tight">Meridian Drayage</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/></svg><span class="text-[18px] font-bold tracking-tight">Atlas <span class="font-medium">BCO</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8l2.1 7.9 8 1.9-8 1.9-2.1 7.9-2.1-7.9-8-1.9 8-1.9L12 1.8z"/></svg><span class="text-[18px] font-bold tracking-tight">Northstar Cargo</span></span>
           </div>
-          <div class="flex gap-12 items-center text-[var(--navy)]/55" aria-hidden="true">
-            <span class="display text-[20px] whitespace-nowrap">CARGOMAX</span>
-            <span class="display text-[20px] italic whitespace-nowrap">portlink</span>
-            <span class="display text-[20px] whitespace-nowrap">◆ NORDFREIGHT</span>
-            <span class="display text-[20px] whitespace-nowrap">veritas3pl</span>
-            <span class="display text-[20px] whitespace-nowrap">▲ ARC LOGISTICS</span>
-            <span class="display text-[20px] whitespace-nowrap">Halo Freight</span>
-            <span class="display text-[20px] whitespace-nowrap">CONTAINERWORKS</span>
-            <span class="display text-[20px] whitespace-nowrap">⬢ Meridian Drayage</span>
-            <span class="display text-[20px] whitespace-nowrap">Atlas BCO</span>
-            <span class="display text-[20px] whitespace-nowrap">↗ Northstar Cargo</span>
+          <div class="flex gap-14 items-center text-[var(--navy)]/55" aria-hidden="true">
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8 4v8l-8 4-8-4V6l8-4z"/><path d="M4 6l8 4 8-4M12 10v8"/></svg><span class="text-[18px] font-extrabold tracking-tight">CARGOMAX</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9.5" cy="12" r="4.6"/><circle cx="14.5" cy="12" r="4.6"/></svg><span class="text-[19px] font-bold italic lowercase tracking-tight">portlink</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l9 17H3l9-17z" opacity=".22"/><path d="M12 3.5l9 17H3l9-17z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span class="text-[17px] font-extrabold tracking-[0.04em]">NORDFREIGHT</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M8.4 12l2.6 2.6 4.6-5.2"/></svg><span class="text-[18px] font-semibold tracking-tight">veritas<span class="font-bold">3pl</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3.5 18a8.5 8.5 0 0 1 17 0"/><circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg><span class="text-[17px] font-bold tracking-[0.08em]">ARC LOGISTICS</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><ellipse cx="12" cy="12" rx="9" ry="4.4" transform="rotate(-18 12 12)"/></svg><span class="text-[18px] font-semibold tracking-tight">Halo <span class="font-extrabold">Freight</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7.5" width="18" height="9" rx="1"/><path d="M7 7.5v9M11 7.5v9M15 7.5v9"/></svg><span class="text-[16px] font-extrabold tracking-[0.02em]">CONTAINERWORKS</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"/><path d="M12 7v10M7.5 9.5l9 5M16.5 9.5l-9 5" opacity=".5"/></svg><span class="text-[18px] font-semibold tracking-tight">Meridian Drayage</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/></svg><span class="text-[18px] font-bold tracking-tight">Atlas <span class="font-medium">BCO</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8l2.1 7.9 8 1.9-8 1.9-2.1 7.9-2.1-7.9-8-1.9 8-1.9L12 1.8z"/></svg><span class="text-[18px] font-bold tracking-tight">Northstar Cargo</span></span>
           </div>
         </div>
       </div>
@@ -591,6 +597,88 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHIPMENTS IN PROCESS -->
+  <section class="py-24 relative overflow-hidden" style="background:radial-gradient(820px 420px at 50% -5%,rgba(77,163,255,0.10),transparent 60%),radial-gradient(700px 400px at 88% 90%,rgba(0,193,106,0.08),transparent 60%),linear-gradient(180deg,#FFFFFF,#EEF4F9);">
+    <div class="max-w-[1400px] mx-auto px-6 relative">
+      <div class="text-center max-w-2xl mx-auto reveal">
+        <h2 class="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04]">Shipments in process</h2>
+        <div class="mt-6 flex items-center justify-center gap-4">
+          <a href="#network" class="group text-[14px] font-semibold text-[var(--navy)] inline-flex items-center gap-1.5">View all
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:translate-x-1"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#quote" class="px-5 py-2.5 rounded-lg text-[13px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Request a quote</a>
+        </div>
+      </div>
+
+      <div class="mt-12 grid md:grid-cols-3 gap-6">
+
+        <!-- Parcels -->
+        <div class="bg-white rounded-2xl p-6 border border-[var(--navy)]/8 reveal" style="box-shadow:0 24px 60px -28px rgba(11,31,68,0.3);">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 17V7H2v10h2"/><path d="M14 9h4l4 4v4h-2"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
+              <h3 class="display text-[19px] text-[var(--navy)]">Parcels</h3>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5" stroke-linecap="round"/><circle cx="12" cy="7.8" r="0.6" fill="var(--green)"/></svg>
+          </div>
+          <div class="ticker mt-4">
+            <div class="ticker-list">
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Los Angeles</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Phoenix, AZ</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">2h ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Long Beach</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Las Vegas, NV</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">4h ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Oakland</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Sacramento, CA</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">08 Jan</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Seattle</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Portland, OR</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">29 Oct</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Houston</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">San Antonio, TX</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">12 Mar</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Savannah</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Charlotte, NC</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">19 Apr</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Standard Cargo -->
+        <div class="bg-white rounded-2xl p-6 border border-[var(--navy)]/8 reveal reveal-delay-1" style="box-shadow:0 24px 60px -28px rgba(11,31,68,0.3);">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="12" width="7" height="7" rx="1"/><rect x="14" y="12" width="7" height="7" rx="1"/><rect x="8.5" y="4" width="7" height="7" rx="1"/></svg>
+              <h3 class="display text-[19px] text-[var(--navy)]">Standard Cargo</h3>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5" stroke-linecap="round"/><circle cx="12" cy="7.8" r="0.6" fill="var(--green)"/></svg>
+          </div>
+          <div class="ticker mt-4">
+            <div class="ticker-list">
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Los Angeles</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Dallas, TX</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">1h ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">New York/NJ</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Chicago, IL</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">5h ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Norfolk</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Atlanta, GA</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">22 Nov</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Long Beach</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Denver, CO</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">22 Nov</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Savannah</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Nashville, TN</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">18 Jan</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Miami</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Orlando, FL</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">03 Feb</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Cargo -->
+        <div class="bg-white rounded-2xl p-6 border border-[var(--navy)]/8 reveal reveal-delay-2" style="box-shadow:0 24px 60px -28px rgba(11,31,68,0.3);">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M7 6v12M11 6v12M15 6v12"/></svg>
+              <h3 class="display text-[19px] text-[var(--navy)]">Project Cargo</h3>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5" stroke-linecap="round"/><circle cx="12" cy="7.8" r="0.6" fill="var(--green)"/></svg>
+          </div>
+          <div class="ticker mt-4">
+            <div class="ticker-list">
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Houston</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Kansas City, MO</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">3d ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Seattle</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Salt Lake City, UT</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">3d ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Oakland</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Reno, NV</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">2d ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">New York/NJ</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Indianapolis, IN</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">11 Dec</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Charleston</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Columbus, OH</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">14 Feb</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Savannah</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Memphis, TN</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">09 Jan</span></div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -909,6 +997,10 @@
     const acc=Array.from(document.querySelectorAll('input[name="acc"]:checked')).map(c=>c.value);
     const q=computeQuote(PORTS[originKey].coords,HUBS[destKey].coords,type,qty,acc);
 
+    // Lock the card to its current (form) height so swapping in the shorter
+    // result panel doesn't resize the card (or the map beside it).
+    calcCard.style.minHeight=calcCard.offsetHeight+'px';
+
     drawRoute(originKey,destKey);
     const loadingTimer=showLoading();
 
@@ -1010,6 +1102,22 @@
   ];
   document.getElementById('costGrid').innerHTML=COSTS.map((c,i)=>`<div class="bento-card glass rounded-2xl p-6 reveal reveal-delay-${i%3} flex items-start gap-4"><div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:${c.a}14;border:1px solid ${c.a}26;">${svgIcon(c.i,c.a)}</div><div><div class="display text-[17px] text-[var(--navy)]">${c.n}</div><p class="text-[13px] text-[var(--muted)] mt-1.5 leading-relaxed">${c.d}</p></div></div>`).join('');
   document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+  // Shipments-in-process tickers: scroll up one row, hold ~2s, repeat (looping).
+  document.querySelectorAll('.ticker').forEach((el,idx)=>{
+    const list=el.querySelector('.ticker-list');
+    const originals=list.children.length;
+    list.innerHTML+=list.innerHTML; // duplicate for a seamless loop
+    let i=0;
+    function step(){
+      i++;
+      const rowH=list.children[0].offsetHeight;
+      list.style.transition='transform .55s cubic-bezier(.5,0,.2,1)';
+      list.style.transform='translateY('+(-i*rowH)+'px)';
+      if(i>=originals){setTimeout(()=>{list.style.transition='none';list.style.transform='translateY(0)';i=0;},580);}
+    }
+    setTimeout(()=>{step();setInterval(step,2600);}, idx*850);
+  });
   </script>
 
 </body>
