@@ -53,9 +53,8 @@
     /* width/height forced with !important to beat Leaflet's `.leaflet-marker-pane img{width:auto}` rule */
     .truck-img{
       width:60px!important;height:40px!important;display:block;
-      -webkit-mask-image:radial-gradient(ellipse 60% 46% at center,#000 58%,rgba(0,0,0,0.6) 74%,transparent 96%);
-              mask-image:radial-gradient(ellipse 60% 46% at center,#000 58%,rgba(0,0,0,0.6) 74%,transparent 96%);
-      filter:drop-shadow(0 3px 6px rgba(0,0,0,0.4)) drop-shadow(0 0 12px rgba(255,140,0,0.45));
+      image-rendering:auto;
+      filter:drop-shadow(0 3px 4px rgba(0,0,0,0.35));
       transition:transform .12s linear;
     }
 
@@ -235,7 +234,7 @@
 
         <!-- CALCULATOR -->
         <div id="quote" class="relative lg:h-[620px]">
-          <div id="calcCard" class="calc-tilt glass rounded-2xl p-5 md:p-6 lg:p-7 lg:h-full relative overflow-hidden">
+          <div id="calcCard" class="calc-tilt glass rounded-2xl p-5 md:p-6 lg:p-7 lg:h-full relative overflow-hidden" style="background:#fff;">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant quote engine</div>
@@ -407,15 +406,6 @@
               <stop offset="0.73" stop-color="#00C16A"/>
               <stop offset="1" stop-color="#A855F7"/>
             </linearGradient>
-            <g id="containerIcon">
-              <rect x="-13" y="-8" width="26" height="16" rx="2" fill="#FFD23F" stroke="#010535" stroke-width="1.4"/>
-              <line x1="-8" y1="-4" x2="-8" y2="4" stroke="#010535" stroke-width="1"/>
-              <line x1="-3" y1="-4" x2="-3" y2="4" stroke="#010535" stroke-width="1"/>
-              <line x1="2" y1="-4" x2="2" y2="4" stroke="#010535" stroke-width="1"/>
-              <line x1="7" y1="-4" x2="7" y2="4" stroke="#010535" stroke-width="1"/>
-              <circle cx="-8" cy="10" r="2.2" fill="#010535"/>
-              <circle cx="8" cy="10" r="2.2" fill="#010535"/>
-            </g>
           </defs>
 
           <!-- Connecting rail -->
@@ -459,9 +449,13 @@
             </g>
           </g>
 
-          <!-- Containers gliding upright along the rail -->
-          <use href="#containerIcon"><animateMotion dur="8s" repeatCount="indefinite" rotate="0" path="M 160 64 L 1140 64"/></use>
-          <use href="#containerIcon"><animateMotion dur="8s" begin="-4s" repeatCount="indefinite" rotate="0" path="M 160 64 L 1140 64"/></use>
+          <!-- Truck driving forward (left → right) along the rail -->
+          <image href="truck.png" width="58" height="39" x="-29" y="-26" preserveAspectRatio="xMidYMid meet" style="filter:drop-shadow(0 3px 4px rgba(11,31,68,0.28));">
+            <animateMotion dur="9s" repeatCount="indefinite" rotate="0" calcMode="linear" path="M 160 64 L 1140 64"/>
+          </image>
+          <image href="truck.png" width="58" height="39" x="-29" y="-26" preserveAspectRatio="xMidYMid meet" style="filter:drop-shadow(0 3px 4px rgba(11,31,68,0.28));">
+            <animateMotion dur="9s" begin="-4.5s" repeatCount="indefinite" rotate="0" calcMode="linear" path="M 160 64 L 1140 64"/>
+          </image>
         </svg>
 
         <div class="mt-8 grid grid-cols-5 gap-2 text-center px-2">
@@ -759,7 +753,7 @@
 
     const mid=[(o[0]+d[0])/2,(o[1]+d[1])/2];
     const dx=d[1]-o[1], dy=d[0]-o[0];
-    const norm=Math.sqrt(dx*dx+dy*dy)||1, offset=norm*0.15;
+    const norm=Math.sqrt(dx*dx+dy*dy)||1, offset=norm*0.08;
     const ctrl=[mid[0]+(dx/norm)*offset, mid[1]-(dy/norm)*offset];
     const path=[];
     for(let i=0;i<=60;i++){const t=i/60;
@@ -769,8 +763,17 @@
     }
     routeLine=L.polyline(path,{className:'route-line',smoothFactor:1}).addTo(map);
     const pathEl=routeLine.getElement();
-    if(pathEl){const len=pathEl.getTotalLength();pathEl.style.setProperty('--len',len);pathEl.classList.add('route-line-draw');}
+    if(pathEl){
+      pathEl.style.setProperty('--len',pathEl.getTotalLength());
+      pathEl.classList.add('route-line-draw');
+      // Once the draw finishes, drop the dash entirely so Leaflet's zoom/pan
+      // reprojection (which changes the path length) can't truncate the tail.
+      pathEl.addEventListener('animationend',()=>{pathEl.style.strokeDasharray='none';pathEl.style.strokeDashoffset='0';},{once:true});
+    }
     map.flyToBounds(L.latLngBounds(path).pad(0.18),{duration:1.1,easeLinearity:0.4});
+    // Keep --len in sync once the fly settles, so the line is fully drawn even
+    // if the draw animation is still running when the zoom completes.
+    map.once('moveend',()=>{if(pathEl&&routeLine){pathEl.style.setProperty('--len',pathEl.getTotalLength());}});
 
     setTimeout(()=>{
       truckMarker=L.marker(path[0],{icon:L.divIcon({html:`<div class="truck-wrap"><img class="truck-img" src="truck.png" alt=""></div>`,className:'',iconSize:[60,40],iconAnchor:[30,20]})}).addTo(map);
