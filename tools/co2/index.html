@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CO₂ Emissions · DrayageRate</title>
+  <meta name="description" content="Estimate the carbon emissions of a drayage move based on distance, weight and equipment." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#0B2350;--navy-2:#163A7E;--navy-3:#06143A;--red:#FF3B30;--red-2:#E0241A;--blue:#3A5FC0;--blue-2:#6E8FE0;--bg:#F8FAFC;--ink:#0B1220;--muted:#5B6473;}
+    *{-webkit-font-smoothing:antialiased;}
+    html,body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);}
+    .display{font-family:'Poppins',system-ui,sans-serif;letter-spacing:-0.02em;font-weight:700;}
+    .num{font-variant-numeric:tabular-nums;}
+    .btn-primary{background:linear-gradient(180deg,var(--red) 0%,var(--red-2) 100%);color:#fff;font-weight:600;border:1px solid rgba(255,255,255,0.18);box-shadow:0 14px 30px -10px rgba(255,59,48,0.55),inset 0 1px 0 rgba(255,255,255,0.4);transition:transform .2s,box-shadow .2s,filter .2s;}
+    .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.04);}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);}
+    .reveal.in{opacity:1;transform:none;}
+    .reveal-d1{transition-delay:.08s;} .reveal-d2{transition-delay:.16s;} .reveal-d3{transition-delay:.24s;}
+    .nav-blink{position:relative;font-weight:700;padding:5px 11px;border-radius:8px;color:#fff;animation:navBlink 1.4s ease-in-out infinite;}
+    .nav-blink::after{content:"";position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:#16C784;box-shadow:0 0 8px #16C784;}
+    @keyframes navBlink{0%{background:var(--red);box-shadow:0 0 0 0 rgba(255,59,48,0.55);}50%{background:var(--blue);box-shadow:0 0 0 6px rgba(58,95,192,0);}100%{background:var(--red);box-shadow:0 0 0 0 rgba(255,59,48,0);}}
+    .mega-wrap{position:relative;}
+    .mega-panel{position:absolute;left:0;top:calc(100% + 18px);width:min(940px,calc(100vw - 32px));background:#fff;border-radius:20px;box-shadow:0 44px 100px -34px rgba(11,31,68,0.6);padding:26px 26px 20px;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .22s,transform .22s;z-index:60;}
+    .mega-wrap:hover .mega-panel,.mega-wrap.open .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
+    .mega-tool{display:flex;gap:14px;padding:12px;border-radius:13px;transition:background .15s;text-decoration:none;}
+    .mega-tool:hover{background:#F4F6FB;}
+    .mega-ic{width:46px;height:46px;border-radius:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 8px 18px -8px rgba(11,31,68,0.4);}
+    .mega-tool h4{font-size:14.5px;font-weight:700;color:var(--navy);}
+    .mega-tool p{font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:2px;}
+    .mega-caret{transition:transform .22s;} .mega-wrap:hover .mega-caret{transform:rotate(180deg);}
+    .tool-input,.tool-select{width:100%;border:1px solid rgba(11,35,80,0.12);border-radius:13px;background:#fff;font-size:15px;color:var(--navy);font-weight:600;padding:14px 16px;outline:none;transition:border-color .2s,box-shadow .2s;}
+    .tool-select{appearance:none;-webkit-appearance:none;padding-right:42px;cursor:pointer;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%230B2350'%3e%3cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 1rem center;background-size:1.1rem;}
+    .tool-input:focus,.tool-select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(58,95,192,0.13);}
+    .tool-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;display:block;}
+      </style>
+</head>
+<body class="overflow-x-hidden">
+  <header class="sticky top-0 z-40 border-b" style="background:#0B2350;border-color:rgba(255,255,255,0.18);box-shadow:0 6px 24px -10px rgba(11,35,80,0.45);">
+  <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="/nelson-laravel-website/dryge/" class="flex items-center gap-2.5">
+      <img src="/nelson-laravel-website/dryge/logo-mark.png" alt="" class="h-9 md:h-10 w-auto" />
+      <span class="display text-white text-[22px] md:text-[24px] tracking-tight leading-none">Drayage <span style="color:var(--red);">Rate</span></span>
+    </a>
+    <nav class="hidden md:flex items-center gap-6 text-[13px] font-medium text-white/85">
+      <div class="mega-wrap">
+        <button class="hover:text-white inline-flex items-center gap-1.5" onclick="this.closest('.mega-wrap').classList.toggle('open')">Tools
+          <svg class="mega-caret" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="mega-panel">
+          <div class="grid grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-1">
+                        <a href="/nelson-laravel-website/dryge/#quote" class="mega-tool">
+              <span class="mega-ic" style="background:linear-gradient(160deg,#FF6B62,#E0241A)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z" opacity="0"/><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/></svg></span>
+              <span><h4>Rate Calculator</h4><p>Instant drayage pricing across every port &amp; lane</p></span>
+            </a>
+                        <a href="/nelson-laravel-website/tools/tracking/" class="mega-tool">
+              <span class="mega-ic" style="background:linear-gradient(160deg,#4C6FE0,#3A5FC0)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></span>
+              <span><h4>Container Tracking</h4><p>Track your box by sea, rail &amp; road in real time</p></span>
+            </a>
+                        <a href="/nelson-laravel-website/dryge/#network" class="mega-tool">
+              <span class="mega-ic" style="background:linear-gradient(160deg,#1E3A8A,#0B2350)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-6-8-12a8 8 0 0 1 16 0c0 6-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <span><h4>Port Explorer</h4><p>Browse 1,200+ sea, river &amp; dry ports</p></span>
+            </a>
+                        <a href="/nelson-laravel-website/tools/distance/" class="mega-tool">
+              <span class="mega-ic" style="background:linear-gradient(160deg,#22D3EE,#3A5FC0)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+              <span><h4>Distance &amp; Time</h4><p>Map distance &amp; ETA for any drayage lane</p></span>
+            </a>
+                        <a href="/nelson-laravel-website/tools/converter/" class="mega-tool">
+              <span class="mega-ic" style="background:linear-gradient(160deg,#7C3AED,#6B5BFF)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/></svg></span>
+              <span><h4>Unit Converter</h4><p>Convert weight, volume, distance &amp; more</p></span>
+            </a>
+                        <a href="/nelson-laravel-website/tools/demurrage/" class="mega-tool">
+              <span class="mega-ic" style="background:linear-gradient(160deg,#FB923C,#E0241A)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/><path d="M12 2v2M12 20v2"/></svg></span>
+              <span><h4>Demurrage Calculator</h4><p>Estimate per-diem &amp; detention exposure</p></span>
+            </a>
+                        <a href="/nelson-laravel-website/tools/co2/" class="mega-tool">
+              <span class="mega-ic" style="background:linear-gradient(160deg,#34D399,#059669)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C16 5 17 4.5 19 2c1 2 2 4.5 2 8a7 7 0 0 1-7 7H11z"/><path d="M2 21c0-3 1.85-5.36 5.5-6"/></svg></span>
+              <span><h4>CO&#8322; Emissions</h4><p>Estimate emissions for any drayage move</p></span>
+            </a>
+                        <a href="/nelson-laravel-website/estimates/" class="mega-tool">
+              <span class="mega-ic" style="background:linear-gradient(160deg,#0EA5E9,#1E3A8A)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 4-5"/></svg></span>
+              <span><h4>All Estimates</h4><p>Live stream of every quote on the network</p></span>
+            </a>
+                      </div>
+          <div class="border-t border-[var(--navy)]/10 mt-3 pt-4 flex flex-wrap gap-3">
+            <a href="/nelson-laravel-website/dryge/#quote" class="text-[13px] font-semibold text-[var(--blue)] bg-[var(--blue)]/8 hover:bg-[var(--blue)]/14 px-5 py-2.5 rounded-lg transition">Request a quote</a>
+            <a href="/nelson-laravel-website/tools/" class="text-[13px] font-semibold text-[var(--navy)] bg-[var(--navy)]/6 hover:bg-[var(--navy)]/10 px-5 py-2.5 rounded-lg transition">All tools</a>
+          </div>
+        </div>
+      </div>
+      <a href="/nelson-laravel-website/dryge/#network" class="hover:text-white">Network</a>
+      <a href="/nelson-laravel-website/dryge/#how" class="hover:text-white">How it works</a>
+      <a href="/nelson-laravel-website/dryge/#features" class="hover:text-white">Platform</a>
+      <a href="/nelson-laravel-website/dryge/#pricing" class="hover:text-white">Pricing</a>
+      <a href="/nelson-laravel-website/estimates/" class="nav-blink">Estimates</a>
+    </nav>
+    <div class="flex items-center gap-2.5">
+      <a href="/nelson-laravel-website/dryge/#login" class="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5">Sign in</a>
+      <a href="/nelson-laravel-website/dryge/#quote" class="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5">
+        <span class="label">Get instant quote</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+  <main><section class="py-16 md:py-20">
+  <div class="max-w-[900px] mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <div class="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Drayage tool</div>
+      <h1 class="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-2">CO&#8322; Emissions Estimator</h1>
+      <p class="mt-4 text-[var(--muted)] text-[15px]">Estimate the carbon footprint of a container move and see how rail and electric drayage compare.</p>
+    </div>
+
+    <div class="mt-10 bg-white rounded-[24px] p-7 md:p-10 reveal reveal-d1" style="box-shadow:0 40px 90px -40px rgba(11,31,68,0.3);border:1px solid rgba(11,35,80,0.06);">
+      <div class="grid md:grid-cols-3 gap-5">
+        <div><label class="tool-label">Distance (miles)</label><input id="coMiles" class="tool-input" type="number" min="0" value="372" /></div>
+        <div><label class="tool-label">Cargo weight (tons)</label><input id="coTons" class="tool-input" type="number" min="0" value="18" /></div>
+        <div><label class="tool-label">Mode</label><select id="coMode" class="tool-select">
+          <option value="0.161">Diesel truck</option>
+          <option value="0.090">Rail + dray</option>
+          <option value="0.045">Electric truck</option>
+        </select></div>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-4 mt-8 text-center">
+        <div class="rounded-2xl py-7 sm:col-span-1" style="background:linear-gradient(160deg,#34D399,#059669);color:#fff;box-shadow:0 20px 44px -22px rgba(5,150,105,0.8)"><div class="display text-[40px] leading-none num"><span id="coKg">0</span></div><div class="text-[12px] mt-1.5 uppercase tracking-wider opacity-90">kg CO₂</div></div>
+        <div class="rounded-2xl bg-[var(--navy)]/4 border border-[var(--navy)]/8 py-7"><div class="display text-[34px] text-[var(--navy)] num"><span id="coTrees">0</span></div><div class="text-[12px] text-[var(--muted)] mt-1.5 uppercase tracking-wider">Trees / yr to offset</div></div>
+        <div class="rounded-2xl bg-[var(--navy)]/4 border border-[var(--navy)]/8 py-7"><div class="display text-[34px] text-[var(--navy)] num"><span id="coSave">0</span>%</div><div class="text-[12px] text-[var(--muted)] mt-1.5 uppercase tracking-wider">Cut vs diesel</div></div>
+      </div>
+      <p class="text-[12px] text-[var(--muted)] mt-5 text-center">Based on ~0.161 kg CO₂ per ton-mile for diesel drayage (EPA SmartWay range). For directional planning only.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+  <footer class="text-white/85 py-14 border-t border-white/10 mt-10" style="background:#08163C;">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div class="flex items-center"><img src="/nelson-laravel-website/dryge/logo-mark.png" alt="" class="h-9 w-auto" /><span class="display text-white text-[22px] tracking-tight leading-none ml-2.5">Drayage <span style="color:var(--red);">Rate</span></span></div>
+          <p class="mt-3 max-w-sm text-white/75 text-[13px]">The drayage pricing network for North America. Instant rates across every U.S. container port.</p>
+        </div>
+        <a href="/nelson-laravel-website/tools/" class="text-[13px] font-semibold text-white/90 hover:text-white inline-flex items-center gap-2">← Back to all tools</a>
+      </div>
+      <div class="mt-8 text-[11px] text-white/55 num">© 2026 drayagerate.net · All rights reserved</div>
+    </div>
+  </footer>
+
+  <script>
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+  <script>
+  const coM=document.getElementById('coMiles'),coT=document.getElementById('coTons'),coMode=document.getElementById('coMode');
+  function coCalc(){
+    const mi=Math.max(0,parseFloat(coM.value)||0),tons=Math.max(0,parseFloat(coT.value)||0),f=parseFloat(coMode.value);
+    const kg=mi*tons*f;
+    const diesel=mi*tons*0.161;
+    document.getElementById('coKg').textContent=Math.round(kg).toLocaleString();
+    document.getElementById('coTrees').textContent=Math.max(0,Math.round(kg/21));
+    document.getElementById('coSave').textContent=diesel>0?Math.round((1-kg/diesel)*100):0;
+  }
+  [coM,coT,coMode].forEach(e=>e.addEventListener('input',coCalc)); coMode.addEventListener('change',coCalc); coCalc();
+</script>
+</body>
+</html>
