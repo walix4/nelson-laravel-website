@@ -232,6 +232,85 @@
     .est-select{appearance:none;-webkit-appearance:none;padding:0.72rem 2.3rem 0.72rem 0.95rem;border:1px solid rgba(11,35,80,0.14);border-radius:10px;background-color:#fff;font-size:0.9rem;font-weight:600;color:var(--navy);cursor:pointer;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%230B2350'%3e%3cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right .7rem center;background-size:1.05rem;}
     .est-empty{padding:46px;text-align:center;color:var(--muted);font-size:14px;}
     .no-scrollbar::-webkit-scrollbar{display:none;} .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
+
+    /* ---- Blinking nav link (Estimates) ---- */
+    .nav-blink{position:relative;font-weight:700;padding:5px 11px;border-radius:8px;color:#fff;animation:navBlink 1.4s ease-in-out infinite;}
+    .nav-blink::after{content:"";position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:#16C784;box-shadow:0 0 8px #16C784;}
+    @keyframes navBlink{0%{background:var(--red);box-shadow:0 0 0 0 rgba(255,59,48,0.55);}50%{background:var(--blue,#3A5FC0);box-shadow:0 0 0 6px rgba(58,95,192,0);}100%{background:var(--red);box-shadow:0 0 0 0 rgba(255,59,48,0);}}
+
+    /* ---- Floating AI chat ---- */
+    .chat-fab{position:fixed;right:24px;bottom:24px;z-index:70;width:62px;height:62px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(160deg,var(--red),var(--red-2));box-shadow:0 16px 36px -10px rgba(255,59,48,0.65),0 4px 12px rgba(0,0,0,0.2);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;}
+    .chat-fab:hover{transform:scale(1.08) translateY(-2px);box-shadow:0 22px 44px -10px rgba(255,59,48,0.8);}
+    .chat-fab svg{width:27px;height:27px;}
+    .chat-fab .fab-close{display:none;}
+    .chat-fab.open .fab-chat{display:none;} .chat-fab.open .fab-close{display:block;}
+    .chat-fab .ping{position:absolute;top:-1px;right:-1px;width:15px;height:15px;background:#16C784;border:2px solid #fff;border-radius:50%;}
+    .chat-fab .ping::after{content:"";position:absolute;inset:-4px;border-radius:50%;background:rgba(22,199,132,0.5);animation:chatping 1.8s ease-out infinite;}
+    @keyframes chatping{0%{transform:scale(.7);opacity:.8;}100%{transform:scale(2.2);opacity:0;}}
+    .chat-panel{position:fixed;right:24px;bottom:98px;z-index:70;width:372px;max-width:calc(100vw - 32px);height:524px;max-height:calc(100vh - 130px);background:#fff;border-radius:20px;box-shadow:0 30px 70px -20px rgba(11,31,68,0.5);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(20px) scale(.96);pointer-events:none;transform-origin:bottom right;transition:opacity .28s,transform .28s cubic-bezier(.2,.7,.2,1);}
+    .chat-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+    .chat-head{padding:15px 16px;color:#fff;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-3) 100%);display:flex;align-items:center;gap:11px;}
+    .chat-head .av{width:40px;height:40px;border-radius:12px;background:linear-gradient(160deg,var(--red),var(--red-2));display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .chat-head .status{font-size:11.5px;color:rgba(255,255,255,0.72);display:flex;align-items:center;gap:5px;margin-top:3px;}
+    .chat-head .status .dot{width:7px;height:7px;border-radius:50%;background:#16C784;box-shadow:0 0 8px #16C784;}
+    .chat-body{flex:1;overflow-y:auto;padding:18px;background:#F5F7FB;display:flex;flex-direction:column;gap:11px;}
+    .chat-msg{max-width:82%;padding:10px 14px;border-radius:15px;font-size:13.5px;line-height:1.5;word-wrap:break-word;}
+    .chat-msg.bot{background:#fff;color:var(--navy);border:1px solid rgba(11,35,80,0.08);border-bottom-left-radius:5px;align-self:flex-start;box-shadow:0 4px 12px -8px rgba(11,31,68,0.3);}
+    .chat-msg.me{background:linear-gradient(160deg,var(--navy),var(--navy-2));color:#fff;border-bottom-right-radius:5px;align-self:flex-end;}
+    .chat-quick{display:flex;flex-wrap:wrap;gap:8px;}
+    .chat-chip{font-size:12px;font-weight:600;color:var(--navy);background:#fff;border:1px solid rgba(11,35,80,0.15);padding:7px 12px;border-radius:999px;cursor:pointer;transition:all .15s;}
+    .chat-chip:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+    .chat-foot{padding:11px;border-top:1px solid rgba(11,35,80,0.08);background:#fff;display:flex;gap:8px;align-items:center;}
+    .chat-foot input{flex:1;border:1px solid rgba(11,35,80,0.14);border-radius:999px;padding:10px 16px;font-size:13.5px;color:var(--navy);outline:none;transition:border-color .2s;}
+    .chat-foot input:focus{border-color:var(--red);}
+    .chat-send{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(160deg,var(--red),var(--red-2));color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .15s;}
+    .chat-send:hover{transform:scale(1.08);}
+    .chat-typing span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:rgba(11,35,80,0.35);animation:chattype 1.2s infinite;}
+    .chat-typing span:nth-child(2){animation-delay:.2s;} .chat-typing span:nth-child(3){animation-delay:.4s;}
+    @keyframes chattype{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-4px);opacity:1;}}
+
+    /* ---- Ports explorer banner ---- */
+    .ports-band{position:relative;border-radius:30px;overflow:hidden;background:linear-gradient(115deg,#3A5FC0 0%,#4C6FE0 45%,#6B5BFF 100%);min-height:430px;}
+    .ports-band .pmap{position:absolute;inset:0;background:url('world-map.svg') center/cover no-repeat;opacity:0.16;filter:brightness(0) invert(1);}
+    .ports-card{position:absolute;background:#fff;border-radius:18px;box-shadow:0 40px 80px -30px rgba(11,31,68,0.55);}
+    .ports-card.left{left:-40px;top:40px;width:430px;padding:22px 24px;transform:rotate(-5deg);}
+    .ports-card.right{right:-30px;top:120px;width:330px;padding:14px 8px;transform:rotate(4deg);}
+    @media (max-width:860px){.ports-card.left,.ports-card.right{position:relative;left:0;right:0;top:0;transform:none;width:100%;margin:0 auto 18px;}.ports-band{padding:24px;}}
+    .pf-radio{display:flex;align-items:center;gap:10px;border:1px solid rgba(11,35,80,0.14);border-radius:11px;padding:11px 14px;font-size:14px;font-weight:600;color:var(--navy);}
+    .pf-radio.sel{border-color:var(--blue,#3A5FC0);box-shadow:0 0 0 3px rgba(58,95,192,0.14);}
+    .pf-dot{width:18px;height:18px;border-radius:50%;border:2px solid rgba(11,35,80,0.3);flex-shrink:0;}
+    .pf-radio.sel .pf-dot{border-color:var(--blue,#3A5FC0);background:radial-gradient(circle,#3A5FC0 0 5px,#fff 5px 8px);}
+    .pf-track{height:4px;border-radius:99px;background:rgba(11,35,80,0.12);position:relative;margin:9px 0 4px;}
+    .pf-track .pf-fill{position:absolute;left:0;top:0;height:100%;border-radius:99px;background:var(--navy);}
+    .pf-track .pf-knob{position:absolute;top:50%;width:15px;height:15px;border-radius:50%;background:#fff;border:2px solid var(--navy);transform:translate(-50%,-50%);box-shadow:0 2px 6px rgba(11,31,68,0.3);}
+    .pc-row{display:flex;align-items:center;gap:12px;padding:11px 16px;font-size:15px;color:var(--navy);font-weight:500;}
+    .pc-row .flag{font-size:20px;line-height:1;}
+
+    /* ---- Unit converter ---- */
+    .uc-card{position:relative;background:#fff;border-radius:26px;box-shadow:0 40px 90px -36px rgba(11,31,68,0.4);border:1px solid rgba(11,35,80,0.06);}
+    .uc-blob{position:absolute;width:160px;height:120px;border-radius:22px;filter:blur(2px);z-index:0;}
+    .uc-blob.l{left:-46px;top:90px;background:linear-gradient(135deg,#22D3EE,#6B5BFF);transform:rotate(-12deg);opacity:.9;}
+    .uc-blob.r{right:-40px;bottom:60px;background:linear-gradient(135deg,#7C3AED,#6B5BFF);transform:rotate(14deg);opacity:.9;}
+    .uc-field{position:relative;}
+    .uc-select,.uc-num{width:100%;border:1px solid rgba(11,35,80,0.10);border-radius:14px;background:#F4F6FB;font-size:16px;color:var(--navy);font-weight:600;padding:16px 18px;outline:none;transition:border-color .2s,box-shadow .2s;}
+    .uc-select{appearance:none;-webkit-appearance:none;padding-right:46px;cursor:pointer;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%230B2350'%3e%3cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 1rem center;background-size:1.2rem;}
+    .uc-num{background:#fff;font-weight:700;text-align:left;}
+    .uc-select:focus,.uc-num:focus{border-color:var(--blue,#3A5FC0);box-shadow:0 0 0 4px rgba(58,95,192,0.13);}
+    .uc-eq{font-size:38px;font-weight:800;color:var(--navy);line-height:1;}
+
+    /* ---- Testimonials ---- */
+    .rv-card{background:#fff;border-radius:18px;padding:22px;border:1px solid rgba(11,35,80,0.07);box-shadow:0 18px 40px -28px rgba(11,31,68,0.32);display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s;}
+    .rv-card:hover{transform:translateY(-4px);box-shadow:0 30px 56px -28px rgba(11,31,68,0.45);}
+    .rv-stars{display:inline-flex;gap:1px;}
+    .rv-stars svg{width:17px;height:17px;}
+    .rv-text{font-size:14px;color:#334; line-height:1.6;margin:14px 0 18px;}
+    .rv-text .rv-clip{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+    .rv-more{color:var(--blue,#3A5FC0);font-weight:600;cursor:pointer;font-size:13.5px;}
+    .rv-av{width:38px;height:38px;border-radius:50%;background:#9aa3b2;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;flex-shrink:0;}
+    .rv-chip{font-size:12.5px;font-weight:600;color:var(--muted);border:1px solid rgba(11,35,80,0.14);background:#fff;padding:7px 15px;border-radius:999px;cursor:pointer;transition:all .15s;}
+    .rv-chip.on{background:var(--navy);color:#fff;border-color:var(--navy);}
+    @keyframes rvIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+    .rv-card.rv-anim{animation:rvIn .5s cubic-bezier(.2,.7,.2,1) both;}
   </style>
 </head>
 <body class="overflow-x-hidden">
@@ -873,6 +952,110 @@
   </section>
 
   <!-- Footer -->
+  <!-- TESTIMONIALS -->
+  <section class="py-24" style="background:linear-gradient(180deg,#EEF2F8,#FFFFFF);">
+    <div class="max-w-[1280px] mx-auto px-6">
+      <div class="bg-white rounded-[26px] p-7 md:p-12" style="box-shadow:0 40px 90px -40px rgba(11,31,68,0.28);border:1px solid rgba(11,35,80,0.05);">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-5 reveal">
+          <div>
+            <div class="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Loved by shippers</div>
+            <h2 class="display text-[32px] md:text-[44px] text-[var(--navy)] leading-[1.05] mt-2">What our clients say about us</h2>
+          </div>
+          <div class="text-right shrink-0">
+            <div class="display text-[44px] text-[var(--navy)] leading-none num"><span id="rvAvg">5.00</span></div>
+            <div class="flex items-center justify-end gap-3 mt-2"><span class="rv-stars" id="rvAvgStars"></span><span class="text-[13px] text-[var(--muted)] border-l border-[var(--navy)]/15 pl-3"><b class="text-[var(--navy)] num" id="rvCount">654</b> reviews</span></div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2.5 mt-8 reveal" id="rvFilters">
+          <button class="rv-chip on" data-src="all">All reviews</button>
+          <button class="rv-chip" data-src="google">Google</button>
+          <button class="rv-chip" data-src="play">Play Store</button>
+          <button class="rv-chip" data-src="appstore">App Store</button>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6" id="rvGrid"></div>
+        <div class="text-center mt-10">
+          <button id="rvLoad" class="px-7 py-3 rounded-xl text-[14px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Load more reviews</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIT CONVERTER -->
+  <section class="py-24 bg-white relative overflow-hidden">
+    <div class="max-w-[1100px] mx-auto px-6 relative">
+      <div class="text-center max-w-2xl mx-auto reveal">
+        <div class="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Free logistics tool</div>
+        <h2 class="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">Online Unit Converter</h2>
+        <p class="mt-4 text-[var(--muted)] text-[15px] leading-relaxed">Accurately, quickly and for free convert common units of measurement. Enter a value, pick a category, then choose the <i>from</i> and <i>to</i> units to convert instantly.</p>
+      </div>
+      <div class="uc-card mt-12 p-7 md:p-12 reveal reveal-delay-1">
+        <div class="uc-blob l"></div><div class="uc-blob r"></div>
+        <div class="relative" style="z-index:1">
+          <div class="uc-field mb-6 md:max-w-[48%]">
+            <select id="ucCat" class="uc-select"></select>
+          </div>
+          <div class="grid md:grid-cols-[1fr_auto_1fr] gap-5 md:gap-7 items-center">
+            <div class="space-y-4">
+              <div class="uc-field"><select id="ucFrom" class="uc-select"></select></div>
+              <input id="ucInput" class="uc-num" type="text" inputmode="decimal" value="1" />
+            </div>
+            <div class="uc-eq text-center select-none">=</div>
+            <div class="space-y-4">
+              <div class="uc-field"><select id="ucTo" class="uc-select"></select></div>
+              <input id="ucOutput" class="uc-num" type="text" readonly value="0" style="background:#F4F6FB" />
+            </div>
+          </div>
+          <div class="mt-6 flex items-center justify-center gap-3">
+            <button id="ucSwap" type="button" class="inline-flex items-center gap-2 text-[13px] font-semibold text-[var(--navy)] border border-[var(--navy)]/15 rounded-lg px-4 py-2 hover:bg-[var(--navy)]/5 transition"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/></svg>Swap units</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTS EXPLORER BANNER -->
+  <section class="py-16 bg-white">
+    <div class="max-w-[1280px] mx-auto px-6">
+      <div class="ports-band flex flex-col md:block">
+        <div class="pmap"></div>
+        <div class="relative z-10 text-center px-6 pt-12 pb-10 md:py-16 max-w-xl mx-auto">
+          <div class="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/80">Global coverage</div>
+          <h2 class="display text-white text-[34px] md:text-[44px] leading-[1.05] mt-2">Explore the port network</h2>
+          <p class="text-white/85 text-[15px] mt-4">Filter 1,200+ sea, river and dry ports across every major trade lane — then price a drayage move in seconds.</p>
+          <a href="#network" class="inline-flex items-center gap-2 mt-7 bg-white text-[var(--navy)] font-semibold text-[14px] px-6 py-3 rounded-xl hover:translate-y-[-2px] transition" style="box-shadow:0 18px 40px -16px rgba(0,0,0,0.5);">Browse ports<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <!-- left filters card -->
+        <div class="ports-card left">
+          <div class="flex items-center justify-between mb-4">
+            <div class="display text-[19px] text-[var(--navy)]">Filters</div>
+            <div class="flex items-center gap-3"><span class="text-[13px] text-[var(--muted)] cursor-pointer">Clear</span><span class="bg-[var(--navy)] text-white text-[13px] font-semibold px-4 py-2 rounded-lg">Show 20</span></div>
+          </div>
+          <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--muted)] mb-2">Sort by</div>
+          <div class="grid grid-cols-2 gap-3 mb-5">
+            <div class="pf-radio"><span class="pf-dot"></span>Sea ports</div>
+            <div class="pf-radio sel" style="grid-column:span 1"><span class="pf-dot"></span>River ports</div>
+            <div class="pf-radio"><span class="pf-dot"></span>Dry ports</div>
+          </div>
+          <div class="grid grid-cols-2 gap-x-6 gap-y-3">
+            <div><div class="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)]">Sea ports</div><div class="pf-track"><div class="pf-fill" style="width:18%"></div><div class="pf-knob" style="left:18%"></div></div></div>
+            <div><div class="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)] flex justify-between">River ports <span class="bg-[var(--navy)]/6 px-2 rounded-full text-[var(--navy)]">500</span></div><div class="pf-track"><div class="pf-fill" style="width:55%"></div><div class="pf-knob" style="left:55%"></div></div></div>
+            <div><div class="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)]">Dry ports</div><div class="pf-track"><div class="pf-fill" style="width:35%"></div><div class="pf-knob" style="left:35%"></div></div></div>
+          </div>
+        </div>
+        <!-- right country list card -->
+        <div class="ports-card right">
+          <div class="flex justify-end px-3 pb-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <div class="pc-row"><span class="flag">🇨🇳</span>China <span class="text-[var(--muted)] font-normal">(11)</span></div>
+          <div class="pc-row"><span class="flag">🇦🇪</span>UAE <span class="text-[var(--muted)] font-normal">(23)</span></div>
+          <div class="pc-row"><span class="flag">🇧🇮</span>Burundi <span class="text-[var(--muted)] font-normal">(13)</span></div>
+          <div class="pc-row"><span class="flag">🇧🇪</span>Belgium <span class="text-[var(--muted)] font-normal">(14)</span></div>
+          <div class="pc-row"><span class="flag">🇦🇹</span>Austria <span class="text-[var(--muted)] font-normal">(21)</span></div>
+          <div class="pc-row"><span class="flag">🇧🇸</span>Bahamas <span class="text-[var(--muted)] font-normal">(21)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="text-white/85 py-14 border-t border-white/10" style="background:#08163C;">
     <div class="max-w-[1400px] mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 text-[13px]">
@@ -1239,6 +1422,142 @@
         });
       }
     }, 1100);
+  }
+  </script>
+
+  <!-- FLOATING AI CHAT -->
+  <div class="chat-panel" id="chatPanel" role="dialog" aria-label="AI chat assistant">
+    <div class="chat-head">
+      <div class="av"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V4M9 13h.01M15 13h.01M9 16h6"/><path d="M2 12v2M22 12v2"/></svg></div>
+      <div class="flex-1"><div class="display text-[15px] leading-none">Draygo Assistant</div><div class="status"><span class="dot"></span>AI · replies instantly</div></div>
+      <button class="text-white/70 hover:text-white" onclick="toggleChat(false)" aria-label="Close chat"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg bot">👋 Hi! I'm the Draygo assistant. Ask me about drayage rates, ports, transit times or accessorials — or tap a shortcut below.</div>
+      <div class="chat-quick">
+        <button class="chat-chip" onclick="quickMsg('Get an instant quote')">Get an instant quote</button>
+        <button class="chat-chip" onclick="quickMsg('Which ports do you cover?')">Ports covered</button>
+        <button class="chat-chip" onclick="quickMsg('Talk to sales')">Talk to sales</button>
+      </div>
+    </div>
+    <form class="chat-foot" id="chatForm" onsubmit="return sendChat(event)">
+      <input id="chatInput" type="text" placeholder="Type your message…" autocomplete="off" />
+      <button class="chat-send" type="submit" aria-label="Send message"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+    </form>
+  </div>
+  <button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Open AI chat">
+    <span class="ping"></span>
+    <svg class="fab-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5 8.38 8.38 0 0 1 8.5 8.5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
+    <svg class="fab-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+
+  <script>
+  // ---- Floating AI chat (UI only) ----
+  function toggleChat(force){
+    const p=document.getElementById('chatPanel'), f=document.getElementById('chatFab');
+    const open = force===undefined ? !p.classList.contains('open') : force;
+    p.classList.toggle('open',open); f.classList.toggle('open',open);
+    if(open){const png=f.querySelector('.ping'); if(png)png.style.display='none'; setTimeout(()=>document.getElementById('chatInput').focus(),300);}
+  }
+  function chatScroll(){const b=document.getElementById('chatBody');b.scrollTop=b.scrollHeight;}
+  function addMsg(text,who){const b=document.getElementById('chatBody');const d=document.createElement('div');d.className='chat-msg '+who;d.textContent=text;b.appendChild(d);chatScroll();return d;}
+  function botReply(userText){
+    const b=document.getElementById('chatBody');
+    const t=document.createElement('div');t.className='chat-msg bot chat-typing';t.innerHTML='<span></span><span></span><span></span>';b.appendChild(t);chatScroll();
+    setTimeout(()=>{t.remove();
+      const low=userText.toLowerCase();
+      let r="Thanks! A drayage specialist will follow up shortly. For an instant rate, use the quote engine at the top of the page.";
+      if(/quote|rate|price|cost/.test(low)) r="You can get an instant rate with the quote engine at the top — pick origin port, destination and container type. Want me to scroll you there?";
+      else if(/port|lane|coverage|cover/.test(low)) r="We cover 50+ port complexes and 1,200+ inland destinations across North America. Which lane are you pricing?";
+      else if(/track|tracking|where|status/.test(low)) r="Container tracking is in our Tools menu — enter your container or booking number for live sea/rail/road status.";
+      else if(/sales|human|agent|talk|call/.test(low)) r="Happy to connect you with a specialist. Drop your email and we'll reach out within one business hour.";
+      else if(/transit|time|how long|eta/.test(low)) r="Transit time depends on the lane. Try the Distance & Time tool, or tell me your origin and destination.";
+      addMsg(r,'bot');
+    },1100);
+  }
+  function quickMsg(t){addMsg(t,'me');botReply(t);}
+  function sendChat(e){e.preventDefault();const i=document.getElementById('chatInput');const v=i.value.trim();if(!v)return false;addMsg(v,'me');i.value='';botReply(v);return false;}
+
+  // ---- Online Unit Converter ----
+  const UC_DATA={
+    Length:{units:{'Meter (m)':1,'Kilometer (km)':1000,'Centimeter (cm)':0.01,'Millimeter (mm)':0.001,'Mile (mi)':1609.344,'Yard (yd)':0.9144,'Foot (ft)':0.3048,'Inch (in)':0.0254,'Nautical mile (nmi)':1852}},
+    Weight:{units:{'Kilogram (kg)':1,'Gram (g)':0.001,'Metric tonne (t)':1000,'Pound (lb)':0.45359237,'Ounce (oz)':0.028349523,'US ton':907.18474,'Long ton':1016.0469}},
+    Volume:{units:{'Liter (L)':1,'Milliliter (mL)':0.001,'Cubic meter (m³)':1000,'Cubic foot (ft³)':28.316846,'US gallon':3.785411784,'Imperial gallon':4.54609,'Barrel (oil)':158.987295}},
+    Area:{units:{'Square meter (m²)':1,'Square kilometer (km²)':1e6,'Hectare (ha)':10000,'Square foot (ft²)':0.092903,'Square yard (yd²)':0.836127,'Acre':4046.8564}},
+    Speed:{units:{'Meter/sec (m/s)':1,'Kilometer/hour (km/h)':0.277778,'Mile/hour (mph)':0.44704,'Knot (kn)':0.514444,'Foot/sec (ft/s)':0.3048}},
+    Acceleration:{units:{'Meter/sq.sec (m/sec²)':1,'Foot/sq.sec (ft/sec²)':0.3048,'Standard gravity (g)':9.80665,'Gal (cm/sec²)':0.01}},
+    Time:{units:{'Second (s)':1,'Minute (min)':60,'Hour (h)':3600,'Day (d)':86400,'Week':604800}},
+    Temperature:{special:'temp',units:{'Celsius (°C)':1,'Fahrenheit (°F)':1,'Kelvin (K)':1}}
+  };
+  const ucCat=document.getElementById('ucCat'),ucFrom=document.getElementById('ucFrom'),ucTo=document.getElementById('ucTo'),ucInput=document.getElementById('ucInput'),ucOutput=document.getElementById('ucOutput');
+  if(ucCat){
+    Object.keys(UC_DATA).forEach(c=>ucCat.add(new Option(c,c)));
+    ucCat.value='Acceleration';
+    function ucFillUnits(){
+      const list=Object.keys(UC_DATA[ucCat.value].units);
+      [ucFrom,ucTo].forEach(sel=>{sel.innerHTML='';list.forEach(u=>sel.add(new Option(u,u)));});
+      ucFrom.selectedIndex=0; ucTo.selectedIndex=Math.min(1,list.length-1);
+    }
+    function toC(v,u){if(u.startsWith('Fahrenheit'))return (v-32)*5/9;if(u.startsWith('Kelvin'))return v-273.15;return v;}
+    function fromC(v,u){if(u.startsWith('Fahrenheit'))return v*9/5+32;if(u.startsWith('Kelvin'))return v+273.15;return v;}
+    function ucConvert(){
+      const cat=UC_DATA[ucCat.value], raw=parseFloat(ucInput.value);
+      if(isNaN(raw)){ucOutput.value='';return;}
+      let res;
+      if(cat.special==='temp'){res=fromC(toC(raw,ucFrom.value),ucTo.value);}
+      else{res=raw*cat.units[ucFrom.value]/cat.units[ucTo.value];}
+      ucOutput.value=parseFloat(res.toPrecision(8)).toLocaleString(undefined,{maximumFractionDigits:8});
+    }
+    ucCat.addEventListener('change',()=>{ucFillUnits();ucConvert();});
+    [ucFrom,ucTo].forEach(s=>s.addEventListener('change',ucConvert));
+    ucInput.addEventListener('input',ucConvert);
+    document.getElementById('ucSwap').addEventListener('click',()=>{const a=ucFrom.value;ucFrom.value=ucTo.value;ucTo.value=a;ucConvert();});
+    ucFillUnits(); ucConvert();
+  }
+
+  // ---- Testimonials ----
+  const RV_REVIEWS=[
+    {n:'M P',r:4,d:'May 06, 2026',s:'google',t:"BulkLoads is a load board for all freight that can't go in a van, reefer or LTL — open-deck, bulk, heavy haul, you name it."},
+    {n:'Terry McCarty',r:5,d:'May 05, 2026',s:'play',t:"I like this app."},
+    {n:'Ben Wallace',r:5,d:'Apr 28, 2026',s:'play',t:"I just started using this app and so far so good. I saw another person comment that they got to talk to an actual person, and another comment stating the rates were spot on. Both true in my experience."},
+    {n:'tal iban',r:5,d:'Apr 23, 2026',s:'appstore',t:"Good good"},
+    {n:'Marie Barker',r:5,d:'Apr 08, 2026',s:'play',t:"we'd be lost without this app. THANK YOU DRAYGO! YOU REALLY ARE A BULKLOAD OF HELP."},
+    {n:'ttrigg84',r:5,d:'Mar 12, 2026',s:'appstore',t:"The app works very well — just needs an iPad compatible version too."},
+    {n:'Jarred Herman',r:5,d:'Jan 10, 2026',s:'google',t:"Currently I do not fully use Draygo yet, but from watching the load board and the messages I get, brokers are clearly looking for equipment in every region. The instant rate accuracy alone is worth it."},
+    {n:'Betty Sue Sands',r:5,d:'Nov 22, 2025',s:'play',t:"Great people to work with."},
+    {n:'Hector Ramos',r:5,d:'Nov 03, 2025',s:'google',t:"Quotes come back in seconds and they match what we actually pay carriers. Cut our pricing desk time in half."},
+    {n:'Dana Liu',r:4,d:'Oct 18, 2025',s:'appstore',t:"Solid tool for port drayage. Would love more inland rail ramps but coverage keeps growing."},
+    {n:'Owen Pratt',r:5,d:'Sep 30, 2025',s:'play',t:"The transit-time estimates are scary accurate. Great for setting customer expectations."},
+    {n:'Sofia Marin',r:5,d:'Sep 12, 2025',s:'google',t:"Switched our whole brokerage over. Live FSC and accessorials baked into the quote is a game changer."}
+  ];
+  const RV_ICONS={
+    google:'<svg width="20" height="20" viewBox="0 0 48 48"><path fill="#4285F4" d="M45 24c0-1.6-.1-2.7-.4-3.9H24v7.4h11.8c-.2 1.9-1.5 4.8-4.4 6.7l6.8 5.3C42.6 36 45 30.6 45 24z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.8-5.3c-1.9 1.3-4.4 2.2-7.7 2.2-5.9 0-10.9-4-12.7-9.4l-7 5.4C7.9 40.9 15.3 46 24 46z"/><path fill="#FBBC05" d="M11.3 28.2c-.5-1.3-.7-2.7-.7-4.2s.3-2.9.7-4.2l-7-5.4C3.5 17.2 3 20.5 3 24s.5 6.8 1.3 9.6l7-5.4z"/><path fill="#EA4335" d="M24 10.6c3.3 0 5.5 1.4 6.8 2.6l5-4.9C32.9 5.5 29 3.8 24 3.8 15.3 3.8 7.9 8.9 4.3 16.2l7 5.4C13.1 16.2 18.1 10.6 24 10.6z"/></svg>',
+    play:'<svg width="19" height="19" viewBox="0 0 24 24"><path fill="#00D2FF" d="M3.6 2.3C3.2 2.6 3 3 3 3.6v16.8c0 .6.2 1 .6 1.3l9.4-9.7L3.6 2.3z"/><path fill="#FFCE00" d="M16.9 8.5L5.4 1.9 13 9.7l3.9-1.2z"/><path fill="#FF3B30" d="M13 9.7l-7.6 7.8 11.5-6.6L13 9.7z"/><path fill="#00C853" d="M16.9 8.5l3.9 2.2c.8.5.8 1.6 0 2.1l-3.9 2.2L13 12l3.9-3.5z" opacity=".0"/><path fill="#00E676" d="M5.4 1.9l11.5 6.6 3.9 2.2c.8.5.8 1.6 0 2.1l-3.9 2.2L5.4 22.1c-.7.4-1.4.3-1.8-.4L13 12 3.6 2.3c.4-.7 1.1-.8 1.8-.4z" opacity="0"/></svg>',
+    appstore:'<svg width="19" height="19" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#0A84FF"/><path fill="#fff" d="M12.3 6.6l.6-1c.2-.3.6-.4.9-.2.3.2.4.6.2.9l-3.6 6.2h2.6c.8 0 1.3.9.9 1.6H6.2c-.4 0-.6-.3-.6-.6 0-.4.3-.6.6-.6h2.1l2.7-4.6-.8-1.5c-.2-.3-.1-.7.2-.9.3-.2.7-.1.9.2l.6 1zM8.3 15.5l-.5.9c-.2.3-.6.4-.9.2-.3-.2-.4-.6-.2-.9l.4-.6c.5-.2 1-.1 1.2.4zm8.4-2.4h1.4c.4 0 .6.3.6.6 0 .4-.3.6-.6.6h-.7l.5.9c.2.3.1.7-.2.9-.3.2-.7.1-.9-.2-1.5-2.5-2.5-4.4-3.2-5.6-.6-1.2-.2-2.4.2-2.8.4.8 1.1 2 2 3.7l.6 1.5z"/></svg>'
+  };
+  function rvStarRow(n,big){let h='';for(let i=1;i<=5;i++){h+='<svg viewBox="0 0 24 24" fill="'+(i<=n?'#FFB400':'none')+'" stroke="#FFB400" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .9-5 4.9 1.3 7L12 18l-6.3 3.3L7 14.3 2 9.4l7-.9L12 2z"/></svg>';}return h;}
+  function rvInitials(n){const p=n.replace(/[^A-Za-z ]/g,'').trim().split(/\s+/);return ((p[0]||'')[0]||'?').toUpperCase()+((p[1]||'')[0]||'').toUpperCase();}
+  const rvGrid=document.getElementById('rvGrid');
+  if(rvGrid){
+    let rvFilter='all', rvShown=8;
+    document.getElementById('rvAvgStars').innerHTML=rvStarRow(5);
+    function rvRender(animateFrom){
+      const list=RV_REVIEWS.filter(r=>rvFilter==='all'||r.s===rvFilter);
+      const slice=list.slice(0,rvShown);
+      rvGrid.innerHTML=slice.map((r,i)=>{
+        const long=r.t.length>120;
+        return '<div class="rv-card'+(animateFrom!=null&&i>=animateFrom?' rv-anim':'')+'">'+
+          '<div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="display text-[20px] text-[var(--navy)]">'+r.r+'</span><span class="rv-stars">'+rvStarRow(r.r)+'</span></div><span class="text-[12.5px] text-[var(--muted)] num">'+r.d+'</span></div>'+
+          '<div class="rv-text flex-1"><span class="'+(long?'rv-clip':'')+'">'+r.t+'</span>'+(long?' <span class="rv-more" onclick="rvToggle(this)">More</span>':'')+'</div>'+
+          '<div class="flex items-center justify-between mt-auto pt-2"><div class="flex items-center gap-2.5"><span class="rv-av">'+rvInitials(r.n)+'</span><span class="text-[14px] font-medium text-[var(--navy)]">'+r.n+'</span></div>'+(RV_ICONS[r.s]||'')+'</div>'+
+        '</div>';
+      }).join('');
+      document.getElementById('rvLoad').style.display = rvShown>=list.length ? 'none':'';
+    }
+    window.rvToggle=function(el){const span=el.previousElementSibling;const clip=span.classList.toggle('rv-clip');el.textContent=clip?'More':'Less';};
+    document.getElementById('rvFilters').addEventListener('click',e=>{const b=e.target.closest('.rv-chip');if(!b)return;document.querySelectorAll('#rvFilters .rv-chip').forEach(c=>c.classList.remove('on'));b.classList.add('on');rvFilter=b.dataset.src;rvShown=8;rvRender(0);});
+    document.getElementById('rvLoad').addEventListener('click',()=>{const prev=rvShown;rvShown+=4;rvRender(prev);});
+    rvRender();
   }
   </script>
 
