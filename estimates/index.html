@@ -54,7 +54,7 @@
   .est-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;font-size:11px;letter-spacing:-0.03em;color:rgba(11,35,80,0.82);white-space:nowrap;}
   .est-cust{display:flex;align-items:center;gap:9px;}
   .est-avatar{width:32px;height:32px;border-radius:9px;flex:0 0 auto;display:grid;place-items:center;color:#fff;font-weight:700;font-size:11.5px;box-shadow:0 8px 16px -8px rgba(11,35,80,0.55);}
-  .est-cust .est-name{font-weight:700;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .est-cust .est-name{font-weight:700;}
   .est-sub{font-size:11.5px;color:var(--muted);margin-top:2px;}
   .est-route{display:flex;align-items:center;gap:7px;font-weight:600;}
   .est-pin{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;flex:0 0 auto;}
@@ -240,7 +240,7 @@
   function estStream(e){if(e.status!=='streaming')return '<span style="color:var(--muted)">—</span>';const v=Math.round(e.stream);return '<div class="est-prog"><div class="est-prog-track"><div class="est-prog-fill" data-fill="'+e.ref+'" style="width:'+v+'%"></div></div><div class="est-prog-label" data-label="'+e.ref+'">'+v+'%</div></div>';}
   function estPrice(e){if(e.price)return '<span class="est-price">'+e.price+'</span>';if(e.status==='failed')return '<span style="color:var(--muted)">—</span>';return '<span class="est-calc">Calculating…</span>';}
   function estRow(e){return '<tr><td><span class="est-ref">'+e.ref+'</span></td>'+
-    '<td><div class="est-cust"><div class="est-avatar" style="background:'+estAvatarColor(e.customer)+'">'+estInitials(e.customer)+'</div><div style="min-width:0"><div class="est-name">'+e.customer+'</div><div class="est-sub">'+e.email+'</div></div></div></td>'+
+    '<td><div class="est-cust"><div style="min-width:0"><div class="est-name">'+e.customer+'</div><div class="est-sub">'+e.email+'</div></div></div></td>'+
     '<td><div class="est-route">'+UP_ARROW+'<span class="est-loc">'+e.pickup+'</span></div><div class="est-sub" style="padding-left:29px">'+e.pickupSub+'</div></td>'+
     '<td><div class="est-route">'+DOWN_ARROW+'<span class="est-loc">'+e.drop+'</span></div><div class="est-sub" style="padding-left:29px">'+e.dropSub+'</div></td>'+
     '<td><span class="est-chip">'+e.container+'</span><div class="est-sub">'+e.miles+' mi</div></td>'+
