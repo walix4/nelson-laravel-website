@@ -37,6 +37,13 @@
       backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%);
       border:1px solid rgba(255,255,255,0.1); color:#fff;
     }
+    /* Sky-blue brand glass — map overlay cards (matches #00A5E7 header) */
+    .glass-sky{
+      background:linear-gradient(155deg, rgba(0,150,214,0.86), rgba(0,116,184,0.84));
+      backdrop-filter:blur(16px) saturate(170%); -webkit-backdrop-filter:blur(16px) saturate(170%);
+      border:1px solid rgba(190,228,255,0.4); color:#fff;
+      box-shadow:0 14px 34px -14px rgba(0,90,150,0.65), inset 0 1px 0 rgba(255,255,255,0.25);
+    }
     .glass-pill{ background:rgba(255,255,255,0.08); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,0.16); }
 
     .port-icon{position:relative;width:14px;height:14px;pointer-events:auto;}
@@ -127,6 +134,44 @@
     .grid-bg{position:relative;background:#04081A;background-image:radial-gradient(900px 500px at 18% 8%,rgba(77,163,255,0.22),transparent 55%),radial-gradient(1000px 600px at 88% 30%,rgba(255,59,48,0.18),transparent 55%),radial-gradient(600px 500px at 50% 110%,rgba(168,85,247,0.16),transparent 60%),linear-gradient(180deg,#04081A 0%,#0A1733 55%,#010535 100%);}
     .grid-bg::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);}
     .grid-bg::after{content:"";position:absolute;inset:0;pointer-events:none;overflow:hidden;background-image:radial-gradient(180px 180px at 12% 18%,rgba(77,163,255,0.4),transparent 70%),radial-gradient(220px 220px at 86% 22%,rgba(255,59,48,0.28),transparent 70%),radial-gradient(200px 200px at 60% 90%,rgba(168,85,247,0.3),transparent 70%);filter:blur(48px);}
+    /* How it works — horizontal zig-zag timeline */
+    .hiw{position:relative;}
+    .hiw.reveal{opacity:1;transform:none;}
+    .hiw-row{display:flex;align-items:stretch;}
+    .hiw-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .75s cubic-bezier(.2,.7,.2,1);}
+    .hiw.in .hiw-col{opacity:1;transform:none;}
+    .hiw.in .hiw-col:nth-child(1){transition-delay:.20s;}
+    .hiw.in .hiw-col:nth-child(2){transition-delay:.36s;}
+    .hiw.in .hiw-col:nth-child(3){transition-delay:.52s;}
+    .hiw.in .hiw-col:nth-child(4){transition-delay:.68s;}
+    .hiw.in .hiw-col:nth-child(5){transition-delay:.84s;}
+    .hiw-half{height:212px;display:flex;flex-direction:column;align-items:center;width:100%;}
+    .hiw-half.top{justify-content:flex-end;}
+    .hiw-half.bot{justify-content:flex-start;}
+    .hiw-node{width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--navy);z-index:3;flex:0 0 auto;box-shadow:0 0 0 6px var(--bg);}
+    .hiw-stub{width:3px;height:52px;background:var(--navy);border-radius:3px;flex:0 0 auto;}
+    .hiw-icon{width:116px;height:116px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:0 0 auto;box-shadow:0 22px 46px -18px rgba(11,31,68,0.42),0 6px 16px -8px rgba(11,31,68,0.18);animation:floatTag 5.5s ease-in-out infinite;}
+    .hiw-icon svg{width:48px;height:48px;}
+    .hiw-text{text-align:center;max-width:240px;padding:0 8px;}
+    .hiw-title{font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--navy);font-size:15px;line-height:1.25;}
+    .hiw-uline{width:40px;height:3px;border-radius:3px;margin:10px auto 0;}
+    .hiw-desc{color:var(--muted);font-size:13px;line-height:1.65;margin-top:11px;}
+    .hiw-line{position:absolute;left:10%;right:10%;top:221px;height:3px;background:var(--navy);border-radius:3px;transform:scaleX(0);transform-origin:left center;transition:transform 1.15s cubic-bezier(.7,0,.3,1) .1s;z-index:1;}
+    .hiw.in .hiw-line{transform:scaleX(1);}
+    .hiw-spark{position:absolute;left:10%;top:221px;width:12px;height:12px;margin-top:-4.5px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(255,59,48,0.22),0 0 14px rgba(255,59,48,0.7);opacity:0;z-index:2;}
+    .hiw.in .hiw-spark{animation:hiwSpark 3.4s cubic-bezier(.5,0,.5,1) 1.15s infinite;}
+    @keyframes hiwSpark{0%{left:10%;opacity:0;}8%{opacity:1;}92%{opacity:1;}100%{left:90%;opacity:0;}}
+    @media (max-width:880px){
+      .hiw-line,.hiw-spark,.hiw-node{display:none;}
+      .hiw-row{flex-direction:column;gap:28px;}
+      .hiw-col{flex-direction:row;align-items:center;gap:20px;text-align:left;}
+      .hiw-half{height:auto;width:auto;flex-direction:row;}
+      .hiw-half.top{order:0;} .hiw-half.bot{order:1;}
+      .hiw-stub{display:none;}
+      .hiw-icon{width:84px;height:84px;}.hiw-icon svg{width:36px;height:36px;}
+      .hiw-text{text-align:left;max-width:none;padding:0;}
+      .hiw-uline{margin-left:0;}
+    }
     .no-scrollbar::-webkit-scrollbar{display:none;} .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
   </style>
 </head>
@@ -203,13 +248,13 @@
         <div class="relative rounded-2xl overflow-hidden border border-white/8" style="height:620px;box-shadow:0 30px 80px -20px rgba(0,0,0,0.7);">
           <div id="map" class="absolute inset-0"></div>
 
-          <div class="absolute top-4 left-4 glass-dark rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
+          <div class="absolute top-4 left-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
             <div class="flex items-center gap-2 text-white/60 uppercase tracking-[0.14em] text-[10px]"><span class="live-dot"></span> Active corridor</div>
             <div class="display text-white text-[13px] mt-1.5" id="activeCorridor">Los Angeles · Port complex</div>
             <div class="num text-white/70 mt-0.5">Throughput · <b class="text-white">9.2M TEU</b> / yr</div>
           </div>
 
-          <div class="absolute top-4 right-4 glass-dark rounded-xl px-3.5 py-2.5 text-[11px] z-[600] hidden sm:block">
+          <div class="absolute top-4 right-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600] hidden sm:block">
             <div class="text-white/60 uppercase tracking-[0.14em] text-[10px]">Live · last 60s</div>
             <div class="flex items-center gap-4 mt-1.5">
               <div><div class="display text-white text-[14px] num"><span id="liveQuotes">412</span></div><div class="text-white/55">Quotes</div></div>
@@ -218,7 +263,7 @@
             </div>
           </div>
 
-          <div class="absolute left-4 right-4 bottom-4 glass-dark rounded-xl px-4 py-3 z-[600] flex flex-wrap items-center justify-between gap-3 text-[11px]">
+          <div class="absolute left-4 right-4 bottom-4 glass-sky rounded-xl px-4 py-3 z-[600] flex flex-wrap items-center justify-between gap-3 text-[11px]">
             <div class="flex items-center gap-2 text-white/70">
               <span class="w-1.5 h-1.5 rounded-full bg-[var(--red)]"></span><span>Origin</span>
               <span class="ml-3 w-1.5 h-1.5 rounded-full bg-[var(--green)]"></span><span>Destination</span>
@@ -396,60 +441,101 @@
         </div>
         <p class="max-w-md text-[var(--muted)] text-[15px]">From the first input to a customer-ready PDF, every drayage move is priced and visualized in under a minute.</p>
       </div>
-      <div class="mt-14 max-w-3xl">
-        <!-- Step 01 -->
-        <div class="reveal flex gap-5 md:gap-7">
-          <div class="flex flex-col items-center">
-            <div class="shrink-0 w-16 h-16 rounded-2xl grid place-items-center display text-[20px] text-white num" style="background:#FF3B30;box-shadow:0 14px 30px -10px rgba(255,59,48,0.6),inset 0 1px 0 rgba(255,255,255,0.35);">01</div>
-            <div class="w-[3px] grow rounded-full mt-2" style="background:linear-gradient(#FF3B30,#FF7B30);"></div>
+      <div class="hiw reveal mt-20">
+        <div class="hiw-line"></div>
+        <div class="hiw-spark"></div>
+        <div class="hiw-row">
+
+          <!-- 01 — icon above, text below -->
+          <div class="hiw-col">
+            <div class="hiw-half top">
+              <div class="hiw-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF3B30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+              </div>
+              <div class="hiw-stub"></div>
+            </div>
+            <div class="hiw-node"></div>
+            <div class="hiw-half bot">
+              <div class="hiw-text">
+                <div class="hiw-title">Choose origin</div>
+                <div class="hiw-uline" style="background:#FF3B30;"></div>
+                <p class="hiw-desc">Pick from every container port across the U.S. &amp; Canada — West Coast, Gulf, East Coast and every Class I rail ramp.</p>
+              </div>
+            </div>
           </div>
-          <div class="pb-12 pt-2.5">
-            <h3 class="display text-[24px] md:text-[26px] text-[var(--navy)] leading-tight">Choose origin</h3>
-            <p class="text-[var(--muted)] text-[15px] mt-2 max-w-md">Pick from every container port across the U.S. & Canada — West Coast, Gulf, East Coast and every Class I rail ramp.</p>
+
+          <!-- 02 — text above, icon below -->
+          <div class="hiw-col">
+            <div class="hiw-half top">
+              <div class="hiw-text">
+                <div class="hiw-title">Pick destination</div>
+                <div class="hiw-uline" style="background:#FF7B30;"></div>
+                <p class="hiw-desc">Door, warehouse or ramp across 1,200+ inland delivery cities — typed or dropped on the map.</p>
+              </div>
+            </div>
+            <div class="hiw-node"></div>
+            <div class="hiw-half bot">
+              <div class="hiw-stub"></div>
+              <div class="hiw-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF7B30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              </div>
+            </div>
           </div>
-        </div>
-        <!-- Step 02 -->
-        <div class="reveal flex gap-5 md:gap-7">
-          <div class="flex flex-col items-center">
-            <div class="shrink-0 w-16 h-16 rounded-2xl grid place-items-center display text-[20px] text-white num" style="background:#FF7B30;box-shadow:0 14px 30px -10px rgba(255,123,48,0.6),inset 0 1px 0 rgba(255,255,255,0.35);">02</div>
-            <div class="w-[3px] grow rounded-full mt-2" style="background:linear-gradient(#FF7B30,#4DA3FF);"></div>
+
+          <!-- 03 — icon above, text below -->
+          <div class="hiw-col">
+            <div class="hiw-half top">
+              <div class="hiw-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#4DA3FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"/><line x1="6.5" y1="21" x2="6.5" y2="12"/><line x1="12" y1="21" x2="12" y2="4"/><line x1="17.5" y1="21" x2="17.5" y2="9"/></svg>
+              </div>
+              <div class="hiw-stub"></div>
+            </div>
+            <div class="hiw-node"></div>
+            <div class="hiw-half bot">
+              <div class="hiw-text">
+                <div class="hiw-title">Calculate rate</div>
+                <div class="hiw-uline" style="background:#4DA3FF;"></div>
+                <p class="hiw-desc">A fully itemised, all-in price in under 30 seconds — live diesel, FSC, chassis pool and port fees baked in.</p>
+              </div>
+            </div>
           </div>
-          <div class="pb-12 pt-2.5">
-            <h3 class="display text-[24px] md:text-[26px] text-[var(--navy)] leading-tight">Pick destination</h3>
-            <p class="text-[var(--muted)] text-[15px] mt-2 max-w-md">Door, warehouse or ramp across 1,200+ inland delivery cities — typed or dropped on the map.</p>
+
+          <!-- 04 — text above, icon below -->
+          <div class="hiw-col">
+            <div class="hiw-half top">
+              <div class="hiw-text">
+                <div class="hiw-title">Export quote</div>
+                <div class="hiw-uline" style="background:#00C16A;"></div>
+                <p class="hiw-desc">Send it out as a brand-ready PDF, structured JSON or embeddable HTML — your markup applied automatically.</p>
+              </div>
+            </div>
+            <div class="hiw-node"></div>
+            <div class="hiw-half bot">
+              <div class="hiw-stub"></div>
+              <div class="hiw-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#00C16A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+              </div>
+            </div>
           </div>
-        </div>
-        <!-- Step 03 -->
-        <div class="reveal flex gap-5 md:gap-7">
-          <div class="flex flex-col items-center">
-            <div class="shrink-0 w-16 h-16 rounded-2xl grid place-items-center display text-[20px] text-white num" style="background:#4DA3FF;box-shadow:0 14px 30px -10px rgba(77,163,255,0.6),inset 0 1px 0 rgba(255,255,255,0.35);">03</div>
-            <div class="w-[3px] grow rounded-full mt-2" style="background:linear-gradient(#4DA3FF,#00C16A);"></div>
+
+          <!-- 05 — icon above, text below -->
+          <div class="hiw-col">
+            <div class="hiw-half top">
+              <div class="hiw-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div class="hiw-stub"></div>
+            </div>
+            <div class="hiw-node"></div>
+            <div class="hiw-half bot">
+              <div class="hiw-text">
+                <div class="hiw-title">Book shipment</div>
+                <div class="hiw-uline" style="background:#A855F7;"></div>
+                <p class="hiw-desc">Hand off to any of 2,800+ vetted carrier partners and track the container from gate to door.</p>
+              </div>
+            </div>
           </div>
-          <div class="pb-12 pt-2.5">
-            <h3 class="display text-[24px] md:text-[26px] text-[var(--navy)] leading-tight">Calculate rate</h3>
-            <p class="text-[var(--muted)] text-[15px] mt-2 max-w-md">A fully itemised, all-in price in under 30 seconds — live diesel, FSC, chassis pool and port fees baked in.</p>
-          </div>
-        </div>
-        <!-- Step 04 -->
-        <div class="reveal flex gap-5 md:gap-7">
-          <div class="flex flex-col items-center">
-            <div class="shrink-0 w-16 h-16 rounded-2xl grid place-items-center display text-[20px] text-white num" style="background:#00C16A;box-shadow:0 14px 30px -10px rgba(0,193,106,0.6),inset 0 1px 0 rgba(255,255,255,0.35);">04</div>
-            <div class="w-[3px] grow rounded-full mt-2" style="background:linear-gradient(#00C16A,#A855F7);"></div>
-          </div>
-          <div class="pb-12 pt-2.5">
-            <h3 class="display text-[24px] md:text-[26px] text-[var(--navy)] leading-tight">Export quote</h3>
-            <p class="text-[var(--muted)] text-[15px] mt-2 max-w-md">Send it out as a brand-ready PDF, structured JSON or embeddable HTML — your markup applied automatically.</p>
-          </div>
-        </div>
-        <!-- Step 05 -->
-        <div class="reveal flex gap-5 md:gap-7">
-          <div class="flex flex-col items-center">
-            <div class="shrink-0 w-16 h-16 rounded-2xl grid place-items-center display text-[20px] text-white num" style="background:#A855F7;box-shadow:0 14px 30px -10px rgba(168,85,247,0.6),inset 0 1px 0 rgba(255,255,255,0.35);">05</div>
-          </div>
-          <div class="pt-2.5">
-            <h3 class="display text-[24px] md:text-[26px] text-[var(--navy)] leading-tight">Book shipment</h3>
-            <p class="text-[var(--muted)] text-[15px] mt-2 max-w-md">Hand off to any of 2,800+ vetted carrier partners and track the container from gate to door.</p>
-          </div>
+
         </div>
       </div>
     </div>
@@ -474,7 +560,7 @@
         <div class="reveal reveal-delay-1">
           <div class="relative rounded-2xl overflow-hidden border border-white/8" style="height:520px;box-shadow:0 30px 80px -20px rgba(0,0,0,0.8);">
             <div id="map2" class="absolute inset-0"></div>
-            <div class="absolute top-4 left-4 glass-dark rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
+            <div class="absolute top-4 left-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
               <div class="text-white/55 uppercase tracking-[0.12em] text-[10px]">Hovered hub</div>
               <div class="display text-white text-[14px] mt-1" id="hubName">Chicago</div>
               <div class="num text-white/70 mt-1"><b class="text-white" id="hubTime">36 hr</b> avg transit · <b class="text-white" id="hubRate">$1,920</b> avg</div>
