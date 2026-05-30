@@ -118,7 +118,10 @@
     .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(0,193,106,0.6);animation:livePulse 1.8s ease-out infinite;}
     @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(0,193,106,0.55);}70%{box-shadow:0 0 0 8px rgba(0,193,106,0);}100%{box-shadow:0 0 0 0 rgba(0,193,106,0);}}
 
-    .grid-bg{background-image:radial-gradient(1200px 600px at 20% 10%,rgba(77,163,255,0.18),transparent 60%),radial-gradient(900px 500px at 90% 30%,rgba(255,59,48,0.16),transparent 55%),linear-gradient(180deg,#050B1A 0%,#0B1F44 100%);}
+    .grid-bg{position:relative;background:#04081A;background-image:radial-gradient(900px 500px at 18% 8%,rgba(77,163,255,0.22),transparent 55%),radial-gradient(1000px 600px at 88% 30%,rgba(255,59,48,0.18),transparent 55%),radial-gradient(600px 500px at 50% 110%,rgba(168,85,247,0.16),transparent 60%),linear-gradient(180deg,#04081A 0%,#0A1733 55%,#0B1F44 100%);}
+    .grid-bg::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);}
+    .grid-bg::after{content:"";position:absolute;inset:0;pointer-events:none;overflow:hidden;background-image:radial-gradient(180px 180px at 12% 18%,rgba(77,163,255,0.45),transparent 70%),radial-gradient(220px 220px at 86% 22%,rgba(255,59,48,0.3),transparent 70%),radial-gradient(200px 200px at 60% 90%,rgba(168,85,247,0.32),transparent 70%);filter:blur(60px);animation:orbDrift 22s ease-in-out infinite;}
+    @keyframes orbDrift{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(40px,-30px) scale(1.05);}}
     .no-scrollbar::-webkit-scrollbar{display:none;} .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
   </style>
 </head>
@@ -173,7 +176,7 @@
           </div>
           <h1 class="display text-white mt-4 text-[30px] md:text-[40px] leading-[1.08] max-w-xl">
             Drayage quotes, port to door —
-            <span style="background:linear-gradient(90deg,#FF3B30,#FF8470 45%,#4DA3FF);-webkit-background-clip:text;background-clip:text;color:transparent;">priced in 30 seconds.</span>
+            <span style="color:#FF3B30;">priced in 30 seconds.</span>
           </h1>
           <p class="mt-3 text-white/65 text-[14px] max-w-md">
             Live diesel, FSC, chassis & port fees across every major U.S. & Canadian port.
