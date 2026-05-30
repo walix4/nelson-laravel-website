@@ -1131,7 +1131,7 @@
     {n:'Accessorials', d:'Tolls, overweight, hazmat, reefer plug, lumper.',     i:'clipboard',a:'#FF3B30'},
     {n:'Overhead',     d:'Admin, dispatch, ELD/TMS, insurance, depreciation.',  i:'settings', a:'#1E3A8A'},
   ];
-  document.getElementById('costGrid').innerHTML=COSTS.map((c,i)=>`<div class="bento-card glass rounded-2xl p-6 reveal reveal-delay-${i%3} flex items-start gap-4"><div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:${c.a}14;border:1px solid ${c.a}26;">${svgIcon(c.i,c.a)}</div><div><div class="display text-[17px] text-[var(--navy)]">${c.n}</div><p class="text-[13px] text-[var(--muted)] mt-1.5 leading-relaxed">${c.d}</p></div></div>`).join('');
+  document.getElementById('costGrid').innerHTML=COSTS.map((c,i)=>`<div class="bento-card glass rounded-2xl p-6 reveal reveal-delay-${i%3} flex items-start gap-4"><div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:${c.a};box-shadow:0 9px 20px -8px ${c.a}b3;">${svgIcon(c.i,'#fff')}</div><div><div class="display text-[17px] text-[var(--navy)]">${c.n}</div><p class="text-[13px] text-[var(--muted)] mt-1.5 leading-relaxed">${c.d}</p></div></div>`).join('');
   document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
 
   // Shipments-in-process tickers: scroll up one row, hold ~2s, repeat (looping).
