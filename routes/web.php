@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home-1')->name('home-1');
 
+Route::view('/dryge', 'dryge')->name('dryge');
+
 Route::post('/contact', function (Request $request) {
     $data = $request->validate([
         'name'    => 'required|string|max:120',
