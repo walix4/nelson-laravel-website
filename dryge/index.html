@@ -46,25 +46,28 @@
     .port-icon.origin .ring{border-color:var(--red);}
     .port-icon.destination .dot{background:var(--green);box-shadow:0 0 14px var(--green),0 0 28px rgba(0,193,106,0.6);}
     .port-icon.destination .ring{border-color:var(--green);}
-    .port-icon .label{position:absolute;left:18px;top:-3px;white-space:nowrap;font-size:10px;font-weight:600;letter-spacing:0.04em;color:rgba(255,255,255,0.85);text-shadow:0 1px 6px rgba(0,0,0,0.8);pointer-events:none;}
+    .port-icon .label{position:absolute;left:18px;top:-3px;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:0.04em;color:#0B1F44;text-shadow:0 1px 6px rgba(255,255,255,0.9),0 0 2px rgba(255,255,255,0.7);pointer-events:none;}
     @keyframes pulseRing{0%{width:14px;height:14px;opacity:0.9;}100%{width:60px;height:60px;opacity:0;}}
 
     .truck-icon{width:32px;height:18px;border-radius:3px;background:linear-gradient(180deg,#FFD23F,#F2A516);border:1.5px solid #1A1A1A;box-shadow:0 4px 14px rgba(0,0,0,0.55),0 0 18px rgba(255,210,63,0.6);position:relative;}
     .truck-icon::before{content:"";position:absolute;left:-9px;top:1px;width:9px;height:14px;border-radius:2px;background:linear-gradient(180deg,#FF3B30,#C7241A);border:1.5px solid #1A1A1A;}
 
-    .leaflet-container{background:#03070F !important;font-family:inherit;}
-    .leaflet-control-attribution{background:rgba(11,31,68,0.55)!important;color:rgba(255,255,255,0.42)!important;backdrop-filter:blur(6px);font-size:9px!important;border-radius:6px 0 0 0;}
-    .leaflet-control-attribution a{color:rgba(255,255,255,0.65)!important;}
-    .leaflet-control-zoom a{background:rgba(11,31,68,0.85)!important;color:#fff!important;border:1px solid rgba(255,255,255,0.1)!important;}
-    .leaflet-control-zoom a:hover{background:rgba(77,163,255,0.85)!important;}
-    .leaflet-tile-pane{filter:saturate(1.1) contrast(1.02);}
+    .leaflet-container{background:#E8ECF1 !important;font-family:inherit;}
+    .leaflet-control-attribution{background:rgba(255,255,255,0.7)!important;color:rgba(11,31,68,0.55)!important;backdrop-filter:blur(6px);font-size:9px!important;border-radius:6px 0 0 0;}
+    .leaflet-control-attribution a{color:rgba(11,31,68,0.75)!important;}
+    .leaflet-control-zoom a{background:rgba(255,255,255,0.95)!important;color:#0B1F44!important;border:1px solid rgba(11,31,68,0.12)!important;}
+    .leaflet-control-zoom a:hover{background:rgba(77,163,255,0.95)!important;color:#fff!important;}
+    .leaflet-tile-pane{filter:grayscale(0.08) contrast(0.98);}
 
     .leaflet-overlay-pane .route-line{stroke:#FF3B30;stroke-width:3.2;fill:none;filter:drop-shadow(0 0 8px rgba(255,59,48,0.7));stroke-linecap:round;}
     .leaflet-overlay-pane .route-line-draw{stroke-dasharray:var(--len,1200);stroke-dashoffset:var(--len,1200);animation:drawLine 1.6s cubic-bezier(.65,.05,.36,1) forwards;}
     @keyframes drawLine{to{stroke-dashoffset:0;}}
-    .leaflet-overlay-pane .corridor{stroke:rgba(77,163,255,0.35);stroke-width:1.1;fill:none;stroke-dasharray:3 7;animation:dashFlow 9s linear infinite;}
+    .leaflet-overlay-pane .corridor{stroke:rgba(11,31,68,0.32);stroke-width:1.1;fill:none;stroke-dasharray:3 7;animation:dashFlow 9s linear infinite;}
     @keyframes dashFlow{from{stroke-dashoffset:0;}to{stroke-dashoffset:-60;}}
-    .leaflet-overlay-pane .corridor-warm{stroke:rgba(255,59,48,0.28);}
+    @keyframes dashShift{to{stroke-dashoffset:-240;}}
+    .station-pulse{transform-origin:center;animation:stationPulse 3.2s ease-in-out infinite;}
+    @keyframes stationPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+    .leaflet-overlay-pane .corridor-warm{stroke:rgba(255,59,48,0.4);}
 
     .input{width:100%;padding:0.85rem 1rem;border:1px solid rgba(11,31,68,0.12);border-radius:10px;background:rgba(255,255,255,0.7);font-size:0.92rem;color:var(--ink);transition:border-color .2s,box-shadow .2s,background .2s;}
     .input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(77,163,255,0.18);background:#fff;}
@@ -191,9 +194,9 @@
     </div>
 
     <div class="max-w-[1400px] mx-auto px-6 pb-10 relative z-10">
-      <div class="relative grid lg:grid-cols-[1.55fr_1fr] gap-5">
+      <div class="relative grid lg:grid-cols-[1.55fr_1fr] gap-5 lg:items-stretch">
         <!-- MAP -->
-        <div class="relative rounded-2xl overflow-hidden border border-white/8" style="height:min(640px,72vh);box-shadow:0 30px 80px -20px rgba(0,0,0,0.7);">
+        <div class="relative rounded-2xl overflow-hidden border border-white/8" style="height:620px;box-shadow:0 30px 80px -20px rgba(0,0,0,0.7);">
           <div id="map" class="absolute inset-0"></div>
 
           <div class="absolute top-4 left-4 glass-dark rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
@@ -226,8 +229,8 @@
         </div>
 
         <!-- CALCULATOR -->
-        <div id="quote" class="relative">
-          <div id="calcCard" class="calc-tilt glass rounded-2xl p-5 md:p-6 lg:p-7">
+        <div id="quote" class="relative lg:h-[620px]">
+          <div id="calcCard" class="calc-tilt glass rounded-2xl p-5 md:p-6 lg:p-7 lg:h-full lg:overflow-y-auto">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant quote engine</div>
@@ -372,8 +375,81 @@
         <p class="max-w-md text-[var(--muted)] text-[15px]">From the first input to a customer-ready PDF, every drayage move is priced and visualized in under a minute.</p>
       </div>
       <div class="mt-14 relative">
-        <div class="hidden md:block absolute left-0 right-0 top-7 h-px bg-gradient-to-r from-transparent via-[var(--navy)]/15 to-transparent"></div>
-        <div id="stepsGrid" class="grid md:grid-cols-5 gap-6"></div>
+        <svg viewBox="0 0 1300 200" class="w-full block" preserveAspectRatio="xMidYMid meet" style="max-height:240px;overflow:visible;">
+          <defs>
+            <path id="loopPath" d="M 100 100 C 200 30, 275 30, 375 100 C 475 170, 550 170, 650 100 C 750 30, 825 30, 925 100 C 1025 170, 1100 170, 1200 100" fill="none"/>
+            <linearGradient id="pipeGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#FF3B30"/>
+              <stop offset="0.3" stop-color="#FF7B30"/>
+              <stop offset="0.55" stop-color="#4DA3FF"/>
+              <stop offset="0.8" stop-color="#00C16A"/>
+              <stop offset="1" stop-color="#A855F7"/>
+            </linearGradient>
+            <g id="containerIcon">
+              <rect x="-14" y="-9" width="28" height="18" rx="2" fill="#FFD23F" stroke="#0B1F44" stroke-width="1.5"/>
+              <rect x="-22" y="-8" width="9" height="15" rx="1" fill="#FF3B30" stroke="#0B1F44" stroke-width="1.5"/>
+              <line x1="-9" y1="-5" x2="-9" y2="5" stroke="#0B1F44" stroke-width="1"/>
+              <line x1="-4" y1="-5" x2="-4" y2="5" stroke="#0B1F44" stroke-width="1"/>
+              <line x1="2" y1="-5" x2="2" y2="5" stroke="#0B1F44" stroke-width="1"/>
+              <line x1="8" y1="-5" x2="8" y2="5" stroke="#0B1F44" stroke-width="1"/>
+              <circle cx="-10" cy="11" r="2.5" fill="#0B1F44"/>
+              <circle cx="9" cy="11" r="2.5" fill="#0B1F44"/>
+            </g>
+          </defs>
+
+          <use href="#loopPath" stroke="rgba(11,31,68,0.14)" stroke-width="2.5" stroke-dasharray="4 6" fill="none"/>
+          <use href="#loopPath" stroke="url(#pipeGrad)" stroke-width="3.2" fill="none" opacity="0.92" stroke-linecap="round" stroke-dasharray="10 14" style="animation:dashShift 5s linear infinite;"/>
+
+          <!-- Stations -->
+          <g transform="translate(100,100)" class="station-pulse">
+            <circle r="34" fill="white" stroke="rgba(255,59,48,0.15)" stroke-width="8"/>
+            <circle r="24" fill="#FF3B30"/>
+            <g transform="translate(-10,-10)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="10" cy="4" r="2.5"/><line x1="10" y1="6.5" x2="10" y2="18"/><path d="M3 13c1.6 3 4.2 5 7 5s5.4-2 7-5"/>
+            </g>
+          </g>
+          <g transform="translate(375,100)" class="station-pulse" style="animation-delay:.6s;">
+            <circle r="34" fill="white" stroke="rgba(255,123,48,0.15)" stroke-width="8"/>
+            <circle r="24" fill="#FF7B30"/>
+            <g transform="translate(-10,-11)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 1.5c-3.3 0-6 2.6-6 6 0 4 6 12 6 12s6-8 6-12c0-3.4-2.7-6-6-6z"/><circle cx="10" cy="7.5" r="2.2" fill="white" stroke="#FF7B30"/>
+            </g>
+          </g>
+          <g transform="translate(650,100)" class="station-pulse" style="animation-delay:1.2s;">
+            <circle r="34" fill="white" stroke="rgba(77,163,255,0.15)" stroke-width="8"/>
+            <circle r="24" fill="#4DA3FF"/>
+            <g transform="translate(-10,-10)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="16" height="16" rx="2"/><line x1="6" y1="14" x2="6" y2="10"/><line x1="10" y1="14" x2="10" y2="6"/><line x1="14" y1="14" x2="14" y2="9"/>
+            </g>
+          </g>
+          <g transform="translate(925,100)" class="station-pulse" style="animation-delay:1.8s;">
+            <circle r="34" fill="white" stroke="rgba(0,193,106,0.15)" stroke-width="8"/>
+            <circle r="24" fill="#00C16A"/>
+            <g transform="translate(-10,-10)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 2.5v10"/><path d="M5 8.5l5 5 5-5"/><path d="M3 17h14"/>
+            </g>
+          </g>
+          <g transform="translate(1200,100)" class="station-pulse" style="animation-delay:2.4s;">
+            <circle r="34" fill="white" stroke="rgba(168,85,247,0.15)" stroke-width="8"/>
+            <circle r="24" fill="#A855F7"/>
+            <g transform="translate(-10,-9)" stroke="white" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9.5l4.5 4.5L17 5"/>
+            </g>
+          </g>
+
+          <!-- Moving containers (looping along path) -->
+          <use href="#containerIcon"><animateMotion dur="9s" repeatCount="indefinite" rotate="auto"><mpath href="#loopPath"/></animateMotion></use>
+          <use href="#containerIcon"><animateMotion dur="9s" begin="-3s" repeatCount="indefinite" rotate="auto"><mpath href="#loopPath"/></animateMotion></use>
+          <use href="#containerIcon"><animateMotion dur="9s" begin="-6s" repeatCount="indefinite" rotate="auto"><mpath href="#loopPath"/></animateMotion></use>
+        </svg>
+
+        <div class="mt-2 grid grid-cols-5 gap-2 text-center px-2">
+          <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#FF3B30]">01</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Choose origin</div><div class="text-[11px] text-[var(--muted)] mt-0.5">Every U.S. & Canadian port</div></div>
+          <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#FF7B30]">02</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Pick destination</div><div class="text-[11px] text-[var(--muted)] mt-0.5">1,200+ inland cities</div></div>
+          <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#4DA3FF]">03</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Calculate rate</div><div class="text-[11px] text-[var(--muted)] mt-0.5">Priced in 30s</div></div>
+          <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#00C16A]">04</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Export quote</div><div class="text-[11px] text-[var(--muted)] mt-0.5">PDF · JSON · HTML</div></div>
+          <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#A855F7]">05</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Book shipment</div><div class="text-[11px] text-[var(--muted)] mt-0.5">2,800+ carriers</div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -634,7 +710,7 @@
   originSel.value='LAX'; destSel.value='DAL';
 
   const map=L.map('map',{zoomControl:true,attributionControl:true,scrollWheelZoom:false,minZoom:3,maxZoom:8}).setView([39.5,-96],4);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'© OpenStreetMap · © CARTO'}).addTo(map);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'© OpenStreetMap · © CARTO'}).addTo(map);
 
   const corridorLayer=L.layerGroup().addTo(map);
   CORRIDORS.forEach(([a,b])=>{
@@ -744,7 +820,7 @@
   },1800);
 
   const map2=L.map('map2',{zoomControl:false,attributionControl:false,scrollWheelZoom:false,dragging:true,minZoom:3,maxZoom:7}).setView([39,-96],4);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'© OSM · CARTO'}).addTo(map2);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'© OSM · CARTO'}).addTo(map2);
   CORRIDORS.forEach(([a,b])=>{const A=PORTS[a]?.coords||HUBS[a]?.coords, B=PORTS[b]?.coords||HUBS[b]?.coords;L.polyline([A,B],{className:'corridor',weight:1.1}).addTo(map2);});
   Object.entries(PORTS).forEach(([k,p])=>L.marker(p.coords,{icon:L.divIcon({html:`<div class="port-icon"><div class="ring"></div><div class="dot"></div></div>`,className:'',iconSize:[14,14],iconAnchor:[7,7]})}).addTo(map2));
   const hubMeta={DAL:{time:'36 hr',rate:'$1,920'},CHI:{time:'72 hr',rate:'$2,640'},ATL:{time:'24 hr',rate:'$1,180'},MEM:{time:'30 hr',rate:'$1,420'},KCM:{time:'48 hr',rate:'$1,980'},DEN:{time:'60 hr',rate:'$2,260'},PHX:{time:'12 hr',rate:'$980'},NSH:{time:'30 hr',rate:'$1,540'},IND:{time:'66 hr',rate:'$2,420'},SLC:{time:'52 hr',rate:'$2,180'}};
@@ -755,24 +831,25 @@
     btn.addEventListener('mouseleave',()=>{btn.style.transform='';});
   });
 
-  const STEPS=[
-    {n:'01',t:'Choose origin port',d:'Every U.S. & Canadian container port — including rail ramps.',c:'#FF3B30'},
-    {n:'02',t:'Select destination',d:'1,200+ inland cities pre-mapped to delivery zones.',c:'#FF7B30'},
-    {n:'03',t:'Calculate rate',d:'Live diesel, FSC, chassis, accessorials — priced in 30s.',c:'#4DA3FF'},
-    {n:'04',t:'Export quote',d:'Brand-ready PDF, JSON for your TMS, or shareable HTML link.',c:'#00C16A'},
-    {n:'05',t:'Book shipment',d:'Hand off to your preferred carrier or our 2,800+ partner network.',c:'#A855F7'},
-  ];
-  document.getElementById('stepsGrid').innerHTML=STEPS.map((s,i)=>`<div class="reveal reveal-delay-${Math.min(3,i)} relative"><div class="w-14 h-14 rounded-2xl flex items-center justify-center display text-[18px] text-white num" style="background:${s.c};box-shadow:0 14px 30px -10px ${s.c}80;">${s.n}</div><h3 class="display text-[18px] text-[var(--navy)] mt-5">${s.t}</h3><p class="text-[13px] text-[var(--muted)] mt-1.5">${s.d}</p></div>`).join('');
+  const ICONS={
+    fuel:'<line x1="3" x2="15" y1="22" y2="22"/><line x1="4" x2="14" y1="9" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/>',
+    user:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/>',
+    anchor:'<circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/>',
+    truck:'<path d="M14 18V6H2v12h2"/><path d="M14 8h4l4 4v6h-2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+    clipboard:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>',
+    settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  };
+  function svgIcon(name,color){return `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]}</svg>`;}
 
   const COSTS=[
-    {n:'Fuel + FSC',d:'Live diesel × MPG × distance, plus carrier FSC.',i:'⛽',a:'#FF3B30'},
-    {n:'Driver labor',d:'Hourly wage × transit time + per diem on 400+ mi.',i:'👤',a:'#4DA3FF'},
-    {n:'Port charges',d:'Gate fees, terminal handling, exam fees if pulled.',i:'⚓',a:'#0B1F44'},
-    {n:'Chassis',d:'Daily rental, pool fees, per-diem on long dwell.',i:'🛞',a:'#F2A516'},
-    {n:'Accessorials',d:'Tolls, overweight, hazmat, reefer plug, lumper.',i:'📋',a:'#A855F7'},
-    {n:'Overhead',d:'Admin, dispatch, ELD/TMS, insurance, depreciation.',i:'⚙️',a:'#00C16A'},
+    {n:'Fuel + FSC',   d:'Live diesel × MPG × distance, plus carrier FSC.',     i:'fuel',     a:'#FF3B30'},
+    {n:'Driver labor', d:'Hourly wage × transit time + per diem on 400+ mi.',   i:'user',     a:'#4DA3FF'},
+    {n:'Port charges', d:'Gate fees, terminal handling, exam fees if pulled.',  i:'anchor',   a:'#0B1F44'},
+    {n:'Chassis',      d:'Daily rental, pool fees, per-diem on long dwell.',    i:'truck',    a:'#F2A516'},
+    {n:'Accessorials', d:'Tolls, overweight, hazmat, reefer plug, lumper.',     i:'clipboard',a:'#A855F7'},
+    {n:'Overhead',     d:'Admin, dispatch, ELD/TMS, insurance, depreciation.',  i:'settings', a:'#00C16A'},
   ];
-  document.getElementById('costGrid').innerHTML=COSTS.map((c,i)=>`<div class="bento-card glass rounded-2xl p-5 reveal reveal-delay-${i%4}"><div class="w-9 h-9 rounded-lg flex items-center justify-center text-[16px]" style="background:${c.a}18;color:${c.a};border:1px solid ${c.a}30;">${c.i}</div><div class="display text-[15px] text-[var(--navy)] mt-3">${c.n}</div><p class="text-[12px] text-[var(--muted)] mt-1.5 leading-relaxed">${c.d}</p></div>`).join('');
+  document.getElementById('costGrid').innerHTML=COSTS.map((c,i)=>`<div class="bento-card glass rounded-2xl p-5 reveal reveal-delay-${i%4}"><div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:${c.a}14;border:1px solid ${c.a}26;">${svgIcon(c.i,c.a)}</div><div class="display text-[15px] text-[var(--navy)] mt-3">${c.n}</div><p class="text-[12px] text-[var(--muted)] mt-1.5 leading-relaxed">${c.d}</p></div>`).join('');
   document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
   </script>
 
