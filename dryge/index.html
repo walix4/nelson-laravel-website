@@ -15,10 +15,10 @@
 
   <style>
     :root{
-      --navy:#010535; --navy-2:#0B1052; --navy-3:#000218;
+      --navy:#0B2350; --navy-2:#163A7E; --navy-3:#06143A;
       --red:#FF3B30; --red-2:#E0241A;
-      --blue:#4DA3FF; --blue-2:#7BBCFF;
-      --bg:#F8FAFC; --green:#00C16A;
+      --blue:#3A5FC0; --blue-2:#6E8FE0;
+      --bg:#F8FAFC; --green:#1E3A8A;
       --ink:#0B1220; --muted:#5B6473;
     }
     *{-webkit-font-smoothing:antialiased;}
@@ -37,23 +37,23 @@
       backdrop-filter:blur(18px) saturate(160%); -webkit-backdrop-filter:blur(18px) saturate(160%);
       border:1px solid rgba(255,255,255,0.1); color:#fff;
     }
-    /* Sky-blue brand glass — map overlay cards (matches #00A5E7 header) */
+    /* Sky-blue brand glass — map overlay cards (matches #0B2350 header) */
     .glass-sky{
-      background:linear-gradient(155deg, rgba(0,150,214,0.86), rgba(0,116,184,0.84));
+      background:linear-gradient(155deg, rgba(20,45,110,0.86), rgba(14,33,82,0.84));
       backdrop-filter:blur(16px) saturate(170%); -webkit-backdrop-filter:blur(16px) saturate(170%);
-      border:1px solid rgba(190,228,255,0.4); color:#fff;
-      box-shadow:0 14px 34px -14px rgba(0,90,150,0.65), inset 0 1px 0 rgba(255,255,255,0.25);
+      border:1px solid rgba(150,180,235,0.4); color:#fff;
+      box-shadow:0 14px 34px -14px rgba(8,22,60,0.65), inset 0 1px 0 rgba(255,255,255,0.25);
     }
     .glass-pill{ background:rgba(255,255,255,0.08); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,0.16); }
 
     .port-icon{position:relative;width:14px;height:14px;pointer-events:auto;}
-    .port-icon .dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px var(--blue),0 0 26px rgba(77,163,255,0.55);z-index:3;border:1.5px solid #fff;}
+    .port-icon .dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px var(--blue),0 0 26px rgba(58,95,192,0.55);z-index:3;border:1.5px solid #fff;}
     .port-icon .ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;border:2px solid var(--blue);opacity:0.9;animation:pulseRing 2.6s ease-out infinite;}
     .port-icon.origin .dot{background:var(--red);box-shadow:0 0 16px var(--red),0 0 32px rgba(255,59,48,0.6);}
     .port-icon.origin .ring{border-color:var(--red);}
-    .port-icon.destination .dot{background:var(--green);box-shadow:0 0 14px var(--green),0 0 28px rgba(0,193,106,0.6);}
+    .port-icon.destination .dot{background:var(--green);box-shadow:0 0 14px var(--green),0 0 28px rgba(30,58,138,0.6);}
     .port-icon.destination .ring{border-color:var(--green);}
-    .port-icon .label{position:absolute;left:18px;top:-3px;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:0.04em;color:#010535;text-shadow:0 1px 6px rgba(255,255,255,0.9),0 0 2px rgba(255,255,255,0.7);pointer-events:none;}
+    .port-icon .label{position:absolute;left:18px;top:-3px;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:0.04em;color:#0B2350;text-shadow:0 1px 6px rgba(255,255,255,0.9),0 0 2px rgba(255,255,255,0.7);pointer-events:none;}
     @keyframes pulseRing{0%{width:14px;height:14px;opacity:0.9;}100%{width:60px;height:60px;opacity:0;}}
 
     .truck-wrap{width:60px;height:40px;display:flex;align-items:center;justify-content:center;will-change:transform;}
@@ -68,8 +68,8 @@
     .leaflet-container{background:#E8ECF1 !important;font-family:inherit;}
     .leaflet-control-attribution{background:rgba(255,255,255,0.7)!important;color:rgba(11,31,68,0.55)!important;backdrop-filter:blur(6px);font-size:9px!important;border-radius:6px 0 0 0;}
     .leaflet-control-attribution a{color:rgba(11,31,68,0.75)!important;}
-    .leaflet-control-zoom a{background:rgba(255,255,255,0.95)!important;color:#010535!important;border:1px solid rgba(11,31,68,0.12)!important;}
-    .leaflet-control-zoom a:hover{background:rgba(77,163,255,0.95)!important;color:#fff!important;}
+    .leaflet-control-zoom a{background:rgba(255,255,255,0.95)!important;color:#0B2350!important;border:1px solid rgba(11,31,68,0.12)!important;}
+    .leaflet-control-zoom a:hover{background:rgba(58,95,192,0.95)!important;color:#fff!important;}
     .leaflet-tile-pane{filter:grayscale(0.08) contrast(0.98);}
 
     .leaflet-overlay-pane .route-line{stroke:#FF3B30;stroke-width:3.2;fill:none;filter:drop-shadow(0 0 8px rgba(255,59,48,0.7));stroke-linecap:round;}
@@ -82,7 +82,7 @@
     .leaflet-overlay-pane .corridor-warm{stroke:rgba(255,59,48,0.4);}
 
     .input{width:100%;padding:0.85rem 1rem;border:1px solid rgba(11,31,68,0.12);border-radius:10px;background:rgba(255,255,255,0.7);font-size:0.92rem;color:var(--ink);transition:border-color .2s,box-shadow .2s,background .2s;}
-    .input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(77,163,255,0.18);background:#fff;}
+    .input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(58,95,192,0.18);background:#fff;}
     select.input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%230B1F44'%3e%3cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right .8rem center;background-size:1.1rem;padding-right:2.4rem;}
     .input-label{font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--navy);text-transform:uppercase;}
 
@@ -127,19 +127,19 @@
     @keyframes floatTag{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
 
     .bento-card{position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1);}
-    .bento-card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(77,163,255,0.18),transparent 40%);opacity:0;transition:opacity .3s;}
+    .bento-card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(58,95,192,0.18),transparent 40%);opacity:0;transition:opacity .3s;}
     .bento-card:hover{transform:translateY(-4px);}
     .bento-card:hover::after{opacity:1;}
 
     .calc-tilt{transition:transform .12s linear;transform-style:preserve-3d;}
 
-    .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(0,193,106,0.6);animation:livePulse 1.8s ease-out infinite;}
-    @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(0,193,106,0.55);}70%{box-shadow:0 0 0 8px rgba(0,193,106,0);}100%{box-shadow:0 0 0 0 rgba(0,193,106,0);}}
-    @keyframes livePulseBlue{0%{box-shadow:0 0 0 0 rgba(77,163,255,0.55);}70%{box-shadow:0 0 0 8px rgba(77,163,255,0);}100%{box-shadow:0 0 0 0 rgba(77,163,255,0);}}
+    .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(30,58,138,0.6);animation:livePulse 1.8s ease-out infinite;}
+    @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(30,58,138,0.55);}70%{box-shadow:0 0 0 8px rgba(30,58,138,0);}100%{box-shadow:0 0 0 0 rgba(30,58,138,0);}}
+    @keyframes livePulseBlue{0%{box-shadow:0 0 0 0 rgba(58,95,192,0.55);}70%{box-shadow:0 0 0 8px rgba(58,95,192,0);}100%{box-shadow:0 0 0 0 rgba(58,95,192,0);}}
 
-    .grid-bg{position:relative;background:#04081A;background-image:radial-gradient(900px 500px at 18% 8%,rgba(77,163,255,0.22),transparent 55%),radial-gradient(1000px 600px at 88% 30%,rgba(255,59,48,0.18),transparent 55%),radial-gradient(600px 500px at 50% 110%,rgba(168,85,247,0.16),transparent 60%),linear-gradient(180deg,#04081A 0%,#0A1733 55%,#010535 100%);}
+    .grid-bg{position:relative;background:#07153B;background-image:radial-gradient(900px 500px at 18% 8%,rgba(58,95,192,0.22),transparent 55%),radial-gradient(1000px 600px at 88% 30%,rgba(255,59,48,0.18),transparent 55%),radial-gradient(600px 500px at 50% 110%,rgba(255,59,48,0.16),transparent 60%),linear-gradient(180deg,#07153B 0%,#0E2452 55%,#0B2350 100%);}
     .grid-bg::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);}
-    .grid-bg::after{content:"";position:absolute;inset:0;pointer-events:none;overflow:hidden;background-image:radial-gradient(180px 180px at 12% 18%,rgba(77,163,255,0.4),transparent 70%),radial-gradient(220px 220px at 86% 22%,rgba(255,59,48,0.28),transparent 70%),radial-gradient(200px 200px at 60% 90%,rgba(168,85,247,0.3),transparent 70%);filter:blur(48px);}
+    .grid-bg::after{content:"";position:absolute;inset:0;pointer-events:none;overflow:hidden;background-image:radial-gradient(180px 180px at 12% 18%,rgba(58,95,192,0.4),transparent 70%),radial-gradient(220px 220px at 86% 22%,rgba(255,59,48,0.28),transparent 70%),radial-gradient(200px 200px at 60% 90%,rgba(255,59,48,0.3),transparent 70%);filter:blur(48px);}
     /* How it works — horizontal zig-zag timeline */
     .hiw{position:relative;}
     .hiw.reveal{opacity:1;transform:none;}
@@ -154,7 +154,7 @@
     .hiw-half{height:212px;display:flex;flex-direction:column;align-items:center;width:100%;}
     .hiw-half.top{justify-content:flex-end;}
     .hiw-half.bot{justify-content:flex-start;}
-    .hiw-node{width:18px;height:18px;border-radius:50%;background:#0A1124;border:3px solid rgba(255,255,255,0.55);z-index:3;flex:0 0 auto;box-shadow:0 0 0 6px #080E1D;}
+    .hiw-node{width:18px;height:18px;border-radius:50%;background:#0C2150;border:3px solid rgba(255,255,255,0.55);z-index:3;flex:0 0 auto;box-shadow:0 0 0 6px #0A1C45;}
     .hiw-stub{width:3px;height:52px;background:rgba(255,255,255,0.28);border-radius:3px;flex:0 0 auto;}
     .hiw-icon{width:116px;height:116px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:0 0 auto;box-shadow:0 22px 46px -18px rgba(11,31,68,0.42),0 6px 16px -8px rgba(11,31,68,0.18);animation:floatTag 5.5s ease-in-out infinite;}
     .hiw-icon svg{width:48px;height:48px;}
@@ -185,7 +185,7 @@
 <body class="overflow-x-hidden">
 
   <!-- Live status strip -->
-  <div class="text-[11px] font-medium border-b" style="background:#0093D0;color:#fff;border-color:rgba(255,255,255,0.18);">
+  <div class="text-[11px] font-medium border-b" style="background:#081C44;color:#fff;border-color:rgba(255,255,255,0.18);">
     <div class="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
       <div class="flex items-center gap-5">
         <span class="flex items-center gap-2"><span class="live-dot"></span><span>Network <b>LIVE</b></span></span>
@@ -202,10 +202,10 @@
   </div>
 
   <!-- Header -->
-  <header class="sticky top-0 z-40 border-b" style="background:#00A5E7;border-color:rgba(255,255,255,0.18);box-shadow:0 6px 24px -10px rgba(0,165,231,0.45);">
+  <header class="sticky top-0 z-40 border-b" style="background:#0B2350;border-color:rgba(255,255,255,0.18);box-shadow:0 6px 24px -10px rgba(11,35,80,0.45);">
     <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
       <a href="./" class="flex items-center">
-        <img src="draygo-logo.png" alt="Draygo" class="h-8 md:h-9 w-auto" style="filter:drop-shadow(0 1px 0 rgba(255,255,255,0.4));" />
+        <img src="draygo-logo.png" alt="Draygo" class="h-8 md:h-9 w-auto" style="filter:brightness(0) invert(1);" />
       </a>
       <nav class="hidden md:flex items-center gap-7 text-[13px] font-medium text-white/85">
         <a href="#network" class="hover:text-white">Network</a>
@@ -231,7 +231,7 @@
     </video>
     <!-- Legibility overlays -->
     <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(1,7,26,0.82) 0%,rgba(1,7,26,0.55) 42%,rgba(1,7,26,0.86) 100%);"></div>
-    <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(900px 520px at 18% 22%,rgba(0,165,231,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(255,59,48,0.18),transparent 60%);"></div>
+    <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(900px 520px at 18% 22%,rgba(11,35,80,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(255,59,48,0.18),transparent 60%);"></div>
 
     <div class="relative z-10 max-w-[1400px] mx-auto px-6 py-28 md:py-40">
       <div class="max-w-3xl">
@@ -273,9 +273,9 @@
         <h2 class="display text-white text-[44px] md:text-[64px] leading-[1.03] mt-3">Calculate your rate.</h2>
         <p class="text-white/60 text-[15px] md:text-[16px] mt-4 max-w-xl mx-auto">Pick a lane, watch the container run it, and get a fully itemised, all-in price in seconds.</p>
       </div>
-      <div class="relative grid lg:grid-cols-[1.55fr_1fr] gap-5 lg:items-stretch">
-        <!-- MAP -->
-        <div class="relative rounded-2xl overflow-hidden border border-white/8 min-h-[460px]" style="box-shadow:0 30px 80px -20px rgba(0,0,0,0.7);">
+      <div class="relative grid lg:grid-cols-[1fr_1.55fr] gap-5 lg:items-stretch">
+        <!-- MAP (right) -->
+        <div class="relative rounded-2xl overflow-hidden border border-white/8 min-h-[460px] lg:order-2" style="box-shadow:0 30px 80px -20px rgba(0,0,0,0.7);">
           <div id="map" class="absolute inset-0"></div>
 
           <div class="absolute top-4 left-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
@@ -307,8 +307,8 @@
           </div>
         </div>
 
-        <!-- CALCULATOR -->
-        <div class="relative">
+        <!-- CALCULATOR (left) -->
+        <div class="relative lg:order-1">
           <div id="calcCard" class="calc-tilt glass rounded-2xl p-5 md:p-6 lg:p-7 relative overflow-hidden" style="background:#fff;">
             <div class="flex items-center justify-between">
               <div>
@@ -416,7 +416,7 @@
               <div class="display text-[16px] text-[var(--navy)] mt-5">Computing your rate</div>
               <div class="text-[12px] text-[var(--navy)]/60 mt-1.5 num" id="loadingStep">Routing port to door…</div>
               <div class="mt-5 flex items-center gap-1 text-[10px] text-[var(--navy)]/55 uppercase tracking-[0.14em]">
-                <span class="live-dot" style="background:var(--blue);box-shadow:0 0 0 0 rgba(77,163,255,0.6);animation-name:livePulseBlue;"></span>
+                <span class="live-dot" style="background:var(--blue);box-shadow:0 0 0 0 rgba(58,95,192,0.6);animation-name:livePulseBlue;"></span>
                 <span>Pulling live market data</span>
               </div>
             </div>
@@ -462,7 +462,7 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section id="how" class="py-24 relative overflow-hidden text-white" style="background:radial-gradient(760px 460px at 10% 12%,rgba(255,59,48,0.16),transparent 60%),radial-gradient(820px 520px at 92% 30%,rgba(77,163,255,0.18),transparent 60%),radial-gradient(680px 460px at 70% 100%,rgba(168,85,247,0.16),transparent 60%),linear-gradient(180deg,#050B1A 0%,#0A1124 60%,#070D1C 100%);">
+  <section id="how" class="py-24 relative overflow-hidden text-white" style="background:radial-gradient(760px 460px at 10% 12%,rgba(255,59,48,0.16),transparent 60%),radial-gradient(820px 520px at 92% 30%,rgba(58,95,192,0.18),transparent 60%),radial-gradient(680px 460px at 70% 100%,rgba(255,59,48,0.16),transparent 60%),linear-gradient(180deg,#08163C 0%,#0C2150 60%,#0A1C45 100%);">
     <div class="max-w-[1400px] mx-auto px-6">
       <div class="flex items-end justify-between flex-wrap gap-6 reveal">
         <div class="max-w-xl">
@@ -499,7 +499,7 @@
             <div class="hiw-half top">
               <div class="hiw-text">
                 <div class="hiw-title">Pick destination</div>
-                <div class="hiw-uline" style="background:#FF7B30;"></div>
+                <div class="hiw-uline" style="background:#FF3B30;"></div>
                 <p class="hiw-desc">Door, warehouse or ramp across 1,200+ inland delivery cities — typed or dropped on the map.</p>
               </div>
             </div>
@@ -524,7 +524,7 @@
             <div class="hiw-half bot">
               <div class="hiw-text">
                 <div class="hiw-title">Calculate rate</div>
-                <div class="hiw-uline" style="background:#4DA3FF;"></div>
+                <div class="hiw-uline" style="background:#3A5FC0;"></div>
                 <p class="hiw-desc">A fully itemised, all-in price in under 30 seconds — live diesel, FSC, chassis pool and port fees baked in.</p>
               </div>
             </div>
@@ -535,7 +535,7 @@
             <div class="hiw-half top">
               <div class="hiw-text">
                 <div class="hiw-title">Export quote</div>
-                <div class="hiw-uline" style="background:#00C16A;"></div>
+                <div class="hiw-uline" style="background:#1E3A8A;"></div>
                 <p class="hiw-desc">Send it out as a brand-ready PDF, structured JSON or embeddable HTML — your markup applied automatically.</p>
               </div>
             </div>
@@ -560,7 +560,7 @@
             <div class="hiw-half bot">
               <div class="hiw-text">
                 <div class="hiw-title">Book shipment</div>
-                <div class="hiw-uline" style="background:#A855F7;"></div>
+                <div class="hiw-uline" style="background:#FF3B30;"></div>
                 <p class="hiw-desc">Hand off to any of 2,800+ vetted carrier partners and track the container from gate to door.</p>
               </div>
             </div>
@@ -572,8 +572,8 @@
   </section>
 
   <!-- NETWORK -->
-  <section id="network" class="py-24 bg-[#03070F] text-white relative overflow-hidden">
-    <div class="absolute inset-0 opacity-[0.07]" style="background:radial-gradient(circle at 25% 20%,#4DA3FF 0%,transparent 40%),radial-gradient(circle at 80% 70%,#FF3B30 0%,transparent 45%);"></div>
+  <section id="network" class="py-24 bg-[#06143A] text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.07]" style="background:radial-gradient(circle at 25% 20%,#3A5FC0 0%,transparent 40%),radial-gradient(circle at 80% 70%,#FF3B30 0%,transparent 45%);"></div>
     <div class="max-w-[1400px] mx-auto px-6 relative">
       <div class="grid lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
         <div class="reveal">
@@ -602,7 +602,7 @@
   </section>
 
   <!-- SHIPMENTS IN PROCESS -->
-  <section class="py-24 relative overflow-hidden" style="background:radial-gradient(820px 420px at 50% -5%,rgba(77,163,255,0.10),transparent 60%),radial-gradient(700px 400px at 88% 90%,rgba(0,193,106,0.08),transparent 60%),linear-gradient(180deg,#FFFFFF,#EEF4F9);">
+  <section class="py-24 relative overflow-hidden" style="background:radial-gradient(820px 420px at 50% -5%,rgba(58,95,192,0.10),transparent 60%),radial-gradient(700px 400px at 88% 90%,rgba(30,58,138,0.08),transparent 60%),linear-gradient(180deg,#FFFFFF,#EEF4F9);">
     <div class="max-w-[1400px] mx-auto px-6 relative">
       <div class="text-center max-w-2xl mx-auto reveal">
         <h2 class="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04]">Shipments in process</h2>
@@ -695,7 +695,7 @@
       </div>
 
       <div class="mt-10 grid md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[180px]">
-        <div class="bento-card md:col-span-2 lg:col-span-2 md:row-span-2 rounded-2xl p-6 relative" style="background:linear-gradient(135deg,#010535 0%,#1A3070 100%);color:#fff;">
+        <div class="bento-card md:col-span-2 lg:col-span-2 md:row-span-2 rounded-2xl p-6 relative" style="background:linear-gradient(135deg,#0B2350 0%,#1E3C82 100%);color:#fff;">
           <div class="relative z-10">
             <div class="text-[10px] uppercase tracking-[0.16em] text-white/65">01 / Instant quotes</div>
             <h3 class="display text-[26px] mt-2 leading-tight">From input to priced route in <span style="color:#FF8470;">&lt; 30 seconds</span>.</h3>
@@ -705,7 +705,7 @@
           <svg class="absolute right-4 bottom-4 opacity-85" width="160" height="120" viewBox="0 0 160 120" fill="none">
             <path d="M5 95 Q 50 30, 100 60 T 155 25" stroke="#FF3B30" stroke-width="2.5" fill="none" stroke-linecap="round" />
             <circle cx="155" cy="25" r="6" fill="#FF3B30"/>
-            <circle cx="5" cy="95" r="4" fill="#4DA3FF"/>
+            <circle cx="5" cy="95" r="4" fill="#3A5FC0"/>
           </svg>
         </div>
 
@@ -714,7 +714,7 @@
           <h3 class="display text-[18px] text-[var(--navy)] mt-2 leading-tight">Watch the freight move.</h3>
           <p class="text-[var(--navy)]/65 text-[12px] mt-2">Animated lane drawing on every quote.</p>
           <svg class="absolute right-2 bottom-2" width="120" height="80" viewBox="0 0 120 80" fill="none">
-            <path d="M10 60 Q 40 10, 70 35 T 115 18" stroke="#4DA3FF" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+            <path d="M10 60 Q 40 10, 70 35 T 115 18" stroke="#3A5FC0" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
             <circle cx="115" cy="18" r="4" fill="#FF3B30"/>
           </svg>
         </div>
@@ -741,10 +741,10 @@
           <p class="text-[var(--navy)]/60 text-[12px] mt-2">Brand-ready quotes in one click.</p>
         </div>
 
-        <div class="bento-card rounded-2xl p-5 relative md:col-span-2" style="background:#010535;color:#fff;">
+        <div class="bento-card rounded-2xl p-5 relative md:col-span-2" style="background:#0B2350;color:#fff;">
           <div class="text-[10px] uppercase tracking-[0.16em] text-white/55">05 / API</div>
           <h3 class="display text-[20px] mt-2 leading-tight">Embed instant rates anywhere.</h3>
-          <pre class="mt-3 bg-black/30 rounded-lg p-3 text-[11px] font-mono overflow-x-auto text-[var(--blue-2)] border border-white/8 leading-relaxed"><span style="color:#00C16A">POST</span> /v1/quotes
+          <pre class="mt-3 bg-black/30 rounded-lg p-3 text-[11px] font-mono overflow-x-auto text-[var(--blue-2)] border border-white/8 leading-relaxed"><span style="color:#1E3A8A">POST</span> /v1/quotes
 {
   "origin": "<span style="color:#fff">USLAX</span>",
   "destination": "<span style="color:#fff">Dallas, TX</span>",
@@ -752,7 +752,7 @@
 }</pre>
         </div>
 
-        <div class="bento-card rounded-2xl p-5 relative" style="background:linear-gradient(160deg,#F0FBF5,#DDF6E7);border:1px solid rgba(0,193,106,0.18);">
+        <div class="bento-card rounded-2xl p-5 relative" style="background:linear-gradient(160deg,#EEF2FB,#DCE6F4);border:1px solid rgba(30,58,138,0.18);">
           <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--green)]">06 / Broker tools</div>
           <h3 class="display text-[18px] text-[var(--navy)] mt-2 leading-tight">White-label margins.</h3>
           <p class="text-[var(--navy)]/65 text-[12px] mt-2">Markup % per customer, baked into every quote.</p>
@@ -767,7 +767,7 @@
   </section>
 
   <!-- 3D CONTAINER -->
-  <section class="py-28 relative overflow-hidden" style="background:radial-gradient(ellipse at 50% 0%,#010535,#03070F 70%);color:#fff;">
+  <section class="py-28 relative overflow-hidden" style="background:radial-gradient(ellipse at 50% 0%,#0B2350,#06143A 70%);color:#fff;">
     <div class="absolute inset-0 opacity-30 pointer-events-none" style="background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:48px 48px;"></div>
     <div class="max-w-[1400px] mx-auto px-6 relative">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -802,7 +802,7 @@
 
   <!-- COST CARDS -->
   <section class="py-24 relative overflow-hidden" style="background:linear-gradient(180deg,#F8FAFC,#EEF2F8);">
-    <div class="absolute inset-0 opacity-50 pointer-events-none" style="background:radial-gradient(800px 400px at 80% 10%,rgba(77,163,255,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(255,59,48,0.13),transparent 60%);"></div>
+    <div class="absolute inset-0 opacity-50 pointer-events-none" style="background:radial-gradient(800px 400px at 80% 10%,rgba(58,95,192,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(255,59,48,0.13),transparent 60%);"></div>
     <div class="max-w-[1400px] mx-auto px-6 relative">
       <div class="max-w-2xl reveal">
         <div class="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Cost transparency</div>
@@ -826,8 +826,8 @@
   </section>
 
   <!-- CTA -->
-  <section class="py-24 relative overflow-hidden" style="background:linear-gradient(135deg,#010535 0%,#03070F 60%,#1A3070 100%);">
-    <div class="absolute inset-0 opacity-50 pointer-events-none" style="background:radial-gradient(700px 400px at 90% 50%,rgba(255,59,48,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(77,163,255,0.22),transparent 60%);"></div>
+  <section class="py-24 relative overflow-hidden" style="background:linear-gradient(135deg,#0B2350 0%,#06143A 60%,#1E3C82 100%);">
+    <div class="absolute inset-0 opacity-50 pointer-events-none" style="background:radial-gradient(700px 400px at 90% 50%,rgba(255,59,48,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(58,95,192,0.22),transparent 60%);"></div>
     <div class="max-w-[1400px] mx-auto px-6 relative">
       <div class="text-center max-w-3xl mx-auto text-white reveal">
         <div class="glass-pill inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-[11px] font-semibold text-white/90"><span class="live-dot"></span> Ready when you are</div>
@@ -842,12 +842,12 @@
   </section>
 
   <!-- Footer -->
-  <footer class="text-white/85 py-14 border-t border-white/10" style="background:#000000;">
+  <footer class="text-white/85 py-14 border-t border-white/10" style="background:#08163C;">
     <div class="max-w-[1400px] mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 text-[13px]">
         <div class="md:col-span-2">
           <div class="flex items-center">
-            <img src="draygo-logo.png" alt="Draygo" class="h-8 w-auto" style="filter:drop-shadow(0 1px 0 rgba(255,255,255,0.4));" />
+            <img src="draygo-logo.png" alt="Draygo" class="h-8 w-auto" style="filter:brightness(0) invert(1);" />
           </div>
           <p class="mt-3 max-w-sm text-white/80">The drayage pricing network for North America. Instant rates across every container port from Vancouver to Miami.</p>
           <div class="mt-4 text-[11px] text-white/65 num">© 2026 drayagerate.net · All rights reserved</div>
@@ -1074,7 +1074,7 @@
   CORRIDORS.forEach(([a,b])=>{const A=PORTS[a]?.coords||HUBS[a]?.coords, B=PORTS[b]?.coords||HUBS[b]?.coords;L.polyline([A,B],{className:'corridor',weight:1.1}).addTo(map2);});
   Object.entries(PORTS).forEach(([k,p])=>L.marker(p.coords,{icon:L.divIcon({html:`<div class="port-icon"><div class="ring"></div><div class="dot"></div></div>`,className:'',iconSize:[14,14],iconAnchor:[7,7]})}).addTo(map2));
   const hubMeta={DAL:{time:'36 hr',rate:'$1,920'},CHI:{time:'72 hr',rate:'$2,640'},ATL:{time:'24 hr',rate:'$1,180'},MEM:{time:'30 hr',rate:'$1,420'},KCM:{time:'48 hr',rate:'$1,980'},DEN:{time:'60 hr',rate:'$2,260'},PHX:{time:'12 hr',rate:'$980'},NSH:{time:'30 hr',rate:'$1,540'},IND:{time:'66 hr',rate:'$2,420'},SLC:{time:'52 hr',rate:'$2,180'}};
-  Object.entries(HUBS).forEach(([k,h])=>{const meta=hubMeta[k]||{time:'—',rate:'—'};const m=L.marker(h.coords,{icon:L.divIcon({html:`<div class="port-icon" style="opacity:.85"><div class="ring" style="border-color:#FFD23F;animation-duration:3.4s;"></div><div class="dot" style="background:#FFD23F;box-shadow:0 0 10px #FFD23F;"></div></div>`,className:'',iconSize:[14,14],iconAnchor:[7,7]})});m.on('mouseover',()=>{document.getElementById('hubName').textContent=h.name;document.getElementById('hubTime').textContent=meta.time;document.getElementById('hubRate').textContent=meta.rate;});m.addTo(map2);});
+  Object.entries(HUBS).forEach(([k,h])=>{const meta=hubMeta[k]||{time:'—',rate:'—'};const m=L.marker(h.coords,{icon:L.divIcon({html:`<div class="port-icon" style="opacity:.85"><div class="ring" style="border-color:#FF3B30;animation-duration:3.4s;"></div><div class="dot" style="background:#FF3B30;box-shadow:0 0 10px #FF3B30;"></div></div>`,className:'',iconSize:[14,14],iconAnchor:[7,7]})});m.on('mouseover',()=>{document.getElementById('hubName').textContent=h.name;document.getElementById('hubTime').textContent=meta.time;document.getElementById('hubRate').textContent=meta.rate;});m.addTo(map2);});
 
   // Magnetic effect — skip form buttons (calc submit) so they don't drift while user clicks
   document.querySelectorAll('.btn-primary:not(#calcBtn),.btn-ghost').forEach(btn=>{
@@ -1094,11 +1094,11 @@
 
   const COSTS=[
     {n:'Fuel + FSC',   d:'Live diesel × MPG × distance, plus carrier FSC.',     i:'fuel',     a:'#FF3B30'},
-    {n:'Driver labor', d:'Hourly wage × transit time + per diem on 400+ mi.',   i:'user',     a:'#4DA3FF'},
-    {n:'Port charges', d:'Gate fees, terminal handling, exam fees if pulled.',  i:'anchor',   a:'#010535'},
-    {n:'Chassis',      d:'Daily rental, pool fees, per-diem on long dwell.',    i:'truck',    a:'#F2A516'},
-    {n:'Accessorials', d:'Tolls, overweight, hazmat, reefer plug, lumper.',     i:'clipboard',a:'#A855F7'},
-    {n:'Overhead',     d:'Admin, dispatch, ELD/TMS, insurance, depreciation.',  i:'settings', a:'#00C16A'},
+    {n:'Driver labor', d:'Hourly wage × transit time + per diem on 400+ mi.',   i:'user',     a:'#3A5FC0'},
+    {n:'Port charges', d:'Gate fees, terminal handling, exam fees if pulled.',  i:'anchor',   a:'#0B2350'},
+    {n:'Chassis',      d:'Daily rental, pool fees, per-diem on long dwell.',    i:'truck',    a:'#FF3B30'},
+    {n:'Accessorials', d:'Tolls, overweight, hazmat, reefer plug, lumper.',     i:'clipboard',a:'#FF3B30'},
+    {n:'Overhead',     d:'Admin, dispatch, ELD/TMS, insurance, depreciation.',  i:'settings', a:'#1E3A8A'},
   ];
   document.getElementById('costGrid').innerHTML=COSTS.map((c,i)=>`<div class="bento-card glass rounded-2xl p-6 reveal reveal-delay-${i%3} flex items-start gap-4"><div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:${c.a}14;border:1px solid ${c.a}26;">${svgIcon(c.i,c.a)}</div><div><div class="display text-[17px] text-[var(--navy)]">${c.n}</div><p class="text-[13px] text-[var(--muted)] mt-1.5 leading-relaxed">${c.d}</p></div></div>`).join('');
   document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
