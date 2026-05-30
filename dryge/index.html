@@ -396,74 +396,60 @@
         </div>
         <p class="max-w-md text-[var(--muted)] text-[15px]">From the first input to a customer-ready PDF, every drayage move is priced and visualized in under a minute.</p>
       </div>
-      <div class="mt-16 relative">
-        <svg viewBox="0 0 1300 130" class="w-full block" preserveAspectRatio="xMidYMid meet" style="max-height:150px;overflow:visible;">
-          <defs>
-            <linearGradient id="pipeGrad" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#FF3B30"/>
-              <stop offset="0.27" stop-color="#FF7B30"/>
-              <stop offset="0.5" stop-color="#4DA3FF"/>
-              <stop offset="0.73" stop-color="#00C16A"/>
-              <stop offset="1" stop-color="#A855F7"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Connecting rail -->
-          <line x1="130" y1="64" x2="1170" y2="64" stroke="rgba(11,31,68,0.10)" stroke-width="2.5"/>
-          <line x1="130" y1="64" x2="1170" y2="64" stroke="url(#pipeGrad)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 13" style="animation:dashShift 7s linear infinite;"/>
-
-          <!-- Stations (aligned to label columns: 130 / 390 / 650 / 910 / 1170) -->
-          <g transform="translate(130,64)">
-            <circle r="29" fill="white" stroke="rgba(255,59,48,0.14)" stroke-width="7"/>
-            <circle r="20" fill="#FF3B30"/>
-            <g transform="translate(-10,-10)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="10" cy="4" r="2.5"/><line x1="10" y1="6.5" x2="10" y2="18"/><path d="M3 13c1.6 3 4.2 5 7 5s5.4-2 7-5"/>
-            </g>
-          </g>
-          <g transform="translate(390,64)">
-            <circle r="29" fill="white" stroke="rgba(255,123,48,0.14)" stroke-width="7"/>
-            <circle r="20" fill="#FF7B30"/>
-            <g transform="translate(-10,-11)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10 1.5c-3.3 0-6 2.6-6 6 0 4 6 12 6 12s6-8 6-12c0-3.4-2.7-6-6-6z"/><circle cx="10" cy="7.5" r="2.2" fill="white" stroke="#FF7B30"/>
-            </g>
-          </g>
-          <g transform="translate(650,64)">
-            <circle r="29" fill="white" stroke="rgba(77,163,255,0.14)" stroke-width="7"/>
-            <circle r="20" fill="#4DA3FF"/>
-            <g transform="translate(-10,-10)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="16" height="16" rx="2"/><line x1="6" y1="14" x2="6" y2="10"/><line x1="10" y1="14" x2="10" y2="6"/><line x1="14" y1="14" x2="14" y2="9"/>
-            </g>
-          </g>
-          <g transform="translate(910,64)">
-            <circle r="29" fill="white" stroke="rgba(0,193,106,0.14)" stroke-width="7"/>
-            <circle r="20" fill="#00C16A"/>
-            <g transform="translate(-10,-10)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10 2.5v10"/><path d="M5 8.5l5 5 5-5"/><path d="M3 17h14"/>
-            </g>
-          </g>
-          <g transform="translate(1170,64)">
-            <circle r="29" fill="white" stroke="rgba(168,85,247,0.14)" stroke-width="7"/>
-            <circle r="20" fill="#A855F7"/>
-            <g transform="translate(-10,-9)" stroke="white" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 9.5l4.5 4.5L17 5"/>
-            </g>
-          </g>
-
-          <!-- Truck driving forward (left → right) along the rail -->
-          <image href="truck.png" width="58" height="39" x="-29" y="-26" preserveAspectRatio="xMidYMid meet" style="filter:drop-shadow(0 3px 4px rgba(11,31,68,0.28));">
-            <animateMotion dur="9s" repeatCount="indefinite" rotate="0" calcMode="linear" path="M 160 64 L 1140 64"/>
-          </image>
-          <image href="truck.png" width="58" height="39" x="-29" y="-26" preserveAspectRatio="xMidYMid meet" style="filter:drop-shadow(0 3px 4px rgba(11,31,68,0.28));">
-            <animateMotion dur="9s" begin="-4.5s" repeatCount="indefinite" rotate="0" calcMode="linear" path="M 160 64 L 1140 64"/>
-          </image>
-        </svg>
-
-        <div class="mt-8 grid grid-cols-5 gap-2 text-center px-2">
-          <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#FF3B30]">01</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Choose origin</div><div class="text-[11px] text-[var(--muted)] mt-0.5">Every U.S. & Canadian port</div></div>
-          <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#FF7B30]">02</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Pick destination</div><div class="text-[11px] text-[var(--muted)] mt-0.5">1,200+ inland cities</div></div>
-          <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#4DA3FF]">03</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Calculate rate</div><div class="text-[11px] text-[var(--muted)] mt-0.5">Priced in 30s</div></div>
-          <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#00C16A]">04</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Export quote</div><div class="text-[11px] text-[var(--muted)] mt-0.5">PDF · JSON · HTML</div></div>
-          <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#A855F7]">05</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Book shipment</div><div class="text-[11px] text-[var(--muted)] mt-0.5">2,800+ carriers</div></div>
+      <div class="mt-14 max-w-3xl">
+        <!-- Step 01 -->
+        <div class="reveal flex gap-5 md:gap-7">
+          <div class="flex flex-col items-center">
+            <div class="shrink-0 w-16 h-16 rounded-2xl grid place-items-center display text-[20px] text-white num" style="background:#FF3B30;box-shadow:0 14px 30px -10px rgba(255,59,48,0.6),inset 0 1px 0 rgba(255,255,255,0.35);">01</div>
+            <div class="w-[3px] grow rounded-full mt-2" style="background:linear-gradient(#FF3B30,#FF7B30);"></div>
+          </div>
+          <div class="pb-12 pt-2.5">
+            <h3 class="display text-[24px] md:text-[26px] text-[var(--navy)] leading-tight">Choose origin</h3>
+            <p class="text-[var(--muted)] text-[15px] mt-2 max-w-md">Pick from every container port across the U.S. & Canada — West Coast, Gulf, East Coast and every Class I rail ramp.</p>
+          </div>
+        </div>
+        <!-- Step 02 -->
+        <div class="reveal flex gap-5 md:gap-7">
+          <div class="flex flex-col items-center">
+            <div class="shrink-0 w-16 h-16 rounded-2xl grid place-items-center display text-[20px] text-white num" style="background:#FF7B30;box-shadow:0 14px 30px -10px rgba(255,123,48,0.6),inset 0 1px 0 rgba(255,255,255,0.35);">02</div>
+            <div class="w-[3px] grow rounded-full mt-2" style="background:linear-gradient(#FF7B30,#4DA3FF);"></div>
+          </div>
+          <div class="pb-12 pt-2.5">
+            <h3 class="display text-[24px] md:text-[26px] text-[var(--navy)] leading-tight">Pick destination</h3>
+            <p class="text-[var(--muted)] text-[15px] mt-2 max-w-md">Door, warehouse or ramp across 1,200+ inland delivery cities — typed or dropped on the map.</p>
+          </div>
+        </div>
+        <!-- Step 03 -->
+        <div class="reveal flex gap-5 md:gap-7">
+          <div class="flex flex-col items-center">
+            <div class="shrink-0 w-16 h-16 rounded-2xl grid place-items-center display text-[20px] text-white num" style="background:#4DA3FF;box-shadow:0 14px 30px -10px rgba(77,163,255,0.6),inset 0 1px 0 rgba(255,255,255,0.35);">03</div>
+            <div class="w-[3px] grow rounded-full mt-2" style="background:linear-gradient(#4DA3FF,#00C16A);"></div>
+          </div>
+          <div class="pb-12 pt-2.5">
+            <h3 class="display text-[24px] md:text-[26px] text-[var(--navy)] leading-tight">Calculate rate</h3>
+            <p class="text-[var(--muted)] text-[15px] mt-2 max-w-md">A fully itemised, all-in price in under 30 seconds — live diesel, FSC, chassis pool and port fees baked in.</p>
+          </div>
+        </div>
+        <!-- Step 04 -->
+        <div class="reveal flex gap-5 md:gap-7">
+          <div class="flex flex-col items-center">
+            <div class="shrink-0 w-16 h-16 rounded-2xl grid place-items-center display text-[20px] text-white num" style="background:#00C16A;box-shadow:0 14px 30px -10px rgba(0,193,106,0.6),inset 0 1px 0 rgba(255,255,255,0.35);">04</div>
+            <div class="w-[3px] grow rounded-full mt-2" style="background:linear-gradient(#00C16A,#A855F7);"></div>
+          </div>
+          <div class="pb-12 pt-2.5">
+            <h3 class="display text-[24px] md:text-[26px] text-[var(--navy)] leading-tight">Export quote</h3>
+            <p class="text-[var(--muted)] text-[15px] mt-2 max-w-md">Send it out as a brand-ready PDF, structured JSON or embeddable HTML — your markup applied automatically.</p>
+          </div>
+        </div>
+        <!-- Step 05 -->
+        <div class="reveal flex gap-5 md:gap-7">
+          <div class="flex flex-col items-center">
+            <div class="shrink-0 w-16 h-16 rounded-2xl grid place-items-center display text-[20px] text-white num" style="background:#A855F7;box-shadow:0 14px 30px -10px rgba(168,85,247,0.6),inset 0 1px 0 rgba(255,255,255,0.35);">05</div>
+          </div>
+          <div class="pt-2.5">
+            <h3 class="display text-[24px] md:text-[26px] text-[var(--navy)] leading-tight">Book shipment</h3>
+            <p class="text-[var(--muted)] text-[15px] mt-2 max-w-md">Hand off to any of 2,800+ vetted carrier partners and track the container from gate to door.</p>
+          </div>
         </div>
       </div>
     </div>
