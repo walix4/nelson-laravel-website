@@ -205,7 +205,7 @@
   <header class="sticky top-0 z-40 border-b" style="background:#0B2350;border-color:rgba(255,255,255,0.18);box-shadow:0 6px 24px -10px rgba(11,35,80,0.45);">
     <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
       <a href="./" class="flex items-center">
-        <img src="draygo-logo.png" alt="Draygo" class="h-8 md:h-9 w-auto" style="filter:brightness(0) invert(1);" />
+        <span class="display text-white text-[22px] md:text-[24px] tracking-tight leading-none">Drayage <span style="color:var(--red);">Rate</span></span>
       </a>
       <nav class="hidden md:flex items-center gap-7 text-[13px] font-medium text-white/85">
         <a href="#network" class="hover:text-white">Network</a>
@@ -235,10 +235,7 @@
 
     <div class="relative z-10 max-w-[1400px] mx-auto px-6 py-28 md:py-40">
       <div class="max-w-3xl">
-        <div class="glass-pill inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-[11px] font-semibold text-white/90 tracking-wide">
-          <span class="live-dot"></span> The drayage pricing network · North America
-        </div>
-        <h1 class="display text-white mt-5 text-[40px] md:text-[66px] leading-[1.03]">
+        <h1 class="display text-white text-[40px] md:text-[66px] leading-[1.03]">
           Drayage quotes, port to door —
           <span style="color:#FF6A5E;">priced in 30 seconds.</span>
         </h1>
