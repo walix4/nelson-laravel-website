@@ -111,6 +111,17 @@
     .reveal-delay-2{transition-delay:.16s;}
     .reveal-delay-3{transition-delay:.24s;}
 
+    /* ---- Stats band (dark) ---- */
+    .stat-card{position:relative;padding:30px 26px 28px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.10);overflow:hidden;transition:transform .4s cubic-bezier(.2,.7,.2,1),border-color .4s,box-shadow .4s,background .4s;}
+    .stat-card:hover{transform:translateY(-5px);border-color:rgba(255,59,48,0.42);background:linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.03));box-shadow:0 26px 54px -26px rgba(0,0,0,0.7);}
+    .stat-card::after{content:"";position:absolute;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--red),var(--red-2));transition:width .7s cubic-bezier(.2,.7,.2,1) .15s;}
+    .stat-card.in::after{width:100%;}
+    .stat-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#FF6B62;background:linear-gradient(180deg,rgba(255,59,48,0.20),rgba(255,59,48,0.06));border:1px solid rgba(255,59,48,0.34);box-shadow:0 8px 20px -10px rgba(255,59,48,0.6);margin-bottom:20px;transform:scale(.55) rotate(-8deg);opacity:0;transition:transform .65s cubic-bezier(.34,1.56,.64,1) .12s,opacity .5s .12s;}
+    .stat-card.in .stat-icon{transform:scale(1) rotate(0);opacity:1;}
+    .stat-num{font-family:'Poppins',system-ui,sans-serif;font-size:46px;line-height:1;font-weight:800;letter-spacing:-0.035em;color:#fff;}
+    .stat-label{margin-top:11px;font-size:13px;font-weight:600;letter-spacing:0.01em;color:rgba(255,255,255,0.60);}
+    @media (max-width:768px){.stat-num{font-size:36px;}.stat-card{padding:24px 20px;}}
+
     .scene{perspective:1600px;perspective-origin:50% 40%;}
     .box3d{position:relative;width:260px;height:140px;transform-style:preserve-3d;transform:rotateX(14deg) rotateY(-32deg);animation:floatBox 6s ease-in-out infinite;}
     @keyframes floatBox{0%,100%{transform:rotateX(14deg) rotateY(-32deg) translateY(0);}50%{transform:rotateX(14deg) rotateY(-32deg) translateY(-16px);}}
@@ -819,13 +830,30 @@
   </section>
 
   <!-- STATS -->
-  <section class="py-20 bg-white">
-    <div class="max-w-[1400px] mx-auto px-6">
-      <div class="grid md:grid-cols-4 gap-px bg-[var(--navy)]/8 rounded-2xl overflow-hidden border border-[var(--navy)]/8">
-        <div class="bg-white p-8 reveal"><div class="display text-[44px] text-[var(--navy)] num" data-count="250000" data-suffix="+">0</div><div class="text-[var(--muted)] text-[13px] mt-1">Quotes generated</div></div>
-        <div class="bg-white p-8 reveal reveal-delay-1"><div class="display text-[44px] text-[var(--navy)] num" data-count="50" data-suffix="+">0</div><div class="text-[var(--muted)] text-[13px] mt-1">Ports supported</div></div>
-        <div class="bg-white p-8 reveal reveal-delay-2"><div class="display text-[44px] text-[var(--navy)] num" data-count="1200" data-suffix="+">0</div><div class="text-[var(--muted)] text-[13px] mt-1">Inland destinations</div></div>
-        <div class="bg-white p-8 reveal reveal-delay-3"><div class="display text-[44px] text-[var(--navy)] num" data-count="999" data-suffix="‰">0</div><div class="text-[var(--muted)] text-[13px] mt-1">Platform availability</div></div>
+  <section class="py-20 relative overflow-hidden" style="background:linear-gradient(135deg,#0B2350 0%,#06143A 55%,#0B2350 100%);">
+    <div class="absolute inset-0 opacity-60 pointer-events-none" style="background:radial-gradient(620px 300px at 14% 0%,rgba(58,95,192,0.30),transparent 60%),radial-gradient(640px 340px at 88% 100%,rgba(255,59,48,0.18),transparent 60%);"></div>
+    <div class="max-w-[1400px] mx-auto px-6 relative">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+        <div class="stat-card reveal">
+          <div class="stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v5h5"/><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M9 13h6M9 17h4"/></svg></div>
+          <div class="stat-num num" data-count="250000" data-suffix="+">0</div>
+          <div class="stat-label">Quotes generated</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-1">
+          <div class="stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg></div>
+          <div class="stat-num num" data-count="50" data-suffix="+">0</div>
+          <div class="stat-label">Ports supported</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-2">
+          <div class="stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="stat-num num" data-count="1200" data-suffix="+">0</div>
+          <div class="stat-label">Inland destinations</div>
+        </div>
+        <div class="stat-card reveal reveal-delay-3">
+          <div class="stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="stat-num num" data-count="99.9" data-decimals="1" data-suffix="%">0</div>
+          <div class="stat-label">Platform availability</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1057,9 +1085,9 @@
       en.target.classList.add('in');
       if(en.target.dataset.count && !en.target.dataset._done){
         en.target.dataset._done='1';
-        const end=parseInt(en.target.dataset.count,10), suffix=en.target.dataset.suffix||'';
+        const end=parseFloat(en.target.dataset.count), suffix=en.target.dataset.suffix||'', dec=parseInt(en.target.dataset.decimals||'0',10);
         const t0=performance.now(), dur=1600;
-        function step(now){const t=Math.min(1,(now-t0)/dur);const eased=1-Math.pow(1-t,3);en.target.textContent=fmt(Math.round(end*eased))+suffix;if(t<1)requestAnimationFrame(step);}
+        function step(now){const t=Math.min(1,(now-t0)/dur);const eased=1-Math.pow(1-t,3);const v=end*eased;en.target.textContent=(dec?v.toFixed(dec):fmt(Math.round(v)))+suffix;if(t<1)requestAnimationFrame(step);}
         requestAnimationFrame(step);
       }
       io.unobserve(en.target);
