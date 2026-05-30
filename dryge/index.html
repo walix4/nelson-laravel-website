@@ -172,12 +172,12 @@
           <div class="glass-pill inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold text-white/90 tracking-wide">
             <span class="live-dot"></span> The drayage pricing network · North America
           </div>
-          <h1 class="display text-white mt-5 text-[44px] md:text-[58px] leading-[1.03]">
-            Watch your container move from port to door.
-            <span class="block" style="background:linear-gradient(90deg,#FF3B30,#FF8470 35%,#4DA3FF);-webkit-background-clip:text;background-clip:text;color:transparent;">Priced in 30 seconds.</span>
+          <h1 class="display text-white mt-4 text-[30px] md:text-[40px] leading-[1.08] max-w-xl">
+            Drayage quotes, port to door —
+            <span style="background:linear-gradient(90deg,#FF3B30,#FF8470 45%,#4DA3FF);-webkit-background-clip:text;background-clip:text;color:transparent;">priced in 30 seconds.</span>
           </h1>
-          <p class="mt-4 text-white/70 text-[15px] md:text-[16px] max-w-xl">
-            Drayage quotes that factor live diesel, FSC, chassis, port fees and accessorials — across every major U.S. & Canadian port. One platform. One transparent rate.
+          <p class="mt-3 text-white/65 text-[14px] max-w-md">
+            Live diesel, FSC, chassis & port fees across every major U.S. & Canadian port.
           </p>
         </div>
         <div class="flex items-center gap-6 text-[11px] uppercase tracking-[0.16em] text-white/55">
