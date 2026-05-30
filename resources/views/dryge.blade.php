@@ -144,12 +144,8 @@
   <!-- Header -->
   <header class="sticky top-0 z-40 bg-[#03070F]/85 backdrop-blur-xl border-b border-white/5">
     <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="./" class="flex items-center gap-2.5">
-        <span class="relative w-9 h-9 rounded-lg flex items-center justify-center text-white font-extrabold text-sm" style="background:linear-gradient(135deg,#FF3B30,#E0241A);box-shadow:0 6px 20px -4px rgba(255,59,48,0.6);">
-          DR
-          <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[var(--green)] ring-2 ring-[#03070F]"></span>
-        </span>
-        <span class="display text-lg text-white">DrayageRate</span>
+      <a href="./" class="flex items-center">
+        <img src="draygo-logo.png" alt="Draygo" class="h-8 md:h-9 w-auto" style="filter:brightness(1.45) saturate(1.1) drop-shadow(0 0 6px rgba(255,255,255,0.25));" />
       </a>
       <nav class="hidden md:flex items-center gap-7 text-[13px] font-medium text-white/75">
         <a href="#network" class="hover:text-white">Network</a>
@@ -647,9 +643,8 @@
     <div class="max-w-[1400px] mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 text-[13px]">
         <div class="md:col-span-2">
-          <div class="flex items-center gap-2.5">
-            <span class="w-8 h-8 rounded-md flex items-center justify-center text-white font-extrabold text-xs" style="background:linear-gradient(135deg,#FF3B30,#E0241A);">DR</span>
-            <span class="display text-white">DrayageRate</span>
+          <div class="flex items-center">
+            <img src="draygo-logo.png" alt="Draygo" class="h-8 w-auto" style="filter:brightness(1.45) saturate(1.1);" />
           </div>
           <p class="mt-3 max-w-sm text-white/55">The drayage pricing network for North America. Instant rates across every container port from Vancouver to Miami.</p>
           <div class="mt-4 text-[11px] text-white/40 num">© 2026 drayagerate.net · All rights reserved</div>
@@ -826,8 +821,9 @@
   const hubMeta={DAL:{time:'36 hr',rate:'$1,920'},CHI:{time:'72 hr',rate:'$2,640'},ATL:{time:'24 hr',rate:'$1,180'},MEM:{time:'30 hr',rate:'$1,420'},KCM:{time:'48 hr',rate:'$1,980'},DEN:{time:'60 hr',rate:'$2,260'},PHX:{time:'12 hr',rate:'$980'},NSH:{time:'30 hr',rate:'$1,540'},IND:{time:'66 hr',rate:'$2,420'},SLC:{time:'52 hr',rate:'$2,180'}};
   Object.entries(HUBS).forEach(([k,h])=>{const meta=hubMeta[k]||{time:'—',rate:'—'};const m=L.marker(h.coords,{icon:L.divIcon({html:`<div class="port-icon" style="opacity:.85"><div class="ring" style="border-color:#FFD23F;animation-duration:3.4s;"></div><div class="dot" style="background:#FFD23F;box-shadow:0 0 10px #FFD23F;"></div></div>`,className:'',iconSize:[14,14],iconAnchor:[7,7]})});m.on('mouseover',()=>{document.getElementById('hubName').textContent=h.name;document.getElementById('hubTime').textContent=meta.time;document.getElementById('hubRate').textContent=meta.rate;});m.addTo(map2);});
 
-  document.querySelectorAll('.btn-primary,.btn-ghost').forEach(btn=>{
-    btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();const x=(e.clientX-r.left-r.width/2)*0.18;const y=(e.clientY-r.top-r.height/2)*0.18;btn.style.transform=`translate(${x}px,${y}px)`;});
+  // Magnetic effect — skip form buttons (calc submit) so they don't drift while user clicks
+  document.querySelectorAll('.btn-primary:not(#calcBtn),.btn-ghost').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();const x=(e.clientX-r.left-r.width/2)*0.12;const y=(e.clientY-r.top-r.height/2)*0.12;btn.style.transform=`translate(${x}px,${y}px)`;});
     btn.addEventListener('mouseleave',()=>{btn.style.transform='';});
   });
 
