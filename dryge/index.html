@@ -216,34 +216,59 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="relative grid-bg overflow-hidden">
-    <div class="max-w-[1400px] mx-auto px-6 pt-10 pb-6 relative z-10">
-      <div class="flex flex-wrap items-end justify-between gap-6">
-        <div class="max-w-2xl">
-          <div class="glass-pill inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-[11px] font-semibold text-white/90 tracking-wide">
-            <span class="live-dot"></span> The drayage pricing network · North America
-          </div>
-          <h1 class="display text-white mt-4 text-[30px] md:text-[40px] leading-[1.08] max-w-xl">
-            Drayage quotes, port to door —
-            <span style="color:#FF3B30;">priced in 30 seconds.</span>
-          </h1>
-          <p class="mt-3 text-white/65 text-[14px] max-w-md">
-            Live diesel, FSC, chassis & port fees across every major U.S. & Canadian port.
-          </p>
+  <!-- HERO (video) -->
+  <section class="relative overflow-hidden text-white">
+    <!-- Background cargo video -->
+    <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+      <source src="hero-cargo.mp4" type="video/mp4">
+    </video>
+    <!-- Legibility overlays -->
+    <div class="absolute inset-0" style="background:linear-gradient(180deg,rgba(1,7,26,0.82) 0%,rgba(1,7,26,0.55) 42%,rgba(1,7,26,0.86) 100%);"></div>
+    <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(900px 520px at 18% 22%,rgba(0,165,231,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(255,59,48,0.18),transparent 60%);"></div>
+
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 py-28 md:py-40">
+      <div class="max-w-3xl">
+        <div class="glass-pill inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-[11px] font-semibold text-white/90 tracking-wide">
+          <span class="live-dot"></span> The drayage pricing network · North America
         </div>
-        <div class="flex items-center gap-6 text-[11px] uppercase tracking-[0.16em] text-white/55">
-          <div><div class="text-[22px] display num text-white" data-count="50">0</div><div>Ports</div></div>
-          <div class="h-8 w-px bg-white/15"></div>
-          <div><div class="text-[22px] display num text-white" data-count="1200" data-suffix="+">0</div><div>Lanes</div></div>
-          <div class="h-8 w-px bg-white/15"></div>
-          <div><div class="text-[22px] display num text-white" data-count="250000" data-suffix="+">0</div><div>Quotes</div></div>
+        <h1 class="display text-white mt-5 text-[40px] md:text-[66px] leading-[1.03]">
+          Drayage quotes, port to door —
+          <span style="color:#FF6A5E;">priced in 30 seconds.</span>
+        </h1>
+        <p class="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">
+          Live diesel, FSC, chassis and port fees across every major U.S. &amp; Canadian container port — instant, fully itemised, and locked for 24 hours.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a href="#quote" class="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span class="label">Get instant quote</span></a>
+          <a href="#network" class="btn-ghost px-6 py-3.5 rounded-lg text-[14px]">Explore the network</a>
+        </div>
+        <div class="mt-12 flex items-center gap-7 text-[11px] uppercase tracking-[0.16em] text-white/60">
+          <div><div class="text-[26px] md:text-[30px] display num text-white" data-count="50">0</div><div class="mt-0.5">Ports</div></div>
+          <div class="h-9 w-px bg-white/20"></div>
+          <div><div class="text-[26px] md:text-[30px] display num text-white" data-count="1200" data-suffix="+">0</div><div class="mt-0.5">Lanes</div></div>
+          <div class="h-9 w-px bg-white/20"></div>
+          <div><div class="text-[26px] md:text-[30px] display num text-white" data-count="250000" data-suffix="+">0</div><div class="mt-0.5">Quotes</div></div>
         </div>
       </div>
     </div>
 
-    <div class="max-w-[1400px] mx-auto px-6 pb-10 relative z-10">
-      <div class="relative grid lg:grid-cols-[1.55fr_1fr] gap-5 lg:items-stretch">
+    <a href="#quote" class="absolute left-1/2 -translate-x-1/2 bottom-6 z-10 text-white/70 hover:text-white flex flex-col items-center gap-1.5 text-[10px] uppercase tracking-[0.22em]">
+      <span>Price a move</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation:floatTag 2.2s ease-in-out infinite;"><path d="M12 5v14"/><path d="M5 12l7 7 7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- LIVE NETWORK + INSTANT QUOTE (2nd section) -->
+  <section id="quote" class="relative grid-bg overflow-hidden py-20 md:py-24">
+    <div class="max-w-[1400px] mx-auto px-6 relative z-10">
+      <div class="flex flex-wrap items-end justify-between gap-6 mb-9 reveal">
+        <div class="max-w-2xl">
+          <div class="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--blue-2)]">Live map · instant quote engine</div>
+          <h2 class="display text-white text-[34px] md:text-[46px] leading-[1.05] mt-2">Watch your container move — then price it live.</h2>
+        </div>
+        <p class="max-w-md text-white/60 text-[15px]">Drop an origin and destination and watch the truck run the lane while every cost component is priced from live market data.</p>
+      </div>
+      <div class="relative grid lg:grid-cols-[1.55fr_1fr] gap-5 lg:items-start">
         <!-- MAP -->
         <div class="relative rounded-2xl overflow-hidden border border-white/8" style="height:620px;box-shadow:0 30px 80px -20px rgba(0,0,0,0.7);">
           <div id="map" class="absolute inset-0"></div>
@@ -278,8 +303,8 @@
         </div>
 
         <!-- CALCULATOR -->
-        <div id="quote" class="relative lg:h-[620px]">
-          <div id="calcCard" class="calc-tilt glass rounded-2xl p-5 md:p-6 lg:p-7 lg:h-full relative overflow-hidden" style="background:#fff;">
+        <div class="relative">
+          <div id="calcCard" class="calc-tilt glass rounded-2xl p-5 md:p-6 lg:p-7 relative overflow-hidden" style="background:#fff;">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant quote engine</div>
