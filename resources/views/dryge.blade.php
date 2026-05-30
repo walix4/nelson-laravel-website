@@ -185,7 +185,7 @@
 <body class="overflow-x-hidden">
 
   <!-- Live status strip -->
-  <div class="text-[11px] font-medium border-b" style="background:#081C44;color:#fff;border-color:rgba(255,255,255,0.18);">
+  <div class="text-[11px] font-medium border-b" style="background:#4DA3FF;color:var(--navy);border-color:rgba(11,35,80,0.15);">
     <div class="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
       <div class="flex items-center gap-5">
         <span class="flex items-center gap-2"><span class="live-dot"></span><span>Network <b>LIVE</b></span></span>
