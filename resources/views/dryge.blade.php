@@ -550,7 +550,11 @@
           <div class="hiw-col">
             <div class="hiw-half top">
               <div class="hiw-icon">
-                <img src="hiw-book.png" alt="Book shipment" loading="lazy">
+                <div class="text-center leading-tight">
+                  <div class="text-[9px] font-bold uppercase tracking-[0.12em]" style="color:var(--muted);">from</div>
+                  <div class="display text-[27px]" style="color:var(--navy);">$3.50</div>
+                  <div class="text-[9px] font-semibold" style="color:var(--muted);">/ mile</div>
+                </div>
               </div>
               <div class="hiw-stub"></div>
             </div>
