@@ -25,6 +25,7 @@
     @keyframes navBlink{0%{background:var(--red);box-shadow:0 0 0 0 rgba(255,59,48,0.55);}50%{background:var(--blue);box-shadow:0 0 0 6px rgba(58,95,192,0);}100%{background:var(--red);box-shadow:0 0 0 0 rgba(255,59,48,0);}}
     .mega-wrap{position:relative;}
     .mega-panel{position:absolute;left:0;top:calc(100% + 18px);width:min(940px,calc(100vw - 32px));background:#fff;border-radius:20px;box-shadow:0 44px 100px -34px rgba(11,31,68,0.6);padding:26px 26px 20px;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .22s,transform .22s;z-index:60;}
+    .mega-panel::before{content:"";position:absolute;left:0;right:0;top:-22px;height:22px;}/* invisible bridge over the gap so hover doesn't drop */
     .mega-wrap:hover .mega-panel,.mega-wrap.open .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
     .mega-tool{display:flex;gap:14px;padding:12px;border-radius:13px;transition:background .15s;text-decoration:none;}
     .mega-tool:hover{background:#F4F6FB;}
