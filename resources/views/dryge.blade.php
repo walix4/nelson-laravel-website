@@ -183,29 +183,37 @@
     .est-wrap{background:#fff;border:1px solid rgba(11,35,80,0.08);border-radius:16px;box-shadow:0 34px 80px -40px rgba(11,35,80,0.35);overflow:hidden;}
     .est-scroll{overflow-x:auto;}
     .est-table{width:100%;border-collapse:collapse;min-width:1060px;}
-    .est-table thead th{text-align:left;font-size:12px;font-weight:700;color:var(--navy);background:#F4F7FB;padding:14px 18px;white-space:nowrap;border-bottom:1px solid rgba(11,35,80,0.08);}
-    .est-table tbody td{padding:13px 18px;border-bottom:1px solid rgba(11,35,80,0.06);vertical-align:middle;font-size:13.5px;color:var(--navy);}
+    .est-table thead th{text-align:left;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(11,35,80,0.5);background:linear-gradient(180deg,#F7FAFD,#EEF3F9);padding:15px 18px;white-space:nowrap;border-bottom:1px solid rgba(11,35,80,0.08);}
+    .est-table tbody td{padding:14px 18px;border-bottom:1px solid rgba(11,35,80,0.055);vertical-align:middle;font-size:13.5px;color:var(--navy);}
     .est-table tbody tr{transition:background .15s;}
-    .est-table tbody tr:hover{background:#F7F9FD;}
-    .est-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;font-size:12.5px;white-space:nowrap;}
+    .est-table tbody tr:hover{background:#F5F9FE;}
+    .est-table tbody tr:hover td:first-child{box-shadow:inset 3px 0 0 var(--red);}
+    .est-table tbody tr:last-child td{border-bottom:none;}
+    .est-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;font-size:12px;letter-spacing:-0.02em;color:rgba(11,35,80,0.82);white-space:nowrap;}
+    .est-cust{display:flex;align-items:center;gap:11px;}
+    .est-avatar{width:38px;height:38px;border-radius:11px;flex:0 0 auto;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;box-shadow:0 8px 16px -8px rgba(11,35,80,0.55);}
     .est-sub{font-size:11.5px;color:var(--muted);margin-top:2px;}
-    .est-route{display:flex;align-items:center;gap:7px;font-weight:600;}
-    .est-loc{max-width:185px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-    .est-chip{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;background:rgba(11,35,80,0.06);color:var(--navy);white-space:nowrap;}
-    .est-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 11px;border-radius:999px;white-space:nowrap;}
-    .est-badge.completed{background:rgba(22,137,90,0.12);color:#16895A;}
+    .est-route{display:flex;align-items:center;gap:9px;font-weight:600;}
+    .est-pin{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:7px;flex:0 0 auto;}
+    .est-pin.up{background:rgba(22,181,113,0.13);}
+    .est-pin.down{background:rgba(255,59,48,0.1);}
+    .est-loc{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .est-chip{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;background:#fff;border:1px solid rgba(11,35,80,0.14);color:var(--navy);white-space:nowrap;}
+    .est-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+    .est-badge.completed{background:rgba(22,181,113,0.13);color:#15935F;}
     .est-badge.streaming{background:rgba(58,95,192,0.13);color:#3A5FC0;}
     .est-badge.pending{background:rgba(11,35,80,0.07);color:#5B6473;}
     .est-badge.failed{background:rgba(255,59,48,0.12);color:#E0241A;}
     .est-dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 0 rgba(58,95,192,0.5);animation:livePulseBlue 1.6s ease-out infinite;}
-    .est-prog{width:128px;}
-    .est-prog-track{height:6px;border-radius:6px;background:rgba(11,35,80,0.1);overflow:hidden;}
-    .est-prog-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#3A5FC0,#6E8FE0);transition:width .7s cubic-bezier(.4,0,.2,1);}
-    .est-prog-label{font-size:11px;color:var(--muted);margin-top:4px;}
+    .est-prog{width:130px;}
+    .est-prog-track{height:7px;border-radius:7px;background:rgba(11,35,80,0.09);overflow:hidden;}
+    .est-prog-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#3A5FC0,#6E8FE0);transition:width .7s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px rgba(58,95,192,0.5);}
+    .est-prog-label{font-size:11px;font-weight:600;color:var(--muted);margin-top:5px;}
     .est-calc{font-style:italic;color:var(--muted);}
     .est-price{font-weight:800;font-size:15px;color:var(--navy);}
-    .est-view{color:var(--red);font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap;}
-    .est-view:hover{text-decoration:underline;}
+    .est-time{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12.5px;white-space:nowrap;}
+    .est-view{display:inline-flex;align-items:center;gap:5px;color:var(--red);font-weight:700;font-size:12.5px;text-decoration:none;white-space:nowrap;padding:6px 11px;border-radius:8px;transition:background .15s;}
+    .est-view:hover{background:rgba(255,59,48,0.09);}
     .est-input{width:100%;padding:0.72rem 0.9rem 0.72rem 2.5rem;border:1px solid rgba(11,35,80,0.14);border-radius:10px;background:#fff;font-size:0.9rem;color:var(--navy);transition:border-color .2s,box-shadow .2s;}
     .est-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(58,95,192,0.14);}
     .est-input::placeholder{color:rgba(11,35,80,0.4);}
@@ -628,8 +636,7 @@
               <div class="hiw-icon">
                 <div class="text-center leading-tight">
                   <div class="text-[9px] font-bold uppercase tracking-[0.12em]" style="color:var(--muted);">from</div>
-                  <div class="display text-[27px]" style="color:var(--navy);">$3.50</div>
-                  <div class="text-[9px] font-semibold" style="color:var(--muted);">/ mile</div>
+                  <div class="display text-[28px]" style="color:var(--navy);">$3.50</div>
                 </div>
               </div>
               <div class="hiw-stub"></div>
@@ -705,12 +712,12 @@
           </div>
           <div class="ticker mt-4">
             <div class="ticker-list">
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Los Angeles</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Phoenix, AZ</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">2h ago</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Long Beach</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Las Vegas, NV</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">4h ago</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Oakland</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Sacramento, CA</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">08 Jan</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Seattle</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Portland, OR</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">29 Oct</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Houston</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">San Antonio, TX</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">12 Mar</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Savannah</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Charlotte, NC</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">19 Apr</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Los Angeles</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Phoenix, AZ</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">2h ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Long Beach</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Las Vegas, NV</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">4h ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Oakland</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Sacramento, CA</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">08 Jan</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Seattle</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Portland, OR</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">29 Oct</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Houston</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">San Antonio, TX</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">12 Mar</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Savannah</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Charlotte, NC</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">19 Apr</span></div>
             </div>
           </div>
         </div>
@@ -726,12 +733,12 @@
           </div>
           <div class="ticker mt-4">
             <div class="ticker-list">
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Los Angeles</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Dallas, TX</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">1h ago</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">New York/NJ</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Chicago, IL</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">5h ago</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Norfolk</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Atlanta, GA</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">22 Nov</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Long Beach</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Denver, CO</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">22 Nov</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Savannah</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Nashville, TN</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">18 Jan</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Miami</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Orlando, FL</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">03 Feb</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Los Angeles</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Dallas, TX</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">1h ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">New York/NJ</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Chicago, IL</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">5h ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Norfolk</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Atlanta, GA</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">22 Nov</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Long Beach</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Denver, CO</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">22 Nov</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Savannah</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Nashville, TN</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">18 Jan</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Miami</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Orlando, FL</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">03 Feb</span></div>
             </div>
           </div>
         </div>
@@ -747,99 +754,16 @@
           </div>
           <div class="ticker mt-4">
             <div class="ticker-list">
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Houston</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Kansas City, MO</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">3d ago</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Seattle</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Salt Lake City, UT</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">3d ago</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Oakland</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Reno, NV</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">2d ago</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">New York/NJ</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Indianapolis, IN</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">11 Dec</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Charleston</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Columbus, OH</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">14 Feb</span></div>
-              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--blue);"></span><span class="font-semibold text-[var(--navy)]">Savannah</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:var(--green);"></span><span class="font-semibold text-[var(--navy)] truncate">Memphis, TN</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">09 Jan</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Houston</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Kansas City, MO</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">3d ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Seattle</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Salt Lake City, UT</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">3d ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Oakland</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Reno, NV</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">2d ago</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">New York/NJ</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Indianapolis, IN</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">11 Dec</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Charleston</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Columbus, OH</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">14 Feb</span></div>
+              <div class="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3"><div class="flex items-center gap-2 text-[13.5px] min-w-0"><span class="w-2 h-2 rounded-full shrink-0" style="background:#16B571;"></span><span class="font-semibold text-[var(--navy)]">Savannah</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span class="w-2 h-2 rounded-full shrink-0" style="background:#3A5FC0;"></span><span class="font-semibold text-[var(--navy)] truncate">Memphis, TN</span></div><span class="text-[12px] text-[var(--muted)] shrink-0 num">09 Jan</span></div>
             </div>
           </div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- BENTO FEATURES -->
-  <section id="features" class="py-24 bg-white">
-    <div class="max-w-[1400px] mx-auto px-6">
-      <div class="flex items-end justify-between flex-wrap gap-6 reveal">
-        <div class="max-w-2xl">
-          <div class="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--blue)]">The platform</div>
-          <h2 class="display text-[40px] md:text-[48px] text-[var(--navy)] leading-[1.05] mt-2">Not a calculator. A drayage operating system.</h2>
-        </div>
-        <a href="#features" class="text-[13px] font-semibold text-[var(--navy)] hover:underline">All platform capabilities →</a>
-      </div>
-
-      <div class="mt-10 grid md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[180px]">
-        <div class="bento-card md:col-span-2 lg:col-span-2 md:row-span-2 rounded-2xl p-6 relative" style="background:linear-gradient(135deg,#0B2350 0%,#1E3C82 100%);color:#fff;">
-          <div class="relative z-10">
-            <div class="text-[10px] uppercase tracking-[0.16em] text-white/65">01 / Instant quotes</div>
-            <h3 class="display text-[26px] mt-2 leading-tight">From input to priced route in <span style="color:#FF8470;">&lt; 30 seconds</span>.</h3>
-            <p class="text-white/70 text-[13px] mt-3 max-w-md">Every quote rebuilt against live diesel, FSC, chassis pool rates and per-port dwell. No spreadsheets. No revisions.</p>
-          </div>
-          <div class="absolute right-0 bottom-0 w-64 h-64 opacity-90" style="background:radial-gradient(circle at center,rgba(255,59,48,0.35),transparent 60%);"></div>
-          <svg class="absolute right-4 bottom-4 opacity-85" width="160" height="120" viewBox="0 0 160 120" fill="none">
-            <path d="M5 95 Q 50 30, 100 60 T 155 25" stroke="#FF3B30" stroke-width="2.5" fill="none" stroke-linecap="round" />
-            <circle cx="155" cy="25" r="6" fill="#FF3B30"/>
-            <circle cx="5" cy="95" r="4" fill="#3A5FC0"/>
-          </svg>
-        </div>
-
-        <div class="bento-card rounded-2xl p-5 relative overflow-hidden" style="background:linear-gradient(160deg,#EFF4FB,#DCE6F4);">
-          <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/55">02 / Route visualization</div>
-          <h3 class="display text-[18px] text-[var(--navy)] mt-2 leading-tight">Watch the freight move.</h3>
-          <p class="text-[var(--navy)]/65 text-[12px] mt-2">Animated lane drawing on every quote.</p>
-          <svg class="absolute right-2 bottom-2" width="120" height="80" viewBox="0 0 120 80" fill="none">
-            <path d="M10 60 Q 40 10, 70 35 T 115 18" stroke="#3A5FC0" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
-            <circle cx="115" cy="18" r="4" fill="#FF3B30"/>
-          </svg>
-        </div>
-
-        <div class="bento-card rounded-2xl p-5 relative" style="background:linear-gradient(160deg,#FFF,#F1F5FA);border:1px solid rgba(11,31,68,0.06);">
-          <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/55">03 / Multi-port</div>
-          <h3 class="display text-[18px] text-[var(--navy)] mt-2 leading-tight">Every USA & Canada port.</h3>
-          <div class="mt-3 flex flex-wrap gap-1">
-            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">LAX</span>
-            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">LGB</span>
-            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">OAK</span>
-            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">SEA</span>
-            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">NY/NJ</span>
-            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">SAV</span>
-            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">HOU</span>
-            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">MIA</span>
-            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">+42</span>
-          </div>
-        </div>
-
-        <div class="bento-card rounded-2xl p-5 relative" style="background:linear-gradient(135deg,#FFF,#FFF5F4);border:1px solid rgba(255,59,48,0.12);">
-          <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--red)]">04 / Export</div>
-          <h3 class="display text-[18px] text-[var(--navy)] mt-2 leading-tight">PDF · JSON · HTML.</h3>
-          <p class="text-[var(--navy)]/60 text-[12px] mt-2">Brand-ready quotes in one click.</p>
-        </div>
-
-        <div class="bento-card rounded-2xl p-5 relative md:col-span-2" style="background:#0B2350;color:#fff;">
-          <div class="text-[10px] uppercase tracking-[0.16em] text-white/55">05 / API</div>
-          <h3 class="display text-[20px] mt-2 leading-tight">Embed instant rates anywhere.</h3>
-          <pre class="mt-3 bg-black/30 rounded-lg p-3 text-[11px] font-mono overflow-x-auto text-[var(--blue-2)] border border-white/8 leading-relaxed"><span style="color:#1E3A8A">POST</span> /v1/quotes
-{
-  "origin": "<span style="color:#fff">USLAX</span>",
-  "destination": "<span style="color:#fff">Dallas, TX</span>",
-  "container": "<span style="color:#fff">40HC</span>"
-}</pre>
-        </div>
-
-        <div class="bento-card rounded-2xl p-5 relative" style="background:linear-gradient(160deg,#EEF2FB,#DCE6F4);border:1px solid rgba(30,58,138,0.18);">
-          <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--green)]">06 / Broker tools</div>
-          <h3 class="display text-[18px] text-[var(--navy)] mt-2 leading-tight">White-label margins.</h3>
-          <p class="text-[var(--navy)]/65 text-[12px] mt-2">Markup % per customer, baked into every quote.</p>
-        </div>
-
-        <div class="bento-card rounded-2xl p-5 relative" style="background:linear-gradient(160deg,#FFF,#F1F5FA);border:1px solid rgba(11,31,68,0.06);">
-          <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/55">07 / Enterprise</div>
-          <h3 class="display text-[18px] text-[var(--navy)] mt-2 leading-tight">SSO · SOC 2 · audit log.</h3>
-        </div>
       </div>
     </div>
   </section>
@@ -1213,9 +1137,18 @@
     {ref:'DRY-2026-0836',customer:'Bayou Transport',email:'ops@bayoutransport.com',pickup:'Port of New Orleans',pickupSub:'New Orleans, LA · port',drop:'Memphis Rail Yard',dropSub:'Memphis, TN · rail',container:'20ft',miles:395,price:'$1,020',status:'completed',stream:0,created:'8h ago'},
   ];
   const EST_LABELS={completed:'Completed',streaming:'Streaming',pending:'Pending',failed:'Failed'};
-  const UP_ARROW='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16895A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
-  const DOWN_ARROW='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E0241A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 auto"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
-  function estBadge(s){return '<span class="est-badge '+s+'">'+(s==='streaming'?'<span class="est-dot"></span>':'')+EST_LABELS[s]+'</span>';}
+  const UP_ARROW='<span class="est-pin up"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15935F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>';
+  const DOWN_ARROW='<span class="est-pin down"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E0241A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>';
+  const EST_AVCOLORS=['#0B2350','#1E3A8A','#3A5FC0','#E0241A','#15935F'];
+  const EST_ICONS={
+    completed:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
+    failed:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>',
+    pending:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
+  };
+  function estInitials(n){const p=n.replace(/[^A-Za-z ]/g,'').trim().split(/\s+/);return ((p[0]||'')[0]||'')+((p[1]||'')[0]||'');}
+  function estAvatarColor(n){let h=0;for(let i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))>>>0;return EST_AVCOLORS[h%EST_AVCOLORS.length];}
+  function estBadge(s){return '<span class="est-badge '+s+'">'+(s==='streaming'?'<span class="est-dot"></span>':(EST_ICONS[s]||''))+EST_LABELS[s]+'</span>';}
+  const CLOCK_ICON='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
   function estStream(e){
     if(e.status!=='streaming') return '<span style="color:var(--muted)">—</span>';
     const v=Math.round(e.stream);
@@ -1229,15 +1162,15 @@
   function estRow(e){
     return '<tr>'+
       '<td><span class="est-ref">'+e.ref+'</span></td>'+
-      '<td><div style="font-weight:600">'+e.customer+'</div><div class="est-sub">'+e.email+'</div></td>'+
-      '<td><div class="est-route">'+UP_ARROW+'<span class="est-loc">'+e.pickup+'</span></div><div class="est-sub">'+e.pickupSub+'</div></td>'+
-      '<td><div class="est-route">'+DOWN_ARROW+'<span class="est-loc">'+e.drop+'</span></div><div class="est-sub">'+e.dropSub+'</div></td>'+
+      '<td><div class="est-cust"><div class="est-avatar" style="background:'+estAvatarColor(e.customer)+'">'+estInitials(e.customer)+'</div><div style="min-width:0"><div style="font-weight:700">'+e.customer+'</div><div class="est-sub">'+e.email+'</div></div></div></td>'+
+      '<td><div class="est-route">'+UP_ARROW+'<span class="est-loc">'+e.pickup+'</span></div><div class="est-sub" style="padding-left:34px">'+e.pickupSub+'</div></td>'+
+      '<td><div class="est-route">'+DOWN_ARROW+'<span class="est-loc">'+e.drop+'</span></div><div class="est-sub" style="padding-left:34px">'+e.dropSub+'</div></td>'+
       '<td><span class="est-chip">'+e.container+'</span><div class="est-sub">'+e.miles+' mi</div></td>'+
       '<td>'+estPrice(e)+'</td>'+
       '<td>'+estBadge(e.status)+'</td>'+
       '<td>'+estStream(e)+'</td>'+
-      '<td><span class="est-sub" style="margin-top:0">'+e.created+'</span></td>'+
-      '<td><a href="#quote" class="est-view">View</a></td>'+
+      '<td><span class="est-time">'+CLOCK_ICON+e.created+'</span></td>'+
+      '<td><a href="#quote" class="est-view">View<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></td>'+
     '</tr>';
   }
   const estTbody=document.getElementById('estTbody'),estSearch=document.getElementById('estSearch'),
