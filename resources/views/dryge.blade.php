@@ -182,30 +182,33 @@
     /* All Estimates data table */
     .est-wrap{background:#fff;border:1px solid rgba(11,35,80,0.08);border-radius:16px;box-shadow:0 34px 80px -40px rgba(11,35,80,0.35);overflow:hidden;}
     .est-scroll{overflow-x:auto;}
-    .est-table{width:100%;border-collapse:collapse;min-width:1060px;}
-    .est-table thead th{text-align:left;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(11,35,80,0.5);background:linear-gradient(180deg,#F7FAFD,#EEF3F9);padding:15px 18px;white-space:nowrap;border-bottom:1px solid rgba(11,35,80,0.08);}
-    .est-table tbody td{padding:14px 18px;border-bottom:1px solid rgba(11,35,80,0.055);vertical-align:middle;font-size:13.5px;color:var(--navy);}
+    .est-table{width:100%;border-collapse:collapse;min-width:1040px;}
+    .est-table thead th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(11,35,80,0.5);background:linear-gradient(180deg,#F7FAFD,#EEF3F9);padding:13px 10px;white-space:nowrap;border-bottom:1px solid rgba(11,35,80,0.08);}
+    .est-table tbody td{padding:12px 10px;border-bottom:1px solid rgba(11,35,80,0.055);vertical-align:middle;font-size:12.5px;color:var(--navy);}
+    .est-table th:nth-child(1),.est-table td:nth-child(1){padding-left:18px;}
+    .est-table th:nth-child(5),.est-table td:nth-child(5){text-align:center;}
     .est-table tbody tr{transition:background .15s;}
     .est-table tbody tr:hover{background:#F5F9FE;}
     .est-table tbody tr:hover td:first-child{box-shadow:inset 3px 0 0 var(--red);}
     .est-table tbody tr:last-child td{border-bottom:none;}
-    .est-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;font-size:12px;letter-spacing:-0.02em;color:rgba(11,35,80,0.82);white-space:nowrap;}
-    .est-cust{display:flex;align-items:center;gap:11px;}
-    .est-avatar{width:38px;height:38px;border-radius:11px;flex:0 0 auto;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;box-shadow:0 8px 16px -8px rgba(11,35,80,0.55);}
+    .est-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;font-size:11px;letter-spacing:-0.03em;color:rgba(11,35,80,0.82);white-space:nowrap;}
+    .est-cust{display:flex;align-items:center;gap:9px;}
+    .est-avatar{width:32px;height:32px;border-radius:9px;flex:0 0 auto;display:grid;place-items:center;color:#fff;font-weight:700;font-size:11.5px;box-shadow:0 8px 16px -8px rgba(11,35,80,0.55);}
+    .est-cust .est-name{font-weight:700;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .est-sub{font-size:11.5px;color:var(--muted);margin-top:2px;}
-    .est-route{display:flex;align-items:center;gap:9px;font-weight:600;}
-    .est-pin{display:inline-flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:7px;flex:0 0 auto;}
+    .est-route{display:flex;align-items:center;gap:7px;font-weight:600;}
+    .est-pin{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:6px;flex:0 0 auto;}
     .est-pin.up{background:rgba(22,181,113,0.13);}
     .est-pin.down{background:rgba(255,59,48,0.1);}
-    .est-loc{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .est-loc{max-width:124px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
     .est-chip{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;background:#fff;border:1px solid rgba(11,35,80,0.14);color:var(--navy);white-space:nowrap;}
-    .est-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+    .est-badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap;}
     .est-badge.completed{background:rgba(22,181,113,0.13);color:#15935F;}
     .est-badge.streaming{background:rgba(58,95,192,0.13);color:#3A5FC0;}
     .est-badge.pending{background:rgba(11,35,80,0.07);color:#5B6473;}
     .est-badge.failed{background:rgba(255,59,48,0.12);color:#E0241A;}
     .est-dot{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 0 rgba(58,95,192,0.5);animation:livePulseBlue 1.6s ease-out infinite;}
-    .est-prog{width:130px;}
+    .est-prog{width:96px;}
     .est-prog-track{height:7px;border-radius:7px;background:rgba(11,35,80,0.09);overflow:hidden;}
     .est-prog-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#3A5FC0,#6E8FE0);transition:width .7s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px rgba(58,95,192,0.5);}
     .est-prog-label{font-size:11px;font-weight:600;color:var(--muted);margin-top:5px;}
@@ -1162,9 +1165,9 @@
   function estRow(e){
     return '<tr>'+
       '<td><span class="est-ref">'+e.ref+'</span></td>'+
-      '<td><div class="est-cust"><div class="est-avatar" style="background:'+estAvatarColor(e.customer)+'">'+estInitials(e.customer)+'</div><div style="min-width:0"><div style="font-weight:700">'+e.customer+'</div><div class="est-sub">'+e.email+'</div></div></div></td>'+
-      '<td><div class="est-route">'+UP_ARROW+'<span class="est-loc">'+e.pickup+'</span></div><div class="est-sub" style="padding-left:34px">'+e.pickupSub+'</div></td>'+
-      '<td><div class="est-route">'+DOWN_ARROW+'<span class="est-loc">'+e.drop+'</span></div><div class="est-sub" style="padding-left:34px">'+e.dropSub+'</div></td>'+
+      '<td><div class="est-cust"><div class="est-avatar" style="background:'+estAvatarColor(e.customer)+'">'+estInitials(e.customer)+'</div><div style="min-width:0"><div class="est-name">'+e.customer+'</div><div class="est-sub">'+e.email+'</div></div></div></td>'+
+      '<td><div class="est-route">'+UP_ARROW+'<span class="est-loc">'+e.pickup+'</span></div><div class="est-sub" style="padding-left:29px">'+e.pickupSub+'</div></td>'+
+      '<td><div class="est-route">'+DOWN_ARROW+'<span class="est-loc">'+e.drop+'</span></div><div class="est-sub" style="padding-left:29px">'+e.dropSub+'</div></td>'+
       '<td><span class="est-chip">'+e.container+'</span><div class="est-sub">'+e.miles+' mi</div></td>'+
       '<td>'+estPrice(e)+'</td>'+
       '<td>'+estBadge(e.status)+'</td>'+
