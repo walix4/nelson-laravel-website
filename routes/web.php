@@ -14,6 +14,11 @@ Route::view('/tools/tracking', 'tools.tracking');
 Route::view('/tools/demurrage', 'tools.demurrage');
 Route::view('/tools/co2', 'tools.co2');
 Route::view('/tools/converter', 'tools.converter');
+Route::view('/tools/ports', 'tools.ports');
+Route::view('/tools/fsc', 'tools.fsc');
+Route::view('/tools/containers', 'tools.containers');
+Route::view('/tools/accessorials', 'tools.accessorials');
+Route::view('/tools/overweight', 'tools.overweight');
 Route::view('/estimates', 'estimates')->name('estimates');
 
 Route::post('/contact', function (Request $request) {
