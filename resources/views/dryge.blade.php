@@ -54,6 +54,10 @@
     .port-icon.destination .dot{background:var(--green);box-shadow:0 0 14px var(--green),0 0 28px rgba(30,58,138,0.6);}
     .port-icon.destination .ring{border-color:var(--green);}
     .port-icon .label{position:absolute;left:18px;top:-3px;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:0.04em;color:#0B2350;text-shadow:0 1px 6px rgba(255,255,255,0.9),0 0 2px rgba(255,255,255,0.7);pointer-events:none;}
+    /* hide static port labels by default (avoids overlap on close ports like LAX/LGB); reveal on hover */
+    .port-icon:not(.origin):not(.destination) .label{opacity:0;transition:opacity .15s;}
+    .port-icon:not(.origin):not(.destination):hover .label{opacity:1;}
+    .leaflet-marker-icon:hover{z-index:600 !important;}
     @keyframes pulseRing{0%{width:14px;height:14px;opacity:0.9;}100%{width:60px;height:60px;opacity:0;}}
 
     .truck-wrap{width:60px;height:40px;display:flex;align-items:center;justify-content:center;will-change:transform;}
@@ -271,7 +275,7 @@
 
     /* ---- Ports explorer banner ---- */
     .ports-band{position:relative;border-radius:30px;overflow:hidden;background:linear-gradient(115deg,#3A5FC0 0%,#4C6FE0 45%,#6B5BFF 100%);min-height:430px;}
-    .ports-band .pmap{position:absolute;inset:0;background:url('world-map.svg') center/cover no-repeat;opacity:0.16;filter:brightness(0) invert(1);}
+    .ports-band .pmap{position:absolute;inset:0;background:url('usa-map.svg') center/contain no-repeat;opacity:0.18;filter:brightness(0) invert(1);}
     .ports-card{position:absolute;background:#fff;border-radius:18px;box-shadow:0 40px 80px -30px rgba(11,31,68,0.55);}
     .ports-card.left{left:-40px;top:40px;width:430px;padding:22px 24px;transform:rotate(-5deg);}
     .ports-card.right{right:-30px;top:120px;width:330px;padding:14px 8px;transform:rotate(4deg);}
@@ -285,6 +289,7 @@
     .pf-track .pf-knob{position:absolute;top:50%;width:15px;height:15px;border-radius:50%;background:#fff;border:2px solid var(--navy);transform:translate(-50%,-50%);box-shadow:0 2px 6px rgba(11,31,68,0.3);}
     .pc-row{display:flex;align-items:center;gap:12px;padding:11px 16px;font-size:15px;color:var(--navy);font-weight:500;}
     .pc-row .flag{font-size:20px;line-height:1;}
+    .pc-pin{width:18px;height:18px;fill:var(--red);flex-shrink:0;}
 
     /* ---- Unit converter ---- */
     .uc-card{position:relative;background:#fff;border-radius:26px;box-shadow:0 40px 90px -36px rgba(11,31,68,0.4);border:1px solid rgba(11,35,80,0.06);}
@@ -299,8 +304,10 @@
     .uc-eq{font-size:38px;font-weight:800;color:var(--navy);line-height:1;}
 
     /* ---- Testimonials ---- */
-    .rv-card{background:#fff;border-radius:18px;padding:22px;border:1px solid rgba(11,35,80,0.07);box-shadow:0 18px 40px -28px rgba(11,31,68,0.32);display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s;}
+    .rv-card{position:relative;background:#fff;border-radius:18px;padding:22px;border:1px solid rgba(11,35,80,0.07);box-shadow:0 18px 40px -28px rgba(11,31,68,0.32);display:flex;flex-direction:column;overflow:hidden;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s;}
     .rv-card:hover{transform:translateY(-4px);box-shadow:0 30px 56px -28px rgba(11,31,68,0.45);}
+    .rv-quote{position:absolute;top:14px;right:16px;width:34px;height:34px;color:var(--navy);opacity:0.07;}
+    .rv-photo{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#e7ebf2;box-shadow:0 4px 10px -4px rgba(11,31,68,0.4);}
     .rv-stars{display:inline-flex;gap:1px;}
     .rv-stars svg{width:17px;height:17px;}
     .rv-text{font-size:14px;color:#334; line-height:1.6;margin:14px 0 18px;}
@@ -311,6 +318,18 @@
     .rv-chip.on{background:var(--navy);color:#fff;border-color:var(--navy);}
     @keyframes rvIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
     .rv-card.rv-anim{animation:rvIn .5s cubic-bezier(.2,.7,.2,1) both;}
+
+    /* ---- Tools mega-menu ---- */
+    .mega-wrap{position:relative;}
+    .mega-panel{position:absolute;left:0;top:calc(100% + 18px);width:min(940px,calc(100vw - 32px));background:#fff;border-radius:20px;box-shadow:0 44px 100px -34px rgba(11,31,68,0.6);padding:26px 26px 20px;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .22s,transform .22s;z-index:60;}
+    .mega-wrap:hover .mega-panel,.mega-wrap.open .mega-panel{opacity:1;visibility:visible;transform:translateY(0);}
+    .mega-tool{display:flex;gap:14px;padding:12px;border-radius:13px;transition:background .15s;text-decoration:none;}
+    .mega-tool:hover{background:#F4F6FB;}
+    .mega-ic{width:46px;height:46px;border-radius:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 8px 18px -8px rgba(11,31,68,0.4);}
+    .mega-tool h4{font-size:14.5px;font-weight:700;color:var(--navy);}
+    .mega-tool p{font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:2px;}
+    .mega-caret{transition:transform .22s;}
+    .mega-wrap:hover .mega-caret{transform:rotate(180deg);}
   </style>
 </head>
 <body class="overflow-x-hidden">
@@ -333,27 +352,7 @@
   </div>
 
   <!-- Header -->
-  <header class="sticky top-0 z-40 border-b" style="background:#0B2350;border-color:rgba(255,255,255,0.18);box-shadow:0 6px 24px -10px rgba(11,35,80,0.45);">
-    <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="./" class="flex items-center gap-2.5">
-        <img src="logo-mark.png" alt="" class="h-9 md:h-10 w-auto" />
-        <span class="display text-white text-[22px] md:text-[24px] tracking-tight leading-none">Drayage <span style="color:var(--red);">Rate</span></span>
-      </a>
-      <nav class="hidden md:flex items-center gap-7 text-[13px] font-medium text-white/85">
-        <a href="#network" class="hover:text-white">Network</a>
-        <a href="#how" class="hover:text-white">How it works</a>
-        <a href="#features" class="hover:text-white">Platform</a>
-        <a href="#pricing" class="hover:text-white">Pricing</a>
-        <a href="#api" class="hover:text-white">Developers</a>
-      </nav>
-      <div class="flex items-center gap-2.5">
-        <a href="#login" class="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5">Sign in</a>
-        <a href="#quote" class="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5">
-          <span class="label">Get instant quote</span>
-        </a>
-      </div>
-    </div>
-  </header>
+  @include('partials.nav', ['onHome' => true])
 
   <!-- HERO (video) -->
   <section class="relative overflow-hidden text-white">
@@ -555,47 +554,13 @@
     </div>
   </section>
 
-  <!-- ALL ESTIMATES -->
-  <section class="py-24 relative overflow-hidden" style="background:radial-gradient(820px 420px at 50% -5%,rgba(58,95,192,0.08),transparent 60%),linear-gradient(180deg,#FFFFFF,#EEF2F8);">
-    <div class="max-w-[1400px] mx-auto px-6 relative">
-      <div class="text-center max-w-2xl mx-auto reveal mb-10">
-        <div class="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Live estimate stream</div>
-        <h2 class="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">All Estimates</h2>
-        <p class="mt-4 text-[var(--muted)] text-[15px]">Every drayage quote on the network — streaming in live and priced in seconds.</p>
-      </div>
-
-      <div class="reveal">
-        <div class="flex flex-col md:flex-row gap-3 mb-5">
-          <div class="relative flex-1">
-            <svg class="absolute left-3 top-1/2 -translate-y-1/2" style="color:rgba(11,35,80,0.4);" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-            <input id="estSearch" class="est-input" type="text" placeholder="Search by reference, customer, pickup, or drop-off…" />
-          </div>
-          <select id="estStatus" class="est-select">
-            <option value="all">All statuses</option>
-            <option value="completed">Completed</option>
-            <option value="streaming">Streaming</option>
-            <option value="pending">Pending</option>
-            <option value="failed">Failed</option>
-          </select>
-          <select id="estDate" class="est-select">
-            <option>Today</option><option>Last 7 days</option><option>Last 30 days</option><option>All time</option>
-          </select>
-          <div class="flex items-center text-[12px] font-medium text-[var(--muted)] px-1 whitespace-nowrap"><b id="estCount" class="text-[var(--navy)] mr-1">0</b> estimates</div>
-        </div>
-
-        <div class="est-wrap">
-          <div class="est-scroll no-scrollbar">
-            <table class="est-table">
-              <thead>
-                <tr>
-                  <th>Reference</th><th>Customer</th><th>Pickup</th><th>Drop-off</th><th>Container</th><th>Est. Price</th><th>Status</th><th>Stream</th><th>Created</th><th></th>
-                </tr>
-              </thead>
-              <tbody id="estTbody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+  <!-- ALL ESTIMATES → moved to its own page (/estimates) -->
+  <section class="py-20 relative overflow-hidden" style="background:radial-gradient(820px 420px at 50% -5%,rgba(58,95,192,0.08),transparent 60%),linear-gradient(180deg,#FFFFFF,#EEF2F8);">
+    <div class="max-w-[1100px] mx-auto px-6 text-center reveal">
+      <div class="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Live estimate stream</div>
+      <h2 class="display text-[36px] md:text-[48px] text-[var(--navy)] leading-[1.05] mt-2">Every quote, live on the network</h2>
+      <p class="mt-4 text-[var(--muted)] text-[15px] max-w-xl mx-auto">Watch real drayage estimates stream in and price in seconds across every U.S. port and lane.</p>
+      <a href="__B__/estimates/" class="btn-primary inline-flex items-center gap-2 mt-7 px-7 py-3.5 rounded-xl text-[15px] font-semibold"><span class="label">View all estimates</span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </section>
 
@@ -966,13 +931,7 @@
             <div class="flex items-center justify-end gap-3 mt-2"><span class="rv-stars" id="rvAvgStars"></span><span class="text-[13px] text-[var(--muted)] border-l border-[var(--navy)]/15 pl-3"><b class="text-[var(--navy)] num" id="rvCount">654</b> reviews</span></div>
           </div>
         </div>
-        <div class="flex flex-wrap gap-2.5 mt-8 reveal" id="rvFilters">
-          <button class="rv-chip on" data-src="all">All reviews</button>
-          <button class="rv-chip" data-src="google">Google</button>
-          <button class="rv-chip" data-src="play">Play Store</button>
-          <button class="rv-chip" data-src="appstore">App Store</button>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-6" id="rvGrid"></div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10" id="rvGrid"></div>
         <div class="text-center mt-10">
           <button id="rvLoad" class="px-7 py-3 rounded-xl text-[14px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Load more reviews</button>
         </div>
@@ -989,7 +948,6 @@
         <p class="mt-4 text-[var(--muted)] text-[15px] leading-relaxed">Accurately, quickly and for free convert common units of measurement. Enter a value, pick a category, then choose the <i>from</i> and <i>to</i> units to convert instantly.</p>
       </div>
       <div class="uc-card mt-12 p-7 md:p-12 reveal reveal-delay-1">
-        <div class="uc-blob l"></div><div class="uc-blob r"></div>
         <div class="relative" style="z-index:1">
           <div class="uc-field mb-6 md:max-w-[48%]">
             <select id="ucCat" class="uc-select"></select>
@@ -1019,9 +977,9 @@
       <div class="ports-band flex flex-col md:block">
         <div class="pmap"></div>
         <div class="relative z-10 text-center px-6 pt-12 pb-10 md:py-16 max-w-xl mx-auto">
-          <div class="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/80">Global coverage</div>
-          <h2 class="display text-white text-[34px] md:text-[44px] leading-[1.05] mt-2">Explore the port network</h2>
-          <p class="text-white/85 text-[15px] mt-4">Filter 1,200+ sea, river and dry ports across every major trade lane — then price a drayage move in seconds.</p>
+          <div class="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/80">U.S. coverage</div>
+          <h2 class="display text-white text-[34px] md:text-[44px] leading-[1.05] mt-2">Explore the U.S. port network</h2>
+          <p class="text-white/85 text-[15px] mt-4">Filter every major U.S. container port and inland ramp across all 48 states — then price a drayage move in seconds.</p>
           <a href="#network" class="inline-flex items-center gap-2 mt-7 bg-white text-[var(--navy)] font-semibold text-[14px] px-6 py-3 rounded-xl hover:translate-y-[-2px] transition" style="box-shadow:0 18px 40px -16px rgba(0,0,0,0.5);">Browse ports<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
         <!-- left filters card -->
@@ -1044,13 +1002,13 @@
         </div>
         <!-- right country list card -->
         <div class="ports-card right">
-          <div class="flex justify-end px-3 pb-1"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-          <div class="pc-row"><span class="flag">🇨🇳</span>China <span class="text-[var(--muted)] font-normal">(11)</span></div>
-          <div class="pc-row"><span class="flag">🇦🇪</span>UAE <span class="text-[var(--muted)] font-normal">(23)</span></div>
-          <div class="pc-row"><span class="flag">🇧🇮</span>Burundi <span class="text-[var(--muted)] font-normal">(13)</span></div>
-          <div class="pc-row"><span class="flag">🇧🇪</span>Belgium <span class="text-[var(--muted)] font-normal">(14)</span></div>
-          <div class="pc-row"><span class="flag">🇦🇹</span>Austria <span class="text-[var(--muted)] font-normal">(21)</span></div>
-          <div class="pc-row"><span class="flag">🇧🇸</span>Bahamas <span class="text-[var(--muted)] font-normal">(21)</span></div>
+          <div class="px-4 pt-1 pb-2 text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--muted)] flex items-center gap-1.5"><span class="flag">🇺🇸</span> Top U.S. ports</div>
+          <div class="pc-row"><svg class="pc-pin" viewBox="0 0 24 24"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="11" r="2.6" fill="#fff"/></svg>Los Angeles, CA <span class="text-[var(--muted)] font-normal">(48)</span></div>
+          <div class="pc-row"><svg class="pc-pin" viewBox="0 0 24 24"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="11" r="2.6" fill="#fff"/></svg>Long Beach, CA <span class="text-[var(--muted)] font-normal">(45)</span></div>
+          <div class="pc-row"><svg class="pc-pin" viewBox="0 0 24 24"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="11" r="2.6" fill="#fff"/></svg>New York / NJ <span class="text-[var(--muted)] font-normal">(52)</span></div>
+          <div class="pc-row"><svg class="pc-pin" viewBox="0 0 24 24"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="11" r="2.6" fill="#fff"/></svg>Savannah, GA <span class="text-[var(--muted)] font-normal">(33)</span></div>
+          <div class="pc-row"><svg class="pc-pin" viewBox="0 0 24 24"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="11" r="2.6" fill="#fff"/></svg>Houston, TX <span class="text-[var(--muted)] font-normal">(29)</span></div>
+          <div class="pc-row"><svg class="pc-pin" viewBox="0 0 24 24"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="11" r="2.6" fill="#fff"/></svg>Seattle, WA <span class="text-[var(--muted)] font-normal">(21)</span></div>
         </div>
       </div>
     </div>
@@ -1061,7 +1019,8 @@
       <div class="grid md:grid-cols-5 gap-8 text-[13px]">
         <div class="md:col-span-2">
           <div class="flex items-center">
-            <img src="draygo-logo.png" alt="Draygo" class="h-8 w-auto" style="filter:brightness(0) invert(1);" />
+            <img src="logo-mark.png" alt="" class="h-9 w-auto" />
+            <span class="display text-white text-[22px] tracking-tight leading-none ml-2.5">Drayage <span style="color:var(--red);">Rate</span></span>
           </div>
           <p class="mt-3 max-w-sm text-white/80">The drayage pricing network for North America. Instant rates across every container port from Vancouver to Miami.</p>
           <div class="mt-4 text-[11px] text-white/65 num">© 2026 drayagerate.net · All rights reserved</div>
@@ -1517,45 +1476,38 @@
 
   // ---- Testimonials ----
   const RV_REVIEWS=[
-    {n:'M P',r:4,d:'May 06, 2026',s:'google',t:"BulkLoads is a load board for all freight that can't go in a van, reefer or LTL — open-deck, bulk, heavy haul, you name it."},
-    {n:'Terry McCarty',r:5,d:'May 05, 2026',s:'play',t:"I like this app."},
-    {n:'Ben Wallace',r:5,d:'Apr 28, 2026',s:'play',t:"I just started using this app and so far so good. I saw another person comment that they got to talk to an actual person, and another comment stating the rates were spot on. Both true in my experience."},
-    {n:'tal iban',r:5,d:'Apr 23, 2026',s:'appstore',t:"Good good"},
-    {n:'Marie Barker',r:5,d:'Apr 08, 2026',s:'play',t:"we'd be lost without this app. THANK YOU DRAYGO! YOU REALLY ARE A BULKLOAD OF HELP."},
-    {n:'ttrigg84',r:5,d:'Mar 12, 2026',s:'appstore',t:"The app works very well — just needs an iPad compatible version too."},
-    {n:'Jarred Herman',r:5,d:'Jan 10, 2026',s:'google',t:"Currently I do not fully use Draygo yet, but from watching the load board and the messages I get, brokers are clearly looking for equipment in every region. The instant rate accuracy alone is worth it."},
-    {n:'Betty Sue Sands',r:5,d:'Nov 22, 2025',s:'play',t:"Great people to work with."},
-    {n:'Hector Ramos',r:5,d:'Nov 03, 2025',s:'google',t:"Quotes come back in seconds and they match what we actually pay carriers. Cut our pricing desk time in half."},
-    {n:'Dana Liu',r:4,d:'Oct 18, 2025',s:'appstore',t:"Solid tool for port drayage. Would love more inland rail ramps but coverage keeps growing."},
-    {n:'Owen Pratt',r:5,d:'Sep 30, 2025',s:'play',t:"The transit-time estimates are scary accurate. Great for setting customer expectations."},
-    {n:'Sofia Marin',r:5,d:'Sep 12, 2025',s:'google',t:"Switched our whole brokerage over. Live FSC and accessorials baked into the quote is a game changer."}
+    {n:'Marcus Powell',r:5,d:'May 06, 2026',img:12,t:"Best drayage pricing tool we've used. Quotes come back in seconds and match what we actually pay carriers — open-deck, bulk, heavy haul, all of it."},
+    {n:'Terry McCarty',r:5,d:'May 05, 2026',img:13,t:"Honestly the cleanest rate tool out there. Love it."},
+    {n:'Ben Wallace',r:5,d:'Apr 28, 2026',img:33,t:"I just started using this and so far so good. Got to talk to an actual person, and the rates were spot on. Both things matter when you're moving freight daily."},
+    {n:'Talia Bennett',r:5,d:'Apr 23, 2026',img:45,t:"Quick, accurate, dependable. Exactly what our desk needed."},
+    {n:'Marie Barker',r:5,d:'Apr 08, 2026',img:5,t:"We'd be lost without this. Thank you Draygo — you really are a bulk-load of help to our team."},
+    {n:'Tom Riggs',r:5,d:'Mar 12, 2026',img:51,t:"The app works very well and the web version is even better. Pricing my port moves takes seconds now."},
+    {n:'Jarred Herman',r:5,d:'Jan 10, 2026',img:8,t:"From watching the load board and the messages, brokers are clearly looking for equipment in every region. The instant rate accuracy alone is worth it."},
+    {n:'Betty Sue Sands',r:5,d:'Nov 22, 2025',img:23,t:"Great people to work with and a genuinely useful product."},
+    {n:'Hector Ramos',r:5,d:'Nov 03, 2025',img:60,t:"Cut our pricing desk time in half. Live FSC baked into every quote is the part I didn't know I needed."},
+    {n:'Dana Liu',r:5,d:'Oct 18, 2025',img:32,t:"Solid tool for port drayage. Coverage keeps growing and the inland rail ramps are filling in fast."},
+    {n:'Owen Pratt',r:5,d:'Sep 30, 2025',img:14,t:"The transit-time estimates are scary accurate. Great for setting customer expectations up front."},
+    {n:'Sofia Marin',r:5,d:'Sep 12, 2025',img:47,t:"Switched our whole brokerage over. Live FSC and accessorials in the quote is a game changer."}
   ];
-  const RV_ICONS={
-    google:'<svg width="20" height="20" viewBox="0 0 48 48"><path fill="#4285F4" d="M45 24c0-1.6-.1-2.7-.4-3.9H24v7.4h11.8c-.2 1.9-1.5 4.8-4.4 6.7l6.8 5.3C42.6 36 45 30.6 45 24z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-6.8-5.3c-1.9 1.3-4.4 2.2-7.7 2.2-5.9 0-10.9-4-12.7-9.4l-7 5.4C7.9 40.9 15.3 46 24 46z"/><path fill="#FBBC05" d="M11.3 28.2c-.5-1.3-.7-2.7-.7-4.2s.3-2.9.7-4.2l-7-5.4C3.5 17.2 3 20.5 3 24s.5 6.8 1.3 9.6l7-5.4z"/><path fill="#EA4335" d="M24 10.6c3.3 0 5.5 1.4 6.8 2.6l5-4.9C32.9 5.5 29 3.8 24 3.8 15.3 3.8 7.9 8.9 4.3 16.2l7 5.4C13.1 16.2 18.1 10.6 24 10.6z"/></svg>',
-    play:'<svg width="19" height="19" viewBox="0 0 24 24"><path fill="#00D2FF" d="M3.6 2.3C3.2 2.6 3 3 3 3.6v16.8c0 .6.2 1 .6 1.3l9.4-9.7L3.6 2.3z"/><path fill="#FFCE00" d="M16.9 8.5L5.4 1.9 13 9.7l3.9-1.2z"/><path fill="#FF3B30" d="M13 9.7l-7.6 7.8 11.5-6.6L13 9.7z"/><path fill="#00C853" d="M16.9 8.5l3.9 2.2c.8.5.8 1.6 0 2.1l-3.9 2.2L13 12l3.9-3.5z" opacity=".0"/><path fill="#00E676" d="M5.4 1.9l11.5 6.6 3.9 2.2c.8.5.8 1.6 0 2.1l-3.9 2.2L5.4 22.1c-.7.4-1.4.3-1.8-.4L13 12 3.6 2.3c.4-.7 1.1-.8 1.8-.4z" opacity="0"/></svg>',
-    appstore:'<svg width="19" height="19" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#0A84FF"/><path fill="#fff" d="M12.3 6.6l.6-1c.2-.3.6-.4.9-.2.3.2.4.6.2.9l-3.6 6.2h2.6c.8 0 1.3.9.9 1.6H6.2c-.4 0-.6-.3-.6-.6 0-.4.3-.6.6-.6h2.1l2.7-4.6-.8-1.5c-.2-.3-.1-.7.2-.9.3-.2.7-.1.9.2l.6 1zM8.3 15.5l-.5.9c-.2.3-.6.4-.9.2-.3-.2-.4-.6-.2-.9l.4-.6c.5-.2 1-.1 1.2.4zm8.4-2.4h1.4c.4 0 .6.3.6.6 0 .4-.3.6-.6.6h-.7l.5.9c.2.3.1.7-.2.9-.3.2-.7.1-.9-.2-1.5-2.5-2.5-4.4-3.2-5.6-.6-1.2-.2-2.4.2-2.8.4.8 1.1 2 2 3.7l.6 1.5z"/></svg>'
-  };
-  function rvStarRow(n,big){let h='';for(let i=1;i<=5;i++){h+='<svg viewBox="0 0 24 24" fill="'+(i<=n?'#FFB400':'none')+'" stroke="#FFB400" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .9-5 4.9 1.3 7L12 18l-6.3 3.3L7 14.3 2 9.4l7-.9L12 2z"/></svg>';}return h;}
-  function rvInitials(n){const p=n.replace(/[^A-Za-z ]/g,'').trim().split(/\s+/);return ((p[0]||'')[0]||'?').toUpperCase()+((p[1]||'')[0]||'').toUpperCase();}
+  function rvStarRow(n){let h='';for(let i=1;i<=5;i++){h+='<svg viewBox="0 0 24 24" fill="'+(i<=n?'#FFB400':'none')+'" stroke="#FFB400" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .9-5 4.9 1.3 7L12 18l-6.3 3.3L7 14.3 2 9.4l7-.9L12 2z"/></svg>';}return h;}
   const rvGrid=document.getElementById('rvGrid');
   if(rvGrid){
-    let rvFilter='all', rvShown=8;
+    let rvShown=8;
     document.getElementById('rvAvgStars').innerHTML=rvStarRow(5);
     function rvRender(animateFrom){
-      const list=RV_REVIEWS.filter(r=>rvFilter==='all'||r.s===rvFilter);
-      const slice=list.slice(0,rvShown);
+      const slice=RV_REVIEWS.slice(0,rvShown);
       rvGrid.innerHTML=slice.map((r,i)=>{
         const long=r.t.length>120;
         return '<div class="rv-card'+(animateFrom!=null&&i>=animateFrom?' rv-anim':'')+'">'+
-          '<div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="display text-[20px] text-[var(--navy)]">'+r.r+'</span><span class="rv-stars">'+rvStarRow(r.r)+'</span></div><span class="text-[12.5px] text-[var(--muted)] num">'+r.d+'</span></div>'+
+          '<svg class="rv-quote" viewBox="0 0 24 24" fill="currentColor"><path d="M10 7L6 11v6h6v-6H8.5L11 8.2 10 7zm8 0l-4 4v6h6v-6h-3.5L20 8.2 18 7z"/></svg>'+
+          '<div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="display text-[20px] text-[var(--navy)]">'+r.r+'.0</span><span class="rv-stars">'+rvStarRow(r.r)+'</span></div><span class="text-[12.5px] text-[var(--muted)] num">'+r.d+'</span></div>'+
           '<div class="rv-text flex-1"><span class="'+(long?'rv-clip':'')+'">'+r.t+'</span>'+(long?' <span class="rv-more" onclick="rvToggle(this)">More</span>':'')+'</div>'+
-          '<div class="flex items-center justify-between mt-auto pt-2"><div class="flex items-center gap-2.5"><span class="rv-av">'+rvInitials(r.n)+'</span><span class="text-[14px] font-medium text-[var(--navy)]">'+r.n+'</span></div>'+(RV_ICONS[r.s]||'')+'</div>'+
+          '<div class="flex items-center gap-3 mt-auto pt-3 border-t border-[var(--navy)]/6"><img class="rv-photo" src="https://i.pravatar.cc/96?img='+r.img+'" alt="'+r.n+'" loading="lazy" /><div><div class="text-[14px] font-semibold text-[var(--navy)] leading-tight">'+r.n+'</div><div class="text-[12px] text-[var(--muted)]">Verified shipper</div></div></div>'+
         '</div>';
       }).join('');
-      document.getElementById('rvLoad').style.display = rvShown>=list.length ? 'none':'';
+      document.getElementById('rvLoad').style.display = rvShown>=RV_REVIEWS.length ? 'none':'';
     }
     window.rvToggle=function(el){const span=el.previousElementSibling;const clip=span.classList.toggle('rv-clip');el.textContent=clip?'More':'Less';};
-    document.getElementById('rvFilters').addEventListener('click',e=>{const b=e.target.closest('.rv-chip');if(!b)return;document.querySelectorAll('#rvFilters .rv-chip').forEach(c=>c.classList.remove('on'));b.classList.add('on');rvFilter=b.dataset.src;rvShown=8;rvRender(0);});
     document.getElementById('rvLoad').addEventListener('click',()=>{const prev=rvShown;rvShown+=4;rvRender(prev);});
     rvRender();
   }

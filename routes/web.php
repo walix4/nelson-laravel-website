@@ -7,6 +7,15 @@ Route::view('/', 'home-1')->name('home-1');
 
 Route::view('/dryge', 'dryge')->name('dryge');
 
+// Tools + Estimates
+Route::view('/tools', 'tools.index')->name('tools');
+Route::view('/tools/distance', 'tools.distance');
+Route::view('/tools/tracking', 'tools.tracking');
+Route::view('/tools/demurrage', 'tools.demurrage');
+Route::view('/tools/co2', 'tools.co2');
+Route::view('/tools/converter', 'tools.converter');
+Route::view('/estimates', 'estimates')->name('estimates');
+
 Route::post('/contact', function (Request $request) {
     $data = $request->validate([
         'name'    => 'required|string|max:120',
