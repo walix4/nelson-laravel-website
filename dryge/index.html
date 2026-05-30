@@ -15,7 +15,7 @@
 
   <style>
     :root{
-      --navy:#0B1F44; --navy-2:#0A1736; --navy-3:#050B1A;
+      --navy:#010535; --navy-2:#0B1052; --navy-3:#000218;
       --red:#FF3B30; --red-2:#E0241A;
       --blue:#4DA3FF; --blue-2:#7BBCFF;
       --bg:#F8FAFC; --green:#00C16A;
@@ -28,7 +28,7 @@
 
     .glass{
       background:linear-gradient(180deg, rgba(255,255,255,0.86) 0%, rgba(255,255,255,0.72) 100%);
-      backdrop-filter:blur(22px) saturate(180%); -webkit-backdrop-filter:blur(22px) saturate(180%);
+      backdrop-filter:blur(16px) saturate(170%); -webkit-backdrop-filter:blur(16px) saturate(170%);
       border:1px solid rgba(255,255,255,0.65);
       box-shadow:0 40px 100px -28px rgba(11,31,68,0.55), 0 12px 30px -10px rgba(11,31,68,0.25), inset 0 1px 0 rgba(255,255,255,0.9);
     }
@@ -46,30 +46,30 @@
     .port-icon.origin .ring{border-color:var(--red);}
     .port-icon.destination .dot{background:var(--green);box-shadow:0 0 14px var(--green),0 0 28px rgba(0,193,106,0.6);}
     .port-icon.destination .ring{border-color:var(--green);}
-    .port-icon .label{position:absolute;left:18px;top:-3px;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:0.04em;color:#0B1F44;text-shadow:0 1px 6px rgba(255,255,255,0.9),0 0 2px rgba(255,255,255,0.7);pointer-events:none;}
+    .port-icon .label{position:absolute;left:18px;top:-3px;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:0.04em;color:#010535;text-shadow:0 1px 6px rgba(255,255,255,0.9),0 0 2px rgba(255,255,255,0.7);pointer-events:none;}
     @keyframes pulseRing{0%{width:14px;height:14px;opacity:0.9;}100%{width:60px;height:60px;opacity:0;}}
 
-    .truck-wrap{width:78px;height:26px;display:flex;align-items:center;justify-content:center;will-change:transform;}
+    .truck-wrap{width:60px;height:40px;display:flex;align-items:center;justify-content:center;will-change:transform;}
+    /* width/height forced with !important to beat Leaflet's `.leaflet-marker-pane img{width:auto}` rule */
     .truck-img{
-      width:78px;height:auto;display:block;
-      -webkit-mask-image:radial-gradient(ellipse 50% 38% at center,#000 55%,rgba(0,0,0,0.7) 70%,transparent 95%);
-              mask-image:radial-gradient(ellipse 50% 38% at center,#000 55%,rgba(0,0,0,0.7) 70%,transparent 95%);
-      filter:drop-shadow(0 4px 8px rgba(0,0,0,0.45)) drop-shadow(0 0 14px rgba(255,140,0,0.5));
+      width:60px!important;height:40px!important;display:block;
+      -webkit-mask-image:radial-gradient(ellipse 60% 46% at center,#000 58%,rgba(0,0,0,0.6) 74%,transparent 96%);
+              mask-image:radial-gradient(ellipse 60% 46% at center,#000 58%,rgba(0,0,0,0.6) 74%,transparent 96%);
+      filter:drop-shadow(0 3px 6px rgba(0,0,0,0.4)) drop-shadow(0 0 12px rgba(255,140,0,0.45));
       transition:transform .12s linear;
     }
 
     .leaflet-container{background:#E8ECF1 !important;font-family:inherit;}
     .leaflet-control-attribution{background:rgba(255,255,255,0.7)!important;color:rgba(11,31,68,0.55)!important;backdrop-filter:blur(6px);font-size:9px!important;border-radius:6px 0 0 0;}
     .leaflet-control-attribution a{color:rgba(11,31,68,0.75)!important;}
-    .leaflet-control-zoom a{background:rgba(255,255,255,0.95)!important;color:#0B1F44!important;border:1px solid rgba(11,31,68,0.12)!important;}
+    .leaflet-control-zoom a{background:rgba(255,255,255,0.95)!important;color:#010535!important;border:1px solid rgba(11,31,68,0.12)!important;}
     .leaflet-control-zoom a:hover{background:rgba(77,163,255,0.95)!important;color:#fff!important;}
     .leaflet-tile-pane{filter:grayscale(0.08) contrast(0.98);}
 
     .leaflet-overlay-pane .route-line{stroke:#FF3B30;stroke-width:3.2;fill:none;filter:drop-shadow(0 0 8px rgba(255,59,48,0.7));stroke-linecap:round;}
     .leaflet-overlay-pane .route-line-draw{stroke-dasharray:var(--len,1200);stroke-dashoffset:var(--len,1200);animation:drawLine 1.6s cubic-bezier(.65,.05,.36,1) forwards;}
     @keyframes drawLine{to{stroke-dashoffset:0;}}
-    .leaflet-overlay-pane .corridor{stroke:rgba(11,31,68,0.32);stroke-width:1.1;fill:none;stroke-dasharray:3 7;animation:dashFlow 9s linear infinite;}
-    @keyframes dashFlow{from{stroke-dashoffset:0;}to{stroke-dashoffset:-60;}}
+    .leaflet-overlay-pane .corridor{stroke:rgba(11,31,68,0.32);stroke-width:1.1;fill:none;stroke-dasharray:3 7;}
     @keyframes dashShift{to{stroke-dashoffset:-240;}}
     .station-pulse{transform-origin:center;animation:stationPulse 3.2s ease-in-out infinite;}
     @keyframes stationPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
@@ -125,10 +125,9 @@
     @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(0,193,106,0.55);}70%{box-shadow:0 0 0 8px rgba(0,193,106,0);}100%{box-shadow:0 0 0 0 rgba(0,193,106,0);}}
     @keyframes livePulseBlue{0%{box-shadow:0 0 0 0 rgba(77,163,255,0.55);}70%{box-shadow:0 0 0 8px rgba(77,163,255,0);}100%{box-shadow:0 0 0 0 rgba(77,163,255,0);}}
 
-    .grid-bg{position:relative;background:#04081A;background-image:radial-gradient(900px 500px at 18% 8%,rgba(77,163,255,0.22),transparent 55%),radial-gradient(1000px 600px at 88% 30%,rgba(255,59,48,0.18),transparent 55%),radial-gradient(600px 500px at 50% 110%,rgba(168,85,247,0.16),transparent 60%),linear-gradient(180deg,#04081A 0%,#0A1733 55%,#0B1F44 100%);}
+    .grid-bg{position:relative;background:#04081A;background-image:radial-gradient(900px 500px at 18% 8%,rgba(77,163,255,0.22),transparent 55%),radial-gradient(1000px 600px at 88% 30%,rgba(255,59,48,0.18),transparent 55%),radial-gradient(600px 500px at 50% 110%,rgba(168,85,247,0.16),transparent 60%),linear-gradient(180deg,#04081A 0%,#0A1733 55%,#010535 100%);}
     .grid-bg::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);}
-    .grid-bg::after{content:"";position:absolute;inset:0;pointer-events:none;overflow:hidden;background-image:radial-gradient(180px 180px at 12% 18%,rgba(77,163,255,0.45),transparent 70%),radial-gradient(220px 220px at 86% 22%,rgba(255,59,48,0.3),transparent 70%),radial-gradient(200px 200px at 60% 90%,rgba(168,85,247,0.32),transparent 70%);filter:blur(60px);animation:orbDrift 22s ease-in-out infinite;}
-    @keyframes orbDrift{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(40px,-30px) scale(1.05);}}
+    .grid-bg::after{content:"";position:absolute;inset:0;pointer-events:none;overflow:hidden;background-image:radial-gradient(180px 180px at 12% 18%,rgba(77,163,255,0.4),transparent 70%),radial-gradient(220px 220px at 86% 22%,rgba(255,59,48,0.28),transparent 70%),radial-gradient(200px 200px at 60% 90%,rgba(168,85,247,0.3),transparent 70%);filter:blur(48px);}
     .no-scrollbar::-webkit-scrollbar{display:none;} .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
   </style>
 </head>
@@ -178,7 +177,7 @@
     <div class="max-w-[1400px] mx-auto px-6 pt-10 pb-6 relative z-10">
       <div class="flex flex-wrap items-end justify-between gap-6">
         <div class="max-w-2xl">
-          <div class="glass-pill inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold text-white/90 tracking-wide">
+          <div class="glass-pill inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-[11px] font-semibold text-white/90 tracking-wide">
             <span class="live-dot"></span> The drayage pricing network · North America
           </div>
           <h1 class="display text-white mt-4 text-[30px] md:text-[40px] leading-[1.08] max-w-xl">
@@ -227,9 +226,9 @@
               <span class="ml-3 w-1.5 h-1.5 rounded-full bg-[var(--blue)]"></span><span>Port</span>
             </div>
             <div class="flex flex-wrap gap-2">
-              <button data-preset="LAX-DAL" class="glass-pill px-3 py-1.5 rounded-full text-white/80 hover:text-white">LA → Dallas</button>
-              <button data-preset="NYNJ-CHI" class="glass-pill px-3 py-1.5 rounded-full text-white/80 hover:text-white">NY/NJ → Chicago</button>
-              <button data-preset="SAV-ATL" class="glass-pill px-3 py-1.5 rounded-full text-white/80 hover:text-white">Savannah → Atlanta</button>
+              <button data-preset="LAX-DAL" class="glass-pill px-3 py-1.5 rounded-lg text-white/80 hover:text-white">LA → Dallas</button>
+              <button data-preset="NYNJ-CHI" class="glass-pill px-3 py-1.5 rounded-lg text-white/80 hover:text-white">NY/NJ → Chicago</button>
+              <button data-preset="SAV-ATL" class="glass-pill px-3 py-1.5 rounded-lg text-white/80 hover:text-white">Savannah → Atlanta</button>
             </div>
           </div>
         </div>
@@ -242,7 +241,7 @@
                 <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant quote engine</div>
                 <h2 class="display text-[24px] md:text-[26px] text-[var(--navy)] mt-1">Price your move</h2>
               </div>
-              <div class="px-2.5 py-1 rounded-full text-[10px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 border border-[var(--navy)]/10">v2026</div>
+              <div class="px-2.5 py-1 rounded-md text-[10px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 border border-[var(--navy)]/10">v2026</div>
             </div>
 
             <form id="quoteForm" class="mt-5 space-y-3.5">
@@ -286,20 +285,20 @@
               </div>
               <div>
                 <label class="input-label">Accessorials</label>
-                <div class="mt-2 flex flex-wrap gap-1.5 text-[11px]">
-                  <label class="cursor-pointer"><input type="checkbox" class="peer hidden" name="acc" value="tolls"><span class="px-2.5 py-1.5 rounded-full border border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80 peer-checked:bg-[var(--navy)] peer-checked:text-white peer-checked:border-[var(--navy)] transition inline-block">Tolls</span></label>
-                  <label class="cursor-pointer"><input type="checkbox" class="peer hidden" name="acc" value="prepull"><span class="px-2.5 py-1.5 rounded-full border border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80 peer-checked:bg-[var(--navy)] peer-checked:text-white peer-checked:border-[var(--navy)] transition inline-block">Pre-pull</span></label>
-                  <label class="cursor-pointer"><input type="checkbox" class="peer hidden" name="acc" value="overweight"><span class="px-2.5 py-1.5 rounded-full border border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80 peer-checked:bg-[var(--navy)] peer-checked:text-white peer-checked:border-[var(--navy)] transition inline-block">Overweight</span></label>
-                  <label class="cursor-pointer"><input type="checkbox" class="peer hidden" name="acc" value="hazmat"><span class="px-2.5 py-1.5 rounded-full border border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80 peer-checked:bg-[var(--navy)] peer-checked:text-white peer-checked:border-[var(--navy)] transition inline-block">Hazmat</span></label>
-                  <label class="cursor-pointer"><input type="checkbox" class="peer hidden" name="acc" value="reefer"><span class="px-2.5 py-1.5 rounded-full border border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80 peer-checked:bg-[var(--navy)] peer-checked:text-white peer-checked:border-[var(--navy)] transition inline-block">Reefer plug</span></label>
+                <div class="mt-2 flex flex-wrap gap-2 text-[11px]">
+                  <label class="cursor-pointer"><input type="checkbox" class="peer hidden" name="acc" value="tolls"><span class="px-3 py-1.5 rounded-md border border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80 peer-checked:bg-[var(--navy)] peer-checked:text-white peer-checked:border-[var(--navy)] transition inline-block">Tolls</span></label>
+                  <label class="cursor-pointer"><input type="checkbox" class="peer hidden" name="acc" value="prepull"><span class="px-3 py-1.5 rounded-md border border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80 peer-checked:bg-[var(--navy)] peer-checked:text-white peer-checked:border-[var(--navy)] transition inline-block">Pre-pull</span></label>
+                  <label class="cursor-pointer"><input type="checkbox" class="peer hidden" name="acc" value="overweight"><span class="px-3 py-1.5 rounded-md border border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80 peer-checked:bg-[var(--navy)] peer-checked:text-white peer-checked:border-[var(--navy)] transition inline-block">Overweight</span></label>
+                  <label class="cursor-pointer"><input type="checkbox" class="peer hidden" name="acc" value="hazmat"><span class="px-3 py-1.5 rounded-md border border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80 peer-checked:bg-[var(--navy)] peer-checked:text-white peer-checked:border-[var(--navy)] transition inline-block">Hazmat</span></label>
+                  <label class="cursor-pointer"><input type="checkbox" class="peer hidden" name="acc" value="reefer"><span class="px-3 py-1.5 rounded-md border border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80 peer-checked:bg-[var(--navy)] peer-checked:text-white peer-checked:border-[var(--navy)] transition inline-block">Reefer plug</span></label>
                 </div>
               </div>
 
-              <button id="calcBtn" type="submit" class="btn-primary relative w-full py-3.5 rounded-xl text-[14px] font-semibold mt-1.5">
+              <button id="calcBtn" type="submit" class="btn-primary relative w-full py-4 rounded-lg text-[14px] font-semibold" style="margin-top:1.6rem;">
                 <span class="label inline-flex items-center justify-center gap-2">Calculate instant rate</span>
                 <span class="spinner"></span>
               </button>
-              <p class="text-[10px] text-[var(--navy)]/55 text-center">No login · No card · Rates lock for 24h</p>
+              <p class="text-[10px] text-[var(--navy)]/55 text-center mt-1">No login · No card · Rates lock for 24h</p>
             </form>
 
             <div id="resultPanel" class="hidden mt-4">
@@ -398,76 +397,74 @@
         </div>
         <p class="max-w-md text-[var(--muted)] text-[15px]">From the first input to a customer-ready PDF, every drayage move is priced and visualized in under a minute.</p>
       </div>
-      <div class="mt-14 relative">
-        <svg viewBox="0 0 1300 200" class="w-full block" preserveAspectRatio="xMidYMid meet" style="max-height:240px;overflow:visible;">
+      <div class="mt-16 relative">
+        <svg viewBox="0 0 1300 130" class="w-full block" preserveAspectRatio="xMidYMid meet" style="max-height:150px;overflow:visible;">
           <defs>
-            <path id="loopPath" d="M 100 100 C 200 30, 275 30, 375 100 C 475 170, 550 170, 650 100 C 750 30, 825 30, 925 100 C 1025 170, 1100 170, 1200 100" fill="none"/>
             <linearGradient id="pipeGrad" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stop-color="#FF3B30"/>
-              <stop offset="0.3" stop-color="#FF7B30"/>
-              <stop offset="0.55" stop-color="#4DA3FF"/>
-              <stop offset="0.8" stop-color="#00C16A"/>
+              <stop offset="0.27" stop-color="#FF7B30"/>
+              <stop offset="0.5" stop-color="#4DA3FF"/>
+              <stop offset="0.73" stop-color="#00C16A"/>
               <stop offset="1" stop-color="#A855F7"/>
             </linearGradient>
             <g id="containerIcon">
-              <rect x="-14" y="-9" width="28" height="18" rx="2" fill="#FFD23F" stroke="#0B1F44" stroke-width="1.5"/>
-              <rect x="-22" y="-8" width="9" height="15" rx="1" fill="#FF3B30" stroke="#0B1F44" stroke-width="1.5"/>
-              <line x1="-9" y1="-5" x2="-9" y2="5" stroke="#0B1F44" stroke-width="1"/>
-              <line x1="-4" y1="-5" x2="-4" y2="5" stroke="#0B1F44" stroke-width="1"/>
-              <line x1="2" y1="-5" x2="2" y2="5" stroke="#0B1F44" stroke-width="1"/>
-              <line x1="8" y1="-5" x2="8" y2="5" stroke="#0B1F44" stroke-width="1"/>
-              <circle cx="-10" cy="11" r="2.5" fill="#0B1F44"/>
-              <circle cx="9" cy="11" r="2.5" fill="#0B1F44"/>
+              <rect x="-13" y="-8" width="26" height="16" rx="2" fill="#FFD23F" stroke="#010535" stroke-width="1.4"/>
+              <line x1="-8" y1="-4" x2="-8" y2="4" stroke="#010535" stroke-width="1"/>
+              <line x1="-3" y1="-4" x2="-3" y2="4" stroke="#010535" stroke-width="1"/>
+              <line x1="2" y1="-4" x2="2" y2="4" stroke="#010535" stroke-width="1"/>
+              <line x1="7" y1="-4" x2="7" y2="4" stroke="#010535" stroke-width="1"/>
+              <circle cx="-8" cy="10" r="2.2" fill="#010535"/>
+              <circle cx="8" cy="10" r="2.2" fill="#010535"/>
             </g>
           </defs>
 
-          <use href="#loopPath" stroke="rgba(11,31,68,0.14)" stroke-width="2.5" stroke-dasharray="4 6" fill="none"/>
-          <use href="#loopPath" stroke="url(#pipeGrad)" stroke-width="3.2" fill="none" opacity="0.92" stroke-linecap="round" stroke-dasharray="10 14" style="animation:dashShift 5s linear infinite;"/>
+          <!-- Connecting rail -->
+          <line x1="130" y1="64" x2="1170" y2="64" stroke="rgba(11,31,68,0.10)" stroke-width="2.5"/>
+          <line x1="130" y1="64" x2="1170" y2="64" stroke="url(#pipeGrad)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 13" style="animation:dashShift 7s linear infinite;"/>
 
-          <!-- Stations -->
-          <g transform="translate(100,100)" class="station-pulse">
-            <circle r="34" fill="white" stroke="rgba(255,59,48,0.15)" stroke-width="8"/>
-            <circle r="24" fill="#FF3B30"/>
+          <!-- Stations (aligned to label columns: 130 / 390 / 650 / 910 / 1170) -->
+          <g transform="translate(130,64)">
+            <circle r="29" fill="white" stroke="rgba(255,59,48,0.14)" stroke-width="7"/>
+            <circle r="20" fill="#FF3B30"/>
             <g transform="translate(-10,-10)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="10" cy="4" r="2.5"/><line x1="10" y1="6.5" x2="10" y2="18"/><path d="M3 13c1.6 3 4.2 5 7 5s5.4-2 7-5"/>
             </g>
           </g>
-          <g transform="translate(375,100)" class="station-pulse" style="animation-delay:.6s;">
-            <circle r="34" fill="white" stroke="rgba(255,123,48,0.15)" stroke-width="8"/>
-            <circle r="24" fill="#FF7B30"/>
+          <g transform="translate(390,64)">
+            <circle r="29" fill="white" stroke="rgba(255,123,48,0.14)" stroke-width="7"/>
+            <circle r="20" fill="#FF7B30"/>
             <g transform="translate(-10,-11)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10 1.5c-3.3 0-6 2.6-6 6 0 4 6 12 6 12s6-8 6-12c0-3.4-2.7-6-6-6z"/><circle cx="10" cy="7.5" r="2.2" fill="white" stroke="#FF7B30"/>
             </g>
           </g>
-          <g transform="translate(650,100)" class="station-pulse" style="animation-delay:1.2s;">
-            <circle r="34" fill="white" stroke="rgba(77,163,255,0.15)" stroke-width="8"/>
-            <circle r="24" fill="#4DA3FF"/>
+          <g transform="translate(650,64)">
+            <circle r="29" fill="white" stroke="rgba(77,163,255,0.14)" stroke-width="7"/>
+            <circle r="20" fill="#4DA3FF"/>
             <g transform="translate(-10,-10)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="16" height="16" rx="2"/><line x1="6" y1="14" x2="6" y2="10"/><line x1="10" y1="14" x2="10" y2="6"/><line x1="14" y1="14" x2="14" y2="9"/>
             </g>
           </g>
-          <g transform="translate(925,100)" class="station-pulse" style="animation-delay:1.8s;">
-            <circle r="34" fill="white" stroke="rgba(0,193,106,0.15)" stroke-width="8"/>
-            <circle r="24" fill="#00C16A"/>
+          <g transform="translate(910,64)">
+            <circle r="29" fill="white" stroke="rgba(0,193,106,0.14)" stroke-width="7"/>
+            <circle r="20" fill="#00C16A"/>
             <g transform="translate(-10,-10)" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10 2.5v10"/><path d="M5 8.5l5 5 5-5"/><path d="M3 17h14"/>
             </g>
           </g>
-          <g transform="translate(1200,100)" class="station-pulse" style="animation-delay:2.4s;">
-            <circle r="34" fill="white" stroke="rgba(168,85,247,0.15)" stroke-width="8"/>
-            <circle r="24" fill="#A855F7"/>
+          <g transform="translate(1170,64)">
+            <circle r="29" fill="white" stroke="rgba(168,85,247,0.14)" stroke-width="7"/>
+            <circle r="20" fill="#A855F7"/>
             <g transform="translate(-10,-9)" stroke="white" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 9.5l4.5 4.5L17 5"/>
             </g>
           </g>
 
-          <!-- Moving containers (looping along path) -->
-          <use href="#containerIcon"><animateMotion dur="9s" repeatCount="indefinite" rotate="auto"><mpath href="#loopPath"/></animateMotion></use>
-          <use href="#containerIcon"><animateMotion dur="9s" begin="-3s" repeatCount="indefinite" rotate="auto"><mpath href="#loopPath"/></animateMotion></use>
-          <use href="#containerIcon"><animateMotion dur="9s" begin="-6s" repeatCount="indefinite" rotate="auto"><mpath href="#loopPath"/></animateMotion></use>
+          <!-- Containers gliding upright along the rail -->
+          <use href="#containerIcon"><animateMotion dur="8s" repeatCount="indefinite" rotate="0" path="M 160 64 L 1140 64"/></use>
+          <use href="#containerIcon"><animateMotion dur="8s" begin="-4s" repeatCount="indefinite" rotate="0" path="M 160 64 L 1140 64"/></use>
         </svg>
 
-        <div class="mt-2 grid grid-cols-5 gap-2 text-center px-2">
+        <div class="mt-8 grid grid-cols-5 gap-2 text-center px-2">
           <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#FF3B30]">01</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Choose origin</div><div class="text-[11px] text-[var(--muted)] mt-0.5">Every U.S. & Canadian port</div></div>
           <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#FF7B30]">02</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Pick destination</div><div class="text-[11px] text-[var(--muted)] mt-0.5">1,200+ inland cities</div></div>
           <div><div class="text-[10px] uppercase tracking-[0.16em] font-bold num text-[#4DA3FF]">03</div><div class="display text-[13px] md:text-[15px] text-[var(--navy)] mt-1">Calculate rate</div><div class="text-[11px] text-[var(--muted)] mt-0.5">Priced in 30s</div></div>
@@ -508,19 +505,6 @@
     </div>
   </section>
 
-  <!-- COST CARDS -->
-  <section class="py-24 relative overflow-hidden" style="background:linear-gradient(180deg,#F8FAFC,#EEF2F8);">
-    <div class="absolute inset-0 opacity-50 pointer-events-none" style="background:radial-gradient(800px 400px at 80% 10%,rgba(77,163,255,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(255,59,48,0.13),transparent 60%);"></div>
-    <div class="max-w-[1400px] mx-auto px-6 relative">
-      <div class="max-w-2xl reveal">
-        <div class="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Cost transparency</div>
-        <h2 class="display text-[40px] md:text-[48px] text-[var(--navy)] leading-[1.05] mt-2">Every dollar in the quote, accounted for.</h2>
-        <p class="mt-4 text-[var(--muted)] text-[15px]">No mystery FSCs. No surprise accessorials at delivery. Six cost components on every quote — priced from live market data.</p>
-      </div>
-      <div id="costGrid" class="mt-12 grid md:grid-cols-3 lg:grid-cols-6 gap-4"></div>
-    </div>
-  </section>
-
   <!-- BENTO FEATURES -->
   <section id="features" class="py-24 bg-white">
     <div class="max-w-[1400px] mx-auto px-6">
@@ -533,7 +517,7 @@
       </div>
 
       <div class="mt-10 grid md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[180px]">
-        <div class="bento-card md:col-span-2 lg:col-span-2 md:row-span-2 rounded-2xl p-6 relative" style="background:linear-gradient(135deg,#0B1F44 0%,#1A3070 100%);color:#fff;">
+        <div class="bento-card md:col-span-2 lg:col-span-2 md:row-span-2 rounded-2xl p-6 relative" style="background:linear-gradient(135deg,#010535 0%,#1A3070 100%);color:#fff;">
           <div class="relative z-10">
             <div class="text-[10px] uppercase tracking-[0.16em] text-white/65">01 / Instant quotes</div>
             <h3 class="display text-[26px] mt-2 leading-tight">From input to priced route in <span style="color:#FF8470;">&lt; 30 seconds</span>.</h3>
@@ -561,15 +545,15 @@
           <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/55">03 / Multi-port</div>
           <h3 class="display text-[18px] text-[var(--navy)] mt-2 leading-tight">Every USA & Canada port.</h3>
           <div class="mt-3 flex flex-wrap gap-1">
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">LAX</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">LGB</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">OAK</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">SEA</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">NY/NJ</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">SAV</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">HOU</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">MIA</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">+42</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">LAX</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">LGB</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">OAK</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">SEA</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">NY/NJ</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">SAV</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">HOU</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">MIA</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[var(--navy)]/8 text-[var(--navy)]/75 font-semibold">+42</span>
           </div>
         </div>
 
@@ -579,7 +563,7 @@
           <p class="text-[var(--navy)]/60 text-[12px] mt-2">Brand-ready quotes in one click.</p>
         </div>
 
-        <div class="bento-card rounded-2xl p-5 relative md:col-span-2" style="background:#0B1F44;color:#fff;">
+        <div class="bento-card rounded-2xl p-5 relative md:col-span-2" style="background:#010535;color:#fff;">
           <div class="text-[10px] uppercase tracking-[0.16em] text-white/55">05 / API</div>
           <h3 class="display text-[20px] mt-2 leading-tight">Embed instant rates anywhere.</h3>
           <pre class="mt-3 bg-black/30 rounded-lg p-3 text-[11px] font-mono overflow-x-auto text-[var(--blue-2)] border border-white/8 leading-relaxed"><span style="color:#00C16A">POST</span> /v1/quotes
@@ -605,7 +589,7 @@
   </section>
 
   <!-- 3D CONTAINER -->
-  <section class="py-28 relative overflow-hidden" style="background:radial-gradient(ellipse at 50% 0%,#0B1F44,#03070F 70%);color:#fff;">
+  <section class="py-28 relative overflow-hidden" style="background:radial-gradient(ellipse at 50% 0%,#010535,#03070F 70%);color:#fff;">
     <div class="absolute inset-0 opacity-30 pointer-events-none" style="background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:48px 48px;"></div>
     <div class="max-w-[1400px] mx-auto px-6 relative">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -638,6 +622,19 @@
     </div>
   </section>
 
+  <!-- COST CARDS -->
+  <section class="py-24 relative overflow-hidden" style="background:linear-gradient(180deg,#F8FAFC,#EEF2F8);">
+    <div class="absolute inset-0 opacity-50 pointer-events-none" style="background:radial-gradient(800px 400px at 80% 10%,rgba(77,163,255,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(255,59,48,0.13),transparent 60%);"></div>
+    <div class="max-w-[1400px] mx-auto px-6 relative">
+      <div class="max-w-2xl reveal">
+        <div class="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Cost transparency</div>
+        <h2 class="display text-[40px] md:text-[48px] text-[var(--navy)] leading-[1.05] mt-2">Every dollar in the quote, accounted for.</h2>
+        <p class="mt-4 text-[var(--muted)] text-[15px]">No mystery FSCs. No surprise accessorials at delivery. Six cost components on every quote — priced from live market data.</p>
+      </div>
+      <div id="costGrid" class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+    </div>
+  </section>
+
   <!-- STATS -->
   <section class="py-20 bg-white">
     <div class="max-w-[1400px] mx-auto px-6">
@@ -651,11 +648,11 @@
   </section>
 
   <!-- CTA -->
-  <section class="py-24 relative overflow-hidden" style="background:linear-gradient(135deg,#0B1F44 0%,#03070F 60%,#1A3070 100%);">
+  <section class="py-24 relative overflow-hidden" style="background:linear-gradient(135deg,#010535 0%,#03070F 60%,#1A3070 100%);">
     <div class="absolute inset-0 opacity-50 pointer-events-none" style="background:radial-gradient(700px 400px at 90% 50%,rgba(255,59,48,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(77,163,255,0.22),transparent 60%);"></div>
     <div class="max-w-[1400px] mx-auto px-6 relative">
       <div class="text-center max-w-3xl mx-auto text-white reveal">
-        <div class="glass-pill inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-semibold text-white/90"><span class="live-dot"></span> Ready when you are</div>
+        <div class="glass-pill inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-[11px] font-semibold text-white/90"><span class="live-dot"></span> Ready when you are</div>
         <h2 class="display text-[44px] md:text-[58px] leading-[1.03] mt-5">Get your drayage quote in seconds.</h2>
         <p class="text-white/70 text-[16px] mt-4">Instant pricing. Full transparency. Nationwide coverage. Built for the brokers, BCOs and 3PLs running North American freight.</p>
         <div class="mt-8 flex items-center justify-center gap-3 flex-wrap">
@@ -667,15 +664,15 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-[#03070F] text-white/70 py-14 border-t border-white/5">
+  <footer class="text-white/85 py-14 border-t border-white/15" style="background:#00A5E7;">
     <div class="max-w-[1400px] mx-auto px-6">
       <div class="grid md:grid-cols-5 gap-8 text-[13px]">
         <div class="md:col-span-2">
           <div class="flex items-center">
-            <img src="draygo-logo.png" alt="Draygo" class="h-8 w-auto" style="filter:brightness(1.45) saturate(1.1);" />
+            <img src="draygo-logo.png" alt="Draygo" class="h-8 w-auto" style="filter:drop-shadow(0 1px 0 rgba(255,255,255,0.4));" />
           </div>
-          <p class="mt-3 max-w-sm text-white/55">The drayage pricing network for North America. Instant rates across every container port from Vancouver to Miami.</p>
-          <div class="mt-4 text-[11px] text-white/40 num">© 2026 drayagerate.net · All rights reserved</div>
+          <p class="mt-3 max-w-sm text-white/80">The drayage pricing network for North America. Instant rates across every container port from Vancouver to Miami.</p>
+          <div class="mt-4 text-[11px] text-white/65 num">© 2026 drayagerate.net · All rights reserved</div>
         </div>
         <div><div class="text-white text-[11px] uppercase tracking-[0.16em] font-semibold mb-3">Platform</div><ul class="space-y-2"><li><a href="#network">Network</a></li><li><a href="#features">Features</a></li><li><a href="#api">API</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
         <div><div class="text-white text-[11px] uppercase tracking-[0.16em] font-semibold mb-3">Company</div><ul class="space-y-2"><li><a href="#about">About</a></li><li><a href="#careers">Careers</a></li><li><a href="#press">Press</a></li><li><a href="#contact">Contact</a></li></ul></div>
@@ -776,7 +773,7 @@
     map.flyToBounds(L.latLngBounds(path).pad(0.18),{duration:1.1,easeLinearity:0.4});
 
     setTimeout(()=>{
-      truckMarker=L.marker(path[0],{icon:L.divIcon({html:`<div class="truck-wrap"><img class="truck-img" src="truck.png" alt=""></div>`,className:'',iconSize:[78,26],iconAnchor:[39,13]})}).addTo(map);
+      truckMarker=L.marker(path[0],{icon:L.divIcon({html:`<div class="truck-wrap"><img class="truck-img" src="truck.png" alt=""></div>`,className:'',iconSize:[60,40],iconAnchor:[30,20]})}).addTo(map);
       const t0=performance.now(), dur=2400;
       function tick(now){
         const t=Math.min(1,(now-t0)/dur);
@@ -785,7 +782,8 @@
         const i1=Math.max(0,idx-1), i2=Math.min(path.length-1,idx+1);
         const dLat=path[i2][0]-path[i1][0], dLng=path[i2][1]-path[i1][1];
         const angle=Math.atan2(-dLat,dLng)*180/Math.PI;
-        const el=truckMarker.getElement(); if(el){const img=el.querySelector('.truck-img'); if(img) img.style.transform=`rotate(${angle}deg)`;}
+        const facingLeft=angle>90||angle<-90;
+        const el=truckMarker.getElement(); if(el){const img=el.querySelector('.truck-img'); if(img) img.style.transform=`rotate(${angle}deg)${facingLeft?' scaleY(-1)':''}`;}
         if(t<1)truckAnim=requestAnimationFrame(tick);
       }
       truckAnim=requestAnimationFrame(tick);
@@ -906,12 +904,12 @@
   const COSTS=[
     {n:'Fuel + FSC',   d:'Live diesel × MPG × distance, plus carrier FSC.',     i:'fuel',     a:'#FF3B30'},
     {n:'Driver labor', d:'Hourly wage × transit time + per diem on 400+ mi.',   i:'user',     a:'#4DA3FF'},
-    {n:'Port charges', d:'Gate fees, terminal handling, exam fees if pulled.',  i:'anchor',   a:'#0B1F44'},
+    {n:'Port charges', d:'Gate fees, terminal handling, exam fees if pulled.',  i:'anchor',   a:'#010535'},
     {n:'Chassis',      d:'Daily rental, pool fees, per-diem on long dwell.',    i:'truck',    a:'#F2A516'},
     {n:'Accessorials', d:'Tolls, overweight, hazmat, reefer plug, lumper.',     i:'clipboard',a:'#A855F7'},
     {n:'Overhead',     d:'Admin, dispatch, ELD/TMS, insurance, depreciation.',  i:'settings', a:'#00C16A'},
   ];
-  document.getElementById('costGrid').innerHTML=COSTS.map((c,i)=>`<div class="bento-card glass rounded-2xl p-5 reveal reveal-delay-${i%4}"><div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:${c.a}14;border:1px solid ${c.a}26;">${svgIcon(c.i,c.a)}</div><div class="display text-[15px] text-[var(--navy)] mt-3">${c.n}</div><p class="text-[12px] text-[var(--muted)] mt-1.5 leading-relaxed">${c.d}</p></div>`).join('');
+  document.getElementById('costGrid').innerHTML=COSTS.map((c,i)=>`<div class="bento-card glass rounded-2xl p-6 reveal reveal-delay-${i%3} flex items-start gap-4"><div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center" style="background:${c.a}14;border:1px solid ${c.a}26;">${svgIcon(c.i,c.a)}</div><div><div class="display text-[17px] text-[var(--navy)]">${c.n}</div><p class="text-[13px] text-[var(--muted)] mt-1.5 leading-relaxed">${c.d}</p></div></div>`).join('');
   document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
   </script>
 
