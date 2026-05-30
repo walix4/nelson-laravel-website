@@ -152,6 +152,7 @@
     .hiw-stub{width:3px;height:52px;background:var(--navy);border-radius:3px;flex:0 0 auto;}
     .hiw-icon{width:116px;height:116px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:0 0 auto;box-shadow:0 22px 46px -18px rgba(11,31,68,0.42),0 6px 16px -8px rgba(11,31,68,0.18);animation:floatTag 5.5s ease-in-out infinite;}
     .hiw-icon svg{width:48px;height:48px;}
+    .hiw-icon img{width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(11,31,68,0.14));}
     .hiw-text{text-align:center;max-width:240px;padding:0 8px;}
     .hiw-title{font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:var(--navy);font-size:15px;line-height:1.25;}
     .hiw-uline{width:40px;height:3px;border-radius:3px;margin:10px auto 0;}
@@ -261,16 +262,14 @@
   <!-- LIVE NETWORK + INSTANT QUOTE (2nd section) -->
   <section id="quote" class="relative grid-bg overflow-hidden py-20 md:py-24">
     <div class="max-w-[1400px] mx-auto px-6 relative z-10">
-      <div class="flex flex-wrap items-end justify-between gap-6 mb-9 reveal">
-        <div class="max-w-2xl">
-          <div class="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--blue-2)]">Live map · instant quote engine</div>
-          <h2 class="display text-white text-[34px] md:text-[46px] leading-[1.05] mt-2">Watch your container move — then price it live.</h2>
-        </div>
-        <p class="max-w-md text-white/60 text-[15px]">Drop an origin and destination and watch the truck run the lane while every cost component is priced from live market data.</p>
+      <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+        <div class="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--blue-2)]">Instant quote engine</div>
+        <h2 class="display text-white text-[44px] md:text-[64px] leading-[1.03] mt-3">Calculate your rate.</h2>
+        <p class="text-white/60 text-[15px] md:text-[16px] mt-4 max-w-xl mx-auto">Pick a lane, watch the container run it, and get a fully itemised, all-in price in seconds.</p>
       </div>
-      <div class="relative grid lg:grid-cols-[1.55fr_1fr] gap-5 lg:items-start">
+      <div class="relative grid lg:grid-cols-[1.55fr_1fr] gap-5 lg:items-stretch">
         <!-- MAP -->
-        <div class="relative rounded-2xl overflow-hidden border border-white/8" style="height:620px;box-shadow:0 30px 80px -20px rgba(0,0,0,0.7);">
+        <div class="relative rounded-2xl overflow-hidden border border-white/8 min-h-[460px]" style="box-shadow:0 30px 80px -20px rgba(0,0,0,0.7);">
           <div id="map" class="absolute inset-0"></div>
 
           <div class="absolute top-4 left-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
@@ -475,7 +474,7 @@
           <div class="hiw-col">
             <div class="hiw-half top">
               <div class="hiw-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#FF3B30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+                <img src="hiw-origin.png" alt="Choose origin port" loading="lazy">
               </div>
               <div class="hiw-stub"></div>
             </div>
@@ -502,7 +501,7 @@
             <div class="hiw-half bot">
               <div class="hiw-stub"></div>
               <div class="hiw-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#FF7B30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                <img src="hiw-destination.png" alt="Pick destination" loading="lazy">
               </div>
             </div>
           </div>
@@ -511,7 +510,7 @@
           <div class="hiw-col">
             <div class="hiw-half top">
               <div class="hiw-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#4DA3FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"/><line x1="6.5" y1="21" x2="6.5" y2="12"/><line x1="12" y1="21" x2="12" y2="4"/><line x1="17.5" y1="21" x2="17.5" y2="9"/></svg>
+                <img src="hiw-calculate.png" alt="Calculate rate" loading="lazy">
               </div>
               <div class="hiw-stub"></div>
             </div>
@@ -538,7 +537,7 @@
             <div class="hiw-half bot">
               <div class="hiw-stub"></div>
               <div class="hiw-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#00C16A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+                <img src="hiw-export.png" alt="Export quote PDF" loading="lazy">
               </div>
             </div>
           </div>
@@ -547,7 +546,7 @@
           <div class="hiw-col">
             <div class="hiw-half top">
               <div class="hiw-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                <img src="hiw-book.png" alt="Book shipment" loading="lazy">
               </div>
               <div class="hiw-stub"></div>
             </div>
