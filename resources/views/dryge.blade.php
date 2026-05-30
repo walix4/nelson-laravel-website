@@ -117,6 +117,7 @@
 
     .live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(0,193,106,0.6);animation:livePulse 1.8s ease-out infinite;}
     @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(0,193,106,0.55);}70%{box-shadow:0 0 0 8px rgba(0,193,106,0);}100%{box-shadow:0 0 0 0 rgba(0,193,106,0);}}
+    @keyframes livePulseBlue{0%{box-shadow:0 0 0 0 rgba(77,163,255,0.55);}70%{box-shadow:0 0 0 8px rgba(77,163,255,0);}100%{box-shadow:0 0 0 0 rgba(77,163,255,0);}}
 
     .grid-bg{position:relative;background:#04081A;background-image:radial-gradient(900px 500px at 18% 8%,rgba(77,163,255,0.22),transparent 55%),radial-gradient(1000px 600px at 88% 30%,rgba(255,59,48,0.18),transparent 55%),radial-gradient(600px 500px at 50% 110%,rgba(168,85,247,0.16),transparent 60%),linear-gradient(180deg,#04081A 0%,#0A1733 55%,#0B1F44 100%);}
     .grid-bg::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 75%);}
@@ -229,7 +230,7 @@
 
         <!-- CALCULATOR -->
         <div id="quote" class="relative lg:h-[620px]">
-          <div id="calcCard" class="calc-tilt glass rounded-2xl p-5 md:p-6 lg:p-7 lg:h-full lg:overflow-y-auto">
+          <div id="calcCard" class="calc-tilt glass rounded-2xl p-5 md:p-6 lg:p-7 lg:h-full relative overflow-hidden">
             <div class="flex items-center justify-between">
               <div>
                 <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant quote engine</div>
@@ -295,12 +296,12 @@
               <p class="text-[10px] text-[var(--navy)]/55 text-center">No login · No card · Rates lock for 24h</p>
             </form>
 
-            <div id="resultPanel" class="hidden mt-5 pt-5 border-t border-[var(--navy)]/10">
+            <div id="resultPanel" class="hidden mt-4">
               <div class="flex items-end justify-between">
                 <div>
-                  <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--green)]">Live rate</div>
+                  <div class="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--green)] flex items-center gap-1.5"><span class="live-dot"></span> Live rate · locked 24h</div>
                   <div class="flex items-baseline gap-2 mt-1">
-                    <span class="display text-[36px] text-[var(--navy)] num">$<span id="rTotal">0</span></span>
+                    <span class="display text-[40px] text-[var(--navy)] num leading-none">$<span id="rTotal">0</span></span>
                     <span class="text-[12px] text-[var(--navy)]/60">/ round trip</span>
                   </div>
                 </div>
@@ -320,6 +321,24 @@
               <div class="mt-3 flex items-center gap-2">
                 <button class="flex-1 py-2.5 rounded-lg text-[12px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)]">Export PDF</button>
                 <button class="flex-1 py-2.5 rounded-lg text-[12px] font-semibold border border-[var(--navy)]/20 text-[var(--navy)] hover:bg-[var(--navy)]/5">Request booking</button>
+              </div>
+              <button id="calcAgainBtn" type="button" class="mt-3 w-full py-2.5 rounded-lg text-[12px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 hover:bg-[var(--navy)]/14 transition flex items-center justify-center gap-1.5">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+                Calculate again
+              </button>
+            </div>
+
+            <!-- Loading overlay -->
+            <div id="loadingPanel" class="hidden absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6" style="background:linear-gradient(180deg,rgba(255,255,255,0.94),rgba(240,247,255,0.92));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);">
+              <div class="relative w-16 h-16">
+                <div class="absolute inset-0 rounded-full border-[3px] border-[var(--navy)]/10"></div>
+                <div class="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[var(--red)] animate-spin"></div>
+              </div>
+              <div class="display text-[16px] text-[var(--navy)] mt-5">Computing your rate</div>
+              <div class="text-[12px] text-[var(--navy)]/60 mt-1.5 num" id="loadingStep">Routing port to door…</div>
+              <div class="mt-5 flex items-center gap-1 text-[10px] text-[var(--navy)]/55 uppercase tracking-[0.14em]">
+                <span class="live-dot" style="background:var(--blue);box-shadow:0 0 0 0 rgba(77,163,255,0.6);animation-name:livePulseBlue;"></span>
+                <span>Pulling live market data</span>
               </div>
             </div>
           </div>
@@ -760,16 +779,31 @@
 
   function countTo(el,end,dur=1500){const t0=performance.now();function step(now){const t=Math.min(1,(now-t0)/dur);const eased=1-Math.pow(1-t,3);el.textContent=fmt(Math.round(end*eased));if(t<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
 
-  const form=document.getElementById('quoteForm'), calcBtn=document.getElementById('calcBtn'), resultPanel=document.getElementById('resultPanel');
+  const form=document.getElementById('quoteForm'), calcBtn=document.getElementById('calcBtn'),
+        resultPanel=document.getElementById('resultPanel'), loadingPanel=document.getElementById('loadingPanel'),
+        loadingStep=document.getElementById('loadingStep'), calcAgainBtn=document.getElementById('calcAgainBtn');
+
+  const LOADING_STEPS=['Routing port to door…','Pulling live diesel + FSC…','Pricing chassis & port fees…','Sealing the rate…'];
+
+  function showLoading(){
+    loadingPanel.classList.remove('hidden');
+    let i=0; loadingStep.textContent=LOADING_STEPS[0];
+    return setInterval(()=>{i=(i+1)%LOADING_STEPS.length;loadingStep.textContent=LOADING_STEPS[i];},800);
+  }
+
   function runQuote(originKey,destKey){
     const type=document.getElementById('contType').value;
     const qty=parseInt(document.getElementById('contQty').value||'1',10);
     const acc=Array.from(document.querySelectorAll('input[name="acc"]:checked')).map(c=>c.value);
     const q=computeQuote(PORTS[originKey].coords,HUBS[destKey].coords,type,qty,acc);
-    calcBtn.classList.add('loading');
+
     drawRoute(originKey,destKey);
+    const loadingTimer=showLoading();
+
     setTimeout(()=>{
-      calcBtn.classList.remove('loading');
+      clearInterval(loadingTimer);
+      loadingPanel.classList.add('hidden');
+      form.classList.add('hidden');
       resultPanel.classList.remove('hidden');
       countTo(document.getElementById('rTotal'),q.total);
       countTo(document.getElementById('rMiles'),q.miles);
@@ -780,11 +814,25 @@
       countTo(document.getElementById('rPort'),q.port);
       countTo(document.getElementById('rOverhead'),q.overhead);
       countTo(document.getElementById('rAcc'),q.acc);
-    },1200);
+    },3200);
   }
+
   form.addEventListener('submit',e=>{e.preventDefault();runQuote(originSel.value,destSel.value);});
+
+  calcAgainBtn.addEventListener('click',()=>{
+    resultPanel.classList.add('hidden');
+    form.classList.remove('hidden');
+  });
+
   document.querySelectorAll('[data-preset]').forEach(btn=>{
-    btn.addEventListener('click',()=>{const [o,d]=btn.dataset.preset.split('-');originSel.value=o;destSel.value=d;updateActiveCorridor();runQuote(o,d);document.getElementById('quote').scrollIntoView({behavior:'smooth',block:'nearest'});});
+    btn.addEventListener('click',()=>{
+      const [o,d]=btn.dataset.preset.split('-');
+      originSel.value=o; destSel.value=d;
+      updateActiveCorridor();
+      // bring form back if results were showing
+      resultPanel.classList.add('hidden'); form.classList.remove('hidden');
+      runQuote(o,d);
+    });
   });
 
   const calcCard=document.getElementById('calcCard');
