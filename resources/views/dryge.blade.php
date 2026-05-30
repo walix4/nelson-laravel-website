@@ -128,14 +128,14 @@
 <body class="overflow-x-hidden">
 
   <!-- Live status strip -->
-  <div class="bg-[#03070F] text-white/80 text-[11px] font-medium border-b border-white/5">
+  <div class="text-[11px] font-medium border-b" style="background:linear-gradient(180deg,#CFE8FF,#BFDFFB);color:#0B1F44;border-color:rgba(77,163,255,0.28);">
     <div class="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
       <div class="flex items-center gap-5">
-        <span class="flex items-center gap-2"><span class="live-dot"></span><span>Network <b class="text-white">LIVE</b></span></span>
-        <span class="hidden sm:inline opacity-70">·</span>
-        <span class="hidden sm:inline num"><b id="liveRoutes" class="text-white">12,431</b> active routes</span>
-        <span class="hidden md:inline opacity-70">·</span>
-        <span class="hidden md:inline num">Diesel <b class="text-white">$5.18</b>/gal · FSC <b class="text-white">17%</b></span>
+        <span class="flex items-center gap-2"><span class="live-dot"></span><span>Network <b>LIVE</b></span></span>
+        <span class="hidden sm:inline opacity-50">·</span>
+        <span class="hidden sm:inline num"><b id="liveRoutes">12,431</b> active routes</span>
+        <span class="hidden md:inline opacity-50">·</span>
+        <span class="hidden md:inline num">Diesel <b>$5.18</b>/gal · FSC <b>17%</b></span>
       </div>
       <div class="flex items-center gap-4 text-[10px] uppercase tracking-[0.14em]">
         <span class="opacity-60">v2026.05</span>
@@ -145,20 +145,20 @@
   </div>
 
   <!-- Header -->
-  <header class="sticky top-0 z-40 bg-[#03070F]/85 backdrop-blur-xl border-b border-white/5">
+  <header class="sticky top-0 z-40 backdrop-blur-xl border-b" style="background:linear-gradient(180deg,rgba(224,242,254,0.95),rgba(199,228,255,0.88));border-color:rgba(77,163,255,0.22);">
     <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
       <a href="./" class="flex items-center">
-        <img src="draygo-logo.png" alt="Draygo" class="h-8 md:h-9 w-auto" style="filter:brightness(1.45) saturate(1.1) drop-shadow(0 0 6px rgba(255,255,255,0.25));" />
+        <img src="draygo-logo.png" alt="Draygo" class="h-8 md:h-9 w-auto" />
       </a>
-      <nav class="hidden md:flex items-center gap-7 text-[13px] font-medium text-white/75">
-        <a href="#network" class="hover:text-white">Network</a>
-        <a href="#how" class="hover:text-white">How it works</a>
-        <a href="#features" class="hover:text-white">Platform</a>
-        <a href="#pricing" class="hover:text-white">Pricing</a>
-        <a href="#api" class="hover:text-white">Developers</a>
+      <nav class="hidden md:flex items-center gap-7 text-[13px] font-medium" style="color:rgba(11,31,68,0.72);">
+        <a href="#network" class="hover:text-[var(--navy)]">Network</a>
+        <a href="#how" class="hover:text-[var(--navy)]">How it works</a>
+        <a href="#features" class="hover:text-[var(--navy)]">Platform</a>
+        <a href="#pricing" class="hover:text-[var(--navy)]">Pricing</a>
+        <a href="#api" class="hover:text-[var(--navy)]">Developers</a>
       </nav>
       <div class="flex items-center gap-2.5">
-        <a href="#login" class="hidden sm:inline text-[13px] font-medium text-white/80 hover:text-white px-3 py-1.5">Sign in</a>
+        <a href="#login" class="hidden sm:inline text-[13px] font-semibold text-[var(--navy)]/80 hover:text-[var(--navy)] px-3 py-1.5">Sign in</a>
         <a href="#quote" class="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5">
           <span class="label">Get instant quote</span>
         </a>
