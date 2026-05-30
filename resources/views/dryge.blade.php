@@ -11,7 +11,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -22,8 +22,8 @@
       --ink:#0B1220; --muted:#5B6473;
     }
     *{-webkit-font-smoothing:antialiased;}
-    html,body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);}
-    .display{font-family:'Space Grotesk','Inter',sans-serif;letter-spacing:-0.025em;font-weight:700;}
+    html,body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);}
+    .display{font-family:'Poppins',system-ui,sans-serif;letter-spacing:-0.02em;font-weight:700;}
     .num{font-feature-settings:"tnum","cv01";font-variant-numeric:tabular-nums;}
 
     .glass{
@@ -456,7 +456,7 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section id="how" class="py-24 bg-[var(--bg)]">
+  <section id="how" class="py-24 relative overflow-hidden" style="background:radial-gradient(760px 460px at 10% 12%,rgba(255,59,48,0.06),transparent 60%),radial-gradient(820px 520px at 92% 30%,rgba(77,163,255,0.07),transparent 60%),radial-gradient(680px 460px at 70% 100%,rgba(168,85,247,0.06),transparent 60%),linear-gradient(180deg,#FFFFFF,#EEF2F8);">
     <div class="max-w-[1400px] mx-auto px-6">
       <div class="flex items-end justify-between flex-wrap gap-6 reveal">
         <div class="max-w-xl">
