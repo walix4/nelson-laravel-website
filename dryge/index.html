@@ -49,8 +49,14 @@
     .port-icon .label{position:absolute;left:18px;top:-3px;white-space:nowrap;font-size:10px;font-weight:700;letter-spacing:0.04em;color:#0B1F44;text-shadow:0 1px 6px rgba(255,255,255,0.9),0 0 2px rgba(255,255,255,0.7);pointer-events:none;}
     @keyframes pulseRing{0%{width:14px;height:14px;opacity:0.9;}100%{width:60px;height:60px;opacity:0;}}
 
-    .truck-icon{width:32px;height:18px;border-radius:3px;background:linear-gradient(180deg,#FFD23F,#F2A516);border:1.5px solid #1A1A1A;box-shadow:0 4px 14px rgba(0,0,0,0.55),0 0 18px rgba(255,210,63,0.6);position:relative;}
-    .truck-icon::before{content:"";position:absolute;left:-9px;top:1px;width:9px;height:14px;border-radius:2px;background:linear-gradient(180deg,#FF3B30,#C7241A);border:1.5px solid #1A1A1A;}
+    .truck-wrap{width:78px;height:26px;display:flex;align-items:center;justify-content:center;will-change:transform;}
+    .truck-img{
+      width:78px;height:auto;display:block;
+      -webkit-mask-image:radial-gradient(ellipse 50% 38% at center,#000 55%,rgba(0,0,0,0.7) 70%,transparent 95%);
+              mask-image:radial-gradient(ellipse 50% 38% at center,#000 55%,rgba(0,0,0,0.7) 70%,transparent 95%);
+      filter:drop-shadow(0 4px 8px rgba(0,0,0,0.45)) drop-shadow(0 0 14px rgba(255,140,0,0.5));
+      transition:transform .12s linear;
+    }
 
     .leaflet-container{background:#E8ECF1 !important;font-family:inherit;}
     .leaflet-control-attribution{background:rgba(255,255,255,0.7)!important;color:rgba(11,31,68,0.55)!important;backdrop-filter:blur(6px);font-size:9px!important;border-radius:6px 0 0 0;}
@@ -770,9 +776,18 @@
     map.flyToBounds(L.latLngBounds(path).pad(0.18),{duration:1.1,easeLinearity:0.4});
 
     setTimeout(()=>{
-      truckMarker=L.marker(path[0],{icon:L.divIcon({html:`<div class="truck-icon"></div>`,className:'',iconSize:[32,18],iconAnchor:[16,9]})}).addTo(map);
+      truckMarker=L.marker(path[0],{icon:L.divIcon({html:`<div class="truck-wrap"><img class="truck-img" src="truck.png" alt=""></div>`,className:'',iconSize:[78,26],iconAnchor:[39,13]})}).addTo(map);
       const t0=performance.now(), dur=2400;
-      function tick(now){const t=Math.min(1,(now-t0)/dur);const idx=Math.floor(t*(path.length-1));truckMarker.setLatLng(path[idx]);if(t<1)truckAnim=requestAnimationFrame(tick);}
+      function tick(now){
+        const t=Math.min(1,(now-t0)/dur);
+        const idx=Math.floor(t*(path.length-1));
+        truckMarker.setLatLng(path[idx]);
+        const i1=Math.max(0,idx-1), i2=Math.min(path.length-1,idx+1);
+        const dLat=path[i2][0]-path[i1][0], dLng=path[i2][1]-path[i1][1];
+        const angle=Math.atan2(-dLat,dLng)*180/Math.PI;
+        const el=truckMarker.getElement(); if(el){const img=el.querySelector('.truck-img'); if(img) img.style.transform=`rotate(${angle}deg)`;}
+        if(t<1)truckAnim=requestAnimationFrame(tick);
+      }
       truckAnim=requestAnimationFrame(tick);
     },1500);
   }
