@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Distance &amp; Time · DrayageRate</title>
-  <meta name="description" content="Calculate road distance and transit time for any U.S. drayage lane between a port and an inland destination." />
+  <title>Overweight Checker · DrayageRate</title>
+  <meta name="description" content="Check a loaded container against U.S. federal gross and axle weight limits for road drayage." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -124,25 +124,34 @@
 </header>
 
   <main><section class="py-16 md:py-20">
-  <div class="max-w-[920px] mx-auto px-6">
+  <div class="max-w-[900px] mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto reveal">
       <div class="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Drayage tool</div>
-      <h1 class="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-2">Distance &amp; Transit Time</h1>
-      <p class="mt-4 text-[var(--muted)] text-[15px]">Pick an origin port and an inland destination to estimate road distance, drive time and an indicative drayage rate.</p>
+      <h1 class="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-2">Overweight Checker</h1>
+      <p class="mt-4 text-[var(--muted)] text-[15px]">Add up cargo, container and equipment to see your gross combination weight against the U.S. federal 80,000 lb limit.</p>
     </div>
 
-    <div class="mt-10 bg-white rounded-[24px] p-7 md:p-10 reveal reveal-d1" style="box-shadow:0 40px 90px -40px rgba(11,31,68,0.32);border:1px solid rgba(11,35,80,0.06);">
-      <div class="grid md:grid-cols-2 gap-5">
-        <div><label class="tool-label">Origin port</label><select id="dOrigin" class="tool-select"></select></div>
-        <div><label class="tool-label">Destination</label><select id="dDest" class="tool-select"></select></div>
+    <div class="mt-10 grid md:grid-cols-[1.1fr_0.9fr] gap-6">
+      <div class="bg-white rounded-[24px] p-7 md:p-9 reveal reveal-d1" style="box-shadow:0 40px 90px -40px rgba(11,31,68,0.3);border:1px solid rgba(11,35,80,0.06);">
+        <div class="space-y-5">
+          <div><label class="tool-label">Cargo weight (lb)</label><input id="oCargo" class="tool-input" type="number" min="0" value="44000" /></div>
+          <div class="grid grid-cols-2 gap-4">
+            <div><label class="tool-label">Container tare (lb)</label><input id="oBox" class="tool-input" type="number" min="0" value="8160" /></div>
+            <div><label class="tool-label">Chassis tare (lb)</label><input id="oChassis" class="tool-input" type="number" min="0" value="7000" /></div>
+          </div>
+          <div><label class="tool-label">Tractor weight (lb)</label><input id="oTractor" class="tool-input" type="number" min="0" value="17000" /></div>
+        </div>
       </div>
-      <div class="grid grid-cols-3 gap-4 mt-8 text-center">
-        <div class="rounded-2xl bg-[var(--navy)]/4 border border-[var(--navy)]/8 py-6"><div class="display text-[34px] text-[var(--navy)] num"><span id="dMiles">0</span></div><div class="text-[12px] text-[var(--muted)] mt-1 uppercase tracking-wider">Miles</div></div>
-        <div class="rounded-2xl bg-[var(--navy)]/4 border border-[var(--navy)]/8 py-6"><div class="display text-[34px] text-[var(--navy)] num"><span id="dTime">0h</span></div><div class="text-[12px] text-[var(--muted)] mt-1 uppercase tracking-wider">Drive time</div></div>
-        <div class="rounded-2xl bg-[var(--red)]/6 border border-[var(--red)]/15 py-6"><div class="display text-[34px] text-[var(--red)] num">$<span id="dRate">0</span></div><div class="text-[12px] text-[var(--muted)] mt-1 uppercase tracking-wider">Est. rate</div></div>
+      <div id="oResult" class="rounded-[24px] p-7 md:p-9 reveal reveal-d2 flex flex-col justify-center text-white transition-colors" style="background:#15935F;box-shadow:0 40px 90px -40px rgba(11,31,68,0.6);">
+        <div class="text-[12px] uppercase tracking-[0.16em] text-white/70">Gross combination weight</div>
+        <div class="display text-[44px] leading-none mt-1 num"><span id="oGross">0</span> lb</div>
+        <div class="h-px bg-white/20 my-6"></div>
+        <div class="flex justify-between text-[14px] text-white/85"><span>Federal limit</span><span class="num">80,000 lb</span></div>
+        <div class="flex justify-between text-[14px] text-white/85 mt-2"><span id="oMarginLabel">Headroom</span><span class="num"><span id="oMargin">0</span> lb</span></div>
+        <div class="mt-6 flex items-center gap-2 text-[15px] font-bold" id="oStatus"></div>
       </div>
-      <p class="text-[12px] text-[var(--muted)] mt-5 text-center">Estimates use great-circle distance × a 1.2 road factor at 45 mph average. Get a firm, all-in quote on the <a href="/nelson-laravel-website/dryge/#quote" class="text-[var(--blue)] font-semibold">rate calculator</a>.</p>
     </div>
+    <p class="text-[12px] text-[var(--muted)] mt-5 text-center reveal">U.S. federal interstate limits: 80,000 lb gross, 20,000 lb single axle, 34,000 lb tandem. State and bridge-formula limits may be lower — confirm before dispatch. Tri-axle chassis can raise allowable container weight.</p>
   </div>
 </section>
 </main>
@@ -165,22 +174,23 @@
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   </script>
   <script>
-  const D_PORTS={'Los Angeles, CA':[33.74,-118.26],'Long Beach, CA':[33.75,-118.22],'Oakland, CA':[37.80,-122.30],'Seattle, WA':[47.60,-122.34],'New York / NJ':[40.66,-74.08],'Savannah, GA':[32.08,-81.10],'Houston, TX':[29.73,-95.27],'Miami, FL':[25.78,-80.18],'Baltimore, MD':[39.26,-76.55],'Charleston, SC':[32.78,-79.92]};
-  const D_DEST={'Dallas, TX':[32.78,-96.80],'Chicago, IL':[41.88,-87.63],'Phoenix, AZ':[33.45,-112.07],'Denver, CO':[39.74,-104.99],'Atlanta, GA':[33.75,-84.39],'Memphis, TN':[35.15,-90.05],'Las Vegas, NV':[36.17,-115.14],'Columbus, OH':[39.96,-82.99],'Kansas City, MO':[39.10,-94.58],'Salt Lake City, UT':[40.76,-111.89]};
-  const dO=document.getElementById('dOrigin'),dD=document.getElementById('dDest');
-  Object.keys(D_PORTS).forEach(k=>dO.add(new Option(k,k)));
-  Object.keys(D_DEST).forEach(k=>dD.add(new Option(k,k)));
-  dO.value='Los Angeles, CA'; dD.value='Dallas, TX';
-  function hav(a,b){const R=3958.8,t=Math.PI/180;const dLat=(b[0]-a[0])*t,dLon=(b[1]-a[1])*t;const s=Math.sin(dLat/2)**2+Math.cos(a[0]*t)*Math.cos(b[0]*t)*Math.sin(dLon/2)**2;return 2*R*Math.asin(Math.sqrt(s));}
-  function dCalc(){
-    const mi=Math.round(hav(D_PORTS[dO.value],D_DEST[dD.value])*1.2);
-    const hrs=mi/45; const h=Math.floor(hrs),m=Math.round((hrs-h)*60);
-    document.getElementById('dMiles').textContent=mi.toLocaleString();
-    document.getElementById('dTime').textContent=h+'h '+(m<10?'0':'')+m+'m';
-    const rate=Math.round((350+mi*2.35)/5)*5;
-    document.getElementById('dRate').textContent=rate.toLocaleString();
+  const O=['oCargo','oBox','oChassis','oTractor'].map(i=>document.getElementById(i));
+  const LIMIT=80000;
+  function oCalc(){
+    const gross=O.reduce((s,e)=>s+(parseFloat(e.value)||0),0);
+    const margin=LIMIT-gross;
+    document.getElementById('oGross').textContent=gross.toLocaleString();
+    document.getElementById('oMargin').textContent=Math.abs(margin).toLocaleString();
+    const box=document.getElementById('oResult'),status=document.getElementById('oStatus'),ml=document.getElementById('oMarginLabel');
+    if(margin>=0){
+      box.style.background='#15935F'; ml.textContent='Headroom';
+      status.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Legal — within federal limit';
+    } else {
+      box.style.background='linear-gradient(160deg,#EF4444,#991B1B)'; ml.textContent='Over limit by';
+      status.innerHTML='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg> Overweight — permit or tri-axle needed';
+    }
   }
-  dO.addEventListener('change',dCalc); dD.addEventListener('change',dCalc); dCalc();
+  O.forEach(e=>e.addEventListener('input',oCalc)); oCalc();
 </script>
 </body>
 </html>
