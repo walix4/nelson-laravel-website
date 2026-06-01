@@ -238,9 +238,8 @@
     .no-scrollbar::-webkit-scrollbar{display:none;} .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
 
     /* ---- Blinking nav link (Estimates) ---- */
-    .nav-blink{position:relative;font-weight:700;padding:5px 11px;border-radius:8px;color:#fff;animation:navBlink 1.4s ease-in-out infinite;}
-    .nav-blink::after{content:"";position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:#16C784;box-shadow:0 0 8px #16C784;}
-    @keyframes navBlink{0%{background:var(--red);box-shadow:0 0 0 0 rgba(255,59,48,0.55);}50%{background:var(--blue,#3A5FC0);box-shadow:0 0 0 6px rgba(58,95,192,0);}100%{background:var(--red);box-shadow:0 0 0 0 rgba(255,59,48,0);}}
+    .nav-blink{font-weight:700;padding:6px 14px;border-radius:8px;color:#fff;background:var(--red);box-shadow:0 8px 18px -8px rgba(255,59,48,0.65);transition:filter .2s,transform .2s;}
+    .nav-blink:hover{filter:brightness(1.06);transform:translateY(-1px);}
 
     /* ---- Floating AI chat ---- */
     .chat-fab{position:fixed;right:24px;bottom:24px;z-index:70;width:62px;height:62px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(160deg,var(--red),var(--red-2));box-shadow:0 16px 36px -10px rgba(255,59,48,0.65),0 4px 12px rgba(0,0,0,0.2);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;}
