@@ -10,7 +10,6 @@ Route::view('/dryge', 'dryge')->name('dryge');
 // Tools + Estimates
 Route::view('/tools', 'tools.index')->name('tools');
 Route::view('/tools/distance', 'tools.distance');
-Route::view('/tools/tracking', 'tools.tracking');
 Route::view('/tools/demurrage', 'tools.demurrage');
 Route::view('/tools/co2', 'tools.co2');
 Route::view('/tools/converter', 'tools.converter');
