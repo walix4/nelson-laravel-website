@@ -95,7 +95,8 @@ export default function CalculateRate() {
       const map = L.map(mapEl.current, { zoomControl: true, attributionControl: true, scrollWheelZoom: false, minZoom: 3, maxZoom: 8 }).setView([39.5, -96], 4);
       mapRef.current = map;
       L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { subdomains: "abcd", maxZoom: 19, attribution: "© OpenStreetMap · © CARTO" }).addTo(map);
-      CORRIDORS.forEach(([a, b]) => { const A = PORTS[a]?.coords || HUBS[a]?.coords, B = PORTS[b]?.coords || HUBS[b]?.coords; L.polyline([A, B], { className: "corridor", weight: 1.2, smoothFactor: 1 }).addTo(map); });
+      const WARM = new Set([1, 4, 7, 10, 13]); // ~1/3 red corridors, like Laravel's random "warm"
+      CORRIDORS.forEach(([a, b], i) => { const A = PORTS[a]?.coords || HUBS[a]?.coords, B = PORTS[b]?.coords || HUBS[b]?.coords; L.polyline([A, B], { className: "corridor" + (WARM.has(i) ? " corridor-warm" : ""), weight: 1.2, smoothFactor: 1 }).addTo(map); });
       Object.entries(PORTS).forEach(([k, p]) => {
         const html = `<div class="port-icon"><div class="ring"></div><div class="dot"></div><div class="label">${p.name.split("/")[0].split(",")[0]}</div></div>`;
         L.marker(p.coords, { icon: L.divIcon({ html, className: "", iconSize: [14, 14], iconAnchor: [7, 7] }), title: p.name }).on("click", () => setOrigin(k)).addTo(map);

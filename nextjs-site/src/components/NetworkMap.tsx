@@ -22,7 +22,8 @@ export default function NetworkMap() {
       const map = L.map(el.current, { zoomControl: false, attributionControl: false, scrollWheelZoom: false, dragging: true, minZoom: 3, maxZoom: 7 }).setView([39, -96], 4);
       mapRef.current = map;
       L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { subdomains: "abcd", maxZoom: 19 }).addTo(map);
-      CORRIDORS.forEach(([a, b]) => { const A = PORTS[a] || HUBS[a]?.coords, B = PORTS[b] || HUBS[b]?.coords; L.polyline([A, B], { className: "corridor", weight: 1.1 }).addTo(map); });
+      const WARM = new Set([1, 4, 7, 10, 13]);
+      CORRIDORS.forEach(([a, b], i) => { const A = PORTS[a] || HUBS[a]?.coords, B = PORTS[b] || HUBS[b]?.coords; L.polyline([A, B], { className: "corridor" + (WARM.has(i) ? " corridor-warm" : ""), weight: 1.1 }).addTo(map); });
       Object.values(PORTS).forEach((c) => L.marker(c, { icon: L.divIcon({ html: `<div class="port-icon"><div class="ring"></div><div class="dot"></div></div>`, className: "", iconSize: [14, 14], iconAnchor: [7, 7] }) }).addTo(map));
       Object.entries(HUBS).forEach(([k, h]) => {
         const meta = HUB_META[k] || { time: "—", rate: "—" };
