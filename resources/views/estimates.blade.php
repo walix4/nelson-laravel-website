@@ -21,7 +21,7 @@
   .est-route{display:flex;align-items:center;gap:7px;font-weight:600;}
   .est-arrow{flex:0 0 auto;display:inline-block;}
   .est-loc{max-width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .est-chip{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;background:#fff;border:1px solid rgba(11,35,80,0.14);color:var(--navy);white-space:nowrap;}
+  .est-chip{display:inline-block;font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:8px;background:#F1F3F5;color:#374151;white-space:nowrap;}
   .est-badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:999px;white-space:nowrap;}
   .est-badge.completed{background:rgba(22,181,113,0.13);color:#15935F;}
   .est-badge.streaming{background:rgba(58,95,192,0.13);color:#3A5FC0;}
@@ -35,8 +35,8 @@
   .est-calc{font-style:italic;color:var(--muted);}
   .est-price{font-weight:800;font-size:15px;color:var(--navy);}
   .est-time{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12.5px;white-space:nowrap;}
-  .est-view{display:inline-flex;align-items:center;gap:5px;color:var(--red);font-weight:700;font-size:12.5px;text-decoration:none;white-space:nowrap;padding:6px 11px;border-radius:8px;transition:background .15s;}
-  .est-view:hover{background:rgba(255,59,48,0.09);}
+  .est-view{color:var(--red);font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap;}
+  .est-view:hover{text-decoration:underline;}
   .est-input{width:100%;padding:0.72rem 0.9rem 0.72rem 2.5rem;border:1px solid rgba(11,35,80,0.14);border-radius:10px;background:#fff;font-size:0.9rem;color:var(--navy);transition:border-color .2s,box-shadow .2s;}
   .est-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(58,95,192,0.14);}
   .est-input::placeholder{color:rgba(11,35,80,0.4);}
@@ -109,7 +109,7 @@
     '<td><span class="est-chip">'+e.container+'</span><div class="est-sub">'+e.miles+' mi</div></td>'+
     '<td>'+estPrice(e)+'</td><td>'+estBadge(e.status)+'</td><td>'+estStream(e)+'</td>'+
     '<td><span class="est-time">'+CLOCK_ICON+e.created+'</span></td>'+
-    '<td><a href="__B__/dryge/#quote" class="est-view">View<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></td></tr>';}
+    '<td><a href="__B__/dryge/#quote" class="est-view">View</a></td></tr>';}
   const estTbody=document.getElementById('estTbody'),estSearch=document.getElementById('estSearch'),estStatus=document.getElementById('estStatus'),estCount=document.getElementById('estCount');
   function estApply(){const q=(estSearch.value||'').toLowerCase().trim(),st=estStatus.value;const rows=ESTIMATES.filter(e=>{const okSt=st==='all'||e.status===st;const hay=(e.ref+' '+e.customer+' '+e.email+' '+e.pickup+' '+e.drop).toLowerCase();return okSt&&(!q||hay.includes(q));});estTbody.innerHTML=rows.length?rows.map(estRow).join(''):'<tr><td colspan="10" class="est-empty">No estimates match your filters.</td></tr>';estCount.textContent=rows.length;}
   if(estTbody){
