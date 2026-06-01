@@ -1,5 +1,4 @@
 "use client";
-import { useMemo, useState } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -8,13 +7,11 @@ import Testimonials from "@/components/Testimonials";
 import Chat from "@/components/Chat";
 import Stats from "@/components/Stats";
 import UnitConverter from "@/components/UnitConverter";
-import UsMap, { US_PORTS } from "@/components/UsMap";
+import UsMap from "@/components/UsMap";
+import CalculateRate from "@/components/CalculateRate";
 import { asset } from "@/lib/site";
 
 const BRANDS = ["CARGOMAX", "portlink", "NORDFREIGHT", "veritas3pl", "ARC LOGISTICS", "Halo Freight", "CONTAINERWORKS", "Meridian Drayage", "Atlas BCO", "Northstar Cargo"];
-const PORTS: Record<string, number> = { "Los Angeles, CA": 62, "Long Beach, CA": 71, "New York / NJ": 92, "Savannah, GA": 264, "Houston, TX": 248, "Seattle, WA": 1320 };
-const DEST = ["Dallas, TX", "Chicago, IL", "Phoenix, AZ", "Atlanta, GA", "Denver, CO", "Memphis, TN"];
-const CONT: Record<string, number> = { "20ft": 1, "40ft": 1.18, "40ft-hc": 1.22, reefer: 1.55 };
 const COSTS = [
   { n: "Fuel + FSC", d: "Live diesel × MPG × distance, plus carrier FSC.", i: '<line x1="3" x2="15" y1="22" y2="22"/><line x1="4" x2="14" y1="9" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/>', a: "#FF3B30" },
   { n: "Driver labor", d: "Hourly wage × transit time + per diem on 400+ mi.", i: '<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/>', a: "#3A5FC0" },
@@ -30,32 +27,6 @@ const SHIP: { title: string; icon: React.ReactNode; rows: Lane[] }[] = [
   { title: "Standard Cargo", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinejoin="round"><rect x="3" y="12" width="7" height="7" rx="1" /><rect x="14" y="12" width="7" height="7" rx="1" /><rect x="8.5" y="4" width="7" height="7" rx="1" /></svg>, rows: [["Los Angeles", "Dallas, TX", "1h ago"], ["New York/NJ", "Chicago, IL", "5h ago"], ["Norfolk", "Atlanta, GA", "22 Nov"], ["Long Beach", "Denver, CO", "22 Nov"], ["Miami", "Orlando, FL", "03 Feb"]] },
   { title: "Project Cargo", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.7" strokeLinejoin="round"><rect x="3" y="6" width="18" height="12" rx="1" /><path d="M7 6v12M11 6v12M15 6v12" /></svg>, rows: [["Houston", "Kansas City, MO", "3d ago"], ["Seattle", "Salt Lake City, UT", "3d ago"], ["Oakland", "Reno, NV", "2d ago"], ["New York/NJ", "Indianapolis, IN", "11 Dec"], ["Charleston", "Columbus, OH", "14 Feb"]] },
 ];
-
-function Quote() {
-  const [origin, setOrigin] = useState("Los Angeles, CA");
-  const [dest, setDest] = useState("Dallas, TX");
-  const [cont, setCont] = useState("40ft");
-  const total = useMemo(() => Math.round((350 + PORTS[origin] * 2.35) * CONT[cont] / 5) * 5, [origin, cont]);
-  const parts = [["Fuel", 0.32], ["Labor", 0.24], ["Chassis", 0.12], ["Port", 0.14], ["Overhead", 0.1], ["Access.", 0.08]] as const;
-  return (
-    <div className="glass rounded-2xl p-6 lg:p-7" style={{ background: "#fff" }}>
-      <div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant quote engine</div>
-      <h3 className="display text-[24px] text-[var(--navy)] mt-1">Price your move</h3>
-      <div className="space-y-3.5 mt-5">
-        <div><label className="tool-label">Origin port</label><select className="tool-select" value={origin} onChange={(e) => setOrigin(e.target.value)}>{Object.keys(PORTS).map((p) => <option key={p}>{p}</option>)}</select></div>
-        <div><label className="tool-label">Destination</label><select className="tool-select" value={dest} onChange={(e) => setDest(e.target.value)}>{DEST.map((d) => <option key={d}>{d}</option>)}</select></div>
-        <div><label className="tool-label">Container</label><select className="tool-select" value={cont} onChange={(e) => setCont(e.target.value)}>{Object.keys(CONT).map((c) => <option key={c}>{c}</option>)}</select></div>
-      </div>
-      <div className="mt-5 flex items-end justify-between rounded-xl px-4 py-3.5" style={{ background: "rgba(11,35,80,0.04)", border: "1px solid rgba(11,35,80,0.08)" }}>
-        <div><span className="display text-[40px] text-[var(--navy)] num leading-none">${total.toLocaleString()}</span><span className="text-[12px] text-[var(--navy)]/60 ml-1">/ round trip</span></div>
-        <span className="text-[11px] text-[var(--navy)]/60">Rate locks 24h</span>
-      </div>
-      <div className="grid grid-cols-3 gap-2 mt-3 text-[11px]">
-        {parts.map(([k, f]) => <div key={k} className="rounded-lg px-2 py-2" style={{ background: "rgba(11,35,80,0.05)", border: "1px solid rgba(11,35,80,0.1)" }}><div className="text-[var(--navy)]/55 uppercase tracking-wider">{k}</div><div className="display text-[var(--navy)] text-[14px] num mt-0.5">${Math.round(total * f).toLocaleString()}</div></div>)}
-      </div>
-    </div>
-  );
-}
 
 export default function Home() {
   return (
@@ -115,26 +86,7 @@ export default function Home() {
             <h2 className="display text-white text-[44px] md:text-[64px] leading-[1.03] mt-3">Calculate your rate.</h2>
             <p className="text-white/60 text-[15px] md:text-[16px] mt-4 max-w-xl mx-auto">Pick a lane, see it on the network, and get a fully itemised, all-in price in seconds.</p>
           </div>
-          <div className="grid lg:grid-cols-[1fr_1.55fr] gap-5 items-stretch">
-            <div className="reveal"><Quote /></div>
-            <div className="reveal reveal-d1 relative">
-              <UsMap height={480} route={[US_PORTS[0], US_PORTS[10]]} />
-              <div className="absolute top-4 left-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
-                <div className="flex items-center gap-2 text-white/60 uppercase tracking-[0.14em] text-[10px]"><span className="live-dot" /> Active corridor</div>
-                <div className="display text-white text-[13px] mt-1.5">Los Angeles · Port complex</div>
-                <div className="num text-white/70 mt-0.5">Throughput · <b className="text-white">9.2M TEU</b> / yr</div>
-              </div>
-              <div className="absolute top-4 right-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600] hidden sm:block">
-                <div className="text-white/60 uppercase tracking-[0.14em] text-[10px]">Live · last 60s</div>
-                <div className="flex items-center gap-4 mt-1.5"><div><div className="display text-white text-[14px] num">412</div><div className="text-white/55">Quotes</div></div><div className="h-7 w-px bg-white/15" /><div><div className="display text-white text-[14px] num">$1,847</div><div className="text-white/55">Avg rate</div></div></div>
-              </div>
-              <div className="absolute left-4 right-4 bottom-4 glass-sky rounded-xl px-4 py-3 z-[600] flex flex-wrap items-center gap-3 text-[11px] text-white/70">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--red)]" /><span>Origin</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--green)]" /><span>Destination</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--blue)]" /><span>Port</span>
-              </div>
-            </div>
-          </div>
+          <CalculateRate />
         </div>
       </section>
 
