@@ -57,8 +57,7 @@
   .est-cust .est-name{font-weight:700;max-width:170px;line-height:1.35;}
   .est-sub{font-size:13px;color:var(--muted);margin-top:3px;}
   .est-route{display:flex;align-items:center;gap:8px;font-weight:600;}
-  .est-pin{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:7px;flex:0 0 auto;}
-  .est-pin.up{background:rgba(22,181,113,0.13);} .est-pin.down{background:rgba(255,59,48,0.1);}
+  .est-arrow{flex:0 0 auto;display:inline-block;}
   .est-loc{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .est-chip{display:inline-block;font-size:12px;font-weight:700;padding:4px 11px;border-radius:8px;background:#fff;border:1px solid rgba(11,35,80,0.14);color:var(--navy);white-space:nowrap;}
   .est-badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;white-space:nowrap;}
@@ -229,8 +228,8 @@
     {ref:'DRY-2026-0836',customer:'Bayou Transport',email:'ops@bayoutransport.com',pickup:'Port of New Orleans',pickupSub:'New Orleans, LA · port',drop:'Memphis Rail Yard',dropSub:'Memphis, TN · rail',container:'20ft',miles:395,price:'$1,020',status:'completed',stream:0,created:'8h ago'}
   ];
   const EST_LABELS={completed:'Completed',streaming:'Streaming',pending:'Pending',failed:'Failed'};
-  const UP_ARROW='<span class="est-pin up"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15935F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>';
-  const DOWN_ARROW='<span class="est-pin down"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E0241A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></span>';
+  const UP_ARROW='<svg class="est-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16B571" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+  const DOWN_ARROW='<svg class="est-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF3B30" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
   const EST_AVCOLORS=['#0B2350','#1E3A8A','#3A5FC0','#E0241A','#15935F'];
   const EST_ICONS={completed:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',failed:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>',pending:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'};
   function estInitials(n){const p=n.replace(/[^A-Za-z ]/g,'').trim().split(/\s+/);return ((p[0]||'')[0]||'')+((p[1]||'')[0]||'');}
@@ -241,8 +240,8 @@
   function estPrice(e){if(e.price)return '<span class="est-price">'+e.price+'</span>';if(e.status==='failed')return '<span style="color:var(--muted)">—</span>';return '<span class="est-calc">Calculating…</span>';}
   function estRow(e){return '<tr><td><span class="est-ref">'+e.ref+'</span></td>'+
     '<td><div class="est-cust"><div style="min-width:0"><div class="est-name">'+e.customer+'</div><div class="est-sub">'+e.email+'</div></div></div></td>'+
-    '<td><div class="est-route">'+UP_ARROW+'<span class="est-loc">'+e.pickup+'</span></div><div class="est-sub" style="padding-left:32px">'+e.pickupSub+'</div></td>'+
-    '<td><div class="est-route">'+DOWN_ARROW+'<span class="est-loc">'+e.drop+'</span></div><div class="est-sub" style="padding-left:32px">'+e.dropSub+'</div></td>'+
+    '<td><div class="est-route">'+UP_ARROW+'<span class="est-loc">'+e.pickup+'</span></div><div class="est-sub" style="padding-left:26px">'+e.pickupSub+'</div></td>'+
+    '<td><div class="est-route">'+DOWN_ARROW+'<span class="est-loc">'+e.drop+'</span></div><div class="est-sub" style="padding-left:26px">'+e.dropSub+'</div></td>'+
     '<td><span class="est-chip">'+e.container+'</span><div class="est-sub">'+e.miles+' mi</div></td>'+
     '<td>'+estPrice(e)+'</td><td>'+estBadge(e.status)+'</td><td>'+estStream(e)+'</td>'+
     '<td><span class="est-time">'+CLOCK_ICON+e.created+'</span></td>'+
