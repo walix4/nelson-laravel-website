@@ -393,6 +393,41 @@
     </a>
   </section>
 
+  <!-- Trust marquee (navy, right after hero) -->
+  <section class="py-11 border-b border-white/10" style="background:#0B2350;">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-white/65 reveal">Trusted by brokers, freight forwarders, importers & 3PLs</div>
+      <div class="mt-6 overflow-hidden no-scrollbar" style="mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);">
+        <div class="marquee-track">
+          <div class="flex gap-14 items-center text-white">
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8 4v8l-8 4-8-4V6l8-4z"/><path d="M4 6l8 4 8-4M12 10v8"/></svg><span class="text-[18px] font-extrabold tracking-tight">CARGOMAX</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9.5" cy="12" r="4.6"/><circle cx="14.5" cy="12" r="4.6"/></svg><span class="text-[19px] font-bold italic lowercase tracking-tight">portlink</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l9 17H3l9-17z" opacity=".3"/><path d="M12 3.5l9 17H3l9-17z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span class="text-[17px] font-extrabold tracking-[0.04em]">NORDFREIGHT</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M8.4 12l2.6 2.6 4.6-5.2"/></svg><span class="text-[18px] font-semibold tracking-tight">veritas<span class="font-bold">3pl</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3.5 18a8.5 8.5 0 0 1 17 0"/><circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg><span class="text-[17px] font-bold tracking-[0.08em]">ARC LOGISTICS</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><ellipse cx="12" cy="12" rx="9" ry="4.4" transform="rotate(-18 12 12)"/></svg><span class="text-[18px] font-semibold tracking-tight">Halo <span class="font-extrabold">Freight</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7.5" width="18" height="9" rx="1"/><path d="M7 7.5v9M11 7.5v9M15 7.5v9"/></svg><span class="text-[16px] font-extrabold tracking-[0.02em]">CONTAINERWORKS</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"/><path d="M12 7v10M7.5 9.5l9 5M16.5 9.5l-9 5" opacity=".5"/></svg><span class="text-[18px] font-semibold tracking-tight">Meridian Drayage</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/></svg><span class="text-[18px] font-bold tracking-tight">Atlas <span class="font-medium">BCO</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8l2.1 7.9 8 1.9-8 1.9-2.1 7.9-2.1-7.9-8-1.9 8-1.9L12 1.8z"/></svg><span class="text-[18px] font-bold tracking-tight">Northstar Cargo</span></span>
+          </div>
+          <div class="flex gap-14 items-center text-white" aria-hidden="true">
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8 4v8l-8 4-8-4V6l8-4z"/><path d="M4 6l8 4 8-4M12 10v8"/></svg><span class="text-[18px] font-extrabold tracking-tight">CARGOMAX</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9.5" cy="12" r="4.6"/><circle cx="14.5" cy="12" r="4.6"/></svg><span class="text-[19px] font-bold italic lowercase tracking-tight">portlink</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l9 17H3l9-17z" opacity=".3"/><path d="M12 3.5l9 17H3l9-17z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span class="text-[17px] font-extrabold tracking-[0.04em]">NORDFREIGHT</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M8.4 12l2.6 2.6 4.6-5.2"/></svg><span class="text-[18px] font-semibold tracking-tight">veritas<span class="font-bold">3pl</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3.5 18a8.5 8.5 0 0 1 17 0"/><circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg><span class="text-[17px] font-bold tracking-[0.08em]">ARC LOGISTICS</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><ellipse cx="12" cy="12" rx="9" ry="4.4" transform="rotate(-18 12 12)"/></svg><span class="text-[18px] font-semibold tracking-tight">Halo <span class="font-extrabold">Freight</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7.5" width="18" height="9" rx="1"/><path d="M7 7.5v9M11 7.5v9M15 7.5v9"/></svg><span class="text-[16px] font-extrabold tracking-[0.02em]">CONTAINERWORKS</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"/><path d="M12 7v10M7.5 9.5l9 5M16.5 9.5l-9 5" opacity=".5"/></svg><span class="text-[18px] font-semibold tracking-tight">Meridian Drayage</span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/></svg><span class="text-[18px] font-bold tracking-tight">Atlas <span class="font-medium">BCO</span></span></span>
+            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8l2.1 7.9 8 1.9-8 1.9-2.1 7.9-2.1-7.9-8-1.9 8-1.9L12 1.8z"/></svg><span class="text-[18px] font-bold tracking-tight">Northstar Cargo</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- LIVE NETWORK + INSTANT QUOTE (2nd section) -->
   <section id="quote" class="relative grid-bg overflow-hidden py-20 md:py-24">
     <div class="max-w-[1400px] mx-auto px-6 relative z-10">
@@ -564,40 +599,6 @@
     </div>
   </section>
 
-  <!-- Trust marquee -->
-  <section class="py-10 bg-white border-y border-black/5">
-    <div class="max-w-[1400px] mx-auto px-6">
-      <div class="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-[var(--navy)]/55 reveal">Trusted by brokers, freight forwarders, importers & 3PLs</div>
-      <div class="mt-6 overflow-hidden no-scrollbar" style="mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);">
-        <div class="marquee-track">
-          <div class="flex gap-14 items-center text-[var(--navy)]/55">
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8 4v8l-8 4-8-4V6l8-4z"/><path d="M4 6l8 4 8-4M12 10v8"/></svg><span class="text-[18px] font-extrabold tracking-tight">CARGOMAX</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9.5" cy="12" r="4.6"/><circle cx="14.5" cy="12" r="4.6"/></svg><span class="text-[19px] font-bold italic lowercase tracking-tight">portlink</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l9 17H3l9-17z" opacity=".22"/><path d="M12 3.5l9 17H3l9-17z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span class="text-[17px] font-extrabold tracking-[0.04em]">NORDFREIGHT</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M8.4 12l2.6 2.6 4.6-5.2"/></svg><span class="text-[18px] font-semibold tracking-tight">veritas<span class="font-bold">3pl</span></span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3.5 18a8.5 8.5 0 0 1 17 0"/><circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg><span class="text-[17px] font-bold tracking-[0.08em]">ARC LOGISTICS</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><ellipse cx="12" cy="12" rx="9" ry="4.4" transform="rotate(-18 12 12)"/></svg><span class="text-[18px] font-semibold tracking-tight">Halo <span class="font-extrabold">Freight</span></span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7.5" width="18" height="9" rx="1"/><path d="M7 7.5v9M11 7.5v9M15 7.5v9"/></svg><span class="text-[16px] font-extrabold tracking-[0.02em]">CONTAINERWORKS</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"/><path d="M12 7v10M7.5 9.5l9 5M16.5 9.5l-9 5" opacity=".5"/></svg><span class="text-[18px] font-semibold tracking-tight">Meridian Drayage</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/></svg><span class="text-[18px] font-bold tracking-tight">Atlas <span class="font-medium">BCO</span></span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8l2.1 7.9 8 1.9-8 1.9-2.1 7.9-2.1-7.9-8-1.9 8-1.9L12 1.8z"/></svg><span class="text-[18px] font-bold tracking-tight">Northstar Cargo</span></span>
-          </div>
-          <div class="flex gap-14 items-center text-[var(--navy)]/55" aria-hidden="true">
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8 4v8l-8 4-8-4V6l8-4z"/><path d="M4 6l8 4 8-4M12 10v8"/></svg><span class="text-[18px] font-extrabold tracking-tight">CARGOMAX</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9.5" cy="12" r="4.6"/><circle cx="14.5" cy="12" r="4.6"/></svg><span class="text-[19px] font-bold italic lowercase tracking-tight">portlink</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.5l9 17H3l9-17z" opacity=".22"/><path d="M12 3.5l9 17H3l9-17z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span class="text-[17px] font-extrabold tracking-[0.04em]">NORDFREIGHT</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M8.4 12l2.6 2.6 4.6-5.2"/></svg><span class="text-[18px] font-semibold tracking-tight">veritas<span class="font-bold">3pl</span></span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3.5 18a8.5 8.5 0 0 1 17 0"/><circle cx="12" cy="18" r="1.5" fill="currentColor" stroke="none"/></svg><span class="text-[17px] font-bold tracking-[0.08em]">ARC LOGISTICS</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><ellipse cx="12" cy="12" rx="9" ry="4.4" transform="rotate(-18 12 12)"/></svg><span class="text-[18px] font-semibold tracking-tight">Halo <span class="font-extrabold">Freight</span></span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7.5" width="18" height="9" rx="1"/><path d="M7 7.5v9M11 7.5v9M15 7.5v9"/></svg><span class="text-[16px] font-extrabold tracking-[0.02em]">CONTAINERWORKS</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l8.5 5v10L12 22l-8.5-5V7L12 2z"/><path d="M12 7v10M7.5 9.5l9 5M16.5 9.5l-9 5" opacity=".5"/></svg><span class="text-[18px] font-semibold tracking-tight">Meridian Drayage</span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/></svg><span class="text-[18px] font-bold tracking-tight">Atlas <span class="font-medium">BCO</span></span></span>
-            <span class="brand-logo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8l2.1 7.9 8 1.9-8 1.9-2.1 7.9-2.1-7.9-8-1.9 8-1.9L12 1.8z"/></svg><span class="text-[18px] font-bold tracking-tight">Northstar Cargo</span></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- HOW IT WORKS -->
   <section id="how" class="py-24 relative overflow-hidden text-white" style="background:radial-gradient(760px 460px at 10% 12%,rgba(255,59,48,0.16),transparent 60%),radial-gradient(820px 520px at 92% 30%,rgba(58,95,192,0.18),transparent 60%),radial-gradient(680px 460px at 70% 100%,rgba(255,59,48,0.16),transparent 60%),linear-gradient(180deg,#08163C 0%,#0C2150 60%,#0A1C45 100%);">
