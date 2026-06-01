@@ -41,39 +41,35 @@
   @keyframes livePulseBlue{0%{box-shadow:0 0 0 0 rgba(58,95,192,0.55);}70%{box-shadow:0 0 0 8px rgba(58,95,192,0);}100%{box-shadow:0 0 0 0 rgba(58,95,192,0);}}
   .est-wrap{background:#fff;border:1px solid rgba(11,35,80,0.08);border-radius:16px;box-shadow:0 34px 80px -40px rgba(11,35,80,0.35);overflow:hidden;}
   .est-scroll{overflow-x:auto;}
-  .est-table{width:100%;border-collapse:collapse;min-width:1180px;}
-  .est-table thead th{text-align:left;font-size:15px;font-weight:500;letter-spacing:0;color:#6B7280;background:#F9FAFB;padding:18px 16px;white-space:nowrap;border-bottom:1px solid rgba(11,35,80,0.08);}
-  .est-table tbody td{padding:20px 16px;border-bottom:1px solid rgba(11,35,80,0.06);vertical-align:middle;font-size:14.5px;color:var(--navy);}
-  .est-table th:nth-child(1),.est-table td:nth-child(1){padding-left:26px;}
+  .est-table{width:100%;border-collapse:collapse;min-width:1040px;}
+  .est-table thead th{text-align:left;font-size:13px;font-weight:500;letter-spacing:0;color:#6B7280;background:#F9FAFB;padding:13px 12px;white-space:nowrap;border-bottom:1px solid rgba(11,35,80,0.08);}
+  .est-table tbody td{padding:14px 12px;border-bottom:1px solid rgba(11,35,80,0.06);vertical-align:middle;font-size:13px;color:var(--navy);}
+  .est-table th:nth-child(1),.est-table td:nth-child(1){padding-left:20px;}
   .est-table th:nth-child(5),.est-table td:nth-child(5){text-align:center;}
-  .est-table tbody tr{transition:background .15s;}
-  .est-table tbody tr:hover{background:#F5F9FE;}
-  .est-table tbody tr:hover td:first-child{box-shadow:inset 3px 0 0 var(--red);}
   .est-table tbody tr:last-child td{border-bottom:none;}
-  .est-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;font-size:13px;letter-spacing:-0.03em;color:rgba(11,35,80,0.82);max-width:84px;display:inline-block;line-height:1.4;}
-  .est-table td:nth-child(1){max-width:96px;}
+  .est-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;font-size:12px;letter-spacing:-0.03em;color:rgba(11,35,80,0.82);max-width:78px;display:inline-block;line-height:1.4;}
+  .est-table td:nth-child(1){max-width:90px;}
   .est-cust{display:flex;align-items:center;gap:9px;}
-  .est-avatar{width:32px;height:32px;border-radius:9px;flex:0 0 auto;display:grid;place-items:center;color:#fff;font-weight:700;font-size:11.5px;box-shadow:0 8px 16px -8px rgba(11,35,80,0.55);}
-  .est-cust .est-name{font-weight:700;max-width:170px;line-height:1.35;}
-  .est-sub{font-size:13px;color:var(--muted);margin-top:3px;}
-  .est-route{display:flex;align-items:center;gap:8px;font-weight:600;}
+  .est-cust .est-name{font-weight:700;max-width:150px;line-height:1.35;}
+  .est-sub{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .est-route{display:flex;align-items:center;gap:7px;font-weight:600;}
   .est-arrow{flex:0 0 auto;display:inline-block;}
-  .est-loc{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .est-chip{display:inline-block;font-size:12px;font-weight:700;padding:4px 11px;border-radius:8px;background:#fff;border:1px solid rgba(11,35,80,0.14);color:var(--navy);white-space:nowrap;}
-  .est-badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;white-space:nowrap;}
+  .est-loc{max-width:135px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .est-chip{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:7px;background:#fff;border:1px solid rgba(11,35,80,0.14);color:var(--navy);white-space:nowrap;}
+  .est-badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:999px;white-space:nowrap;}
   .est-badge.completed{background:rgba(22,181,113,0.13);color:#15935F;}
   .est-badge.streaming{background:rgba(58,95,192,0.13);color:#3A5FC0;}
   .est-badge.pending{background:rgba(11,35,80,0.07);color:#5B6473;}
   .est-badge.failed{background:rgba(255,59,48,0.12);color:#E0241A;}
   .est-dot{width:7px;height:7px;border-radius:50%;background:currentColor;animation:livePulseBlue 1.6s ease-out infinite;}
-  .est-prog{width:110px;}
-  .est-prog-track{height:8px;border-radius:8px;background:rgba(11,35,80,0.09);overflow:hidden;}
-  .est-prog-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,#3A5FC0,#6E8FE0);transition:width .7s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px rgba(58,95,192,0.5);}
-  .est-prog-label{font-size:12px;font-weight:600;color:var(--muted);margin-top:6px;}
+  .est-prog{width:94px;}
+  .est-prog-track{height:7px;border-radius:7px;background:rgba(11,35,80,0.09);overflow:hidden;}
+  .est-prog-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#3A5FC0,#6E8FE0);transition:width .7s cubic-bezier(.4,0,.2,1);box-shadow:0 0 10px rgba(58,95,192,0.5);}
+  .est-prog-label{font-size:11px;font-weight:600;color:var(--muted);margin-top:5px;}
   .est-calc{font-style:italic;color:var(--muted);}
-  .est-price{font-weight:800;font-size:17px;color:var(--navy);}
-  .est-time{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:14px;white-space:nowrap;}
-  .est-view{display:inline-flex;align-items:center;gap:6px;color:var(--red);font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;padding:7px 13px;border-radius:8px;transition:background .15s;}
+  .est-price{font-weight:800;font-size:15px;color:var(--navy);}
+  .est-time{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12.5px;white-space:nowrap;}
+  .est-view{display:inline-flex;align-items:center;gap:5px;color:var(--red);font-weight:700;font-size:12.5px;text-decoration:none;white-space:nowrap;padding:6px 11px;border-radius:8px;transition:background .15s;}
   .est-view:hover{background:rgba(255,59,48,0.09);}
   .est-input{width:100%;padding:0.72rem 0.9rem 0.72rem 2.5rem;border:1px solid rgba(11,35,80,0.14);border-radius:10px;background:#fff;font-size:0.9rem;color:var(--navy);transition:border-color .2s,box-shadow .2s;}
   .est-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(58,95,192,0.14);}
@@ -104,10 +100,6 @@
                         <a href="/nelson-laravel-website/tools/ports/" class="mega-tool">
               <span class="mega-ic" style="background:linear-gradient(160deg,#1E3A8A,#0B2350)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg></span>
               <span><h4>See All Ports</h4><p>Searchable directory of every U.S. sea, rail & inland port.</p></span>
-            </a>
-                        <a href="/nelson-laravel-website/tools/tracking/" class="mega-tool">
-              <span class="mega-ic" style="background:linear-gradient(160deg,#4C6FE0,#3A5FC0)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7L12 12l8.7-5M12 22V12"/></svg></span>
-              <span><h4>Container Tracking</h4><p>Track your box by sea, rail & road in real time.</p></span>
             </a>
                         <a href="/nelson-laravel-website/tools/distance/" class="mega-tool">
               <span class="mega-ic" style="background:linear-gradient(160deg,#22D3EE,#3A5FC0)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
@@ -186,7 +178,7 @@
         <select id="estDate" class="est-select"><option>Today</option><option>Last 7 days</option><option>Last 30 days</option><option>All time</option></select>
         <div class="flex items-center text-[12px] font-medium text-[var(--muted)] px-1 whitespace-nowrap"><b id="estCount" class="text-[var(--navy)] mr-1">0</b> estimates</div>
       </div>
-      <div class="est-wrap"><div class="est-scroll no-scrollbar"><table class="est-table">
+      <div class="est-wrap"><div class="est-scroll"><table class="est-table">
         <thead><tr><th>Reference</th><th>Customer</th><th>Pickup</th><th>Drop-off</th><th>Container</th><th>Est. Price</th><th>Status</th><th>Stream</th><th>Created</th><th></th></tr></thead>
         <tbody id="estTbody"></tbody>
       </table></div></div>
@@ -228,8 +220,8 @@
     {ref:'DRY-2026-0836',customer:'Bayou Transport',email:'ops@bayoutransport.com',pickup:'Port of New Orleans',pickupSub:'New Orleans, LA · port',drop:'Memphis Rail Yard',dropSub:'Memphis, TN · rail',container:'20ft',miles:395,price:'$1,020',status:'completed',stream:0,created:'8h ago'}
   ];
   const EST_LABELS={completed:'Completed',streaming:'Streaming',pending:'Pending',failed:'Failed'};
-  const UP_ARROW='<svg class="est-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16B571" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
-  const DOWN_ARROW='<svg class="est-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF3B30" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
+  const UP_ARROW='<svg class="est-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16B571" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+  const DOWN_ARROW='<svg class="est-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF3B30" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
   const EST_AVCOLORS=['#0B2350','#1E3A8A','#3A5FC0','#E0241A','#15935F'];
   const EST_ICONS={completed:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',failed:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>',pending:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'};
   function estInitials(n){const p=n.replace(/[^A-Za-z ]/g,'').trim().split(/\s+/);return ((p[0]||'')[0]||'')+((p[1]||'')[0]||'');}
@@ -240,8 +232,8 @@
   function estPrice(e){if(e.price)return '<span class="est-price">'+e.price+'</span>';if(e.status==='failed')return '<span style="color:var(--muted)">—</span>';return '<span class="est-calc">Calculating…</span>';}
   function estRow(e){return '<tr><td><span class="est-ref">'+e.ref+'</span></td>'+
     '<td><div class="est-cust"><div style="min-width:0"><div class="est-name">'+e.customer+'</div><div class="est-sub">'+e.email+'</div></div></div></td>'+
-    '<td><div class="est-route">'+UP_ARROW+'<span class="est-loc">'+e.pickup+'</span></div><div class="est-sub" style="padding-left:26px">'+e.pickupSub+'</div></td>'+
-    '<td><div class="est-route">'+DOWN_ARROW+'<span class="est-loc">'+e.drop+'</span></div><div class="est-sub" style="padding-left:26px">'+e.dropSub+'</div></td>'+
+    '<td><div class="est-route">'+UP_ARROW+'<span class="est-loc">'+e.pickup+'</span></div><div class="est-sub" style="padding-left:23px">'+e.pickupSub+'</div></td>'+
+    '<td><div class="est-route">'+DOWN_ARROW+'<span class="est-loc">'+e.drop+'</span></div><div class="est-sub" style="padding-left:23px">'+e.dropSub+'</div></td>'+
     '<td><span class="est-chip">'+e.container+'</span><div class="est-sub">'+e.miles+' mi</div></td>'+
     '<td>'+estPrice(e)+'</td><td>'+estBadge(e.status)+'</td><td>'+estStream(e)+'</td>'+
     '<td><span class="est-time">'+CLOCK_ICON+e.created+'</span></td>'+
