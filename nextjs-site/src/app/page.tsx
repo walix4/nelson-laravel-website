@@ -7,7 +7,8 @@ import Testimonials from "@/components/Testimonials";
 import Chat from "@/components/Chat";
 import Stats from "@/components/Stats";
 import UnitConverter from "@/components/UnitConverter";
-import UsMap from "@/components/UsMap";
+import NetworkMap from "@/components/NetworkMap";
+import Ticker from "@/components/Ticker";
 import CalculateRate from "@/components/CalculateRate";
 import { asset } from "@/lib/site";
 
@@ -149,7 +150,7 @@ export default function Home() {
                 {[["West coast", "LAX · LGB · OAK · SEA"], ["East coast", "NY/NJ · NOR · SAV · CHA"], ["Gulf", "HOU · MIA"], ["Canada", "VAN · MTL · HAL"]].map(([k, v]) => <div key={k} className="glass-dark rounded-lg p-3"><div className="text-white/55 text-[10px] uppercase tracking-wider">{k}</div><div className="display text-white text-[16px] mt-0.5">{v}</div></div>)}
               </div>
             </div>
-            <div className="reveal reveal-d1"><UsMap height={520} /></div>
+            <div className="reveal reveal-d1"><NetworkMap /></div>
           </div>
         </div>
       </section>
@@ -165,12 +166,7 @@ export default function Home() {
             {SHIP.map((s, i) => (
               <div key={s.title} className={`bg-white rounded-2xl p-6 border border-[var(--navy)]/8 reveal reveal-d${i}`}>
                 <div className="flex items-center justify-between"><div className="flex items-center gap-2.5">{s.icon}<h3 className="display text-[19px] text-[var(--navy)]">{s.title}</h3></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 11v5" strokeLinecap="round" /><circle cx="12" cy="7.8" r="0.6" fill="var(--green)" /></svg></div>
-                <div className="mt-4">{s.rows.map(([from, to, time]) => (
-                  <div key={from + to} className="flex items-center justify-between border-t border-[var(--navy)]/6 gap-3 py-2.5">
-                    <div className="flex items-center gap-2 text-[13.5px] min-w-0"><span className="w-2 h-2 rounded-full shrink-0" style={{ background: "#16B571" }} /><span className="font-semibold text-[var(--navy)]">{from}</span><Arrow /><span className="w-2 h-2 rounded-full shrink-0" style={{ background: "#3A5FC0" }} /><span className="font-semibold text-[var(--navy)] truncate">{to}</span></div>
-                    <span className="text-[12px] text-[var(--muted)] shrink-0 num">{time}</span>
-                  </div>
-                ))}</div>
+                <Ticker rows={s.rows} index={i} />
               </div>
             ))}
           </div>
@@ -242,13 +238,38 @@ export default function Home() {
       {/* PORTS BANNER */}
       <section className="py-16 bg-white">
         <div className="max-w-[1280px] mx-auto px-6">
-          <div className="ports-band">
+          <div className="ports-band flex flex-col md:block">
             <div className="pmap" style={{ backgroundImage: `url(${asset("/usa-map.svg")})` }} />
-            <div className="relative z-10 text-center px-6 py-14 max-w-xl mx-auto">
+            <div className="relative z-10 text-center px-6 pt-12 pb-10 md:py-16 max-w-xl mx-auto">
               <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/80">U.S. coverage</div>
               <h2 className="display text-white text-[34px] md:text-[44px] leading-[1.05] mt-2">Explore the U.S. port network</h2>
               <p className="text-white/85 text-[15px] mt-4">Filter every major U.S. container port and inland ramp across all 48 states — then price a drayage move in seconds.</p>
               <Link href="/tools/ports" className="inline-flex items-center gap-2 mt-7 bg-white text-[var(--navy)] font-semibold text-[14px] px-6 py-3 rounded-xl">Browse ports <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link>
+            </div>
+            {/* left filters card */}
+            <div className="ports-card left">
+              <div className="flex items-center justify-between mb-4">
+                <div className="display text-[19px] text-[var(--navy)]">Filters</div>
+                <div className="flex items-center gap-3"><span className="text-[13px] text-[var(--muted)] cursor-pointer">Clear</span><span className="bg-[var(--navy)] text-white text-[13px] font-semibold px-4 py-2 rounded-lg">Show 20</span></div>
+              </div>
+              <div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--muted)] mb-2">Sort by</div>
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                <div className="pf-radio"><span className="pf-dot" />Sea ports</div>
+                <div className="pf-radio sel"><span className="pf-dot" />River ports</div>
+                <div className="pf-radio"><span className="pf-dot" />Dry ports</div>
+              </div>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)]">Sea ports</div><div className="pf-track"><div className="pf-fill" style={{ width: "18%" }} /><div className="pf-knob" style={{ left: "18%" }} /></div></div>
+                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)] flex justify-between">River ports <span className="bg-[var(--navy)]/6 px-2 rounded-full text-[var(--navy)]">500</span></div><div className="pf-track"><div className="pf-fill" style={{ width: "55%" }} /><div className="pf-knob" style={{ left: "55%" }} /></div></div>
+                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)]">Dry ports</div><div className="pf-track"><div className="pf-fill" style={{ width: "35%" }} /><div className="pf-knob" style={{ left: "35%" }} /></div></div>
+              </div>
+            </div>
+            {/* right top-ports card */}
+            <div className="ports-card right">
+              <div className="px-4 pt-1 pb-2 text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--muted)] flex items-center gap-1.5"><span className="flag">🇺🇸</span> Top U.S. ports</div>
+              {([["Los Angeles, CA", 48], ["Long Beach, CA", 45], ["New York / NJ", 52], ["Savannah, GA", 33], ["Houston, TX", 29], ["Seattle, WA", 21]] as [string, number][]).map(([city, n]) => (
+                <div key={city} className="pc-row"><svg className="pc-pin" viewBox="0 0 24 24"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z" /><circle cx="12" cy="11" r="2.6" fill="#fff" /></svg>{city} <span className="text-[var(--muted)] font-normal">({n})</span></div>
+              ))}
             </div>
           </div>
         </div>
