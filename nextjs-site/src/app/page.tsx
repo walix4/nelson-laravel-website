@@ -97,15 +97,41 @@ export default function Home() {
             <div className="max-w-xl"><div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">How it works</div><h2 className="display text-[40px] md:text-[48px] text-white leading-[1.05] mt-2">Quote, route, book — one continuous flow.</h2></div>
             <p className="max-w-md text-white/60 text-[15px]">From the first input to a customer-ready PDF, every drayage move is priced and visualized in under a minute.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 mt-14">
-            {[["hiw-origin", "Choose origin", "#FF3B30", "Pick from every container port across the U.S. & Canada — West Coast, Gulf, East Coast and every Class I rail ramp."], ["hiw-destination", "Pick destination", "#FF3B30", "Door, warehouse or ramp across 1,200+ inland delivery cities — typed or dropped on the map."], ["hiw-calculate", "Calculate rate", "#3A5FC0", "A fully itemised, all-in price in under 30 seconds — live diesel, FSC, chassis pool and port fees baked in."], ["hiw-export", "Export quote", "#1E3A8A", "Send it out as a brand-ready PDF, structured JSON or embeddable HTML — your markup applied automatically."], ["$3.50", "Book shipment", "#FF3B30", "Hand off to any of 2,800+ vetted carrier partners and track the container from gate to door."]].map(([img, t, c, d], i) => (
-              <div key={t} className="bg-white rounded-2xl p-6 text-center reveal" style={{ transitionDelay: `${i * 0.06}s` }}>
-                <div className="hiw-icon mx-auto" style={{ width: 72, height: 72 }}>{img.startsWith("$") ? <div className="text-center leading-tight"><div className="text-[9px] font-bold uppercase tracking-[0.12em] text-[var(--muted)]">from</div><div className="display text-[28px] text-[var(--navy)]">{img}</div></div> : <img src={asset(`/${img}.png`)} alt="" />}</div>
-                <div className="display text-[17px] text-[var(--navy)] mt-4">{t}</div>
-                <div className="mx-auto mt-1.5 mb-2" style={{ width: 28, height: 3, borderRadius: 3, background: c }} />
-                <p className="text-[12.5px] text-[var(--muted)] leading-relaxed">{d}</p>
+          <div className="hiw reveal mt-20">
+            <div className="hiw-line" />
+            <div className="hiw-spark" />
+            <div className="hiw-row">
+              {/* 01 — icon top, text bottom */}
+              <div className="hiw-col">
+                <div className="hiw-half top"><div className="hiw-icon"><img src={asset("/hiw-origin.png")} alt="Choose origin port" loading="lazy" /></div><div className="hiw-stub" /></div>
+                <div className="hiw-node" />
+                <div className="hiw-half bot"><div className="hiw-text"><div className="hiw-title">Choose origin</div><div className="hiw-uline" style={{ background: "#FF3B30" }} /><p className="hiw-desc">Pick from every container port across the U.S. &amp; Canada — West Coast, Gulf, East Coast and every Class I rail ramp.</p></div></div>
               </div>
-            ))}
+              {/* 02 — text top, icon bottom */}
+              <div className="hiw-col">
+                <div className="hiw-half top"><div className="hiw-text"><div className="hiw-title">Pick destination</div><div className="hiw-uline" style={{ background: "#FF3B30" }} /><p className="hiw-desc">Door, warehouse or ramp across 1,200+ inland delivery cities — typed or dropped on the map.</p></div></div>
+                <div className="hiw-node" />
+                <div className="hiw-half bot"><div className="hiw-stub" /><div className="hiw-icon"><img src={asset("/hiw-destination.png")} alt="Pick destination" loading="lazy" /></div></div>
+              </div>
+              {/* 03 — icon top, text bottom */}
+              <div className="hiw-col">
+                <div className="hiw-half top"><div className="hiw-icon"><img src={asset("/hiw-calculate.png")} alt="Calculate rate" loading="lazy" /></div><div className="hiw-stub" /></div>
+                <div className="hiw-node" />
+                <div className="hiw-half bot"><div className="hiw-text"><div className="hiw-title">Calculate rate</div><div className="hiw-uline" style={{ background: "#3A5FC0" }} /><p className="hiw-desc">A fully itemised, all-in price in under 30 seconds — live diesel, FSC, chassis pool and port fees baked in.</p></div></div>
+              </div>
+              {/* 04 — text top, icon bottom */}
+              <div className="hiw-col">
+                <div className="hiw-half top"><div className="hiw-text"><div className="hiw-title">Export quote</div><div className="hiw-uline" style={{ background: "#1E3A8A" }} /><p className="hiw-desc">Send it out as a brand-ready PDF, structured JSON or embeddable HTML — your markup applied automatically.</p></div></div>
+                <div className="hiw-node" />
+                <div className="hiw-half bot"><div className="hiw-stub" /><div className="hiw-icon"><img src={asset("/hiw-export.png")} alt="Export quote PDF" loading="lazy" /></div></div>
+              </div>
+              {/* 05 — $ icon top, text bottom */}
+              <div className="hiw-col">
+                <div className="hiw-half top"><div className="hiw-icon"><div className="text-center leading-tight"><div className="text-[9px] font-bold uppercase tracking-[0.12em]" style={{ color: "var(--muted)" }}>from</div><div className="display text-[28px]" style={{ color: "var(--navy)" }}>$3.50</div></div></div><div className="hiw-stub" /></div>
+                <div className="hiw-node" />
+                <div className="hiw-half bot"><div className="hiw-text"><div className="hiw-title">Book shipment</div><div className="hiw-uline" style={{ background: "#FF3B30" }} /><p className="hiw-desc">Hand off to any of 2,800+ vetted carrier partners and track the container from gate to door.</p></div></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
