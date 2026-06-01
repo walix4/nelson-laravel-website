@@ -6,7 +6,18 @@ import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
 import Testimonials from "@/components/Testimonials";
 import Chat from "@/components/Chat";
+import Stats from "@/components/Stats";
+import UnitConverter from "@/components/UnitConverter";
 import { asset } from "@/lib/site";
+
+const COSTS = [
+  { n: "Fuel + FSC", d: "Live diesel × MPG × distance, plus carrier FSC.", i: '<line x1="3" x2="15" y1="22" y2="22"/><line x1="4" x2="14" y1="9" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2 2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/>', a: "#FF3B30" },
+  { n: "Driver labor", d: "Hourly wage × transit time + per diem on 400+ mi.", i: '<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/>', a: "#3A5FC0" },
+  { n: "Port charges", d: "Gate fees, terminal handling, exam fees if pulled.", i: '<circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/>', a: "#0B2350" },
+  { n: "Chassis", d: "Daily rental, pool fees, per-diem on long dwell.", i: '<path d="M14 18V6H2v12h2"/><path d="M14 8h4l4 4v6h-2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>', a: "#FF3B30" },
+  { n: "Accessorials", d: "Tolls, overweight, hazmat, reefer plug, lumper.", i: '<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>', a: "#FF3B30" },
+  { n: "Overhead", d: "Admin, dispatch, ELD/TMS, insurance, depreciation.", i: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>', a: "#1E3A8A" },
+];
 
 const BRANDS = ["CARGOMAX", "portlink", "NORDFREIGHT", "veritas3pl", "ARC LOGISTICS", "Halo Freight", "CONTAINERWORKS", "Meridian Drayage", "Atlas BCO", "Northstar Cargo"];
 const PORTS: Record<string, number> = { "Los Angeles, CA": 62, "Long Beach, CA": 71, "New York / NJ": 92, "Savannah, GA": 264, "Houston, TX": 248, "Seattle, WA": 1320 };
@@ -39,6 +50,21 @@ function Quote() {
 export default function Home() {
   return (
     <>
+      <div className="text-[11px] font-medium border-b" style={{ background: "#4DA3FF", color: "var(--navy)", borderColor: "rgba(11,35,80,0.15)" }}>
+        <div className="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
+          <div className="flex items-center gap-5">
+            <span className="flex items-center gap-2"><span className="live-dot" /><span>Network <b>LIVE</b></span></span>
+            <span className="hidden sm:inline opacity-60">·</span>
+            <span className="hidden sm:inline num"><b>12,431</b> active routes</span>
+            <span className="hidden md:inline opacity-60">·</span>
+            <span className="hidden md:inline num">Diesel <b>$5.18</b>/gal · FSC <b>17%</b></span>
+          </div>
+          <div className="flex items-center gap-4 text-[10px] uppercase tracking-[0.14em]">
+            <span className="opacity-70">v2026.05</span>
+            <a href="#api" className="opacity-90 hover:opacity-100">API status</a>
+          </div>
+        </div>
+      </div>
       <Nav />
       <RevealInit />
 
@@ -88,9 +114,9 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section id="how" className="py-20" style={{ background: "#F4F7FB" }}>
-        <div className="max-w-[1100px] mx-auto px-6">
-          <div className="text-center reveal"><div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">How it works</div><h2 className="display text-[36px] md:text-[46px] text-[var(--navy)] mt-2">Quote to delivery in 4 steps</h2></div>
+      <section id="how" className="py-24 relative overflow-hidden text-white" style={{ background: "radial-gradient(760px 460px at 10% 12%,rgba(255,59,48,0.16),transparent 60%),radial-gradient(820px 520px at 92% 30%,rgba(58,95,192,0.18),transparent 60%),linear-gradient(180deg,#08163C 0%,#0C2150 60%,#0A1C45 100%)" }}>
+        <div className="max-w-[1100px] mx-auto px-6 relative">
+          <div className="text-center reveal"><div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">How it works</div><h2 className="display text-[36px] md:text-[46px] text-white mt-2">Quote to delivery in 4 steps</h2></div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-12">
             {[["hiw-origin", "Pick origin", "Choose any U.S. container port or rail ramp."], ["hiw-calculate", "Get the rate", "Live pricing with FSC and accessorials baked in."], ["hiw-book", "Book the move", "Lock the rate for 24h and dispatch instantly."], ["hiw-destination", "Track to door", "Watch it move from port to warehouse in real time."]].map(([img, t, d], i) => (
               <div key={t} className={`reveal reveal-d${i % 3} bg-white rounded-2xl p-6 text-center`} style={{ border: "1px solid rgba(11,35,80,0.07)" }}>
@@ -103,6 +129,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* COST CARDS */}
+      <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#F8FAFC,#EEF2F8)" }}>
+        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(800px 400px at 80% 10%,rgba(58,95,192,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(255,59,48,0.13),transparent 60%)" }} />
+        <div className="max-w-[1400px] mx-auto px-6 relative">
+          <div className="max-w-2xl reveal">
+            <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Cost transparency</div>
+            <h2 className="display text-[40px] md:text-[48px] text-[var(--navy)] leading-[1.05] mt-2">Every dollar in the quote, accounted for.</h2>
+            <p className="mt-4 text-[var(--muted)] text-[15px]">No mystery FSCs. No surprise accessorials at delivery. Six cost components on every quote — priced from live market data.</p>
+          </div>
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {COSTS.map((c, i) => (
+              <div key={c.n} className={`bg-white rounded-2xl p-6 reveal reveal-d${i % 3} flex items-start gap-4`} style={{ border: "1px solid rgba(11,35,80,0.07)" }}>
+                <div className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-white" style={{ background: c.a }}>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: c.i }} />
+                </div>
+                <div><div className="display text-[17px] text-[var(--navy)]">{c.n}</div><p className="text-[13px] text-[var(--muted)] mt-1.5 leading-relaxed">{c.d}</p></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Stats />
+
       {/* ESTIMATES CTA */}
       <section className="py-20 bg-white">
         <div className="max-w-[1100px] mx-auto px-6 text-center reveal">
@@ -114,6 +164,18 @@ export default function Home() {
       </section>
 
       <Testimonials />
+
+      {/* UNIT CONVERTER */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-[1100px] mx-auto px-6 relative">
+          <div className="text-center max-w-2xl mx-auto reveal">
+            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Free logistics tool</div>
+            <h2 className="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">Online Unit Converter</h2>
+            <p className="mt-4 text-[var(--muted)] text-[15px] leading-relaxed">Accurately, quickly and for free convert common units of measurement. Enter a value, pick a category, then choose the <i>from</i> and <i>to</i> units to convert instantly.</p>
+          </div>
+          <div className="mt-12 reveal reveal-d1"><UnitConverter initial="Acceleration" /></div>
+        </div>
+      </section>
 
       {/* PORTS BANNER */}
       <section className="py-16 bg-white">
