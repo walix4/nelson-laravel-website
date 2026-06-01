@@ -1027,7 +1027,7 @@
         <div class="md:col-span-2">
           <div class="flex items-center">
             <img src="logo-mark.png" alt="" class="h-9 w-auto" />
-            <span class="display text-white text-[22px] tracking-tight leading-none ml-2.5">Drayage <span style="color:var(--red);">Rate</span></span>
+            <span class="display text-white text-[22px] tracking-tight leading-none ml-2.5">Dray <span style="color:var(--red);">Rate</span></span>
           </div>
           <p class="mt-3 max-w-sm text-white/80">The drayage pricing network for North America. Instant rates across every container port from Vancouver to Miami.</p>
           <div class="mt-4 text-[11px] text-white/65 num">© 2026 drayagerate.net · All rights reserved</div>

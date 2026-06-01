@@ -53,7 +53,7 @@
     <div class="max-w-[1400px] mx-auto px-6">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <div class="flex items-center"><img src="__B__/dryge/logo-mark.png" alt="" class="h-9 w-auto" /><span class="display text-white text-[22px] tracking-tight leading-none ml-2.5">Drayage <span style="color:var(--red);">Rate</span></span></div>
+          <div class="flex items-center"><img src="__B__/dryge/logo-mark.png" alt="" class="h-9 w-auto" /><span class="display text-white text-[22px] tracking-tight leading-none ml-2.5">Dray <span style="color:var(--red);">Rate</span></span></div>
           <p class="mt-3 max-w-sm text-white/75 text-[13px]">The drayage pricing network for North America. Instant rates across every U.S. container port.</p>
         </div>
         <a href="__B__/tools/" class="text-[13px] font-semibold text-white/90 hover:text-white inline-flex items-center gap-2">← Back to all tools</a>

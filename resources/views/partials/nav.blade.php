@@ -8,7 +8,7 @@
   <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
     <a href="{{ $logo }}" class="flex items-center gap-2.5">
       <img src="{{ $onHome ? '' : '__B__/dryge/' }}logo-mark.png" alt="" class="h-9 md:h-10 w-auto" />
-      <span class="display text-white text-[22px] md:text-[24px] tracking-tight leading-none">Drayage <span style="color:var(--red);">Rate</span></span>
+      <span class="display text-white text-[22px] md:text-[24px] tracking-tight leading-none">Dray <span style="color:var(--red);">Rate</span></span>
     </a>
     <nav class="hidden md:flex items-center gap-6 text-[13px] font-medium text-white/85">
       <div class="mega-wrap">
