@@ -12,6 +12,8 @@
   <style>
     :root{--navy:#0B2350;--navy-2:#163A7E;--navy-3:#06143A;--red:#FF3B30;--red-2:#E0241A;--blue:#3A5FC0;--blue-2:#6E8FE0;--bg:#F8FAFC;--ink:#0B1220;--muted:#5B6473;}
     *{-webkit-font-smoothing:antialiased;}
+    /* Flat design — no shadows anywhere */
+    *,*::before,*::after{box-shadow:none !important;text-shadow:none !important;}
     html,body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);}
     .display{font-family:'Poppins',system-ui,sans-serif;letter-spacing:-0.02em;font-weight:700;}
     .num{font-variant-numeric:tabular-nums;}
