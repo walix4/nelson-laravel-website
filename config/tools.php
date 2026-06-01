@@ -18,7 +18,6 @@ return [
     ['n'=>'CO₂ Emissions','d'=>'Estimate emissions for any drayage move.','href'=>'__B__/tools/co2/','g'=>'linear-gradient(160deg,#34D399,#059669)','i'=>'<path d="M11 20A7 7 0 0 1 9.8 6.1C16 5 17 4.5 19 2c1 2 2 4.5 2 8a7 7 0 0 1-7 7H11z"/><path d="M2 21c0-3 1.85-5.36 5.5-6"/>'],
     ['n'=>'Container Specs','d'=>'Dimensions, capacity & payload for every box type.','href'=>'__B__/tools/containers/','g'=>'linear-gradient(160deg,#0EA5E9,#0369A1)','i'=>'<rect x="3" y="7" width="18" height="12" rx="1"/><path d="M3 11h18M8 7v12M13 7v12"/>'],
     ['n'=>'Accessorial Guide','d'=>'What every drayage fee means — tolls, hazmat, reefer & more.','href'=>'__B__/tools/accessorials/','g'=>'linear-gradient(160deg,#8B5CF6,#6D28D9)','i'=>'<path d="M6 2h9l4 4v16l-2-1-2 1-2-1-2 1-2-1-3 1V2z"/><path d="M9 8h6M9 12h6M9 16h4"/>'],
-    ['n'=>'Overweight Checker','d'=>'Check axle & gross weight against U.S. road limits.','href'=>'__B__/tools/overweight/','g'=>'linear-gradient(160deg,#EF4444,#991B1B)','i'=>'<path d="M12 3v18M7 21h10"/><path d="M7 6l-4 7a4 4 0 0 0 8 0L7 6zM17 6l-4 7a4 4 0 0 0 8 0l-4-7zM6 6h12"/>'],
     ['n'=>'All Estimates','d'=>'Live stream of every quote on the network.','href'=>'__B__/estimates/','g'=>'linear-gradient(160deg,#0EA5E9,#1E3A8A)','i'=>'<path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 4-5"/>'],
   ],
 ];
