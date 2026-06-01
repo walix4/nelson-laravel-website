@@ -8,7 +8,7 @@
   .est-wrap{background:#fff;border:1px solid rgba(11,35,80,0.08);border-radius:16px;box-shadow:0 34px 80px -40px rgba(11,35,80,0.35);overflow:hidden;}
   .est-scroll{overflow-x:auto;}
   .est-table{width:100%;border-collapse:collapse;min-width:1180px;}
-  .est-table thead th{text-align:left;font-size:11.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:rgba(11,35,80,0.5);background:linear-gradient(180deg,#F7FAFD,#EEF3F9);padding:18px 16px;white-space:nowrap;border-bottom:1px solid rgba(11,35,80,0.08);}
+  .est-table thead th{text-align:left;font-size:15px;font-weight:500;letter-spacing:0;color:#6B7280;background:#F9FAFB;padding:18px 16px;white-space:nowrap;border-bottom:1px solid rgba(11,35,80,0.08);}
   .est-table tbody td{padding:20px 16px;border-bottom:1px solid rgba(11,35,80,0.06);vertical-align:middle;font-size:14.5px;color:var(--navy);}
   .est-table th:nth-child(1),.est-table td:nth-child(1){padding-left:26px;}
   .est-table th:nth-child(5),.est-table td:nth-child(5){text-align:center;}
@@ -103,7 +103,7 @@
   const EST_ICONS={completed:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',failed:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>',pending:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'};
   function estInitials(n){const p=n.replace(/[^A-Za-z ]/g,'').trim().split(/\s+/);return ((p[0]||'')[0]||'')+((p[1]||'')[0]||'');}
   function estAvatarColor(n){let h=0;for(let i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))>>>0;return EST_AVCOLORS[h%EST_AVCOLORS.length];}
-  function estBadge(s){return '<span class="est-badge '+s+'">'+(s==='streaming'?'<span class="est-dot"></span>':(EST_ICONS[s]||''))+EST_LABELS[s]+'</span>';}
+  function estBadge(s){return '<span class="est-badge '+s+'">'+(s==='streaming'?'<span class="est-dot"></span>':'')+EST_LABELS[s]+'</span>';}
   const CLOCK_ICON='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity:.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
   function estStream(e){if(e.status!=='streaming')return '<span style="color:var(--muted)">—</span>';const v=Math.round(e.stream);return '<div class="est-prog"><div class="est-prog-track"><div class="est-prog-fill" data-fill="'+e.ref+'" style="width:'+v+'%"></div></div><div class="est-prog-label" data-label="'+e.ref+'">'+v+'%</div></div>';}
   function estPrice(e){if(e.price)return '<span class="est-price">'+e.price+'</span>';if(e.status==='failed')return '<span style="color:var(--muted)">—</span>';return '<span class="est-calc">Calculating…</span>';}
