@@ -22,6 +22,8 @@
       --ink:#0B1220; --muted:#5B6473;
     }
     *{-webkit-font-smoothing:antialiased;}
+    /* Flat design — no shadows anywhere (overrides Tailwind shadow-* classes and inline styles) */
+    *,*::before,*::after{box-shadow:none !important;text-shadow:none !important;}
     html,body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);}
     .display{font-family:'Poppins',system-ui,sans-serif;letter-spacing:-0.02em;font-weight:700;}
     .num{font-feature-settings:"tnum","cv01";font-variant-numeric:tabular-nums;}
@@ -65,7 +67,6 @@
     .truck-img{
       width:60px!important;height:40px!important;display:block;
       image-rendering:auto;
-      filter:drop-shadow(0 3px 4px rgba(0,0,0,0.35));
       transition:transform .12s linear;
     }
 
@@ -76,7 +77,7 @@
     .leaflet-control-zoom a:hover{background:rgba(58,95,192,0.95)!important;color:#fff!important;}
     .leaflet-tile-pane{filter:grayscale(0.08) contrast(0.98);}
 
-    .leaflet-overlay-pane .route-line{stroke:#FF3B30;stroke-width:3.2;fill:none;filter:drop-shadow(0 0 8px rgba(255,59,48,0.7));stroke-linecap:round;}
+    .leaflet-overlay-pane .route-line{stroke:#FF3B30;stroke-width:3.2;fill:none;stroke-linecap:round;}
     .leaflet-overlay-pane .route-line-draw{stroke-dasharray:var(--len,1200);stroke-dashoffset:var(--len,1200);animation:drawLine 1.6s cubic-bezier(.65,.05,.36,1) forwards;}
     @keyframes drawLine{to{stroke-dashoffset:0;}}
     .leaflet-overlay-pane .corridor{stroke:rgba(11,31,68,0.32);stroke-width:1.1;fill:none;stroke-dasharray:3 7;}
@@ -171,7 +172,7 @@
     .hiw-stub{width:3px;height:52px;background:rgba(255,255,255,0.28);border-radius:3px;flex:0 0 auto;}
     .hiw-icon{width:116px;height:116px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:0 0 auto;box-shadow:0 22px 46px -18px rgba(11,31,68,0.42),0 6px 16px -8px rgba(11,31,68,0.18);animation:floatTag 5.5s ease-in-out infinite;}
     .hiw-icon svg{width:48px;height:48px;}
-    .hiw-icon img{width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(11,31,68,0.14));}
+    .hiw-icon img{width:84%;height:84%;object-fit:contain;}
     .hiw-text{text-align:center;max-width:240px;padding:0 8px;}
     .hiw-title{font-weight:800;letter-spacing:0.05em;text-transform:uppercase;color:#fff;font-size:15px;line-height:1.25;}
     .hiw-uline{width:40px;height:3px;border-radius:3px;margin:10px auto 0;}
