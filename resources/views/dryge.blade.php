@@ -330,6 +330,12 @@
     .mega-tool p{font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:2px;}
     .mega-caret{transition:transform .22s;}
     .mega-wrap:hover .mega-caret{transform:rotate(180deg);}
+
+    /* Wide-monitor (1920px) optimisation — only kicks in on very large screens, smaller screens unchanged */
+    @media (min-width:1680px){
+      .max-w-\[1400px\]{max-width:1560px !important;}
+      .max-w-\[1280px\]{max-width:1380px !important;}
+    }
   </style>
 </head>
 <body class="overflow-x-hidden">
