@@ -3,16 +3,17 @@ import { useEffect, useRef, useState } from "react";
 import { asset } from "@/lib/site";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// Major freight origins (kept as map anchors) and inland destinations.
 const PORTS: Record<string, { name: string; coords: [number, number]; teu: string }> = {
-  LAX: { name: "Los Angeles", coords: [33.7395, -118.2596], teu: "9.2M" },
-  LGB: { name: "Long Beach", coords: [33.7536, -118.2169], teu: "9.1M" },
-  OAK: { name: "Oakland", coords: [37.7955, -122.2782], teu: "2.4M" },
-  SEA: { name: "Seattle/Tacoma", coords: [47.4097, -122.3331], teu: "3.4M" },
-  HOU: { name: "Houston", coords: [29.725, -95.025], teu: "4.0M" },
-  SAV: { name: "Savannah", coords: [32.133, -81.143], teu: "5.9M" },
-  MIA: { name: "Miami", coords: [25.7741, -80.1709], teu: "1.2M" },
-  NOR: { name: "Norfolk", coords: [36.9171, -76.2944], teu: "3.5M" },
-  NYNJ: { name: "New York/NJ", coords: [40.663, -74.109], teu: "9.5M" },
+  LAX: { name: "Los Angeles", coords: [33.7395, -118.2596], teu: "High" },
+  LGB: { name: "Long Beach", coords: [33.7536, -118.2169], teu: "High" },
+  OAK: { name: "Oakland", coords: [37.7955, -122.2782], teu: "Med" },
+  SEA: { name: "Seattle/Tacoma", coords: [47.4097, -122.3331], teu: "Med" },
+  HOU: { name: "Houston", coords: [29.725, -95.025], teu: "High" },
+  SAV: { name: "Savannah", coords: [32.133, -81.143], teu: "Med" },
+  MIA: { name: "Miami", coords: [25.7741, -80.1709], teu: "High" },
+  NOR: { name: "Norfolk", coords: [36.9171, -76.2944], teu: "Med" },
+  NYNJ: { name: "New York/NJ", coords: [40.663, -74.109], teu: "Very high" },
 };
 const HUBS: Record<string, { name: string; coords: [number, number] }> = {
   DAL: { name: "Dallas, TX", coords: [32.7767, -96.797] }, CHI: { name: "Chicago, IL", coords: [41.8781, -87.6298] },
@@ -22,23 +23,36 @@ const HUBS: Record<string, { name: string; coords: [number, number] }> = {
   IND: { name: "Indianapolis, IN", coords: [39.7684, -86.1581] }, SLC: { name: "Salt Lake City, UT", coords: [40.7608, -111.891] },
 };
 const CORRIDORS: [string, string][] = [["LAX", "DAL"], ["LAX", "PHX"], ["LAX", "DEN"], ["LGB", "SLC"], ["OAK", "SLC"], ["SEA", "DEN"], ["SEA", "CHI"], ["NYNJ", "CHI"], ["NYNJ", "IND"], ["NOR", "ATL"], ["SAV", "ATL"], ["SAV", "NSH"], ["HOU", "DAL"], ["MIA", "ATL"]];
-const LOADING_STEPS = ["Routing port to door…", "Pulling live diesel + FSC…", "Pricing chassis & port fees…", "Sealing the rate…"];
+const LOADING_STEPS = ["Mapping the route…", "Scanning toll roads & plazas…", "Pricing bridges, tunnels & axles…", "Applying transponder rates…"];
 
 function hav(a: [number, number], b: [number, number]) { const R = 3958.8, t = (v: number) => (v * Math.PI) / 180; const dL = t(b[0] - a[0]), dG = t(b[1] - a[1]); const x = Math.sin(dL / 2) ** 2 + Math.cos(t(a[0])) * Math.cos(t(b[0])) * Math.sin(dG / 2) ** 2; return 2 * R * Math.asin(Math.min(1, Math.sqrt(x))); }
-function computeQuote(o: [number, number], d: [number, number], type: string, qty: number, acc: string[]) {
-  const miles = hav(o, d), mpg = 7, diesel = 5.18, fsc = 0.17, drvHr = 28, speed = 50, legs = 2;
-  const fuel = (miles / mpg) * diesel * (1 + fsc) * legs;
-  const labor = (miles / speed + 2.5) * drvHr * legs;
-  const chassis = 40 * Math.max(1, Math.ceil(miles / 300));
-  const port = 75, overhead = 160;
-  const accCost = (acc.includes("overweight") ? 125 : 0) + (acc.includes("hazmat") ? 180 : 0) + (acc.includes("reefer") ? 95 : 0) + (acc.includes("prepull") ? 75 : 0) + (acc.includes("tolls") ? Math.round(miles * 0.04) : 0);
-  const m = type === "45hc" ? 1.08 : type === "40rf" ? 1.15 : type === "20" ? 0.88 : 1;
-  const sub = (fuel + labor + chassis + port + overhead + accCost) * m * qty;
-  const margin = sub * 0.15, admin = sub * 0.05;
-  return { miles: Math.round(miles), total: Math.round(sub + margin + admin), eta: Math.round((miles / speed + 4) * 10) / 10, fuel: Math.round(fuel * m * qty), labor: Math.round(labor * m * qty), chassis: Math.round(chassis * qty), port: port * qty, overhead: Math.round(overhead * qty + margin + admin), acc: Math.round(accCost * qty) };
+const AXLE_MULT: Record<string, number> = { "2": 1, "3": 1.6, "4": 2.1, "5": 2.6, "6": 3.1 };
+function computeToll(o: [number, number], d: [number, number], axles: string, trips: number, transponder: string, opts: string[]) {
+  const miles = hav(o, d);
+  const tolledMiles = miles * 0.38;
+  const axleMult = AXLE_MULT[axles] ?? 2.6;
+  const avoid = opts.includes("avoid");
+  const roads = tolledMiles * 0.118 * axleMult * (avoid ? 0.22 : 1);
+  const plazas = Math.max(1, Math.round(tolledMiles / 95));
+  const bridges = Math.max(1, Math.round(miles / 540)) * 10.5 * axleMult;
+  const peak = opts.includes("peak") ? (roads + bridges) * 0.18 : 0;
+  // Transponder discount vs. cash/video-toll surcharge
+  const noTag = transponder === "none";
+  const network = noTag ? (roads + bridges) * 0.27 : -(roads + bridges) * 0.1;
+  const perTrip = roads + bridges + peak + network;
+  const total = Math.max(0, perTrip * trips);
+  return {
+    miles: Math.round(miles), plazas, total: Math.round(total),
+    eta: Math.round((miles / 52 + 0.5) * 10) / 10,
+    perMile: miles ? perTrip / miles : 0,
+    roads: Math.round(roads * trips), bridges: Math.round(bridges * trips),
+    peak: Math.round(peak * trips), network: Math.round(network * trips),
+  };
 }
 const N = (n: number) => n.toLocaleString();
-const ACC = [["tolls", "Tolls"], ["prepull", "Pre-pull"], ["overweight", "Overweight"], ["hazmat", "Hazmat"], ["reefer", "Reefer plug"]];
+const money = (v: number) => (v < 0 ? "−$" : "$") + N(Math.abs(v));
+const OPTS = [["avoid", "Avoid tolls"], ["peak", "Peak hours"], ["oversize", "Oversize"], ["hov", "Managed lanes"], ["hazmat", "Hazmat"]];
+const TAGS = [["ezpass", "E-ZPass"], ["sunpass", "SunPass"], ["txtag", "TxTag"], ["ipass", "I-PASS"], ["none", "None / cash"]];
 
 export default function CalculateRate() {
   const mapEl = useRef<HTMLDivElement>(null);
@@ -47,14 +61,13 @@ export default function CalculateRate() {
   const [ready, setReady] = useState(false);
   const [origin, setOrigin] = useState("LAX");
   const [dest, setDest] = useState("DAL");
-  const [contType, setContType] = useState("40");
-  const [qty, setQty] = useState(1);
-  const [weight, setWeight] = useState(32000);
-  const [line, setLine] = useState("Maersk");
-  const [acc, setAcc] = useState<string[]>([]);
+  const [axles, setAxles] = useState("5");
+  const [trips, setTrips] = useState(1);
+  const [transponder, setTransponder] = useState("ezpass");
+  const [opts, setOpts] = useState<string[]>([]);
   const [phase, setPhase] = useState<"form" | "loading" | "result">("form");
   const [step, setStep] = useState(0);
-  const [res, setRes] = useState<ReturnType<typeof computeQuote> | null>(null);
+  const [res, setRes] = useState<ReturnType<typeof computeToll> | null>(null);
 
   const drawRoute = (oKey: string, dKey: string) => {
     const L = (window as any).L, map = mapRef.current; if (!L || !map) return;
@@ -95,7 +108,7 @@ export default function CalculateRate() {
       const map = L.map(mapEl.current, { zoomControl: true, attributionControl: true, scrollWheelZoom: false, minZoom: 3, maxZoom: 8 }).setView([39.5, -96], 4);
       mapRef.current = map;
       L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", { subdomains: "abcd", maxZoom: 19, attribution: "© OpenStreetMap · © CARTO" }).addTo(map);
-      const WARM = new Set([1, 4, 7, 10, 13]); // ~1/3 red corridors, like Laravel's random "warm"
+      const WARM = new Set([1, 4, 7, 10, 13]); // ~1/3 high-toll corridors
       CORRIDORS.forEach(([a, b], i) => { const A = PORTS[a]?.coords || HUBS[a]?.coords, B = PORTS[b]?.coords || HUBS[b]?.coords; L.polyline([A, B], { className: "corridor" + (WARM.has(i) ? " corridor-warm" : ""), weight: 1.2, smoothFactor: 1 }).addTo(map); });
       Object.entries(PORTS).forEach(([k, p]) => {
         const html = `<div class="port-icon"><div class="ring"></div><div class="dot"></div><div class="label">${p.name.split("/")[0].split(",")[0]}</div></div>`;
@@ -119,39 +132,36 @@ export default function CalculateRate() {
     if (!ready) return;
     drawRoute(oKey, dKey);
     setPhase("loading");
-    setTimeout(() => { setRes(computeQuote(PORTS[oKey].coords, HUBS[dKey].coords, contType, qty, acc)); setPhase("result"); }, 3000);
+    setTimeout(() => { setRes(computeToll(PORTS[oKey].coords, HUBS[dKey].coords, axles, trips, transponder, opts)); setPhase("result"); }, 3000);
   };
-  const toggleAcc = (v: string) => setAcc((a) => (a.includes(v) ? a.filter((x) => x !== v) : [...a, v]));
+  const toggleOpt = (v: string) => setOpts((a) => (a.includes(v) ? a.filter((x) => x !== v) : [...a, v]));
 
   return (
     <div className="grid lg:grid-cols-[1fr_1.55fr] gap-5 items-stretch">
       <div className="reveal">
         <div className="rounded-2xl p-5 md:p-6 lg:p-7 relative overflow-hidden" style={{ background: "#fff", minHeight: phase === "form" ? undefined : 560 }}>
           <div className="flex items-center justify-between">
-            <div><div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant quote engine</div><h3 className="display text-[24px] md:text-[26px] text-[var(--navy)] mt-1">Price your move</h3></div>
+            <div><div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant toll engine</div><h3 className="display text-[24px] md:text-[26px] text-[var(--navy)] mt-1">Price your route</h3></div>
             <div className="px-2.5 py-1 rounded-md text-[10px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 border border-[var(--navy)]/10">v2026</div>
           </div>
 
           {phase !== "result" && (
             <form className="mt-5 space-y-3.5" onSubmit={(e) => { e.preventDefault(); run(origin, dest); }}>
-              <div><label className="input-label">Origin port / ramp</label><select className="input mt-1.5" value={origin} onChange={(e) => setOrigin(e.target.value)}>{Object.entries(PORTS).map(([k, p]) => <option key={k} value={k}>{p.name}</option>)}</select></div>
-              <div><label className="input-label">Destination city</label><select className="input mt-1.5" value={dest} onChange={(e) => setDest(e.target.value)}>{Object.entries(HUBS).map(([k, h]) => <option key={k} value={k}>{h.name}</option>)}</select></div>
+              <div><label className="input-label">Origin</label><select className="input mt-1.5" value={origin} onChange={(e) => setOrigin(e.target.value)}>{Object.entries(PORTS).map(([k, p]) => <option key={k} value={k}>{p.name}</option>)}</select></div>
+              <div><label className="input-label">Destination</label><select className="input mt-1.5" value={dest} onChange={(e) => setDest(e.target.value)}>{Object.entries(HUBS).map(([k, h]) => <option key={k} value={k}>{h.name}</option>)}</select></div>
               <div className="grid grid-cols-2 gap-3">
-                <div><label className="input-label">Container</label><select className="input mt-1.5" value={contType} onChange={(e) => setContType(e.target.value)}><option value="40">40&apos; Standard</option><option value="40hc">40&apos; High Cube</option><option value="20">20&apos; Standard</option><option value="45hc">45&apos; High Cube</option><option value="40rf">40&apos; Reefer</option></select></div>
-                <div><label className="input-label">Qty</label><input className="input mt-1.5 num" type="number" min={1} value={qty} onChange={(e) => setQty(Math.max(1, +e.target.value))} /></div>
+                <div><label className="input-label">Axle class</label><select className="input mt-1.5" value={axles} onChange={(e) => setAxles(e.target.value)}><option value="2">2 axles</option><option value="3">3 axles</option><option value="4">4 axles</option><option value="5">5 axles (semi)</option><option value="6">6 axles</option></select></div>
+                <div><label className="input-label">Trips / day</label><input className="input mt-1.5 num" type="number" min={1} value={trips} onChange={(e) => setTrips(Math.max(1, +e.target.value))} /></div>
               </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div><label className="input-label">Weight (lb)</label><input className="input mt-1.5 num" type="number" min={0} value={weight} onChange={(e) => setWeight(+e.target.value)} /></div>
-                <div><label className="input-label">Shipping line</label><select className="input mt-1.5" value={line} onChange={(e) => setLine(e.target.value)}>{["Maersk", "MSC", "CMA CGM", "Hapag-Lloyd", "ONE", "Evergreen", "COSCO", "Other"].map((l) => <option key={l}>{l}</option>)}</select></div>
-              </div>
+              <div><label className="input-label">Transponder network</label><select className="input mt-1.5" value={transponder} onChange={(e) => setTransponder(e.target.value)}>{TAGS.map(([v, label]) => <option key={v} value={v}>{label}</option>)}</select></div>
               <div>
-                <label className="input-label">Accessorials</label>
+                <label className="input-label">Toll options</label>
                 <div className="mt-2 flex flex-wrap gap-2 text-[11px]">
-                  {ACC.map(([v, label]) => <button type="button" key={v} onClick={() => toggleAcc(v)} className={`px-3 py-1.5 rounded-md border transition ${acc.includes(v) ? "bg-[var(--navy)] text-white border-[var(--navy)]" : "border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80"}`}>{label}</button>)}
+                  {OPTS.map(([v, label]) => <button type="button" key={v} onClick={() => toggleOpt(v)} className={`px-3 py-1.5 rounded-md border transition ${opts.includes(v) ? "bg-[var(--navy)] text-white border-[var(--navy)]" : "border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80"}`}>{label}</button>)}
                 </div>
               </div>
-              <button type="submit" className="btn-primary w-full py-4 rounded-lg text-[14px] font-semibold" style={{ marginTop: "1.6rem" }}><span className="label">Calculate instant rate</span></button>
-              <p className="text-[10px] text-[var(--navy)]/55 text-center mt-1">No login · No card · Rates lock for 24h</p>
+              <button type="submit" className="btn-primary w-full py-4 rounded-lg text-[14px] font-semibold" style={{ marginTop: "1.6rem" }}><span className="label">Calculate toll cost</span></button>
+              <p className="text-[10px] text-[var(--navy)]/55 text-center mt-1">No login · No card · Rates refreshed daily</p>
             </form>
           )}
 
@@ -159,17 +169,17 @@ export default function CalculateRate() {
             <div className="mt-4">
               <div className="flex items-end justify-between">
                 <div>
-                  <div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--green)] flex items-center gap-1.5"><span className="live-dot" /> Live rate · locked 24h</div>
-                  <div className="flex items-baseline gap-2 mt-1"><span className="display text-[40px] text-[var(--navy)] num leading-none">${N(res.total)}</span><span className="text-[12px] text-[var(--navy)]/60">/ round trip</span></div>
+                  <div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--green)] flex items-center gap-1.5"><span className="live-dot" /> Live toll · {transponder === "none" ? "cash rate" : "tag rate"}</div>
+                  <div className="flex items-baseline gap-2 mt-1"><span className="display text-[40px] text-[var(--navy)] num leading-none">${N(res.total)}</span><span className="text-[12px] text-[var(--navy)]/60">/ {trips > 1 ? "day" : "trip"}</span></div>
                 </div>
-                <div className="text-right text-[11px] text-[var(--navy)]/70"><div className="num"><b>{N(res.miles)}</b> mi total</div><div className="num"><b>{res.eta}</b> hr transit</div></div>
+                <div className="text-right text-[11px] text-[var(--navy)]/70"><div className="num"><b>{N(res.miles)}</b> mi · <b>{res.plazas}</b> toll pts</div><div className="num"><b>{res.eta}</b> hr · <b>${res.perMile.toFixed(2)}</b>/mi</div></div>
               </div>
-              <div className="mt-3 grid grid-cols-3 gap-2 text-[10px]">
-                {([["Fuel", res.fuel], ["Labor", res.labor], ["Chassis", res.chassis], ["Port", res.port], ["Overhead", res.overhead], ["Access.", res.acc]] as [string, number][]).map(([k, v]) => <div key={k} className="rounded-lg px-2 py-2 bg-[var(--navy)]/5 border border-[var(--navy)]/10"><div className="text-[var(--navy)]/55 uppercase tracking-wider">{k}</div><div className="display text-[var(--navy)] text-[14px] num mt-0.5">${N(v)}</div></div>)}
+              <div className="mt-3 grid grid-cols-2 gap-2 text-[10px]">
+                {([["Toll roads", res.roads], ["Bridges / tunnels", res.bridges], ["Congestion", res.peak], [transponder === "none" ? "Cash surcharge" : "Tag discount", res.network]] as [string, number][]).map(([k, v]) => <div key={k} className="rounded-lg px-2.5 py-2 bg-[var(--navy)]/5 border border-[var(--navy)]/10"><div className="text-[var(--navy)]/55 uppercase tracking-wider">{k}</div><div className="display text-[var(--navy)] text-[15px] num mt-0.5">{money(v)}</div></div>)}
               </div>
               <div className="mt-3 flex items-center gap-2">
                 <button className="flex-1 py-2.5 rounded-lg text-[12px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)]">Export PDF</button>
-                <button className="flex-1 py-2.5 rounded-lg text-[12px] font-semibold border border-[var(--navy)]/20 text-[var(--navy)] hover:bg-[var(--navy)]/5">Request booking</button>
+                <button className="flex-1 py-2.5 rounded-lg text-[12px] font-semibold border border-[var(--navy)]/20 text-[var(--navy)] hover:bg-[var(--navy)]/5">Save route</button>
               </div>
               <button type="button" onClick={() => setPhase("form")} className="mt-3 w-full py-2.5 rounded-lg text-[12px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 hover:bg-[var(--navy)]/14 transition flex items-center justify-center gap-1.5">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>Calculate again
@@ -180,7 +190,7 @@ export default function CalculateRate() {
           {phase === "loading" && (
             <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6" style={{ background: "linear-gradient(180deg,rgba(255,255,255,0.94),rgba(240,247,255,0.92))", backdropFilter: "blur(10px)" }}>
               <div className="relative w-16 h-16"><div className="absolute inset-0 rounded-full border-[3px] border-[var(--navy)]/10" /><div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[var(--red)] animate-spin" /></div>
-              <div className="display text-[16px] text-[var(--navy)] mt-5">Computing your rate</div>
+              <div className="display text-[16px] text-[var(--navy)] mt-5">Pricing your tolls</div>
               <div className="text-[12px] text-[var(--navy)]/60 mt-1.5 num">{LOADING_STEPS[step]}</div>
             </div>
           )}
@@ -191,15 +201,15 @@ export default function CalculateRate() {
         <div ref={mapEl} className="absolute inset-0" />
         <div className="absolute top-4 left-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
           <div className="flex items-center gap-2 text-white/60 uppercase tracking-[0.14em] text-[10px]"><span className="live-dot" /> Active corridor</div>
-          <div className="display text-white text-[13px] mt-1.5">{PORTS[origin].name} · Port complex</div>
-          <div className="num text-white/70 mt-0.5">Throughput · <b className="text-white">{PORTS[origin].teu} TEU</b> / yr</div>
+          <div className="display text-white text-[13px] mt-1.5">{PORTS[origin].name} · Origin</div>
+          <div className="num text-white/70 mt-0.5">Toll density · <b className="text-white">{PORTS[origin].teu}</b></div>
         </div>
         <div className="absolute top-4 right-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600] hidden sm:block">
           <div className="text-white/60 uppercase tracking-[0.14em] text-[10px]">Live · last 60s</div>
-          <div className="flex items-center gap-4 mt-1.5"><div><div className="display text-white text-[14px] num">412</div><div className="text-white/55">Quotes</div></div><div className="h-7 w-px bg-white/15" /><div><div className="display text-white text-[14px] num">$1,847</div><div className="text-white/55">Avg rate</div></div></div>
+          <div className="flex items-center gap-4 mt-1.5"><div><div className="display text-white text-[14px] num">318</div><div className="text-white/55">Routes</div></div><div className="h-7 w-px bg-white/15" /><div><div className="display text-white text-[14px] num">$214</div><div className="text-white/55">Avg toll</div></div></div>
         </div>
         <div className="absolute left-4 right-4 bottom-4 glass-sky rounded-xl px-4 py-3 z-[600] flex flex-wrap items-center justify-between gap-3 text-[11px]">
-          <div className="flex items-center gap-2 text-white/70"><span className="w-1.5 h-1.5 rounded-full bg-[var(--red)]" /><span>Origin</span><span className="ml-3 w-1.5 h-1.5 rounded-full bg-[var(--green)]" /><span>Destination</span><span className="ml-3 w-1.5 h-1.5 rounded-full bg-[var(--blue)]" /><span>Port</span></div>
+          <div className="flex items-center gap-2 text-white/70"><span className="w-1.5 h-1.5 rounded-full bg-[var(--red)]" /><span>Origin</span><span className="ml-3 w-1.5 h-1.5 rounded-full bg-[var(--green)]" /><span>Destination</span><span className="ml-3 w-1.5 h-1.5 rounded-full bg-[var(--blue)]" /><span>Toll point</span></div>
           <div className="flex flex-wrap gap-2">
             {([["LAX", "DAL", "LA → Dallas"], ["NYNJ", "CHI", "NY/NJ → Chicago"], ["SAV", "ATL", "Savannah → Atlanta"]] as const).map(([o, d, label]) => (
               <button key={label} onClick={() => { setOrigin(o); setDest(d); run(o, d); }} className="glass-pill px-3 py-1.5 rounded-lg text-white/80 hover:text-white">{label}</button>

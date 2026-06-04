@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DrayageRate · The drayage pricing network for North America",
-  description: "Instant drayage quotes across every major U.S. port. Watch your freight move from port to door — in real time.",
+  title: "DrayToll · The truck toll-cost network for North America",
+  description: "Instant toll costs for every truck route across the U.S. & Canada — by axle class, corridor and transponder network. Know the toll before you dispatch.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -11,7 +11,7 @@ export default function Nav() {
         <Link href="/" className="flex items-center gap-2.5">
           <img src={asset("/logo-mark.png")} alt="" className="h-9 md:h-10 w-auto" />
           <span className="display text-white text-[22px] md:text-[24px] tracking-tight leading-none">
-            Dray <span style={{ color: "var(--red)" }}>Rate</span>
+            Dray <span style={{ color: "var(--red)" }}>Toll</span>
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-[13px] font-medium text-white/85">
@@ -32,20 +32,20 @@ export default function Nav() {
                 ))}
               </div>
               <div className="border-t mt-3 pt-4 flex flex-wrap gap-3" style={{ borderColor: "rgba(11,35,80,0.1)" }}>
-                <Link href="/#quote" className="text-[13px] font-semibold px-5 py-2.5 rounded-lg" style={{ color: "var(--blue)", background: "rgba(58,95,192,0.08)" }}>Request a quote</Link>
+                <Link href="/#quote" className="text-[13px] font-semibold px-5 py-2.5 rounded-lg" style={{ color: "var(--blue)", background: "rgba(58,95,192,0.08)" }}>Estimate a route</Link>
                 <Link href="/tools" className="text-[13px] font-semibold px-5 py-2.5 rounded-lg" style={{ color: "var(--navy)", background: "rgba(11,35,80,0.06)" }}>All tools</Link>
               </div>
             </div>
           </div>
-          <Link href="/#network" className="hover:text-white">Network</Link>
+          <Link href="/#network" className="hover:text-white">Toll network</Link>
           <Link href="/#how" className="hover:text-white">How it works</Link>
           <Link href="/#features" className="hover:text-white">Platform</Link>
           <Link href="/#pricing" className="hover:text-white">Pricing</Link>
-          <Link href="/estimates" className="nav-blink">Estimates</Link>
+          <Link href="/estimates" className="nav-blink">Live tolls</Link>
         </nav>
         <div className="flex items-center gap-2.5">
           <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5">Sign in</Link>
-          <Link href="/#quote" className="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5"><span className="label">Get instant quote</span></Link>
+          <Link href="/#quote" className="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5"><span className="label">Get toll estimate</span></Link>
         </div>
       </div>
     </header>

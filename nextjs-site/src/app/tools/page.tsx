@@ -13,9 +13,9 @@ export default function Page() {
       <section className="relative overflow-hidden py-20" style={{ background: "linear-gradient(135deg,#0B2350,#06143A 60%,#1E3C82)" }}>
         <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(700px 360px at 85% 0%,rgba(255,59,48,0.22),transparent 60%),radial-gradient(600px 360px at 10% 100%,rgba(58,95,192,0.3),transparent 60%)" }} />
         <div className="max-w-[1100px] mx-auto px-6 relative text-center">
-          <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/70">Free logistics tools</div>
-          <h1 className="display text-white text-[40px] md:text-[58px] leading-[1.03] mt-3">Everything you need to<br />move a container</h1>
-          <p className="text-white/75 text-[16px] mt-5 max-w-xl mx-auto">A full toolkit for drayage — price moves, track boxes, calculate transit time, demurrage and emissions, all in one place.</p>
+          <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/70">Free trucking tools</div>
+          <h1 className="display text-white text-[40px] md:text-[58px] leading-[1.03] mt-3">Everything you need to<br />price a truck route</h1>
+          <p className="text-white/75 text-[16px] mt-5 max-w-xl mx-auto">A full toolkit for the road — calculate tolls, distance and transit time, axle classes, fuel surcharge and emissions, all in one place.</p>
         </div>
       </section>
       <section className="py-16 -mt-10">

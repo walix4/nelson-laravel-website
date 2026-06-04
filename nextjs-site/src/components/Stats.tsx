@@ -3,10 +3,10 @@ import { useEffect, useRef, useState } from "react";
 
 type Stat = { icon: string; count: number; suffix: string; decimals?: number; label: string };
 const STATS: Stat[] = [
-  { icon: '<path d="M14 3v5h5"/><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M9 13h6M9 17h4"/>', count: 250000, suffix: "+", label: "Quotes generated" },
-  { icon: '<circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/>', count: 50, suffix: "+", label: "Ports supported" },
-  { icon: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>', count: 1200, suffix: "+", label: "Inland destinations" },
-  { icon: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>', count: 99.9, suffix: "%", decimals: 1, label: "Platform availability" },
+  { icon: '<path d="M14 3v5h5"/><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M9 13h6M9 17h4"/>', count: 250000, suffix: "+", label: "Routes priced" },
+  { icon: '<circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/>', count: 3100, suffix: "+", label: "Toll roads & crossings" },
+  { icon: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>', count: 48, suffix: "", label: "States & provinces covered" },
+  { icon: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>', count: 99.9, suffix: "%", decimals: 1, label: "Toll-rate accuracy" },
 ];
 
 function Counter({ s }: { s: Stat }) {
