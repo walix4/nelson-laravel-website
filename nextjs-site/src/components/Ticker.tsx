@@ -27,7 +27,7 @@ export default function Ticker({ rows, index = 0 }: { rows: [string, string, str
         {doubled.map(([from, to, time], i) => (
           <div key={i} className="ticker-row flex items-center justify-between border-t border-[var(--navy)]/6 gap-3">
             <div className="flex items-center gap-2 text-[13.5px] min-w-0"><span className="w-2 h-2 rounded-full shrink-0" style={{ background: "#16B571" }} /><span className="font-semibold text-[var(--navy)]">{from}</span><Arrow /><span className="w-2 h-2 rounded-full shrink-0" style={{ background: "#3A5FC0" }} /><span className="font-semibold text-[var(--navy)] truncate">{to}</span></div>
-            <span className="text-[12px] text-[var(--muted)] shrink-0 num">{time}</span>
+            <span className="text-[13px] font-bold text-[var(--navy)] shrink-0 num bg-[var(--red)]/10 px-2.5 py-1 rounded-md">{time}</span>
           </div>
         ))}
       </div>

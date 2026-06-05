@@ -25,9 +25,9 @@ const COSTS = [
 const Arrow = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 type Lane = [string, string, string];
 const SHIP: { title: string; icon: React.ReactNode; rows: Lane[] }[] = [
-  { title: "Regional", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 17V7H2v10h2" /><path d="M14 9h4l4 4v4h-2" /><circle cx="7" cy="18" r="1.8" /><circle cx="17" cy="18" r="1.8" /></svg>, rows: [["Los Angeles", "Phoenix, AZ", "2h ago"], ["Long Beach", "Las Vegas, NV", "4h ago"], ["Oakland", "Sacramento, CA", "08 Jan"], ["Seattle", "Portland, OR", "29 Oct"], ["Houston", "San Antonio, TX", "12 Mar"]] },
-  { title: "Long-haul", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinejoin="round"><rect x="3" y="12" width="7" height="7" rx="1" /><rect x="14" y="12" width="7" height="7" rx="1" /><rect x="8.5" y="4" width="7" height="7" rx="1" /></svg>, rows: [["Los Angeles", "Dallas, TX", "1h ago"], ["New York/NJ", "Chicago, IL", "5h ago"], ["Norfolk", "Atlanta, GA", "22 Nov"], ["Long Beach", "Denver, CO", "22 Nov"], ["Miami", "Orlando, FL", "03 Feb"]] },
-  { title: "Oversize", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.7" strokeLinejoin="round"><rect x="3" y="6" width="18" height="12" rx="1" /><path d="M7 6v12M11 6v12M15 6v12" /></svg>, rows: [["Houston", "Kansas City, MO", "3d ago"], ["Seattle", "Salt Lake City, UT", "3d ago"], ["Oakland", "Reno, NV", "2d ago"], ["New York/NJ", "Indianapolis, IN", "11 Dec"], ["Charleston", "Columbus, OH", "14 Feb"]] },
+  { title: "5-axle semi", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 17V7H2v10h2" /><path d="M14 9h4l4 4v4h-2" /><circle cx="7" cy="18" r="1.8" /><circle cx="17" cy="18" r="1.8" /></svg>, rows: [["Los Angeles", "Phoenix, AZ", "$74"], ["Long Beach", "Las Vegas, NV", "$58"], ["Oakland", "Sacramento, CA", "$19"], ["Seattle", "Portland, OR", "$33"], ["Houston", "San Antonio, TX", "$41"]] },
+  { title: "6-axle heavy", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinejoin="round"><rect x="3" y="12" width="7" height="7" rx="1" /><rect x="14" y="12" width="7" height="7" rx="1" /><rect x="8.5" y="4" width="7" height="7" rx="1" /></svg>, rows: [["Los Angeles", "Dallas, TX", "$112"], ["New York/NJ", "Chicago, IL", "$96"], ["Norfolk", "Atlanta, GA", "$63"], ["Long Beach", "Denver, CO", "$88"], ["Miami", "Orlando, FL", "$57"]] },
+  { title: "Oversize / permit", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.7" strokeLinejoin="round"><rect x="3" y="6" width="18" height="12" rx="1" /><path d="M7 6v12M11 6v12M15 6v12" /></svg>, rows: [["Houston", "Kansas City, MO", "$164"], ["Seattle", "Salt Lake City, UT", "$148"], ["Oakland", "Reno, NV", "$96"], ["New York/NJ", "Indianapolis, IN", "$182"], ["Charleston", "Columbus, OH", "$138"]] },
 ];
 
 export default function Home() {
@@ -149,9 +149,9 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
             <div className="reveal">
-              <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--blue)]">North American network</div>
-              <h2 className="display text-[40px] md:text-[48px] leading-[1.05] mt-2">One toll engine. Every turnpike from Seattle to Savannah.</h2>
-              <p className="mt-5 text-white/70 max-w-md text-[15px]">Real-time toll rates across 3,100+ toll roads, bridges and tunnels, every transponder network, and thousands of corridors — kept current as authorities change their tariffs.</p>
+              <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Nationwide toll coverage</div>
+              <h2 className="display text-[40px] md:text-[48px] leading-[1.05] mt-2">Every toll authority in North America — priced by one engine.</h2>
+              <p className="mt-5 text-white/70 max-w-md text-[15px]">We keep live truck rates for 3,100+ toll roads, bridges and tunnels, plus every transponder network coast to coast. The moment an authority changes a tariff or its axle-based schedule, your estimates update the same day.</p>
               <div className="mt-8 grid grid-cols-2 gap-3 text-[12px]">
                 {[["Northeast", "E-ZPass · NJTP · Mass Pike"], ["Southeast", "SunPass · PeachPass · NC Quick"], ["Texas", "TxTag · NTTA · EZ TAG"], ["West & Midwest", "FasTrak · I-PASS · ExpressToll"]].map(([k, v]) => <div key={k} className="glass-dark rounded-lg p-3"><div className="text-white/55 text-[10px] uppercase tracking-wider">{k}</div><div className="display text-white text-[16px] mt-0.5">{v}</div></div>)}
               </div>
@@ -165,8 +165,10 @@ export default function Home() {
       <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#FFFFFF,#EEF4F9)" }}>
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <div className="text-center max-w-2xl mx-auto reveal">
-            <h2 className="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04]">Routes in process</h2>
-            <div className="mt-6 flex items-center justify-center gap-4"><Link href="/estimates" className="text-[14px] font-semibold text-[var(--navy)] inline-flex items-center gap-1.5">View all <Arrow /></Link><Link href="/#quote" className="px-5 py-2.5 rounded-lg text-[13px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Estimate a route</Link></div>
+            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Live on the network</div>
+            <h2 className="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">Tolls priced right now</h2>
+            <p className="mt-4 text-[var(--muted)] text-[15px]">Real truck tolls being calculated across the country this minute — by axle class, from 5-axle semis to oversize permit loads.</p>
+            <div className="mt-6 flex items-center justify-center gap-4"><Link href="/estimates" className="text-[14px] font-semibold text-[var(--navy)] inline-flex items-center gap-1.5">View all <Arrow /></Link><Link href="/#quote" className="px-5 py-2.5 rounded-lg text-[13px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Calculate a toll</Link></div>
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {SHIP.map((s, i) => (
@@ -185,11 +187,11 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="reveal">
-              <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--blue)]">Every route, modeled.</div>
-              <h2 className="display text-[40px] md:text-[52px] leading-[1.04] mt-2">A live digital twin of every route on the platform.</h2>
-              <p className="text-white/65 mt-5 max-w-lg text-[15px]">Axle class, weight, height, transponder, time of day — every variable feeds the toll engine. Estimates update as authorities change their tariffs.</p>
+              <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Every variable, priced.</div>
+              <h2 className="display text-[40px] md:text-[52px] leading-[1.04] mt-2">The model behind every toll number.</h2>
+              <p className="text-white/65 mt-5 max-w-lg text-[15px]">Axle count, gross weight, height, width, transponder, commercial status and time of day — every input feeds the rate engine so the toll you see is the toll you pay. No guesswork, no surprise plaza charges.</p>
               <div className="mt-8 grid grid-cols-2 gap-3 max-w-lg">
-                {[["Axle classes", "6"], ["Live variables", "38"], ["Reprice latency", "120ms"], ["Rate refresh", "Daily"]].map(([k, v]) => <div key={k} className="glass-dark rounded-xl p-4"><div className="text-white/55 text-[10px] uppercase tracking-wider">{k}</div><div className="display num text-[24px] mt-1">{v}</div></div>)}
+                {[["Toll authorities", "510+"], ["Pricing inputs", "38"], ["Reprice latency", "120ms"], ["Rate refresh", "Daily"]].map(([k, v]) => <div key={k} className="glass-dark rounded-xl p-4"><div className="text-white/55 text-[10px] uppercase tracking-wider">{k}</div><div className="display num text-[24px] mt-1">{v}</div></div>)}
               </div>
             </div>
             <div className="relative flex items-center justify-center" style={{ minHeight: 420 }}>
@@ -236,7 +238,7 @@ export default function Home() {
       {/* UNIT CONVERTER */}
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-[1100px] mx-auto px-6 relative">
-          <div className="text-center max-w-2xl mx-auto reveal"><div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Free trucking tool</div><h2 className="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">Online Unit Converter</h2><p className="mt-4 text-[var(--muted)] text-[15px] leading-relaxed">Accurately, quickly and for free convert common units of measurement. Enter a value, pick a category, then choose the <i>from</i> and <i>to</i> units to convert instantly.</p></div>
+          <div className="text-center max-w-2xl mx-auto reveal"><div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Free toll-prep tool</div><h2 className="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">Truck unit converter</h2><p className="mt-4 text-[var(--muted)] text-[15px] leading-relaxed">Toll classing depends on getting your numbers right. Convert weight, length, height and width between units in seconds — so you enter the correct vehicle specs and get an accurate toll every time.</p></div>
           <div className="mt-12 reveal reveal-d1"><UnitConverter initial="Acceleration" /></div>
         </div>
       </section>
