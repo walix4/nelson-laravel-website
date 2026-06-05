@@ -11,10 +11,12 @@ export default function Nav() {
         <Link href="/" className="flex items-center">
           <img src={asset("/draytoll-logo.png")} alt="DrayToll" className="h-8 md:h-9 w-auto" />
         </Link>
-        <nav className="hidden md:flex items-center gap-6 text-[13px] font-medium text-white/85">
+        <nav className="hidden lg:flex items-center gap-5 text-[13px] font-medium text-white/85">
+          <Link href="/tools" className="hover:text-white">Route toll grade</Link>
+          <Link href="/pricing" className="hover:text-white">Data quality</Link>
           <div className={`mega-wrap ${open ? "open" : ""}`}>
             <button className="hover:text-white inline-flex items-center gap-1.5" onClick={() => setOpen((o) => !o)}>
-              Tools
+              Solutions
               <svg className="mega-caret" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
             </button>
             <div className="mega-panel">
@@ -34,15 +36,14 @@ export default function Nav() {
               </div>
             </div>
           </div>
-          <Link href="/#quote" className="hover:text-white">Calculator</Link>
-          <Link href="/#how" className="hover:text-white">How it works</Link>
-          <Link href="/#features" className="hover:text-white">Platform</Link>
           <Link href="/pricing" className="hover:text-white">API pricing</Link>
-          <Link href="/estimates" className="nav-blink">Live tolls</Link>
+          <Link href="#" className="hover:text-white">Blog</Link>
+          <Link href="/pricing" className="hover:text-white">FAQ</Link>
+          <Link href="#" className="hover:text-white">About</Link>
+          <Link href="#" className="hover:text-white">Support</Link>
         </nav>
         <div className="flex items-center gap-2.5">
-          <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5">Sign in</Link>
-          <Link href="/#quote" className="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5"><span className="label">Get toll estimate</span></Link>
+          <Link href="/pricing" className="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5"><span className="label">Get API Key</span></Link>
         </div>
       </div>
     </header>
