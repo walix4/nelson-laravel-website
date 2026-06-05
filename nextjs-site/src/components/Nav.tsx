@@ -37,7 +37,7 @@ export default function Nav() {
           <Link href="/#quote" className="hover:text-white">Calculator</Link>
           <Link href="/#how" className="hover:text-white">How it works</Link>
           <Link href="/#features" className="hover:text-white">Platform</Link>
-          <Link href="/#quote" className="hover:text-white">Pricing</Link>
+          <Link href="/pricing" className="hover:text-white">API pricing</Link>
           <Link href="/estimates" className="nav-blink">Live tolls</Link>
         </nav>
         <div className="flex items-center gap-2.5">

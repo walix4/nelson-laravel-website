@@ -15,9 +15,9 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Developers",
     links: [
-      { label: "API pricing", href: "#" },
-      { label: "Request API access", href: "#" },
-      { label: "Commercial data quality", href: "#" },
+      { label: "API pricing", href: "/pricing" },
+      { label: "Request API access", href: "/pricing" },
+      { label: "Commercial data quality", href: "/pricing" },
     ],
   },
   {
