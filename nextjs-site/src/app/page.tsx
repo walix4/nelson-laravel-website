@@ -56,7 +56,7 @@ export default function Home() {
             {/* LEFT — savings calculator */}
             <TollSavings />
             {/* RIGHT — headline */}
-            <div className="rounded-2xl lg:p-10 lg:bg-[rgba(1,7,26,0.42)] lg:backdrop-blur-[2px] flex flex-col justify-center h-full">
+            <div className="flex flex-col justify-center h-full">
               <h1 className="display text-white text-[38px] md:text-[60px] leading-[1.03]">Every toll on your truck route — <span style={{ color: "#FF6B00" }}>priced before you dispatch.</span></h1>
               <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Instant toll costs for any lane across the U.S. &amp; Canada — by axle class, transponder network, bridges, tunnels and congestion pricing. Fully itemised in seconds.</p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
