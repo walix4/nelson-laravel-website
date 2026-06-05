@@ -52,11 +52,11 @@ export default function Home() {
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(1,7,26,0.82) 0%,rgba(1,7,26,0.55) 42%,rgba(1,7,26,0.86) 100%)" }} />
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 520px at 18% 22%,rgba(11,35,80,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(255,107,0,0.18),transparent 60%)" }} />
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-16 md:py-24">
-          <div className="grid lg:grid-cols-[420px_1fr] gap-10 lg:gap-14 items-center">
+          <div className="grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-stretch">
             {/* LEFT — savings calculator */}
             <TollSavings />
             {/* RIGHT — headline */}
-            <div className="rounded-2xl lg:p-10 lg:bg-[rgba(1,7,26,0.42)] lg:backdrop-blur-[2px]">
+            <div className="rounded-2xl lg:p-10 lg:bg-[rgba(1,7,26,0.42)] lg:backdrop-blur-[2px] flex flex-col justify-center h-full">
               <h1 className="display text-white text-[38px] md:text-[60px] leading-[1.03]">Every toll on your truck route — <span style={{ color: "#FF6B00" }}>priced before you dispatch.</span></h1>
               <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Instant toll costs for any lane across the U.S. &amp; Canada — by axle class, transponder network, bridges, tunnels and congestion pricing. Fully itemised in seconds.</p>
               <div className="mt-8 flex flex-wrap items-center gap-3">

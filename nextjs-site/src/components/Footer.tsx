@@ -8,8 +8,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center">
-              <img src={asset("/logo-mark.png")} alt="" className="h-9 w-auto" />
-              <span className="display text-white text-[22px] tracking-tight leading-none ml-2.5">Dray <span style={{ color: "var(--red)" }}>Toll</span></span>
+              <img src={asset("/draytoll-logo.png")} alt="DrayToll" className="h-9 w-auto" />
             </div>
             <p className="mt-3 max-w-sm text-white/75 text-[13px]">The truck toll-cost network for North America. Instant toll pricing on every corridor, by axle class and transponder.</p>
           </div>
