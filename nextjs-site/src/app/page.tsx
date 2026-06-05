@@ -15,12 +15,12 @@ import { asset } from "@/lib/site";
 
 const BRANDS = ["CARGOMAX", "portlink", "NORDFREIGHT", "veritas3pl", "ARC LOGISTICS", "Halo Freight", "ROADWORKS", "Meridian Fleet", "Atlas Carriers", "Northstar Cargo"];
 const COSTS = [
-  { n: "Toll roads", d: "Live per-mile rates × tolled miles × your axle class.", i: '<path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/>', a: "#FF3B30" },
+  { n: "Toll roads", d: "Live per-mile rates × tolled miles × your axle class.", i: '<path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/>', a: "#FF6B00" },
   { n: "Bridges & tunnels", d: "Per-crossing tolls for heavy vehicles, by axle count.", i: '<path d="M2 17h20"/><path d="M4 17v-4M20 17v-4"/><path d="M2 13c4 0 4-5 10-5s6 5 10 5"/>', a: "#3A5FC0" },
-  { n: "Axle-based rates", d: "2 to 6+ axles — every authority prices weight differently.", i: '<circle cx="6" cy="17" r="2.4"/><circle cx="18" cy="17" r="2.4"/><path d="M3 17h2M9 17h6M21 17h-2"/><path d="M5 13h14l-2-4H7z"/>', a: "#0B2350" },
-  { n: "Congestion & peak", d: "Time-of-day, express-lane and managed-lane pricing.", i: '<circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/>', a: "#FF3B30" },
+  { n: "Axle-based rates", d: "2 to 6+ axles — every authority prices weight differently.", i: '<circle cx="6" cy="17" r="2.4"/><circle cx="18" cy="17" r="2.4"/><path d="M3 17h2M9 17h6M21 17h-2"/><path d="M5 13h14l-2-4H7z"/>', a: "#0B2D5C" },
+  { n: "Congestion & peak", d: "Time-of-day, express-lane and managed-lane pricing.", i: '<circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/>', a: "#FF6B00" },
   { n: "Transponder networks", d: "E-ZPass, SunPass, TxTag, I-PASS — discounts & account fees.", i: '<rect x="4" y="7" width="16" height="11" rx="2"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/><path d="M9 12h6"/>', a: "#1E3A8A" },
-  { n: "Cash & video tolls", d: "Pay-by-plate surcharges when you run a lane without a tag.", i: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>', a: "#FF3B30" },
+  { n: "Cash & video tolls", d: "Pay-by-plate surcharges when you run a lane without a tag.", i: '<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>', a: "#FF6B00" },
 ];
 const Arrow = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 type Lane = [string, string, string];
@@ -50,14 +50,14 @@ export default function Home() {
       <section className="relative overflow-hidden text-white">
         <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline><source src={asset("/hero-toll.mp4")} type="video/mp4" /></video>
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(1,7,26,0.82) 0%,rgba(1,7,26,0.55) 42%,rgba(1,7,26,0.86) 100%)" }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 520px at 18% 22%,rgba(11,35,80,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(255,59,48,0.18),transparent 60%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 520px at 18% 22%,rgba(11,35,80,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(255,107,0,0.18),transparent 60%)" }} />
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-16 md:py-24">
           <div className="grid lg:grid-cols-[420px_1fr] gap-10 lg:gap-14 items-center">
             {/* LEFT — savings calculator */}
             <TollSavings />
             {/* RIGHT — headline */}
             <div className="rounded-2xl lg:p-10 lg:bg-[rgba(1,7,26,0.42)] lg:backdrop-blur-[2px]">
-              <h1 className="display text-white text-[38px] md:text-[60px] leading-[1.03]">Every toll on your truck route — <span style={{ color: "#FF6A5E" }}>priced before you dispatch.</span></h1>
+              <h1 className="display text-white text-[38px] md:text-[60px] leading-[1.03]">Every toll on your truck route — <span style={{ color: "#FF6B00" }}>priced before you dispatch.</span></h1>
               <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Instant toll costs for any lane across the U.S. &amp; Canada — by axle class, transponder network, bridges, tunnels and congestion pricing. Fully itemised in seconds.</p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link href="/#quote" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Get toll estimate</span></Link>
@@ -76,7 +76,7 @@ export default function Home() {
       </section>
 
       {/* TRUST MARQUEE */}
-      <section className="py-11 border-b border-white/10" style={{ background: "#0B2350" }}>
+      <section className="py-11 border-b border-white/10" style={{ background: "#0B2D5C" }}>
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-white/65">Trusted by fleets, owner-operators, brokers & 3PLs</div>
           <div className="mt-6 overflow-hidden" style={{ maskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)" }}>
@@ -86,7 +86,7 @@ export default function Home() {
       </section>
 
       {/* CALCULATE YOUR RATE */}
-      <section id="quote" className="relative overflow-hidden py-20 md:py-24" style={{ background: "radial-gradient(900px 500px at 80% 0%,rgba(58,95,192,0.2),transparent 60%),linear-gradient(180deg,#0B2350,#06143A)" }}>
+      <section id="quote" className="relative overflow-hidden py-20 md:py-24" style={{ background: "radial-gradient(900px 500px at 80% 0%,rgba(58,95,192,0.2),transparent 60%),linear-gradient(180deg,#0B2D5C,#061A38)" }}>
         <div className="max-w-[1400px] mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-12 reveal">
             <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--blue-2)]">Instant toll engine</div>
@@ -98,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS — Quote, route, book */}
-      <section id="how" className="py-24 relative overflow-hidden text-white" style={{ background: "radial-gradient(760px 460px at 10% 12%,rgba(255,59,48,0.16),transparent 60%),radial-gradient(820px 520px at 92% 30%,rgba(58,95,192,0.18),transparent 60%),linear-gradient(180deg,#08163C 0%,#0C2150 60%,#0A1C45 100%)" }}>
+      <section id="how" className="py-24 relative overflow-hidden text-white" style={{ background: "radial-gradient(760px 460px at 10% 12%,rgba(255,107,0,0.16),transparent 60%),radial-gradient(820px 520px at 92% 30%,rgba(58,95,192,0.18),transparent 60%),linear-gradient(180deg,#061A38 0%,#0C2150 60%,#0A1C45 100%)" }}>
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="flex items-end justify-between flex-wrap gap-6 reveal">
             <div className="max-w-xl"><div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">How it works</div><h2 className="display text-[40px] md:text-[48px] text-white leading-[1.05] mt-2">Route, price, dispatch — one continuous flow.</h2></div>
@@ -112,11 +112,11 @@ export default function Home() {
               <div className="hiw-col">
                 <div className="hiw-half top"><div className="hiw-icon"><img src={asset("/hiw-origin.png")} alt="Choose origin port" loading="lazy" /></div><div className="hiw-stub" /></div>
                 <div className="hiw-node" />
-                <div className="hiw-half bot"><div className="hiw-text"><div className="hiw-title">Set origin</div><div className="hiw-uline" style={{ background: "#FF3B30" }} /><p className="hiw-desc">Start anywhere across the U.S. &amp; Canada — a yard, a dock, a city or a precise pin dropped on the map.</p></div></div>
+                <div className="hiw-half bot"><div className="hiw-text"><div className="hiw-title">Set origin</div><div className="hiw-uline" style={{ background: "#FF6B00" }} /><p className="hiw-desc">Start anywhere across the U.S. &amp; Canada — a yard, a dock, a city or a precise pin dropped on the map.</p></div></div>
               </div>
               {/* 02 — text top, icon bottom */}
               <div className="hiw-col">
-                <div className="hiw-half top"><div className="hiw-text"><div className="hiw-title">Pick destination</div><div className="hiw-uline" style={{ background: "#FF3B30" }} /><p className="hiw-desc">Door, warehouse or terminal across thousands of delivery cities — typed or dropped on the map.</p></div></div>
+                <div className="hiw-half top"><div className="hiw-text"><div className="hiw-title">Pick destination</div><div className="hiw-uline" style={{ background: "#FF6B00" }} /><p className="hiw-desc">Door, warehouse or terminal across thousands of delivery cities — typed or dropped on the map.</p></div></div>
                 <div className="hiw-node" />
                 <div className="hiw-half bot"><div className="hiw-stub" /><div className="hiw-icon"><img src={asset("/hiw-destination.png")} alt="Pick destination" loading="lazy" /></div></div>
               </div>
@@ -136,7 +136,7 @@ export default function Home() {
               <div className="hiw-col">
                 <div className="hiw-half top"><div className="hiw-icon"><div className="text-center leading-tight"><div className="text-[9px] font-bold uppercase tracking-[0.12em]" style={{ color: "var(--muted)" }}>from</div><div className="display text-[28px]" style={{ color: "var(--navy)" }}>$0.11</div><div className="text-[8px] font-bold uppercase tracking-[0.12em]" style={{ color: "var(--muted)" }}>/ mi</div></div></div><div className="hiw-stub" /></div>
                 <div className="hiw-node" />
-                <div className="hiw-half bot"><div className="hiw-text"><div className="hiw-title">Dispatch route</div><div className="hiw-uline" style={{ background: "#FF3B30" }} /><p className="hiw-desc">Lock the toll-priced route, push it to your TMS or driver, and track spend against the estimate in real time.</p></div></div>
+                <div className="hiw-half bot"><div className="hiw-text"><div className="hiw-title">Dispatch route</div><div className="hiw-uline" style={{ background: "#FF6B00" }} /><p className="hiw-desc">Lock the toll-priced route, push it to your TMS or driver, and track spend against the estimate in real time.</p></div></div>
               </div>
             </div>
           </div>
@@ -144,8 +144,8 @@ export default function Home() {
       </section>
 
       {/* NETWORK */}
-      <section id="network" className="py-24 text-white relative overflow-hidden" style={{ background: "#06143A" }}>
-        <div className="absolute inset-0 opacity-[0.07]" style={{ background: "radial-gradient(circle at 25% 20%,#3A5FC0 0%,transparent 40%),radial-gradient(circle at 80% 70%,#FF3B30 0%,transparent 45%)" }} />
+      <section id="network" className="py-24 text-white relative overflow-hidden" style={{ background: "#061A38" }}>
+        <div className="absolute inset-0 opacity-[0.07]" style={{ background: "radial-gradient(circle at 25% 20%,#3A5FC0 0%,transparent 40%),radial-gradient(circle at 80% 70%,#FF6B00 0%,transparent 45%)" }} />
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <div className="grid lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
             <div className="reveal">
@@ -180,7 +180,7 @@ export default function Home() {
       </section>
 
       {/* LIVE DIGITAL TWIN */}
-      <section className="py-28 relative overflow-hidden" style={{ background: "radial-gradient(ellipse at 50% 0%,#0B2350,#06143A 70%)", color: "#fff" }}>
+      <section className="py-28 relative overflow-hidden" style={{ background: "radial-gradient(ellipse at 50% 0%,#0B2D5C,#061A38 70%)", color: "#fff" }}>
         <div className="absolute inset-0 opacity-30 pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -205,7 +205,7 @@ export default function Home() {
 
       {/* COST CARDS */}
       <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#F8FAFC,#EEF2F8)" }}>
-        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(800px 400px at 80% 10%,rgba(58,95,192,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(255,59,48,0.13),transparent 60%)" }} />
+        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(800px 400px at 80% 10%,rgba(58,95,192,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(255,107,0,0.13),transparent 60%)" }} />
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <div className="max-w-2xl reveal"><div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Toll transparency</div><h2 className="display text-[40px] md:text-[48px] text-[var(--navy)] leading-[1.05] mt-2">Every toll on the route, accounted for.</h2><p className="mt-4 text-[var(--muted)] text-[15px]">No surprise plazas. No pay-by-plate shock weeks later. Six toll components on every estimate — priced from current authority tariffs.</p></div>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -282,8 +282,8 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section id="pricing" className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(135deg,#0B2350 0%,#06143A 60%,#1E3C82 100%)" }}>
-        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(700px 400px at 90% 50%,rgba(255,59,48,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(58,95,192,0.22),transparent 60%)" }} />
+      <section id="pricing" className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(135deg,#0B2D5C 0%,#061A38 60%,#15448C 100%)" }}>
+        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(700px 400px at 90% 50%,rgba(255,107,0,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(58,95,192,0.22),transparent 60%)" }} />
         <div className="max-w-[900px] mx-auto px-6 text-center reveal relative">
           <h2 className="display text-white text-[44px] md:text-[58px] leading-[1.03]">Get your route tolls in seconds.</h2>
           <p className="text-white/70 mt-4">Instant toll pricing. Full transparency. Nationwide coverage. Built for the fleets, owner-operators and brokers running North American freight.</p>

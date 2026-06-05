@@ -3,7 +3,7 @@ import { asset } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="text-white/85 py-14 border-t border-white/10 mt-10" style={{ background: "#08163C" }}>
+    <footer className="text-white/85 py-14 border-t border-white/10 mt-10" style={{ background: "#061A38" }}>
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>

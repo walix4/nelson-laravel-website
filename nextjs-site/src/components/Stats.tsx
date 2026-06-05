@@ -37,8 +37,8 @@ function Counter({ s }: { s: Stat }) {
 
 export default function Stats() {
   return (
-    <section className="py-20 relative overflow-hidden" style={{ background: "linear-gradient(135deg,#0B2350 0%,#06143A 55%,#0B2350 100%)" }}>
-      <div className="absolute inset-0 opacity-60 pointer-events-none" style={{ background: "radial-gradient(620px 300px at 14% 0%,rgba(58,95,192,0.30),transparent 60%),radial-gradient(640px 340px at 88% 100%,rgba(255,59,48,0.18),transparent 60%)" }} />
+    <section className="py-20 relative overflow-hidden" style={{ background: "linear-gradient(135deg,#0B2D5C 0%,#061A38 55%,#0B2D5C 100%)" }}>
+      <div className="absolute inset-0 opacity-60 pointer-events-none" style={{ background: "radial-gradient(620px 300px at 14% 0%,rgba(58,95,192,0.30),transparent 60%),radial-gradient(640px 340px at 88% 100%,rgba(255,107,0,0.18),transparent 60%)" }} />
       <div className="max-w-[1400px] mx-auto px-6 relative">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
           {STATS.map((s) => <Counter key={s.label} s={s} />)}

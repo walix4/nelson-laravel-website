@@ -6,7 +6,7 @@ import { TOOLS, asset } from "@/lib/site";
 export default function Nav() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b" style={{ background: "#0B2350", borderColor: "rgba(255,255,255,0.18)" }}>
+    <header className="sticky top-0 z-40 border-b" style={{ background: "#0B2D5C", borderColor: "rgba(255,255,255,0.18)" }}>
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
           <img src={asset("/logo-mark.png")} alt="" className="h-9 md:h-10 w-auto" />

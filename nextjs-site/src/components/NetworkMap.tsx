@@ -27,7 +27,7 @@ export default function NetworkMap() {
       Object.values(PORTS).forEach((c) => L.marker(c, { icon: L.divIcon({ html: `<div class="port-icon"><div class="ring"></div><div class="dot"></div></div>`, className: "", iconSize: [14, 14], iconAnchor: [7, 7] }) }).addTo(map));
       Object.entries(HUBS).forEach(([k, h]) => {
         const meta = HUB_META[k] || { time: "—", rate: "—" };
-        L.marker(h.coords, { icon: L.divIcon({ html: `<div class="port-icon" style="opacity:.85"><div class="ring" style="border-color:#FF3B30;animation-duration:3.4s;"></div><div class="dot" style="background:#FF3B30;box-shadow:0 0 10px #FF3B30;"></div></div>`, className: "", iconSize: [14, 14], iconAnchor: [7, 7] }) })
+        L.marker(h.coords, { icon: L.divIcon({ html: `<div class="port-icon" style="opacity:.85"><div class="ring" style="border-color:#FF6B00;animation-duration:3.4s;"></div><div class="dot" style="background:#FF6B00;box-shadow:0 0 10px #FF6B00;"></div></div>`, className: "", iconSize: [14, 14], iconAnchor: [7, 7] }) })
           .on("mouseover", () => setHub({ name: h.name, time: meta.time, rate: meta.rate }))
           .addTo(map);
       });
@@ -36,7 +36,7 @@ export default function NetworkMap() {
     return () => { cancelled = true; if (mapRef.current) { mapRef.current.remove(); mapRef.current = null; } };
   }, []);
   return (
-    <div className="relative rounded-2xl overflow-hidden border border-white/10" style={{ height: 520, background: "#06143A" }}>
+    <div className="relative rounded-2xl overflow-hidden border border-white/10" style={{ height: 520, background: "#061A38" }}>
       <div ref={el} className="absolute inset-0" />
       <div className="absolute top-4 left-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
         <div className="text-white/55 uppercase tracking-[0.12em] text-[10px]">Hovered hub</div>

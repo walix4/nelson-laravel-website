@@ -10,7 +10,7 @@ const PT: P[] = [
   { n: "BNSF Logistics Park", c: "Chicago, IL", r: "Rail", t: "Rail", v: "Class I ramp" }, { n: "UP Global IV", c: "Joliet, IL", r: "Rail", t: "Rail", v: "Class I ramp" }, { n: "CSX Fairburn", c: "Atlanta, GA", r: "Rail", t: "Rail", v: "Class I ramp" }, { n: "BNSF Alliance", c: "Fort Worth, TX", r: "Rail", t: "Rail", v: "Class I ramp" },
   { n: "Inland Empire Hub", c: "Ontario, CA", r: "Inland", t: "Inland", v: "Distribution" }, { n: "Memphis Intermodal", c: "Memphis, TN", r: "Inland", t: "Inland", v: "Distribution" }, { n: "Columbus Rickenbacker", c: "Columbus, OH", r: "Inland", t: "Inland", v: "Distribution" }, { n: "Kansas City SmartPort", c: "Kansas City, MO", r: "Inland", t: "Inland", v: "Distribution" }, { n: "Denver Inland Port", c: "Denver, CO", r: "Inland", t: "Inland", v: "Distribution" },
 ];
-const COLOR: Record<string, string> = { West: "linear-gradient(160deg,#22D3EE,#3A5FC0)", East: "linear-gradient(160deg,#4C6FE0,#1E3A8A)", Gulf: "linear-gradient(160deg,#FB923C,#E0241A)", Rail: "linear-gradient(160deg,#8B5CF6,#6D28D9)", Inland: "linear-gradient(160deg,#34D399,#059669)" };
+const COLOR: Record<string, string> = { West: "linear-gradient(160deg,#22D3EE,#3A5FC0)", East: "linear-gradient(160deg,#4C6FE0,#1E3A8A)", Gulf: "linear-gradient(160deg,#FB923C,#E25A00)", Rail: "linear-gradient(160deg,#8B5CF6,#6D28D9)", Inland: "linear-gradient(160deg,#34D399,#059669)" };
 const TAG: Record<string, { bg: string; c: string }> = { Sea: { bg: "rgba(58,95,192,0.13)", c: "#3A5FC0" }, Rail: { bg: "rgba(139,92,246,0.14)", c: "#6D28D9" }, Inland: { bg: "rgba(22,181,113,0.14)", c: "#15935F" } };
 const FILTERS = ["all", "West", "East", "Gulf", "Rail", "Inland"];
 

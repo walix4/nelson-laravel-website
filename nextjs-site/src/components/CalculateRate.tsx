@@ -197,7 +197,7 @@ export default function CalculateRate() {
         </div>
       </div>
 
-      <div className="reveal reveal-d1 relative rounded-2xl overflow-hidden border border-white/10 min-h-[480px]" style={{ background: "#06143A" }}>
+      <div className="reveal reveal-d1 relative rounded-2xl overflow-hidden border border-white/10 min-h-[480px]" style={{ background: "#061A38" }}>
         <div ref={mapEl} className="absolute inset-0" />
         <div className="absolute top-4 left-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
           <div className="flex items-center gap-2 text-white/60 uppercase tracking-[0.14em] text-[10px]"><span className="live-dot" /> Active corridor</div>
