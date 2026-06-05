@@ -100,7 +100,7 @@ export default function CalculateRate() {
 
   return (
     <div className="max-w-[680px] mx-auto reveal">
-      <div className="rounded-2xl p-6 md:p-8 relative overflow-hidden shadow-2xl" style={{ background: "#fff", minHeight: phase === "form" ? undefined : 520 }}>
+      <div className="rounded-lg p-6 md:p-8 relative overflow-hidden shadow-2xl" style={{ background: "#fff", minHeight: phase === "form" ? undefined : 520 }}>
         <div className="flex items-center justify-between">
           <div><div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant toll engine</div><h3 className="display text-[26px] md:text-[28px] text-[var(--navy)] mt-1">Calculate tolls</h3></div>
           <div className="px-2.5 py-1 rounded-md text-[10px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 border border-[var(--navy)]/10">v2026</div>

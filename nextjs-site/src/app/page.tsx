@@ -9,7 +9,6 @@ import Stats from "@/components/Stats";
 import Ticker from "@/components/Ticker";
 import CalculateRate from "@/components/CalculateRate";
 import TollSavings from "@/components/TollSavings";
-import TollGate from "@/components/TollGate";
 import { asset } from "@/lib/site";
 
 const BRANDS = ["CARGOMAX", "portlink", "NORDFREIGHT", "veritas3pl", "ARC LOGISTICS", "Halo Freight", "ROADWORKS", "Meridian Fleet", "Atlas Carriers", "Northstar Cargo"];
@@ -57,12 +56,16 @@ export default function Home() {
             <TollSavings />
             {/* RIGHT — headline */}
             <div className="flex flex-col justify-center h-full">
-              <h1 className="display text-white text-[38px] md:text-[60px] leading-[1.03]">Every toll on your truck route — <span style={{ color: "#FF6B00" }}>priced before you dispatch.</span></h1>
-              <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Instant toll costs for any lane across the U.S. &amp; Canada — by axle class, transponder network, bridges, tunnels and congestion pricing. Fully itemised in seconds.</p>
+              <div className="inline-flex items-center gap-2 self-start rounded-full px-3.5 py-1.5 text-[11px] font-semibold mb-5" style={{ background: "rgba(255,107,0,0.16)", border: "1px solid rgba(255,107,0,0.4)" }}>
+                <span className="live-dot" /> Commercial truck toll data — updated every 15 minutes
+              </div>
+              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">Toll intelligence for <span className="bg-gradient-to-r from-[#FFD36B] via-[#FF9A5B] to-[#FF6B00] bg-clip-text text-transparent">trucks &amp; container freight.</span></h1>
+              <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Class-aware toll rates for drayage, intermodal, and heavy freight — from port gates to inland ramps. Power TMS, fleet, and shipping platforms with one API.</p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link href="/#quote" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Get toll estimate</span></Link>
-                <Link href="/#quote" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>Calculate tolls</Link>
+                <Link href="/#pricing" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>View pricing</Link>
               </div>
+              <div className="mt-5 text-[12px] text-white/55">🚛 Built for 5-axle rigs, chassis moves, and E-ZPass fleets</div>
               <div className="mt-10 flex items-center gap-7 text-[11px] uppercase tracking-[0.16em] text-white/60">
                 <div><div className="text-[26px] md:text-[30px] display num text-white">3,100+</div><div className="mt-0.5">Toll roads</div></div>
                 <div className="h-9 w-px bg-white/20" />
@@ -177,7 +180,10 @@ export default function Home() {
               </div>
             </div>
             <div className="relative flex items-center justify-center" style={{ minHeight: 420 }}>
-              <TollGate />
+              <div className="relative rounded-lg overflow-hidden border border-white/10 w-full max-w-[480px] aspect-video shadow-2xl">
+                <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline><source src={asset("/toll-road.mp4")} type="video/mp4" /></video>
+                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(6,26,56,0.15),rgba(6,26,56,0.45))" }} />
+              </div>
               <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ top: "8%", left: "5%", animationDelay: "-1s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Axle class</div><div className="display text-white">5-axle semi</div></div>
               <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ top: "20%", right: "5%", animationDelay: "-2.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Weight</div><div className="display text-white num">38,420 lb</div></div>
               <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ bottom: "18%", left: "8%", animationDelay: "-3.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Transponder</div><div className="display text-white">E-ZPass</div></div>

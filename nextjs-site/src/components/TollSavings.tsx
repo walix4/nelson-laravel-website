@@ -25,7 +25,7 @@ export default function TollSavings() {
   };
 
   return (
-    <div className="reveal rounded-2xl bg-white shadow-2xl p-6 md:p-7 w-full max-w-[460px] mx-auto lg:mx-0 h-full flex flex-col">
+    <div className="reveal rounded-lg bg-white shadow-2xl p-6 md:p-7 w-full max-w-[460px] mx-auto lg:mx-0 h-full flex flex-col">
       {!res && (
         <form onSubmit={calc} className="flex flex-col h-full">
           <h3 className="display text-[20px] md:text-[22px] text-[var(--navy)] leading-tight">Calculate your toll savings</h3>
