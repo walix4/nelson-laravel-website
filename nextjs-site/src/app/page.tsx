@@ -179,8 +179,8 @@ export default function Home() {
                 {[["Toll authorities", "510+"], ["Pricing inputs", "38"], ["Reprice latency", "120ms"], ["Rate refresh", "Daily"]].map(([k, v]) => <div key={k} className="glass-dark rounded-xl p-4"><div className="text-white/55 text-[10px] uppercase tracking-wider">{k}</div><div className="display num text-[24px] mt-1">{v}</div></div>)}
               </div>
             </div>
-            <div className="relative flex items-center justify-center" style={{ minHeight: 420 }}>
-              <div className="relative rounded-lg overflow-hidden border border-white/10 w-full max-w-[480px] aspect-video shadow-2xl">
+            <div className="relative flex items-center justify-center" style={{ minHeight: 480 }}>
+              <div className="relative rounded-lg overflow-hidden border border-white/10 w-full max-w-[640px] aspect-video shadow-2xl">
                 <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline><source src={asset("/toll-road.mp4")} type="video/mp4" /></video>
                 <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(6,26,56,0.15),rgba(6,26,56,0.45))" }} />
               </div>
