@@ -5,7 +5,11 @@ import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
 import Testimonials from "@/components/Testimonials";
 import Chat from "@/components/Chat";
-import Stats from "@/components/Stats";
+import StatBand from "@/components/StatBand";
+import FreightFeatures from "@/components/FreightFeatures";
+import ContainerLanes from "@/components/ContainerLanes";
+import HowSteps from "@/components/HowSteps";
+import WhoUses from "@/components/WhoUses";
 import Ticker from "@/components/Ticker";
 import CalculateRate from "@/components/CalculateRate";
 import TollSavings from "@/components/TollSavings";
@@ -88,6 +92,9 @@ export default function Home() {
         </div>
       </section>
 
+      <StatBand />
+      <FreightFeatures />
+
       {/* CALCULATE YOUR RATE */}
       <section id="quote" className="relative overflow-hidden py-20 md:py-24" style={{ background: "radial-gradient(900px 500px at 80% 0%,rgba(58,95,192,0.2),transparent 60%),linear-gradient(180deg,#0B2D5C,#061A38)" }}>
         <div className="max-w-[1400px] mx-auto px-6 relative z-10">
@@ -100,51 +107,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* HOW IT WORKS — Quote, route, book */}
-      <section id="how" className="py-24 relative overflow-hidden text-white" style={{ background: "radial-gradient(760px 460px at 10% 12%,rgba(255,107,0,0.16),transparent 60%),radial-gradient(820px 520px at 92% 30%,rgba(58,95,192,0.18),transparent 60%),linear-gradient(180deg,#061A38 0%,#0C2150 60%,#0A1C45 100%)" }}>
-        <div className="max-w-[1400px] mx-auto px-6">
-          <div className="flex items-end justify-between flex-wrap gap-6 reveal">
-            <div className="max-w-xl"><div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">How it works</div><h2 className="display text-[40px] md:text-[48px] text-white leading-[1.05] mt-2">Route, price, dispatch — one continuous flow.</h2></div>
-            <p className="max-w-md text-white/60 text-[15px]">From the first input to a customer-ready PDF, every truck route is toll-priced and visualized in under a minute.</p>
-          </div>
-          <div className="hiw reveal mt-20">
-            <div className="hiw-line" />
-            <div className="hiw-spark" />
-            <div className="hiw-row">
-              {/* 01 — icon top, text bottom */}
-              <div className="hiw-col">
-                <div className="hiw-half top"><div className="hiw-icon"><img src={asset("/hiw-origin.png")} alt="Choose origin port" loading="lazy" /></div><div className="hiw-stub" /></div>
-                <div className="hiw-node" />
-                <div className="hiw-half bot"><div className="hiw-text"><div className="hiw-title">Set origin</div><div className="hiw-uline" style={{ background: "#FF6B00" }} /><p className="hiw-desc">Start anywhere across the U.S. &amp; Canada — a yard, a dock, a city or a precise pin dropped on the map.</p></div></div>
-              </div>
-              {/* 02 — text top, icon bottom */}
-              <div className="hiw-col">
-                <div className="hiw-half top"><div className="hiw-text"><div className="hiw-title">Pick destination</div><div className="hiw-uline" style={{ background: "#FF6B00" }} /><p className="hiw-desc">Door, warehouse or terminal across thousands of delivery cities — typed or dropped on the map.</p></div></div>
-                <div className="hiw-node" />
-                <div className="hiw-half bot"><div className="hiw-stub" /><div className="hiw-icon"><img src={asset("/hiw-destination.png")} alt="Pick destination" loading="lazy" /></div></div>
-              </div>
-              {/* 03 — icon top, text bottom */}
-              <div className="hiw-col">
-                <div className="hiw-half top"><div className="hiw-icon"><img src={asset("/hiw-calculate.png")} alt="Calculate rate" loading="lazy" /></div><div className="hiw-stub" /></div>
-                <div className="hiw-node" />
-                <div className="hiw-half bot"><div className="hiw-text"><div className="hiw-title">Calculate tolls</div><div className="hiw-uline" style={{ background: "#3A5FC0" }} /><p className="hiw-desc">A fully itemised toll cost in under 30 seconds — toll roads, bridges, tunnels, congestion and axle class baked in.</p></div></div>
-              </div>
-              {/* 04 — text top, icon bottom */}
-              <div className="hiw-col">
-                <div className="hiw-half top"><div className="hiw-text"><div className="hiw-title">Export quote</div><div className="hiw-uline" style={{ background: "#1E3A8A" }} /><p className="hiw-desc">Send it out as a brand-ready PDF, structured JSON or embeddable HTML — your markup applied automatically.</p></div></div>
-                <div className="hiw-node" />
-                <div className="hiw-half bot"><div className="hiw-stub" /><div className="hiw-icon"><img src={asset("/hiw-export.png")} alt="Export quote PDF" loading="lazy" /></div></div>
-              </div>
-              {/* 05 — $ icon top, text bottom */}
-              <div className="hiw-col">
-                <div className="hiw-half top"><div className="hiw-icon"><div className="text-center leading-tight"><div className="text-[9px] font-bold uppercase tracking-[0.12em]" style={{ color: "var(--muted)" }}>from</div><div className="display text-[28px]" style={{ color: "var(--navy)" }}>$0.11</div><div className="text-[8px] font-bold uppercase tracking-[0.12em]" style={{ color: "var(--muted)" }}>/ mi</div></div></div><div className="hiw-stub" /></div>
-                <div className="hiw-node" />
-                <div className="hiw-half bot"><div className="hiw-text"><div className="hiw-title">Dispatch route</div><div className="hiw-uline" style={{ background: "#FF6B00" }} /><p className="hiw-desc">Lock the toll-priced route, push it to your TMS or driver, and track spend against the estimate in real time.</p></div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ContainerLanes />
+      <HowSteps />
 
       {/* SHIPMENTS IN PROCESS */}
       <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#FFFFFF,#EEF4F9)" }}>
@@ -209,7 +173,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Stats />
+      <WhoUses />
 
       <Testimonials />
 
