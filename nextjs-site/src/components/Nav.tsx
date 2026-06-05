@@ -34,7 +34,7 @@ export default function Nav() {
               </div>
             </div>
           </div>
-          <Link href="/#network" className="hover:text-white">Toll network</Link>
+          <Link href="/#quote" className="hover:text-white">Calculator</Link>
           <Link href="/#how" className="hover:text-white">How it works</Link>
           <Link href="/#features" className="hover:text-white">Platform</Link>
           <Link href="/#pricing" className="hover:text-white">Pricing</Link>
