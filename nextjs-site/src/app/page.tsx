@@ -63,7 +63,7 @@ export default function Home() {
               <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Class-aware toll rates for drayage, intermodal, and heavy freight — from port gates to inland ramps. Power TMS, fleet, and shipping platforms with one API.</p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link href="/#quote" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Get toll estimate</span></Link>
-                <Link href="/#pricing" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>View pricing</Link>
+                <Link href="/#quote" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>Calculate tolls</Link>
               </div>
               <div className="mt-5 text-[12px] text-white/55">🚛 Built for 5-axle rigs, chassis moves, and E-ZPass fleets</div>
               <div className="mt-10 flex items-center gap-7 text-[11px] uppercase tracking-[0.16em] text-white/60">
@@ -250,16 +250,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section id="pricing" className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(135deg,#0B2D5C 0%,#061A38 60%,#15448C 100%)" }}>
-        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(700px 400px at 90% 50%,rgba(255,107,0,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(58,95,192,0.22),transparent 60%)" }} />
-        <div className="max-w-[900px] mx-auto px-6 text-center reveal relative">
-          <h2 className="display text-white text-[44px] md:text-[58px] leading-[1.03]">Get your route tolls in seconds.</h2>
-          <p className="text-white/70 mt-4">Instant toll pricing. Full transparency. Nationwide coverage. Built for the fleets, owner-operators and brokers running North American freight.</p>
-          <Link href="/#quote" className="btn-primary inline-flex items-center gap-2 mt-8 px-7 py-3.5 rounded-xl text-[15px] font-semibold"><span className="label">Price my first route</span></Link>
         </div>
       </section>
 
