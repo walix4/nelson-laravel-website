@@ -60,7 +60,17 @@ export default function Page() {
               <tbody>
                 {view.length === 0 ? <tr><td colSpan={10} className="est-empty">No estimates match your filters.</td></tr> : view.map((e) => (
                   <tr key={e.ref}>
-                    <td><span className="est-ref">{e.ref}</span></td>
+                    <td>
+                      <div className="est-refcell">
+                        <span className="est-cont" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="2.5" width="19" height="19" rx="3" stroke="currentColor" strokeWidth="1.4" strokeDasharray="3 2.4" /><rect x="8" y="8" width="8" height="8" rx="1.6" fill="currentColor" /><rect x="10.2" y="10.2" width="3.6" height="3.6" rx="0.8" fill="#fff" fillOpacity="0.85" /></svg></span>
+                        <div style={{ minWidth: 0 }}>
+                          {e.container === "reefer"
+                            ? <span className="est-tag reefer"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 2v20M2 12h20M4.6 4.6l14.8 14.8M19.4 4.6L4.6 19.4" /></svg>REEFER</span>
+                            : <span className="est-tag dry"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><circle cx="12" cy="12" r="4" /><path d="M12 2.6v2.1M12 19.3v2.1M2.6 12h2.1M19.3 12h2.1M5.1 5.1l1.5 1.5M17.4 17.4l1.5 1.5M18.9 5.1l-1.5 1.5M6.6 17.4l-1.5 1.5" /></svg>DRY</span>}
+                          <div className="est-refnum">{e.ref.split("-").slice(1).reverse().join("")}</div>
+                        </div>
+                      </div>
+                    </td>
                     <td><div className="est-cust"><div style={{ minWidth: 0 }}><div className="est-name">{e.customer}</div><div className="est-sub">{e.email}</div></div></div></td>
                     <td><div className="est-route"><UpArrow /><span className="est-loc">{e.pickup}</span></div><div className="est-sub" style={{ paddingLeft: 23 }}>{e.pickupSub}</div></td>
                     <td><div className="est-route"><DownArrow /><span className="est-loc">{e.drop}</span></div><div className="est-sub" style={{ paddingLeft: 23 }}>{e.dropSub}</div></td>
