@@ -101,8 +101,8 @@ export default function HeroQuote() {
               const base = "rounded-md py-2.5 text-[12px] font-semibold border backdrop-blur-sm transition";
               const onCls = "bg-[var(--red)]/25 border-[var(--red)] text-white shadow-[0_8px_20px_-8px_rgba(255,59,48,0.7)]";
               const offCls = "bg-white/[0.06] border-white/15 text-white/70 hover:bg-white/[0.12] hover:text-white";
-              if (!mode) return <button type="button" key={v} onClick={() => { setMode(v); setDir(null); }} className={`${base} ${offCls}`}>{l}</button>;
-              if (v === mode) return <button type="button" key={v} onClick={() => { setMode(null); setDir(null); }} className={`${base} ${onCls}`}>{l}</button>;
+              if (!mode) return <button type="button" key={v} onClick={() => { setMode(v); setDir(null); setTo(v === "porttoport" ? "Packer Avenue Marine Terminal — Philadelphia, PA" : "Philadelphia, PA, USA"); }} className={`${base} ${offCls}`}>{l}</button>;
+              if (v === mode) return <button type="button" key={v} onClick={() => { setMode(null); setDir(null); setTo("Philadelphia, PA, USA"); }} className={`${base} ${onCls}`}>{l}</button>;
               const others = MODES.filter(([mv]) => mv !== mode).map(([mv]) => mv);
               const isImport = others[0] === v;
               const dv = isImport ? "import" : "export";
@@ -110,8 +110,13 @@ export default function HeroQuote() {
             })}
           </div>
           <div className="mt-4 space-y-3.5">
-            <div><label className={labelCls}>Select port terminal <span className="text-[var(--red)]">*</span></label><PortSelect value={from} onChange={setFrom} options={PORTS} placeholder="Select port terminal" /></div>
-            <div><label className={labelCls}>Enter drop off address <span className="text-[var(--red)]">*</span></label><input className={fieldCls} required value={to} onChange={(e) => setTo(e.target.value)} placeholder="Enter drop-off address" /></div>
+            <div><label className={labelCls}>{mode === "porttoport" ? "Origin port terminal" : "Select port terminal"} <span className="text-[var(--red)]">*</span></label><PortSelect value={from} onChange={setFrom} options={PORTS} placeholder="Select port terminal" /></div>
+            <div>
+              <label className={labelCls}>{mode === "porttoport" ? "Destination port terminal" : mode === "intermodal" ? "Destination rail ramp / address" : "Enter drop off address"} <span className="text-[var(--red)]">*</span></label>
+              {mode === "porttoport"
+                ? <PortSelect value={to} onChange={setTo} options={PORTS} placeholder="Select destination port" />
+                : <input className={fieldCls} required value={to} onChange={(e) => setTo(e.target.value)} placeholder={mode === "intermodal" ? "Enter rail ramp or address" : "Enter drop-off address"} />}
+            </div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-3.5">
             <div><label className={labelCls}>Container type</label><GlassSelect value={container} onChange={setContainer} options={CONTAINER} /></div>
