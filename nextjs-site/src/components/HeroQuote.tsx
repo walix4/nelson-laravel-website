@@ -22,6 +22,7 @@ const CONTAINER: [string, string][] = [["dry", "Dry Container"], ["reefer", "Ree
 const TRIP: [string, string][] = [["round", "Round Trip"], ["oneway", "One Way"]];
 const SIZE: [string, string][] = [["20", "20' Standard"], ["40", "40' Standard"], ["40hc", "40' High Cube"], ["45hc", "45' High Cube"]];
 const WCLASS: [string, string][] = [["5", "5K lbs"], ["10", "10K lbs"], ["20", "20K lbs"], ["32", "32K lbs"], ["44", "44K lbs"]];
+const MODES: [string, string][] = [["drayage", "Drayage"], ["porttoport", "Port To Port"], ["intermodal", "Intermodal"]];
 
 const GEO: [string, [number, number]][] = [
   ["elizabeth", [40.666, -74.211]], ["newark", [40.7357, -74.1724]], ["bayonne", [40.6687, -74.1143]], ["staten island", [40.5795, -74.1502]],
@@ -49,7 +50,8 @@ const labelCls = "block text-[10.5px] font-semibold uppercase tracking-[0.06em] 
 const fieldCls = "w-full rounded bg-white/[0.07] px-3 py-2.5 text-[14px] text-white placeholder-white/45 focus:outline-none focus:bg-white/[0.16] transition";
 
 export default function HeroQuote() {
-  const [mode, setMode] = useState("drayage");
+  const [mode, setMode] = useState<string | null>(null);
+  const [dir, setDir] = useState<string | null>(null);
   const [from, setFrom] = useState("APM Terminals — Elizabeth, NJ");
   const [to, setTo] = useState("Philadelphia, PA, USA");
   const [container, setContainer] = useState("dry");
@@ -95,9 +97,17 @@ export default function HeroQuote() {
           <h3 className="display text-[20px] md:text-[22px] text-white leading-tight">Get instant quote</h3>
           <p className="text-[12.5px] text-white/55 mt-1.5">Price a container move from port gate to door.</p>
           <div className="mt-5 grid grid-cols-3 gap-2">
-            {([["drayage", "Drayage"], ["porttoport", "Port To Port"], ["intermodal", "Intermodal"]] as [string, string][]).map(([v, l]) => (
-              <button type="button" key={v} onClick={() => setMode(v)} className={`rounded-md py-2.5 text-[12px] font-semibold border backdrop-blur-sm transition ${mode === v ? "bg-[var(--red)]/25 border-[var(--red)] text-white shadow-[0_8px_20px_-8px_rgba(255,59,48,0.7)]" : "bg-white/[0.06] border-white/15 text-white/70 hover:bg-white/[0.12] hover:text-white"}`}>{l}</button>
-            ))}
+            {MODES.map(([v, l]) => {
+              const base = "rounded-md py-2.5 text-[12px] font-semibold border backdrop-blur-sm transition";
+              const onCls = "bg-[var(--red)]/25 border-[var(--red)] text-white shadow-[0_8px_20px_-8px_rgba(255,59,48,0.7)]";
+              const offCls = "bg-white/[0.06] border-white/15 text-white/70 hover:bg-white/[0.12] hover:text-white";
+              if (!mode) return <button type="button" key={v} onClick={() => { setMode(v); setDir(null); }} className={`${base} ${offCls}`}>{l}</button>;
+              if (v === mode) return <button type="button" key={v} onClick={() => { setMode(null); setDir(null); }} className={`${base} ${onCls}`}>{l}</button>;
+              const others = MODES.filter(([mv]) => mv !== mode).map(([mv]) => mv);
+              const isImport = others[0] === v;
+              const dv = isImport ? "import" : "export";
+              return <button type="button" key={v} onClick={() => setDir(dv)} className={`${base} ${dir === dv ? onCls : offCls}`}>{isImport ? "Import" : "Export"}</button>;
+            })}
           </div>
           <div className="mt-4 space-y-3.5">
             <div><label className={labelCls}>Select port terminal <span className="text-[var(--red)]">*</span></label><PortSelect value={from} onChange={setFrom} options={PORTS} placeholder="Select port terminal" /></div>
