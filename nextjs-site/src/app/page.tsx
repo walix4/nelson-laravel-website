@@ -88,14 +88,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* TRUST MARQUEE */}
-      <section className="py-11 border-b border-white/10" style={{ background: "linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.08)), #0a1426", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)", borderTop: "2px solid rgba(255,138,43,0.6)" }}>
-        <div className="max-w-[1400px] mx-auto px-6">
-          <div className="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-white/65">Trusted by fleets, owner-operators, brokers & 3PLs</div>
-          <div className="mt-6 overflow-hidden" style={{ maskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)" }}>
-            <div className="marquee-track">{[...BRANDS, ...BRANDS].map((b, i) => <span key={i} className="brand-logo text-white"><span className="text-[18px] font-bold tracking-tight whitespace-nowrap">{b}</span></span>)}</div>
+        {/* trust band — bottom of hero, video plays behind the glass */}
+        <div className="relative z-10 py-9 border-t-2" style={{ borderColor: "rgba(255,138,43,0.6)", background: "rgba(255,255,255,0.06)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}>
+          <div className="max-w-[1400px] mx-auto px-6">
+            <div className="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-white/65">Trusted by fleets, owner-operators, brokers & 3PLs</div>
+            <div className="mt-6 overflow-hidden" style={{ maskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)" }}>
+              <div className="marquee-track">{[...BRANDS, ...BRANDS].map((b, i) => <span key={i} className="brand-logo text-white"><span className="text-[18px] font-bold tracking-tight whitespace-nowrap">{b}</span></span>)}</div>
+            </div>
           </div>
         </div>
       </section>
