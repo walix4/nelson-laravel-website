@@ -73,7 +73,7 @@ export default function Home() {
                 </a>
                 {/* Google Play badge */}
                 <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] w-full pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
-                  <svg width="28" height="28" viewBox="20 18 64 64" aria-hidden="true" className="shrink-0"><path fill="#00C3FF" d="M24 22 53 50 24 78 Z"/><path fill="#00D95F" d="M24 22 62 41 53 50 Z"/><path fill="#FF3D44" d="M24 78 62 59 53 50 Z"/><path fill="#FFCE00" d="M62 41 L75 47 Q80 50 75 53 L62 59 L53 50 Z"/></svg>
+                  <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" />
                   <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
                 </a>
               </div>
