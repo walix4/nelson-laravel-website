@@ -11,14 +11,14 @@ const H = 600;
 
 type Region = { key: string; title: string; color: string; states: string[] };
 const REGIONS: Region[] = [
-  { key: "1", title: "Region 1", color: "#AEC0D8", states: ["Washington", "Oregon", "Idaho", "Montana", "Wyoming"] },
-  { key: "2", title: "Region 2", color: "#ECF1F8", states: ["North Dakota", "South Dakota", "Nebraska", "Kansas", "Minnesota", "Iowa", "Missouri", "Wisconsin", "Illinois", "Michigan", "Indiana", "Ohio", "Kentucky"] },
-  { key: "3", title: "Region 3", color: "#8AA0C0", states: ["Maine", "New Hampshire", "Vermont", "Massachusetts", "New York", "Rhode Island", "Connecticut", "New Jersey", "Pennsylvania"] },
-  { key: "4", title: "Region 4", color: "#D6DFEC", states: ["California", "Nevada", "Arizona", "New Mexico", "Utah", "Colorado"] },
-  { key: "5", title: "Region 5", color: "#A2B5CF", states: ["Texas", "Oklahoma", "Louisiana", "Arkansas"] },
-  { key: "6", title: "Region 6", color: "#C0CDE0", states: ["West Virginia", "Delaware", "Maryland", "Virginia", "District of Columbia", "Tennessee", "North Carolina", "South Carolina", "Georgia", "Alabama", "Mississippi", "Florida"] },
+  { key: "1", title: "Region 1", color: "#4F8FE0", states: ["Washington", "Oregon", "Idaho", "Montana", "Wyoming"] },
+  { key: "2", title: "Region 2", color: "#33B0A2", states: ["North Dakota", "South Dakota", "Nebraska", "Kansas", "Minnesota", "Iowa", "Missouri", "Wisconsin", "Illinois", "Michigan", "Indiana", "Ohio", "Kentucky"] },
+  { key: "3", title: "Region 3", color: "#9B7BE6", states: ["Maine", "New Hampshire", "Vermont", "Massachusetts", "New York", "Rhode Island", "Connecticut", "New Jersey", "Pennsylvania"] },
+  { key: "4", title: "Region 4", color: "#F08A45", states: ["California", "Nevada", "Arizona", "New Mexico", "Utah", "Colorado"] },
+  { key: "5", title: "Region 5", color: "#E0566F", states: ["Texas", "Oklahoma", "Louisiana", "Arkansas"] },
+  { key: "6", title: "Region 6", color: "#E6B53C", states: ["West Virginia", "Delaware", "Maryland", "Virginia", "District of Columbia", "Tennessee", "North Carolina", "South Carolina", "Georgia", "Alabama", "Mississippi", "Florida"] },
 ];
-const UNASSIGNED = { title: "Unassigned Region", color: "#6E7E99", states: ["Alaska", "Hawaii"] };
+const UNASSIGNED = { title: "Unassigned Region", color: "#7E8CA3", states: ["Alaska", "Hawaii"] };
 const DISPLAY: Record<string, string> = { "District of Columbia": "Wash. D.C." };
 
 const REGION_OF: Record<string, string> = {};
@@ -31,15 +31,6 @@ const usGeo = topojson.feature(usTopo as any, (usTopo as any).objects.states) as
 const projection = geoAlbersUsa().fitSize([W, H], usGeo);
 const pathGen = geoPath(projection);
 const stateShapes = usGeo.features.map((f: any) => ({ d: pathGen(f) || "", region: REGION_OF[f.properties?.name] }));
-
-// big region number positions = centroid of merged region geometry
-const stateGeoms = (usTopo as any).objects.states.geometries;
-const regionNumbers = REGIONS.map((r) => {
-  const geoms = stateGeoms.filter((g: any) => REGION_OF[g.properties?.name] === r.key);
-  const merged = topojson.merge(usTopo as any, geoms);
-  const c = pathGen.centroid({ type: "Feature", geometry: merged, properties: {} } as any);
-  return { key: r.key, x: c[0], y: c[1] };
-}).filter((n) => isFinite(n.x) && isFinite(n.y));
 
 function RegionCard({ title, color, states }: { title: string; color: string; states: string[] }) {
   return (
@@ -70,12 +61,6 @@ export default function RateMapPage() {
             <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block" role="img" aria-label="US drayage service regions">
               {stateShapes.map((s: { d: string; region?: string }, i: number) => (
                 <path key={i} d={s.d} fill={s.region ? COLOR_OF[s.region] : "#54657F"} stroke="#0B2350" strokeWidth={0.9} strokeLinejoin="round" />
-              ))}
-              {regionNumbers.map((n) => (
-                <g key={n.key} pointerEvents="none">
-                  <text x={n.x} y={n.y - 16} textAnchor="middle" fontSize={12} fontWeight={800} letterSpacing="2" fill="#FF3B30">REGION</text>
-                  <text x={n.x} y={n.y} textAnchor="middle" dy="0.34em" fontSize={52} fontWeight={900} fill="#FF3B30">{n.key}</text>
-                </g>
               ))}
             </svg>
           </div>
