@@ -80,7 +80,8 @@
 
     /* glass variant of the calculator card (hero) — flips inner palette to white-on-dark */
     .calc-glass{--navy:#ffffff;--navy-2:#ffffff;--ink:#ffffff;--green:#34D399;}
-    .calc-glass .input{background-color:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.16);color:#fff;}
+    .calc-glass .input{background-color:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.14);color:#fff;border-radius:8px;}
+    .calc-glass .input-label{color:rgba(255,255,255,0.65);}
     .calc-glass .input::placeholder{color:rgba(255,255,255,0.45);}
     .calc-glass .input:focus{border-color:rgba(255,255,255,0.34);box-shadow:0 0 0 4px rgba(255,255,255,0.08);background-color:rgba(255,255,255,0.16);}
     .calc-glass select.input{background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3e%3c/svg%3e");}
