@@ -40,7 +40,7 @@ function computeQuote(o: [number, number], d: [number, number], type: string, qt
 const N = (n: number) => n.toLocaleString();
 const ACC = [["tolls", "Tolls"], ["prepull", "Pre-pull"], ["overweight", "Overweight"], ["hazmat", "Hazmat"], ["reefer", "Reefer plug"]];
 
-export default function CalculateRate() {
+export default function CalculateRate({ compact = false }: { compact?: boolean }) {
   const mapEl = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
   const routeRef = useRef<any>({ line: null, truck: null, o: null, d: null, raf: 0 });
@@ -87,6 +87,7 @@ export default function CalculateRate() {
   };
 
   useEffect(() => {
+    if (compact) { setReady(true); return; }
     let cancelled = false;
     const start = () => {
       const L = (window as any).L;
@@ -123,8 +124,7 @@ export default function CalculateRate() {
   };
   const toggleAcc = (v: string) => setAcc((a) => (a.includes(v) ? a.filter((x) => x !== v) : [...a, v]));
 
-  return (
-    <div className="grid lg:grid-cols-[1fr_1.55fr] gap-5 items-stretch">
+  const formCard = (
       <div className="reveal">
         <div className="rounded-2xl p-5 md:p-6 lg:p-7 relative overflow-hidden" style={{ background: "#fff", minHeight: phase === "form" ? undefined : 560 }}>
           <div className="flex items-center justify-between">
@@ -186,7 +186,9 @@ export default function CalculateRate() {
           )}
         </div>
       </div>
+  );
 
+  const mapPanel = (
       <div className="reveal reveal-d1 relative rounded-2xl overflow-hidden border border-white/10 min-h-[480px]" style={{ background: "#06143A" }}>
         <div ref={mapEl} className="absolute inset-0" />
         <div className="absolute top-4 left-4 glass-sky rounded-xl px-3.5 py-2.5 text-[11px] z-[600]">
@@ -207,6 +209,13 @@ export default function CalculateRate() {
           </div>
         </div>
       </div>
+  );
+
+  if (compact) return formCard;
+  return (
+    <div className="grid lg:grid-cols-[1fr_1.55fr] gap-5 items-stretch">
+      {formCard}
+      {mapPanel}
     </div>
   );
 }
