@@ -14,6 +14,8 @@ export default function TollSavings() {
   const [avoid, setAvoid] = useState("yes");
   const [ftes, setFtes] = useState("");
   const [hours, setHours] = useState("30");
+  const [from, setFrom] = useState("APM Terminals, McLester Street, Elizabeth, NJ, USA");
+  const [to, setTo] = useState("New York, NY, USA");
   const [res, setRes] = useState<{ monthly: number; annual: number; toll: number; labor: number } | null>(null);
 
   const calc = (e: React.FormEvent) => {
@@ -33,7 +35,11 @@ export default function TollSavings() {
         <form onSubmit={calc} className="flex flex-col h-full">
           <h3 className="display text-[20px] md:text-[22px] text-white leading-tight">Calculate your toll savings</h3>
           <p className="text-[12.5px] text-white/55 mt-1.5">See what accurate toll data saves your fleet.</p>
-          <div className="mt-5 grid grid-cols-2 gap-x-3 gap-y-3.5 flex-1 content-start">
+          <div className="mt-5 space-y-3.5">
+            <div><label className={labelCls}>From <span className="text-[#FF6B00]">*</span></label><input className={fieldCls} required value={from} onChange={(e) => setFrom(e.target.value)} placeholder="Origin address or city" /></div>
+            <div><label className={labelCls}>To <span className="text-[#FF6B00]">*</span></label><input className={fieldCls} required value={to} onChange={(e) => setTo(e.target.value)} placeholder="Destination address or city" /></div>
+          </div>
+          <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-3.5 flex-1 content-start">
             <div><label className={labelCls}>Monthly toll spend ($)</label><input className={fieldCls} type="number" min={0} placeholder="0" required value={spend} onChange={(e) => setSpend(e.target.value)} /></div>
             <div><label className={labelCls}>Vehicles in fleet</label><input className={fieldCls} type="number" min={0} placeholder="0" required value={fleet} onChange={(e) => setFleet(e.target.value)} /></div>
             <div><label className={labelCls}>On toll roads</label><input className={fieldCls} type="number" min={0} placeholder="0" required value={tollVeh} onChange={(e) => setTollVeh(e.target.value)} /></div>
