@@ -65,16 +65,16 @@ export default function Home() {
               </div>
               <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">Toll intelligence for <span className="bg-gradient-to-r from-[#FFD36B] via-[#FF9A5B] to-[#FF6B00] bg-clip-text text-transparent">trucks &amp; container freight.</span></h1>
               <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Class-aware toll rates for drayage, intermodal, and heavy freight — from port gates to inland ramps. Power TMS, fleet, and shipping platforms with one API.</p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
+              <div className="mt-8 inline-grid grid-cols-2 gap-3">
                 {/* App Store badge */}
-                <a href="#" className="inline-flex items-center gap-3 rounded-md h-[58px] w-[210px] pl-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
+                <a href="#" className="inline-flex items-center gap-3 rounded-md h-[58px] w-full pl-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
                   <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" aria-hidden="true" className="shrink-0"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-                  <span className="leading-none text-white text-left"><span className="block text-[10px] opacity-90">Download on the</span><span className="block text-[18px] font-semibold mt-0.5 tracking-tight">App Store</span></span>
+                  <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[10px] opacity-90">Download on the</span><span className="block text-[18px] font-semibold mt-0.5 tracking-tight">App Store</span></span>
                 </a>
                 {/* Google Play badge */}
-                <a href="#" className="inline-flex items-center gap-3 rounded-md h-[58px] w-[210px] pl-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
+                <a href="#" className="inline-flex items-center gap-3 rounded-md h-[58px] w-full pl-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
                   <svg width="30" height="32" viewBox="0 0 512 512" aria-hidden="true" className="shrink-0"><path fill="#4895F6" d="M60 40 220 256 60 472z"/><path fill="#1FBE5B" d="M60 40 340 188 220 256z"/><path fill="#EE4339" d="M60 472 340 324 220 256z"/><path fill="#FFBA00" d="M340 188 L424 236 Q450 252 450 256 Q450 260 424 276 L340 324 L220 256 Z"/></svg>
-                  <span className="leading-none text-white text-left"><span className="block text-[10px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[18px] font-semibold mt-0.5 tracking-tight">Google Play</span></span>
+                  <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[10px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[18px] font-semibold mt-0.5 tracking-tight">Google Play</span></span>
                 </a>
               </div>
               <div className="mt-5 text-[12px] text-white/55">🚛 Built for 5-axle rigs, chassis moves, and E-ZPass fleets</div>
