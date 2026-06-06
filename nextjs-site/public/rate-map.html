@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DRAYPAY — Drayage Rate Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0B2D5C;
+  --navy2:#061A38;
+  --navy3:#0d3570;
+  --orange:#FF6B00;
+  --orange2:#FF8C33;
+  --white:#FFFFFF;
+  --silver:#E8EDF5;
+  --muted:#8FA3BE;
+  --land:#D6E0EE;
+  --border:#1E4A8A;
+  --card-bg:#0f346b;
+  --r-la:#E53535;
+  --r-sea:#2B7CC4;
+  --r-oak:#3A8C3F;
+  --r-hou:#00B4B4;
+  --r-ny:#FF9A00;
+  --r-bal:#B06FD8;
+  --r-sav:#FF6B00;
+  --r-mia:#FFD700;
+  --r-nol:#00CC88;
+  --r-kc:#FF6B9D;
+}
+html,body{width:1200px;background:var(--navy2);font-family:'Barlow',sans-serif}
+
+.page{width:1200px;background:linear-gradient(160deg,#061A38 0%,#0B2D5C 60%,#0d3570 100%);min-height:760px;position:relative;overflow:hidden;padding:0}
+
+/* subtle grid bg */
+.page::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0px,transparent 1px,transparent 40px);pointer-events:none;z-index:0}
+
+/* top header */
+.header{position:relative;z-index:10;display:flex;align-items:center;padding:18px 28px 14px;border-bottom:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.25);backdrop-filter:blur(4px)}
+.logo-block{display:flex;align-items:center;gap:12px;border-right:1px solid rgba(255,255,255,.15);padding-right:20px;margin-right:20px}
+.logo-icon{width:40px;height:40px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;font-family:'Barlow Condensed',sans-serif;letter-spacing:-0.5px;position:relative;overflow:hidden}
+.logo-icon::after{content:'';position:absolute;left:16px;top:0;width:5px;height:100%;background:rgba(0,0,0,.3)}
+.logo-name{display:flex;flex-direction:column;line-height:1.1}
+.logo-primary{font-size:20px;font-weight:900;color:#fff;font-family:'Barlow Condensed',sans-serif;letter-spacing:.5px}
+.logo-sub{font-size:8px;font-weight:700;color:var(--orange);letter-spacing:3px;text-transform:uppercase}
+.header-title{flex:1}
+.ht-main{font-size:28px;font-weight:900;color:#fff;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase;line-height:1}
+.ht-sub{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:3px}
+.assumptions-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 16px;min-width:260px}
+.ab-title{font-size:8px;font-weight:700;letter-spacing:2.5px;color:var(--orange);text-transform:uppercase;margin-bottom:8px}
+.ab-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.ab-row:last-child{margin-bottom:0}
+.ab-lbl{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.ab-val{font-size:14px;font-weight:800;color:#fff;font-family:'Barlow Condensed',sans-serif}
+.ab-divider{width:100%;height:.5px;background:rgba(255,255,255,.1);margin:6px 0}
+.ab-formula{font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--orange);text-align:center;background:rgba(255,107,0,.08);padding:4px 8px;border-radius:4px}
+
+/* body */
+.body{display:flex;position:relative;z-index:5}
+
+/* left port cards */
+.ports-left{width:200px;flex-shrink:0;padding:12px 10px 12px 14px;display:flex;flex-direction:column;gap:7px}
+.ports-right{width:200px;flex-shrink:0;padding:12px 14px 12px 10px;display:flex;flex-direction:column;gap:7px}
+
+.port-card{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:8px 10px;position:relative;overflow:hidden;transition:all .2s}
+.port-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+.port-card:hover{background:rgba(30,74,138,.8);transform:translateX(2px)}
+
+.pc-header{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.anchor-icon{width:22px;height:22px;background:var(--navy2);border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;color:var(--orange)}
+.pc-name{font-size:9px;font-weight:800;color:#fff;letter-spacing:.5px;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;line-height:1.2}
+.pc-body{padding-left:2px}
+.pc-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+.pc-label{font-size:9px;color:var(--muted);font-weight:500}
+.pc-miles{font-size:11px;font-weight:700;color:#fff;font-family:'JetBrains Mono',monospace}
+.pc-cost{font-size:13px;font-weight:800;color:var(--orange);font-family:'Barlow Condensed',sans-serif;letter-spacing:-.2px}
+.pc-bar{height:2px;background:rgba(255,255,255,.08);border-radius:1px;margin-top:4px;overflow:hidden}
+.pc-bar-fill{height:2px;border-radius:1px;opacity:.7}
+
+/* map center */
+.map-center{flex:1;position:relative;overflow:hidden}
+
+/* legend bottom */
+.legend{padding:8px 14px 10px;background:rgba(0,0,0,.2);border-top:1px solid rgba(255,255,255,.07)}
+.legend-title{font-size:8px;font-weight:700;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.legend-routes{display:flex;flex-wrap:wrap;gap:4px 14px}
+.lr-item{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:600;color:rgba(255,255,255,.75)}
+.lr-line{width:20px;height:2.5px;border-radius:2px;flex-shrink:0}
+
+.how-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 12px;margin-top:8px}
+.how-title{font-size:8px;font-weight:800;letter-spacing:2px;color:var(--orange);text-transform:uppercase;margin-bottom:5px}
+.how-row{font-size:9px;color:var(--muted);margin-bottom:3px;display:flex;align-items:flex-start;gap:5px}
+.how-num{color:var(--orange);font-weight:700;flex-shrink:0}
+.formula-highlight{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--orange);background:rgba(255,107,0,.1);padding:2px 6px;border-radius:3px;display:inline-block;margin-top:2px}
+
+.note-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 12px;margin-top:8px}
+.note-title{font-size:8px;font-weight:800;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+.note-item{font-size:8.5px;color:rgba(255,255,255,.5);margin-bottom:2px;display:flex;align-items:center;gap:4px}
+.note-item::before{content:'·';color:var(--orange);font-size:12px;line-height:1;margin-top:-1px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-block">
+    <div class="logo-icon">DP<div style="position:absolute;left:17px;top:0;width:4px;height:100%;background:rgba(0,0,0,.35)"></div></div>
+    <div class="logo-name">
+      <span class="logo-primary">DRAYPAY</span>
+      <span class="logo-sub">Drayage Rate Map</span>
+    </div>
+  </div>
+  <div class="header-title">
+    <div class="ht-main">Drayage Rate Map</div>
+    <div class="ht-sub">Port Terminals Drayage Rate Guide</div>
+  </div>
+  <div class="assumptions-box">
+    <div class="ab-title">Rate Calculation Assumptions</div>
+    <div class="ab-row">
+      <span class="ab-lbl">⛽ Miles Per Gallon (Diesel)</span>
+      <span class="ab-val">7 MPG</span>
+    </div>
+    <div class="ab-row">
+      <span class="ab-lbl">💲 Diesel Price Per Gallon</span>
+      <span class="ab-val">$5.15</span>
+    </div>
+    <div class="ab-divider"></div>
+    <div class="ab-formula">(TOTAL MILES ÷ 7) × $5.15 = Fuel Cost</div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- LEFT PORT CARDS -->
+  <div class="ports-left">
+
+    <div class="port-card" style="--accent:#2B7CC4" data-port="SEA">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#2B7CC4;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#2B7CC4;color:#2B7CC4">⚓</div>
+        <div class="pc-name">Port of Seattle</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Chicago</span><span class="pc-miles">2,064</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$1,518.17</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:62%;background:#2B7CC4"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="OAK">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#3A8C3F;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#3A8C3F;color:#3A8C3F">⚓</div>
+        <div class="pc-name">Port of Oakland</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Denver</span><span class="pc-miles">1,235</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$908.21</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:42%;background:#3A8C3F"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="LAX">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#E53535;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#E53535;color:#E53535">⚓</div>
+        <div class="pc-name">Port of LA / Long Beach</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Dallas</span><span class="pc-miles">1,419</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$1,043.36</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:52%;background:#E53535"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="SAN">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#B06FD8;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#B06FD8;color:#B06FD8">⚓</div>
+        <div class="pc-name">Port of San Diego</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Dallas</span><span class="pc-miles">1,322</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$972.14</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:46%;background:#B06FD8"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="HOU">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#00B4B4;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#00B4B4;color:#00B4B4">⚓</div>
+        <div class="pc-name">Port of Houston</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Dallas</span><span class="pc-miles">239</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$175.79</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:16%;background:#00B4B4"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="NOL">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#00CC88;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#00CC88;color:#00CC88">⚓</div>
+        <div class="pc-name">Port of New Orleans</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Dallas</span><span class="pc-miles">504</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$370.63</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:22%;background:#00CC88"></div></div>
+      </div>
+    </div>
+
+    <!-- How to read -->
+    <div class="how-box">
+      <div class="how-title">How to Read This Map</div>
+      <div class="how-row"><span class="how-num">1.</span>Select your port terminal</div>
+      <div class="how-row"><span class="how-num">2.</span>Check total miles to your location</div>
+      <div class="how-row"><span class="how-num">3.</span>Calculate fuel cost using the formula</div>
+      <div class="formula-highlight">(Miles ÷ 7) × $5.15</div>
+    </div>
+
+  </div>
+
+  <!-- MAP CENTER SVG -->
+  <div class="map-center">
+    <svg viewBox="0 0 800 520" width="100%" height="520" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <style>
+        .state-fill{fill:#C8D6EA;stroke:#E8EDF5;stroke-width:0.7;opacity:.55}
+        .state-lbl{font-family:'Barlow',sans-serif;font-size:9px;fill:rgba(30,60,100,.7);font-weight:700;pointer-events:none}
+        .city-node{fill:#0B2D5C;stroke:#fff;stroke-width:1.5}
+        .city-lbl{font-family:'Barlow',sans-serif;font-size:8.5px;fill:#fff;font-weight:600;pointer-events:none}
+        .route-line{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+        .route-line-glow{fill:none;stroke-width:6;stroke-linecap:round;opacity:.18}
+      </style>
+      <!-- Glow filter for route lines -->
+      <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <!-- ══ US MAP BACKGROUND ══ -->
+    <!-- Pacific Northwest -->
+    <polygon points="68,28 152,28 152,108 184,108 184,250 158,250 130,268 62,268 44,232 44,140 62,100 68,28" class="state-fill"/>
+    <!-- Rocky Mountains -->
+    <polygon points="152,28 306,28 306,268 184,268 184,108 152,108" class="state-fill"/>
+    <!-- Great Plains -->
+    <polygon points="306,28 462,28 520,50 520,108 506,108 462,200 462,260 388,260 306,268" class="state-fill"/>
+    <!-- Great Lakes / Midwest -->
+    <polygon points="462,60 520,50 570,60 606,80 620,130 606,178 568,200 520,200 506,200 506,108 520,108" class="state-fill"/>
+    <!-- Southwest / TX -->
+    <polygon points="130,268 184,268 218,268 218,346 252,346 302,346 302,404 390,404 390,346 388,260 306,268" class="state-fill"/>
+    <!-- South-Central -->
+    <polygon points="302,346 390,346 390,404 430,404 460,380 460,340 438,318 460,310 460,260 388,260" class="state-fill"/>
+    <!-- Southeast -->
+    <polygon points="460,260 568,200 606,178 620,260 620,310 600,330 580,360 580,400 556,420 510,420 480,400 460,380 460,340" class="state-fill"/>
+    <!-- Northeast -->
+    <polygon points="606,80 670,80 720,60 760,60 780,80 780,178 720,178 680,200 620,200 620,130 606,80" class="state-fill"/>
+    <!-- Florida -->
+    <polygon points="580,360 620,360 626,390 618,430 594,460 568,460 550,440 546,410 556,420 580,400" class="state-fill"/>
+
+    <!-- State dividers (selected major ones) -->
+    <line x1="306" y1="28" x2="306" y2="268" stroke="#E8EDF5" stroke-width=".7" opacity=".5"/>
+    <line x1="152" y1="28" x2="152" y2="108" stroke="#E8EDF5" stroke-width=".7" opacity=".5"/>
+    <line x1="462" y1="28" x2="462" y2="260" stroke="#E8EDF5" stroke-width=".7" opacity=".5"/>
+    <line x1="506" y1="108" x2="506" y2="200" stroke="#E8EDF5" stroke-width=".7" opacity=".5"/>
+    <line x1="620" y1="80" x2="620" y2="360" stroke="#E8EDF5" stroke-width=".7" opacity=".5"/>
+    <line x1="306" y1="168" x2="462" y2="168" stroke="#E8EDF5" stroke-width=".7" opacity=".4"/>
+    <line x1="218" y1="268" x2="390" y2="268" stroke="#E8EDF5" stroke-width=".7" opacity=".4"/>
+    <line x1="460" y1="200" x2="620" y2="200" stroke="#E8EDF5" stroke-width=".7" opacity=".4"/>
+
+    <!-- State abbreviations -->
+    <text x="100" y="150" class="state-lbl" text-anchor="middle">WA/OR</text>
+    <text x="210" y="80" class="state-lbl" text-anchor="middle">MT</text>
+    <text x="200" y="180" class="state-lbl" text-anchor="middle">ID/NV</text>
+    <text x="250" y="310" class="state-lbl" text-anchor="middle">AZ/UT</text>
+    <text x="350" y="80" class="state-lbl" text-anchor="middle">ND/SD</text>
+    <text x="360" y="220" class="state-lbl" text-anchor="middle">NE/KS</text>
+    <text x="480" y="130" class="state-lbl" text-anchor="middle">MN/WI</text>
+    <text x="480" y="230" class="state-lbl" text-anchor="middle">IA/IL/IN</text>
+    <text x="350" y="375" class="state-lbl" text-anchor="middle">TX</text>
+    <text x="430" y="300" class="state-lbl" text-anchor="middle">AR/LA</text>
+    <text x="540" y="300" class="state-lbl" text-anchor="middle">TN/AL</text>
+    <text x="570" y="155" class="state-lbl" text-anchor="middle">OH</text>
+    <text x="700" y="130" class="state-lbl" text-anchor="middle">PA/NY</text>
+    <text x="580" y="390" class="state-lbl" text-anchor="middle">GA/FL</text>
+    <text x="640" y="280" class="state-lbl" text-anchor="middle">NC/SC</text>
+
+    <!-- ══ ROUTE LINES — glows first, then solid ══ -->
+
+    <!-- LA/LB to Dallas (red) -->
+    <path d="M 68,262 Q 180,310 340,345" class="route-line-glow" stroke="#E53535"/>
+    <path d="M 68,262 Q 180,310 340,345" class="route-line" stroke="#E53535"/>
+
+    <!-- LA/LB to Chicago (dark blue) -->
+    <path d="M 68,262 Q 200,200 340,185 Q 430,175 510,170" class="route-line-glow" stroke="#1A4FA0"/>
+    <path d="M 68,262 Q 200,200 340,185 Q 430,175 510,170" class="route-line" stroke="#1A4FA0"/>
+
+    <!-- Seattle to Chicago (medium blue) -->
+    <path d="M 72,52 Q 200,60 340,90 Q 430,115 510,165" class="route-line-glow" stroke="#2B7CC4"/>
+    <path d="M 72,52 Q 200,60 340,90 Q 430,115 510,165" class="route-line" stroke="#2B7CC4"/>
+
+    <!-- Oakland to Denver (green) -->
+    <path d="M 60,195 Q 160,195 260,230" class="route-line-glow" stroke="#3A8C3F"/>
+    <path d="M 60,195 Q 160,195 260,230" class="route-line" stroke="#3A8C3F"/>
+
+    <!-- Houston to Dallas (teal) -->
+    <path d="M 290,370 Q 310,358 340,345" class="route-line-glow" stroke="#00B4B4"/>
+    <path d="M 290,370 Q 310,358 340,345" class="route-line" stroke="#00B4B4"/>
+
+    <!-- Houston to Kansas City (pink) -->
+    <path d="M 290,370 Q 330,310 400,270" class="route-line-glow" stroke="#FF6B9D"/>
+    <path d="M 290,370 Q 330,310 400,270" class="route-line" stroke="#FF6B9D"/>
+
+    <!-- New York to Chicago (orange) -->
+    <path d="M 736,130 Q 660,140 580,155 Q 545,160 510,165" class="route-line-glow" stroke="#FF9A00"/>
+    <path d="M 736,130 Q 660,140 580,155 Q 545,160 510,165" class="route-line" stroke="#FF9A00"/>
+
+    <!-- Savannah to Atlanta (orange brand) -->
+    <path d="M 672,295 Q 650,278 614,265" class="route-line-glow" stroke="#FF6B00"/>
+    <path d="M 672,295 Q 650,278 614,265" class="route-line" stroke="#FF6B00"/>
+
+    <!-- Miami to Atlanta (gold) -->
+    <path d="M 686,425 Q 672,370 614,265" class="route-line-glow" stroke="#FFD700"/>
+    <path d="M 686,425 Q 672,370 614,265" class="route-line" stroke="#FFD700"/>
+
+    <!-- New Orleans to Dallas (green-teal) -->
+    <path d="M 416,380 Q 380,365 340,345" class="route-line-glow" stroke="#00CC88"/>
+    <path d="M 416,380 Q 380,365 340,345" class="route-line" stroke="#00CC88"/>
+
+    <!-- ══ CITY NODES ══ -->
+    <!-- Chicago -->
+    <circle cx="510" cy="165" r="7" fill="#FF6B00" stroke="#fff" stroke-width="2" filter="url(#glow)"/>
+    <circle cx="510" cy="165" r="3" fill="#fff"/>
+    <text x="510" y="155" class="city-lbl" text-anchor="middle">Chicago</text>
+
+    <!-- Dallas -->
+    <circle cx="340" cy="345" r="7" fill="#FF6B00" stroke="#fff" stroke-width="2"/>
+    <circle cx="340" cy="345" r="3" fill="#fff"/>
+    <text x="340" y="358" class="city-lbl" text-anchor="middle">Dallas</text>
+
+    <!-- Kansas City -->
+    <circle cx="400" cy="270" r="5.5" fill="#0B2D5C" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="400" cy="270" r="2.5" fill="#fff"/>
+    <text x="414" y="274" class="city-lbl" text-anchor="start" font-size="8">Kansas City</text>
+
+    <!-- Denver -->
+    <circle cx="260" cy="232" r="5.5" fill="#0B2D5C" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="260" cy="232" r="2.5" fill="#fff"/>
+    <text x="270" y="236" class="city-lbl" text-anchor="start" font-size="8">Denver</text>
+
+    <!-- Salt Lake City -->
+    <circle cx="188" cy="196" r="4.5" fill="#0B2D5C" stroke="#fff" stroke-width="1.5"/>
+    <text x="198" y="200" class="city-lbl" text-anchor="start" font-size="8">Salt Lake City</text>
+
+    <!-- Phoenix -->
+    <circle cx="152" cy="314" r="4.5" fill="#0B2D5C" stroke="#fff" stroke-width="1.5"/>
+    <text x="160" y="318" class="city-lbl" text-anchor="start" font-size="8">Phoenix</text>
+
+    <!-- Atlanta -->
+    <circle cx="614" cy="265" r="5.5" fill="#0B2D5C" stroke="#fff" stroke-width="1.5"/>
+    <circle cx="614" cy="265" r="2.5" fill="#fff"/>
+    <text x="604" y="280" class="city-lbl" text-anchor="middle" font-size="8">Atlanta</text>
+
+    <!-- Port dots on map edges -->
+    <!-- Seattle port dot -->
+    <circle cx="72" cy="52" r="5" fill="#2B7CC4" stroke="#fff" stroke-width="1.5"/>
+    <!-- Oakland port dot -->
+    <circle cx="60" cy="195" r="5" fill="#3A8C3F" stroke="#fff" stroke-width="1.5"/>
+    <!-- LA/LB port dot -->
+    <circle cx="68" cy="262" r="6" fill="#E53535" stroke="#fff" stroke-width="2"/>
+    <!-- San Diego port dot -->
+    <circle cx="72" cy="305" r="5" fill="#B06FD8" stroke="#fff" stroke-width="1.5"/>
+    <!-- Houston port dot -->
+    <circle cx="290" cy="370" r="5" fill="#00B4B4" stroke="#fff" stroke-width="1.5"/>
+    <!-- New Orleans port dot -->
+    <circle cx="416" cy="380" r="5" fill="#00CC88" stroke="#fff" stroke-width="1.5"/>
+    <!-- NY/NJ port dot -->
+    <circle cx="736" cy="130" r="5" fill="#FF9A00" stroke="#fff" stroke-width="1.5"/>
+    <!-- Baltimore port dot -->
+    <circle cx="716" cy="160" r="4.5" fill="#B06FD8" stroke="#fff" stroke-width="1.5"/>
+    <!-- Virginia port dot -->
+    <circle cx="716" cy="192" r="4.5" fill="#9B6FD0" stroke="#fff" stroke-width="1.5"/>
+    <!-- Charleston port dot -->
+    <circle cx="698" cy="290" r="4.5" fill="#FF8C33" stroke="#fff" stroke-width="1.5"/>
+    <!-- Savannah port dot -->
+    <circle cx="672" cy="295" r="4.5" fill="#FF6B00" stroke="#fff" stroke-width="1.5"/>
+    <!-- Tampa port dot -->
+    <circle cx="646" cy="375" r="4.5" fill="#00AACC" stroke="#fff" stroke-width="1.5"/>
+    <!-- Miami port dot -->
+    <circle cx="686" cy="425" r="5" fill="#FFD700" stroke="#fff" stroke-width="1.5"/>
+
+    <!-- ══ PORT LABELS on map edge ══ -->
+    <text x="84" y="46" class="city-lbl" font-size="7.5" text-anchor="start" fill="rgba(200,220,240,.8)">PORT OF SEATTLE →</text>
+    <text x="72" y="210" class="city-lbl" font-size="7" text-anchor="start" fill="rgba(200,220,240,.7)">PORT OF OAKLAND →</text>
+
+    </svg>
+  </div>
+
+  <!-- RIGHT PORT CARDS -->
+  <div class="ports-right">
+
+    <div class="port-card" data-port="NYC">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#FF9A00;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#FF9A00;color:#FF9A00">⚓</div>
+        <div class="pc-name">Port of New York / NJ</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Chicago</span><span class="pc-miles">791</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$581.57</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:30%;background:#FF9A00"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="BAL">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#B06FD8;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#B06FD8;color:#B06FD8">⚓</div>
+        <div class="pc-name">Port of Baltimore</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to DC</span><span class="pc-miles">38</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$27.94</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:8%;background:#B06FD8"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="VIR">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#9B6FD0;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#9B6FD0;color:#9B6FD0">⚓</div>
+        <div class="pc-name">Port of Virginia</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Charlotte</span><span class="pc-miles">340</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$250.00</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:15%;background:#9B6FD0"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="CHS">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#FF8C33;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#FF8C33;color:#FF8C33">⚓</div>
+        <div class="pc-name">Port of Charleston</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Charlotte</span><span class="pc-miles">211</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$155.21</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:12%;background:#FF8C33"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="SAV">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#FF6B00;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#FF6B00;color:#FF6B00">⚓</div>
+        <div class="pc-name">Port of Savannah</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Atlanta</span><span class="pc-miles">255</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$187.50</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:13%;background:#FF6B00"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="TAM">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#00AACC;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#00AACC;color:#00AACC">⚓</div>
+        <div class="pc-name">Port of Tampa</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Atlanta</span><span class="pc-miles">470</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$345.36</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:20%;background:#00AACC"></div></div>
+      </div>
+    </div>
+
+    <div class="port-card" data-port="MIA">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#FFD700;border-radius:3px 0 0 3px"></div>
+      <div class="pc-header">
+        <div class="anchor-icon" style="border-color:#FFD700;color:#FFD700">⚓</div>
+        <div class="pc-name">Port of Miami</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="pc-label">Miles to Atlanta</span><span class="pc-miles">663</span></div>
+        <div class="pc-row"><span class="pc-label">Fuel Cost</span><span class="pc-cost">$487.64</span></div>
+        <div class="pc-bar"><div class="pc-bar-fill" style="width:26%;background:#FFD700"></div></div>
+      </div>
+    </div>
+
+    <!-- Note box -->
+    <div class="note-box">
+      <div class="note-title">Additional Charges May Apply</div>
+      <div class="note-item">Driver Pay</div>
+      <div class="note-item">Tolls &amp; Fees</div>
+      <div class="note-item">Chassis Rental</div>
+      <div class="note-item">Accessorials</div>
+      <div class="note-item">Waiting / Detention Time</div>
+    </div>
+
+  </div>
+
+</div><!-- body -->
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-title">Example Routes from Ports to Major Hubs</div>
+  <div class="legend-routes">
+    <div class="lr-item"><div class="lr-line" style="background:#E53535"></div>LA/LB to Dallas</div>
+    <div class="lr-item"><div class="lr-line" style="background:#1A4FA0"></div>LA/LB to Chicago</div>
+    <div class="lr-item"><div class="lr-line" style="background:#00B4B4"></div>Houston to Dallas</div>
+    <div class="lr-item"><div class="lr-line" style="background:#FF9A00"></div>New York to Chicago</div>
+    <div class="lr-item"><div class="lr-line" style="background:#FF6B00"></div>Savannah to Atlanta</div>
+    <div class="lr-item"><div class="lr-line" style="background:#FFD700"></div>Miami to Atlanta</div>
+    <div class="lr-item"><div class="lr-line" style="background:#2B7CC4"></div>Seattle to Chicago</div>
+    <div class="lr-item"><div class="lr-line" style="background:#3A8C3F"></div>Oakland to Denver</div>
+    <div class="lr-item"><div class="lr-line" style="background:#FF6B9D"></div>Houston to Kansas City</div>
+    <div class="lr-item"><div class="lr-line" style="background:#00CC88"></div>New Orleans to Dallas</div>
+  </div>
+</div>
+
+</div><!-- page -->
+</body>
+</html>
