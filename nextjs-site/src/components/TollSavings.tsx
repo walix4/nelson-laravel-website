@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
+import GlassSelect from "@/components/GlassSelect";
 
 const N = (n: number) => n.toLocaleString();
 const fieldCls = "w-full rounded bg-white/[0.07] px-3 py-2.5 text-[14px] text-white placeholder-white/45 focus:outline-none focus:bg-white/[0.16] transition";
 const labelCls = "block text-[10.5px] font-semibold uppercase tracking-[0.06em] text-white/65 mb-1.5";
-const chev: React.CSSProperties = { backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23FF6B00' stroke-width='2.5' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 10px center", paddingRight: "30px" };
 
 export default function TollSavings() {
   const [spend, setSpend] = useState("");
@@ -37,8 +37,8 @@ export default function TollSavings() {
             <div><label className={labelCls}>Monthly toll spend ($)</label><input className={fieldCls} type="number" min={0} placeholder="0" required value={spend} onChange={(e) => setSpend(e.target.value)} /></div>
             <div><label className={labelCls}>Vehicles in fleet</label><input className={fieldCls} type="number" min={0} placeholder="0" required value={fleet} onChange={(e) => setFleet(e.target.value)} /></div>
             <div><label className={labelCls}>On toll roads</label><input className={fieldCls} type="number" min={0} placeholder="0" required value={tollVeh} onChange={(e) => setTollVeh(e.target.value)} /></div>
-            <div><label className={labelCls}>Vehicle type</label><select style={chev} className={`${fieldCls} appearance-none`} value={vType} onChange={(e) => setVType(e.target.value)}><option value="trucks">Trucks</option><option value="mixed">Mixed fleet</option><option value="vans">Cars / vans</option></select></div>
-            <div><label className={labelCls}>Avoid toll roads?</label><select style={chev} className={`${fieldCls} appearance-none`} value={avoid} onChange={(e) => setAvoid(e.target.value)}><option value="yes">Yes</option><option value="no">No</option></select></div>
+            <div><label className={labelCls}>Vehicle type</label><GlassSelect value={vType} onChange={setVType} options={[["trucks","Trucks"],["mixed","Mixed fleet"],["vans","Cars / vans"]]} /></div>
+            <div><label className={labelCls}>Avoid toll roads?</label><GlassSelect value={avoid} onChange={setAvoid} options={[["yes","Yes"],["no","No"]]} /></div>
             <div><label className={labelCls}>FTEs on routing</label><input className={fieldCls} type="number" min={0} placeholder="0" required value={ftes} onChange={(e) => setFtes(e.target.value)} /></div>
             <div className="col-span-2"><label className={labelCls}>Hours / month each FTE spends on routing</label><input className={fieldCls} type="number" min={0} required value={hours} onChange={(e) => setHours(e.target.value)} /></div>
           </div>
