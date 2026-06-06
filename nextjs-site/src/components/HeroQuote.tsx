@@ -124,7 +124,11 @@ export default function HeroQuote() {
             <div><label className={labelCls}>Container size</label><GlassSelect value={size} onChange={setSize} options={SIZE} /></div>
             <div><label className={labelCls}>Weight</label><GlassSelect value={wclass} onChange={setWclass} options={WCLASS} /></div>
           </div>
-          <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5"><span className="label">Get Your Quote Now</span></button>
+          <div className="mt-5 flex gap-2 rounded-md px-3 py-2.5" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <svg className="shrink-0 mt-0.5" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
+            <p className="text-[10px] leading-[1.5] text-white/55">Prices can vary due to our dynamic pricing system, which adjusts fares based on real-time factors like demand, traffic, and trip duration. The final price may differ from this upfront estimate if changes are made during the trip — adding stops, changing the destination, or if unexpected traffic significantly alters the route or time.</p>
+          </div>
+          <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-3"><span className="label">Get Your Quote Now</span></button>
           <p className="text-[10px] text-white/45 text-center mt-3">No login · No card · Rates lock for 24h</p>
         </form>
       )}
