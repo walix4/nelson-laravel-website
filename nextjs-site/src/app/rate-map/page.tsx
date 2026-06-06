@@ -2,7 +2,8 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { geoAlbersUsa, geoPath } from "d3-geo";
-import statesGeo from "@/data/us-states.geo.json";
+import * as topojson from "topojson-client";
+import usTopo from "@/data/us-states-10m.json";
 
 const MPG = 7;
 const DIESEL = 5.15;
@@ -12,14 +13,15 @@ const usd = (n: number) => n.toLocaleString(undefined, { minimumFractionDigits: 
 const W = 960;
 const H = 600;
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const projection = geoAlbersUsa().fitSize([W, H], statesGeo as any);
+const usGeo = topojson.feature(usTopo as any, (usTopo as any).objects.states) as any;
+const projection = geoAlbersUsa().fitSize([W, H], usGeo);
 const pathGen = geoPath(projection);
 const proj = (lng: number, lat: number): [number, number] => (projection([lng, lat]) as [number, number]) || [0, 0];
-const statePaths = (statesGeo as any).features.map((f: any) => pathGen(f) || "");
+const statePaths = usGeo.features.map((f: any) => pathGen(f) || "");
 const STATE_ABBR: Record<string, string> = {
   Alabama: "AL", Alaska: "AK", Arizona: "AZ", Arkansas: "AR", California: "CA", Colorado: "CO", Connecticut: "CT", Delaware: "DE", "District of Columbia": "DC", Florida: "FL", Georgia: "GA", Hawaii: "HI", Idaho: "ID", Illinois: "IL", Indiana: "IN", Iowa: "IA", Kansas: "KS", Kentucky: "KY", Louisiana: "LA", Maine: "ME", Maryland: "MD", Massachusetts: "MA", Michigan: "MI", Minnesota: "MN", Mississippi: "MS", Missouri: "MO", Montana: "MT", Nebraska: "NE", Nevada: "NV", "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "New York": "NY", "North Carolina": "NC", "North Dakota": "ND", Ohio: "OH", Oklahoma: "OK", Oregon: "OR", Pennsylvania: "PA", "Rhode Island": "RI", "South Carolina": "SC", "South Dakota": "SD", Tennessee: "TN", Texas: "TX", Utah: "UT", Vermont: "VT", Virginia: "VA", Washington: "WA", "West Virginia": "WV", Wisconsin: "WI", Wyoming: "WY",
 };
-const stateLabels = (statesGeo as any).features
+const stateLabels = usGeo.features
   .map((f: any) => { const c = pathGen.centroid(f); return { abbr: STATE_ABBR[f.properties?.name] || "", x: c[0], y: c[1] }; })
   .filter((s: any) => s.abbr && isFinite(s.x) && isFinite(s.y));
 
