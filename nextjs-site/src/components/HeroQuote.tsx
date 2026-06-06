@@ -49,6 +49,7 @@ const labelCls = "block text-[10.5px] font-semibold uppercase tracking-[0.06em] 
 const fieldCls = "w-full rounded bg-white/[0.07] px-3 py-2.5 text-[14px] text-white placeholder-white/45 focus:outline-none focus:bg-white/[0.16] transition";
 
 export default function HeroQuote() {
+  const [mode, setMode] = useState("drayage");
   const [from, setFrom] = useState("APM Terminals — Elizabeth, NJ");
   const [to, setTo] = useState("Philadelphia, PA, USA");
   const [container, setContainer] = useState("dry");
@@ -71,7 +72,8 @@ export default function HeroQuote() {
     const oc = geocode(from) ?? [40.666, -74.211], dc = geocode(to) ?? [39.9526, -75.1652];
     const miles = Math.max(hav(oc, dc), 8);
     const legs = trip === "round" ? 2 : 1;
-    const mult = (SIZE_MULT[size] ?? 1) * (CONT_MULT[container] ?? 1);
+    const modeMult = mode === "porttoport" ? 0.82 : mode === "intermodal" ? 0.91 : 1;
+    const mult = (SIZE_MULT[size] ?? 1) * (CONT_MULT[container] ?? 1) * modeMult;
     const weightLbs = (parseInt(wclass) || 5) * 1000;
     const fuel = (miles / 7) * 5.18 * 1.17 * legs;
     const labor = (miles / 50 + 2.5) * 28 * legs;
@@ -92,7 +94,12 @@ export default function HeroQuote() {
         <form onSubmit={run} className="flex flex-col">
           <h3 className="display text-[20px] md:text-[22px] text-white leading-tight">Calculate Your Drayage Rate</h3>
           <p className="text-[12.5px] text-white/55 mt-1.5">Price a container move from port gate to door.</p>
-          <div className="mt-5 space-y-3.5">
+          <div className="mt-5 grid grid-cols-3 gap-2">
+            {([["drayage", "Drayage"], ["porttoport", "Port To Port"], ["intermodal", "Intermodal"]] as [string, string][]).map(([v, l]) => (
+              <button type="button" key={v} onClick={() => setMode(v)} className={`rounded-md py-2.5 text-[12px] font-semibold border backdrop-blur-sm transition ${mode === v ? "bg-[var(--red)]/25 border-[var(--red)] text-white shadow-[0_8px_20px_-8px_rgba(255,59,48,0.7)]" : "bg-white/[0.06] border-white/15 text-white/70 hover:bg-white/[0.12] hover:text-white"}`}>{l}</button>
+            ))}
+          </div>
+          <div className="mt-4 space-y-3.5">
             <div><label className={labelCls}>Select port terminal <span className="text-[var(--red)]">*</span></label><PortSelect value={from} onChange={setFrom} options={PORTS} placeholder="Select port terminal" /></div>
             <div><label className={labelCls}>Enter drop off address <span className="text-[var(--red)]">*</span></label><input className={fieldCls} required value={to} onChange={(e) => setTo(e.target.value)} placeholder="Enter drop-off address" /></div>
           </div>
