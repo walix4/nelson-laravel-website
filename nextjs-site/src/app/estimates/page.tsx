@@ -38,21 +38,20 @@ export default function Page() {
   return (
     <>
       <Nav />
-      <section className="py-14 md:py-16">
+      <section className="py-7 md:py-9">
         <div className="max-w-[1400px] mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-10">
+          <div className="mb-5">
             <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Live estimate stream</div>
-            <h1 className="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">All Estimates</h1>
-            <p className="mt-4 text-[var(--muted)] text-[15px]">Every drayage quote on the network — streaming in live and priced in seconds.</p>
+            <p className="mt-1.5 text-[var(--muted)] text-[14px]">Every drayage quote on the network — streaming in live and priced in seconds.</p>
           </div>
           <div>
-            <div className="flex flex-col md:flex-row gap-3 mb-5">
+            <div className="flex flex-col md:flex-row md:items-center gap-3 mb-5">
+              <select className="est-select" value={st} onChange={(e) => setSt(e.target.value)}><option value="all">All statuses</option><option value="completed">Completed</option><option value="streaming">Streaming</option><option value="pending">Pending</option><option value="failed">Failed</option></select>
+              <select className="est-select"><option>Today</option><option>Last 7 days</option><option>Last 30 days</option><option>All time</option></select>
               <div className="relative flex-1">
                 <svg className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: "rgba(11,35,80,0.4)" }} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
                 <input className="est-input" placeholder="Search by reference, customer, pickup, or drop-off…" value={q} onChange={(e) => setQ(e.target.value)} />
               </div>
-              <select className="est-select" value={st} onChange={(e) => setSt(e.target.value)}><option value="all">All statuses</option><option value="completed">Completed</option><option value="streaming">Streaming</option><option value="pending">Pending</option><option value="failed">Failed</option></select>
-              <select className="est-select"><option>Today</option><option>Last 7 days</option><option>Last 30 days</option><option>All time</option></select>
               <div className="flex items-center text-[12px] font-medium text-[var(--muted)] px-1 whitespace-nowrap"><b className="text-[var(--navy)] mr-1">{view.length}</b> estimates</div>
             </div>
             <div className="est-wrap"><div className="est-scroll"><table className="est-table">
@@ -62,11 +61,11 @@ export default function Page() {
                   <tr key={e.ref}>
                     <td>
                       <div className="est-refcell">
-                        <span className="est-cont" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="2.5" width="19" height="19" rx="3" stroke="currentColor" strokeWidth="1.4" strokeDasharray="3 2.4" /><rect x="8" y="8" width="8" height="8" rx="1.6" fill="currentColor" /><rect x="10.2" y="10.2" width="3.6" height="3.6" rx="0.8" fill="#fff" fillOpacity="0.85" /></svg></span>
+                        <span className="est-cont" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="2.5" width="19" height="19" rx="3" stroke="currentColor" strokeWidth="1.4" strokeDasharray="3 2.4" /><rect x="8" y="8" width="8" height="8" rx="1.6" fill="#2E6BD6" /><rect x="10.2" y="10.2" width="3.6" height="3.6" rx="0.8" fill="#fff" fillOpacity="0.9" /></svg></span>
                         <div style={{ minWidth: 0 }}>
                           {e.container === "reefer"
-                            ? <span className="est-tag reefer"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M12 2v20M2 12h20M4.6 4.6l14.8 14.8M19.4 4.6L4.6 19.4" /></svg>REEFER</span>
-                            : <span className="est-tag dry"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><circle cx="12" cy="12" r="4" /><path d="M12 2.6v2.1M12 19.3v2.1M2.6 12h2.1M19.3 12h2.1M5.1 5.1l1.5 1.5M17.4 17.4l1.5 1.5M18.9 5.1l-1.5 1.5M6.6 17.4l-1.5 1.5" /></svg>DRY</span>}
+                            ? <span className="est-tag"><svg className="est-ico" style={{ color: "#2E8BE6" }} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19" /><path d="M12 5l-2.2 2.2M12 5l2.2 2.2M12 19l-2.2-2.2M12 19l2.2 2.2M5 12l2.2-2.2M5 12l2.2 2.2M19 12l-2.2-2.2M19 12l-2.2 2.2" /></svg>REEFER</span>
+                            : <span className="est-tag"><svg className="est-ico" style={{ color: "#FF6B00" }} width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.6" fill="currentColor" /><g stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M19.4 4.6l-1.7 1.7M6.3 17.7l-1.7 1.7" /></g></svg>DRY</span>}
                           <div className="est-refnum">{e.ref.split("-").slice(1).reverse().join("")}</div>
                         </div>
                       </div>
