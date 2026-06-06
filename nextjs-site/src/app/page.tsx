@@ -10,6 +10,7 @@ import UnitConverter from "@/components/UnitConverter";
 import NetworkMap from "@/components/NetworkMap";
 import Ticker from "@/components/Ticker";
 import CalculateRate from "@/components/CalculateRate";
+import HeroQuote from "@/components/HeroQuote";
 import { asset } from "@/lib/site";
 
 const BRANDS = ["CARGOMAX", "portlink", "NORDFREIGHT", "veritas3pl", "ARC LOGISTICS", "Halo Freight", "CONTAINERWORKS", "Meridian Drayage", "Atlas BCO", "Northstar Cargo"];
@@ -53,7 +54,7 @@ export default function Home() {
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-16 md:py-24">
           <div className="grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-stretch">
             {/* LEFT — instant rate calculator */}
-            <CalculateRate compact />
+            <HeroQuote />
             {/* RIGHT — headline */}
             <div className="flex flex-col justify-center h-full">
               <div className="inline-flex items-center gap-2 self-start rounded-md px-3.5 py-1.5 text-[11px] font-semibold mb-5" style={{ background: "rgba(255,59,48,0.16)", border: "1px solid rgba(255,59,48,0.4)" }}>
