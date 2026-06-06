@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { asset } from "@/lib/site";
 
 type Est = { ref: string; customer: string; email: string; pickup: string; pickupSub: string; drop: string; dropSub: string; container: string; miles: number; price: string | null; finalPrice?: string; status: string; stream: number; created: string };
 const SEED: Est[] = [
@@ -65,8 +64,8 @@ export default function Page() {
                         <span className="est-cont" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="2.5" width="19" height="19" rx="3" stroke="currentColor" strokeWidth="1.4" strokeDasharray="3 2.4" /><rect x="8" y="8" width="8" height="8" rx="1.6" fill="#2E6BD6" /><rect x="10.2" y="10.2" width="3.6" height="3.6" rx="0.8" fill="#fff" fillOpacity="0.9" /></svg></span>
                         <div style={{ minWidth: 0 }}>
                           {e.container === "reefer"
-                            ? <span className="est-tag"><img className="est-ico" src={asset("/ic-reefer.png")} alt="" />REEFER</span>
-                            : <span className="est-tag"><img className="est-ico" src={asset("/ic-dry.png")} alt="" />DRY</span>}
+                            ? <span className="est-tag"><svg className="est-ico" style={{ color: "#2E8BE6" }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M2 12h20M5 5l14 14M19 5L5 19" /><path d="M12 5l-2.2 2.2M12 5l2.2 2.2M12 19l-2.2-2.2M12 19l2.2 2.2M5 12l2.2-2.2M5 12l2.2 2.2M19 12l-2.2-2.2M19 12l-2.2 2.2" /></svg>REEFER</span>
+                            : <span className="est-tag"><svg className="est-ico" style={{ color: "#FF6B00" }} viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.6" fill="currentColor" /><g stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M19.4 4.6l-1.7 1.7M6.3 17.7l-1.7 1.7" /></g></svg>DRY</span>}
                           <div className="est-refnum">{e.ref.split("-").slice(1).reverse().join("")}</div>
                         </div>
                       </div>

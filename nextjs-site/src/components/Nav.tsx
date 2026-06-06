@@ -41,7 +41,7 @@ export default function Nav() {
           <Link href="/#how" className="hover:text-white">How it works</Link>
           <Link href="/#features" className="hover:text-white">Platform</Link>
           <Link href="/#pricing" className="hover:text-white">Pricing</Link>
-          <Link href="/estimates" className="nav-blink">Estimates</Link>
+          <Link href="/estimates" className="nav-blink">Drayage</Link>
         </nav>
         <div className="flex items-center gap-2.5">
           <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5">Sign in</Link>
