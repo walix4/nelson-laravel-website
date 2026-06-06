@@ -124,7 +124,7 @@ export default function HeroQuote() {
             <div><label className={labelCls}>Container size</label><GlassSelect value={size} onChange={setSize} options={SIZE} /></div>
             <div><label className={labelCls}>Weight</label><GlassSelect value={wclass} onChange={setWclass} options={WCLASS} /></div>
           </div>
-          <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5"><span className="label">Calculate instant rate</span></button>
+          <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5"><span className="label">Get Your Quote Now</span></button>
           <p className="text-[10px] text-white/45 text-center mt-3">No login · No card · Rates lock for 24h</p>
         </form>
       )}
