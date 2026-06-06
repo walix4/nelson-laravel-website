@@ -31,6 +31,31 @@ const usGeo = topojson.feature(usTopo as any, (usTopo as any).objects.states) as
 const projection = geoAlbersUsa().fitSize([W, H], usGeo);
 const pathGen = geoPath(projection);
 const stateShapes = usGeo.features.map((f: any) => ({ d: pathGen(f) || "", region: REGION_OF[f.properties?.name] }));
+const proj = (lng: number, lat: number): [number, number] => (projection([lng, lat]) as [number, number]) || [0, 0];
+
+// port -> inland hub routes (from the rate map)
+type LngLat = [number, number];
+type Route = { name: string; color: string; port: LngLat; dest: LngLat };
+const CITY: Record<string, LngLat> = {
+  Chicago: [-87.6298, 41.8781], Denver: [-104.9903, 39.7392], Dallas: [-96.797, 32.7767], Atlanta: [-84.388, 33.749],
+  "Washington DC": [-77.0369, 38.9072], Charlotte: [-80.8431, 35.2271],
+};
+const ROUTES: Route[] = [
+  { name: "Seattle", color: "#2B7CC4", port: [-122.33, 47.6], dest: CITY.Chicago },
+  { name: "Oakland", color: "#34A853", port: [-122.27, 37.8], dest: CITY.Denver },
+  { name: "LA / Long Beach", color: "#E53535", port: [-118.19, 33.77], dest: CITY.Dallas },
+  { name: "San Diego", color: "#E0529B", port: [-117.16, 32.72], dest: CITY.Dallas },
+  { name: "Houston", color: "#00B4B4", port: [-95.37, 29.76], dest: CITY.Dallas },
+  { name: "New Orleans", color: "#00CC88", port: [-90.07, 29.95], dest: CITY.Dallas },
+  { name: "New York / NJ", color: "#FF9A00", port: [-74.05, 40.7], dest: CITY.Chicago },
+  { name: "Baltimore", color: "#B06FD8", port: [-76.61, 39.29], dest: CITY["Washington DC"] },
+  { name: "Virginia", color: "#8C7BFF", port: [-76.29, 36.85], dest: CITY.Charlotte },
+  { name: "Charleston", color: "#2BC4A8", port: [-79.93, 32.78], dest: CITY.Charlotte },
+  { name: "Savannah", color: "#FF6B00", port: [-81.09, 32.08], dest: CITY.Atlanta },
+  { name: "Tampa", color: "#FFB300", port: [-82.46, 27.95], dest: CITY.Atlanta },
+  { name: "Miami", color: "#FFD700", port: [-80.19, 25.76], dest: CITY.Atlanta },
+];
+const DEST_NAMES = Array.from(new Set(ROUTES.map((r) => Object.keys(CITY).find((k) => CITY[k] === r.dest)!)));
 
 function RegionCard({ title, color, states }: { title: string; color: string; states: string[] }) {
   return (
@@ -62,6 +87,18 @@ export default function RateMapPage() {
               {stateShapes.map((s: { d: string; region?: string }, i: number) => (
                 <path key={i} d={s.d} fill={s.region ? COLOR_OF[s.region] : "#54657F"} stroke="#0B2350" strokeWidth={0.9} strokeLinejoin="round" />
               ))}
+              {/* connector routes (white casing + colored line) */}
+              {ROUTES.map((r) => { const a = proj(...r.port); const b = proj(...r.dest); return (
+                <g key={r.name}><line x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="rgba(6,20,56,0.55)" strokeWidth={4} strokeLinecap="round" /><line x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={r.color} strokeWidth={2.4} strokeLinecap="round" /></g>
+              ); })}
+              {/* destination cities */}
+              {DEST_NAMES.map((c) => { const [x, y] = proj(...CITY[c]); return (
+                <g key={c}><circle cx={x} cy={y} r={4.5} fill="#fff" stroke="#0B2350" strokeWidth={1.5} /><text x={x + 9} y={y + 4} fill="#fff" fontSize={12.5} fontWeight={800} letterSpacing="0.5" style={{ paintOrder: "stroke", stroke: "rgba(6,20,56,0.9)", strokeWidth: 3 }}>{c.toUpperCase()}</text></g>
+              ); })}
+              {/* port dots */}
+              {ROUTES.map((r) => { const [x, y] = proj(...r.port); return (
+                <g key={"p" + r.name}><circle cx={x} cy={y} r={9} fill={r.color} opacity={0.22} /><circle cx={x} cy={y} r={5.5} fill={r.color} stroke="#fff" strokeWidth={1.5} /></g>
+              ); })}
             </svg>
           </div>
 
