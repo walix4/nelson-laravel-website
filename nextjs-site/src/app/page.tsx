@@ -63,7 +63,7 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 self-start rounded-md px-3.5 py-1.5 text-[11px] font-semibold mb-5" style={{ background: "rgba(255,107,0,0.16)", border: "1px solid rgba(255,107,0,0.4)" }}>
                 <span className="live-dot" /> Commercial truck toll data — updated every 15 minutes
               </div>
-              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">Toll intelligence for <span className="bg-gradient-to-r from-[#FFD36B] via-[#FF9A5B] to-[#FF6B00] bg-clip-text text-transparent">trucks &amp; container freight.</span></h1>
+              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">Toll Intelligence for <span className="bg-gradient-to-r from-[#FFD36B] via-[#FF9A5B] to-[#FF6B00] bg-clip-text text-transparent">Drayage Container &amp; Truck Freight.</span></h1>
               <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Class-aware toll rates for drayage, intermodal, and heavy freight — from port gates to inland ramps. Power TMS, fleet, and shipping platforms with one API.</p>
               <div className="mt-8 grid w-fit grid-cols-2 gap-3">
                 {/* App Store badge */}
