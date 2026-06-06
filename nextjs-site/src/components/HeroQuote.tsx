@@ -92,7 +92,7 @@ export default function HeroQuote() {
     <div className="reveal rounded-lg bg-white/[0.08] border border-[var(--red)]/30 backdrop-blur-sm shadow-2xl p-6 md:p-7 w-full max-w-[460px] mx-auto lg:mx-0 relative overflow-hidden">
       {phase !== "result" && (
         <form onSubmit={run} className="flex flex-col">
-          <h3 className="display text-[20px] md:text-[22px] text-white leading-tight">Calculate Your Drayage Rate</h3>
+          <h3 className="display text-[20px] md:text-[22px] text-white leading-tight">Get instant quote</h3>
           <p className="text-[12.5px] text-white/55 mt-1.5">Price a container move from port gate to door.</p>
           <div className="mt-5 grid grid-cols-3 gap-2">
             {([["drayage", "Drayage"], ["porttoport", "Port To Port"], ["intermodal", "Intermodal"]] as [string, string][]).map(([v, l]) => (
@@ -116,7 +116,7 @@ export default function HeroQuote() {
 
       {phase === "result" && res && (
         <div>
-          <h3 className="display text-[20px] text-white leading-tight">Calculate Your Drayage Rate</h3>
+          <h3 className="display text-[20px] text-white leading-tight">Get instant quote</h3>
           <div className="mt-4 text-[10px] uppercase tracking-[0.16em] font-bold text-[#7CF0B0] flex items-center gap-1.5"><span className="live-dot" /> Live rate · {trip === "round" ? "round trip" : "one way"} · locked 24h</div>
           <div className="mt-2 flex items-baseline gap-2">
             <span className="display text-[44px] md:text-[48px] text-white num leading-none">${N(res.total)}</span>
