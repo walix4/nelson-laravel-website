@@ -16,6 +16,12 @@ const projection = geoAlbersUsa().fitSize([W, H], statesGeo as any);
 const pathGen = geoPath(projection);
 const proj = (lng: number, lat: number): [number, number] => (projection([lng, lat]) as [number, number]) || [0, 0];
 const statePaths = (statesGeo as any).features.map((f: any) => pathGen(f) || "");
+const STATE_ABBR: Record<string, string> = {
+  Alabama: "AL", Alaska: "AK", Arizona: "AZ", Arkansas: "AR", California: "CA", Colorado: "CO", Connecticut: "CT", Delaware: "DE", "District of Columbia": "DC", Florida: "FL", Georgia: "GA", Hawaii: "HI", Idaho: "ID", Illinois: "IL", Indiana: "IN", Iowa: "IA", Kansas: "KS", Kentucky: "KY", Louisiana: "LA", Maine: "ME", Maryland: "MD", Massachusetts: "MA", Michigan: "MI", Minnesota: "MN", Mississippi: "MS", Missouri: "MO", Montana: "MT", Nebraska: "NE", Nevada: "NV", "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "New York": "NY", "North Carolina": "NC", "North Dakota": "ND", Ohio: "OH", Oklahoma: "OK", Oregon: "OR", Pennsylvania: "PA", "Rhode Island": "RI", "South Carolina": "SC", "South Dakota": "SD", Tennessee: "TN", Texas: "TX", Utah: "UT", Vermont: "VT", Virginia: "VA", Washington: "WA", "West Virginia": "WV", Wisconsin: "WI", Wyoming: "WY",
+};
+const stateLabels = (statesGeo as any).features
+  .map((f: any) => { const c = pathGen.centroid(f); return { abbr: STATE_ABBR[f.properties?.name] || "", x: c[0], y: c[1] }; })
+  .filter((s: any) => s.abbr && isFinite(s.x) && isFinite(s.y));
 
 type LngLat = [number, number];
 type Port = { name: string; city: string; miles: number; color: string; port: LngLat; dest: LngLat };
@@ -97,28 +103,32 @@ export default function RateMapPage() {
             </div>
 
             <div className="order-1 lg:order-2">
-              <div className="relative w-full rounded-2xl overflow-hidden" style={{ background: "radial-gradient(700px 420px at 50% 28%,rgba(58,95,192,0.18),transparent 70%),linear-gradient(160deg,#0a2350,#06143A)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div className="relative w-full rounded-2xl overflow-hidden p-3 md:p-4" style={{ background: "#FFFFFF", border: "1px solid rgba(11,35,80,0.1)", boxShadow: "0 24px 60px -30px rgba(11,35,80,0.4)" }}>
                 <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block" role="img" aria-label="US drayage rate map">
                   {/* states */}
                   {statePaths.map((d: string, i: number) => (
-                    <path key={i} d={d} fill="rgba(151,170,200,0.42)" stroke="rgba(11,35,80,0.55)" strokeWidth={0.6} strokeLinejoin="round" />
+                    <path key={i} d={d} className="usmap-state" strokeLinejoin="round" />
+                  ))}
+                  {/* state abbreviations */}
+                  {stateLabels.map((s: { abbr: string; x: number; y: number }) => (
+                    <text key={s.abbr} x={s.x} y={s.y} textAnchor="middle" dy="0.32em" fontSize={9} fontWeight={700} fill="#94A3B8" pointerEvents="none">{s.abbr}</text>
                   ))}
                   {/* connector lines */}
                   {ALL.map((p) => {
                     const a = proj(p.port[0], p.port[1]); const b = proj(p.dest[0], p.dest[1]);
-                    return <line key={p.name} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={p.color} strokeWidth={2.4} strokeLinecap="round" opacity={0.9} />;
+                    return <line key={p.name} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={p.color} strokeWidth={2.4} strokeLinecap="round" opacity={0.92} />;
                   })}
                   {/* reference cities */}
                   {REF_CITIES.map((c) => { const [x, y] = proj(CITIES[c][0], CITIES[c][1]); return (
-                    <g key={c}><circle cx={x} cy={y} r={3.2} fill="rgba(255,255,255,0.55)" /><text x={x + 7} y={y + 3.5} fill="rgba(255,255,255,0.6)" fontSize={11} fontWeight={600} letterSpacing="0.5">{c.toUpperCase()}</text></g>
+                    <g key={c}><circle cx={x} cy={y} r={3.2} fill="#64748B" /><text x={x + 7} y={y + 3.5} fill="#64748B" fontSize={11} fontWeight={600} letterSpacing="0.5">{c.toUpperCase()}</text></g>
                   ); })}
                   {/* destination cities */}
                   {DEST_NAMES.map((c) => { const [x, y] = proj(CITIES[c][0], CITIES[c][1]); return (
-                    <g key={c}><circle cx={x} cy={y} r={4.5} fill="#fff" stroke="rgba(255,255,255,0.35)" strokeWidth={4} /><circle cx={x} cy={y} r={4.5} fill="#fff" /><text x={x + 9} y={y + 4} fill="#fff" fontSize={12.5} fontWeight={800} letterSpacing="0.5" style={{ paintOrder: "stroke", stroke: "rgba(6,20,56,0.85)", strokeWidth: 3 }}>{c.toUpperCase()}</text></g>
+                    <g key={c}><circle cx={x} cy={y} r={4.5} fill="#0B2350" stroke="#fff" strokeWidth={1.5} /><text x={x + 9} y={y + 4} fill="#0B2350" fontSize={12.5} fontWeight={800} letterSpacing="0.5" style={{ paintOrder: "stroke", stroke: "#fff", strokeWidth: 3 }}>{c.toUpperCase()}</text></g>
                   ); })}
                   {/* port dots */}
                   {ALL.map((p) => { const [x, y] = proj(p.port[0], p.port[1]); return (
-                    <g key={p.name}><circle cx={x} cy={y} r={9} fill={p.color} opacity={0.18} /><circle cx={x} cy={y} r={5.5} fill={p.color} stroke="#fff" strokeWidth={1.2} /></g>
+                    <g key={p.name}><circle cx={x} cy={y} r={9} fill={p.color} opacity={0.2} /><circle cx={x} cy={y} r={5.5} fill={p.color} stroke="#fff" strokeWidth={1.5} /></g>
                   ); })}
                 </svg>
               </div>

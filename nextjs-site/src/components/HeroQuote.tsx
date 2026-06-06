@@ -52,6 +52,7 @@ const fieldCls = "w-full rounded bg-white/[0.07] px-3 py-2.5 text-[14px] text-wh
 export default function HeroQuote() {
   const [mode, setMode] = useState<string | null>(null);
   const [dir, setDir] = useState<string | null>(null);
+  const [showTerms, setShowTerms] = useState(false);
   const [from, setFrom] = useState("APM Terminals — Elizabeth, NJ");
   const [to, setTo] = useState("Philadelphia, PA, USA");
   const [container, setContainer] = useState("dry");
@@ -126,7 +127,10 @@ export default function HeroQuote() {
           </div>
           <div className="mt-5 flex gap-2 rounded-md px-3 py-2.5" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
             <svg className="shrink-0 mt-0.5" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
-            <p className="text-[10px] leading-[1.5] text-white/55">Prices can vary due to our dynamic pricing system, which adjusts fares based on real-time factors like demand, traffic, and trip duration. The final price may differ from this upfront estimate if changes are made during the trip — adding stops, changing the destination, or if unexpected traffic significantly alters the route or time.</p>
+            <div className="min-w-0">
+              <p className="text-[10px] leading-[1.5] text-white/55" style={showTerms ? undefined : ({ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" } as React.CSSProperties)}>Prices can vary due to our dynamic pricing system, which adjusts fares based on real-time factors like demand, traffic, and trip duration. The final price may differ from this upfront estimate if changes are made during the trip — adding stops, changing the destination, or if unexpected traffic significantly alters the route or time.</p>
+              <button type="button" onClick={() => setShowTerms((v) => !v)} className="mt-1 text-[10px] font-bold text-[var(--red)] hover:underline">{showTerms ? "Read less" : "Read more"}</button>
+            </div>
           </div>
           <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-3"><span className="label">Get Your Quote Now</span></button>
           <p className="text-[10px] text-white/45 text-center mt-3">No login · No card · Rates lock for 24h</p>

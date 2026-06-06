@@ -93,6 +93,9 @@
     .port-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.18);border-radius:8px;border:2px solid transparent;background-clip:padding-box;}
     .port-scroll::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.32);background-clip:padding-box;}
 
+    .usmap-state{fill:#E2E8F2;stroke:#FFFFFF;stroke-width:0.7;transition:fill .15s ease;}
+    .usmap-state:hover{fill:#C3D2E8;}
+
     .btn-primary{background:linear-gradient(180deg,var(--red) 0%,var(--red-2) 100%);color:#fff;font-weight:600;letter-spacing:0.02em;border:1px solid rgba(255,255,255,0.18);box-shadow:0 14px 30px -10px rgba(255,59,48,0.55),inset 0 1px 0 rgba(255,255,255,0.4);transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s,filter .2s;}
     .btn-primary:hover{transform:translateY(-1px);box-shadow:0 20px 40px -10px rgba(255,59,48,0.7),inset 0 1px 0 rgba(255,255,255,0.5);filter:saturate(1.1);}
     .btn-primary.loading .label{opacity:0;}
