@@ -32,7 +32,7 @@ const SHIP: { title: string; icon: React.ReactNode; rows: Lane[] }[] = [
 export default function Home() {
   return (
     <>
-      <div className="text-[11px] font-medium border-b" style={{ background: "#4DA3FF", color: "var(--navy)", borderColor: "rgba(11,35,80,0.15)" }}>
+      <div className="text-[11px] font-medium border-b" style={{ background: "var(--red)", color: "#fff", borderColor: "rgba(0,0,0,0.15)" }}>
         <div className="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
           <div className="flex items-center gap-5">
             <span className="flex items-center gap-2"><span className="live-dot" /><span>Network <b>LIVE</b></span></span>
