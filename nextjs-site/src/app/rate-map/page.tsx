@@ -5,74 +5,50 @@ import { geoAlbersUsa, geoPath } from "d3-geo";
 import * as topojson from "topojson-client";
 import usTopo from "@/data/us-states-10m.json";
 
-const MPG = 7;
-const DIESEL = 5.15;
-const fuelOf = (miles: number) => (miles / MPG) * DIESEL;
-const usd = (n: number) => n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
 const W = 960;
 const H = 600;
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+type Region = { key: string; title: string; color: string; states: string[] };
+const REGIONS: Region[] = [
+  { key: "1", title: "Region 1", color: "#AEC0D8", states: ["Washington", "Oregon", "Idaho", "Montana", "Wyoming"] },
+  { key: "2", title: "Region 2", color: "#ECF1F8", states: ["North Dakota", "South Dakota", "Nebraska", "Kansas", "Minnesota", "Iowa", "Missouri", "Wisconsin", "Illinois", "Michigan", "Indiana", "Ohio", "Kentucky"] },
+  { key: "3", title: "Region 3", color: "#8AA0C0", states: ["Maine", "New Hampshire", "Vermont", "Massachusetts", "New York", "Rhode Island", "Connecticut", "New Jersey", "Pennsylvania"] },
+  { key: "4", title: "Region 4", color: "#D6DFEC", states: ["California", "Nevada", "Arizona", "New Mexico", "Utah", "Colorado"] },
+  { key: "5", title: "Region 5", color: "#A2B5CF", states: ["Texas", "Oklahoma", "Louisiana", "Arkansas"] },
+  { key: "6", title: "Region 6", color: "#C0CDE0", states: ["West Virginia", "Delaware", "Maryland", "Virginia", "District of Columbia", "Tennessee", "North Carolina", "South Carolina", "Georgia", "Alabama", "Mississippi", "Florida"] },
+];
+const UNASSIGNED = { title: "Unassigned Region", color: "#6E7E99", states: ["Alaska", "Hawaii"] };
+const DISPLAY: Record<string, string> = { "District of Columbia": "Wash. D.C." };
+
+const REGION_OF: Record<string, string> = {};
+REGIONS.forEach((r) => r.states.forEach((s) => { REGION_OF[s] = r.key; }));
+UNASSIGNED.states.forEach((s) => { REGION_OF[s] = "U"; });
+const COLOR_OF: Record<string, string> = { U: UNASSIGNED.color };
+REGIONS.forEach((r) => { COLOR_OF[r.key] = r.color; });
+
 const usGeo = topojson.feature(usTopo as any, (usTopo as any).objects.states) as any;
 const projection = geoAlbersUsa().fitSize([W, H], usGeo);
 const pathGen = geoPath(projection);
-const proj = (lng: number, lat: number): [number, number] => (projection([lng, lat]) as [number, number]) || [0, 0];
-const statePaths = usGeo.features.map((f: any) => pathGen(f) || "");
-const STATE_ABBR: Record<string, string> = {
-  Alabama: "AL", Alaska: "AK", Arizona: "AZ", Arkansas: "AR", California: "CA", Colorado: "CO", Connecticut: "CT", Delaware: "DE", "District of Columbia": "DC", Florida: "FL", Georgia: "GA", Hawaii: "HI", Idaho: "ID", Illinois: "IL", Indiana: "IN", Iowa: "IA", Kansas: "KS", Kentucky: "KY", Louisiana: "LA", Maine: "ME", Maryland: "MD", Massachusetts: "MA", Michigan: "MI", Minnesota: "MN", Mississippi: "MS", Missouri: "MO", Montana: "MT", Nebraska: "NE", Nevada: "NV", "New Hampshire": "NH", "New Jersey": "NJ", "New Mexico": "NM", "New York": "NY", "North Carolina": "NC", "North Dakota": "ND", Ohio: "OH", Oklahoma: "OK", Oregon: "OR", Pennsylvania: "PA", "Rhode Island": "RI", "South Carolina": "SC", "South Dakota": "SD", Tennessee: "TN", Texas: "TX", Utah: "UT", Vermont: "VT", Virginia: "VA", Washington: "WA", "West Virginia": "WV", Wisconsin: "WI", Wyoming: "WY",
-};
-const stateLabels = usGeo.features
-  .map((f: any) => { const c = pathGen.centroid(f); return { abbr: STATE_ABBR[f.properties?.name] || "", x: c[0], y: c[1] }; })
-  .filter((s: any) => s.abbr && isFinite(s.x) && isFinite(s.y));
+const stateShapes = usGeo.features.map((f: any) => ({ d: pathGen(f) || "", region: REGION_OF[f.properties?.name] }));
 
-type LngLat = [number, number];
-type Port = { name: string; city: string; miles: number; color: string; port: LngLat; dest: LngLat };
+// big region number positions = centroid of merged region geometry
+const stateGeoms = (usTopo as any).objects.states.geometries;
+const regionNumbers = REGIONS.map((r) => {
+  const geoms = stateGeoms.filter((g: any) => REGION_OF[g.properties?.name] === r.key);
+  const merged = topojson.merge(usTopo as any, geoms);
+  const c = pathGen.centroid({ type: "Feature", geometry: merged, properties: {} } as any);
+  return { key: r.key, x: c[0], y: c[1] };
+}).filter((n) => isFinite(n.x) && isFinite(n.y));
 
-const CITIES: Record<string, LngLat> = {
-  Chicago: [-87.6298, 41.8781], Denver: [-104.9903, 39.7392], Dallas: [-96.797, 32.7767], Atlanta: [-84.388, 33.749],
-  "Washington DC": [-77.0369, 38.9072], Charlotte: [-80.8431, 35.2271],
-  "Salt Lake City": [-111.891, 40.7608], "Kansas City": [-94.5786, 39.0997], Phoenix: [-112.074, 33.4484],
-};
-
-const LEFT: Port[] = [
-  { name: "Port of Seattle", city: "Chicago", miles: 2064, color: "#2B7CC4", port: [-122.33, 47.6], dest: CITIES.Chicago },
-  { name: "Port of Oakland", city: "Denver", miles: 1235, color: "#34A853", port: [-122.27, 37.8], dest: CITIES.Denver },
-  { name: "Port of LA / Long Beach", city: "Dallas", miles: 1419, color: "#E53535", port: [-118.19, 33.77], dest: CITIES.Dallas },
-  { name: "Port of San Diego", city: "Dallas", miles: 1322, color: "#E0529B", port: [-117.16, 32.72], dest: CITIES.Dallas },
-  { name: "Port of Houston", city: "Dallas", miles: 239, color: "#00B4B4", port: [-95.37, 29.76], dest: CITIES.Dallas },
-  { name: "Port of New Orleans", city: "Dallas", miles: 504, color: "#00CC88", port: [-90.07, 29.95], dest: CITIES.Dallas },
-];
-const RIGHT: Port[] = [
-  { name: "Port of New York / NJ", city: "Chicago", miles: 791, color: "#FF9A00", port: [-74.05, 40.7], dest: CITIES.Chicago },
-  { name: "Port of Baltimore", city: "Washington DC", miles: 38, color: "#B06FD8", port: [-76.61, 39.29], dest: CITIES["Washington DC"] },
-  { name: "Port of Virginia", city: "Charlotte", miles: 340, color: "#8C7BFF", port: [-76.29, 36.85], dest: CITIES.Charlotte },
-  { name: "Port of Charleston", city: "Charlotte", miles: 211, color: "#2BC4A8", port: [-79.93, 32.78], dest: CITIES.Charlotte },
-  { name: "Port of Savannah", city: "Atlanta", miles: 255, color: "#FF6B00", port: [-81.09, 32.08], dest: CITIES.Atlanta },
-  { name: "Port of Tampa", city: "Atlanta", miles: 470, color: "#FFB300", port: [-82.46, 27.95], dest: CITIES.Atlanta },
-  { name: "Port of Miami", city: "Atlanta", miles: 663, color: "#FFD700", port: [-80.19, 25.76], dest: CITIES.Atlanta },
-];
-const ALL = [...LEFT, ...RIGHT];
-const DEST_NAMES = Array.from(new Set(ALL.map((p) => p.city)));
-const REF_CITIES = ["Salt Lake City", "Kansas City", "Phoenix"];
-
-function Card({ p, align }: { p: Port; align: "left" | "right" }) {
+function RegionCard({ title, color, states }: { title: string; color: string; states: string[] }) {
   return (
-    <div className="rounded-lg p-3.5 relative overflow-hidden" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderLeft: align === "left" ? `3px solid ${p.color}` : undefined, borderRight: align === "right" ? `3px solid ${p.color}` : undefined }}>
+    <div className="rounded-lg p-3.5" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
       <div className="flex items-center gap-2">
-        <span className="grid place-items-center rounded-md" style={{ width: 22, height: 22, background: `${p.color}22`, border: `1px solid ${p.color}55` }}>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={p.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="2.5" /><path d="M12 7.5V21M5 12H2a10 10 0 0 0 20 0h-3M12 12l-4 4M12 12l4 4" /></svg>
-        </span>
-        <div className="text-[11px] font-extrabold uppercase tracking-[0.06em] text-white leading-tight">{p.name}</div>
+        <span className="rounded" style={{ width: 12, height: 12, background: color, border: "1px solid rgba(255,255,255,0.35)" }} />
+        <div className="text-[12px] font-extrabold uppercase tracking-[0.08em] text-[var(--red)]">{title}</div>
       </div>
-      <div className="mt-2.5 flex items-center justify-between text-[11.5px]">
-        <span className="text-white/55">Miles to {p.city}</span>
-        <span className="num font-bold text-white">{p.miles.toLocaleString()}</span>
-      </div>
-      <div className="mt-1 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
-      <div className="mt-1.5 flex items-center justify-between text-[11.5px]">
-        <span className="text-white/55">Fuel Cost</span>
-        <span className="num font-extrabold" style={{ color: p.color }}>${usd(fuelOf(p.miles))}</span>
-      </div>
+      <div className="mt-2 text-[11.5px] leading-[1.65] text-white/70">{states.map((s) => DISPLAY[s] || s).join(" · ")}</div>
     </div>
   );
 }
@@ -82,71 +58,32 @@ export default function RateMapPage() {
     <>
       <Nav />
       <section className="py-9 md:py-12" style={{ background: "linear-gradient(160deg,#061A38 0%,#0B2350 60%,#0d3570 100%)" }}>
-        <div className="max-w-[1500px] mx-auto px-5">
-          {/* header */}
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5 mb-7">
-            <div>
-              <div className="text-[11px] uppercase tracking-[0.24em] font-semibold text-[var(--red)]">Port terminals drayage rate guide</div>
-              <h1 className="display text-[34px] md:text-[50px] text-white leading-[1.02] mt-2">Drayage Rate Map</h1>
-              <p className="mt-2.5 text-white/60 text-[14.5px] max-w-xl">Average over-the-road fuel cost from every major U.S. container port to its nearest inland hub.</p>
-            </div>
-            <div className="rounded-xl p-4 w-full lg:w-[340px] shrink-0" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,107,0,0.35)" }}>
-              <div className="text-[10.5px] uppercase tracking-[0.16em] font-bold text-[var(--red)]">Rate calculation assumptions</div>
-              <div className="mt-3 flex items-center justify-between text-[12.5px]"><span className="text-white/70">Miles per gallon (diesel)</span><span className="num font-extrabold text-white">{MPG} MPG</span></div>
-              <div className="mt-2 flex items-center justify-between text-[12.5px]"><span className="text-white/70">Diesel price per gallon</span><span className="num font-extrabold text-white">${DIESEL.toFixed(2)}</span></div>
-              <div className="mt-3 rounded-md px-3 py-2 text-[11.5px] num font-semibold text-white/90 text-center" style={{ background: "rgba(255,107,0,0.16)", border: "1px solid rgba(255,107,0,0.3)" }}>(Total miles ÷ {MPG}) × ${DIESEL.toFixed(2)} = Fuel Cost</div>
-            </div>
+        <div className="max-w-[1400px] mx-auto px-5">
+          <div className="max-w-2xl mb-7">
+            <div className="text-[11px] uppercase tracking-[0.24em] font-semibold text-[var(--red)]">Drayage service coverage</div>
+            <h1 className="display text-[34px] md:text-[50px] text-white leading-[1.02] mt-2">Our 6 Service Regions</h1>
+            <p className="mt-2.5 text-white/60 text-[14.5px] max-w-xl">Nationwide drayage coverage organized into six operating regions, port to door.</p>
           </div>
 
-          {/* main grid */}
-          <div className="grid lg:grid-cols-[235px_1fr_235px] gap-5 items-start">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-3 order-2 lg:order-1">
-              {LEFT.map((p) => <Card key={p.name} p={p} align="left" />)}
-            </div>
+          {/* region map */}
+          <div className="mx-auto max-w-[1000px]">
+            <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block" role="img" aria-label="US drayage service regions">
+              {stateShapes.map((s: { d: string; region?: string }, i: number) => (
+                <path key={i} d={s.d} fill={s.region ? COLOR_OF[s.region] : "#54657F"} stroke="#0B2350" strokeWidth={0.9} strokeLinejoin="round" />
+              ))}
+              {regionNumbers.map((n) => (
+                <g key={n.key} pointerEvents="none">
+                  <text x={n.x} y={n.y - 16} textAnchor="middle" fontSize={12} fontWeight={800} letterSpacing="2" fill="#FF3B30">REGION</text>
+                  <text x={n.x} y={n.y} textAnchor="middle" dy="0.34em" fontSize={52} fontWeight={900} fill="#FF3B30">{n.key}</text>
+                </g>
+              ))}
+            </svg>
+          </div>
 
-            <div className="order-1 lg:order-2">
-              <div className="relative w-full rounded-2xl overflow-hidden p-3 md:p-4" style={{ background: "#FFFFFF", border: "1px solid rgba(11,35,80,0.1)", boxShadow: "0 24px 60px -30px rgba(11,35,80,0.4)" }}>
-                <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block" role="img" aria-label="US drayage rate map">
-                  {/* states */}
-                  {statePaths.map((d: string, i: number) => (
-                    <path key={i} d={d} className="usmap-state" strokeLinejoin="round" />
-                  ))}
-                  {/* state abbreviations */}
-                  {stateLabels.map((s: { abbr: string; x: number; y: number }) => (
-                    <text key={s.abbr} x={s.x} y={s.y} textAnchor="middle" dy="0.32em" fontSize={9} fontWeight={700} fill="#94A3B8" pointerEvents="none">{s.abbr}</text>
-                  ))}
-                  {/* connector lines */}
-                  {ALL.map((p) => {
-                    const a = proj(p.port[0], p.port[1]); const b = proj(p.dest[0], p.dest[1]);
-                    return <line key={p.name} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={p.color} strokeWidth={2.4} strokeLinecap="round" opacity={0.92} />;
-                  })}
-                  {/* reference cities */}
-                  {REF_CITIES.map((c) => { const [x, y] = proj(CITIES[c][0], CITIES[c][1]); return (
-                    <g key={c}><circle cx={x} cy={y} r={3.2} fill="#64748B" /><text x={x + 7} y={y + 3.5} fill="#64748B" fontSize={11} fontWeight={600} letterSpacing="0.5">{c.toUpperCase()}</text></g>
-                  ); })}
-                  {/* destination cities */}
-                  {DEST_NAMES.map((c) => { const [x, y] = proj(CITIES[c][0], CITIES[c][1]); return (
-                    <g key={c}><circle cx={x} cy={y} r={4.5} fill="#0B2350" stroke="#fff" strokeWidth={1.5} /><text x={x + 9} y={y + 4} fill="#0B2350" fontSize={12.5} fontWeight={800} letterSpacing="0.5" style={{ paintOrder: "stroke", stroke: "#fff", strokeWidth: 3 }}>{c.toUpperCase()}</text></g>
-                  ); })}
-                  {/* port dots */}
-                  {ALL.map((p) => { const [x, y] = proj(p.port[0], p.port[1]); return (
-                    <g key={p.name}><circle cx={x} cy={y} r={9} fill={p.color} opacity={0.2} /><circle cx={x} cy={y} r={5.5} fill={p.color} stroke="#fff" strokeWidth={1.5} /></g>
-                  ); })}
-                </svg>
-              </div>
-              <div className="mt-4 rounded-lg p-4" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <div className="text-[10.5px] uppercase tracking-[0.16em] font-bold text-[var(--red)]">How to read this map</div>
-                <div className="mt-2.5 grid sm:grid-cols-3 gap-3 text-[12px] text-white/70">
-                  <div className="flex gap-2"><span className="num font-bold" style={{ color: "var(--red)" }}>1.</span> Pick your port terminal from either side.</div>
-                  <div className="flex gap-2"><span className="num font-bold" style={{ color: "var(--red)" }}>2.</span> Follow the line to its inland hub & total miles.</div>
-                  <div className="flex gap-2"><span className="num font-bold" style={{ color: "var(--red)" }}>3.</span> Fuel cost = (miles ÷ {MPG}) × ${DIESEL.toFixed(2)}.</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-3 order-3">
-              {RIGHT.map((p) => <Card key={p.name} p={p} align="right" />)}
-            </div>
+          {/* region legends */}
+          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {REGIONS.map((r) => <RegionCard key={r.key} title={r.title} color={r.color} states={r.states} />)}
+            <RegionCard title={UNASSIGNED.title} color={UNASSIGNED.color} states={UNASSIGNED.states} />
           </div>
         </div>
       </section>
