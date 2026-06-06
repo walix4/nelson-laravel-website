@@ -1,42 +1,51 @@
 "use client";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import { asset } from "@/lib/site";
+import { geoAlbersUsa, geoPath } from "d3-geo";
+import statesGeo from "@/data/us-states.geo.json";
 
 const MPG = 7;
 const DIESEL = 5.15;
-const fuel = (miles: number) => (miles / MPG) * DIESEL;
+const fuelOf = (miles: number) => (miles / MPG) * DIESEL;
 const usd = (n: number) => n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-type Pt = [number, number];
-type Port = { name: string; city: string; miles: number; color: string; port: Pt; dest: Pt };
+const W = 960;
+const H = 600;
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const projection = geoAlbersUsa().fitSize([W, H], statesGeo as any);
+const pathGen = geoPath(projection);
+const proj = (lng: number, lat: number): [number, number] => (projection([lng, lat]) as [number, number]) || [0, 0];
+const statePaths = (statesGeo as any).features.map((f: any) => pathGen(f) || "");
 
-// % positions calibrated to /usa-map.svg silhouette (background-size 92%, centered)
-const CITIES: Record<string, Pt> = {
-  Chicago: [63, 38], Denver: [38, 50], Dallas: [52, 66], Atlanta: [72, 57],
-  "Washington DC": [86, 43], Charlotte: [80, 53],
-  "Salt Lake City": [30, 45], "Kansas City": [55, 48], Phoenix: [22, 67],
+type LngLat = [number, number];
+type Port = { name: string; city: string; miles: number; color: string; port: LngLat; dest: LngLat };
+
+const CITIES: Record<string, LngLat> = {
+  Chicago: [-87.6298, 41.8781], Denver: [-104.9903, 39.7392], Dallas: [-96.797, 32.7767], Atlanta: [-84.388, 33.749],
+  "Washington DC": [-77.0369, 38.9072], Charlotte: [-80.8431, 35.2271],
+  "Salt Lake City": [-111.891, 40.7608], "Kansas City": [-94.5786, 39.0997], Phoenix: [-112.074, 33.4484],
 };
 
 const LEFT: Port[] = [
-  { name: "Port of Seattle", city: "Chicago", miles: 2064, color: "#2B7CC4", port: [13, 20], dest: CITIES.Chicago },
-  { name: "Port of Oakland", city: "Denver", miles: 1235, color: "#34A853", port: [8, 48], dest: CITIES.Denver },
-  { name: "Port of LA / Long Beach", city: "Dallas", miles: 1419, color: "#E53535", port: [11, 61], dest: CITIES.Dallas },
-  { name: "Port of San Diego", city: "Dallas", miles: 1322, color: "#E0529B", port: [14, 66], dest: CITIES.Dallas },
-  { name: "Port of Houston", city: "Dallas", miles: 239, color: "#00B4B4", port: [55, 80], dest: CITIES.Dallas },
-  { name: "Port of New Orleans", city: "Dallas", miles: 504, color: "#00CC88", port: [62, 78], dest: CITIES.Dallas },
+  { name: "Port of Seattle", city: "Chicago", miles: 2064, color: "#2B7CC4", port: [-122.33, 47.6], dest: CITIES.Chicago },
+  { name: "Port of Oakland", city: "Denver", miles: 1235, color: "#34A853", port: [-122.27, 37.8], dest: CITIES.Denver },
+  { name: "Port of LA / Long Beach", city: "Dallas", miles: 1419, color: "#E53535", port: [-118.19, 33.77], dest: CITIES.Dallas },
+  { name: "Port of San Diego", city: "Dallas", miles: 1322, color: "#E0529B", port: [-117.16, 32.72], dest: CITIES.Dallas },
+  { name: "Port of Houston", city: "Dallas", miles: 239, color: "#00B4B4", port: [-95.37, 29.76], dest: CITIES.Dallas },
+  { name: "Port of New Orleans", city: "Dallas", miles: 504, color: "#00CC88", port: [-90.07, 29.95], dest: CITIES.Dallas },
 ];
 const RIGHT: Port[] = [
-  { name: "Port of New York / NJ", city: "Chicago", miles: 791, color: "#FF9A00", port: [90, 33], dest: CITIES.Chicago },
-  { name: "Port of Baltimore", city: "Washington DC", miles: 38, color: "#B06FD8", port: [87, 40], dest: CITIES["Washington DC"] },
-  { name: "Port of Virginia", city: "Charlotte", miles: 340, color: "#8C7BFF", port: [86, 48], dest: CITIES.Charlotte },
-  { name: "Port of Charleston", city: "Charlotte", miles: 211, color: "#2BC4A8", port: [84, 61], dest: CITIES.Charlotte },
-  { name: "Port of Savannah", city: "Atlanta", miles: 255, color: "#FF6B00", port: [83, 58], dest: CITIES.Atlanta },
-  { name: "Port of Tampa", city: "Atlanta", miles: 470, color: "#FFB300", port: [83, 82], dest: CITIES.Atlanta },
-  { name: "Port of Miami", city: "Atlanta", miles: 663, color: "#FFD700", port: [87, 90], dest: CITIES.Atlanta },
+  { name: "Port of New York / NJ", city: "Chicago", miles: 791, color: "#FF9A00", port: [-74.05, 40.7], dest: CITIES.Chicago },
+  { name: "Port of Baltimore", city: "Washington DC", miles: 38, color: "#B06FD8", port: [-76.61, 39.29], dest: CITIES["Washington DC"] },
+  { name: "Port of Virginia", city: "Charlotte", miles: 340, color: "#8C7BFF", port: [-76.29, 36.85], dest: CITIES.Charlotte },
+  { name: "Port of Charleston", city: "Charlotte", miles: 211, color: "#2BC4A8", port: [-79.93, 32.78], dest: CITIES.Charlotte },
+  { name: "Port of Savannah", city: "Atlanta", miles: 255, color: "#FF6B00", port: [-81.09, 32.08], dest: CITIES.Atlanta },
+  { name: "Port of Tampa", city: "Atlanta", miles: 470, color: "#FFB300", port: [-82.46, 27.95], dest: CITIES.Atlanta },
+  { name: "Port of Miami", city: "Atlanta", miles: 663, color: "#FFD700", port: [-80.19, 25.76], dest: CITIES.Atlanta },
 ];
 const ALL = [...LEFT, ...RIGHT];
 const DEST_NAMES = Array.from(new Set(ALL.map((p) => p.city)));
+const REF_CITIES = ["Salt Lake City", "Kansas City", "Phoenix"];
 
 function Card({ p, align }: { p: Port; align: "left" | "right" }) {
   return (
@@ -54,7 +63,7 @@ function Card({ p, align }: { p: Port; align: "left" | "right" }) {
       <div className="mt-1 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
       <div className="mt-1.5 flex items-center justify-between text-[11.5px]">
         <span className="text-white/55">Fuel Cost</span>
-        <span className="num font-extrabold" style={{ color: p.color }}>${usd(fuel(p.miles))}</span>
+        <span className="num font-extrabold" style={{ color: p.color }}>${usd(fuelOf(p.miles))}</span>
       </div>
     </div>
   );
@@ -73,7 +82,6 @@ export default function RateMapPage() {
               <h1 className="display text-[34px] md:text-[50px] text-white leading-[1.02] mt-2">Drayage Rate Map</h1>
               <p className="mt-2.5 text-white/60 text-[14.5px] max-w-xl">Average over-the-road fuel cost from every major U.S. container port to its nearest inland hub.</p>
             </div>
-            {/* assumptions */}
             <div className="rounded-xl p-4 w-full lg:w-[340px] shrink-0" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,107,0,0.35)" }}>
               <div className="text-[10.5px] uppercase tracking-[0.16em] font-bold text-[var(--red)]">Rate calculation assumptions</div>
               <div className="mt-3 flex items-center justify-between text-[12.5px]"><span className="text-white/70">Miles per gallon (diesel)</span><span className="num font-extrabold text-white">{MPG} MPG</span></div>
@@ -84,43 +92,36 @@ export default function RateMapPage() {
 
           {/* main grid */}
           <div className="grid lg:grid-cols-[235px_1fr_235px] gap-5 items-start">
-            {/* left cards */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-3 order-2 lg:order-1">
               {LEFT.map((p) => <Card key={p.name} p={p} align="left" />)}
             </div>
 
-            {/* map */}
             <div className="order-1 lg:order-2">
-              <div className="relative w-full rounded-2xl overflow-hidden" style={{ height: 560, background: "radial-gradient(700px 400px at 50% 30%,rgba(58,95,192,0.18),transparent 70%),linear-gradient(160deg,#0a2350,#06143A)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <div className="absolute inset-0" style={{ backgroundImage: `url(${asset("/usa-map.svg")})`, backgroundSize: "92%", backgroundPosition: "center", backgroundRepeat: "no-repeat", opacity: 0.3, filter: "brightness(0) invert(1)" }} />
-                {/* connector lines */}
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  {ALL.map((p) => (
-                    <line key={p.name} x1={p.port[0]} y1={p.port[1]} x2={p.dest[0]} y2={p.dest[1]} stroke={p.color} strokeWidth="0.45" strokeLinecap="round" opacity="0.85" />
+              <div className="relative w-full rounded-2xl overflow-hidden" style={{ background: "radial-gradient(700px 420px at 50% 28%,rgba(58,95,192,0.18),transparent 70%),linear-gradient(160deg,#0a2350,#06143A)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto block" role="img" aria-label="US drayage rate map">
+                  {/* states */}
+                  {statePaths.map((d: string, i: number) => (
+                    <path key={i} d={d} fill="rgba(151,170,200,0.42)" stroke="rgba(11,35,80,0.55)" strokeWidth={0.6} strokeLinejoin="round" />
                   ))}
+                  {/* connector lines */}
+                  {ALL.map((p) => {
+                    const a = proj(p.port[0], p.port[1]); const b = proj(p.dest[0], p.dest[1]);
+                    return <line key={p.name} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke={p.color} strokeWidth={2.4} strokeLinecap="round" opacity={0.9} />;
+                  })}
+                  {/* reference cities */}
+                  {REF_CITIES.map((c) => { const [x, y] = proj(CITIES[c][0], CITIES[c][1]); return (
+                    <g key={c}><circle cx={x} cy={y} r={3.2} fill="rgba(255,255,255,0.55)" /><text x={x + 7} y={y + 3.5} fill="rgba(255,255,255,0.6)" fontSize={11} fontWeight={600} letterSpacing="0.5">{c.toUpperCase()}</text></g>
+                  ); })}
+                  {/* destination cities */}
+                  {DEST_NAMES.map((c) => { const [x, y] = proj(CITIES[c][0], CITIES[c][1]); return (
+                    <g key={c}><circle cx={x} cy={y} r={4.5} fill="#fff" stroke="rgba(255,255,255,0.35)" strokeWidth={4} /><circle cx={x} cy={y} r={4.5} fill="#fff" /><text x={x + 9} y={y + 4} fill="#fff" fontSize={12.5} fontWeight={800} letterSpacing="0.5" style={{ paintOrder: "stroke", stroke: "rgba(6,20,56,0.85)", strokeWidth: 3 }}>{c.toUpperCase()}</text></g>
+                  ); })}
+                  {/* port dots */}
+                  {ALL.map((p) => { const [x, y] = proj(p.port[0], p.port[1]); return (
+                    <g key={p.name}><circle cx={x} cy={y} r={9} fill={p.color} opacity={0.18} /><circle cx={x} cy={y} r={5.5} fill={p.color} stroke="#fff" strokeWidth={1.2} /></g>
+                  ); })}
                 </svg>
-                {/* destination cities */}
-                {DEST_NAMES.map((c) => (
-                  <span key={c} className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-1.5" style={{ left: `${CITIES[c][0]}%`, top: `${CITIES[c][1]}%` }}>
-                    <span className="block rounded-full bg-white" style={{ width: 8, height: 8, boxShadow: "0 0 0 3px rgba(255,255,255,0.2)" }} />
-                    <span className="text-[9.5px] font-bold uppercase tracking-wide text-white whitespace-nowrap" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.8)" }}>{c}</span>
-                  </span>
-                ))}
-                {/* reference cities */}
-                {["Salt Lake City", "Kansas City", "Phoenix"].map((c) => (
-                  <span key={c} className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center gap-1.5" style={{ left: `${CITIES[c][0]}%`, top: `${CITIES[c][1]}%` }}>
-                    <span className="block rounded-full" style={{ width: 5, height: 5, background: "rgba(255,255,255,0.55)" }} />
-                    <span className="text-[8.5px] font-semibold uppercase tracking-wide text-white/55 whitespace-nowrap">{c}</span>
-                  </span>
-                ))}
-                {/* port dots */}
-                {ALL.map((p) => (
-                  <span key={p.name} title={p.name} className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: `${p.port[0]}%`, top: `${p.port[1]}%` }}>
-                    <span className="block rounded-full" style={{ width: 11, height: 11, background: p.color, boxShadow: `0 0 0 4px ${p.color}33, 0 0 14px ${p.color}` }} />
-                  </span>
-                ))}
               </div>
-              {/* how to read */}
               <div className="mt-4 rounded-lg p-4" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
                 <div className="text-[10.5px] uppercase tracking-[0.16em] font-bold text-[var(--red)]">How to read this map</div>
                 <div className="mt-2.5 grid sm:grid-cols-3 gap-3 text-[12px] text-white/70">
@@ -131,7 +132,6 @@ export default function RateMapPage() {
               </div>
             </div>
 
-            {/* right cards */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-3 order-3">
               {RIGHT.map((p) => <Card key={p.name} p={p} align="right" />)}
             </div>
