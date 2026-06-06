@@ -126,7 +126,7 @@ export default function CalculateRate({ compact = false }: { compact?: boolean }
 
   const formCard = (
       <div className="reveal">
-        <div className="rounded-2xl p-5 md:p-6 lg:p-7 relative overflow-hidden" style={{ background: "#fff", minHeight: phase === "form" ? undefined : 560 }}>
+        <div className={`rounded-2xl p-5 md:p-6 lg:p-7 relative overflow-hidden ${compact ? "calc-glass border border-[var(--red)]/35 backdrop-blur-md shadow-2xl" : ""}`} style={{ background: compact ? "rgba(255,255,255,0.08)" : "#fff", minHeight: phase === "form" ? undefined : 560 }}>
           <div className="flex items-center justify-between">
             <div><div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant quote engine</div><h3 className="display text-[24px] md:text-[26px] text-[var(--navy)] mt-1">Price your move</h3></div>
             <div className="px-2.5 py-1 rounded-md text-[10px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 border border-[var(--navy)]/10">v2026</div>
@@ -147,7 +147,7 @@ export default function CalculateRate({ compact = false }: { compact?: boolean }
               <div>
                 <label className="input-label">Accessorials</label>
                 <div className="mt-2 flex flex-wrap gap-2 text-[11px]">
-                  {ACC.map(([v, label]) => <button type="button" key={v} onClick={() => toggleAcc(v)} className={`px-3 py-1.5 rounded-md border transition ${acc.includes(v) ? "bg-[var(--navy)] text-white border-[var(--navy)]" : "border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80"}`}>{label}</button>)}
+                  {ACC.map(([v, label]) => <button type="button" key={v} onClick={() => toggleAcc(v)} className={`px-3 py-1.5 rounded-md border transition ${acc.includes(v) ? (compact ? "bg-[var(--red)] text-white border-[var(--red)]" : "bg-[var(--navy)] text-white border-[var(--navy)]") : (compact ? "border-white/20 bg-white/[0.06] text-white/80 hover:bg-white/[0.12]" : "border-[var(--navy)]/15 bg-white/60 text-[var(--navy)]/80")}`}>{label}</button>)}
                 </div>
               </div>
               <button type="submit" className="btn-primary w-full py-4 rounded-lg text-[14px] font-semibold" style={{ marginTop: "1.6rem" }}><span className="label">Calculate instant rate</span></button>
@@ -168,7 +168,7 @@ export default function CalculateRate({ compact = false }: { compact?: boolean }
                 {([["Fuel", res.fuel], ["Labor", res.labor], ["Chassis", res.chassis], ["Port", res.port], ["Overhead", res.overhead], ["Access.", res.acc]] as [string, number][]).map(([k, v]) => <div key={k} className="rounded-lg px-2 py-2 bg-[var(--navy)]/5 border border-[var(--navy)]/10"><div className="text-[var(--navy)]/55 uppercase tracking-wider">{k}</div><div className="display text-[var(--navy)] text-[14px] num mt-0.5">${N(v)}</div></div>)}
               </div>
               <div className="mt-3 flex items-center gap-2">
-                <button className="flex-1 py-2.5 rounded-lg text-[12px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)]">Export PDF</button>
+                <button className={`flex-1 py-2.5 rounded-lg text-[12px] font-semibold ${compact ? "bg-[var(--red)] text-white hover:brightness-110" : "bg-[var(--navy)] text-white hover:bg-[var(--navy-2)]"}`}>Export PDF</button>
                 <button className="flex-1 py-2.5 rounded-lg text-[12px] font-semibold border border-[var(--navy)]/20 text-[var(--navy)] hover:bg-[var(--navy)]/5">Request booking</button>
               </div>
               <button type="button" onClick={() => setPhase("form")} className="mt-3 w-full py-2.5 rounded-lg text-[12px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 hover:bg-[var(--navy)]/14 transition flex items-center justify-center gap-1.5">
@@ -178,7 +178,7 @@ export default function CalculateRate({ compact = false }: { compact?: boolean }
           )}
 
           {phase === "loading" && (
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6" style={{ background: "linear-gradient(180deg,rgba(255,255,255,0.94),rgba(240,247,255,0.92))", backdropFilter: "blur(10px)" }}>
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6" style={{ background: compact ? "rgba(8,18,38,0.82)" : "linear-gradient(180deg,rgba(255,255,255,0.94),rgba(240,247,255,0.92))", backdropFilter: "blur(10px)" }}>
               <div className="relative w-16 h-16"><div className="absolute inset-0 rounded-full border-[3px] border-[var(--navy)]/10" /><div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[var(--red)] animate-spin" /></div>
               <div className="display text-[16px] text-[var(--navy)] mt-5">Computing your rate</div>
               <div className="text-[12px] text-[var(--navy)]/60 mt-1.5 num">{LOADING_STEPS[step]}</div>

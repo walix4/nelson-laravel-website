@@ -78,6 +78,14 @@
     select.input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%230B1F44'%3e%3cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right .8rem center;background-size:1.1rem;padding-right:2.4rem;}
     .input-label{font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--navy);text-transform:uppercase;}
 
+    /* glass variant of the calculator card (hero) — flips inner palette to white-on-dark */
+    .calc-glass{--navy:#ffffff;--navy-2:#ffffff;--ink:#ffffff;--green:#34D399;}
+    .calc-glass .input{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.16);color:#fff;}
+    .calc-glass .input::placeholder{color:rgba(255,255,255,0.45);}
+    .calc-glass .input:focus{border-color:rgba(255,255,255,0.34);box-shadow:0 0 0 4px rgba(255,255,255,0.08);background:rgba(255,255,255,0.16);}
+    .calc-glass select.input{background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3e%3c/svg%3e");}
+    .calc-glass option{color:#0B2350;}
+
     .btn-primary{background:linear-gradient(180deg,var(--red) 0%,var(--red-2) 100%);color:#fff;font-weight:600;letter-spacing:0.02em;border:1px solid rgba(255,255,255,0.18);box-shadow:0 14px 30px -10px rgba(255,59,48,0.55),inset 0 1px 0 rgba(255,255,255,0.4);transition:transform .2s cubic-bezier(.2,.7,.2,1),box-shadow .2s,filter .2s;}
     .btn-primary:hover{transform:translateY(-1px);box-shadow:0 20px 40px -10px rgba(255,59,48,0.7),inset 0 1px 0 rgba(255,255,255,0.5);filter:saturate(1.1);}
     .btn-primary.loading .label{opacity:0;}

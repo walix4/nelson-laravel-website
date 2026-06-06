@@ -69,7 +69,7 @@ export default function Home() {
                 </a>
                 {/* Google Play badge */}
                 <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] w-full pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true" className="shrink-0"><path d="M3.6 2.3c-.3.2-.5.6-.5 1.1v17.2c0 .5.2.9.5 1.1l.1.1L13 12.1v-.2L3.7 2.2z"/><path d="M16.1 15.2 13 12.1v-.2l3.1-3.1.1.1 3.7 2.1c1 .6 1 1.6 0 2.2l-3.8 2z"/><path d="M16.2 15.1 13 12 3.6 21.4c.4.4 1 .4 1.6.1l11-6.4"/><path d="M16.2 8.9 5.2 2.6c-.6-.3-1.2-.3-1.6.1L13 12.1z"/></svg>
+                  <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" />
                   <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
                 </a>
               </div>
@@ -84,14 +84,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* TRUST MARQUEE */}
-      <section className="py-11 border-b border-white/10" style={{ background: "#0B2350" }}>
-        <div className="max-w-[1400px] mx-auto px-6">
-          <div className="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-white/65">Trusted by brokers, freight forwarders, importers & 3PLs</div>
-          <div className="mt-6 overflow-hidden" style={{ maskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)" }}>
-            <div className="marquee-track">{[...BRANDS, ...BRANDS].map((b, i) => <span key={i} className="brand-logo text-white"><span className="text-[18px] font-bold tracking-tight whitespace-nowrap">{b}</span></span>)}</div>
+        {/* trust band — bottom of hero, video plays behind the glass */}
+        <div className="relative z-10 py-9 border-t-2" style={{ borderColor: "rgba(255,59,48,0.6)", background: "rgba(255,255,255,0.06)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}>
+          <div className="max-w-[1400px] mx-auto px-6">
+            <div className="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-white/65">Trusted by brokers, freight forwarders, importers &amp; 3PLs</div>
+            <div className="mt-6 overflow-hidden" style={{ maskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)" }}>
+              <div className="marquee-track">{[...BRANDS, ...BRANDS].map((b, i) => <span key={i} className="brand-logo text-white"><span className="text-[18px] font-bold tracking-tight whitespace-nowrap">{b}</span></span>)}</div>
+            </div>
           </div>
         </div>
       </section>
