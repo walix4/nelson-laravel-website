@@ -18,9 +18,10 @@ const PORTS = [
   "Blount Island (JAXPORT) — Jacksonville, FL", "Napoleon Avenue Terminal — New Orleans, LA",
   "APM Terminals — Mobile, AL", "Terminal 6 — Portland, OR",
 ];
-const CATEGORY: [string, string][] = [["truck", "Truck"], ["tractor", "Tractor Trailer"], ["straight", "Straight Truck"], ["bus", "Bus"], ["van", "Van"]];
-const PROFILE: [string, string][] = [["2", "2-Axle Truck — 2 axles"], ["3", "3-Axle Truck — 3 axles"], ["4", "4-Axle Truck — 4 axles"], ["5", "5-Axle Semi-Trailer — 5 axles"], ["6", "6-Axle Heavy — 6 axles"], ["7", "7+ Axle Oversize — 7 axles"]];
-const YESNO: [string, string][] = [["yes", "Yes"], ["no", "No"]];
+const CONTAINER: [string, string][] = [["dry", "Dry Container"], ["reefer", "Reefer"], ["opentop", "Open Top"], ["flatrack", "Flat Rack"], ["tank", "Tank"]];
+const TRIP: [string, string][] = [["round", "Round Trip"], ["oneway", "One Way"]];
+const SIZE: [string, string][] = [["20", "20' Standard"], ["40", "40' Standard"], ["40hc", "40' High Cube"], ["45hc", "45' High Cube"]];
+const WCLASS: [string, string][] = [["5", "5K lbs"], ["10", "10K lbs"], ["20", "20K lbs"], ["32", "32K lbs"], ["44", "44K lbs"]];
 
 const GEO: [string, [number, number]][] = [
   ["elizabeth", [40.666, -74.211]], ["newark", [40.7357, -74.1724]], ["bayonne", [40.6687, -74.1143]], ["staten island", [40.5795, -74.1502]],
@@ -39,24 +40,21 @@ const geocode = (t: string): [number, number] | null => {
   return hit ? hit[1] : null;
 };
 function hav(a: [number, number], b: [number, number]) { const R = 3958.8, t = (v: number) => (v * Math.PI) / 180; const dL = t(b[0] - a[0]), dG = t(b[1] - a[1]); const x = Math.sin(dL / 2) ** 2 + Math.cos(t(a[0])) * Math.cos(t(b[0])) * Math.sin(dG / 2) ** 2; return 2 * R * Math.asin(Math.min(1, Math.sqrt(x))); }
-const CAT_MULT: Record<string, number> = { tractor: 1, truck: 0.92, straight: 0.72, bus: 0.6, van: 0.45 };
+const SIZE_MULT: Record<string, number> = { "20": 0.9, "40": 1, "40hc": 1.06, "45hc": 1.12 };
+const CONT_MULT: Record<string, number> = { dry: 1, reefer: 1.18, opentop: 1.08, flatrack: 1.1, tank: 1.14 };
 const N = (n: number) => n.toLocaleString();
 const LOADING = ["Geocoding route…", "Pulling live diesel + FSC…", "Pricing chassis & port fees…", "Sealing the rate…"];
 
-const fieldCls = "w-full rounded bg-white/[0.07] px-3 py-2.5 text-[14px] text-white placeholder-white/45 focus:outline-none focus:bg-white/[0.16] transition";
 const labelCls = "block text-[10.5px] font-semibold uppercase tracking-[0.06em] text-white/65 mb-1.5";
+const fieldCls = "w-full rounded bg-white/[0.07] px-3 py-2.5 text-[14px] text-white placeholder-white/45 focus:outline-none focus:bg-white/[0.16] transition";
 
 export default function HeroQuote() {
   const [from, setFrom] = useState("APM Terminals — Elizabeth, NJ");
   const [to, setTo] = useState("Philadelphia, PA, USA");
-  const [category, setCategory] = useState("truck");
-  const [profile, setProfile] = useState("5");
-  const [dual, setDual] = useState("yes");
-  const [trailer, setTrailer] = useState("yes");
-  const [weight, setWeight] = useState("80000");
-  const [height, setHeight] = useState("162");
-  const [width, setWidth] = useState("102");
-  const [length, setLength] = useState("576");
+  const [container, setContainer] = useState("dry");
+  const [trip, setTrip] = useState("round");
+  const [size, setSize] = useState("40hc");
+  const [wclass, setWclass] = useState("5");
   const [phase, setPhase] = useState<"form" | "loading" | "result">("form");
   const [step, setStep] = useState(0);
   const [res, setRes] = useState<{ total: number; miles: number; fuel: number; labor: number; chassis: number; port: number } | null>(null);
@@ -72,20 +70,18 @@ export default function HeroQuote() {
     e.preventDefault();
     const oc = geocode(from) ?? [40.666, -74.211], dc = geocode(to) ?? [39.9526, -75.1652];
     const miles = Math.max(hav(oc, dc), 8);
-    const legs = 2;
-    const catMult = CAT_MULT[category] ?? 0.9;
-    const axles = parseInt(profile) || 5;
-    const axleMult = 0.85 + axles * 0.03;
+    const legs = trip === "round" ? 2 : 1;
+    const mult = (SIZE_MULT[size] ?? 1) * (CONT_MULT[container] ?? 1);
+    const weightLbs = (parseInt(wclass) || 5) * 1000;
     const fuel = (miles / 7) * 5.18 * 1.17 * legs;
     const labor = (miles / 50 + 2.5) * 28 * legs;
-    const chassis = 40 * Math.max(1, Math.ceil(miles / 300)) + (trailer === "yes" ? 25 : 0);
-    const port = 75 + ((+weight || 0) > 80000 ? 60 : 0) + (dual === "yes" ? 15 : 0) + ((+width || 0) > 102 || (+height || 0) > 162 || (+length || 0) > 636 ? 80 : 0);
+    const chassis = 40 * Math.max(1, Math.ceil(miles / 300)) + (size === "45hc" ? 20 : 0);
+    const port = 75 + (weightLbs > 40000 ? 60 : 0) + (container === "reefer" ? 45 : 0);
     const overhead = 160;
-    const base = (fuel + labor + chassis + port + overhead) * catMult * axleMult;
-    const total = base * 1.2; // margin + admin
+    const base = (fuel + labor + chassis + port + overhead) * mult;
     setPhase("loading");
     setTimeout(() => {
-      setRes({ total: Math.round(total), miles: Math.round(miles), fuel: Math.round(fuel * catMult * axleMult), labor: Math.round(labor * catMult * axleMult), chassis: Math.round(chassis * catMult * axleMult), port: Math.round((port + overhead) * catMult * axleMult) });
+      setRes({ total: Math.round(base * 1.2), miles: Math.round(miles), fuel: Math.round(fuel * mult), labor: Math.round(labor * mult), chassis: Math.round(chassis * mult), port: Math.round((port + overhead) * mult) });
       setPhase("result");
     }, 2600);
   };
@@ -101,14 +97,10 @@ export default function HeroQuote() {
             <div><label className={labelCls}>Enter drop off address <span className="text-[var(--red)]">*</span></label><input className={fieldCls} required value={to} onChange={(e) => setTo(e.target.value)} placeholder="Enter drop-off address" /></div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-3.5">
-            <div><label className={labelCls}>Vehicle category</label><GlassSelect value={category} onChange={setCategory} options={CATEGORY} /></div>
-            <div><label className={labelCls}>Truck profile</label><GlassSelect value={profile} onChange={setProfile} options={PROFILE} /></div>
-            <div><label className={labelCls}>Dual tires</label><GlassSelect value={dual} onChange={setDual} options={YESNO} /></div>
-            <div><label className={labelCls}>Has trailer</label><GlassSelect value={trailer} onChange={setTrailer} options={YESNO} /></div>
-            <div><label className={labelCls}>Weight (lbs)</label><input className={fieldCls} type="number" min={0} value={weight} onChange={(e) => setWeight(e.target.value)} /></div>
-            <div><label className={labelCls}>Height (in)</label><input className={fieldCls} type="number" min={0} value={height} onChange={(e) => setHeight(e.target.value)} /></div>
-            <div><label className={labelCls}>Width (in)</label><input className={fieldCls} type="number" min={0} value={width} onChange={(e) => setWidth(e.target.value)} /></div>
-            <div><label className={labelCls}>Length (in)</label><input className={fieldCls} type="number" min={0} value={length} onChange={(e) => setLength(e.target.value)} /></div>
+            <div><label className={labelCls}>Container type</label><GlassSelect value={container} onChange={setContainer} options={CONTAINER} /></div>
+            <div><label className={labelCls}>Trip</label><GlassSelect value={trip} onChange={setTrip} options={TRIP} /></div>
+            <div><label className={labelCls}>Container size</label><GlassSelect value={size} onChange={setSize} options={SIZE} /></div>
+            <div><label className={labelCls}>Weight</label><GlassSelect value={wclass} onChange={setWclass} options={WCLASS} /></div>
           </div>
           <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5"><span className="label">Calculate instant rate</span></button>
           <p className="text-[10px] text-white/45 text-center mt-3">No login · No card · Rates lock for 24h</p>
@@ -118,10 +110,10 @@ export default function HeroQuote() {
       {phase === "result" && res && (
         <div>
           <h3 className="display text-[20px] text-white leading-tight">Calculate Your Drayage Rate</h3>
-          <div className="mt-4 text-[10px] uppercase tracking-[0.16em] font-bold text-[#7CF0B0] flex items-center gap-1.5"><span className="live-dot" /> Live rate · {profile}-axle · locked 24h</div>
+          <div className="mt-4 text-[10px] uppercase tracking-[0.16em] font-bold text-[#7CF0B0] flex items-center gap-1.5"><span className="live-dot" /> Live rate · {trip === "round" ? "round trip" : "one way"} · locked 24h</div>
           <div className="mt-2 flex items-baseline gap-2">
             <span className="display text-[44px] md:text-[48px] text-white num leading-none">${N(res.total)}</span>
-            <span className="text-[13px] text-white/60">/ round trip</span>
+            <span className="text-[13px] text-white/60">/ {trip === "round" ? "round trip" : "move"}</span>
           </div>
           <div className="text-[13px] text-white/70 mt-1.5 num">{N(res.miles)} mi · port to door</div>
           <div className="mt-5 grid grid-cols-2 gap-3 text-[11px]">
@@ -132,7 +124,7 @@ export default function HeroQuote() {
           <a href="#quote" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5 flex items-center justify-center gap-2"><span className="label">Get full breakdown</span></a>
           <button type="button" onClick={() => setPhase("form")} className="mt-2.5 w-full py-2.5 rounded text-[12px] font-semibold text-white/85 bg-white/10 hover:bg-white/15 transition flex items-center justify-center gap-1.5">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>Calculate again
-        </button>
+          </button>
         </div>
       )}
 
