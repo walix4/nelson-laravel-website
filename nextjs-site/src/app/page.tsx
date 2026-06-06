@@ -91,7 +91,7 @@ export default function Home() {
       </section>
 
       {/* TRUST MARQUEE */}
-      <section className="py-11 border-b border-white/10" style={{ background: "#0B2D5C" }}>
+      <section className="py-11 border-b border-white/10" style={{ background: "rgba(11,45,92,0.55)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderTop: "2px solid rgba(255,138,43,0.6)" }}>
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-white/65">Trusted by fleets, owner-operators, brokers & 3PLs</div>
           <div className="mt-6 overflow-hidden" style={{ maskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)" }}>
