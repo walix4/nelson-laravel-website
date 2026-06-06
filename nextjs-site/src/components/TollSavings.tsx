@@ -53,8 +53,6 @@ export default function TollSavings() {
   const [profile, setProfile] = useState("5");
   const [dual, setDual] = useState("yes");
   const [trailer, setTrailer] = useState("yes");
-  const [commercial, setCommercial] = useState("yes");
-  const [special, setSpecial] = useState("no");
   const [weight, setWeight] = useState("80000");
   const [height, setHeight] = useState("162");
   const [width, setWidth] = useState("102");
@@ -80,8 +78,8 @@ export default function TollSavings() {
     const catMult = CAT_MULT[category] ?? 0.9;
     const roads = tolledMiles * 0.12 * axleMult * catMult;
     const bridges = Math.max(1, Math.round(miles / 220)) * 16 * axleMult * (trailer === "yes" ? 1.12 : 1);
-    const oversize = ((+weight || 0) > 80000 ? 60 : 0) + ((+width || 0) > 102 ? 45 : 0) + ((+height || 0) > 162 ? 40 : 0) + ((+length || 0) > 636 ? 35 : 0) + (special === "yes" ? 55 : 0);
-    const surcharge = (roads + bridges) * ((commercial === "yes" ? 0.1 : 0) + (dual === "yes" ? 0.03 : 0));
+    const oversize = ((+weight || 0) > 80000 ? 60 : 0) + ((+width || 0) > 102 ? 45 : 0) + ((+height || 0) > 162 ? 40 : 0) + ((+length || 0) > 636 ? 35 : 0);
+    const surcharge = (roads + bridges) * (dual === "yes" ? 0.03 : 0);
     setPhase("loading");
     setTimeout(() => {
       setRes({ total: Math.round(roads + bridges + oversize + surcharge), miles: Math.round(miles), roads: Math.round(roads), bridges: Math.round(bridges), oversize: Math.round(oversize), surcharge: Math.round(surcharge), plazas: Math.max(1, Math.round(tolledMiles / 70)) });
@@ -104,8 +102,6 @@ export default function TollSavings() {
             <div><label className={labelCls}>Truck profile</label><GlassSelect value={profile} onChange={setProfile} options={PROFILE} /></div>
             <div><label className={labelCls}>Dual tires</label><GlassSelect value={dual} onChange={setDual} options={YESNO} /></div>
             <div><label className={labelCls}>Has trailer</label><GlassSelect value={trailer} onChange={setTrailer} options={YESNO} /></div>
-            <div><label className={labelCls}>Commercial</label><GlassSelect value={commercial} onChange={setCommercial} options={YESNO} /></div>
-            <div><label className={labelCls}>Special load</label><GlassSelect value={special} onChange={setSpecial} options={YESNO} /></div>
             <div><label className={labelCls}>Weight (lbs)</label><input className={fieldCls} type="number" min={0} value={weight} onChange={(e) => setWeight(e.target.value)} /></div>
             <div><label className={labelCls}>Height (in)</label><input className={fieldCls} type="number" min={0} value={height} onChange={(e) => setHeight(e.target.value)} /></div>
             <div><label className={labelCls}>Width (in)</label><input className={fieldCls} type="number" min={0} value={width} onChange={(e) => setWidth(e.target.value)} /></div>
