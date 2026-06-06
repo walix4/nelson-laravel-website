@@ -52,7 +52,7 @@ export default function Home() {
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 520px at 18% 22%,rgba(11,35,80,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(255,59,48,0.18),transparent 60%)" }} />
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-28 md:py-40">
           <div className="max-w-3xl">
-            <h1 className="display text-white text-[40px] md:text-[66px] leading-[1.03]">Drayage quotes, port to door — <span style={{ color: "#FF6A5E" }}>priced in 30 seconds.</span></h1>
+            <h1 className="display text-white text-[40px] md:text-[66px] leading-[1.03]">Drayage quotes, port to door — <span style={{ color: "var(--red)" }}>priced in 30 seconds.</span></h1>
             <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Live diesel, FSC, chassis and port fees across every major U.S. &amp; Canadian container port — instant, fully itemised, and locked for 24 hours.</p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link href="/#quote" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Get instant quote</span></Link>
