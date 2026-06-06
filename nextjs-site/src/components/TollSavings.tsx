@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 const N = (n: number) => n.toLocaleString();
-const fieldCls = "w-full rounded bg-white/10 border border-[#FF6B00]/35 px-3 py-2.5 text-[14px] text-white placeholder-white/45 focus:outline-none focus:border-[#FF6B00]/70 focus:bg-white/[0.16] transition";
+const fieldCls = "w-full rounded bg-white/[0.07] px-3 py-2.5 text-[14px] text-white placeholder-white/45 focus:outline-none focus:bg-white/[0.16] transition";
 const labelCls = "block text-[10.5px] font-semibold uppercase tracking-[0.06em] text-white/65 mb-1.5";
 const chev: React.CSSProperties = { backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23FF6B00' stroke-width='2.5' stroke-linecap='round'><path d='M6 9l6 6 6-6'/></svg>\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 10px center", paddingRight: "30px" };
 
@@ -55,11 +55,11 @@ export default function TollSavings() {
           </div>
           <div className="text-[13px] text-white/70 mt-1.5 num">≈ ${N(res.monthly)} / month back to your bottom line</div>
           <div className="mt-5 grid grid-cols-2 gap-3 text-[11px]">
-            <div className="rounded px-3 py-3 bg-white/10 border border-[#FF6B00]/25"><div className="text-white/55 uppercase tracking-wider">Toll savings</div><div className="display text-white text-[18px] num mt-0.5">${N(res.toll)}<span className="text-[10px] text-white/50"> /mo</span></div></div>
-            <div className="rounded px-3 py-3 bg-white/10 border border-[#FF6B00]/25"><div className="text-white/55 uppercase tracking-wider">Routing time</div><div className="display text-white text-[18px] num mt-0.5">${N(res.labor)}<span className="text-[10px] text-white/50"> /mo</span></div></div>
+            <div className="rounded px-3 py-3 bg-white/[0.08]"><div className="text-white/55 uppercase tracking-wider">Toll savings</div><div className="display text-white text-[18px] num mt-0.5">${N(res.toll)}<span className="text-[10px] text-white/50"> /mo</span></div></div>
+            <div className="rounded px-3 py-3 bg-white/[0.08]"><div className="text-white/55 uppercase tracking-wider">Routing time</div><div className="display text-white text-[18px] num mt-0.5">${N(res.labor)}<span className="text-[10px] text-white/50"> /mo</span></div></div>
           </div>
           <a href="#quote" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5 flex items-center justify-center gap-2"><span className="label">Price a route now</span></a>
-          <button type="button" onClick={() => setRes(null)} className="mt-2.5 w-full py-2.5 rounded text-[12px] font-semibold text-white/85 bg-white/10 hover:bg-white/15 border border-[#FF6B00]/25 transition flex items-center justify-center gap-1.5">
+          <button type="button" onClick={() => setRes(null)} className="mt-2.5 w-full py-2.5 rounded text-[12px] font-semibold text-white/85 bg-white/10 hover:bg-white/15 transition flex items-center justify-center gap-1.5">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>Recalculate
           </button>
         </div>
