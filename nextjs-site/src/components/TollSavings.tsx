@@ -1,6 +1,23 @@
 "use client";
 import { useState } from "react";
 import GlassSelect from "@/components/GlassSelect";
+import PortSelect from "@/components/PortSelect";
+
+const PORTS = [
+  "APM Terminals — Elizabeth, NJ", "Maher Terminals — Elizabeth, NJ", "Port Newark Container Terminal — Newark, NJ",
+  "GCT Bayonne — Bayonne, NJ", "GCT New York — Staten Island, NY",
+  "APM Terminals (Pier 400) — Los Angeles, CA", "Fenix Marine (Pier 300) — Los Angeles, CA", "Yusen Terminals — Los Angeles, CA",
+  "Long Beach Container Terminal (Pier E) — Long Beach, CA", "Total Terminals (Pier T) — Long Beach, CA", "ITS (Pier G) — Long Beach, CA",
+  "TraPac — Oakland, CA", "SSA Terminal (Pier J) — Oakland, CA",
+  "Terminal 18 (SSA) — Seattle, WA", "Husky Terminal — Tacoma, WA",
+  "Barbours Cut — Houston, TX", "Bayport Container Terminal — Houston, TX",
+  "Garden City Terminal — Savannah, GA", "Wando Welch Terminal — Charleston, SC", "Hugh K. Leatherman Terminal — Charleston, SC",
+  "Norfolk International Terminals — Norfolk, VA", "Virginia International Gateway — Portsmouth, VA",
+  "Seagirt Marine Terminal — Baltimore, MD", "Packer Avenue Marine Terminal — Philadelphia, PA", "Conley Terminal — Boston, MA",
+  "POMTOC — Miami, FL", "South Florida Container Terminal — Miami, FL", "Port Everglades — Fort Lauderdale, FL",
+  "Blount Island (JAXPORT) — Jacksonville, FL", "Napoleon Avenue Terminal — New Orleans, LA",
+  "APM Terminals — Mobile, AL", "Terminal 6 — Portland, OR",
+];
 
 const N = (n: number) => n.toLocaleString();
 const fieldCls = "w-full rounded bg-white/[0.07] px-3 py-2.5 text-[14px] text-white placeholder-white/45 focus:outline-none focus:bg-white/[0.16] transition";
@@ -14,7 +31,7 @@ export default function TollSavings() {
   const [avoid, setAvoid] = useState("yes");
   const [ftes, setFtes] = useState("");
   const [hours, setHours] = useState("30");
-  const [from, setFrom] = useState("APM Terminals, McLester Street, Elizabeth, NJ, USA");
+  const [from, setFrom] = useState("APM Terminals — Elizabeth, NJ");
   const [to, setTo] = useState("New York, NY, USA");
   const [res, setRes] = useState<{ monthly: number; annual: number; toll: number; labor: number } | null>(null);
 
@@ -36,8 +53,8 @@ export default function TollSavings() {
           <h3 className="display text-[20px] md:text-[22px] text-white leading-tight">Calculate your toll savings</h3>
           <p className="text-[12.5px] text-white/55 mt-1.5">See what accurate toll data saves your fleet.</p>
           <div className="mt-5 space-y-3.5">
-            <div><label className={labelCls}>From <span className="text-[#FF6B00]">*</span></label><input className={fieldCls} required value={from} onChange={(e) => setFrom(e.target.value)} placeholder="Origin address or city" /></div>
-            <div><label className={labelCls}>To <span className="text-[#FF6B00]">*</span></label><input className={fieldCls} required value={to} onChange={(e) => setTo(e.target.value)} placeholder="Destination address or city" /></div>
+            <div><label className={labelCls}>Select port terminal <span className="text-[#FF6B00]">*</span></label><PortSelect value={from} onChange={setFrom} options={PORTS} placeholder="Select port terminal" /></div>
+            <div><label className={labelCls}>Enter drop off address <span className="text-[#FF6B00]">*</span></label><input className={fieldCls} required value={to} onChange={(e) => setTo(e.target.value)} placeholder="Enter drop-off address" /></div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-3.5 flex-1 content-start">
             <div><label className={labelCls}>Monthly toll spend ($)</label><input className={fieldCls} type="number" min={0} placeholder="0" required value={spend} onChange={(e) => setSpend(e.target.value)} /></div>
