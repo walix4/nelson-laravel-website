@@ -63,8 +63,8 @@ export default function Home() {
               <div className="inline-flex items-center gap-2 self-start rounded-md px-3.5 py-1.5 text-[11px] font-semibold mb-5" style={{ background: "rgba(255,222,1,0.16)", border: "1px solid rgba(255,222,1,0.4)" }}>
                 <span className="live-dot" /> Commercial truck toll data — updated every 15 minutes
               </div>
-              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">Toll Intelligence for <span className="bg-gradient-to-r from-[#fff08a] via-[#ffe45c] to-[#ffde01] bg-clip-text text-transparent">Drayage Container &amp; Truck Freight.</span></h1>
-              <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Class-aware toll rates for drayage, intermodal, and heavy freight — from port gates to inland ramps. Power TMS, fleet, and shipping platforms with one API.</p>
+              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">The Smart Drayage Overweight Platform <span className="bg-gradient-to-r from-[#fff08a] via-[#ffe45c] to-[#ffde01] bg-clip-text text-transparent">Built for Every U.S. State</span></h1>
+              <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Instant overweight analysis, axle compliance, permit guidance, and route intelligence for ports, carriers, brokers, and owner operators.</p>
               <div className="mt-8 grid w-fit grid-cols-2 gap-3">
                 {/* App Store badge */}
                 <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] w-full pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
