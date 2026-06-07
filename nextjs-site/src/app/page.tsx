@@ -56,10 +56,10 @@ export default function Home() {
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-16 md:py-24">
           <div className="max-w-[880px] mx-auto text-center flex flex-col items-center py-6 md:py-10">
               <div className="inline-flex items-center gap-2 rounded-md px-3.5 py-1.5 text-[11px] font-semibold mb-5" style={{ background: "rgba(47,97,192,0.16)", border: "1px solid rgba(47,97,192,0.4)" }}>
-                <span className="live-dot" /> Commercial truck toll data — updated every 15 minutes
+                <span className="live-dot" /> Secure Every Move with Blockchain
               </div>
-              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">Toll Intelligence for <span className="bg-gradient-to-r from-[#8fa8e6] via-[#4f74cf] to-[#2f61c0] bg-clip-text text-transparent">Drayage Container &amp; Truck Freight.</span></h1>
-              <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Class-aware toll rates for drayage, intermodal, and heavy freight — from port gates to inland ramps. Power TMS, fleet, and shipping platforms with one API.</p>
+              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">Real-Time Blockchain Verification <span className="bg-gradient-to-r from-[#8fa8e6] via-[#4f74cf] to-[#2f61c0] bg-clip-text text-transparent">for Drayage Operations</span></h1>
+              <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Create immutable records for rate confirmations, container movements, signatures, payments, and shipment events across the supply chain.</p>
               <div className="mt-8 grid w-fit grid-cols-2 gap-3">
                 {/* App Store badge */}
                 <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] w-full pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
