@@ -11,7 +11,7 @@ export default function Page() {
       <Nav />
       <RevealInit />
       <section className="relative overflow-hidden py-20" style={{ background: "linear-gradient(135deg,#0B2D5C,#061A38 60%,#15448C)" }}>
-        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(700px 360px at 85% 0%,rgba(255,107,0,0.22),transparent 60%),radial-gradient(600px 360px at 10% 100%,rgba(58,95,192,0.3),transparent 60%)" }} />
+        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(700px 360px at 85% 0%,rgba(47,97,192,0.22),transparent 60%),radial-gradient(600px 360px at 10% 100%,rgba(58,95,192,0.3),transparent 60%)" }} />
         <div className="max-w-[1100px] mx-auto px-6 relative text-center">
           <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/70">Free trucking tools</div>
           <h1 className="display text-white text-[40px] md:text-[58px] leading-[1.03] mt-3">Everything you need to<br />price a truck route</h1>

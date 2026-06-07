@@ -15,7 +15,7 @@ const Arrow = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" 
 export default function ContainerLanes() {
   return (
     <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#FFF8EF,#FFFFFF)" }}>
-      <div className="absolute inset-0 pointer-events-none opacity-70" style={{ background: "radial-gradient(700px 360px at 12% 0%,rgba(255,107,0,0.10),transparent 60%)" }} />
+      <div className="absolute inset-0 pointer-events-none opacity-70" style={{ background: "radial-gradient(700px 360px at 12% 0%,rgba(47,97,192,0.10),transparent 60%)" }} />
       <div className="max-w-[1400px] mx-auto px-6 relative grid lg:grid-cols-2 gap-14 items-start">
         {/* left */}
         <div className="reveal">

@@ -8,10 +8,10 @@ export default function TollGate() {
         <defs>
           <linearGradient id="tgNavy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#1B4E9B" /><stop offset="1" stopColor="#0B2D5C" /></linearGradient>
           <linearGradient id="tgNavyDark" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#0B2D5C" /><stop offset="1" stopColor="#061A38" /></linearGradient>
-          <linearGradient id="tgOrange" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#FF8A2B" /><stop offset="1" stopColor="#FF6B00" /></linearGradient>
-          <linearGradient id="tgOrangeDark" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#E25A00" /><stop offset="1" stopColor="#B84800" /></linearGradient>
-          <radialGradient id="tgGlow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stopColor="#FF6B00" stopOpacity="0.5" /><stop offset="1" stopColor="#FF6B00" stopOpacity="0" /></radialGradient>
-          <pattern id="tgStripes" width="22" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(20)"><rect width="22" height="14" fill="#FF6B00" /><rect width="11" height="14" fill="#FFFFFF" /></pattern>
+          <linearGradient id="tgOrange" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#4f74cf" /><stop offset="1" stopColor="#2f61c0" /></linearGradient>
+          <linearGradient id="tgOrangeDark" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#244a93" /><stop offset="1" stopColor="#244a93" /></linearGradient>
+          <radialGradient id="tgGlow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stopColor="#2f61c0" stopOpacity="0.5" /><stop offset="1" stopColor="#2f61c0" stopOpacity="0" /></radialGradient>
+          <pattern id="tgStripes" width="22" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(20)"><rect width="22" height="14" fill="#2f61c0" /><rect width="11" height="14" fill="#FFFFFF" /></pattern>
         </defs>
 
         {/* ground glow */}
@@ -33,14 +33,14 @@ export default function TollGate() {
         {/* hangers + TOLL sign */}
         <rect x="158" y="112" width="3" height="38" fill="#0B2D5C" />
         <rect x="199" y="112" width="3" height="38" fill="#0B2D5C" />
-        <polygon points="148,150 164,141 228,141 212,150" fill="#FF9A4A" />
+        <polygon points="148,150 164,141 228,141 212,150" fill="#4f74cf" />
         <polygon points="212,150 228,141 228,185 212,194" fill="url(#tgOrangeDark)" />
         <rect x="148" y="150" width="64" height="44" rx="6" fill="url(#tgOrange)" />
         <text x="180" y="179" textAnchor="middle" fontFamily="Poppins, sans-serif" fontWeight="800" fontSize="20" fill="#fff" letterSpacing="0.5">TOLL</text>
 
         {/* signal lights on beam */}
         <circle cx="96" cy="99" r="4.5" fill="#16B571" className="tg-led" />
-        <circle cx="264" cy="99" r="4.5" fill="#FF6B00" />
+        <circle cx="264" cy="99" r="4.5" fill="#2f61c0" />
 
         {/* boom barrier (lifts) */}
         <g className="tg-boom">
@@ -49,7 +49,7 @@ export default function TollGate() {
         </g>
         {/* pivot hub on right post */}
         <circle cx="252" cy="229" r="11" fill="#0B2D5C" />
-        <circle cx="252" cy="229" r="5" fill="#FF6B00" />
+        <circle cx="252" cy="229" r="5" fill="#2f61c0" />
       </svg>
 
       <style jsx>{`

@@ -18,12 +18,12 @@ import { asset } from "@/lib/site";
 const BRANDS = ["CARGOMAX", "portlink", "NORDFREIGHT", "veritas3pl", "ARC LOGISTICS", "Halo Freight", "ROADWORKS", "Meridian Fleet", "Atlas Carriers", "Northstar Cargo"];
 // Solid (filled) icons — rendered with fill="currentColor".
 const COSTS = [
-  { n: "Toll roads", d: "Live per-mile rates × tolled miles × your axle class.", i: '<path d="M12 2a7 7 0 0 0-7 7c0 4.6 5.7 11.5 6.2 12.1a1 1 0 0 0 1.6 0C13.3 20.5 19 13.6 19 9a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/>', a: "#FF6B00" },
+  { n: "Toll roads", d: "Live per-mile rates × tolled miles × your axle class.", i: '<path d="M12 2a7 7 0 0 0-7 7c0 4.6 5.7 11.5 6.2 12.1a1 1 0 0 0 1.6 0C13.3 20.5 19 13.6 19 9a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/>', a: "#2f61c0" },
   { n: "Bridges & tunnels", d: "Per-crossing tolls for heavy vehicles, by axle count.", i: '<path d="M12 3a10 10 0 0 0-10 9 1 1 0 0 0 1 1h1v6h2v-6h3v6h2v-6h2v6h2v-6h3v6h2v-6h1a1 1 0 0 0 1-1A10 10 0 0 0 12 3Z"/>', a: "#3A5FC0" },
   { n: "Axle-based rates", d: "2 to 6+ axles — every authority prices weight differently.", i: '<path d="M3 7a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1h2.4a2 2 0 0 1 1.72.98l1.6 2.67A2 2 0 0 1 24 12.7V15a1 1 0 0 1-1 1h-1.2a3 3 0 0 1-5.6 0H9.8a3 3 0 0 1-5.6 0H3a1 1 0 0 1-1-1V7Zm14 3h4l-1.2-2H17v2ZM7 18.5A1.5 1.5 0 1 0 7 15.5a1.5 1.5 0 0 0 0 3Zm10 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/>', a: "#0B2D5C" },
-  { n: "Congestion & peak", d: "Time-of-day, express-lane and managed-lane pricing.", i: '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 9.6 2.7 1.55a1 1 0 1 1-1 1.74l-3.2-1.85A1 1 0 0 1 11 12V7a1 1 0 1 1 2 0v4.6Z"/>', a: "#FF6B00" },
+  { n: "Congestion & peak", d: "Time-of-day, express-lane and managed-lane pricing.", i: '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 9.6 2.7 1.55a1 1 0 1 1-1 1.74l-3.2-1.85A1 1 0 0 1 11 12V7a1 1 0 1 1 2 0v4.6Z"/>', a: "#2f61c0" },
   { n: "Transponder networks", d: "E-ZPass, SunPass, TxTag, I-PASS — discounts & account fees.", i: '<path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1H3V6Zm0 4h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8Zm3 5a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2H6Z"/>', a: "#1E3A8A" },
-  { n: "Cash & video tolls", d: "Pay-by-plate surcharges when you run a lane without a tag.", i: '<path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7Zm10 1.5A3.5 3.5 0 1 0 12 15.5a3.5 3.5 0 0 0 0-7ZM5.5 8A1.5 1.5 0 0 0 4 9.5a1 1 0 0 0 2 0A1.5 1.5 0 0 0 5.5 8Zm13 5a1.5 1.5 0 0 0-1.5 1.5 1 1 0 0 0 2 0 1.5 1.5 0 0 0-.5-1.5Z"/>', a: "#FF6B00" },
+  { n: "Cash & video tolls", d: "Pay-by-plate surcharges when you run a lane without a tag.", i: '<path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7Zm10 1.5A3.5 3.5 0 1 0 12 15.5a3.5 3.5 0 0 0 0-7ZM5.5 8A1.5 1.5 0 0 0 4 9.5a1 1 0 0 0 2 0A1.5 1.5 0 0 0 5.5 8Zm13 5a1.5 1.5 0 0 0-1.5 1.5 1 1 0 0 0 2 0 1.5 1.5 0 0 0-.5-1.5Z"/>', a: "#2f61c0" },
 ];
 const Arrow = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 type Lane = [string, string, string];
@@ -36,7 +36,7 @@ const SHIP: { title: string; icon: React.ReactNode; rows: Lane[] }[] = [
 export default function Home() {
   return (
     <>
-      <div className="text-[11px] font-medium border-b text-white" style={{ background: "#FF6B00", borderColor: "rgba(255,255,255,0.2)" }}>
+      <div className="text-[11px] font-medium border-b text-white" style={{ background: "#2f61c0", borderColor: "rgba(255,255,255,0.2)" }}>
         <div className="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
           <div className="flex items-center gap-5">
             <span className="flex items-center gap-2"><span className="live-dot" /><span>Network <b>LIVE</b></span></span>
@@ -53,17 +53,17 @@ export default function Home() {
       <section className="relative overflow-hidden text-white">
         <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="auto" poster={asset("/hero-toll.jpg")}><source src={asset("/hero-toll.mp4")} type="video/mp4" /></video>
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(1,7,26,0.82) 0%,rgba(1,7,26,0.55) 42%,rgba(1,7,26,0.86) 100%)" }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 520px at 18% 22%,rgba(11,35,80,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(255,107,0,0.18),transparent 60%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 520px at 18% 22%,rgba(11,35,80,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(47,97,192,0.18),transparent 60%)" }} />
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-16 md:py-24">
           <div className="grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-stretch">
             {/* LEFT — savings calculator */}
             <TollSavings />
             {/* RIGHT — headline */}
             <div className="flex flex-col justify-center h-full">
-              <div className="inline-flex items-center gap-2 self-start rounded-md px-3.5 py-1.5 text-[11px] font-semibold mb-5" style={{ background: "rgba(255,107,0,0.16)", border: "1px solid rgba(255,107,0,0.4)" }}>
+              <div className="inline-flex items-center gap-2 self-start rounded-md px-3.5 py-1.5 text-[11px] font-semibold mb-5" style={{ background: "rgba(47,97,192,0.16)", border: "1px solid rgba(47,97,192,0.4)" }}>
                 <span className="live-dot" /> Commercial truck toll data — updated every 15 minutes
               </div>
-              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">Toll Intelligence for <span className="bg-gradient-to-r from-[#FFD36B] via-[#FF9A5B] to-[#FF6B00] bg-clip-text text-transparent">Drayage Container &amp; Truck Freight.</span></h1>
+              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">Toll Intelligence for <span className="bg-gradient-to-r from-[#8fa8e6] via-[#4f74cf] to-[#2f61c0] bg-clip-text text-transparent">Drayage Container &amp; Truck Freight.</span></h1>
               <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Class-aware toll rates for drayage, intermodal, and heavy freight — from port gates to inland ramps. Power TMS, fleet, and shipping platforms with one API.</p>
               <div className="mt-8 grid w-fit grid-cols-2 gap-3">
                 {/* App Store badge */}
@@ -89,7 +89,7 @@ export default function Home() {
           </div>
         </div>
         {/* trust band — bottom of hero, video plays behind the glass */}
-        <div className="relative z-10 py-9 border-t-2" style={{ borderColor: "rgba(255,138,43,0.6)", background: "rgba(255,255,255,0.06)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}>
+        <div className="relative z-10 py-9 border-t-2" style={{ borderColor: "rgba(47,97,192,0.6)", background: "rgba(255,255,255,0.06)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}>
           <div className="max-w-[1400px] mx-auto px-6">
             <div className="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-white/65">Trusted by fleets, owner-operators, brokers & 3PLs</div>
             <div className="mt-6 overflow-hidden" style={{ maskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)" }}>
@@ -166,7 +166,7 @@ export default function Home() {
 
       {/* COST CARDS */}
       <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#F8FAFC,#EEF2F8)" }}>
-        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(800px 400px at 80% 10%,rgba(58,95,192,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(255,107,0,0.13),transparent 60%)" }} />
+        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(800px 400px at 80% 10%,rgba(58,95,192,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(47,97,192,0.13),transparent 60%)" }} />
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <div className="max-w-2xl reveal"><div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Toll transparency</div><h2 className="display text-[40px] md:text-[48px] text-[var(--navy)] leading-[1.05] mt-2">Every toll on the route, accounted for.</h2><p className="mt-4 text-[var(--muted)] text-[15px]">No surprise plazas. No pay-by-plate shock weeks later. Six toll components on every estimate — priced from current authority tariffs.</p></div>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

@@ -19,7 +19,7 @@ const SEED: Est[] = [
 ];
 const LABELS: Record<string, string> = { completed: "Completed", streaming: "Streaming", pending: "Pending", failed: "Failed" };
 const UpArrow = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16B571" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ flex: "0 0 auto" }}><path d="M12 19V5M5 12l7-7 7 7" /></svg>;
-const DownArrow = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF6B00" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ flex: "0 0 auto" }}><path d="M12 5v14M5 12l7 7 7-7" /></svg>;
+const DownArrow = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2f61c0" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ flex: "0 0 auto" }}><path d="M12 5v14M5 12l7 7 7-7" /></svg>;
 
 export default function Page() {
   const [rows, setRows] = useState<Est[]>(SEED);

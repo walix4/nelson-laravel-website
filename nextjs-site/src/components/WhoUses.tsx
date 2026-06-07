@@ -18,9 +18,9 @@ export default function WhoUses() {
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {USES.map((u, i) => (
             <div key={u.t} className={`reveal reveal-d${i % 3} group relative overflow-hidden rounded-lg border border-[var(--navy)]/8 p-7 hover:-translate-y-1 transition shadow-sm hover:shadow-xl bg-white`}>
-              <div className="absolute -top-8 -right-8 w-28 h-28 rounded-full pointer-events-none" style={{ background: "rgba(255,107,0,0.10)" }} />
+              <div className="absolute -top-8 -right-8 w-28 h-28 rounded-full pointer-events-none" style={{ background: "rgba(47,97,192,0.10)" }} />
               <div className="relative w-12 h-12 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(160deg,#0B2D5C,#061A38)" }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8A2B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: u.i }} />
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4f74cf" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: u.i }} />
               </div>
               <h3 className="display text-[19px] text-[var(--navy)] mt-5 relative">{u.t}</h3>
               <p className="text-[13.5px] text-[var(--muted)] mt-2.5 leading-relaxed relative">{u.d}</p>
