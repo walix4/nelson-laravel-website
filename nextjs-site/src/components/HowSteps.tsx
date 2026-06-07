@@ -23,8 +23,8 @@ export default function HowSteps() {
             const hot = s.n === "03";
             return (
               <div key={s.n} className={`reveal reveal-d${i} rounded-lg p-7 transition shadow-sm hover:shadow-xl ${hot ? "border-2" : "border"}`} style={{ background: hot ? "linear-gradient(170deg,#FFF8EF,#FFFFFF)" : "#fff", borderColor: hot ? "var(--red)" : "rgba(11,45,92,0.08)" }}>
-                <div className="display text-[44px] leading-none num" style={{ color: hot ? "var(--red)" : "rgba(255,107,0,0.32)" }}>{s.n}</div>
-                <div className="h-[3px] w-12 rounded-full mt-3" style={{ background: hot ? "var(--red)" : "rgba(255,107,0,0.25)" }} />
+                <div className="display text-[44px] leading-none num" style={{ color: hot ? "var(--red)" : "rgba(255,222,1,0.32)" }}>{s.n}</div>
+                <div className="h-[3px] w-12 rounded-full mt-3" style={{ background: hot ? "var(--red)" : "rgba(255,222,1,0.25)" }} />
                 <h3 className={`display text-[20px] mt-5 ${hot ? "text-[var(--red)]" : "text-[var(--navy)]"}`}>{s.t}</h3>
                 <p className="text-[13.5px] text-[var(--muted)] mt-2.5 leading-relaxed">{s.d}</p>
                 <Link href="/#quote" className="inline-flex items-center gap-1.5 mt-5 text-[13.5px] font-semibold text-[var(--red)]">Get started <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></Link>

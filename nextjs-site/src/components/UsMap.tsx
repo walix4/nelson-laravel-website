@@ -2,7 +2,7 @@
 import { asset } from "@/lib/site";
 
 type Dot = { x: number; y: number; label?: string; kind?: "port" | "origin" | "dest" };
-const COLOR = { port: "#3A5FC0", origin: "#FF6B00", dest: "#16B571" };
+const COLOR = { port: "#3A5FC0", origin: "#ffde01", dest: "#16B571" };
 
 // Approx % positions on the continental-US silhouette
 export const US_PORTS: Dot[] = [
@@ -19,7 +19,7 @@ export default function UsMap({ dots = US_PORTS, height = 460, route }: { dots?:
       <div className="absolute inset-0" style={{ backgroundImage: `url(${asset("/usa-map.svg")})`, backgroundSize: "92%", backgroundPosition: "center", backgroundRepeat: "no-repeat", opacity: 0.22, filter: "brightness(0) invert(1)" }} />
       {route && (
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <line x1={route[0].x} y1={route[0].y} x2={route[1].x} y2={route[1].y} stroke="#FF6B00" strokeWidth="0.5" strokeDasharray="2 2" opacity="0.8" />
+          <line x1={route[0].x} y1={route[0].y} x2={route[1].x} y2={route[1].y} stroke="#ffde01" strokeWidth="0.5" strokeDasharray="2 2" opacity="0.8" />
         </svg>
       )}
       {dots.map((d, i) => (

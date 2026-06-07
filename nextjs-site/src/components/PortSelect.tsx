@@ -20,7 +20,7 @@ export default function PortSelect({ value, onChange, options, placeholder }: { 
     <div ref={ref} className="relative">
       <button type="button" onClick={() => setOpen((o) => !o)} className={`${FIELD} text-left flex items-center justify-between gap-2`}>
         <span className={`truncate ${value ? "text-white" : "text-white/45"}`}>{value || placeholder}</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF6B00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`shrink-0 transition-transform ${open ? "rotate-180" : ""}`}><path d="M6 9l6 6 6-6" /></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffde01" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`shrink-0 transition-transform ${open ? "rotate-180" : ""}`}><path d="M6 9l6 6 6-6" /></svg>
       </button>
       {open && (
         <div className="absolute z-30 mt-1.5 w-full rounded-md border border-white/15 shadow-2xl overflow-hidden" style={{ background: "rgba(12,22,42,0.92)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
@@ -34,7 +34,7 @@ export default function PortSelect({ value, onChange, options, placeholder }: { 
             {list.length === 0 && <div className="px-3 py-3 text-[13px] text-white/50">No terminals match.</div>}
             {list.map((o) => (
               <button type="button" key={o} onClick={() => { onChange(o); setOpen(false); setQuery(""); }} className={`w-full text-left px-3 py-2.5 text-[13px] hover:bg-white/10 transition flex items-center gap-2 ${o === value ? "text-white bg-white/[0.06]" : "text-white/75"}`}>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF6B00" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z" /><circle cx="12" cy="11" r="2.4" /></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ffde01" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z" /><circle cx="12" cy="11" r="2.4" /></svg>
                 <span>{o}</span>
               </button>
             ))}

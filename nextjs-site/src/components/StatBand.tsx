@@ -11,7 +11,7 @@ export default function StatBand() {
       <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-5">
         {STATS.map((s, i) => (
           <div key={s.l} className={`reveal reveal-d${i % 4} rounded-lg p-6 border border-[var(--navy)]/8 relative overflow-hidden`} style={{ background: "linear-gradient(160deg,#FFFFFF, #FFF6EE)" }}>
-            <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-5" style={{ background: "rgba(255,107,0,0.12)" }}>
+            <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-5" style={{ background: "rgba(255,222,1,0.12)" }}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: s.i }} />
             </div>
             <div className="display text-[34px] md:text-[38px] text-[var(--navy)] leading-none num">{s.n}</div>

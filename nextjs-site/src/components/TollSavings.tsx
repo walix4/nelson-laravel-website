@@ -88,14 +88,14 @@ export default function TollSavings() {
   };
 
   return (
-    <div className="reveal rounded-md bg-white/[0.08] border border-[#FF6B00]/30 backdrop-blur-sm shadow-2xl p-6 md:p-7 w-full max-w-[460px] mx-auto lg:mx-0 relative overflow-hidden">
+    <div className="reveal rounded-md bg-white/[0.08] border border-[#ffde01]/30 backdrop-blur-sm shadow-2xl p-6 md:p-7 w-full max-w-[460px] mx-auto lg:mx-0 relative overflow-hidden">
       {phase !== "result" && (
         <form onSubmit={run} className="flex flex-col">
           <h3 className="display text-[20px] md:text-[22px] text-white leading-tight">Calculate Your Drayage Toll Cost</h3>
           <p className="text-[12.5px] text-white/55 mt-1.5">Price a container move from port gate to door.</p>
           <div className="mt-5 space-y-3.5">
-            <div><label className={labelCls}>Select port terminal <span className="text-[#FF6B00]">*</span></label><PortSelect value={from} onChange={setFrom} options={PORTS} placeholder="Select port terminal" /></div>
-            <div><label className={labelCls}>Enter drop off address <span className="text-[#FF6B00]">*</span></label><input className={fieldCls} required value={to} onChange={(e) => setTo(e.target.value)} placeholder="Enter drop-off address" /></div>
+            <div><label className={labelCls}>Select port terminal <span className="text-[#ffde01]">*</span></label><PortSelect value={from} onChange={setFrom} options={PORTS} placeholder="Select port terminal" /></div>
+            <div><label className={labelCls}>Enter drop off address <span className="text-[#ffde01]">*</span></label><input className={fieldCls} required value={to} onChange={(e) => setTo(e.target.value)} placeholder="Enter drop-off address" /></div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-3.5">
             <div><label className={labelCls}>Vehicle category</label><GlassSelect value={category} onChange={setCategory} options={CATEGORY} /></div>
@@ -134,7 +134,7 @@ export default function TollSavings() {
 
       {phase === "loading" && (
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6" style={{ background: "rgba(8,18,38,0.78)", backdropFilter: "blur(8px)" }}>
-          <div className="relative w-16 h-16"><div className="absolute inset-0 rounded-full border-[3px] border-white/15" /><div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[#FF6B00] animate-spin" /></div>
+          <div className="relative w-16 h-16"><div className="absolute inset-0 rounded-full border-[3px] border-white/15" /><div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[#ffde01] animate-spin" /></div>
           <div className="display text-[16px] text-white mt-5">Pricing your tolls</div>
           <div className="text-[12px] text-white/60 mt-1.5 num">{LOADING[step]}</div>
         </div>
