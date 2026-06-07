@@ -57,10 +57,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             {/* LEFT — headline */}
             <div className="flex flex-col justify-center">
-              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]"><span className="italic font-black" style={{ fontFamily: "'Roboto', sans-serif" }}>DrayPay</span> <span className="bg-gradient-to-r from-[#8fd9f5] via-[#3bb8ee] to-[#00a2e7] bg-clip-text text-transparent">Smart Wallet</span></h1>
-              <div className="inline-flex items-center gap-2 self-start rounded-md px-3.5 py-1.5 text-[11px] font-semibold mt-5" style={{ background: "rgba(0,162,231,0.16)", border: "1px solid rgba(0,162,231,0.4)" }}>
-                <span className="live-dot" /> Instant Blockchain Payments
-              </div>
+              <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]"><span className="italic font-black" style={{ fontFamily: "'Roboto', sans-serif" }}>DrayPay</span> <span className="bg-gradient-to-r from-[#8fd9f5] via-[#3bb8ee] to-[#00a2e7] bg-clip-text text-transparent">Smart Wallet</span><span className="block">Digital Wallet for Drayage</span></h1>
               <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Secure digital payments for carriers, brokers, and drivers powered by blockchain smart contracts.</p>
               <div className="mt-8 grid w-fit grid-cols-2 gap-3">
                 {/* App Store badge */}
