@@ -85,7 +85,7 @@ export default function Home() {
             </div>
             {/* RIGHT — photo */}
             <div className="hidden lg:flex items-center justify-center">
-              <img src={asset("/hero-photo.jpg?v=1")} alt="" className="w-full rounded-2xl object-cover border border-white/15 shadow-2xl" style={{ aspectRatio: "4 / 3" }} />
+              <video className="w-full rounded-2xl object-cover border border-white/15 shadow-2xl" autoPlay muted loop playsInline preload="auto" poster={asset("/hero-card.jpg?v=1")} style={{ aspectRatio: "16 / 9" }}><source src={asset("/hero-card.mp4?v=1")} type="video/mp4" /></video>
             </div>
           </div>
         </div>
