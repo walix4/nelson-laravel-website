@@ -42,7 +42,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* brand + contact */}
           <div>
-            <img src={asset("/draytoll-logo.png")} alt="DrayToll" className="h-9 w-auto" />
+            <img src={asset("/draytoll-logo.png?v=2")} alt="DrayToll" className="h-9 w-auto" />
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
               Commercial truck and container shipping toll intelligence. Accurate class-aware rates for drayage, intermodal, and heavy freight.
             </p>

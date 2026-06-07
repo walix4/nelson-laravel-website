@@ -20,7 +20,7 @@ export default function FreightFeatures() {
           {FEATURES.map((f, i) => (
             <div key={f.t} className={`reveal reveal-d${i % 3} group rounded-lg border border-[var(--navy)]/8 p-7 hover:-translate-y-1 transition shadow-sm hover:shadow-xl`} style={{ background: "linear-gradient(170deg,#FFFFFF,#F7F9FC)" }}>
               <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{ background: "linear-gradient(160deg,#0B2D5C,#061A38)" }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8A2B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: f.i }} />
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3bb8ee" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: f.i }} />
               </div>
               <h3 className="display text-[19px] text-[var(--navy)] mt-5">{f.t}</h3>
               <p className="text-[13.5px] text-[var(--muted)] mt-2.5 leading-relaxed">{f.d}</p>

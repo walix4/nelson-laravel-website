@@ -52,7 +52,7 @@ export default function Pricing() {
       <RevealInit />
 
       {/* HERO */}
-      <section className="relative overflow-hidden text-white" style={{ background: "radial-gradient(900px 520px at 18% 18%,rgba(58,95,192,0.28),transparent 60%),radial-gradient(820px 520px at 86% 88%,rgba(255,107,0,0.22),transparent 60%),linear-gradient(180deg,#0B2D5C,#061A38)" }}>
+      <section className="relative overflow-hidden text-white" style={{ background: "radial-gradient(900px 520px at 18% 18%,rgba(58,95,192,0.28),transparent 60%),radial-gradient(820px 520px at 86% 88%,rgba(0,162,231,0.22),transparent 60%),linear-gradient(180deg,#0B2D5C,#061A38)" }}>
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.4) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.4) 1px,transparent 1px)", backgroundSize: "46px 46px" }} />
         <div className="relative max-w-[900px] mx-auto px-6 py-24 md:py-28 text-center">
           <div className="inline-flex items-center rounded-md px-3.5 py-1.5 text-[11px] font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}>API Pricing</div>
@@ -123,7 +123,7 @@ export default function Pricing() {
       </section>
 
       {/* CTA BAND */}
-      <section className="relative overflow-hidden text-white py-24" style={{ background: "radial-gradient(700px 400px at 85% 50%,rgba(255,107,0,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(58,95,192,0.25),transparent 60%),linear-gradient(135deg,#0B2D5C,#061A38 60%,#15448C)" }}>
+      <section className="relative overflow-hidden text-white py-24" style={{ background: "radial-gradient(700px 400px at 85% 50%,rgba(0,162,231,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(58,95,192,0.25),transparent 60%),linear-gradient(135deg,#0B2D5C,#061A38 60%,#15448C)" }}>
         <div className="max-w-[820px] mx-auto px-6 text-center reveal relative">
           <h2 className="display text-white text-[36px] md:text-[48px] leading-[1.05]">Ship smarter — know tolls before the container rolls</h2>
           <p className="mt-4 text-white/70 text-[15px] md:text-[16px] max-w-xl mx-auto leading-relaxed">Integrate truck-class toll estimates into your TMS, rating engine, or shipper portal. Built for drayage and intermodal freight teams.</p>
