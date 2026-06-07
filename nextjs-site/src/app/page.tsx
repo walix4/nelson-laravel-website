@@ -83,9 +83,9 @@ export default function Home() {
                 <div><div className="text-[26px] md:text-[30px] display num text-white">250,000+</div><div className="mt-0.5">Routes priced</div></div>
               </div>
             </div>
-            {/* RIGHT — photo */}
+            {/* RIGHT — DrayPay mockup */}
             <div className="hidden lg:flex items-center justify-center">
-              <video className="w-full rounded-2xl object-cover border border-white/15 shadow-2xl" autoPlay muted loop playsInline preload="auto" poster={asset("/hero-card.jpg?v=1")} style={{ aspectRatio: "16 / 9" }}><source src={asset("/hero-card.mp4?v=1")} type="video/mp4" /></video>
+              <img src={asset("/draypay-hero.png?v=1")} alt="DrayPay app and card" className="w-full max-w-[560px] h-auto object-contain" style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.45))" }} />
             </div>
           </div>
         </div>
