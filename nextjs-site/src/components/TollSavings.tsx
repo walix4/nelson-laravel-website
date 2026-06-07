@@ -60,6 +60,7 @@ export default function TollSavings() {
   const [axles, setAxles] = useState("5");
   const [wheelbase, setWheelbase] = useState("51");
   const [trips, setTrips] = useState("1");
+  const [more, setMore] = useState(false);
   const [phase, setPhase] = useState<"form" | "loading" | "result">("form");
   const [step, setStep] = useState(0);
   const [res, setRes] = useState<{ gvw: number; legal: number; over: number; perAxle: number; perTrip: number; total: number; trips: number } | null>(null);
@@ -127,7 +128,10 @@ export default function TollSavings() {
             </div>
           </div>
           <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5"><span className="label">Analyze overweight</span></button>
-          <p className="mt-4 text-[10.5px] leading-snug text-white/40"><span className="font-semibold text-white/55">How it works:</span> Enter your container weight and axle configuration. The calculator applies the Federal Bridge Formula (FBF), checks per-axle limits for your state, calculates the overweight above 44,000 lbs (standard 2-axle 40/45-ft container threshold), computes the overweight permit fee for your chosen state, and shows total drayage cost impact.</p>
+          <div className="mt-4">
+            <p className={`text-[10.5px] leading-snug text-white/40 ${more ? "" : "line-clamp-2"}`}><span className="font-semibold text-white/55">How it works:</span> Enter your container weight and axle configuration. The calculator applies the Federal Bridge Formula (FBF), checks per-axle limits for your state, calculates the overweight above 44,000 lbs (standard 2-axle 40/45-ft container threshold), computes the overweight permit fee for your chosen state, and shows total drayage cost impact.</p>
+            <button type="button" onClick={() => setMore((m) => !m)} className="mt-1 text-[10.5px] font-semibold text-[#ffde01] hover:opacity-80">{more ? "Read less" : "Read more"}</button>
+          </div>
         </form>
       )}
 
