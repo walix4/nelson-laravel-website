@@ -51,7 +51,7 @@ export default function Home() {
 
       {/* HERO */}
       <section className="relative overflow-hidden text-white">
-        <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="auto" poster={asset("/hero-toll.jpg")}><source src={asset("/hero-toll.mp4")} type="video/mp4" /></video>
+        <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="auto" poster={asset("/hero-toll.jpg?v=2")}><source src={asset("/hero-toll.mp4?v=2")} type="video/mp4" /></video>
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(1,7,26,0.82) 0%,rgba(1,7,26,0.55) 42%,rgba(1,7,26,0.86) 100%)" }} />
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 520px at 18% 22%,rgba(11,35,80,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(255,222,1,0.18),transparent 60%)" }} />
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-16 md:py-24">
@@ -152,7 +152,7 @@ export default function Home() {
             </div>
             <div className="relative flex items-center justify-center" style={{ minHeight: 480 }}>
               <div className="relative rounded-lg overflow-hidden border border-white/10 w-full max-w-[640px] aspect-video shadow-2xl">
-                <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="none" poster={asset("/hero-toll.jpg")}><source src={asset("/toll-road.mp4")} type="video/mp4" /></video>
+                <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="none" poster={asset("/hero-toll.jpg?v=2")}><source src={asset("/toll-road.mp4")} type="video/mp4" /></video>
                 <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(6,26,56,0.15),rgba(6,26,56,0.45))" }} />
               </div>
               <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ top: "8%", left: "5%", animationDelay: "-1s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Axle class</div><div className="display text-white">5-axle semi</div></div>
