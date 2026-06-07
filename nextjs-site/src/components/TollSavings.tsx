@@ -110,6 +110,7 @@ export default function TollSavings() {
             </div>
           </div>
           <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5"><span className="label">Analyze overweight</span></button>
+          <p className="mt-4 text-[10.5px] leading-snug text-white/40"><span className="font-semibold text-white/55">How it works:</span> Enter your container weight and axle configuration. The calculator applies the Federal Bridge Formula (FBF), checks per-axle limits for your state, calculates the overweight above 44,000 lbs (standard 2-axle 40/45-ft container threshold), computes the overweight permit fee for your chosen state, and shows total drayage cost impact.</p>
         </form>
       )}
 
