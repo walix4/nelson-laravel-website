@@ -9,7 +9,7 @@ export default function Nav() {
     <header className="sticky top-0 z-40 border-b" style={{ background: "#0B2D5C", borderColor: "rgba(255,255,255,0.18)" }}>
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center">
-          <img src={asset("/draytoll-logo.png?v=2")} alt="DrayToll" className="h-8 md:h-9 w-auto" />
+          <span className="italic font-black text-[22px] md:text-[26px] tracking-tight leading-none text-white" style={{ fontFamily: "'Roboto', sans-serif" }}>Dray<span className="text-[#00a2e7]">Pay</span></span>
         </Link>
         <nav className="hidden lg:flex items-center gap-5 text-[13px] font-medium text-white/85">
           <Link href="/tools" className="hover:text-white">Route toll grade</Link>
