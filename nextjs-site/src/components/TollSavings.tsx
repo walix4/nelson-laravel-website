@@ -1,6 +1,23 @@
 "use client";
 import { useState, useEffect } from "react";
 import GlassSelect from "@/components/GlassSelect";
+import PortSelect from "@/components/PortSelect";
+
+const PORTS = [
+  "APM Terminals — Elizabeth, NJ", "Maher Terminals — Elizabeth, NJ", "Port Newark Container Terminal — Newark, NJ",
+  "GCT Bayonne — Bayonne, NJ", "GCT New York — Staten Island, NY",
+  "APM Terminals (Pier 400) — Los Angeles, CA", "Fenix Marine (Pier 300) — Los Angeles, CA", "Yusen Terminals — Los Angeles, CA",
+  "Long Beach Container Terminal (Pier E) — Long Beach, CA", "Total Terminals (Pier T) — Long Beach, CA", "ITS (Pier G) — Long Beach, CA",
+  "TraPac — Oakland, CA", "SSA Terminal (Pier J) — Oakland, CA",
+  "Terminal 18 (SSA) — Seattle, WA", "Husky Terminal — Tacoma, WA",
+  "Barbours Cut — Houston, TX", "Bayport Container Terminal — Houston, TX",
+  "Garden City Terminal — Savannah, GA", "Wando Welch Terminal — Charleston, SC", "Hugh K. Leatherman Terminal — Charleston, SC",
+  "Norfolk International Terminals — Norfolk, VA", "Virginia International Gateway — Portsmouth, VA",
+  "Seagirt Marine Terminal — Baltimore, MD", "Packer Avenue Marine Terminal — Philadelphia, PA", "Conley Terminal — Boston, MA",
+  "POMTOC — Miami, FL", "South Florida Container Terminal — Miami, FL", "Port Everglades — Fort Lauderdale, FL",
+  "Blount Island (JAXPORT) — Jacksonville, FL", "Napoleon Avenue Terminal — New Orleans, LA",
+  "APM Terminals — Mobile, AL", "Terminal 6 — Portland, OR",
+];
 
 // State overweight-cost multiplier (permit fees + fine schedules vary by state).
 const STATES: [string, number][] = [
@@ -33,9 +50,10 @@ const LOADING = ["Computing gross vehicle weight…", "Applying the federal brid
 
 const fieldCls = "w-full rounded bg-white/[0.07] px-3 py-2.5 text-[14px] text-white placeholder-white/45 focus:outline-none focus:bg-white/[0.16] transition";
 const labelCls = "block text-[10.5px] font-semibold uppercase tracking-[0.06em] text-white/65 mb-1.5";
-const helpCls = "text-[10.5px] leading-snug text-white/45 mt-1.5";
 
 export default function TollSavings() {
+  const [from, setFrom] = useState("APM Terminals — Elizabeth, NJ");
+  const [to, setTo] = useState("Philadelphia, PA, USA");
   const [container, setContainer] = useState("52000");
   const [tare, setTare] = useState("34000");
   const [state, setState] = useState("New Jersey");
@@ -77,17 +95,19 @@ export default function TollSavings() {
         <form onSubmit={run} className="flex flex-col">
           <h3 className="display text-[20px] md:text-[22px] text-white leading-tight">Calculate Your Drayage Overweight Cost</h3>
           <p className="text-[12.5px] text-white/55 mt-1.5">Axle weights, permits &amp; fines — before you roll.</p>
+          <div className="mt-5 space-y-3.5">
+            <div><label className={labelCls}>Select port terminal <span className="text-[#ffde01]">*</span></label><PortSelect value={from} onChange={setFrom} options={PORTS} placeholder="Select port terminal" /></div>
+            <div><label className={labelCls}>Enter drop off address <span className="text-[#ffde01]">*</span></label><input className={fieldCls} required value={to} onChange={(e) => setTo(e.target.value)} placeholder="Enter drop-off address" /></div>
+          </div>
           <div className="mt-5 text-[10px] font-bold uppercase tracking-[0.16em] text-white/40">Configure your load</div>
           <div className="mt-3 grid grid-cols-2 gap-x-3 gap-y-3.5">
             <div>
               <label className={labelCls}>Container weight (lbs)</label>
               <input className={fieldCls} type="number" min={0} value={container} onChange={(e) => setContainer(e.target.value)} />
-              <p className={helpCls}>Gross weight of loaded container (cargo + tare). Legal max ~44,000 lbs for a standard 2-axle container move.</p>
             </div>
             <div>
               <label className={labelCls}>Truck tare weight (lbs)</label>
               <input className={fieldCls} type="number" min={0} value={tare} onChange={(e) => setTare(e.target.value)} />
-              <p className={helpCls}>Typical tractor ~18,000 lbs · chassis ~7,000 lbs · total tare ~25,000–35,000 lbs.</p>
             </div>
             <div>
               <label className={labelCls}>State</label>
@@ -96,17 +116,14 @@ export default function TollSavings() {
             <div>
               <label className={labelCls}>Axle configuration</label>
               <GlassSelect value={axles} onChange={setAxles} options={AXLES} />
-              <p className={helpCls}>More axles = better weight distribution = lower per-axle stress.</p>
             </div>
             <div>
               <label className={labelCls}>Wheelbase (L) — feet</label>
               <input className={fieldCls} type="number" min={0} value={wheelbase} onChange={(e) => setWheelbase(e.target.value)} />
-              <p className={helpCls}>Distance from steer to last axle. Typical 53-ft trailer ~51 ft.</p>
             </div>
             <div>
               <label className={labelCls}>Number of trips</label>
               <input className={fieldCls} type="number" min={1} value={trips} onChange={(e) => setTrips(e.target.value)} />
-              <p className={helpCls}>Multiply for weekly / monthly cost.</p>
             </div>
           </div>
           <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5"><span className="label">Analyze overweight</span></button>
