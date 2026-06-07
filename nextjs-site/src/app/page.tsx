@@ -12,7 +12,6 @@ import HowSteps from "@/components/HowSteps";
 import WhoUses from "@/components/WhoUses";
 import Ticker from "@/components/Ticker";
 import CalculateRate from "@/components/CalculateRate";
-import TollSavings from "@/components/TollSavings";
 import { asset } from "@/lib/site";
 
 const BRANDS = ["CARGOMAX", "portlink", "NORDFREIGHT", "veritas3pl", "ARC LOGISTICS", "Halo Freight", "ROADWORKS", "Meridian Fleet", "Atlas Carriers", "Northstar Cargo"];
@@ -55,12 +54,8 @@ export default function Home() {
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(1,7,26,0.82) 0%,rgba(1,7,26,0.55) 42%,rgba(1,7,26,0.86) 100%)" }} />
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 520px at 18% 22%,rgba(11,35,80,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(47,97,192,0.18),transparent 60%)" }} />
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-16 md:py-24">
-          <div className="grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-stretch">
-            {/* LEFT — savings calculator */}
-            <TollSavings />
-            {/* RIGHT — headline */}
-            <div className="flex flex-col justify-center h-full">
-              <div className="inline-flex items-center gap-2 self-start rounded-md px-3.5 py-1.5 text-[11px] font-semibold mb-5" style={{ background: "rgba(47,97,192,0.16)", border: "1px solid rgba(47,97,192,0.4)" }}>
+          <div className="max-w-[880px] mx-auto text-center flex flex-col items-center py-6 md:py-10">
+              <div className="inline-flex items-center gap-2 rounded-md px-3.5 py-1.5 text-[11px] font-semibold mb-5" style={{ background: "rgba(47,97,192,0.16)", border: "1px solid rgba(47,97,192,0.4)" }}>
                 <span className="live-dot" /> Commercial truck toll data — updated every 15 minutes
               </div>
               <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]">Toll Intelligence for <span className="bg-gradient-to-r from-[#8fa8e6] via-[#4f74cf] to-[#2f61c0] bg-clip-text text-transparent">Drayage Container &amp; Truck Freight.</span></h1>
@@ -85,7 +80,6 @@ export default function Home() {
                 <div className="h-9 w-px bg-white/20" />
                 <div><div className="text-[26px] md:text-[30px] display num text-white">250,000+</div><div className="mt-0.5">Routes priced</div></div>
               </div>
-            </div>
           </div>
         </div>
         {/* trust band — bottom of hero, video plays behind the glass */}
