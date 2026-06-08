@@ -43,7 +43,7 @@ export default function Footer() {
           {/* brand + contact */}
           <div>
             <span className="flex items-center gap-2.5">
-              <img src={asset("/drayow-mark.png?v=3")} alt="" className="h-11 w-auto" />
+              <img src={asset("/drayow-mark.png?v=4")} alt="" className="h-11 w-auto" />
               <span className="display font-extrabold text-[22px] tracking-tight leading-none text-white">Dray <span className="text-[#ffc400]">Overweight</span></span>
             </span>
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
