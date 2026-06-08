@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DrayToll · The truck toll-cost network for North America",
-  description: "Instant toll costs for every truck route across the U.S. & Canada — by axle class, corridor and transponder network. Know the toll before you dispatch.",
+  title: "DrayPay · Smart Wallet for Drayage Payments",
+  description: "Secure digital payments for shippers, brokers, and carriers — instant blockchain payments and a digital wallet for drayage, all in one place.",
 };
 
 const BASE = process.env.NEXT_PUBLIC_BASE || "";
