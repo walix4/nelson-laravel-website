@@ -61,7 +61,6 @@ export default function Home() {
                 <span className="live-dot" /> Instant Blockchain Payments
               </div>
               <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]"><span className="italic font-black" style={{ fontFamily: "'Roboto', sans-serif" }}>DrayPay</span> <span className="bg-gradient-to-r from-[#8fd9f5] via-[#3bb8ee] to-[#00a2e7] bg-clip-text text-transparent">Smart Wallet</span></h1>
-              <div className="display text-white text-[22px] md:text-[30px] leading-tight mt-2.5">Digital Wallet for Drayage</div>
               <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Secure digital payments for carriers, brokers, and drivers powered by blockchain smart contracts.</p>
               <div className="mt-8 grid w-fit grid-cols-2 gap-3">
                 {/* App Store badge */}
@@ -86,8 +85,9 @@ export default function Home() {
             </div>
             {/* RIGHT — DrayPay card on a glass card with app badges */}
             <div className="hidden lg:flex items-center justify-center">
-              <div className="w-full max-w-[520px] rounded-lg border border-white/15 p-7" style={{ background: "rgba(255,255,255,0.08)", backdropFilter: "blur(16px) saturate(150%)", WebkitBackdropFilter: "blur(16px) saturate(150%)", boxShadow: "0 30px 70px -20px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.18)" }}>
-                <img src={asset("/draypay-card.png?v=2")} alt="DrayPay Visa debit card" className="w-full h-auto object-contain" style={{ filter: "drop-shadow(0 18px 36px rgba(0,0,0,0.45))" }} />
+              <div className="w-full max-w-[520px] rounded-lg border border-white/15 px-8 py-12 flex flex-col justify-center" style={{ minHeight: "560px", background: "rgba(255,255,255,0.08)", backdropFilter: "blur(16px) saturate(150%)", WebkitBackdropFilter: "blur(16px) saturate(150%)", boxShadow: "0 30px 70px -20px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.18)" }}>
+                <img src={asset("/draypay-card.png?v=2")} alt="DrayPay app and Visa debit card" className="w-full h-auto object-contain" style={{ filter: "drop-shadow(0 18px 36px rgba(0,0,0,0.45))" }} />
+                <div className="mt-7 display text-white text-[24px] md:text-[30px] leading-tight">Digital Wallet for Drayage</div>
               </div>
             </div>
           </div>
