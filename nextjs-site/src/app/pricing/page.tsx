@@ -5,35 +5,35 @@ import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
 
 export const metadata: Metadata = {
-  title: "API Pricing · DrayToll",
-  description: "Start free in sandbox, scale into production volumes, or go enterprise with custom SLAs and dedicated toll-data feeds.",
+  title: "API Pricing · Dray Overweight",
+  description: "Start free in sandbox, scale into production volumes, or go enterprise with custom SLAs and dedicated overweight-permit data feeds.",
 };
 
-const CHIPS = ["50K+ US toll plazas & gantries", "Commercial truck classes 2–6", "E-ZPass, cash & plate billing", "Peak / off-peak multipliers"];
+const CHIPS = ["50-state permit rule sets", "Commercial truck classes 2–6", "Per-axle & bridge-formula checks", "Escort & clearance flags"];
 
 const PLANS = [
   {
-    name: "Developer", popular: false, blurb: "Prototype toll-aware features in sandbox before production.",
+    name: "Developer", popular: false, blurb: "Prototype compliance-aware features in sandbox before production.",
     price: "Free", unit: "up to 1,000 calls/mo",
     features: ["REST API access", "Sandbox environment", "Community support", "Rate-limited production trial"],
     cta: "Start free", solid: false,
   },
   {
-    name: "Growth", popular: true, blurb: "For TMS, fleet, and mobility apps shipping toll features to users.",
+    name: "Growth", popular: true, blurb: "For TMS, fleet, and dispatch apps shipping overweight checks to users.",
     price: "$299", unit: "/month",
-    features: ["100,000 API calls / month", "Real-time rate updates", "Email support (24h SLA)", "Webhook notifications", "Usage analytics dashboard"],
+    features: ["100,000 API calls / month", "Real-time limit updates", "Email support (24h SLA)", "Webhook notifications", "Usage analytics dashboard"],
     cta: "Get started", solid: true,
   },
   {
-    name: "Enterprise", popular: false, blurb: "High-volume platforms, custom SLAs, and dedicated data feeds.",
+    name: "Enterprise", popular: false, blurb: "High-volume platforms, custom SLAs, and dedicated permit-data feeds.",
     price: "Custom", unit: "volume pricing",
-    features: ["Unlimited scale", "Dedicated account manager", "99.9% uptime SLA", "Custom data feeds & bulk export", "Priority rate-change alerts"],
+    features: ["Unlimited scale", "Dedicated account manager", "99.9% uptime SLA", "Custom data feeds & bulk export", "Priority limit-change alerts"],
     cta: "Contact sales", solid: false,
   },
 ];
 
 const FAQ = [
-  ["What counts as an API call?", "Each plaza lookup, corridor query, or location search counts as one call. Batch endpoints bill per record returned."],
+  ["What counts as an API call?", "Each weight check, route compliance query, or permit lookup counts as one call. Batch endpoints bill per record returned."],
   ["Can I upgrade mid-cycle?", "Yes — upgrades take effect immediately; we prorate the difference on your next invoice."],
   ["Do you offer annual contracts?", "Growth and Enterprise plans are available annually with a 15% discount. Contact us for a quote."],
 ];
@@ -64,7 +64,7 @@ export default function Pricing() {
             <Link href="/tools/ports" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>Data quality →</Link>
           </div>
           <div className="mt-7 text-[12.5px] text-white/55">
-            <Link href="/tools" className="text-[var(--red)] font-semibold hover:opacity-80">Route toll grade</Link> · <Link href="/#quote" className="text-[var(--red)] font-semibold hover:opacity-80">Toll grades</Link>
+            <Link href="/tools" className="text-[var(--red)] font-semibold hover:opacity-80">Compliance tools</Link> · <Link href="/#quote" className="text-[var(--red)] font-semibold hover:opacity-80">Check a load</Link>
           </div>
         </div>
       </section>
@@ -125,8 +125,8 @@ export default function Pricing() {
       {/* CTA BAND */}
       <section className="relative overflow-hidden text-white py-24" style={{ background: "radial-gradient(700px 400px at 85% 50%,rgba(255,222,1,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(58,95,192,0.25),transparent 60%),linear-gradient(135deg,#0B2D5C,#061A38 60%,#15448C)" }}>
         <div className="max-w-[820px] mx-auto px-6 text-center reveal relative">
-          <h2 className="display text-white text-[36px] md:text-[48px] leading-[1.05]">Ship smarter — know tolls before the container rolls</h2>
-          <p className="mt-4 text-white/70 text-[15px] md:text-[16px] max-w-xl mx-auto leading-relaxed">Integrate truck-class toll estimates into your TMS, rating engine, or shipper portal. Built for drayage and intermodal freight teams.</p>
+          <h2 className="display text-white text-[36px] md:text-[48px] leading-[1.05]">Dispatch smarter — know it's legal before the load rolls</h2>
+          <p className="mt-4 text-white/70 text-[15px] md:text-[16px] max-w-xl mx-auto leading-relaxed">Integrate per-axle weight, bridge-formula and permit checks into your TMS, rating engine, or shipper portal. Built for drayage and intermodal freight teams.</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a href="#plans" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Request fleet API access</span></a>
             <a href="#plans" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>View API pricing →</a>

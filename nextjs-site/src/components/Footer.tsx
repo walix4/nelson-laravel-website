@@ -5,11 +5,11 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Products",
     links: [
-      { label: "Toll calculator", href: "/#quote" },
-      { label: "Route toll grade", href: "/tools" },
-      { label: "Port drayage", href: "/tools/ports" },
-      { label: "Intermodal & rail", href: "/tools" },
-      { label: "Freight brokers", href: "/estimates" },
+      { label: "Overweight calculator", href: "/#quote" },
+      { label: "Compliance tools", href: "/tools" },
+      { label: "State permit directory", href: "/tools/ports" },
+      { label: "Bridge formula check", href: "/tools" },
+      { label: "Overweight analyses", href: "/estimates" },
     ],
   },
   {
@@ -17,7 +17,7 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "API pricing", href: "/pricing" },
       { label: "Request API access", href: "/pricing" },
-      { label: "Commercial data quality", href: "/pricing" },
+      { label: "Permit data quality", href: "/pricing" },
     ],
   },
   {
@@ -47,10 +47,10 @@ export default function Footer() {
               <span className="display font-extrabold text-[22px] tracking-tight leading-none text-white">Dray <span className="text-[#ffc400]">Overweight</span></span>
             </span>
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
-              Commercial truck and container shipping toll intelligence. Accurate class-aware rates for drayage, intermodal, and heavy freight.
+              Drayage overweight intelligence. Verify gross and per-axle weight, bridge-formula compliance, and state permit requirements before every dispatch.
             </p>
             <div className="mt-4 text-[13.5px] text-white/60">(410) 555-0199</div>
-            <a href="mailto:freight@draytoll.com" className="mt-2 inline-block text-[13.5px] font-semibold text-[var(--red)] hover:opacity-80">freight@draytoll.com</a>
+            <a href="mailto:support@drayow.com" className="mt-2 inline-block text-[13.5px] font-semibold text-[var(--red)] hover:opacity-80">support@drayow.com</a>
           </div>
 
           {/* link columns */}
@@ -69,8 +69,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[12.5px] text-white/45">
-          <div className="num">© 2026 DrayToll. All rights reserved.</div>
-          <div className="num">50K+ toll plazas · Class 2–6 routes · 99.9% uptime</div>
+          <div className="num">© 2026 Dray Overweight. All rights reserved.</div>
+          <div className="num">50 states · Class 2–6 axle limits · 99.9% uptime</div>
         </div>
       </div>
     </footer>

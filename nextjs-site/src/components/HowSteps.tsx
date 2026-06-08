@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const STEPS = [
-  { n: "01", t: "Define equipment & class", d: "Set truck class, axle count, container size, and gross weight for the move." },
-  { n: "02", t: "Estimate corridor tolls", d: "Run port-to-destination routes across Turnpike, bridge, and open-road toll networks." },
-  { n: "03", t: "Push to TMS & billing", d: "Feed totals into quotes, dispatch, and freight invoices via API or export." },
+  { n: "01", t: "Define equipment & weight", d: "Set truck class, axle count, container size, and gross weight for the move." },
+  { n: "02", t: "Verify axle & permit compliance", d: "Check each axle group, the Bridge Formula, and per-state permit rules along the route." },
+  { n: "03", t: "Push to TMS & dispatch", d: "Feed permit needs and compliance status into quotes, dispatch, and the TMS via API or export." },
 ];
 
 export default function HowSteps() {
@@ -13,8 +13,8 @@ export default function HowSteps() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 reveal">
           <div className="max-w-xl">
             <div className="text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--red)]">How it works</div>
-            <h2 className="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-3">Quote container tolls in three steps</h2>
-            <p className="mt-4 text-[var(--muted)] text-[15px] md:text-[16px] leading-relaxed">From dispatch to invoice — align operations, rating, and billing on one toll number per lane.</p>
+            <h2 className="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-3">Clear an overweight load in three steps</h2>
+            <p className="mt-4 text-[var(--muted)] text-[15px] md:text-[16px] leading-relaxed">From dispatch to delivery — align operations, compliance, and permits on one verified weight check per lane.</p>
           </div>
           <Link href="/#quote" className="shrink-0 rounded-lg px-6 py-3 text-[14px] font-semibold text-[var(--navy)] border border-[var(--navy)]/15 hover:bg-[var(--navy)]/5 transition">Request API access</Link>
         </div>

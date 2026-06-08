@@ -3,7 +3,7 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import RevealInit from "./RevealInit";
 
-export default function ToolLayout({ eyebrow = "DrayToll tool", title, desc, children }: { eyebrow?: string; title: React.ReactNode; desc: string; children: React.ReactNode }) {
+export default function ToolLayout({ eyebrow = "Dray Overweight tool", title, desc, children }: { eyebrow?: string; title: React.ReactNode; desc: string; children: React.ReactNode }) {
   return (
     <>
       <Nav />

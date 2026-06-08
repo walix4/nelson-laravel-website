@@ -13,7 +13,7 @@ export default function Page() {
   const hrs = mi / 45; const h = Math.floor(hrs), m = Math.round((hrs - h) * 60);
   const rate = Math.round((350 + mi * 2.35) / 5) * 5;
   return (
-    <ToolLayout title="Distance & Transit Time" desc="Pick an origin port and an inland destination to estimate road distance, drive time and an indicative drayage rate.">
+    <ToolLayout title="Distance & Route Clearance" desc="Pick an origin port and an inland destination to estimate road distance, drive time and an indicative drayage rate for the lane you plan to run heavy.">
       <div className="bg-white rounded-[24px] p-7 md:p-10 reveal" style={{ border: "1px solid rgba(11,35,80,0.06)" }}>
         <div className="grid md:grid-cols-2 gap-5">
           <div><label className="tool-label">Origin port</label><select className="tool-select" value={o} onChange={(e) => setO(e.target.value)}>{Object.keys(PORTS).map((k) => <option key={k}>{k}</option>)}</select></div>

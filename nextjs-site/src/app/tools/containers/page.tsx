@@ -24,7 +24,7 @@ const f1 = (v: number) => Math.round(v * 10) / 10;
 export default function Page() {
   const [si, setSi] = useState(false);
   return (
-    <ToolLayout eyebrow="Reference" title="Container Specs" desc="Interior dimensions, capacity and max payload for the boxes you move every day.">
+    <ToolLayout eyebrow="Reference" title="Container & Axle Specs" desc="Interior dimensions, tare and max payload for the boxes you move — so you know how much weight rides on each axle group.">
       <div className="text-center -mt-4 mb-9">
         <div className="inline-flex rounded-xl border border-[var(--navy)]/12 overflow-hidden text-[13px] font-semibold">
           <button className={`px-5 py-2 ${!si ? "bg-[var(--navy)] text-white" : "text-[var(--navy)]"}`} onClick={() => setSi(false)}>US (ft / lb)</button>
