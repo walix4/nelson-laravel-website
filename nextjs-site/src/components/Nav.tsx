@@ -9,7 +9,7 @@ export default function Nav() {
     <header className="sticky top-0 z-40 border-b" style={{ background: "#0B2D5C", borderColor: "rgba(255,255,255,0.18)" }}>
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
-          <img src={asset("/drayow-mark.png?v=4")} alt="" className="h-9 md:h-11 w-auto" />
+          <img src={asset("/drayow-mark.png?v=5")} alt="" className="h-9 md:h-11 w-auto" />
           <span className="display font-extrabold text-[20px] md:text-[24px] tracking-tight leading-none text-white">Dray <span className="text-[#ffc400]">Overweight</span></span>
         </Link>
         <nav className="hidden lg:flex items-center gap-5 text-[13px] font-medium text-white/85">
