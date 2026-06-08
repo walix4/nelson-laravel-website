@@ -42,7 +42,10 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* brand + contact */}
           <div>
-            <img src={asset("/drayow-logo.png?v=1")} alt="Dray Overweight" className="h-11 w-auto" />
+            <span className="flex items-center gap-2.5">
+              <img src={asset("/drayow-mark.png?v=1")} alt="" className="h-11 w-auto" />
+              <span className="display font-extrabold text-[22px] tracking-tight leading-none text-white">Dray <span className="text-[#ffc400]">Overweight</span></span>
+            </span>
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
               Commercial truck and container shipping toll intelligence. Accurate class-aware rates for drayage, intermodal, and heavy freight.
             </p>
