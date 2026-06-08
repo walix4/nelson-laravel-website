@@ -63,7 +63,19 @@ export default function Home() {
               <h1 className="display text-white text-[40px] md:text-[64px] leading-[1.02]"><span className="italic font-black" style={{ fontFamily: "'Roboto', sans-serif" }}>DrayPay</span> <span className="bg-gradient-to-r from-[#8fd9f5] via-[#3bb8ee] to-[#00a2e7] bg-clip-text text-transparent">Smart Wallet</span></h1>
               <div className="display text-white text-[22px] md:text-[30px] leading-tight mt-2.5">Digital Wallet for Drayage</div>
               <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">Secure digital payments for carriers, brokers, and drivers powered by blockchain smart contracts.</p>
-              <div className="mt-6 text-[12px] text-white/55">🚛 Built for 5-axle rigs, chassis moves, and E-ZPass fleets</div>
+              <div className="mt-8 grid w-fit grid-cols-2 gap-3">
+                {/* App Store badge */}
+                <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] w-full pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
+                  <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" aria-hidden="true" className="shrink-0"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                  <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] opacity-90">Download on the</span><span className="block text-[14px] font-semibold tracking-tight">App Store</span></span>
+                </a>
+                {/* Google Play badge */}
+                <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] w-full pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
+                  <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" />
+                  <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
+                </a>
+              </div>
+              <div className="mt-5 text-[12px] text-white/55">🚛 Built for 5-axle rigs, chassis moves, and E-ZPass fleets</div>
               <div className="mt-10 flex items-center gap-7 text-[11px] uppercase tracking-[0.16em] text-white/60">
                 <div><div className="text-[26px] md:text-[30px] display num text-white">3,100+</div><div className="mt-0.5">Toll roads</div></div>
                 <div className="h-9 w-px bg-white/20" />
@@ -76,18 +88,6 @@ export default function Home() {
             <div className="hidden lg:flex items-center justify-center">
               <div className="w-full max-w-[520px] rounded-lg border border-white/15 p-7" style={{ background: "rgba(255,255,255,0.08)", backdropFilter: "blur(16px) saturate(150%)", WebkitBackdropFilter: "blur(16px) saturate(150%)", boxShadow: "0 30px 70px -20px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.18)" }}>
                 <img src={asset("/draypay-card.png?v=1")} alt="DrayPay Visa debit card" className="w-full h-auto object-contain" style={{ filter: "drop-shadow(0 18px 36px rgba(0,0,0,0.45))" }} />
-                <div className="mt-6 grid grid-cols-2 gap-3">
-                  {/* App Store badge */}
-                  <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] w-full pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
-                    <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" aria-hidden="true" className="shrink-0"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-                    <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] opacity-90">Download on the</span><span className="block text-[14px] font-semibold tracking-tight">App Store</span></span>
-                  </a>
-                  {/* Google Play badge */}
-                  <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] w-full pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
-                    <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" />
-                    <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
-                  </a>
-                </div>
               </div>
             </div>
           </div>
