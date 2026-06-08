@@ -84,7 +84,7 @@ export default function Home() {
             {/* RIGHT — DrayPay card on a glass card with app badges */}
             <div className="hidden lg:flex items-center justify-center">
               <div className="w-full max-w-[520px] rounded-lg border border-white/15 px-8 py-12 flex flex-col justify-center" style={{ minHeight: "560px", background: "rgba(255,255,255,0.08)", backdropFilter: "blur(16px) saturate(150%)", WebkitBackdropFilter: "blur(16px) saturate(150%)", boxShadow: "0 30px 70px -20px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.18)" }}>
-                <img src={asset("/draypay-card.png?v=2")} alt="DrayPay app and Visa debit card" className="w-full h-auto object-contain" style={{ filter: "drop-shadow(0 18px 36px rgba(0,0,0,0.45))" }} />
+                <img src={asset("/draypay-card.png?v=2")} alt="DrayPay app and Visa debit card" className="w-full h-auto object-contain" style={{ filter: "drop-shadow(0 18px 36px rgba(0,0,0,0.45))", animation: "floatTag 5.5s ease-in-out infinite" }} />
                 <div className="mt-7 display text-white text-[24px] md:text-[30px] leading-tight">Digital Wallet for Drayage</div>
                 <Typewriter text="Fast, secure payments for shippers, brokers, and carriers — all in one wallet." className="mt-3 block text-[14px] md:text-[15px] text-white/70 leading-relaxed min-h-[3.2em]" />
               </div>
