@@ -13,7 +13,7 @@ export default function Page() {
   const hrs = mi / 45; const h = Math.floor(hrs), m = Math.round((hrs - h) * 60);
   const rate = Math.round((350 + mi * 2.35) / 5) * 5;
   return (
-    <ToolLayout title="Distance & Transit Time" desc="Pick an origin port and an inland destination to estimate road distance, drive time and an indicative drayage rate.">
+    <ToolLayout title="Distance & Settlement Timing" desc="Pick an origin port and an inland destination to estimate move distance, transit time and an indicative payment amount.">
       <div className="bg-white rounded-[24px] p-7 md:p-10 reveal" style={{ border: "1px solid rgba(11,35,80,0.06)" }}>
         <div className="grid md:grid-cols-2 gap-5">
           <div><label className="tool-label">Origin port</label><select className="tool-select" value={o} onChange={(e) => setO(e.target.value)}>{Object.keys(PORTS).map((k) => <option key={k}>{k}</option>)}</select></div>
@@ -21,10 +21,10 @@ export default function Page() {
         </div>
         <div className="grid grid-cols-3 gap-4 mt-8 text-center">
           <div className="rounded-2xl bg-[var(--navy)]/4 border border-[var(--navy)]/8 py-6"><div className="display text-[34px] text-[var(--navy)] num">{mi.toLocaleString()}</div><div className="text-[12px] text-[var(--muted)] mt-1 uppercase tracking-wider">Miles</div></div>
-          <div className="rounded-2xl bg-[var(--navy)]/4 border border-[var(--navy)]/8 py-6"><div className="display text-[34px] text-[var(--navy)] num">{h}h {m < 10 ? "0" : ""}{m}m</div><div className="text-[12px] text-[var(--muted)] mt-1 uppercase tracking-wider">Drive time</div></div>
-          <div className="rounded-2xl bg-[var(--red)]/6 border border-[var(--red)]/15 py-6"><div className="display text-[34px] text-[var(--red)] num">${rate.toLocaleString()}</div><div className="text-[12px] text-[var(--muted)] mt-1 uppercase tracking-wider">Est. rate</div></div>
+          <div className="rounded-2xl bg-[var(--navy)]/4 border border-[var(--navy)]/8 py-6"><div className="display text-[34px] text-[var(--navy)] num">{h}h {m < 10 ? "0" : ""}{m}m</div><div className="text-[12px] text-[var(--muted)] mt-1 uppercase tracking-wider">Transit time</div></div>
+          <div className="rounded-2xl bg-[var(--red)]/6 border border-[var(--red)]/15 py-6"><div className="display text-[34px] text-[var(--red)] num">${rate.toLocaleString()}</div><div className="text-[12px] text-[var(--muted)] mt-1 uppercase tracking-wider">Est. payment</div></div>
         </div>
-        <p className="text-[12px] text-[var(--muted)] mt-5 text-center">Estimates use great-circle distance × a 1.2 road factor at 45 mph average. Get a firm, all-in quote on the rate calculator.</p>
+        <p className="text-[12px] text-[var(--muted)] mt-5 text-center">Estimates use great-circle distance × a 1.2 road factor at 45 mph average. Get a firm, all-in payment on the payment calculator.</p>
       </div>
     </ToolLayout>
   );

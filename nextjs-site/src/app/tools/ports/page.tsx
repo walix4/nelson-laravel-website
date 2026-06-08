@@ -18,11 +18,11 @@ export default function Page() {
   const [q, setQ] = useState(""), [f, setF] = useState("all");
   const list = PT.filter((p) => (f === "all" || p.r === f || p.t === f) && (!q || (p.n + " " + p.c).toLowerCase().includes(q.toLowerCase())));
   return (
-    <ToolLayout eyebrow="Port directory" title="See all U.S. ports" desc="Every sea, rail and inland port we price drayage to. Search by name or state, or filter by coast and type.">
+    <ToolLayout eyebrow="Payout directory" title="See all U.S. payout points" desc="Every port, rail ramp and inland hub we settle drayage payments across. Search by name or state, or filter by coast and type.">
       <div className="reveal">
         <div className="relative max-w-xl mx-auto">
           <svg className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: "rgba(11,35,80,0.4)" }} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
-          <input className="tool-input" style={{ paddingLeft: "2.8rem" }} placeholder="Search ports, cities or states…" value={q} onChange={(e) => setQ(e.target.value)} />
+          <input className="tool-input" style={{ paddingLeft: "2.8rem" }} placeholder="Search hubs, cities or states…" value={q} onChange={(e) => setQ(e.target.value)} />
         </div>
         <div className="flex flex-wrap justify-center gap-2.5 mt-5">
           {FILTERS.map((x) => (

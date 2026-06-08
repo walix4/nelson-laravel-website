@@ -1,10 +1,10 @@
 const FEATURES = [
-  { t: "5-axle & heavy truck classes", d: "Toll tables mapped to commercial class, axle count, and trailer configuration — not passenger-car defaults.", i: '<path d="M3 7h11v8H3zM14 10h3l3 3v2h-6zM7 18a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 7 18Zm10 0a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 17 18Z"/>' },
-  { t: "Container & chassis profiles", d: "40', 45', and 53' equipment types with weight, height, and combined-length rules for bridge and plaza tolls.", i: '<path d="M21 7.5 12 3 3 7.5 12 12zM3 7.5v9L12 21M21 7.5v9L12 21M12 12v9"/>' },
-  { t: "Port-to-ramp route estimates", d: "Drayage corridors from marine terminals to rail ramps, warehouses, and cross-docks with plaza-by-plaza breakdown.", i: '<path d="M9 3 3 5v16l6-2 6 2 6-2V3l-6 2zM9 3v16M15 5v16"/>' },
-  { t: "Peak & off-peak commercial rates", d: "E-ZPass, license-plate, and cash lanes with time-of-day multipliers used by major US toll authorities.", i: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
-  { t: "Fleet & TMS integrations", d: "REST JSON API for dispatch, rating engines, and shipper portals — sandbox keys and usage analytics included.", i: '<path d="m9 8-4 4 4 4M15 8l4 4-4 4"/>' },
-  { t: "Audit-ready cost breakdown", d: "Per-plaza receipts for freight invoices, accessorial chargebacks, and customer quote validation.", i: '<rect x="6" y="4" width="12" height="16" rx="1.5"/><path d="M9 4V3h6v1M9 9h6M9 13h6M9 17h4"/>' },
+  { t: "Instant payments & payouts", d: "Pay shippers, brokers, carriers and drivers in seconds — no waiting days for a wire or check to clear.", i: '<path d="M3 7h11v8H3zM14 10h3l3 3v2h-6zM7 18a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 7 18Zm10 0a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 17 18Z"/>' },
+  { t: "Escrow & automated settlement", d: "Funds held in smart-contract escrow and released the moment delivery conditions are met — no chasing, no disputes.", i: '<path d="M21 7.5 12 3 3 7.5 12 12zM3 7.5v9L12 21M21 7.5v9L12 21M12 12v9"/>' },
+  { t: "Smart-contract digital wallet", d: "One wallet per party for balances, payouts and invoices — funds programmable by the terms each move actually runs on.", i: '<path d="M9 3 3 5v16l6-2 6 2 6-2V3l-6 2zM9 3v16M15 5v16"/>' },
+  { t: "Invoices, QuickPay & factoring", d: "Send invoices, get paid early with QuickPay, or factor receivables — transparent fees shown before you accept.", i: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
+  { t: "TMS & accounting integrations", d: "REST JSON API for dispatch, accounting and broker portals — sandbox keys and usage analytics included.", i: '<path d="m9 8-4 4 4 4M15 8l4 4-4 4"/>' },
+  { t: "Tamper-proof transaction records", d: "Every payment, payout and settlement written on-chain — audit-ready receipts for reconciliation and disputes.", i: '<rect x="6" y="4" width="12" height="16" rx="1.5"/><path d="M9 4V3h6v1M9 9h6M9 13h6M9 17h4"/>' },
 ];
 
 export default function FreightFeatures() {
@@ -12,9 +12,9 @@ export default function FreightFeatures() {
     <section id="features" className="py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto reveal">
-          <div className="text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--red)]">Built for heavy freight</div>
-          <h2 className="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-3">Container moves need truck-grade toll logic</h2>
-          <p className="mt-4 text-[var(--muted)] text-[15px] md:text-[16px] leading-relaxed">Passenger-car APIs miss axle classes, equipment profiles, and commercial peak rates — we model tolls the way ports and fleets actually pay them.</p>
+          <div className="text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--red)]">Built for drayage</div>
+          <h2 className="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-3">Drayage payments need smart-contract logic</h2>
+          <p className="mt-4 text-[var(--muted)] text-[15px] md:text-[16px] leading-relaxed">Legacy payment rails move slowly and hide fees — we settle the way drayage actually works: instant, transparent and provable on-chain.</p>
         </div>
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {FEATURES.map((f, i) => (

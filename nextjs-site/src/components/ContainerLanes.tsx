@@ -1,14 +1,14 @@
 const FLOW = [
-  ["Port gate", "Marine terminal"],
-  ["Turnpike", "Class 5 toll"],
-  ["Bridge", "Height / weight"],
-  ["Rail ramp", "Inland intermodal"],
-  ["Warehouse", "Final mile"],
+  ["Invoice", "Shipper or broker"],
+  ["Escrow", "Funds locked"],
+  ["Delivery", "Conditions met"],
+  ["Settlement", "Smart contract"],
+  ["Payout", "Carrier / driver"],
 ];
 const STEPS = [
-  ["01", "Define equipment & class", "Set truck class, axle count, container size, and gross weight for the move."],
-  ["02", "Estimate corridor tolls", "Run port-to-destination routes across Turnpike, bridge, and open-road toll networks."],
-  ["03", "Push to TMS & billing", "Feed totals into quotes, dispatch, and freight invoices via API or export."],
+  ["01", "Send invoice & fund escrow", "Issue an invoice and lock the payment in smart-contract escrow the moment a move is booked."],
+  ["02", "Settle on delivery", "Funds release automatically when delivery conditions are met — no chasing, no manual approvals."],
+  ["03", "Push to accounting & TMS", "Feed settled payments and on-chain receipts into your ledger and dispatch via API or export."],
 ];
 const Arrow = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 
@@ -19,9 +19,9 @@ export default function ContainerLanes() {
       <div className="max-w-[1400px] mx-auto px-6 relative grid lg:grid-cols-2 gap-14 items-start">
         {/* left */}
         <div className="reveal">
-          <div className="text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--red)]">Container shipping lanes</div>
-          <h2 className="display text-[36px] md:text-[46px] text-[var(--navy)] leading-[1.06] mt-3">From port gate to inland ramp — every toll counted</h2>
-          <p className="mt-5 text-[var(--muted)] text-[15px] md:text-[16px] max-w-md leading-relaxed">Model drayage and intermodal moves with equipment-aware pricing. No more underestimating turnpike and bridge costs on container quotes.</p>
+          <div className="text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--red)]">The payment lifecycle</div>
+          <h2 className="display text-[36px] md:text-[46px] text-[var(--navy)] leading-[1.06] mt-3">From invoice to payout — every dollar accounted for</h2>
+          <p className="mt-5 text-[var(--muted)] text-[15px] md:text-[16px] max-w-md leading-relaxed">Move money the way drayage moves freight. Funds held in escrow and released on delivery — no more waiting weeks to get paid or chasing brokers for settlement.</p>
           <div className="mt-9 flex items-center gap-2.5 overflow-x-auto pb-3 lane-scroll">
             {FLOW.map(([t, s], i) => (
               <div key={t} className="flex items-center gap-2.5 shrink-0">

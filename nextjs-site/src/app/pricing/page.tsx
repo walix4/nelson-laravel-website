@@ -5,37 +5,37 @@ import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
 
 export const metadata: Metadata = {
-  title: "API Pricing · DrayToll",
-  description: "Start free in sandbox, scale into production volumes, or go enterprise with custom SLAs and dedicated toll-data feeds.",
+  title: "Pricing · DrayPay",
+  description: "Start free, pay simple per-transaction fees as you grow, or go enterprise with custom rates and dedicated settlement support.",
 };
 
-const CHIPS = ["50K+ US toll plazas & gantries", "Commercial truck classes 2–6", "E-ZPass, cash & plate billing", "Peak / off-peak multipliers"];
+const CHIPS = ["Transparent per-transaction fees", "Instant payouts to any wallet", "Smart-contract escrow included", "On-chain receipts on every payment"];
 
 const PLANS = [
   {
-    name: "Developer", popular: false, blurb: "Prototype toll-aware features in sandbox before production.",
-    price: "Free", unit: "up to 1,000 calls/mo",
-    features: ["REST API access", "Sandbox environment", "Community support", "Rate-limited production trial"],
-    cta: "Start free", solid: false,
+    name: "Starter", popular: false, blurb: "Open a wallet and start sending and receiving payments — no monthly fee.",
+    price: "Free", unit: "0.9% per transaction",
+    features: ["Digital wallet & debit card", "Instant payouts", "Smart-contract escrow", "On-chain receipts"],
+    cta: "Open a wallet", solid: false,
   },
   {
-    name: "Growth", popular: true, blurb: "For TMS, fleet, and mobility apps shipping toll features to users.",
-    price: "$299", unit: "/month",
-    features: ["100,000 API calls / month", "Real-time rate updates", "Email support (24h SLA)", "Webhook notifications", "Usage analytics dashboard"],
+    name: "Business", popular: true, blurb: "For brokers and carriers settling volume — lower fees and faster support.",
+    price: "$299", unit: "/month + 0.5% per txn",
+    features: ["Everything in Starter", "QuickPay & factoring", "Email support (24h SLA)", "Payment webhooks & API", "Settlement analytics dashboard"],
     cta: "Get started", solid: true,
   },
   {
-    name: "Enterprise", popular: false, blurb: "High-volume platforms, custom SLAs, and dedicated data feeds.",
+    name: "Enterprise", popular: false, blurb: "High-volume platforms, custom rates, and dedicated settlement support.",
     price: "Custom", unit: "volume pricing",
-    features: ["Unlimited scale", "Dedicated account manager", "99.9% uptime SLA", "Custom data feeds & bulk export", "Priority rate-change alerts"],
+    features: ["Unlimited volume", "Dedicated account manager", "99.9% uptime SLA", "Custom payout rails & bulk export", "Priority settlement support"],
     cta: "Contact sales", solid: false,
   },
 ];
 
 const FAQ = [
-  ["What counts as an API call?", "Each plaza lookup, corridor query, or location search counts as one call. Batch endpoints bill per record returned."],
-  ["Can I upgrade mid-cycle?", "Yes — upgrades take effect immediately; we prorate the difference on your next invoice."],
-  ["Do you offer annual contracts?", "Growth and Enterprise plans are available annually with a 15% discount. Contact us for a quote."],
+  ["What does a transaction cost?", "Each payment or payout is charged a flat percentage shown before you confirm — no monthly minimums on Starter, no hidden deductions."],
+  ["How fast do payouts settle?", "Payouts to carrier, broker and driver wallets typically settle in under a minute, with funds held in escrow until delivery is confirmed."],
+  ["Do you offer annual contracts?", "Business and Enterprise plans are available annually with a 15% discount. Contact us for a quote."],
 ];
 
 const Check = ({ on }: { on: boolean }) => (
@@ -55,16 +55,16 @@ export default function Pricing() {
       <section className="relative overflow-hidden text-white" style={{ background: "radial-gradient(900px 520px at 18% 18%,rgba(58,95,192,0.28),transparent 60%),radial-gradient(820px 520px at 86% 88%,rgba(0,162,231,0.22),transparent 60%),linear-gradient(180deg,#0B2D5C,#061A38)" }}>
         <div className="absolute inset-0 opacity-[0.06] pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.4) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.4) 1px,transparent 1px)", backgroundSize: "46px 46px" }} />
         <div className="relative max-w-[900px] mx-auto px-6 py-24 md:py-28 text-center">
-          <div className="inline-flex items-center rounded-md px-3.5 py-1.5 text-[11px] font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}>API Pricing</div>
-          <h1 className="display text-white text-[40px] md:text-[58px] leading-[1.05] mt-6">Pricing that scales with your platform</h1>
-          <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl mx-auto leading-relaxed">Start free in sandbox, grow into production volumes, or talk to us about enterprise deployments with custom SLAs and dedicated feeds.</p>
-          <div className="mt-5 text-[13px] font-semibold text-[var(--red)]">Developer free tier · Growth from $299/mo · Enterprise custom</div>
+          <div className="inline-flex items-center rounded-md px-3.5 py-1.5 text-[11px] font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}>Pricing</div>
+          <h1 className="display text-white text-[40px] md:text-[58px] leading-[1.05] mt-6">Pricing that scales with your payments</h1>
+          <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl mx-auto leading-relaxed">Start free, pay simple per-transaction fees as you grow, or talk to us about enterprise volumes with custom rates and dedicated settlement support.</p>
+          <div className="mt-5 text-[13px] font-semibold text-[var(--red)]">Starter free · Business from $299/mo · Enterprise custom</div>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href="#plans" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Get API key</span></a>
-            <Link href="/tools/ports" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>Data quality →</Link>
+            <a href="#plans" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Open a wallet</span></a>
+            <Link href="/tools/ports" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>Payout rails →</Link>
           </div>
           <div className="mt-7 text-[12.5px] text-white/55">
-            <Link href="/tools" className="text-[var(--red)] font-semibold hover:opacity-80">Route toll grade</Link> · <Link href="/#quote" className="text-[var(--red)] font-semibold hover:opacity-80">Toll grades</Link>
+            <Link href="/tools" className="text-[var(--red)] font-semibold hover:opacity-80">Payment tools</Link> · <Link href="/#quote" className="text-[var(--red)] font-semibold hover:opacity-80">Estimate a payment</Link>
           </div>
         </div>
       </section>
@@ -125,13 +125,13 @@ export default function Pricing() {
       {/* CTA BAND */}
       <section className="relative overflow-hidden text-white py-24" style={{ background: "radial-gradient(700px 400px at 85% 50%,rgba(0,162,231,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(58,95,192,0.25),transparent 60%),linear-gradient(135deg,#0B2D5C,#061A38 60%,#15448C)" }}>
         <div className="max-w-[820px] mx-auto px-6 text-center reveal relative">
-          <h2 className="display text-white text-[36px] md:text-[48px] leading-[1.05]">Ship smarter — know tolls before the container rolls</h2>
-          <p className="mt-4 text-white/70 text-[15px] md:text-[16px] max-w-xl mx-auto leading-relaxed">Integrate truck-class toll estimates into your TMS, rating engine, or shipper portal. Built for drayage and intermodal freight teams.</p>
+          <h2 className="display text-white text-[36px] md:text-[48px] leading-[1.05]">Get paid faster — settle before the container rolls</h2>
+          <p className="mt-4 text-white/70 text-[15px] md:text-[16px] max-w-xl mx-auto leading-relaxed">Embed instant payouts, escrow and settlement into your TMS, accounting stack, or broker portal. Built for drayage and intermodal teams.</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href="#plans" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Request fleet API access</span></a>
-            <a href="#plans" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>View API pricing →</a>
+            <a href="#plans" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Open a business wallet</span></a>
+            <a href="#plans" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>View pricing →</a>
           </div>
-          <div className="mt-6 text-[12.5px] text-white/55">Moving containers between ports? <a href="#plans" className="text-[var(--red)] font-semibold">Talk to our freight team</a></div>
+          <div className="mt-6 text-[12.5px] text-white/55">Settling high payment volume? <a href="#plans" className="text-[var(--red)] font-semibold">Talk to our payments team</a></div>
         </div>
       </section>
 

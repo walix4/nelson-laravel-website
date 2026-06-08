@@ -30,7 +30,7 @@ export default function TollCalculator() {
   const [res, setRes] = useState<any>(null);
 
   useEffect(() => {
-    document.title = "Toll Calculator · DrayToll";
+    document.title = "Payment Calculator · DrayPay";
     const p = new URLSearchParams(window.location.search);
     const g = (k: string, s: (v: string) => void) => { const v = p.get(k); if (v) s(v); };
     g("from", setFrom); g("to", setTo); g("profile", setAxles); g("axles", setAxles);
@@ -81,8 +81,8 @@ export default function TollCalculator() {
       <Nav />
       <main className="bg-[#F6F8FB] min-h-screen">
         <div className="max-w-[1400px] mx-auto px-6 py-6">
-          <h1 className="display text-[26px] md:text-[32px] text-[var(--navy)]">Toll Calculator</h1>
-          <p className="text-[var(--muted)] text-[13.5px] mt-1">Live TollSmart route pricing — per-plaza cash &amp; transponder rates by truck class.</p>
+          <h1 className="display text-[26px] md:text-[32px] text-[var(--navy)]">Payment Calculator</h1>
+          <p className="text-[var(--muted)] text-[13.5px] mt-1">Live drayage payment pricing — fees, escrow and net payout, milestone by milestone.</p>
 
           <div className="grid lg:grid-cols-2 gap-6 mt-5 items-start">
             {/* LEFT */}
@@ -90,8 +90,8 @@ export default function TollCalculator() {
               {!res ? (
                 <div className="bg-white rounded-lg border border-[var(--navy)]/8 p-5 md:p-6 shadow-sm overflow-y-auto">
                   <form onSubmit={(e) => { e.preventDefault(); doCalc(); }} className="space-y-3.5">
-                    <div><label className="input-label">From <span className="text-[var(--red)]">*</span></label><input className={inp + " mt-1"} required value={from} onChange={(e) => setFrom(e.target.value)} /></div>
-                    <div><label className="input-label">To <span className="text-[var(--red)]">*</span></label><input className={inp + " mt-1"} required value={to} onChange={(e) => setTo(e.target.value)} /></div>
+                    <div><label className="input-label">Pickup <span className="text-[var(--red)]">*</span></label><input className={inp + " mt-1"} required value={from} onChange={(e) => setFrom(e.target.value)} /></div>
+                    <div><label className="input-label">Delivery <span className="text-[var(--red)]">*</span></label><input className={inp + " mt-1"} required value={to} onChange={(e) => setTo(e.target.value)} /></div>
                     <div className="grid grid-cols-2 gap-3">
                       <div><label className="input-label">Vehicle category</label><select className={inp + " mt-1"} value={category} onChange={(e) => setCategory(e.target.value)}><option value="tractor_trailer">Tractor Trailer</option><option value="truck">Truck</option><option value="bus">Bus</option></select></div>
                       <div><label className="input-label">Truck profile</label><select className={inp + " mt-1"} value={axles} onChange={(e) => setAxles(e.target.value)}>{[2, 3, 4, 5, 6, 7].map((a) => <option key={a} value={a}>{a}-Axle{a === 5 ? " Semi-Trailer" : ""} — {a} axles</option>)}</select></div>
@@ -104,7 +104,7 @@ export default function TollCalculator() {
                       <div><label className="input-label">Width (in)</label><input className={inp + " mt-1 num"} type="number" value={width} onChange={(e) => setWidth(e.target.value)} /></div>
                       <div><label className="input-label">Length (in)</label><input className={inp + " mt-1 num"} type="number" value={length} onChange={(e) => setLength(e.target.value)} /></div>
                     </div>
-                    <button type="submit" disabled={!ready || loading} className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold disabled:opacity-60"><span className="label">{loading ? "Calculating…" : "Calculate tolls"}</span></button>
+                    <button type="submit" disabled={!ready || loading} className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold disabled:opacity-60"><span className="label">{loading ? "Calculating…" : "Estimate payment"}</span></button>
                     {err && <p className="text-[13px] text-[var(--red)] text-center">{err}</p>}
                   </form>
                 </div>
@@ -120,12 +120,12 @@ export default function TollCalculator() {
                       <div><div className="text-[11px] uppercase tracking-wider text-[var(--muted)] font-bold">Duration</div><div className="display text-[18px] text-[var(--navy)] mt-1">{res.durationLabel || "—"}</div></div>
                     </div>
                     <div className="grid grid-cols-3 gap-3">
-                      {([["Cash / Plate", res.tollCashUsd, "var(--navy)"], ["Transponder", res.tollTransponderUsd, "var(--green)"], ["You Pay", res.tollCashUsd, "var(--red)"]] as [string, any, string][]).map(([k, v, c]) => (
+                      {([["Standard fee", res.tollCashUsd, "var(--navy)"], ["QuickPay fee", res.tollTransponderUsd, "var(--green)"], ["You Pay", res.tollCashUsd, "var(--red)"]] as [string, any, string][]).map(([k, v, c]) => (
                         <div key={k} className="bg-white rounded-lg border border-[var(--navy)]/8 p-4 text-center shadow-sm"><div className="text-[10px] uppercase tracking-[0.12em] font-bold text-[var(--muted)]">{k}</div><div className="display text-[22px] num mt-1" style={{ color: c }}>{money(v)}</div></div>
                       ))}
                     </div>
                     <div className="bg-white rounded-lg border border-[var(--navy)]/8 p-5 md:p-6 shadow-sm">
-                      <h2 className="display text-[18px] text-[var(--navy)] mb-4">Toll details</h2>
+                      <h2 className="display text-[18px] text-[var(--navy)] mb-4">Payment breakdown</h2>
                       <div className="space-y-3">
                         {(res.stops || []).map((s: any, i: number) => (
                           <div key={s.id || i} className="rounded-lg border border-[var(--navy)]/8 p-4">
@@ -137,12 +137,12 @@ export default function TollCalculator() {
                                 {Array.isArray(s.paymentMethods) && s.paymentMethods.length > 0 && <div className="text-[12px] text-[var(--muted)] mt-1">Payment: {s.paymentMethods.join(", ")}</div>}
                                 {s.description && <div className="text-[12px] text-[var(--muted)] mt-1">{s.description}</div>}
                               </div>
-                              <div className="text-right shrink-0 num text-[13px]"><div className="text-[var(--navy)]">Cash: <b>{money(s.cashRate)}</b></div><div className="text-[var(--green)]">Pass: <b>{money(s.etcRate)}</b></div></div>
+                              <div className="text-right shrink-0 num text-[13px]"><div className="text-[var(--navy)]">Standard: <b>{money(s.cashRate)}</b></div><div className="text-[var(--green)]">QuickPay: <b>{money(s.etcRate)}</b></div></div>
                             </div>
                           </div>
                         ))}
                       </div>
-                      <p className="text-[11px] text-[var(--muted)] mt-4">Data from TollSmart. Each toll plaza shown with cash and transponder rates for your vehicle class.</p>
+                      <p className="text-[11px] text-[var(--muted)] mt-4">Each milestone shown with the standard and QuickPay fee for this payment.</p>
                     </div>
                   </div>
                 </>

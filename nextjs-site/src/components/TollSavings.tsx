@@ -41,7 +41,7 @@ const geocode = (t: string): [number, number] | null => {
 function hav(a: [number, number], b: [number, number]) { const R = 3958.8, t = (v: number) => (v * Math.PI) / 180; const dL = t(b[0] - a[0]), dG = t(b[1] - a[1]); const x = Math.sin(dL / 2) ** 2 + Math.cos(t(a[0])) * Math.cos(t(b[0])) * Math.sin(dG / 2) ** 2; return 2 * R * Math.asin(Math.min(1, Math.sqrt(x))); }
 const CAT_MULT: Record<string, number> = { tractor: 1, truck: 0.92, straight: 0.72, bus: 0.6, van: 0.45 };
 const N = (n: number) => n.toLocaleString();
-const LOADING = ["Geocoding route…", "Scanning toll roads & plazas…", "Pricing bridges, tunnels & axles…", "Applying vehicle class…"];
+const LOADING = ["Locating the move…", "Pricing the payment…", "Calculating fees & escrow…", "Estimating net payout…"];
 
 const fieldCls = "w-full rounded bg-white/[0.07] px-3 py-2.5 text-[14px] text-white placeholder-white/45 focus:outline-none focus:bg-white/[0.16] transition";
 const labelCls = "block text-[10.5px] font-semibold uppercase tracking-[0.06em] text-white/65 mb-1.5";
@@ -91,7 +91,7 @@ export default function TollSavings() {
     <div className="reveal rounded-md bg-white/[0.08] border border-[#00a2e7]/30 backdrop-blur-sm shadow-2xl p-6 md:p-7 w-full max-w-[460px] mx-auto lg:mx-0 relative overflow-hidden">
       {phase !== "result" && (
         <form onSubmit={run} className="flex flex-col">
-          <h3 className="display text-[20px] md:text-[22px] text-white leading-tight">Calculate Your Drayage Toll Cost</h3>
+          <h3 className="display text-[20px] md:text-[22px] text-white leading-tight">Estimate Your Drayage Payment</h3>
           <p className="text-[12.5px] text-white/55 mt-1.5">Price a container move from port gate to door.</p>
           <div className="mt-5 space-y-3.5">
             <div><label className={labelCls}>Select port terminal <span className="text-[#00a2e7]">*</span></label><PortSelect value={from} onChange={setFrom} options={PORTS} placeholder="Select port terminal" /></div>
@@ -107,27 +107,27 @@ export default function TollSavings() {
             <div><label className={labelCls}>Width (in)</label><input className={fieldCls} type="number" min={0} value={width} onChange={(e) => setWidth(e.target.value)} /></div>
             <div><label className={labelCls}>Length (in)</label><input className={fieldCls} type="number" min={0} value={length} onChange={(e) => setLength(e.target.value)} /></div>
           </div>
-          <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5"><span className="label">Calculate tolls</span></button>
+          <button type="submit" className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5"><span className="label">Estimate payment</span></button>
         </form>
       )}
 
       {phase === "result" && res && (
         <div>
-          <h3 className="display text-[20px] text-white leading-tight">Calculate Your Drayage Toll Cost</h3>
-          <div className="mt-4 text-[10px] uppercase tracking-[0.16em] font-bold text-[#7CF0B0] flex items-center gap-1.5"><span className="live-dot" /> Estimated tolls · {profile}-axle</div>
+          <h3 className="display text-[20px] text-white leading-tight">Estimate Your Drayage Payment</h3>
+          <div className="mt-4 text-[10px] uppercase tracking-[0.16em] font-bold text-[#7CF0B0] flex items-center gap-1.5"><span className="live-dot" /> Estimated payment</div>
           <div className="mt-2 flex items-baseline gap-2">
             <span className="display text-[44px] md:text-[48px] text-white num leading-none">${N(res.total)}</span>
-            <span className="text-[13px] text-white/60">/ trip</span>
+            <span className="text-[13px] text-white/60">/ move</span>
           </div>
-          <div className="text-[13px] text-white/70 mt-1.5 num">{N(res.miles)} mi · {res.plazas} toll points</div>
+          <div className="text-[13px] text-white/70 mt-1.5 num">{N(res.miles)} mi · {res.plazas} milestones</div>
           <div className="mt-5 grid grid-cols-2 gap-3 text-[11px]">
-            {([["Toll roads", res.roads], ["Bridges / tunnels", res.bridges], ["Oversize / permit", res.oversize], ["Surcharges", res.surcharge]] as [string, number][]).map(([k, v]) => (
+            {([["Linehaul", res.roads], ["Accessorials", res.bridges], ["Platform fee", res.oversize], ["Net payout", res.surcharge]] as [string, number][]).map(([k, v]) => (
               <div key={k} className="rounded px-3 py-3 bg-white/[0.08]"><div className="text-white/55 uppercase tracking-wider">{k}</div><div className="display text-white text-[17px] num mt-0.5">${N(v)}</div></div>
             ))}
           </div>
           <a href={`${process.env.NEXT_PUBLIC_BASE||""}/toll-calculator?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&profile=${profile}&dual=${dual}&trailer=${trailer}&weight=${weight}&height=${height}&width=${width}&length=${length}`} className="btn-primary w-full py-3.5 rounded-md text-[14px] font-semibold mt-5 flex items-center justify-center gap-2"><span className="label">Get full breakdown</span></a>
           <button type="button" onClick={() => setPhase("form")} className="mt-2.5 w-full py-2.5 rounded text-[12px] font-semibold text-white/85 bg-white/10 hover:bg-white/15 transition flex items-center justify-center gap-1.5">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>Calculate again
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>Estimate again
           </button>
         </div>
       )}
@@ -135,7 +135,7 @@ export default function TollSavings() {
       {phase === "loading" && (
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6" style={{ background: "rgba(8,18,38,0.78)", backdropFilter: "blur(8px)" }}>
           <div className="relative w-16 h-16"><div className="absolute inset-0 rounded-full border-[3px] border-white/15" /><div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[#00a2e7] animate-spin" /></div>
-          <div className="display text-[16px] text-white mt-5">Pricing your tolls</div>
+          <div className="display text-[16px] text-white mt-5">Pricing your payment</div>
           <div className="text-[12px] text-white/60 mt-1.5 num">{LOADING[step]}</div>
         </div>
       )}

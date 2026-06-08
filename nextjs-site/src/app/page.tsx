@@ -18,19 +18,19 @@ import { asset } from "@/lib/site";
 const BRANDS = ["CARGOMAX", "portlink", "NORDFREIGHT", "veritas3pl", "ARC LOGISTICS", "Halo Freight", "ROADWORKS", "Meridian Fleet", "Atlas Carriers", "Northstar Cargo"];
 // Solid (filled) icons — rendered with fill="currentColor".
 const COSTS = [
-  { n: "Toll roads", d: "Live per-mile rates × tolled miles × your axle class.", i: '<path d="M12 2a7 7 0 0 0-7 7c0 4.6 5.7 11.5 6.2 12.1a1 1 0 0 0 1.6 0C13.3 20.5 19 13.6 19 9a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/>', a: "#00a2e7" },
-  { n: "Bridges & tunnels", d: "Per-crossing tolls for heavy vehicles, by axle count.", i: '<path d="M12 3a10 10 0 0 0-10 9 1 1 0 0 0 1 1h1v6h2v-6h3v6h2v-6h2v6h2v-6h3v6h2v-6h1a1 1 0 0 0 1-1A10 10 0 0 0 12 3Z"/>', a: "#3A5FC0" },
-  { n: "Axle-based rates", d: "2 to 6+ axles — every authority prices weight differently.", i: '<path d="M3 7a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1h2.4a2 2 0 0 1 1.72.98l1.6 2.67A2 2 0 0 1 24 12.7V15a1 1 0 0 1-1 1h-1.2a3 3 0 0 1-5.6 0H9.8a3 3 0 0 1-5.6 0H3a1 1 0 0 1-1-1V7Zm14 3h4l-1.2-2H17v2ZM7 18.5A1.5 1.5 0 1 0 7 15.5a1.5 1.5 0 0 0 0 3Zm10 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/>', a: "#0B2D5C" },
-  { n: "Congestion & peak", d: "Time-of-day, express-lane and managed-lane pricing.", i: '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 9.6 2.7 1.55a1 1 0 1 1-1 1.74l-3.2-1.85A1 1 0 0 1 11 12V7a1 1 0 1 1 2 0v4.6Z"/>', a: "#00a2e7" },
-  { n: "Transponder networks", d: "E-ZPass, SunPass, TxTag, I-PASS — discounts & account fees.", i: '<path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1H3V6Zm0 4h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8Zm3 5a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2H6Z"/>', a: "#1E3A8A" },
-  { n: "Cash & video tolls", d: "Pay-by-plate surcharges when you run a lane without a tag.", i: '<path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7Zm10 1.5A3.5 3.5 0 1 0 12 15.5a3.5 3.5 0 0 0 0-7ZM5.5 8A1.5 1.5 0 0 0 4 9.5a1 1 0 0 0 2 0A1.5 1.5 0 0 0 5.5 8Zm13 5a1.5 1.5 0 0 0-1.5 1.5 1 1 0 0 0 2 0 1.5 1.5 0 0 0-.5-1.5Z"/>', a: "#00a2e7" },
+  { n: "Instant payouts", d: "Funds hit carrier, broker and driver wallets in seconds, not weeks.", i: '<path d="M12 2a7 7 0 0 0-7 7c0 4.6 5.7 11.5 6.2 12.1a1 1 0 0 0 1.6 0C13.3 20.5 19 13.6 19 9a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/>', a: "#00a2e7" },
+  { n: "Smart-contract escrow", d: "Funds locked on booking and released the moment delivery is confirmed.", i: '<path d="M12 3a10 10 0 0 0-10 9 1 1 0 0 0 1 1h1v6h2v-6h3v6h2v-6h2v6h2v-6h3v6h2v-6h1a1 1 0 0 0 1-1A10 10 0 0 0 12 3Z"/>', a: "#3A5FC0" },
+  { n: "Transparent fees", d: "One simple rate per payment — every fee shown before you accept.", i: '<path d="M3 7a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1h2.4a2 2 0 0 1 1.72.98l1.6 2.67A2 2 0 0 1 24 12.7V15a1 1 0 0 1-1 1h-1.2a3 3 0 0 1-5.6 0H9.8a3 3 0 0 1-5.6 0H3a1 1 0 0 1-1-1V7Zm14 3h4l-1.2-2H17v2ZM7 18.5A1.5 1.5 0 1 0 7 15.5a1.5 1.5 0 0 0 0 3Zm10 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/>', a: "#0B2D5C" },
+  { n: "QuickPay & factoring", d: "Get paid early with a clear discount, or factor receivables on demand.", i: '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 9.6 2.7 1.55a1 1 0 1 1-1 1.74l-3.2-1.85A1 1 0 0 1 11 12V7a1 1 0 1 1 2 0v4.6Z"/>', a: "#00a2e7" },
+  { n: "Digital wallet & card", d: "Hold balances, send payouts and spend with a debit card on the road.", i: '<path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1H3V6Zm0 4h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8Zm3 5a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2H6Z"/>', a: "#1E3A8A" },
+  { n: "Tamper-proof records", d: "Every payment written on-chain — audit-ready receipts for both sides.", i: '<path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7Zm10 1.5A3.5 3.5 0 1 0 12 15.5a3.5 3.5 0 0 0 0-7ZM5.5 8A1.5 1.5 0 0 0 4 9.5a1 1 0 0 0 2 0A1.5 1.5 0 0 0 5.5 8Zm13 5a1.5 1.5 0 0 0-1.5 1.5 1 1 0 0 0 2 0 1.5 1.5 0 0 0-.5-1.5Z"/>', a: "#00a2e7" },
 ];
 const Arrow = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 type Lane = [string, string, string];
 const SHIP: { title: string; icon: React.ReactNode; rows: Lane[] }[] = [
-  { title: "5-axle semi", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 17V7H2v10h2" /><path d="M14 9h4l4 4v4h-2" /><circle cx="7" cy="18" r="1.8" /><circle cx="17" cy="18" r="1.8" /></svg>, rows: [["Los Angeles", "Phoenix, AZ", "$74"], ["Long Beach", "Las Vegas, NV", "$58"], ["Oakland", "Sacramento, CA", "$19"], ["Seattle", "Portland, OR", "$33"], ["Houston", "San Antonio, TX", "$41"]] },
-  { title: "6-axle heavy", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinejoin="round"><rect x="3" y="12" width="7" height="7" rx="1" /><rect x="14" y="12" width="7" height="7" rx="1" /><rect x="8.5" y="4" width="7" height="7" rx="1" /></svg>, rows: [["Los Angeles", "Dallas, TX", "$112"], ["New York/NJ", "Chicago, IL", "$96"], ["Norfolk", "Atlanta, GA", "$63"], ["Long Beach", "Denver, CO", "$88"], ["Miami", "Orlando, FL", "$57"]] },
-  { title: "Oversize / permit", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.7" strokeLinejoin="round"><rect x="3" y="6" width="18" height="12" rx="1" /><path d="M7 6v12M11 6v12M15 6v12" /></svg>, rows: [["Houston", "Kansas City, MO", "$164"], ["Seattle", "Salt Lake City, UT", "$148"], ["Oakland", "Reno, NV", "$96"], ["New York/NJ", "Indianapolis, IN", "$182"], ["Charleston", "Columbus, OH", "$138"]] },
+  { title: "Instant payouts", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 17V7H2v10h2" /><path d="M14 9h4l4 4v4h-2" /><circle cx="7" cy="18" r="1.8" /><circle cx="17" cy="18" r="1.8" /></svg>, rows: [["Los Angeles", "Phoenix, AZ", "$740"], ["Long Beach", "Las Vegas, NV", "$580"], ["Oakland", "Sacramento, CA", "$190"], ["Seattle", "Portland, OR", "$330"], ["Houston", "San Antonio, TX", "$410"]] },
+  { title: "Escrow released", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinejoin="round"><rect x="3" y="12" width="7" height="7" rx="1" /><rect x="14" y="12" width="7" height="7" rx="1" /><rect x="8.5" y="4" width="7" height="7" rx="1" /></svg>, rows: [["Los Angeles", "Dallas, TX", "$1,120"], ["New York/NJ", "Chicago, IL", "$960"], ["Norfolk", "Atlanta, GA", "$630"], ["Long Beach", "Denver, CO", "$880"], ["Miami", "Orlando, FL", "$570"]] },
+  { title: "QuickPay funded", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.7" strokeLinejoin="round"><rect x="3" y="6" width="18" height="12" rx="1" /><path d="M7 6v12M11 6v12M15 6v12" /></svg>, rows: [["Houston", "Kansas City, MO", "$1,640"], ["Seattle", "Salt Lake City, UT", "$1,480"], ["Oakland", "Reno, NV", "$960"], ["New York/NJ", "Indianapolis, IN", "$1,820"], ["Charleston", "Columbus, OH", "$1,380"]] },
 ];
 
 export default function Home() {
@@ -40,8 +40,8 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
           <div className="flex items-center gap-5">
             <span className="flex items-center gap-2"><span className="live-dot" /><span>Network <b>LIVE</b></span></span>
-            <span className="hidden sm:inline opacity-60">·</span><span className="hidden sm:inline num"><b>3,128</b> toll roads tracked</span>
-            <span className="hidden md:inline opacity-60">·</span><span className="hidden md:inline num">5-axle avg <b>$0.21</b>/mi · Diesel <b>$5.18</b>/gal</span>
+            <span className="hidden sm:inline opacity-60">·</span><span className="hidden sm:inline num"><b>$48M+</b> settled this month</span>
+            <span className="hidden md:inline opacity-60">·</span><span className="hidden md:inline num">Avg payout <b>under 60s</b> · Fees from <b>0.5%</b></span>
           </div>
           <div className="flex items-center gap-4 text-[10px] uppercase tracking-[0.14em]"><span className="opacity-70">v2026.05</span><a href="#api" className="opacity-90 hover:opacity-100">API status</a></div>
         </div>
@@ -72,13 +72,13 @@ export default function Home() {
                   <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
                 </a>
               </div>
-              <div className="mt-5 text-[12px] text-white/55">🚛 Built for 5-axle rigs, chassis moves, and E-ZPass fleets</div>
+              <div className="mt-5 text-[12px] text-white/55">🚛 Built for shippers, brokers, carriers, owner-operators & drivers</div>
               <div className="mt-10 flex items-center gap-7 text-[11px] uppercase tracking-[0.16em] text-white/60">
-                <div><div className="text-[26px] md:text-[30px] display num text-white">3,100+</div><div className="mt-0.5">Toll roads</div></div>
+                <div><div className="text-[26px] md:text-[30px] display num text-white">&lt;60s</div><div className="mt-0.5">Payouts</div></div>
                 <div className="h-9 w-px bg-white/20" />
                 <div><div className="text-[26px] md:text-[30px] display num text-white">48</div><div className="mt-0.5">States</div></div>
                 <div className="h-9 w-px bg-white/20" />
-                <div><div className="text-[26px] md:text-[30px] display num text-white">250,000+</div><div className="mt-0.5">Routes priced</div></div>
+                <div><div className="text-[26px] md:text-[30px] display num text-white">$48M+</div><div className="mt-0.5">Settled / mo</div></div>
               </div>
             </div>
             {/* RIGHT — DrayPay card on a glass card with app badges */}
@@ -109,9 +109,9 @@ export default function Home() {
       <section id="quote" className="relative overflow-hidden py-20 md:py-24" style={{ background: "radial-gradient(900px 500px at 80% 0%,rgba(58,95,192,0.2),transparent 60%),linear-gradient(180deg,#0B2D5C,#061A38)" }}>
         <div className="max-w-[1400px] mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-12 reveal">
-            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--blue-2)]">Instant toll engine</div>
-            <h2 className="display text-white text-[44px] md:text-[64px] leading-[1.03] mt-3">Price your tolls.</h2>
-            <p className="text-white/60 text-[15px] md:text-[16px] mt-4 max-w-xl mx-auto">Pick a route, see it on the network, and get a fully itemised toll cost — by axle class and transponder — in seconds.</p>
+            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--blue-2)]">Instant payment engine</div>
+            <h2 className="display text-white text-[44px] md:text-[64px] leading-[1.03] mt-3">Estimate a payment.</h2>
+            <p className="text-white/60 text-[15px] md:text-[16px] mt-4 max-w-xl mx-auto">Enter a move, see the fee and net payout, and know exactly what lands in the wallet — all in seconds.</p>
           </div>
           <CalculateRate />
         </div>
@@ -125,9 +125,9 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <div className="text-center max-w-2xl mx-auto reveal">
             <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Live on the network</div>
-            <h2 className="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">Tolls priced right now</h2>
-            <p className="mt-4 text-[var(--muted)] text-[15px]">Real truck tolls being calculated across the country this minute — by axle class, from 5-axle semis to oversize permit loads.</p>
-            <div className="mt-6 flex items-center justify-center gap-4"><Link href="/estimates" className="text-[14px] font-semibold text-[var(--navy)] inline-flex items-center gap-1.5">View all <Arrow /></Link><Link href="/#quote" className="px-5 py-2.5 rounded-lg text-[13px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Calculate a toll</Link></div>
+            <h2 className="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">Payments settling right now</h2>
+            <p className="mt-4 text-[var(--muted)] text-[15px]">Real drayage payments clearing across the country this minute — instant payouts, escrow releases and QuickPay, all settling in seconds.</p>
+            <div className="mt-6 flex items-center justify-center gap-4"><Link href="/estimates" className="text-[14px] font-semibold text-[var(--navy)] inline-flex items-center gap-1.5">View all <Arrow /></Link><Link href="/#quote" className="px-5 py-2.5 rounded-lg text-[13px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Estimate a payment</Link></div>
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {SHIP.map((s, i) => (
@@ -146,11 +146,11 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-6 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="reveal">
-              <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Every variable, priced.</div>
-              <h2 className="display text-[40px] md:text-[52px] leading-[1.04] mt-2">The model behind every toll number.</h2>
-              <p className="text-white/65 mt-5 max-w-lg text-[15px]">Axle count, gross weight, height, width, transponder, commercial status and time of day — every input feeds the rate engine so the toll you see is the toll you pay. No guesswork, no surprise plaza charges.</p>
+              <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Every payment, provable.</div>
+              <h2 className="display text-[40px] md:text-[52px] leading-[1.04] mt-2">The smart contract behind every payout.</h2>
+              <p className="text-white/65 mt-5 max-w-lg text-[15px]">Payer, payee, amount, escrow terms, delivery conditions and fees — every term is written into the contract so the payout you see is the payout you get. No guesswork, no surprise deductions.</p>
               <div className="mt-8 grid grid-cols-2 gap-3 max-w-lg">
-                {[["Toll authorities", "510+"], ["Pricing inputs", "38"], ["Reprice latency", "120ms"], ["Rate refresh", "Daily"]].map(([k, v]) => <div key={k} className="glass-dark rounded-xl p-4"><div className="text-white/55 text-[10px] uppercase tracking-wider">{k}</div><div className="display num text-[24px] mt-1">{v}</div></div>)}
+                {[["Payout rails", "510+"], ["Contract terms", "38"], ["Settlement latency", "120ms"], ["On-chain record", "100%"]].map(([k, v]) => <div key={k} className="glass-dark rounded-xl p-4"><div className="text-white/55 text-[10px] uppercase tracking-wider">{k}</div><div className="display num text-[24px] mt-1">{v}</div></div>)}
               </div>
             </div>
             <div className="relative flex items-center justify-center" style={{ minHeight: 480 }}>
@@ -158,10 +158,10 @@ export default function Home() {
                 <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="none" poster={asset("/hero-toll.jpg?v=3")}><source src={asset("/toll-road.mp4")} type="video/mp4" /></video>
                 <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(6,26,56,0.15),rgba(6,26,56,0.45))" }} />
               </div>
-              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ top: "8%", left: "5%", animationDelay: "-1s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Axle class</div><div className="display text-white">5-axle semi</div></div>
-              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ top: "20%", right: "5%", animationDelay: "-2.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Weight</div><div className="display text-white num">38,420 lb</div></div>
-              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ bottom: "18%", left: "8%", animationDelay: "-3.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Transponder</div><div className="display text-white">E-ZPass</div></div>
-              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ bottom: "8%", right: "6%", animationDelay: "-1.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Toll points</div><div className="display text-white num">14</div></div>
+              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ top: "8%", left: "5%", animationDelay: "-1s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Status</div><div className="display text-white">Settled</div></div>
+              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ top: "20%", right: "5%", animationDelay: "-2.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Payout</div><div className="display text-white num">$1,840</div></div>
+              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ bottom: "18%", left: "8%", animationDelay: "-3.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Escrow</div><div className="display text-white">Released</div></div>
+              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ bottom: "8%", right: "6%", animationDelay: "-1.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Confirmations</div><div className="display text-white num">14</div></div>
             </div>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function Home() {
       <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#F8FAFC,#EEF2F8)" }}>
         <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(800px 400px at 80% 10%,rgba(58,95,192,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(0,162,231,0.13),transparent 60%)" }} />
         <div className="max-w-[1400px] mx-auto px-6 relative">
-          <div className="max-w-2xl reveal"><div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Toll transparency</div><h2 className="display text-[40px] md:text-[48px] text-[var(--navy)] leading-[1.05] mt-2">Every toll on the route, accounted for.</h2><p className="mt-4 text-[var(--muted)] text-[15px]">No surprise plazas. No pay-by-plate shock weeks later. Six toll components on every estimate — priced from current authority tariffs.</p></div>
+          <div className="max-w-2xl reveal"><div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Payment transparency</div><h2 className="display text-[40px] md:text-[48px] text-[var(--navy)] leading-[1.05] mt-2">Every dollar on the move, accounted for.</h2><p className="mt-4 text-[var(--muted)] text-[15px]">No hidden fees. No surprise deductions weeks later. Six things every payment gives you — all powered by smart contracts.</p></div>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {COSTS.map((c, i) => (
               <div key={c.n} className={`bg-white rounded-2xl p-6 reveal reveal-d${i % 3} flex items-start gap-4`} style={{ border: "1px solid rgba(11,35,80,0.07)" }}>
@@ -194,9 +194,9 @@ export default function Home() {
             <div className="pmap" style={{ backgroundImage: `url(${asset("/usa-map.svg")})` }} />
             <div className="relative z-10 text-center px-6 pt-12 pb-10 md:py-16 max-w-xl mx-auto">
               <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/80">U.S. coverage</div>
-              <h2 className="display text-white text-[34px] md:text-[44px] leading-[1.05] mt-2">Explore the U.S. toll network</h2>
-              <p className="text-white/85 text-[15px] mt-4">Browse every major toll road, bridge and tunnel across all 48 states — then price a truck route in seconds.</p>
-              <Link href="/tools/ports" className="inline-flex items-center gap-2 mt-7 bg-white text-[var(--navy)] font-semibold text-[14px] px-6 py-3 rounded-xl">Browse toll roads <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link>
+              <h2 className="display text-white text-[34px] md:text-[44px] leading-[1.05] mt-2">Pay and get paid nationwide</h2>
+              <p className="text-white/85 text-[15px] mt-4">Settle payments to carriers, brokers and drivers across all 48 states — instant payouts to any wallet in seconds.</p>
+              <Link href="/tools/ports" className="inline-flex items-center gap-2 mt-7 bg-white text-[var(--navy)] font-semibold text-[14px] px-6 py-3 rounded-xl">Browse payout rails <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link>
             </div>
             {/* left filters card */}
             <div className="ports-card left">
@@ -206,20 +206,20 @@ export default function Home() {
               </div>
               <div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--muted)] mb-2">Sort by</div>
               <div className="grid grid-cols-2 gap-3 mb-5">
-                <div className="pf-radio"><span className="pf-dot" />Toll roads</div>
-                <div className="pf-radio sel"><span className="pf-dot" />Bridges</div>
-                <div className="pf-radio"><span className="pf-dot" />Tunnels</div>
+                <div className="pf-radio"><span className="pf-dot" />Payouts</div>
+                <div className="pf-radio sel"><span className="pf-dot" />Escrow</div>
+                <div className="pf-radio"><span className="pf-dot" />QuickPay</div>
               </div>
               <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)]">Toll roads</div><div className="pf-track"><div className="pf-fill" style={{ width: "18%" }} /><div className="pf-knob" style={{ left: "18%" }} /></div></div>
-                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)] flex justify-between">Bridges <span className="bg-[var(--navy)]/6 px-2 rounded-full text-[var(--navy)]">500</span></div><div className="pf-track"><div className="pf-fill" style={{ width: "55%" }} /><div className="pf-knob" style={{ left: "55%" }} /></div></div>
-                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)]">Tunnels</div><div className="pf-track"><div className="pf-fill" style={{ width: "35%" }} /><div className="pf-knob" style={{ left: "35%" }} /></div></div>
+                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)]">Payouts</div><div className="pf-track"><div className="pf-fill" style={{ width: "18%" }} /><div className="pf-knob" style={{ left: "18%" }} /></div></div>
+                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)] flex justify-between">Escrow <span className="bg-[var(--navy)]/6 px-2 rounded-full text-[var(--navy)]">500</span></div><div className="pf-track"><div className="pf-fill" style={{ width: "55%" }} /><div className="pf-knob" style={{ left: "55%" }} /></div></div>
+                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)]">QuickPay</div><div className="pf-track"><div className="pf-fill" style={{ width: "35%" }} /><div className="pf-knob" style={{ left: "35%" }} /></div></div>
               </div>
             </div>
             {/* right top-ports card */}
             <div className="ports-card right">
-              <div className="px-4 pt-1 pb-2 text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--muted)] flex items-center gap-1.5"><span className="flag">🇺🇸</span> Top U.S. toll roads</div>
-              {([["NJ Turnpike", 48], ["PA Turnpike", 45], ["I-95 Express, FL", 52], ["Ohio Turnpike", 33], ["Sam Houston Tollway", 29], ["Indiana Toll Rd", 21]] as [string, number][]).map(([city, n]) => (
+              <div className="px-4 pt-1 pb-2 text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--muted)] flex items-center gap-1.5"><span className="flag">🇺🇸</span> Top U.S. payout lanes</div>
+              {([["Newark, NJ", 48], ["Philadelphia, PA", 45], ["Miami, FL", 52], ["Columbus, OH", 33], ["Houston, TX", 29], ["Indianapolis, IN", 21]] as [string, number][]).map(([city, n]) => (
                 <div key={city} className="pc-row"><svg className="pc-pin" viewBox="0 0 24 24"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z" /><circle cx="12" cy="11" r="2.6" fill="#fff" /></svg>{city} <span className="text-[var(--muted)] font-normal">({n})</span></div>
               ))}
             </div>

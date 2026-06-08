@@ -36,7 +36,7 @@ export default function TollGate() {
         <polygon points="148,150 164,141 228,141 212,150" fill="#3bb8ee" />
         <polygon points="212,150 228,141 228,185 212,194" fill="url(#tgOrangeDark)" />
         <rect x="148" y="150" width="64" height="44" rx="6" fill="url(#tgOrange)" />
-        <text x="180" y="179" textAnchor="middle" fontFamily="Poppins, sans-serif" fontWeight="800" fontSize="20" fill="#fff" letterSpacing="0.5">TOLL</text>
+        <text x="180" y="179" textAnchor="middle" fontFamily="Poppins, sans-serif" fontWeight="800" fontSize="20" fill="#fff" letterSpacing="0.5">PAY</text>
 
         {/* signal lights on beam */}
         <circle cx="96" cy="99" r="4.5" fill="#16B571" className="tg-led" />
