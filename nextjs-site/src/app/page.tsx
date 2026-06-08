@@ -51,8 +51,9 @@ export default function Home() {
 
       {/* HERO */}
       <section className="relative overflow-hidden text-white">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,#07153B 0%,#0B2D5C 58%,#061A38 100%)" }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 520px at 18% 22%,rgba(47,97,192,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(47,97,192,0.20),transparent 60%)" }} />
+        <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="auto" poster={asset("/hero-toll.jpg?v=3")}><source src={asset("/hero-toll.mp4?v=3")} type="video/mp4" /></video>
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(1,7,26,0.82) 0%,rgba(1,7,26,0.55) 42%,rgba(1,7,26,0.86) 100%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 520px at 18% 22%,rgba(11,35,80,0.28),transparent 60%),radial-gradient(820px 520px at 86% 82%,rgba(47,97,192,0.18),transparent 60%)" }} />
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-16 md:py-24">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             {/* LEFT — headline */}
@@ -86,7 +87,7 @@ export default function Home() {
             {/* RIGHT — glass card with network visual */}
             <div className="hidden lg:flex items-center justify-center">
               <div className="w-full max-w-[520px] rounded-lg border border-white/15 px-8 py-12 flex flex-col justify-center" style={{ minHeight: "560px", background: "rgba(255,255,255,0.08)", backdropFilter: "blur(16px) saturate(150%)", WebkitBackdropFilter: "blur(16px) saturate(150%)", boxShadow: "0 30px 70px -20px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.18)" }}>
-                <video className="w-full rounded-md object-cover border border-white/10" autoPlay muted loop playsInline preload="auto" poster={asset("/hero-toll.jpg?v=3")} style={{ aspectRatio: "16 / 9", animation: "floatTag 5.5s ease-in-out infinite" }}><source src={asset("/hero-toll.mp4?v=3")} type="video/mp4" /></video>
+                <img src={asset("/blockchain-cube.png?v=1")} alt="Blockchain ledger" className="w-[78%] mx-auto h-auto object-contain" style={{ filter: "drop-shadow(0 22px 44px rgba(0,0,0,0.5))", animation: "floatTag 5.5s ease-in-out infinite" }} />
                 <div className="mt-7 display text-white text-[24px] md:text-[30px] leading-tight">Immutable On-Chain Records</div>
                 <Typewriter text="Rate confirmations, container moves, signatures & payments — verified on-chain." className="mt-3 block text-[14px] md:text-[15px] text-white/70 leading-relaxed min-h-[3.2em]" />
               </div>
