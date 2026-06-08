@@ -3,32 +3,32 @@ import { useState } from "react";
 import ToolLayout from "@/components/ToolLayout";
 
 const AC = [
-  { n: "Chassis rental", d: "Daily charge for the wheeled frame the container rides on, when not using your own.", p: "$25–45 / day" },
-  { n: "Chassis split", d: "Fee when the chassis and container are stored at different locations and must be combined.", p: "$75–150" },
-  { n: "Pre-pull", d: "Pulling a container from the terminal early to beat last free day, then storing it short-term.", p: "$125–250" },
-  { n: "Drop & hook", d: "Dropping the loaded container at the consignee and picking up an empty later, instead of waiting.", p: "$50–100" },
-  { n: "Detention", d: "Charge when your driver waits beyond free time (usually 1–2 hrs) at pickup or delivery.", p: "$60–90 / hr" },
-  { n: "Demurrage", d: "Terminal charge for a container sitting past its free days at the port.", p: "$150–300 / day" },
-  { n: "Per diem", d: "Carrier charge for keeping the container/equipment past the allowed free days.", p: "$100–185 / day" },
-  { n: "Congestion / pier pass", d: "Port traffic-mitigation fee (e.g. PierPass at LA/LB) on peak-hour moves.", p: "$35–80" },
-  { n: "Tolls", d: "Highway, bridge and turnpike tolls along the drayage route, passed through at cost.", p: "At cost" },
-  { n: "Hazmat", d: "Surcharge for moving hazardous materials requiring certified drivers and placarding.", p: "$75–200" },
-  { n: "Overweight", d: "Surcharge for loads over legal axle/gross weight needing permits or special equipment.", p: "$100–350" },
-  { n: "Reefer plug / genset", d: "Powering a refrigerated container in transit or at yard via genset or plug-in.", p: "$60–150 / day" },
-  { n: "Scale / weigh", d: "Stopping at a certified scale to verify gross weight (often required for export).", p: "$25–60" },
-  { n: "Yard storage", d: "Holding a container in the carrier yard between pickup and delivery.", p: "$30–55 / day" },
-  { n: "Bobtail / dry run", d: "Driver dispatched but unable to complete the move (container not ready, etc.).", p: "$95–175" },
-  { n: "Stop-off", d: "Additional intermediate stop for partial unload or cross-dock on the route.", p: "$50–120 / stop" },
+  { n: "Hash", d: "A fixed-length cryptographic fingerprint of a document or record — any change produces a completely different hash.", p: "SHA-256" },
+  { n: "Anchor", d: "Writing a record's hash to the blockchain so its existence and contents at that moment are provable forever.", p: "On-chain" },
+  { n: "Immutable", d: "Once a record is anchored it cannot be altered or deleted — only superseded by a new, linked record.", p: "Permanent" },
+  { n: "Audit trail", d: "The complete, time-ordered history of every event and change tied to a shipment record.", p: "Time-ordered" },
+  { n: "Chain of custody", d: "The verified sequence of parties who held or handled a container, from gate-in to final delivery.", p: "Custody" },
+  { n: "Provenance", d: "The documented origin and full history of a record or shipment, traceable back to its source.", p: "Origin" },
+  { n: "Digital signature", d: "A cryptographic approval that binds a record to a specific, verifiable identity and cannot be forged.", p: "Signed" },
+  { n: "Rate confirmation", d: "An agreed freight rate captured as a signed, timestamped on-chain record between two parties.", p: "Record" },
+  { n: "BOL", d: "Bill of lading — the contract and receipt for a shipment, anchored on-chain as a verifiable document.", p: "Document" },
+  { n: "POD", d: "Proof of delivery — signed confirmation that a shipment was received, hashed into the record.", p: "Document" },
+  { n: "Smart contract", d: "Self-executing code that records or releases an event (such as a payment) when conditions are met.", p: "Automated" },
+  { n: "Block height", d: "The position of a block in the chain — a simple measure of how many confirmations a record has.", p: "Position" },
+  { n: "Tamper-proof", d: "A property of anchored records: any attempt to change them breaks verification and is immediately detectable.", p: "Verified" },
+  { n: "Verification link", d: "A shareable URL that lets any party independently confirm a record's authenticity on-chain.", p: "Shareable" },
+  { n: "Timestamp", d: "The exact, trusted time a record was anchored, used to prove when an event occurred.", p: "Trusted time" },
+  { n: "Consensus", d: "The mechanism by which network nodes agree a record is valid before it is permanently committed.", p: "Network" },
 ];
 
 export default function Page() {
   const [q, setQ] = useState("");
   const list = AC.filter((a) => !q || (a.n + " " + a.d).toLowerCase().includes(q.toLowerCase()));
   return (
-    <ToolLayout eyebrow="Reference" title="Accessorial Guide" desc="Every drayage line-item, in plain English — what it is, when it hits, and a typical U.S. range.">
+    <ToolLayout eyebrow="Reference" title="Verification Glossary" desc="Every blockchain verification term, in plain English — what it means and how it applies to your shipment records.">
       <div className="relative max-w-xl mx-auto mb-6 reveal">
         <svg className="absolute left-4 top-1/2 -translate-y-1/2" style={{ color: "rgba(11,35,80,0.4)" }} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /></svg>
-        <input className="tool-input" style={{ paddingLeft: "2.8rem" }} placeholder="Search accessorials…" value={q} onChange={(e) => setQ(e.target.value)} />
+        <input className="tool-input" style={{ paddingLeft: "2.8rem" }} placeholder="Search terms…" value={q} onChange={(e) => setQ(e.target.value)} />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         {list.map((a) => (
@@ -38,7 +38,7 @@ export default function Page() {
           </div>
         ))}
       </div>
-      {list.length === 0 && <div className="text-center text-[var(--muted)] py-12">No accessorials match your search.</div>}
+      {list.length === 0 && <div className="text-center text-[var(--muted)] py-12">No terms match your search.</div>}
     </ToolLayout>
   );
 }

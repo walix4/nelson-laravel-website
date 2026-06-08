@@ -5,11 +5,11 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Products",
     links: [
-      { label: "Toll calculator", href: "/#quote" },
-      { label: "Route toll grade", href: "/tools" },
-      { label: "Port drayage", href: "/tools/ports" },
-      { label: "Intermodal & rail", href: "/tools" },
-      { label: "Freight brokers", href: "/estimates" },
+      { label: "Verify a record", href: "/#quote" },
+      { label: "Verification tools", href: "/tools" },
+      { label: "Chain explorer", href: "/tools/ports" },
+      { label: "Document verifier", href: "/tools" },
+      { label: "Verified records stream", href: "/estimates" },
     ],
   },
   {
@@ -17,7 +17,7 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "API pricing", href: "/pricing" },
       { label: "Request API access", href: "/pricing" },
-      { label: "Commercial data quality", href: "/pricing" },
+      { label: "Verification data", href: "/pricing" },
     ],
   },
   {
@@ -30,7 +30,7 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Support", href: "#" },
       { label: "Request access", href: "#" },
       { label: "Privacy policy", href: "#" },
-      { label: "Data quality", href: "#" },
+      { label: "Security", href: "#" },
     ],
   },
 ];
@@ -47,10 +47,10 @@ export default function Footer() {
               <span className="text-white font-bold text-[22px] tracking-tight leading-none">Dray<span className="text-[#8fa8e6]">Chain</span></span>
             </span>
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
-              Commercial truck and container shipping toll intelligence. Accurate class-aware rates for drayage, intermodal, and heavy freight.
+              Blockchain verification for drayage and the supply chain. Immutable, tamper-proof records for rate confirmations, documents, container movements and payments.
             </p>
             <div className="mt-4 text-[13.5px] text-white/60">(410) 555-0199</div>
-            <a href="mailto:freight@draytoll.com" className="mt-2 inline-block text-[13.5px] font-semibold text-[var(--red)] hover:opacity-80">freight@draytoll.com</a>
+            <a href="mailto:support@drayageblockchain.com" className="mt-2 inline-block text-[13.5px] font-semibold text-[var(--red)] hover:opacity-80">support@drayageblockchain.com</a>
           </div>
 
           {/* link columns */}
@@ -69,8 +69,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[12.5px] text-white/45">
-          <div className="num">© 2026 DrayToll. All rights reserved.</div>
-          <div className="num">50K+ toll plazas · Class 2–6 routes · 99.9% uptime</div>
+          <div className="num">© 2026 DrayChain. All rights reserved.</div>
+          <div className="num">3.1M+ records anchored · Tamper-proof audit trail · 99.9% uptime</div>
         </div>
       </div>
     </footer>

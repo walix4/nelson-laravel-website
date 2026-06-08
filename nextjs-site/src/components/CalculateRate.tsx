@@ -39,7 +39,7 @@ const geocode = (t: string): [number, number] | null => {
   const hit = [...GEO].sort((a, b) => b[0].length - a[0].length).find(([k]) => l.includes(k));
   return hit ? hit[1] : null;
 };
-const LOADING_STEPS = ["Geocoding route…", "Scanning toll roads & plazas…", "Pricing bridges, tunnels & axles…", "Applying vehicle class…"];
+const LOADING_STEPS = ["Resolving route…", "Hashing shipment records…", "Anchoring events on-chain…", "Confirming signatures…"];
 
 function hav(a: [number, number], b: [number, number]) { const R = 3958.8, t = (v: number) => (v * Math.PI) / 180; const dL = t(b[0] - a[0]), dG = t(b[1] - a[1]); const x = Math.sin(dL / 2) ** 2 + Math.cos(t(a[0])) * Math.cos(t(b[0])) * Math.sin(dG / 2) ** 2; return 2 * R * Math.asin(Math.min(1, Math.sqrt(x))); }
 const CAT_MULT: Record<string, number> = { tractor: 1, straight: 0.72, bus: 0.6, van: 0.45, car: 0.35 };
@@ -102,7 +102,7 @@ export default function CalculateRate() {
     <div className="max-w-[680px] mx-auto reveal">
       <div className="rounded-lg p-6 md:p-8 relative overflow-hidden shadow-2xl" style={{ background: "#fff", minHeight: phase === "form" ? undefined : 520 }}>
         <div className="flex items-center justify-between">
-          <div><div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant toll engine</div><h3 className="display text-[26px] md:text-[28px] text-[var(--navy)] mt-1">Calculate tolls</h3></div>
+          <div><div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant verification engine</div><h3 className="display text-[26px] md:text-[28px] text-[var(--navy)] mt-1">Verify a shipment</h3></div>
           <div className="px-2.5 py-1 rounded-md text-[10px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 border border-[var(--navy)]/10">v2026</div>
         </div>
 
@@ -122,8 +122,8 @@ export default function CalculateRate() {
               <div><label className="input-label">Width (in)</label><input className="input num mt-1" type="number" min={0} value={width} onChange={(e) => setWidth(e.target.value)} /></div>
               <div><label className="input-label">Length (in)</label><input className="input num mt-1" type="number" min={0} value={length} onChange={(e) => setLength(e.target.value)} /></div>
             </div>
-            <button type="submit" className="btn-primary w-full py-4 rounded-lg text-[15px] font-semibold" style={{ marginTop: "1.5rem" }}><span className="label">Calculate tolls</span></button>
-            <p className="text-[10px] text-[var(--navy)]/55 text-center mt-1">No login · No card · Rates refreshed daily</p>
+            <button type="submit" className="btn-primary w-full py-4 rounded-lg text-[15px] font-semibold" style={{ marginTop: "1.5rem" }}><span className="label">Verify record</span></button>
+            <p className="text-[10px] text-[var(--navy)]/55 text-center mt-1">No login · No card · Anchored on-chain</p>
           </form>
         )}
 
@@ -131,20 +131,20 @@ export default function CalculateRate() {
           <div className="mt-6">
             <div className="flex items-end justify-between">
               <div>
-                <div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--green)] flex items-center gap-1.5"><span className="live-dot" /> Estimated tolls · {axles}-axle</div>
-                <div className="flex items-baseline gap-2 mt-1"><span className="display text-[48px] text-[var(--navy)] num leading-none">${N(res.total)}</span><span className="text-[13px] text-[var(--navy)]/60">/ trip</span></div>
+                <div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--green)] flex items-center gap-1.5"><span className="live-dot" /> Verified · {axles}-axle</div>
+                <div className="flex items-baseline gap-2 mt-1"><span className="display text-[48px] text-[var(--navy)] num leading-none">{N(res.total)}</span><span className="text-[13px] text-[var(--navy)]/60">events</span></div>
               </div>
-              <div className="text-right text-[12px] text-[var(--navy)]/70"><div className="num"><b>{N(res.miles)}</b> mi · <b>{res.plazas}</b> toll pts</div><div className="num"><b>{res.eta}</b> hr · <b>${res.perMile.toFixed(2)}</b>/mi</div></div>
+              <div className="text-right text-[12px] text-[var(--navy)]/70"><div className="num"><b>{N(res.miles)}</b> mi · <b>{res.plazas}</b> checkpoints</div><div className="num"><b>{res.eta}</b> hr · <b>{res.perMile.toFixed(2)}</b>/mi</div></div>
             </div>
             <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-[10px]">
-              {([["Toll roads", res.roads], ["Bridges / tunnels", res.bridges], ["Oversize / permit", res.oversize], ["Surcharges", res.surcharge]] as [string, number][]).map(([k, v]) => <div key={k} className="rounded-lg px-3 py-2.5 bg-[var(--navy)]/5 border border-[var(--navy)]/10"><div className="text-[var(--navy)]/55 uppercase tracking-wider">{k}</div><div className="display text-[var(--navy)] text-[17px] num mt-0.5">${N(v)}</div></div>)}
+              {([["Rate confs", res.roads], ["BOL / POD", res.bridges], ["Movements", res.oversize], ["Signatures", res.surcharge]] as [string, number][]).map(([k, v]) => <div key={k} className="rounded-lg px-3 py-2.5 bg-[var(--navy)]/5 border border-[var(--navy)]/10"><div className="text-[var(--navy)]/55 uppercase tracking-wider">{k}</div><div className="display text-[var(--navy)] text-[17px] num mt-0.5">{N(v)}</div></div>)}
             </div>
             <div className="mt-4 flex items-center gap-2.5">
-              <button className="flex-1 py-3 rounded-lg text-[13px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)]">Export PDF</button>
-              <button className="flex-1 py-3 rounded-lg text-[13px] font-semibold border border-[var(--navy)]/20 text-[var(--navy)] hover:bg-[var(--navy)]/5">Save route</button>
+              <button className="flex-1 py-3 rounded-lg text-[13px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)]">Export proof</button>
+              <button className="flex-1 py-3 rounded-lg text-[13px] font-semibold border border-[var(--navy)]/20 text-[var(--navy)] hover:bg-[var(--navy)]/5">Save record</button>
             </div>
             <button type="button" onClick={() => setPhase("form")} className="mt-3 w-full py-2.5 rounded-lg text-[12px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 hover:bg-[var(--navy)]/14 transition flex items-center justify-center gap-1.5">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>Calculate again
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8" /><path d="M3 3v5h5" /></svg>Verify again
             </button>
           </div>
         )}
@@ -152,7 +152,7 @@ export default function CalculateRate() {
         {phase === "loading" && (
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-6" style={{ background: "linear-gradient(180deg,rgba(255,255,255,0.94),rgba(240,247,255,0.92))", backdropFilter: "blur(10px)" }}>
             <div className="relative w-16 h-16"><div className="absolute inset-0 rounded-full border-[3px] border-[var(--navy)]/10" /><div className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[var(--red)] animate-spin" /></div>
-            <div className="display text-[16px] text-[var(--navy)] mt-5">Pricing your tolls</div>
+            <div className="display text-[16px] text-[var(--navy)] mt-5">Verifying your record</div>
             <div className="text-[12px] text-[var(--navy)]/60 mt-1.5 num">{LOADING_STEPS[step]}</div>
           </div>
         )}

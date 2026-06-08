@@ -5,35 +5,35 @@ import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
 
 export const metadata: Metadata = {
-  title: "API Pricing · DrayToll",
-  description: "Start free in sandbox, scale into production volumes, or go enterprise with custom SLAs and dedicated toll-data feeds.",
+  title: "API Pricing · DrayChain",
+  description: "Start free in sandbox, scale into production record volumes, or go enterprise with custom SLAs and dedicated verification infrastructure.",
 };
 
-const CHIPS = ["50K+ US toll plazas & gantries", "Commercial truck classes 2–6", "E-ZPass, cash & plate billing", "Peak / off-peak multipliers"];
+const CHIPS = ["3.1M+ records anchored", "6 verified record types", "Cryptographic signatures", "Tamper-proof audit trail"];
 
 const PLANS = [
   {
-    name: "Developer", popular: false, blurb: "Prototype toll-aware features in sandbox before production.",
-    price: "Free", unit: "up to 1,000 calls/mo",
+    name: "Developer", popular: false, blurb: "Prototype on-chain verification in sandbox before production.",
+    price: "Free", unit: "up to 1,000 records/mo",
     features: ["REST API access", "Sandbox environment", "Community support", "Rate-limited production trial"],
     cta: "Start free", solid: false,
   },
   {
-    name: "Growth", popular: true, blurb: "For TMS, fleet, and mobility apps shipping toll features to users.",
+    name: "Growth", popular: true, blurb: "For TMS, broker and shipper apps anchoring records on-chain.",
     price: "$299", unit: "/month",
-    features: ["100,000 API calls / month", "Real-time rate updates", "Email support (24h SLA)", "Webhook notifications", "Usage analytics dashboard"],
+    features: ["100,000 records / month", "Real-time verification", "Email support (24h SLA)", "Webhook notifications", "Usage analytics dashboard"],
     cta: "Get started", solid: true,
   },
   {
-    name: "Enterprise", popular: false, blurb: "High-volume platforms, custom SLAs, and dedicated data feeds.",
+    name: "Enterprise", popular: false, blurb: "High-volume platforms, custom SLAs, and dedicated infrastructure.",
     price: "Custom", unit: "volume pricing",
-    features: ["Unlimited scale", "Dedicated account manager", "99.9% uptime SLA", "Custom data feeds & bulk export", "Priority rate-change alerts"],
+    features: ["Unlimited scale", "Dedicated account manager", "99.9% uptime SLA", "Bulk anchoring & export", "Priority verification alerts"],
     cta: "Contact sales", solid: false,
   },
 ];
 
 const FAQ = [
-  ["What counts as an API call?", "Each plaza lookup, corridor query, or location search counts as one call. Batch endpoints bill per record returned."],
+  ["What counts as a record?", "Each anchored event — a rate confirmation, document hash, movement, signature or payment — counts as one record. Verification lookups are unmetered."],
   ["Can I upgrade mid-cycle?", "Yes — upgrades take effect immediately; we prorate the difference on your next invoice."],
   ["Do you offer annual contracts?", "Growth and Enterprise plans are available annually with a 15% discount. Contact us for a quote."],
 ];
@@ -57,14 +57,14 @@ export default function Pricing() {
         <div className="relative max-w-[900px] mx-auto px-6 py-24 md:py-28 text-center">
           <div className="inline-flex items-center rounded-md px-3.5 py-1.5 text-[11px] font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)" }}>API Pricing</div>
           <h1 className="display text-white text-[40px] md:text-[58px] leading-[1.05] mt-6">Pricing that scales with your platform</h1>
-          <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl mx-auto leading-relaxed">Start free in sandbox, grow into production volumes, or talk to us about enterprise deployments with custom SLAs and dedicated feeds.</p>
+          <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl mx-auto leading-relaxed">Start free in sandbox, grow into production record volumes, or talk to us about enterprise deployments with custom SLAs and dedicated infrastructure.</p>
           <div className="mt-5 text-[13px] font-semibold text-[var(--red)]">Developer free tier · Growth from $299/mo · Enterprise custom</div>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a href="#plans" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Get API key</span></a>
-            <Link href="/tools/ports" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>Data quality →</Link>
+            <Link href="/tools/ports" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>Chain explorer →</Link>
           </div>
           <div className="mt-7 text-[12.5px] text-white/55">
-            <Link href="/tools" className="text-[var(--red)] font-semibold hover:opacity-80">Route toll grade</Link> · <Link href="/#quote" className="text-[var(--red)] font-semibold hover:opacity-80">Toll grades</Link>
+            <Link href="/tools" className="text-[var(--red)] font-semibold hover:opacity-80">Verification tools</Link> · <Link href="/#quote" className="text-[var(--red)] font-semibold hover:opacity-80">Verify a record</Link>
           </div>
         </div>
       </section>
@@ -125,13 +125,13 @@ export default function Pricing() {
       {/* CTA BAND */}
       <section className="relative overflow-hidden text-white py-24" style={{ background: "radial-gradient(700px 400px at 85% 50%,rgba(47,97,192,0.25),transparent 60%),radial-gradient(600px 400px at 10% 80%,rgba(58,95,192,0.25),transparent 60%),linear-gradient(135deg,#0B2D5C,#061A38 60%,#15448C)" }}>
         <div className="max-w-[820px] mx-auto px-6 text-center reveal relative">
-          <h2 className="display text-white text-[36px] md:text-[48px] leading-[1.05]">Ship smarter — know tolls before the container rolls</h2>
-          <p className="mt-4 text-white/70 text-[15px] md:text-[16px] max-w-xl mx-auto leading-relaxed">Integrate truck-class toll estimates into your TMS, rating engine, or shipper portal. Built for drayage and intermodal freight teams.</p>
+          <h2 className="display text-white text-[36px] md:text-[48px] leading-[1.05]">Ship with proof — verify every record before the dispute</h2>
+          <p className="mt-4 text-white/70 text-[15px] md:text-[16px] max-w-xl mx-auto leading-relaxed">Integrate on-chain verification into your TMS, operations system, or shipper portal. Built for drayage and intermodal supply-chain teams.</p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a href="#plans" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Request fleet API access</span></a>
+            <a href="#plans" className="btn-primary px-6 py-3.5 rounded-lg text-[14px] font-semibold inline-flex items-center gap-2"><span className="label">Request API access</span></a>
             <a href="#plans" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>View API pricing →</a>
           </div>
-          <div className="mt-6 text-[12.5px] text-white/55">Moving containers between ports? <a href="#plans" className="text-[var(--red)] font-semibold">Talk to our freight team</a></div>
+          <div className="mt-6 text-[12.5px] text-white/55">Moving containers between ports? <a href="#plans" className="text-[var(--red)] font-semibold">Talk to our verification team</a></div>
         </div>
       </section>
 

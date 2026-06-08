@@ -4,16 +4,16 @@ import { useRef, useState } from "react";
 type Msg = { who: "bot" | "me"; text: string };
 const reply = (t: string) => {
   const l = t.toLowerCase();
-  if (/quote|rate|price|cost|toll/.test(l)) return "You can get an instant toll cost with the engine at the top — pick origin, destination, axle class and transponder.";
-  if (/road|lane|corridor|coverage|cover|network/.test(l)) return "We cover 3,100+ toll roads, bridges and tunnels across all 48 states and Canada. Which route are you pricing?";
-  if (/track|status|where|transponder|tag|ezpass|sunpass/.test(l)) return "Transponder networks (E-ZPass, SunPass, TxTag, I-PASS) are baked into every estimate — pick yours in the toll engine for tag-rate pricing.";
+  if (/verify|record|hash|confirm|anchor|sign/.test(l)) return "You can verify a record with the engine at the top — enter the shipment, anchor it on-chain, and get a tamper-proof audit trail in seconds.";
+  if (/chain|ledger|coverage|cover|network|explorer/.test(l)) return "We anchor rate confirmations, BOL/POD, container movements, signatures and payments across all 48 states. Which record are you verifying?";
+  if (/track|status|where|provenance|custody|document|bol|pod/.test(l)) return "Every shipment event and document is logged in an immutable chain of custody — look it up in the chain explorer to confirm provenance.";
   if (/sales|human|agent|talk|call/.test(l)) return "Happy to connect you with a specialist. Drop your email and we'll reach out within one business hour.";
-  return "Thanks! A toll specialist will follow up shortly. For an instant estimate, use the toll engine at the top of the page.";
+  return "Thanks! A verification specialist will follow up shortly. To check a record now, use the verification engine at the top of the page.";
 };
 
 export default function Chat() {
   const [open, setOpen] = useState(false);
-  const [msgs, setMsgs] = useState<Msg[]>([{ who: "bot", text: "👋 Hi! I'm the DrayToll assistant. Ask me about toll costs, axle classes, transponder networks or coverage — or tap a shortcut below." }]);
+  const [msgs, setMsgs] = useState<Msg[]>([{ who: "bot", text: "👋 Hi! I'm the DrayChain assistant. Ask me about verifying records, the audit trail, chain of custody or coverage — or tap a shortcut below." }]);
   const [typing, setTyping] = useState(false);
   const [val, setVal] = useState("");
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -28,12 +28,12 @@ export default function Chat() {
       <div className={`chat-panel ${open ? "open" : ""}`} role="dialog" aria-label="AI chat">
         <div className="chat-head">
           <div className="av"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="8" width="16" height="11" rx="3" /><path d="M12 8V4M9 13h.01M15 13h.01M9 16h6M2 12v2M22 12v2" /></svg></div>
-          <div className="flex-1"><div className="display text-[15px] leading-none">DrayToll Assistant</div><div className="status"><span className="dot" />AI · replies instantly</div></div>
+          <div className="flex-1"><div className="display text-[15px] leading-none">DrayChain Assistant</div><div className="status"><span className="dot" />AI · replies instantly</div></div>
           <button className="text-white/70 hover:text-white" onClick={() => setOpen(false)} aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg></button>
         </div>
         <div className="chat-body" ref={bodyRef}>
           {msgs.map((m, i) => <div key={i} className={`chat-msg ${m.who}`}>{m.text}</div>)}
-          {msgs.length === 1 && <div className="chat-quick">{["Get a toll estimate", "Which toll roads do you cover?", "Talk to sales"].map((q) => <button key={q} className="chat-chip" onClick={() => send(q)}>{q}</button>)}</div>}
+          {msgs.length === 1 && <div className="chat-quick">{["Verify a record", "What can you anchor on-chain?", "Talk to sales"].map((q) => <button key={q} className="chat-chip" onClick={() => send(q)}>{q}</button>)}</div>}
           {typing && <div className="chat-msg bot chat-typing"><span /><span /><span /></div>}
         </div>
         <form className="chat-foot" onSubmit={(e) => { e.preventDefault(); send(val); }}>

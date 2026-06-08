@@ -8,7 +8,7 @@ export default function Page() {
   const demTot = charge * dem * qty, detTot = charge * det * qty;
   const N = (n: number) => n.toLocaleString();
   return (
-    <ToolLayout title="Demurrage & Detention" desc="Estimate per-diem exposure on containers sitting past their free time — at the terminal (demurrage) and on your equipment (detention).">
+    <ToolLayout title="Demurrage & Detention Records" desc="Calculate per-diem exposure on containers sitting past their free time — at the terminal (demurrage) and on your equipment (detention) — then anchor the figures to the shipment record.">
       <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-6">
         <div className="bg-white rounded-[24px] p-7 md:p-9 reveal" style={{ border: "1px solid rgba(11,35,80,0.06)" }}>
           <div className="space-y-5">

@@ -6,7 +6,7 @@ export default function Page() {
   const [mi, setMi] = useState(372), [tons, setTons] = useState(18), [f, setF] = useState(0.161);
   const kg = mi * tons * f, diesel = mi * tons * 0.161;
   return (
-    <ToolLayout title={<>CO&#8322; Emissions Estimator</>} desc="Estimate the carbon footprint of a container move and see how rail and electric drayage compare.">
+    <ToolLayout title={<>CO&#8322; Emissions Records</>} desc="Estimate the carbon footprint of a container move, compare rail and electric drayage, and attach verifiable emissions data to the record.">
       <div className="bg-white rounded-[24px] p-7 md:p-10 reveal" style={{ border: "1px solid rgba(11,35,80,0.06)" }}>
         <div className="grid md:grid-cols-3 gap-5">
           <div><label className="tool-label">Distance (miles)</label><input className="tool-input" type="number" min={0} value={mi} onChange={(e) => setMi(+e.target.value)} /></div>

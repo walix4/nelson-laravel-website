@@ -1,10 +1,10 @@
 const FEATURES = [
-  { t: "5-axle & heavy truck classes", d: "Toll tables mapped to commercial class, axle count, and trailer configuration — not passenger-car defaults.", i: '<path d="M3 7h11v8H3zM14 10h3l3 3v2h-6zM7 18a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 7 18Zm10 0a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 17 18Z"/>' },
-  { t: "Container & chassis profiles", d: "40', 45', and 53' equipment types with weight, height, and combined-length rules for bridge and plaza tolls.", i: '<path d="M21 7.5 12 3 3 7.5 12 12zM3 7.5v9L12 21M21 7.5v9L12 21M12 12v9"/>' },
-  { t: "Port-to-ramp route estimates", d: "Drayage corridors from marine terminals to rail ramps, warehouses, and cross-docks with plaza-by-plaza breakdown.", i: '<path d="M9 3 3 5v16l6-2 6 2 6-2V3l-6 2zM9 3v16M15 5v16"/>' },
-  { t: "Peak & off-peak commercial rates", d: "E-ZPass, license-plate, and cash lanes with time-of-day multipliers used by major US toll authorities.", i: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
-  { t: "Fleet & TMS integrations", d: "REST JSON API for dispatch, rating engines, and shipper portals — sandbox keys and usage analytics included.", i: '<path d="m9 8-4 4 4 4M15 8l4 4-4 4"/>' },
-  { t: "Audit-ready cost breakdown", d: "Per-plaza receipts for freight invoices, accessorial chargebacks, and customer quote validation.", i: '<rect x="6" y="4" width="12" height="16" rx="1.5"/><path d="M9 4V3h6v1M9 9h6M9 13h6M9 17h4"/>' },
+  { t: "Immutable rate confirmations", d: "Agreed rates hashed and timestamped on-chain — once written, they can never be silently changed or backdated.", i: '<path d="M3 7h11v8H3zM14 10h3l3 3v2h-6zM7 18a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 7 18Zm10 0a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 17 18Z"/>' },
+  { t: "BOL, POD & document hashing", d: "Bills of lading, proof of delivery and supporting docs anchored as cryptographic fingerprints anyone can verify.", i: '<path d="M21 7.5 12 3 3 7.5 12 12zM3 7.5v9L12 21M21 7.5v9L12 21M12 12v9"/>' },
+  { t: "Chain-of-custody tracking", d: "Container movements from marine terminal to rail ramp, warehouse and cross-dock — each handoff logged on-chain.", i: '<path d="M9 3 3 5v16l6-2 6 2 6-2V3l-6 2zM9 3v16M15 5v16"/>' },
+  { t: "Digital signatures & approvals", d: "Carriers, brokers and shippers sign records cryptographically, with every approval bound to a verifiable identity.", i: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
+  { t: "Verification API & integrations", d: "REST JSON API for TMS, dispatch and shipper portals — anchor and verify records with sandbox keys and usage analytics.", i: '<path d="m9 8-4 4 4 4M15 8l4 4-4 4"/>' },
+  { t: "Tamper-proof audit trail", d: "A complete, time-ordered history of every event for invoice disputes, compliance and customer transparency.", i: '<rect x="6" y="4" width="12" height="16" rx="1.5"/><path d="M9 4V3h6v1M9 9h6M9 13h6M9 17h4"/>' },
 ];
 
 export default function FreightFeatures() {
@@ -12,9 +12,9 @@ export default function FreightFeatures() {
     <section id="features" className="py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto reveal">
-          <div className="text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--red)]">Built for heavy freight</div>
-          <h2 className="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-3">Container moves need truck-grade toll logic</h2>
-          <p className="mt-4 text-[var(--muted)] text-[15px] md:text-[16px] leading-relaxed">Passenger-car APIs miss axle classes, equipment profiles, and commercial peak rates — we model tolls the way ports and fleets actually pay them.</p>
+          <div className="text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--red)]">Built for the supply chain</div>
+          <h2 className="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-3">Drayage records that prove themselves</h2>
+          <p className="mt-4 text-[var(--muted)] text-[15px] md:text-[16px] leading-relaxed">Email and spreadsheets can be edited after the fact — we anchor rate confirmations, documents and events on-chain so ports, carriers and brokers share one source of truth.</p>
         </div>
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {FEATURES.map((f, i) => (
