@@ -87,7 +87,7 @@ export default function Home() {
             {/* RIGHT — DrayPay card on a glass card with app badges */}
             <div className="hidden lg:flex items-center justify-center">
               <div className="w-full max-w-[520px] rounded-lg border border-white/15 p-7" style={{ background: "rgba(255,255,255,0.08)", backdropFilter: "blur(16px) saturate(150%)", WebkitBackdropFilter: "blur(16px) saturate(150%)", boxShadow: "0 30px 70px -20px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.18)" }}>
-                <img src={asset("/draypay-card.png?v=1")} alt="DrayPay Visa debit card" className="w-full h-auto object-contain" style={{ filter: "drop-shadow(0 18px 36px rgba(0,0,0,0.45))" }} />
+                <img src={asset("/draypay-card.png?v=2")} alt="DrayPay Visa debit card" className="w-full h-auto object-contain" style={{ filter: "drop-shadow(0 18px 36px rgba(0,0,0,0.45))" }} />
               </div>
             </div>
           </div>
