@@ -11,7 +11,6 @@ import ContainerLanes from "@/components/ContainerLanes";
 import HowSteps from "@/components/HowSteps";
 import WhoUses from "@/components/WhoUses";
 import Ticker from "@/components/Ticker";
-import CalculateRate from "@/components/CalculateRate";
 import Typewriter from "@/components/Typewriter";
 import { asset } from "@/lib/site";
 
@@ -107,18 +106,6 @@ export default function Home() {
 
       <StatBand />
       <FreightFeatures />
-
-      {/* CALCULATE YOUR RATE */}
-      <section id="quote" className="relative overflow-hidden py-20 md:py-24" style={{ background: "radial-gradient(900px 500px at 80% 0%,rgba(58,95,192,0.2),transparent 60%),linear-gradient(180deg,#0B2D5C,#061A38)" }}>
-        <div className="max-w-[1400px] mx-auto px-6 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-12 reveal">
-            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--blue-2)]">Instant verification engine</div>
-            <h2 className="display text-white text-[44px] md:text-[64px] leading-[1.03] mt-3">Verify your records.</h2>
-            <p className="text-white/60 text-[15px] md:text-[16px] mt-4 max-w-xl mx-auto">Enter a shipment, anchor it to the chain, and get a fully itemised, tamper-proof audit trail — signatures, events and payments — in seconds.</p>
-          </div>
-          <CalculateRate />
-        </div>
-      </section>
 
       <ContainerLanes />
       <HowSteps />
