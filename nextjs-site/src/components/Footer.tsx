@@ -49,7 +49,6 @@ export default function Footer() {
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
               Drayage overweight intelligence. Verify gross and per-axle weight, bridge-formula compliance, and state permit requirements before every dispatch.
             </p>
-            <div className="mt-4 text-[13.5px] text-white/60">(410) 555-0199</div>
             <a href="mailto:support@drayow.com" className="mt-2 inline-block text-[13.5px] font-semibold text-[var(--red)] hover:opacity-80">support@drayow.com</a>
           </div>
 
