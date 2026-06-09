@@ -46,7 +46,6 @@ export default function Footer() {
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
               Commercial truck and container shipping toll intelligence. Accurate class-aware rates for drayage, intermodal, and heavy freight.
             </p>
-            <div className="mt-4 text-[13.5px] text-white/60">(410) 555-0199</div>
             <a href="mailto:freight@draytoll.com" className="mt-2 inline-block text-[13.5px] font-semibold text-[var(--red)] hover:opacity-80">freight@draytoll.com</a>
           </div>
 
