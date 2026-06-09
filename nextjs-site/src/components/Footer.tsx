@@ -49,7 +49,6 @@ export default function Footer() {
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
               The drayage payments platform powered by blockchain smart contracts. Instant payouts, escrow and automated settlement for shippers, brokers, carriers and drivers.
             </p>
-            <div className="mt-4 text-[13.5px] text-white/60">(410) 555-0199</div>
             <a href="mailto:support@draypay.net" className="mt-2 inline-block text-[13.5px] font-semibold text-[var(--red)] hover:opacity-80">support@draypay.net</a>
           </div>
 
