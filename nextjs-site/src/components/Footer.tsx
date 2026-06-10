@@ -5,19 +5,19 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Products",
     links: [
-      { label: "Payment calculator", href: "/#quote" },
-      { label: "Payment tools", href: "/tools" },
-      { label: "Payout directory", href: "/tools/ports" },
-      { label: "Escrow & settlement", href: "/tools" },
-      { label: "Live transactions", href: "/estimates" },
+      { label: "Smart Wallet", href: "/wallet" },
+      { label: "How payments work", href: "/payments" },
+      { label: "QuickPay & factoring", href: "/quickpay" },
+      { label: "Live settlements", href: "/settlements" },
+      { label: "Fees & volume", href: "/fees" },
     ],
   },
   {
     title: "Platform",
     links: [
-      { label: "Pricing & fees", href: "/pricing" },
-      { label: "Open a wallet", href: "/pricing" },
-      { label: "Security & compliance", href: "/pricing" },
+      { label: "Open a wallet", href: "/wallet" },
+      { label: "Escrow & settlement", href: "/payments" },
+      { label: "Fee schedule", href: "/fees" },
     ],
   },
   {
