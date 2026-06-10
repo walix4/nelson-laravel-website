@@ -3,14 +3,12 @@ import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
-import Testimonials from "@/components/Testimonials";
 import Chat from "@/components/Chat";
 import StatBand from "@/components/StatBand";
 import FreightFeatures from "@/components/FreightFeatures";
 import ContainerLanes from "@/components/ContainerLanes";
 import HowSteps from "@/components/HowSteps";
 import WhoUses from "@/components/WhoUses";
-import Ticker from "@/components/Ticker";
 import Typewriter from "@/components/Typewriter";
 import ChainCube from "@/components/ChainCube";
 import { asset } from "@/lib/site";
@@ -24,13 +22,6 @@ const COSTS = [
   { n: "Shipment events", d: "Pickup, transfer and exception events written to the ledger in real time.", i: '<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 9.6 2.7 1.55a1 1 0 1 1-1 1.74l-3.2-1.85A1 1 0 0 1 11 12V7a1 1 0 1 1 2 0v4.6Z"/>', a: "#2f61c0" },
   { n: "Digital signatures", d: "Cryptographically signed approvals from carriers, brokers and shippers.", i: '<path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1H3V6Zm0 4h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-8Zm3 5a1 1 0 1 0 0 2h5a1 1 0 1 0 0-2H6Z"/>', a: "#1E3A8A" },
   { n: "On-chain payments", d: "Settlement and payment milestones recorded against the same verified record.", i: '<path d="M2 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7Zm10 1.5A3.5 3.5 0 1 0 12 15.5a3.5 3.5 0 0 0 0-7ZM5.5 8A1.5 1.5 0 0 0 4 9.5a1 1 0 0 0 2 0A1.5 1.5 0 0 0 5.5 8Zm13 5a1.5 1.5 0 0 0-1.5 1.5 1 1 0 0 0 2 0 1.5 1.5 0 0 0-.5-1.5Z"/>', a: "#2f61c0" },
-];
-const Arrow = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--navy)]/35 shrink-0"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
-type Lane = [string, string, string];
-const SHIP: { title: string; icon: React.ReactNode; rows: Lane[] }[] = [
-  { title: "Rate confirmations", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 17V7H2v10h2" /><path d="M14 9h4l4 4v4h-2" /><circle cx="7" cy="18" r="1.8" /><circle cx="17" cy="18" r="1.8" /></svg>, rows: [["Los Angeles", "Phoenix, AZ", "0x7af3"], ["Long Beach", "Las Vegas, NV", "0x1c9e"], ["Oakland", "Sacramento, CA", "0x4b20"], ["Seattle", "Portland, OR", "0x9d11"], ["Houston", "San Antonio, TX", "0x3e8a"]] },
-  { title: "BOL & POD", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.8" strokeLinejoin="round"><rect x="3" y="12" width="7" height="7" rx="1" /><rect x="14" y="12" width="7" height="7" rx="1" /><rect x="8.5" y="4" width="7" height="7" rx="1" /></svg>, rows: [["Los Angeles", "Dallas, TX", "0xc4f2"], ["New York/NJ", "Chicago, IL", "0x8b07"], ["Norfolk", "Atlanta, GA", "0x2a55"], ["Long Beach", "Denver, CO", "0x6f3d"], ["Miami", "Orlando, FL", "0xe190"]] },
-  { title: "Container moves", icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" strokeWidth="1.7" strokeLinejoin="round"><rect x="3" y="6" width="18" height="12" rx="1" /><path d="M7 6v12M11 6v12M15 6v12" /></svg>, rows: [["Houston", "Kansas City, MO", "0x5d72"], ["Seattle", "Salt Lake City, UT", "0xab14"], ["Oakland", "Reno, NV", "0x3c81"], ["New York/NJ", "Indianapolis, IN", "0x7e60"], ["Charleston", "Columbus, OH", "0x90fa"]] },
 ];
 
 export default function Home() {
@@ -139,53 +130,6 @@ export default function Home() {
       <ContainerLanes />
       <HowSteps />
 
-      {/* SHIPMENTS IN PROCESS */}
-      <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#FFFFFF,#EEF4F9)" }}>
-        <div className="max-w-[1400px] mx-auto px-6 relative">
-          <div className="text-center max-w-2xl mx-auto reveal">
-            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Live on the chain</div>
-            <h2 className="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">Records verified right now</h2>
-            <p className="mt-4 text-[var(--muted)] text-[15px]">Real supply-chain records being anchored across the country this minute — rate confirmations, BOL/POD documents and container movements.</p>
-            <div className="mt-6 flex items-center justify-center gap-4"><Link href="/estimates" className="text-[14px] font-semibold text-[var(--navy)] inline-flex items-center gap-1.5">View all <Arrow /></Link><Link href="/network" className="px-5 py-2.5 rounded text-[13px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Open the network</Link></div>
-          </div>
-          <div className="mt-12 grid md:grid-cols-3 gap-6">
-            {SHIP.map((s, i) => (
-              <div key={s.title} className={`bg-white rounded-2xl p-6 border border-[var(--navy)]/8 reveal reveal-d${i}`}>
-                <div className="flex items-center justify-between"><div className="flex items-center gap-2.5">{s.icon}<h3 className="display text-[19px] text-[var(--navy)]">{s.title}</h3></div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.8"><circle cx="12" cy="12" r="9" /><path d="M12 11v5" strokeLinecap="round" /><circle cx="12" cy="7.8" r="0.6" fill="var(--green)" /></svg></div>
-                <Ticker rows={s.rows} index={i} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* LIVE DIGITAL TWIN */}
-      <section className="py-28 relative overflow-hidden" style={{ background: "radial-gradient(ellipse at 50% 0%,#0B2D5C,#061A38 70%)", color: "#fff" }}>
-        <div className="absolute inset-0 opacity-30 pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
-        <div className="max-w-[1400px] mx-auto px-6 relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="reveal">
-              <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-[var(--red)]">Every event, verified.</div>
-              <h2 className="display text-[40px] md:text-[52px] leading-[1.04] mt-2">The ledger behind every shipment record.</h2>
-              <p className="text-white/65 mt-5 max-w-lg text-[15px]">Rate confirmations, signatures, container movements, document hashes and payment milestones — every event is anchored on-chain so what you see is provably what happened. No silent edits, no disputed paper trails.</p>
-              <div className="mt-8 grid grid-cols-2 gap-3 max-w-lg">
-                {[["Network nodes", "510+"], ["Record types", "38"], ["Verify latency", "120ms"], ["Audit trail", "Permanent"]].map(([k, v]) => <div key={k} className="glass-dark rounded-xl p-4"><div className="text-white/55 text-[10px] uppercase tracking-wider">{k}</div><div className="display num text-[24px] mt-1">{v}</div></div>)}
-              </div>
-            </div>
-            <div className="relative flex items-center justify-center" style={{ minHeight: 480 }}>
-              <div className="relative rounded-lg overflow-hidden border border-white/10 w-full max-w-[640px] aspect-video shadow-2xl">
-                <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="none" poster={asset("/hero-toll.jpg?v=3")}><source src={asset("/toll-road.mp4")} type="video/mp4" /></video>
-                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg,rgba(6,26,56,0.15),rgba(6,26,56,0.45))" }} />
-              </div>
-              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ top: "8%", left: "5%", animationDelay: "-1s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Record type</div><div className="display text-white">Rate confirmation</div></div>
-              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ top: "20%", right: "5%", animationDelay: "-2.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Block</div><div className="display text-white num">#5,184,902</div></div>
-              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ bottom: "18%", left: "8%", animationDelay: "-3.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Signature</div><div className="display text-white">Verified</div></div>
-              <div className="floating-tag glass-dark rounded-xl px-3 py-2 text-[11px]" style={{ bottom: "8%", right: "6%", animationDelay: "-1.5s" }}><div className="text-white/55 text-[9px] uppercase tracking-wider">Confirmations</div><div className="display text-white num">14</div></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* COST CARDS */}
       <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg,#F8FAFC,#EEF2F8)" }}>
         <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ background: "radial-gradient(800px 400px at 80% 10%,rgba(58,95,192,0.18),transparent 60%),radial-gradient(700px 400px at 10% 80%,rgba(47,97,192,0.13),transparent 60%)" }} />
@@ -203,48 +147,6 @@ export default function Home() {
       </section>
 
       <WhoUses />
-
-      <Testimonials />
-
-      {/* PORTS BANNER */}
-      <section className="py-16 bg-white">
-        <div className="max-w-[1280px] mx-auto px-6">
-          <div className="ports-band flex flex-col md:block">
-            <div className="pmap" style={{ backgroundImage: `url(${asset("/usa-map.svg")})` }} />
-            <div className="relative z-10 text-center px-6 pt-12 pb-10 md:py-16 max-w-xl mx-auto">
-              <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/80">U.S. coverage</div>
-              <h2 className="display text-white text-[34px] md:text-[44px] leading-[1.05] mt-2">Explore the verified-record network</h2>
-              <p className="text-white/85 text-[15px] mt-4">Browse anchored records across ports, carriers and ramps in all 48 states — then verify any shipment on the chain in seconds.</p>
-              <Link href="/network" className="inline-flex items-center gap-2 mt-7 bg-white text-[var(--navy)] font-semibold text-[14px] px-6 py-3 rounded">Open chain explorer <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link>
-            </div>
-            {/* left filters card */}
-            <div className="ports-card left">
-              <div className="flex items-center justify-between mb-4">
-                <div className="display text-[19px] text-[var(--navy)]">Filters</div>
-                <div className="flex items-center gap-3"><span className="text-[13px] text-[var(--muted)] cursor-pointer">Clear</span><span className="bg-[var(--navy)] text-white text-[13px] font-semibold px-4 py-2 rounded-lg">Show 20</span></div>
-              </div>
-              <div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--muted)] mb-2">Sort by</div>
-              <div className="grid grid-cols-2 gap-3 mb-5">
-                <div className="pf-radio"><span className="pf-dot" />Rate confs</div>
-                <div className="pf-radio sel"><span className="pf-dot" />BOL / POD</div>
-                <div className="pf-radio"><span className="pf-dot" />Payments</div>
-              </div>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)]">Rate confs</div><div className="pf-track"><div className="pf-fill" style={{ width: "18%" }} /><div className="pf-knob" style={{ left: "18%" }} /></div></div>
-                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)] flex justify-between">BOL / POD <span className="bg-[var(--navy)]/6 px-2 rounded-full text-[var(--navy)]">500</span></div><div className="pf-track"><div className="pf-fill" style={{ width: "55%" }} /><div className="pf-knob" style={{ left: "55%" }} /></div></div>
-                <div><div className="text-[10px] uppercase tracking-[0.14em] font-bold text-[var(--muted)]">Payments</div><div className="pf-track"><div className="pf-fill" style={{ width: "35%" }} /><div className="pf-knob" style={{ left: "35%" }} /></div></div>
-              </div>
-            </div>
-            {/* right top-ports card */}
-            <div className="ports-card right">
-              <div className="px-4 pt-1 pb-2 text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--muted)] flex items-center gap-1.5"><span className="flag">🇺🇸</span> Top verified U.S. lanes</div>
-              {([["Port of NY/NJ", 48], ["Los Angeles, CA", 45], ["Savannah, GA", 52], ["Chicago, IL", 33], ["Houston, TX", 29], ["Norfolk, VA", 21]] as [string, number][]).map(([city, n]) => (
-                <div key={city} className="pc-row"><svg className="pc-pin" viewBox="0 0 24 24"><path d="M12 22s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z" /><circle cx="12" cy="11" r="2.6" fill="#fff" /></svg>{city} <span className="text-[var(--muted)] font-normal">({n})</span></div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       <Footer />
       <Chat />
