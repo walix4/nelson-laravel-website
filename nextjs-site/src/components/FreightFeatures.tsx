@@ -22,11 +22,11 @@ export default function FreightFeatures() {
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {/* photo tile spans first column */}
           <div className="photo-tile reveal lg:row-span-2 min-h-[340px]">
-            <img src={asset("/photos/containers-aerial.jpg")} alt="Container terminal from above" loading="lazy" />
+            <img src={asset("/photos/glow-cube.jpg")} alt="Glowing blockchain block render" loading="lazy" />
             <div className="pt-shade" />
             <div className="pt-body">
-              <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/70">From the terminal up</div>
-              <div className="display text-white text-[24px] leading-tight mt-1.5">Every container on this yard can carry a verifiable record.</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/70">Proof, rendered</div>
+              <div className="display text-white text-[24px] leading-tight mt-1.5">Every move on the network can carry a verifiable record.</div>
               <Link href="/solutions" className="inline-flex items-center gap-1.5 mt-4 text-[13px] font-semibold text-white bg-[var(--red)] px-4 py-2 rounded">See solutions <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></Link>
             </div>
           </div>

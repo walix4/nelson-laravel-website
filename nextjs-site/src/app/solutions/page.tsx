@@ -10,22 +10,22 @@ export const metadata = { title: "Solutions · DrayChain", description: "Blockch
 
 const AUDIENCES = [
   {
-    t: "Carriers & owner-operators", img: "/photos/truck-dusk.jpg", tag: "On the road",
+    t: "Carriers & owner-operators", img: "/photos/truck-bw.jpg", tag: "On the road",
     lead: "Get paid on what was actually agreed — and prove every delivery.",
     points: ["Rate confirmations locked at booking, immune to after-the-fact edits", "Signed, timestamped POD on every load — disputes close in minutes", "Chain-of-custody records that protect you on damaged-freight claims"],
   },
   {
-    t: "Ports & marine terminals", img: "/photos/containers-aerial.jpg", tag: "At the gate",
+    t: "Ports & marine terminals", img: "/photos/containers-stack.jpg", tag: "At the gate",
     lead: "Every gate-in and gate-out becomes a verifiable, shareable event.",
     points: ["Gate events anchored in real time from your TOS via the API", "One source of truth for free-time, demurrage and per-diem clocks", "Selective disclosure — terminals share proofs, not raw operational data"],
   },
   {
-    t: "3PLs & freight brokers", img: "/photos/warehouse.jpg", tag: "In the middle",
+    t: "3PLs & freight brokers", img: "/photos/servers.jpg", tag: "In the middle",
     lead: "Stop arbitrating he-said-she-said between shippers and carriers.",
     points: ["Every rate conf, accessorial and approval cryptographically signed", "Audit-ready files for every shipment, assembled automatically", "White-label verification links your customers can check themselves"],
   },
   {
-    t: "Shippers & finance teams", img: "/photos/ship.jpg", tag: "At the desk",
+    t: "Shippers & finance teams", img: "/photos/circuit-glow.jpg", tag: "At the desk",
     lead: "Reconcile invoices against proof, not promises.",
     points: ["Match invoices to anchored rates, events and signatures automatically", "Tamper-proof audit trail for SOX, customs and insurance reviews", "Payment milestones recorded against the same verified shipment record"],
   },
@@ -40,11 +40,10 @@ export default function Solutions() {
         eyebrow="Solutions"
         title={<>One chain. <span className="bg-gradient-to-r from-[#8fa8e6] via-[#4f74cf] to-[#2f61c0] bg-clip-text text-transparent">Every side</span> of the move.</>}
         sub="The same anchored record serves the terminal that scanned the container, the carrier that hauled it, the broker that arranged it and the shipper that pays for it."
-        photo="/photos/containers-aerial.jpg"
       >
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/developers" className="px-6 py-3 rounded text-[14px] font-semibold btn-primary">Start anchoring</Link>
-          <Link href="/pricing" className="px-6 py-3 rounded text-[14px] font-semibold btn-ghost">See pricing</Link>
+          <Link href="/network" className="px-6 py-3 rounded text-[14px] font-semibold btn-primary">See the live network</Link>
+          <Link href="/technology" className="px-6 py-3 rounded text-[14px] font-semibold btn-ghost">Explore the technology</Link>
         </div>
       </PageHero>
 
@@ -70,7 +69,7 @@ export default function Solutions() {
                   </li>
                 ))}
               </ul>
-              <Link href="/developers" className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded text-[14px] font-semibold text-white bg-[var(--navy)] hover:bg-[var(--navy-2)] transition">Get started <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link>
+              <Link href="/network" className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded text-[14px] font-semibold text-white bg-[var(--navy)] hover:bg-[var(--navy-2)] transition">Get started <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link>
             </div>
           </div>
         </section>
@@ -82,7 +81,7 @@ export default function Solutions() {
           <h2 className="display text-[32px] md:text-[44px] leading-[1.08] reveal">Whoever you are in the move — the proof is the same.</h2>
           <p className="mt-4 text-white/65 text-[15px] max-w-xl mx-auto reveal reveal-d1">Anchor once, verify everywhere. Bring your TMS, your portal or just your paperwork.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3 reveal reveal-d2">
-            <Link href="/developers" className="px-7 py-3.5 rounded text-[14px] font-semibold btn-primary">Request API access</Link>
+            <Link href="/technology" className="px-7 py-3.5 rounded text-[14px] font-semibold btn-primary">Explore the technology</Link>
             <Link href="/network" className="px-7 py-3.5 rounded text-[14px] font-semibold btn-ghost">Watch the live network</Link>
           </div>
         </div>

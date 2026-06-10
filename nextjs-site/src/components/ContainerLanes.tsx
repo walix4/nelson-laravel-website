@@ -17,7 +17,7 @@ export default function ContainerLanes() {
         {/* left — photo with floating on-chain event tags */}
         <div className="relative reveal">
           <div className="photo-tile min-h-[420px] h-full">
-            <img src={asset("/photos/ship.jpg")} alt="Container ship arriving at port" loading="lazy" />
+            <img src={asset("/photos/cargo-ship.jpg")} alt="Container ship arriving at port" loading="lazy" />
             <div className="pt-shade" />
             <div className="pt-body">
               <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-white/70">Vessel → gate → rail → door</div>

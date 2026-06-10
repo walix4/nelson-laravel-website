@@ -6,18 +6,17 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
     title: "Products",
     links: [
       { label: "Verify a record", href: "/network" },
-      { label: "Verification tools", href: "/tools" },
-      { label: "Chain explorer", href: "/tools/ports" },
-      { label: "Document verifier", href: "/tools" },
-      { label: "Verified records stream", href: "/estimates" },
+      { label: "Solutions", href: "/solutions" },
+      { label: "Technology", href: "/technology" },
+            { label: "Verified records stream", href: "/estimates" },
     ],
   },
   {
     title: "Developers",
     links: [
-      { label: "API pricing", href: "/pricing" },
-      { label: "Request API access", href: "/pricing" },
-      { label: "Verification data", href: "/pricing" },
+      { label: "How it works", href: "/technology" },
+      { label: "Live network", href: "/network" },
+      { label: "Verification data", href: "/estimates" },
     ],
   },
   {

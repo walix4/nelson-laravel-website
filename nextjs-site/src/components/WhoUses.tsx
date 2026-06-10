@@ -2,10 +2,10 @@ import Link from "next/link";
 import { asset } from "@/lib/site";
 
 const USES = [
-  { t: "Ports & terminals", d: "Anchor gate-in and gate-out events so every container handoff has a verifiable record before it leaves the terminal.", img: "/photos/containers-aerial.jpg" },
-  { t: "Carriers & intermodal", d: "Prove chain of custody between ports, inland ramps and transload facilities with on-chain movement records.", img: "/photos/truck-dusk.jpg" },
-  { t: "3PLs & freight brokers", d: "Settle disputes fast with signed, timestamped rate confirmations and proof of delivery on every load.", img: "/photos/warehouse.jpg" },
-  { t: "Shippers & finance teams", d: "Reconcile invoices against a tamper-proof audit trail of payments and events across multi-leg shipments.", img: "/photos/ship.jpg" },
+  { t: "Ports & terminals", d: "Anchor gate-in and gate-out events so every container handoff has a verifiable record before it leaves the terminal.", img: "/photos/wire-blocks.jpg" },
+  { t: "Carriers & intermodal", d: "Prove chain of custody between ports, inland ramps and transload facilities with on-chain movement records.", img: "/photos/crystal-mesh.jpg" },
+  { t: "3PLs & freight brokers", d: "Settle disputes fast with signed, timestamped rate confirmations and proof of delivery on every load.", img: "/photos/blockchain-tiles.jpg" },
+  { t: "Shippers & finance teams", d: "Reconcile invoices against a tamper-proof audit trail of payments and events across multi-leg shipments.", img: "/photos/circuit.jpg" },
 ];
 
 export default function WhoUses() {

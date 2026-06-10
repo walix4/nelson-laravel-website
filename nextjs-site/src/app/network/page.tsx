@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Chat from "@/components/Chat";
 import RevealInit from "@/components/RevealInit";
 import PageHero from "@/components/PageHero";
+import LiveRecords from "@/components/LiveRecords";
 import { asset } from "@/lib/site";
 
 export const metadata = { title: "Live Network · DrayChain", description: "Watch records being anchored on the DrayChain network in real time — blocks, nodes and verified events." };
@@ -19,19 +20,6 @@ const STATS = [
   { n: "38", l: "Record types" },
 ];
 
-const RECORDS: [string, string, string, string, string][] = [
-  ["0x7af3…c918", "Rate confirmation", "Los Angeles → Phoenix, AZ", "Carrier · Broker", "12s ago"],
-  ["0x1c9e…04b7", "Gate-in event", "Port of Long Beach · Pier E", "Terminal", "31s ago"],
-  ["0x4b20…e6d1", "POD signature", "Oakland → Sacramento, CA", "Carrier · Shipper", "44s ago"],
-  ["0x9d11…7a02", "BOL document hash", "Seattle → Portland, OR", "3PL", "1m ago"],
-  ["0x3e8a…b5f9", "Payment milestone", "Houston → San Antonio, TX", "Shipper", "2m ago"],
-  ["0xc4f2…1d6e", "Chassis interchange", "BNSF Hobart Ramp", "IEP · Motor carrier", "2m ago"],
-  ["0x8b07…93aa", "Rate confirmation", "New York/NJ → Chicago, IL", "Carrier · Broker", "3m ago"],
-  ["0x2a55…f0c3", "Gate-out event", "Port of Savannah · GCT", "Terminal", "4m ago"],
-  ["0x6f3d…28e7", "Demurrage clock stop", "Port of Norfolk · NIT", "Terminal · 3PL", "5m ago"],
-  ["0xe190…6b44", "POD signature", "Miami → Orlando, FL", "Carrier · Shipper", "6m ago"],
-];
-
 export default function Network() {
   return (
     <>
@@ -41,10 +29,10 @@ export default function Network() {
         eyebrow="Chain live · block #5,184,902"
         title={<>The network, <span className="bg-gradient-to-r from-[#8fa8e6] via-[#4f74cf] to-[#2f61c0] bg-clip-text text-transparent">right now</span></>}
         sub="Every few seconds another drayage record becomes permanent. This is the public face of the chain — blocks, validators and the records they protect."
-        photo="/photos/network-3d.jpg"
+        photo="/photos/earth-night.jpg"
       >
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/developers" className="px-6 py-3 rounded text-[14px] font-semibold btn-primary">Anchor a record</Link>
+          <Link href="/solutions" className="px-6 py-3 rounded text-[14px] font-semibold btn-primary">Explore solutions</Link>
           <Link href="/estimates" className="px-6 py-3 rounded text-[14px] font-semibold btn-ghost">Full record stream</Link>
         </div>
       </PageHero>
@@ -73,25 +61,7 @@ export default function Network() {
             </div>
             <span className="inline-flex items-center gap-2 text-[12.5px] font-semibold text-[var(--navy)]"><span className="live-dot" /> Streaming live</span>
           </div>
-          <div className="est-wrap mt-9 reveal reveal-d1">
-            <div className="est-scroll">
-              <table className="est-table">
-                <thead><tr><th>Record hash</th><th>Type</th><th>Lane / location</th><th>Signed by</th><th>Status</th><th>Anchored</th></tr></thead>
-                <tbody>
-                  {RECORDS.map(([hash, type, lane, parties, time]) => (
-                    <tr key={hash}>
-                      <td><span className="est-ref">{hash}</span></td>
-                      <td><span className="est-chip">{type}</span></td>
-                      <td><span className="est-loc" style={{ maxWidth: 220 }}>{lane}</span></td>
-                      <td className="text-[12.5px]">{parties}</td>
-                      <td><span className="est-badge completed"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg> Verified</span></td>
-                      <td><span className="est-time num">{time}</span></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <LiveRecords />
           <div className="mt-7 text-center reveal"><Link href="/estimates" className="inline-flex items-center gap-2 px-6 py-3 rounded text-[14px] font-semibold text-[var(--navy)] border border-[var(--navy)]/15 hover:bg-[var(--navy)]/5 transition">Open the full stream <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link></div>
         </div>
       </section>

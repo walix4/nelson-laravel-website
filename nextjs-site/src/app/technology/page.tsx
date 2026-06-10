@@ -42,7 +42,7 @@ export default function Technology() {
         photo="/photos/chain-abstract.jpg"
       >
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/developers" className="px-6 py-3 rounded text-[14px] font-semibold btn-primary inline-flex items-center gap-2">Read the API docs</Link>
+          <Link href="/solutions" className="px-6 py-3 rounded text-[14px] font-semibold btn-primary inline-flex items-center gap-2">Explore solutions</Link>
           <Link href="/network" className="px-6 py-3 rounded text-[14px] font-semibold btn-ghost">See the live network</Link>
         </div>
       </PageHero>
@@ -141,8 +141,8 @@ export default function Technology() {
             <p className="mt-3 text-white/70 text-[15px]">Sandbox keys are free — go from TMS export to on-chain proof in an afternoon.</p>
           </div>
           <div className="flex flex-wrap gap-3 shrink-0">
-            <Link href="/developers" className="px-7 py-3.5 rounded text-[14px] font-semibold btn-primary">Get API access</Link>
-            <Link href="/pricing" className="px-7 py-3.5 rounded text-[14px] font-semibold btn-ghost">View pricing</Link>
+            <Link href="/network" className="px-7 py-3.5 rounded text-[14px] font-semibold btn-primary">Open the live network</Link>
+            <Link href="/solutions" className="px-7 py-3.5 rounded text-[14px] font-semibold btn-ghost">Explore solutions</Link>
           </div>
         </div>
       </section>

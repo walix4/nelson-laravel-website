@@ -128,6 +128,49 @@ export default function Home() {
       </section>
 
       <ContainerLanes />
+
+      {/* ANATOMY OF A BLOCK — orbiting 3D */}
+      <section className="grid-bg relative py-24 text-white overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-14 items-center">
+          {/* left — center block with two orbiting mini blocks */}
+          <div className="relative hidden lg:flex items-center justify-center" style={{ minHeight: 480 }}>
+            <div className="absolute orbit-ring" style={{ width: 420, height: 420 }} />
+            <div className="absolute orbit-ring" style={{ width: 290, height: 290, opacity: 0.6 }} />
+            <ChainCube size={150} duration={15} label="Block #5,184,902" />
+            {/* orbiters: outer spins, inner counter-spins to keep the cube upright */}
+            <div className="absolute inset-0 spin-orbit pointer-events-none">
+              <div className="absolute" style={{ left: "50%", top: "50%", transform: "translate(-50%,-50%) translateX(210px)" }}>
+                <div className="spin-orbit-rev"><ChainCube size={44} duration={9} /></div>
+              </div>
+            </div>
+            <div className="absolute inset-0 spin-orbit pointer-events-none" style={{ animationDelay: "-13s" }}>
+              <div className="absolute" style={{ left: "50%", top: "50%", transform: "translate(-50%,-50%) translateX(-145px)" }}>
+                <div className="spin-orbit-rev" style={{ animationDelay: "-13s" }}><ChainCube size={34} duration={11} delay={-3} /></div>
+              </div>
+            </div>
+          </div>
+          {/* right — what lives inside a block */}
+          <div className="reveal">
+            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[#8fa8e6]">Anatomy of a block</div>
+            <h2 className="display text-[36px] md:text-[48px] leading-[1.05] mt-3">Four things make a record impossible to fake</h2>
+            <p className="mt-4 text-white/65 text-[15px] leading-relaxed max-w-lg">Open any block on the chain and you'll find the same four ingredients. Together they turn a plain freight document into permanent, portable proof.</p>
+            <div className="mt-8 space-y-3 max-w-lg">
+              {[
+                ["01", "Record hash", "A SHA-256 fingerprint of the document — change one comma and it breaks."],
+                ["02", "Signatures", "Carrier, broker and shipper keys sign the same hash, binding identity to intent."],
+                ["03", "Timestamp", "The block's position in the chain proves exactly when the record existed."],
+                ["04", "Parent link", "Each block commits to the previous block's hash — history can only grow."],
+              ].map(([n, t, d]) => (
+                <div key={n} className="anat-tag glass-dark rounded-md px-5 py-4 flex items-start gap-4" style={{ border: "1px solid rgba(143,168,230,0.25)" }}>
+                  <span className="display num text-[18px] text-[#8fa8e6] shrink-0 mt-0.5">{n}</span>
+                  <span><span className="display text-[16px] text-white block">{t}</span><span className="text-[13px] text-white/60 leading-relaxed">{d}</span></span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <HowSteps />
 
       {/* COST CARDS */}
@@ -143,6 +186,34 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* BLOCK CONVEYOR — 3D ribbon of blocks being anchored */}
+      <section className="grid-bg relative py-24 text-white overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+          <div className="text-center max-w-2xl mx-auto reveal">
+            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[#8fa8e6]">Always anchoring</div>
+            <h2 className="display text-[38px] md:text-[50px] leading-[1.05] mt-3">The chain never sleeps</h2>
+            <p className="mt-4 text-white/65 text-[15px] md:text-[16px] leading-relaxed">A new block every two seconds, around the clock — gate events from night shifts, PODs from morning deliveries, payments at close of business.</p>
+          </div>
+        </div>
+        <div className="conv-persp conv-fade relative mt-14" style={{ height: 230 }}>
+          <div className="conv-plane absolute left-1/2 top-1/2" style={{ transform: "translate(-50%,-58%) rotateX(55deg) rotateZ(-12deg)" }}>
+            <div className="conv-track">
+              {["a", "b"].map((half) => ["7af3", "1c9e", "4b20", "9d11", "3e8a", "c4f2", "8b07", "2a55"].map((h) => (
+                <div key={half + h} className="conv-block"><span className="cb-hash">0x{h}</span></div>
+              )))}
+            </div>
+          </div>
+        </div>
+        <div className="relative z-10 mt-12 mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl">
+          {[["2s", "block time"], ["1.4M", "records / day"], ["24/7", "anchoring"], ["0", "missed blocks"]].map(([v, k], i) => (
+            <div key={k} className={`glass-pill rounded-md px-4 py-3.5 text-center reveal reveal-d${i}`}>
+              <div className="display num text-[22px]">{v}</div>
+              <div className="text-[11px] uppercase tracking-[0.14em] text-white/55 mt-0.5">{k}</div>
+            </div>
+          ))}
         </div>
       </section>
 
