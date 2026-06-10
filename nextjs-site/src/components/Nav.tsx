@@ -6,8 +6,7 @@ const LINKS = [
   { label: "Wallet", href: "/wallet" },
   { label: "How Payments Work", href: "/payments" },
   { label: "QuickPay", href: "/quickpay" },
-  { label: "Live Settlements", href: "/settlements" },
-  { label: "Fees", href: "/fees" },
+{ label: "Fees", href: "/fees" },
 ];
 
 export default function Nav() {
