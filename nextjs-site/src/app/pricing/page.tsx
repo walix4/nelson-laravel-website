@@ -64,7 +64,7 @@ export default function Pricing() {
             <Link href="/tools/ports" className="px-6 py-3.5 rounded-lg text-[14px] text-white font-semibold" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.25)" }}>Chain explorer →</Link>
           </div>
           <div className="mt-7 text-[12.5px] text-white/55">
-            <Link href="/tools" className="text-[var(--red)] font-semibold hover:opacity-80">Verification tools</Link> · <Link href="/#quote" className="text-[var(--red)] font-semibold hover:opacity-80">Verify a record</Link>
+            <Link href="/tools" className="text-[var(--red)] font-semibold hover:opacity-80">Verification tools</Link> · <Link href="/network" className="text-[var(--red)] font-semibold hover:opacity-80">Live network</Link>
           </div>
         </div>
       </section>

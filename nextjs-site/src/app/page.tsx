@@ -12,6 +12,7 @@ import HowSteps from "@/components/HowSteps";
 import WhoUses from "@/components/WhoUses";
 import Ticker from "@/components/Ticker";
 import Typewriter from "@/components/Typewriter";
+import ChainCube from "@/components/ChainCube";
 import { asset } from "@/lib/site";
 
 const BRANDS = ["CARGOMAX", "portlink", "NORDFREIGHT", "veritas3pl", "ARC LOGISTICS", "Halo Freight", "ROADWORKS", "Meridian Fleet", "Atlas Carriers", "Northstar Cargo"];
@@ -107,6 +108,34 @@ export default function Home() {
       <StatBand />
       <FreightFeatures />
 
+      {/* THE CHAIN, VISUALIZED — 3D blocks */}
+      <section className="grid-bg relative py-24 text-white overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+          <div className="text-center max-w-2xl mx-auto reveal">
+            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[#8fa8e6]">The chain, visualized</div>
+            <h2 className="display text-[38px] md:text-[50px] leading-[1.05] mt-3">Every record becomes a block. Every block stays forever.</h2>
+            <p className="mt-4 text-white/65 text-[15px] md:text-[16px] leading-relaxed">A rate confirmation, a gate-in scan, a signed POD — each event is hashed into a block and cryptographically linked to the one before it. Change anything, and the chain tells on you.</p>
+          </div>
+          <div className="mt-6 hidden md:flex items-center justify-center gap-0 reveal reveal-d1">
+            <ChainCube size={92} duration={18} delay={0} label="Block #5,184,900" />
+            <div className="chain-link w-[110px] -mt-8" />
+            <ChainCube size={124} duration={14} delay={-4} label="Block #5,184,901" />
+            <div className="chain-link w-[110px] -mt-8" style={{ animationDelay: "-1.3s" }} />
+            <ChainCube size={92} duration={18} delay={-9} label="Block #5,184,902" />
+          </div>
+          <div className="mt-4 md:hidden flex justify-center reveal reveal-d1"><ChainCube size={110} duration={14} label="Block #5,184,902" /></div>
+          <div className="mt-12 grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+            {[["Hashed", "SHA-256 fingerprint of the full record"], ["Signed", "Ed25519 signatures from every party"], ["Linked", "Each block commits to its parent hash"]].map(([t, d], i) => (
+              <div key={t} className={`glass-pill rounded-md px-5 py-4 text-center reveal reveal-d${i}`}>
+                <div className="display text-[17px]">{t}</div>
+                <div className="text-[12.5px] text-white/60 mt-1 leading-relaxed">{d}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 text-center reveal"><Link href="/technology" className="inline-flex items-center gap-2 px-7 py-3 rounded text-[14px] font-semibold btn-primary">Explore the technology <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link></div>
+        </div>
+      </section>
+
       <ContainerLanes />
       <HowSteps />
 
@@ -117,7 +146,7 @@ export default function Home() {
             <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[var(--red)]">Live on the chain</div>
             <h2 className="display text-[40px] md:text-[52px] text-[var(--navy)] leading-[1.04] mt-2">Records verified right now</h2>
             <p className="mt-4 text-[var(--muted)] text-[15px]">Real supply-chain records being anchored across the country this minute — rate confirmations, BOL/POD documents and container movements.</p>
-            <div className="mt-6 flex items-center justify-center gap-4"><Link href="/estimates" className="text-[14px] font-semibold text-[var(--navy)] inline-flex items-center gap-1.5">View all <Arrow /></Link><Link href="/#quote" className="px-5 py-2.5 rounded-lg text-[13px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Verify a record</Link></div>
+            <div className="mt-6 flex items-center justify-center gap-4"><Link href="/estimates" className="text-[14px] font-semibold text-[var(--navy)] inline-flex items-center gap-1.5">View all <Arrow /></Link><Link href="/network" className="px-5 py-2.5 rounded text-[13px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Open the network</Link></div>
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {SHIP.map((s, i) => (
@@ -186,7 +215,7 @@ export default function Home() {
               <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-white/80">U.S. coverage</div>
               <h2 className="display text-white text-[34px] md:text-[44px] leading-[1.05] mt-2">Explore the verified-record network</h2>
               <p className="text-white/85 text-[15px] mt-4">Browse anchored records across ports, carriers and ramps in all 48 states — then verify any shipment on the chain in seconds.</p>
-              <Link href="/tools/ports" className="inline-flex items-center gap-2 mt-7 bg-white text-[var(--navy)] font-semibold text-[14px] px-6 py-3 rounded-xl">Open chain explorer <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link>
+              <Link href="/network" className="inline-flex items-center gap-2 mt-7 bg-white text-[var(--navy)] font-semibold text-[14px] px-6 py-3 rounded">Open chain explorer <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link>
             </div>
             {/* left filters card */}
             <div className="ports-card left">

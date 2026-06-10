@@ -13,11 +13,13 @@ export default function Nav() {
           <span className="text-white font-bold text-[20px] md:text-[22px] tracking-tight leading-none">Dray<span className="text-[#8fa8e6]">Chain</span></span>
         </Link>
         <nav className="hidden lg:flex items-center gap-5 text-[13px] font-medium text-white/85">
-          <Link href="/tools" className="hover:text-white">Verification tools</Link>
-          <Link href="/pricing" className="hover:text-white">Security</Link>
+          <Link href="/technology" className="hover:text-white">Technology</Link>
+          <Link href="/solutions" className="hover:text-white">Solutions</Link>
+          <Link href="/network" className="hover:text-white">Live Network</Link>
+          <Link href="/developers" className="hover:text-white">Developers</Link>
           <div className={`mega-wrap ${open ? "open" : ""}`}>
             <button className="hover:text-white inline-flex items-center gap-1.5" onClick={() => setOpen((o) => !o)}>
-              Solutions
+              Tools
               <svg className="mega-caret" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
             </button>
             <div className="mega-panel">
@@ -32,19 +34,15 @@ export default function Nav() {
                 ))}
               </div>
               <div className="border-t mt-3 pt-4 flex flex-wrap gap-3" style={{ borderColor: "rgba(11,35,80,0.1)" }}>
-                <Link href="/#quote" className="text-[13px] font-semibold px-5 py-2.5 rounded-lg" style={{ color: "var(--blue)", background: "rgba(58,95,192,0.08)" }}>Verify a record</Link>
-                <Link href="/tools" className="text-[13px] font-semibold px-5 py-2.5 rounded-lg" style={{ color: "var(--navy)", background: "rgba(11,35,80,0.06)" }}>All tools</Link>
+                <Link href="/network" className="text-[13px] font-semibold px-5 py-2.5 rounded" style={{ color: "var(--blue)", background: "rgba(58,95,192,0.08)" }}>Live network</Link>
+                <Link href="/tools" className="text-[13px] font-semibold px-5 py-2.5 rounded" style={{ color: "var(--navy)", background: "rgba(11,35,80,0.06)" }}>All tools</Link>
               </div>
             </div>
           </div>
-          <Link href="/pricing" className="hover:text-white">API pricing</Link>
-          <Link href="#" className="hover:text-white">Blog</Link>
-          <Link href="/pricing" className="hover:text-white">FAQ</Link>
-          <Link href="#" className="hover:text-white">About</Link>
-          <Link href="#" className="hover:text-white">Support</Link>
+          <Link href="/pricing" className="hover:text-white">Pricing</Link>
         </nav>
         <div className="flex items-center gap-2.5">
-          <Link href="/pricing" className="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5"><span className="label">Get API Key</span></Link>
+          <Link href="/developers" className="btn-primary text-[13px] px-4 py-2 rounded inline-flex items-center gap-1.5"><span className="label">Get API Key</span></Link>
         </div>
       </div>
     </header>

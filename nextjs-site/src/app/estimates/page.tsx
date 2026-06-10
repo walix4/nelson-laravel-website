@@ -69,7 +69,7 @@ export default function Page() {
                     <td><span className={`est-badge ${e.status}`}>{e.status === "streaming" && <span className="est-dot" />}{LABELS[e.status]}</span></td>
                     <td>{e.status === "streaming" ? <div className="est-prog"><div className="est-prog-track"><div className="est-prog-fill" style={{ width: `${Math.round(e.stream)}%` }} /></div><div className="est-prog-label">{Math.round(e.stream)}%</div></div> : <span style={{ color: "var(--muted)" }}>—</span>}</td>
                     <td><span className="est-time"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.6 }}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>{e.created}</span></td>
-                    <td><Link href="/#quote" className="est-view">View</Link></td>
+                    <td><Link href="/network" className="est-view">View</Link></td>
                   </tr>
                 ))}
               </tbody>

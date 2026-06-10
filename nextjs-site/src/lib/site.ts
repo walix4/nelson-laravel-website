@@ -6,7 +6,7 @@ export type Tool = { n: string; d: string; href: string; g: string; i: string };
 
 // Drayage verification toolkit. hrefs are Next routes (next/link prefixes basePath automatically).
 export const TOOLS: Tool[] = [
-  { n: "Record Verifier", d: "Anchor a shipment on-chain and get a tamper-proof audit trail instantly.", href: "/#quote", g: "linear-gradient(160deg,#FF6B62,#E0241A)", i: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/>' },
+  { n: "Record Verifier", d: "Anchor a shipment on-chain and get a tamper-proof audit trail instantly.", href: "/network", g: "linear-gradient(160deg,#FF6B62,#E0241A)", i: '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/>' },
   { n: "Chain Explorer", d: "Browse anchored records across ports, carriers and ramps nationwide.", href: "/tools/ports", g: "linear-gradient(160deg,#1E3A8A,#0B2D5C)", i: '<circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/>' },
   { n: "Route Verification", d: "Confirm origin, destination and transit for any drayage lane on-chain.", href: "/tools/distance", g: "linear-gradient(160deg,#22D3EE,#3A5FC0)", i: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
   { n: "Hash & Unit Converter", d: "Convert weight, distance and measures, or hash a value to verify it.", href: "/tools/converter", g: "linear-gradient(160deg,#7C3AED,#6B5BFF)", i: '<path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/>' },

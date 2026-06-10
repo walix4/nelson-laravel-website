@@ -5,7 +5,7 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Products",
     links: [
-      { label: "Verify a record", href: "/#quote" },
+      { label: "Verify a record", href: "/network" },
       { label: "Verification tools", href: "/tools" },
       { label: "Chain explorer", href: "/tools/ports" },
       { label: "Document verifier", href: "/tools" },

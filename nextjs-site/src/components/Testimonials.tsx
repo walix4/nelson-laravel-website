@@ -42,7 +42,7 @@ export default function Testimonials() {
             <div className="text-right shrink-0"><div className="display text-[44px] text-[var(--navy)] leading-none num">5.00</div><div className="flex items-center justify-end gap-3 mt-2"><Stars n={5} /><span className="text-[13px] text-[var(--muted)] border-l border-[var(--navy)]/15 pl-3"><b className="text-[var(--navy)] num">654</b> reviews</span></div></div>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">{REVIEWS.slice(0, shown).map((r) => <Card key={r.n} r={r} />)}</div>
-          {shown < REVIEWS.length && <div className="text-center mt-10"><button onClick={() => setShown((s) => s + 4)} className="px-7 py-3 rounded-xl text-[14px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Load more reviews</button></div>}
+          {shown < REVIEWS.length && <div className="text-center mt-10"><button onClick={() => setShown((s) => s + 4)} className="px-7 py-3 rounded text-[14px] font-semibold bg-[var(--navy)] text-white hover:bg-[var(--navy-2)] transition">Load more reviews</button></div>}
         </div>
       </div>
     </section>

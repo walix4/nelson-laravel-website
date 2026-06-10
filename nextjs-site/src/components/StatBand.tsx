@@ -1,21 +1,21 @@
 const STATS = [
   { n: "3.1M+", l: "Records anchored on-chain", i: '<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M9 21v-3h6v3"/>' },
-  { n: "6 types", l: "Verified record categories", i: '<path d="M3 6h13v9H3zM16 9h3l2 3v3h-5zM6 18a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 6 18Zm12 0a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 18 18Z"/>' },
-  { n: "100%", l: "Tamper-proof audit trail", i: '<rect x="3" y="7" width="18" height="10" rx="1"/><path d="M7 7v10M11 7v10M15 7v10"/>' },
+  { n: "510+", l: "Validator nodes online", i: '<circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/>' },
+  { n: "0.4s", l: "Average verification time", i: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
   { n: "99.9%", l: "Verification API uptime", i: '<path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9.5 12l1.8 1.8L15 10"/>' },
 ];
 
 export default function StatBand() {
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-5">
+    <section className="grid-bg relative py-16">
+      <div className="max-w-[1400px] mx-auto px-6 relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-5">
         {STATS.map((s, i) => (
-          <div key={s.l} className={`reveal reveal-d${i % 4} rounded-lg p-6 border border-[var(--navy)]/8 relative overflow-hidden`} style={{ background: "linear-gradient(160deg,#FFFFFF, #FFF6EE)" }}>
-            <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-5" style={{ background: "rgba(47,97,192,0.12)" }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: s.i }} />
+          <div key={s.l} className={`stat-card reveal reveal-d${i % 4}`}>
+            <div className="stat-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: s.i }} />
             </div>
-            <div className="display text-[34px] md:text-[38px] text-[var(--navy)] leading-none num">{s.n}</div>
-            <div className="mt-2 text-[13px] text-[var(--muted)]">{s.l}</div>
+            <div className="stat-num num">{s.n}</div>
+            <div className="stat-label">{s.l}</div>
           </div>
         ))}
       </div>
