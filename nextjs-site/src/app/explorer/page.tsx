@@ -5,6 +5,7 @@ import Chat from "@/components/Chat";
 import RevealInit from "@/components/RevealInit";
 import PageHero from "@/components/PageHero";
 import VolumeExplorer from "@/components/VolumeExplorer";
+import ChainCube from "@/components/ChainCube";
 
 export const metadata = { title: "Container Volume Explorer · DrayChain", description: "Explore the volume of containers moving through the DrayChain network — per port, across any time window, every TEU anchored on-chain." };
 
@@ -48,32 +49,39 @@ export default function Explorer() {
       </PageHero>
 
       {/* THE EXPLORER */}
-      <section id="chart" className="py-20" style={{ background: "linear-gradient(180deg,#F6F8FB,#FFFFFF)" }}>
-        <div className="max-w-[1280px] mx-auto px-6">
+      <section id="chart" className="grid-bg relative py-20 overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           <VolumeExplorer />
-          <p className="mt-4 text-center text-[12px] text-[var(--muted)]">Hover the chart for exact volumes · switch ports and time windows above · figures are sums of anchored gate events.</p>
+          <p className="mt-4 text-center text-[12px] text-white/45">Hover the chart for exact volumes · switch ports and time windows above · figures are sums of anchored gate events.</p>
         </div>
       </section>
 
-      {/* PORT LEADERBOARD */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[1280px] mx-auto px-6">
+      {/* PORT LEADERBOARD — dark 3D */}
+      <section className="grid-bg relative py-24 text-white overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 relative z-10">
           <div className="max-w-2xl reveal">
-            <div className="text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--red)]">Today by port</div>
-            <h2 className="display text-[34px] md:text-[44px] text-[var(--navy)] leading-[1.05] mt-3">Where the boxes are moving</h2>
+            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-[#8fa8e6]">Today by port</div>
+            <h2 className="display text-[34px] md:text-[44px] leading-[1.05] mt-3">Where the boxes are moving</h2>
+            <p className="mt-3 text-white/60 text-[14.5px]">Each card is the sum of gate events anchored to the chain today — one block per box.</p>
           </div>
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {PORTS.map((p, i) => (
-              <div key={p.name} className={`reveal reveal-d${i % 3} rounded-lg border border-[var(--navy)]/8 p-6`} style={{ background: "linear-gradient(170deg,#FFFFFF,#F4F7FC)" }}>
-                <div className="flex items-center justify-between">
-                  <div className="text-[14px] font-bold text-[var(--navy)]">{p.name}</div>
-                  <span className="text-[12px] font-bold num" style={{ color: p.up ? "#15935F" : "#C0392B" }}>{p.d}</span>
+              <div key={p.name} className={`anat-tag glass-dark rounded-md p-6 relative overflow-hidden reveal reveal-d${i % 3}`} style={{ border: "1px solid rgba(143,168,230,0.25)" }}>
+                <div className="absolute pointer-events-none" style={{ right: -14, top: -20, opacity: 0.85 }}>
+                  <ChainCube size={34} duration={12 + (i % 3) * 3} delay={-i * 2.5} />
                 </div>
-                <div className="display num text-[30px] text-[var(--navy)] mt-3 leading-none">{p.teu} <span className="text-[14px] text-[var(--muted)]">TEU</span></div>
-                <div className="mt-4 h-[6px] rounded-sm overflow-hidden" style={{ background: "rgba(11,45,92,0.08)" }}>
-                  <div className="h-full rounded-sm" style={{ width: `${p.share}%`, background: "linear-gradient(90deg,#2f61c0,#6E8FE0)" }} />
+                <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(300px 140px at 85% 0%,rgba(47,97,192,0.22),transparent 70%)" }} />
+                <div className="relative">
+                  <div className="flex items-center justify-between pr-12">
+                    <div className="text-[14px] font-bold text-white">{p.name}</div>
+                    <span className="text-[12px] font-bold num px-2 py-0.5 rounded" style={{ color: p.up ? "#5fe3a8" : "#ff8a80", background: p.up ? "rgba(22,181,113,0.14)" : "rgba(192,57,43,0.18)" }}>{p.d}</span>
+                  </div>
+                  <div className="display num text-[30px] text-white mt-3 leading-none">{p.teu} <span className="text-[14px] text-white/50">TEU</span></div>
+                  <div className="mt-4 h-[6px] rounded-sm overflow-hidden" style={{ background: "rgba(255,255,255,0.1)" }}>
+                    <div className="h-full rounded-sm" style={{ width: `${p.share}%`, background: "linear-gradient(90deg,#2f61c0,#8fc6ff)", filter: "drop-shadow(0 0 6px rgba(110,143,224,0.9))" }} />
+                  </div>
+                  <div className="mt-2 text-[11.5px] text-white/55 num">{p.share}% of network volume</div>
                 </div>
-                <div className="mt-2 text-[11.5px] text-[var(--muted)] num">{p.share}% of network volume</div>
               </div>
             ))}
           </div>
