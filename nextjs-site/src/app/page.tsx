@@ -11,7 +11,6 @@ import HowSteps from "@/components/HowSteps";
 import WhoUses from "@/components/WhoUses";
 import Typewriter from "@/components/Typewriter";
 import ChainCube from "@/components/ChainCube";
-import VolumeExplorer from "@/components/VolumeExplorer";
 import { asset } from "@/lib/site";
 
 const BRANDS = ["CARGOMAX", "portlink", "NORDFREIGHT", "veritas3pl", "ARC LOGISTICS", "Halo Freight", "ROADWORKS", "Meridian Fleet", "Atlas Carriers", "Northstar Cargo"];
@@ -125,20 +124,6 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-10 text-center reveal"><Link href="/technology" className="inline-flex items-center gap-2 px-7 py-3 rounded text-[14px] font-semibold btn-primary">Explore the technology <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></Link></div>
-        </div>
-      </section>
-
-      {/* VOLUME EXPLORER — interactive container-volume chart */}
-      <section className="py-24" style={{ background: "linear-gradient(180deg,#F6F8FB,#FFFFFF)" }}>
-        <div className="max-w-[1280px] mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto reveal">
-            <div className="text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--red)]">Network explorer</div>
-            <h2 className="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-3">Container volume, by the block</h2>
-            <p className="mt-4 text-[var(--muted)] text-[15px] md:text-[16px] leading-relaxed">Every anchored gate event adds up. Explore the volume of containers moving through the network — per port, across any window.</p>
-          </div>
-          <div className="mt-10">
-            <VolumeExplorer />
-          </div>
         </div>
       </section>
 

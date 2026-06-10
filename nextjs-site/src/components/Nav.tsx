@@ -14,6 +14,7 @@ export default function Nav() {
           <Link href="/technology" className="hover:text-white">Technology</Link>
           <Link href="/solutions" className="hover:text-white">Solutions</Link>
           <Link href="/network" className="hover:text-white">Live Network</Link>
+          <Link href="/explorer" className="hover:text-white">Container Volume</Link>
           <Link href="/estimates" className="hover:text-white">Records Stream</Link>
         </nav>
         <div className="flex items-center gap-2.5">
