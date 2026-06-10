@@ -6,20 +6,20 @@ type Pay = { hash: string; type: string; lane: string; by: string; amt: string; 
 const TYPES = ["All", "Instant payout", "Escrow release", "QuickPay", "Invoice", "Card spend"];
 // Deterministic pool (no Math.random — keeps SSG hydration clean); cycled as "new" payments arrive.
 const POOL: Omit<Pay, "age" | "born">[] = [
-  { hash: "0x7af3…c918", type: "Instant payout", lane: "Los Angeles → Phoenix, AZ", by: "Broker → Carrier", amt: "$740.00" },
-  { hash: "0x1c9e…04b7", type: "Escrow release", lane: "Long Beach → Las Vegas, NV", by: "Shipper → Carrier", amt: "$1,120.00" },
-  { hash: "0x4b20…e6d1", type: "QuickPay", lane: "Oakland → Sacramento, CA", by: "Factor → Owner-op", amt: "$2,310.40" },
-  { hash: "0x9d11…7a02", type: "Invoice", lane: "Seattle → Portland, OR", by: "Carrier → Broker", amt: "$980.00" },
-  { hash: "0x3e8a…b5f9", type: "Card spend", lane: "Pilot #214 · Ontario, CA", by: "Driver wallet", amt: "$182.60" },
-  { hash: "0xc4f2…1d6e", type: "Instant payout", lane: "Houston → San Antonio, TX", by: "Broker → Carrier", amt: "$540.00" },
-  { hash: "0x8b07…93aa", type: "Escrow release", lane: "New York/NJ → Chicago, IL", by: "Shipper → Carrier", amt: "$1,840.00" },
-  { hash: "0x2a55…f0c3", type: "QuickPay", lane: "Savannah → Atlanta, GA", by: "Factor → Carrier", amt: "$760.00" },
-  { hash: "0x6f3d…28e7", type: "Invoice", lane: "Norfolk → Columbus, OH", by: "Carrier → Broker", amt: "$1,380.00" },
-  { hash: "0xe190…6b44", type: "Instant payout", lane: "Miami → Orlando, FL", by: "Broker → Driver", amt: "$570.00" },
-  { hash: "0x5d72…aa31", type: "Escrow release", lane: "Houston → Kansas City, MO", by: "Shipper → Carrier", amt: "$1,640.00" },
-  { hash: "0xab14…07ce", type: "Card spend", lane: "TA #88 · Salt Lake City, UT", by: "Driver wallet", amt: "$96.40" },
-  { hash: "0x3c81…d940", type: "QuickPay", lane: "Oakland → Reno, NV", by: "Factor → Owner-op", amt: "$960.00" },
-  { hash: "0x7e60…1f55", type: "Invoice", lane: "New York/NJ → Indianapolis, IN", by: "Carrier → Broker", amt: "$1,820.00" },
+  { hash: "PAY-84J3C9", type: "Instant payout", lane: "Los Angeles → Phoenix, AZ", by: "Broker → Carrier", amt: "$740.00" },
+  { hash: "PAY-1C9E04", type: "Escrow release", lane: "Long Beach → Las Vegas, NV", by: "Shipper → Carrier", amt: "$1,120.00" },
+  { hash: "PAY-4B20E6", type: "QuickPay", lane: "Oakland → Sacramento, CA", by: "Factor → Owner-op", amt: "$2,310.40" },
+  { hash: "PAY-9D117A", type: "Invoice", lane: "Seattle → Portland, OR", by: "Carrier → Broker", amt: "$980.00" },
+  { hash: "PAY-3E8AB5", type: "Card spend", lane: "Pilot #214 · Ontario, CA", by: "Driver wallet", amt: "$182.60" },
+  { hash: "PAY-C4F21D", type: "Instant payout", lane: "Houston → San Antonio, TX", by: "Broker → Carrier", amt: "$540.00" },
+  { hash: "PAY-8B0793", type: "Escrow release", lane: "New York/NJ → Chicago, IL", by: "Shipper → Carrier", amt: "$1,840.00" },
+  { hash: "PAY-2A55F0", type: "QuickPay", lane: "Savannah → Atlanta, GA", by: "Factor → Carrier", amt: "$760.00" },
+  { hash: "PAY-6F3D28", type: "Invoice", lane: "Norfolk → Columbus, OH", by: "Carrier → Broker", amt: "$1,380.00" },
+  { hash: "PAY-E1906B", type: "Instant payout", lane: "Miami → Orlando, FL", by: "Broker → Driver", amt: "$570.00" },
+  { hash: "PAY-5D72AA", type: "Escrow release", lane: "Houston → Kansas City, MO", by: "Shipper → Carrier", amt: "$1,640.00" },
+  { hash: "PAY-AB1407", type: "Card spend", lane: "TA #88 · Salt Lake City, UT", by: "Driver wallet", amt: "$96.40" },
+  { hash: "PAY-3C81D9", type: "QuickPay", lane: "Oakland → Reno, NV", by: "Factor → Owner-op", amt: "$960.00" },
+  { hash: "PAY-7E601F", type: "Invoice", lane: "New York/NJ → Indianapolis, IN", by: "Carrier → Broker", amt: "$1,820.00" },
 ];
 const SEED: Pay[] = POOL.slice(0, 10).map((r, i) => ({ ...r, age: [12, 31, 44, 68, 120, 150, 210, 264, 318, 380][i], born: 0 }));
 
@@ -46,7 +46,7 @@ export default function LiveSettlements({ compact = false }: { compact?: boolean
   }, [tick, paused, nextIdx, compact]);
 
   const copy = (hash: string) => {
-    try { navigator.clipboard?.writeText(hash.replace("…", "9f2e6b8d04c1a7")); } catch { /* clipboard unavailable */ }
+    try { navigator.clipboard?.writeText(hash); } catch { /* clipboard unavailable */ }
     setCopied(hash);
     setTimeout(() => setCopied(""), 1400);
   };
@@ -68,12 +68,12 @@ export default function LiveSettlements({ compact = false }: { compact?: boolean
       <div className="est-wrap mt-5" style={{ borderRadius: 8 }}>
         <div className="est-scroll">
           <table className="est-table">
-            <thead><tr><th>Tx hash</th><th>Type</th><th>Lane / location</th><th>Parties</th><th>Amount</th><th>Status</th><th>Settled</th></tr></thead>
+            <thead><tr><th>Payment ID</th><th>Type</th><th>Lane / location</th><th>Parties</th><th>Amount</th><th>Status</th><th>Settled</th></tr></thead>
             <tbody>
               {shown.map((r) => (
                 <tr key={`${r.hash}-${r.born}`} className={r.born === 0 ? "" : "lr-in"}>
                   <td>
-                    <span className="est-ref lr-hash" title="Click to copy full hash" onClick={() => copy(r.hash)}>{r.hash}</span>
+                    <span className="est-ref lr-hash" title="Click to copy payment ID" onClick={() => copy(r.hash)}>{r.hash}</span>
                     {copied === r.hash && <span className="ml-2 text-[10.5px] font-bold" style={{ color: "var(--green)" }}>Copied ✓</span>}
                   </td>
                   <td><span className="est-chip" style={{ borderRadius: 4 }}>{r.type}</span></td>

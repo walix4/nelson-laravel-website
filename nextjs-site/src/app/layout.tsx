@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DrayPay · Smart Wallet for Drayage Payments",
-  description: "Secure digital payments for shippers, brokers, and carriers — instant blockchain payments and a digital wallet for drayage, all in one place.",
+  title: "DrayPay · The Financial Hub for Modern Logistics",
+  description: "Manage payments, balances, payouts and transfers across your entire transportation network from a single wallet built for logistics.",
 };
 
 const BASE = process.env.NEXT_PUBLIC_BASE || "";

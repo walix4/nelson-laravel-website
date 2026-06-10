@@ -47,7 +47,7 @@ export default function Footer() {
               <span className="italic font-black text-[24px] tracking-tight leading-none text-white" style={{ fontFamily: "'Roboto', sans-serif" }}>Dray<span className="text-[#00a2e7]">Pay</span></span>
             </span>
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
-              The drayage payments platform powered by blockchain smart contracts. Instant payouts, escrow and automated settlement for shippers, brokers, carriers and drivers.
+              The financial hub for modern logistics. Instant payouts, automated settlement and complete payment visibility for shippers, brokers, carriers and drivers.
             </p>
             <a href="mailto:support@draypay.net" className="mt-2 inline-block text-[13.5px] font-semibold text-[var(--red)] hover:opacity-80">support@draypay.net</a>
           </div>
@@ -69,7 +69,7 @@ export default function Footer() {
 
         <div className="mt-14 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[12.5px] text-white/45">
           <div className="num">© 2026 DrayPay. All rights reserved.</div>
-          <div className="num">Instant payouts · Smart-contract escrow · 99.9% uptime</div>
+          <div className="num">Instant payouts · Automated settlement · 99.9% uptime</div>
         </div>
       </div>
     </footer>

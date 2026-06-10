@@ -5,7 +5,7 @@ type Msg = { who: "bot" | "me"; text: string };
 const reply = (t: string) => {
   const l = t.toLowerCase();
   if (/quote|rate|price|cost|fee|payment|pay/.test(l)) return "You can see the fee and net payout instantly with the calculator at the top — enter the amount, method and settlement speed.";
-  if (/payout|settle|settlement|escrow|coverage|cover|network/.test(l)) return "We settle payments to carriers, brokers and drivers across all 48 states and Canada, with funds held in smart-contract escrow until delivery. What are you paying?";
+  if (/payout|settle|settlement|escrow|coverage|cover|network/.test(l)) return "We settle payments to carriers, brokers and drivers across all 48 states and Canada, with funds reserved at booking and released on delivery. What are you paying?";
   if (/track|status|where|wallet|invoice|quickpay|factoring/.test(l)) return "Your wallet shows every payment, invoice and payout in real time — and QuickPay lets you get paid early with the fee shown up front.";
   if (/sales|human|agent|talk|call/.test(l)) return "Happy to connect you with a specialist. Drop your email and we'll reach out within one business hour.";
   return "Thanks! A payments specialist will follow up shortly. For an instant estimate, use the payment calculator at the top of the page.";

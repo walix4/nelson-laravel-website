@@ -12,17 +12,18 @@ const LINKS = [
 
 export default function Nav() {
   return (
-    <header className="sticky top-0 z-40 border-b" style={{ background: "#0B2D5C", borderColor: "rgba(255,255,255,0.18)" }}>
-      <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-40 border-b" style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "blur(14px) saturate(160%)", WebkitBackdropFilter: "blur(14px) saturate(160%)", borderColor: "rgba(11,45,92,0.08)" }}>
+      <div className="max-w-[1280px] mx-auto px-6 h-[68px] flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
-          <img src={asset("/draypay-d.png?v=1")} alt="" className="h-8 md:h-10 w-auto" />
-          <span className="italic font-black text-[22px] md:text-[26px] tracking-tight leading-none text-white" style={{ fontFamily: "'Roboto', sans-serif" }}>Dray<span className="text-[#00a2e7]">Pay</span></span>
+          <img src={asset("/draypay-d-dark.png?v=1")} alt="" className="h-8 md:h-9 w-auto" />
+          <span className="italic font-black text-[22px] md:text-[24px] tracking-tight leading-none text-[var(--navy)]" style={{ fontFamily: "'Roboto', sans-serif" }}>Dray<span className="text-[#00a2e7]">Pay</span></span>
         </Link>
-        <nav className="hidden lg:flex items-center gap-6 text-[13px] font-medium text-white/85">
-          {LINKS.map((l) => <Link key={l.href} href={l.href} className="hover:text-white">{l.label}</Link>)}
+        <nav className="hidden lg:flex items-center gap-7 text-[13.5px] font-medium text-[var(--navy)]/75">
+          {LINKS.map((l) => <Link key={l.href} href={l.href} className="hover:text-[var(--navy)] transition-colors">{l.label}</Link>)}
         </nav>
-        <div className="flex items-center gap-2.5">
-          <Link href="/wallet" className="btn-primary text-[13px] px-4 py-2 rounded inline-flex items-center gap-1.5"><span className="label">Open Wallet</span></Link>
+        <div className="flex items-center gap-3">
+          <Link href="/payments" className="hidden md:inline-flex text-[13px] font-semibold text-[var(--navy)]/75 hover:text-[var(--navy)] transition-colors">Book Demo</Link>
+          <Link href="/wallet" className="btn-primary text-[13px] px-5 py-2.5 inline-flex items-center gap-1.5"><span className="label">Get Started</span></Link>
         </div>
       </div>
     </header>

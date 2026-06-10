@@ -94,11 +94,7 @@ export default function FeeExplorer() {
   const hourLabel = X_LABELS[range];
 
   return (
-    <div className="relative rounded-lg p-5 md:p-8 reveal reveal-d1 overflow-hidden" style={{ background: "linear-gradient(165deg,#0A1B3F 0%,#071226 60%,#0B2D5C 130%)", border: "1px solid rgba(143,217,245,0.28)" }}>
-      {/* futuristic backdrop: grid + glows */}
-      <div className="absolute inset-0 pointer-events-none opacity-50" style={{ backgroundImage: "linear-gradient(rgba(143,217,245,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(143,217,245,0.06) 1px,transparent 1px)", backgroundSize: "44px 44px", maskImage: "radial-gradient(ellipse at 50% 30%,#000 30%,transparent 80%)", WebkitMaskImage: "radial-gradient(ellipse at 50% 30%,#000 30%,transparent 80%)" }} />
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(700px 280px at 12% 0%,rgba(0,162,231,0.25),transparent 65%),radial-gradient(600px 260px at 92% 100%,rgba(59,184,238,0.16),transparent 65%)" }} />
-
+    <div className="relative rounded-2xl p-5 md:p-8 reveal reveal-d1 overflow-hidden bg-white" style={{ border: "1px solid #E6EDF5", boxShadow: "0 30px 70px -30px rgba(11,45,92,0.18)" }}>
       <div className="relative">
         {/* rail tabs */}
         <div className="flex gap-2 overflow-x-auto no-scrollbar pb-1">
@@ -107,13 +103,13 @@ export default function FeeExplorer() {
             return (
               <button key={p.key} onClick={() => { setRail(p); setHover(null); }}
                 className="flex items-center gap-3 px-4 py-2.5 rounded shrink-0 border transition text-left"
-                style={{ borderColor: on ? "rgba(143,217,245,0.8)" : "rgba(143,217,245,0.22)", background: on ? "linear-gradient(160deg,rgba(0,162,231,0.35),rgba(11,45,92,0.5))" : "rgba(255,255,255,0.04)", filter: on ? "drop-shadow(0 0 14px rgba(0,162,231,0.45))" : "none" }}>
-                <span className="w-8 h-8 rounded flex items-center justify-center shrink-0" style={{ background: "linear-gradient(160deg,#046e9e,#061A38)", border: "1px solid rgba(143,217,245,0.35)" }}>
+                style={{ borderColor: on ? "#00a2e7" : "#E6EDF5", background: on ? "linear-gradient(160deg,rgba(0,162,231,0.1),rgba(0,162,231,0.04))" : "#fff", boxShadow: on ? "0 14px 30px -14px rgba(0,162,231,0.35)" : "none" }}>
+                <span className="w-8 h-8 rounded flex items-center justify-center shrink-0" style={{ background: "linear-gradient(160deg,#0B2D5C,#0670a0)" }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8fd9f5" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d={p.icon} /></svg>
                 </span>
                 <span>
-                  <span className="block text-[13px] font-bold text-white whitespace-nowrap">{p.name}</span>
-                  <span className="block text-[11.5px] font-bold num" style={{ color: d >= 0 ? "#5fe3a8" : "#ff8a80" }}>{d >= 0 ? "↑" : "↓"} {Math.abs(d).toFixed(2)}%</span>
+                  <span className="block text-[13px] font-bold text-[var(--navy)] whitespace-nowrap">{p.name}</span>
+                  <span className="block text-[11.5px] font-bold num" style={{ color: d >= 0 ? "#0E9F6E" : "#D9534F" }}>{d >= 0 ? "↑" : "↓"} {Math.abs(d).toFixed(2)}%</span>
                 </span>
               </button>
             );
@@ -124,16 +120,16 @@ export default function FeeExplorer() {
         <div className="mt-7 flex flex-wrap items-end justify-between gap-4">
           <div>
             <div className="flex items-baseline gap-3">
-              <span className="display num text-[36px] md:text-[46px] leading-none bg-gradient-to-r from-white via-[#cfeefc] to-[#8fd9f5] bg-clip-text text-transparent">{fmt(hover ? vals[hover.i] : vals[N - 1])} <span className="text-[18px] md:text-[20px]" style={{ WebkitTextFillColor: "rgba(255,255,255,0.45)" }}>USD</span></span>
-              <span className="text-[13px] font-bold num px-2 py-1 rounded" style={{ color: delta >= 0 ? "#5fe3a8" : "#ff8a80", background: delta >= 0 ? "rgba(22,181,113,0.16)" : "rgba(192,57,43,0.2)", border: `1px solid ${delta >= 0 ? "rgba(95,227,168,0.35)" : "rgba(255,138,128,0.35)"}` }}>{delta >= 0 ? "+" : ""}{delta.toFixed(2)}%</span>
+              <span className="display num text-[36px] md:text-[46px] leading-none text-[var(--navy)]">{fmt(hover ? vals[hover.i] : vals[N - 1])} <span className="text-[18px] md:text-[20px]" style={{ color: "rgba(11,45,92,0.4)" }}>USD</span></span>
+              <span className="text-[13px] font-bold num px-2 py-1 rounded" style={{ color: delta >= 0 ? "#0E9F6E" : "#D9534F", background: delta >= 0 ? "rgba(14,159,110,0.1)" : "rgba(217,83,79,0.1)", border: `1px solid ${delta >= 0 ? "rgba(14,159,110,0.3)" : "rgba(217,83,79,0.3)"}` }}>{delta >= 0 ? "+" : ""}{delta.toFixed(2)}%</span>
             </div>
-            <div className="mt-2 text-[12.5px] text-white/50 num flex items-center gap-2"><span className="live-dot" />{hover ? `at ${hourLabel[Math.floor((hover.i / (N - 1)) * (hourLabel.length - 1))]}` : `${rail.name} · settled on DrayPay smart contracts · ${range}`}</div>
+            <div className="mt-2 text-[12.5px] text-[var(--muted)] num flex items-center gap-2"><span className="live-dot" />{hover ? `at ${hourLabel[Math.floor((hover.i / (N - 1)) * (hourLabel.length - 1))]}` : `${rail.name} · settled on DrayPay · ${range}`}</div>
           </div>
-          <div className="flex items-center gap-1 rounded p-1" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(143,217,245,0.2)" }}>
+          <div className="flex items-center gap-1 rounded p-1" style={{ background: "#F4F8FC", border: "1px solid #E6EDF5" }}>
             {RANGES.map((r) => (
               <button key={r} onClick={() => { setRange(r); setHover(null); }}
                 className="px-3 py-1.5 rounded text-[12px] font-bold transition"
-                style={r === range ? { background: "linear-gradient(180deg,#00a2e7,#0670a0)", color: "#fff", filter: "drop-shadow(0 0 10px rgba(0,162,231,0.6))" } : { color: "rgba(255,255,255,0.55)" }}>{r}</button>
+                style={r === range ? { background: "linear-gradient(180deg,#00a2e7,#0670a0)", color: "#fff", boxShadow: "0 8px 18px -8px rgba(0,162,231,0.55)" } : { color: "var(--muted)" }}>{r}</button>
             ))}
           </div>
         </div>
@@ -144,7 +140,7 @@ export default function FeeExplorer() {
             onMouseMove={onMove} onMouseLeave={() => setHover(null)}>
             <defs>
               <linearGradient id="payFillD" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#3bb8ee" stopOpacity="0.38" />
+                <stop offset="0%" stopColor="#00a2e7" stopOpacity="0.22" />
                 <stop offset="100%" stopColor="#00a2e7" stopOpacity="0.01" />
               </linearGradient>
               <linearGradient id="payLineD" x1="0" y1="0" x2="1" y2="0">
@@ -156,44 +152,44 @@ export default function FeeExplorer() {
                 <feGaussianBlur stdDeviation="7" />
               </filter>
             </defs>
-            {yTicks.map((t) => <line key={t} x1="0" x2={W} y1={yFor(t)} y2={yFor(t)} stroke="rgba(143,217,245,0.12)" strokeWidth="1" />)}
+            {yTicks.map((t) => <line key={t} x1="0" x2={W} y1={yFor(t)} y2={yFor(t)} stroke="rgba(11,45,92,0.07)" strokeWidth="1" />)}
             <path d={area} fill="url(#payFillD)" />
             {/* glow underlay + crisp line */}
-            <path d={line} fill="none" stroke="#1ba8e8" strokeWidth="7" strokeLinejoin="round" strokeLinecap="round" opacity="0.45" filter="url(#payGlow)" />
+            
             <path d={line} fill="none" stroke="url(#payLineD)" strokeWidth="2.6" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
             {hover && (
               <g>
-                <line x1={hover.x} x2={hover.x} y1={PAD_T - 8} y2={H} stroke="rgba(143,217,245,0.5)" strokeWidth="1" strokeDasharray="4 4" vectorEffect="non-scaling-stroke" />
-                <circle cx={hover.x} cy={hover.y} r="9" fill="rgba(143,217,245,0.25)" />
-                <circle cx={hover.x} cy={hover.y} r="4.5" fill="#8fd9f5" stroke="#071226" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+                <line x1={hover.x} x2={hover.x} y1={PAD_T - 8} y2={H} stroke="rgba(11,45,92,0.3)" strokeWidth="1" strokeDasharray="4 4" vectorEffect="non-scaling-stroke" />
+                <circle cx={hover.x} cy={hover.y} r="9" fill="rgba(0,162,231,0.18)" />
+                <circle cx={hover.x} cy={hover.y} r="4.5" fill="#00a2e7" stroke="#fff" strokeWidth="2" vectorEffect="non-scaling-stroke" />
               </g>
             )}
           </svg>
           {/* y labels */}
           <div className="pointer-events-none absolute inset-y-0 right-0 hidden sm:flex flex-col justify-between py-1 text-right">
-            {[...yTicks].reverse().map((t) => <span key={t} className="text-[10.5px] num text-white/40 px-1 rounded-sm" style={{ background: "rgba(7,18,38,0.7)" }}>{fmt(t)}</span>)}
+            {[...yTicks].reverse().map((t) => <span key={t} className="text-[10.5px] num text-[var(--muted)] px-1 rounded-sm" style={{ background: "rgba(255,255,255,0.85)" }}>{fmt(t)}</span>)}
           </div>
           {/* tooltip */}
           {hover && (
-            <div className="pointer-events-none absolute glass-sky rounded-md px-3 py-2 text-[11px] -translate-x-1/2" style={{ left: `${(hover.x / W) * 100}%`, top: Math.max(0, (hover.y / H) * 100 - 24) + "%" }}>
-              <div className="text-white/60 text-[9px] uppercase tracking-wider whitespace-nowrap">{rail.name}</div>
-              <div className="display text-white num whitespace-nowrap">{fmt(vals[hover.i])}</div>
+            <div className="pointer-events-none absolute bg-white rounded-md px-3 py-2 text-[11px] -translate-x-1/2"  style={{ left: `${(hover.x / W) * 100}%`, top: Math.max(0, (hover.y / H) * 100 - 24) + "%" }}>
+              <div className="text-[var(--muted)] text-[9px] uppercase tracking-wider whitespace-nowrap">{rail.name}</div>
+              <div className="display text-[var(--navy)] num whitespace-nowrap">{fmt(vals[hover.i])}</div>
             </div>
           )}
         </div>
         {/* x labels */}
-        <div className="mt-2 flex justify-between text-[10.5px] num text-white/40 px-0.5">
+        <div className="mt-2 flex justify-between text-[10.5px] num text-[var(--muted)] px-0.5">
           {hourLabel.map((l) => <span key={l}>{l}</span>)}
         </div>
 
         {/* AI insight strip */}
-        <div className="mt-6 flex items-start gap-3 rounded-md px-4 py-3.5" style={{ background: "linear-gradient(90deg,rgba(0,162,231,0.18),rgba(59,184,238,0.07))", border: "1px solid rgba(143,217,245,0.3)" }}>
-          <span className="shrink-0 w-7 h-7 rounded flex items-center justify-center" style={{ background: "linear-gradient(160deg,#00a2e7,#046e9e)", filter: "drop-shadow(0 0 10px rgba(0,162,231,0.7))" }}>
+        <div className="mt-6 flex items-start gap-3 rounded-md px-4 py-3.5" style={{ background: "linear-gradient(90deg,rgba(0,162,231,0.07),rgba(0,162,231,0.02))", border: "1px solid rgba(0,162,231,0.2)" }}>
+          <span className="shrink-0 w-7 h-7 rounded flex items-center justify-center" style={{ background: "linear-gradient(160deg,#00a2e7,#0670a0)", boxShadow: "0 8px 18px -8px rgba(0,162,231,0.55)" }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4L12 2zM19 14l.9 2.6L22 17l-2.1.7L19 20l-.9-2.3L16 17l2.1-.4L19 14zM5 15l.7 2L8 18l-2.3.8L5 21l-.7-2.2L2 18l2.3-1L5 15z" /></svg>
           </span>
           <div>
-            <div className="text-[10px] uppercase tracking-[0.18em] font-bold text-[#8fd9f5]">Payments intelligence</div>
-            <div className="text-[13px] text-white/80 leading-relaxed mt-0.5">{insight}</div>
+            <div className="text-[10px] uppercase tracking-[0.18em] font-bold text-[#0670a0]">Payments intelligence</div>
+            <div className="text-[13px] text-[var(--navy)]/80 leading-relaxed mt-0.5">{insight}</div>
           </div>
         </div>
       </div>
