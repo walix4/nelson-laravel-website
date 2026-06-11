@@ -3,10 +3,11 @@ import Link from "next/link";
 import { asset } from "@/lib/site";
 
 const LINKS = [
+  { label: "Home", href: "/" },
+  { label: "Features", href: "/features" },
   { label: "Wallet", href: "/wallet" },
   { label: "How Payments Work", href: "/payments" },
   { label: "QuickPay", href: "/quickpay" },
-{ label: "Fees", href: "/fees" },
 ];
 
 export default function Nav() {
