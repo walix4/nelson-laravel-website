@@ -46,7 +46,7 @@ export default function Nav() {
         </nav>
         <div className="flex items-center gap-2.5">
           <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5">Sign in</Link>
-          <Link href="/#quote" className="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5"><span className="label">Get instant quote</span></Link>
+          <Link href="/#load-board" className="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5"><span className="label">Load Board</span></Link>
         </div>
       </div>
     </header>
