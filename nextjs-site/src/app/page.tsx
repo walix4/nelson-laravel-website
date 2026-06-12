@@ -193,7 +193,7 @@ export default function Home() {
 
 
       {/* ─── FEATURE CARDS — dark glass ─── */}
-      <section className="py-20 relative overflow-hidden" style={{ background: "linear-gradient(160deg,#060D1A 0%,#0B1A2E 50%,#071424 100%)" }}>
+      <section id="features" className="py-20 relative overflow-hidden" style={{ background: "linear-gradient(160deg,#060D1A 0%,#0B1A2E 50%,#071424 100%)" }}>
         {/* subtle grid pattern */}
         <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "linear-gradient(rgba(0,162,231,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,162,231,0.04) 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
         <div className="max-w-[1280px] mx-auto px-6 relative z-10">
@@ -388,7 +388,7 @@ export default function Home() {
       </section>
 
       {/* ─── KEY BENEFITS (Image #97 style) ─── */}
-      <section className="py-24" style={{ background: "#F3F5F8" }}>
+      <section id="how-it-works" className="py-24" style={{ background: "#F3F5F8" }}>
         <div className="max-w-[1280px] mx-auto px-6">
           <motion.div {...fadeUp} className="text-center mb-14">
             <span className="inline-flex items-center gap-2 rounded-[6px] px-5 py-2 text-[12px] font-bold" style={{ background: "linear-gradient(135deg,#00a2e7,#0565a0)", color: "white", boxShadow: "0 4px 16px rgba(0,162,231,0.35)" }}>
@@ -475,11 +475,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── SERVICES CAROUSEL ─── */}
-      <ServicesCarousel />
+      {/* ─── SERVICES GRID ─── */}
+      <div id="services"><ServicesGrid /></div>
+
+      {/* ─── GET STARTED STEPS ─── */}
+      <GetStartedSteps />
 
       {/* ─── OUR MISSION (Image #96 style) ─── */}
-      <section className="py-24 bg-white">
+      <section id="about" className="py-24 bg-white">
         <div className="max-w-[1280px] mx-auto px-6">
           <div className="grid lg:grid-cols-[1fr_1.2fr] gap-14 items-center">
             {/* Left */}
@@ -790,87 +793,217 @@ export default function Home() {
   );
 }
 
-/* ── Services Carousel ── */
-const SERVICES = [
-  { title: "Instant Driver Payouts",   cat: "Payments",        img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=80" },
-  { title: "Port Operations Finance",  cat: "Drayage",         img: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?w=900&q=80" },
-  { title: "Container Settlement",     cat: "Logistics",       img: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=900&q=80" },
-  { title: "Maersk Fleet Payments",    cat: "Fleet",           img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" },
-  { title: "QuickPay Freight Funding", cat: "Finance",         img: "https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=900&q=80" },
-  { title: "Drayage Load Tracking",    cat: "Operations",      img: "https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?w=900&q=80" },
+/* ── Get Started Steps ── */
+const ONBOARDING_STEPS = [
+  {
+    num: "1",
+    title: "Create your account",
+    desc: "Sign up in minutes. Add your company details and verify your identity to unlock your DrayPay wallet.",
+  },
+  {
+    num: "2",
+    title: "Connect your operation",
+    desc: "Link your fleet, load board, and brokers. Import drivers and set up your payment workflows in one place.",
+  },
+  {
+    num: "3",
+    title: "Pay and get paid instantly",
+    desc: "Send payouts to drivers, settle port fees, and collect freight payments — all from a single dashboard.",
+  },
 ];
 
-function ServicesCarousel() {
-  const [active, setActive] = useState(2);
-  const n = SERVICES.length;
-  const prev = () => setActive(i => (i - 1 + n) % n);
-  const next = () => setActive(i => (i + 1) % n);
-
-  const getStyle = (idx: number): React.CSSProperties => {
-    let offset = idx - active;
-    if (offset > n / 2) offset -= n;
-    if (offset < -n / 2) offset += n;
-    const abs = Math.abs(offset);
-    if (abs > 2) return { display: "none" };
-    const tx = offset * 52;
-    const scale = abs === 0 ? 1 : abs === 1 ? 0.75 : 0.57;
-    const opacity = abs === 0 ? 1 : abs === 1 ? 0.55 : 0.28;
-    const zIndex = abs === 0 ? 10 : abs === 1 ? 6 : 2;
-    return {
-      position: "absolute",
-      left: "50%",
-      top: 0,
-      transform: `translateX(calc(-50% + ${tx}%)) scale(${scale})`,
-      opacity,
-      zIndex,
-      transition: "transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.55s ease",
-      transformOrigin: "bottom center",
-      cursor: abs === 0 ? "default" : "pointer",
-      width: "min(440px, 85vw)",
-    };
-  };
-
+function GetStartedSteps() {
   return (
-    <section className="py-24 overflow-hidden" style={{ background: "#F8FAFC" }}>
-      <div className="max-w-[1280px] mx-auto px-6">
-        <motion.div {...fadeUp} className="text-center mb-16">
+    <section className="py-24 bg-white">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <motion.div {...fadeUp} className="text-center mb-10">
+          <h2 className="display text-[34px] md:text-[52px] text-[var(--navy)] leading-[1.08] mb-6">
+            Get started in 3 steps
+          </h2>
+          <a
+            href="#"
+            style={{
+              display: "inline-block",
+              background: "#0B2D5C",
+              color: "#fff",
+              fontWeight: 600,
+              fontSize: 15,
+              padding: "13px 32px",
+              borderRadius: 999,
+              textDecoration: "none",
+              transition: "background 0.2s",
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "#00a2e7"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "#0B2D5C"; }}
+          >
+            Download DrayPay
+          </a>
+        </motion.div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="mt-10">
+          {ONBOARDING_STEPS.map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.1 }}
+              style={{
+                background: "#EDEEF0",
+                borderRadius: 16,
+                padding: "28px 28px 36px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 14,
+              }}
+            >
+              {/* Circled number */}
+              <div style={{
+                width: 36,
+                height: 36,
+                borderRadius: "50%",
+                border: "1.5px solid #0B2D5C",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#0B2D5C",
+                flexShrink: 0,
+              }}>
+                {step.num}
+              </div>
+              <h3 style={{ fontSize: 20, fontWeight: 700, color: "#0B2D5C", lineHeight: 1.3, margin: 0 }}>{step.title}</h3>
+              <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.65, margin: 0 }}>{step.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Services Grid ── */
+const SERVICE_CARDS = [
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+    ),
+    title: "Instant Driver Payouts",
+    desc: "Pay drivers and owner-operators the moment a load is delivered — no waiting, no checks.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    ),
+    title: "Digital Paperwork",
+    desc: "Replace paper BOLs, invoices, and receipts with digital documents — signed and stored automatically.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    ),
+    title: "QuickPay Freight Funding",
+    desc: "Get paid early on outstanding invoices. Stop waiting 30-90 days for broker payments.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    ),
+    title: "Container Settlement",
+    desc: "Automate port demurrage, per diem, and container fees — reconciled and settled in real time.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    ),
+    title: "Multi-Party Splits",
+    desc: "Automatically split payments between carriers, brokers, and agents on every transaction.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-4"/><path d="m5 7 3 3-3 3"/></svg>
+    ),
+    title: "Send Payments Anywhere",
+    desc: "Wire funds to any bank, port authority, or logistics partner — domestic or international, 24/7.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg>
+    ),
+    title: "Fleet Fuel Cards",
+    desc: "Issue virtual and physical fuel cards to your fleet. Set spending limits per driver or truck.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    ),
+    title: "Real-Time Spend Tracking",
+    desc: "See every transaction across your entire operation as it happens — one dashboard, zero surprises.",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    ),
+    title: "Compliance & Tax Reports",
+    desc: "Automated IFTA, per-diem, and 1099 reporting. Stay audit-ready without the manual work.",
+  },
+];
+
+function ServicesGrid() {
+  return (
+    <section className="py-24" style={{ background: "#F8FAFC" }}>
+      <div className="max-w-[1200px] mx-auto px-6">
+        <motion.div {...fadeUp} className="text-center mb-14">
           <div className="flex items-center justify-center gap-3 mb-5">
             <div style={{ height: 1, width: 48, background: "#CBD5E1" }} />
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "#6B7C93" }}>Our Services</span>
             <div style={{ height: 1, width: 48, background: "#CBD5E1" }} />
           </div>
-          <h2 className="display text-[34px] md:text-[52px] text-[var(--navy)] leading-[1.05]">Everything logistics<br className="hidden md:block" /> payments need</h2>
+          <h2 className="display text-[34px] md:text-[50px] text-[var(--navy)] leading-[1.08]">Everything logistics<br className="hidden md:block" /> payments need</h2>
         </motion.div>
 
-        {/* Carousel track */}
-        <div style={{ position: "relative", height: 640, width: "100%" }}>
-          {SERVICES.map((s, i) => (
-            <div key={i} style={getStyle(i)} onClick={() => { if (i !== active) { const off = ((i - active + n) % n <= n / 2) ? next : prev; off(); } }}>
-              <div style={{ borderRadius: 20, overflow: "hidden", boxShadow: i === active ? "0 32px 64px rgba(11,45,92,0.22), 0 8px 20px rgba(0,0,0,0.1)" : "0 12px 32px rgba(0,0,0,0.12)", width: "100%" }}>
-                <div style={{ height: 560, position: "relative", overflow: "hidden" }}>
-                  <img src={s.img} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", transition: "transform 0.6s ease" }} />
-                </div>
-              </div>
-            </div>
-          ))}
-
-          {/* Prev / Next buttons — centered on card */}
-          <button onClick={prev} style={{ position: "absolute", left: "calc(50% - 220px)", top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: "50%", background: "#0B2D5C", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 8px 24px rgba(11,45,92,0.35)", transition: "background 0.2s, transform 0.2s" }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#00a2e7"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1.08)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "#0B2D5C"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1)"; }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <button onClick={next} style={{ position: "absolute", right: "calc(50% - 220px)", top: "50%", transform: "translateY(-50%)", zIndex: 20, width: 52, height: 52, borderRadius: "50%", background: "#0B2D5C", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 8px 24px rgba(11,45,92,0.35)", transition: "background 0.2s, transform 0.2s" }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = "#00a2e7"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1.08)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = "#0B2D5C"; (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-50%) scale(1)"; }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
-        </div>
-
-        {/* Dot indicators */}
-        <div className="flex justify-center gap-2 mt-5">
-          {SERVICES.map((_, i) => (
-            <button key={i} onClick={() => setActive(i)} style={{ width: i === active ? 24 : 8, height: 8, borderRadius: 4, background: i === active ? "#00a2e7" : "#CBD5E1", border: "none", cursor: "pointer", transition: "all 0.3s ease", padding: 0 }} />
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="md:grid-cols-3 grid-cols-1">
+          {SERVICE_CARDS.map((card, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: (i % 3) * 0.08 }}
+              style={{
+                background: "#EDEEF0",
+                borderRadius: 16,
+                padding: "28px 28px 32px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 12,
+                cursor: "default",
+                transition: "background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease",
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget as HTMLDivElement;
+                el.style.background = "#0B2D5C";
+                el.style.boxShadow = "0 20px 48px rgba(11,45,92,0.22)";
+                el.style.transform = "translateY(-4px)";
+                el.querySelectorAll<HTMLElement>("h3").forEach(h => h.style.color = "#fff");
+                el.querySelectorAll<HTMLElement>("p").forEach(p => p.style.color = "rgba(255,255,255,0.72)");
+                el.querySelectorAll<SVGElement>("svg").forEach(s => s.style.stroke = "#00a2e7");
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget as HTMLDivElement;
+                el.style.background = "#EDEEF0";
+                el.style.boxShadow = "none";
+                el.style.transform = "translateY(0)";
+                el.querySelectorAll<HTMLElement>("h3").forEach(h => h.style.color = "#0B2D5C");
+                el.querySelectorAll<HTMLElement>("p").forEach(p => p.style.color = "#64748B");
+                el.querySelectorAll<SVGElement>("svg").forEach(s => s.style.stroke = "currentColor");
+              }}
+            >
+              <div style={{ color: "#0B2D5C", marginBottom: 4 }}>{card.icon}</div>
+              <h3 style={{ fontSize: 18, fontWeight: 700, color: "#0B2D5C", lineHeight: 1.3, margin: 0 }}>{card.title}</h3>
+              <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.65, margin: 0 }}>{card.desc}</p>
+            </motion.div>
           ))}
         </div>
       </div>
