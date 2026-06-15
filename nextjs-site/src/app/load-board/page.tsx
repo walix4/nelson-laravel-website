@@ -109,17 +109,11 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
             <div className="text-[12px] font-bold text-white truncate">{load.id}</div>
             <div className="text-[10px] text-white/40 mt-0.5">{load.mode}</div>
           </div>
-          {/* Status */}
-          <span
-            className="text-[9px] font-bold px-2 py-1 rounded shrink-0 mt-0.5"
-            style={{
-              background: isHot ? "rgba(251,191,36,0.14)" : "rgba(74,222,128,0.12)",
-              color: isHot ? "#fbbf24" : "#4ade80",
-              border: `1px solid ${isHot ? "rgba(251,191,36,0.28)" : "rgba(74,222,128,0.22)"}`,
-            }}
-          >
-            {isHot ? "High Demand" : "Available"}
-          </span>
+          {/* Rate top-right */}
+          <div className="text-right shrink-0">
+            <div className="text-[8px] uppercase tracking-[0.14em] text-white/30 mb-0.5">Rate</div>
+            <div className="text-[16px] font-extrabold leading-none" style={{ color: "#fc0b05" }}>${load.rate.toLocaleString()}</div>
+          </div>
         </div>
 
         {/* ── Route timeline ── */}
@@ -175,10 +169,16 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
 
         {/* ── Footer ── */}
         <div className="px-3 pb-3 flex items-center justify-between gap-2">
-          <div>
-            <div className="text-[8px] uppercase tracking-[0.14em] text-white/30">Rate</div>
-            <div className="text-[20px] font-extrabold leading-none" style={{ color: "#fc0b05" }}>${load.rate.toLocaleString()}</div>
-          </div>
+          <span
+            className="text-[9px] font-bold px-2 py-1 rounded"
+            style={{
+              background: isHot ? "rgba(251,191,36,0.14)" : "rgba(74,222,128,0.12)",
+              color: isHot ? "#fbbf24" : "#4ade80",
+              border: `1px solid ${isHot ? "rgba(251,191,36,0.28)" : "rgba(74,222,128,0.22)"}`,
+            }}
+          >
+            {isHot ? "High Demand" : "Available"}
+          </span>
           <div
             className="px-3 py-1.5 rounded text-[11px] font-bold text-white/80 group-hover:text-white group-hover:border-white/30 transition"
             style={{ border: "1px solid rgba(255,255,255,0.14)", background: "rgba(255,255,255,0.05)" }}
