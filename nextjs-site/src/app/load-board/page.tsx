@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -86,10 +86,43 @@ function SignInModal({ onClose }: { onClose: () => void }) {
   );
 }
 
+const TYPE_ICON: Record<string, { bg: string; icon: React.ReactNode }> = {
+  dry: {
+    bg: "radial-gradient(circle, #fc0b05 30%, #facc15 70%, transparent 100%)",
+    icon: <div className="w-6 h-6 rounded-full" style={{ background: "radial-gradient(circle, #fc0b05 30%, #facc15 70%, transparent 100%)", boxShadow: "0 0 6px 2px rgba(250,204,21,0.5)" }} />,
+  },
+  cool: {
+    bg: "radial-gradient(circle, #38bdf8 30%, #7dd3fc 70%, transparent 100%)",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 0 4px #38bdf8)" }}>
+        <line x1="12" y1="2" x2="12" y2="22"/><path d="M17 7l-5-5-5 5"/><path d="M17 17l-5 5-5-5"/>
+        <line x1="2" y1="12" x2="22" y2="12"/><path d="M7 7l-5 5 5 5"/><path d="M17 7l5 5-5 5"/>
+      </svg>
+    ),
+  },
+  flat: {
+    bg: "",
+    icon: (
+      <svg width="22" height="18" viewBox="0 0 24 18" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 0 4px #f97316)" }}>
+        <rect x="1" y="5" width="18" height="8" rx="1"/><path d="M19 9h3l1 4H19"/><circle cx="6" cy="16" r="2"/><circle cx="16" cy="16" r="2"/>
+      </svg>
+    ),
+  },
+  ow: {
+    bg: "",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ filter: "drop-shadow(0 0 4px #a78bfa)" }}>
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+      </svg>
+    ),
+  },
+};
+
 /* ─── Single card ───────────────────────────────────────────────────── */
 function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; onClick: () => void }) {
   const isHot = load.status === "hot";
   const num = String(idx + 1).padStart(2, "0");
+  const typeIcon = TYPE_ICON[load.type] ?? TYPE_ICON.dry;
   return (
     <button
       onClick={onClick}
@@ -107,9 +140,9 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
         <div className="px-4 pt-4 pb-3 flex items-start gap-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
           {/* Number box — mini card style */}
           <div className="shrink-0 rounded-lg flex flex-col items-center justify-between px-2.5 py-2" style={{ background: "rgba(255,255,255,0.10)", minWidth: "44px" }}>
-            {/* Sun icon: yellow ring + red dot */}
-            <div className="relative flex items-center justify-center">
-              <div className="w-6 h-6 rounded-full" style={{ background: "radial-gradient(circle, #fc0b05 30%, #facc15 70%, transparent 100%)", boxShadow: "0 0 6px 2px rgba(250,204,21,0.5)" }} />
+            {/* Type icon */}
+            <div className="flex items-center justify-center h-6">
+              {typeIcon.icon}
             </div>
             {/* Number */}
             <span className="display num text-[17px] font-extrabold leading-none mt-1.5 text-white">{num}</span>
