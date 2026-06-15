@@ -277,10 +277,6 @@ export default function LoadBoardPage() {
   const [showSignIn, setShowSignIn]     = useState(false);
   const [activeFilter, setActiveFilter] = useState("all");
   const [viewMode, setViewMode]         = useState<"list" | "map">("list");
-  const [origin, setOrigin]             = useState("");
-  const [destination, setDestination]   = useState("");
-  const [dateRange, setDateRange]       = useState("");
-  const [equipment, setEquipment]       = useState("all");
 
   const filtered = LOADS.filter(l => activeFilter === "all" || l.type === activeFilter);
 
@@ -289,93 +285,54 @@ export default function LoadBoardPage() {
       <Nav />
       {showSignIn && <BookingDialog onClose={() => setShowSignIn(false)} />}
 
-      {/* ── FIND LOADS BANNER ── */}
-      <section style={{ background: "#08163C", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-        <div className="max-w-[1400px] mx-auto px-6 py-5">
-          <div className="flex items-center gap-5">
+      {/* ── HERO ── */}
+      <section className="relative overflow-hidden" style={{ background: "#08192b", minHeight: "420px" }}>
+        {/* Radial glow — right side */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(900px 700px at 75% 50%, rgba(6,20,58,0.95), transparent 70%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(600px 500px at 20% 60%, rgba(252,11,5,0.06), transparent 60%)" }} />
 
-            {/* Title */}
-            <span className="text-white font-bold text-[17px] shrink-0">Find Loads</span>
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-20 md:py-28">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 rounded-md px-3.5 py-1.5 text-[11px] font-semibold mb-7"
+            style={{ background: "rgba(252,11,5,0.13)", border: "1px solid rgba(252,11,5,0.32)" }}>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#fc0b05] inline-block" />
+            <span className="text-white">Live Load Board</span>
+          </div>
 
-            {/* Single unified input bar */}
-            <div className="flex flex-1 rounded-xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.13)", background: "rgba(255,255,255,0.04)" }}>
+          {/* Headline */}
+          <h1 className="display font-black leading-[1.02] text-[56px] md:text-[76px] lg:text-[88px] max-w-3xl">
+            <span className="text-white">Find loads.</span><br />
+            <span style={{ color: "#fc0b05" }}>Get paid in 48 hours.</span>
+          </h1>
 
-              {/* ORIGIN */}
-              <div className="flex-1 px-4 py-2.5 min-w-0">
-                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Origin</div>
-                <input value={origin} onChange={e => setOrigin(e.target.value)}
-                  placeholder="City, State, ZIP"
-                  className="w-full text-[13px] text-white placeholder-white/30 bg-transparent focus:outline-none" />
-              </div>
-              <div style={{ width:"1px", background:"rgba(255,255,255,0.09)", flexShrink:0 }} />
+          {/* Sub */}
+          <p className="mt-6 text-white/55 text-[15px] md:text-[17px] max-w-[520px] leading-relaxed">
+            Hundreds of verified drayage jobs from US ports, updated in real time. Browse free — sign up to claim loads and get paid within 48 hours of delivery.
+          </p>
 
-              {/* RADIUS */}
-              <div className="px-4 py-2.5 shrink-0">
-                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Radius</div>
-                <select className="text-[13px] text-white bg-transparent focus:outline-none cursor-pointer" style={{ colorScheme:"dark" }}>
-                  <option>+100 mi</option><option>+50 mi</option><option>+200 mi</option><option>+300 mi</option>
-                </select>
-              </div>
-              <div className="flex items-center px-2 text-white/25 shrink-0">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              </div>
-
-              {/* DESTINATION */}
-              <div className="flex-1 px-4 py-2.5 min-w-0">
-                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Destination</div>
-                <input value={destination} onChange={e => setDestination(e.target.value)}
-                  placeholder="City, State, ZIP"
-                  className="w-full text-[13px] text-white placeholder-white/30 bg-transparent focus:outline-none" />
-              </div>
-              <div style={{ width:"1px", background:"rgba(255,255,255,0.09)", flexShrink:0 }} />
-
-              {/* RADIUS */}
-              <div className="px-4 py-2.5 shrink-0">
-                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Radius</div>
-                <select className="text-[13px] text-white bg-transparent focus:outline-none cursor-pointer" style={{ colorScheme:"dark" }}>
-                  <option>+100 mi</option><option>+50 mi</option><option>+200 mi</option><option>+300 mi</option>
-                </select>
-              </div>
-              <div style={{ width:"1px", background:"rgba(255,255,255,0.09)", flexShrink:0 }} />
-
-              {/* EQUIPMENT TYPE */}
-              <div className="flex-1 px-4 py-2.5 min-w-[140px]">
-                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Equipment Type</div>
-                <select value={equipment} onChange={e => setEquipment(e.target.value)}
-                  className="w-full text-[13px] text-white bg-transparent focus:outline-none cursor-pointer" style={{ colorScheme:"dark" }}>
-                  <option value="all">All Equipment</option>
-                  <option value="dry">Dry Van</option>
-                  <option value="cool">Reefer / Cool</option>
-                  <option value="flat">Flatbed</option>
-                  <option value="ow">Overweight</option>
-                </select>
-              </div>
-              <div style={{ width:"1px", background:"rgba(255,255,255,0.09)", flexShrink:0 }} />
-
-              {/* JOB TYPE */}
-              <div className="flex-1 px-4 py-2.5 min-w-[120px]">
-                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Job Type</div>
-                <select className="w-full text-[13px] text-white bg-transparent focus:outline-none cursor-pointer" style={{ colorScheme:"dark" }}>
-                  <option>All Jobs</option>
-                  <option>Drayage</option>
-                  <option>Intermodal</option>
-                  <option>Port to Port</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Search */}
-            <button onClick={() => setActiveFilter(equipment !== "all" ? equipment : "all")}
-              className="shrink-0 px-7 py-3.5 rounded-xl text-[14px] font-bold text-white transition hover:opacity-90"
-              style={{ background: "#fc0b05" }}>
-              Search
+          {/* CTAs */}
+          <div className="mt-9 flex flex-wrap items-center gap-4">
+            <button
+              onClick={() => { const el = document.getElementById("live-jobs"); el?.scrollIntoView({ behavior: "smooth" }); }}
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-[14px] font-bold text-white transition hover:opacity-90"
+              style={{ background: "#fc0b05" }}
+            >
+              Browse Jobs
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <button
+              onClick={() => setShowSignIn(true)}
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-[14px] font-bold text-white transition hover:bg-white/10"
+              style={{ border: "1px solid rgba(255,255,255,0.22)" }}
+            >
+              Sign Up Free
             </button>
           </div>
         </div>
       </section>
 
       {/* ── LIVE JOBS ── */}
-      <section className="min-h-screen py-10" style={{ background: "#08192b" }}>
+      <section id="live-jobs" className="min-h-screen py-10" style={{ background: "#08192b" }}>
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(800px 600px at 80% 20%,rgba(252,11,5,0.06),transparent 60%)" }} />
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-6">
