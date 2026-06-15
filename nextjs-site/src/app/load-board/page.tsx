@@ -91,12 +91,13 @@ function LoadCard({ load, onClick }: { load: typeof LOADS[0]; onClick: () => voi
         borderRadius: "10px",
         backdropFilter: "blur(8px)",
         WebkitBackdropFilter: "blur(8px)",
+        aspectRatio: "1 / 1",
       }}
     >
       {/* Red top accent line */}
       <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[10px] opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: "#fc0b05" }} />
 
-      <div className="p-5 flex flex-col gap-4">
+      <div className="p-5 h-full flex flex-col justify-between gap-0">
 
         {/* Row 1 — ID + status */}
         <div className="flex items-center justify-between">
