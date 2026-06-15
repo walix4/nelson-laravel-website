@@ -57,7 +57,7 @@ export default function Nav() {
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-1 text-[13px]">
           <Link
-            href="/#load-board"
+            href="/load-board"
             className="px-4 py-1.5 rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition"
           >
             Load Board
@@ -159,7 +159,7 @@ export default function Nav() {
             ))}
           </div>
           <div className="pt-3">
-            <Link href="/#load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
+            <Link href="/load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
               Get Started →
             </Link>
           </div>

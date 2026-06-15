@@ -9,7 +9,7 @@ const FOOTER_LINKS = [
     { label: "All Services", href: "/services" },
   ]},
   { title: "Platform", links: [
-    { label: "Load Board", href: "/#load-board" },
+    { label: "Load Board", href: "/load-board" },
     { label: "Rate Map", href: "/rate-map" },
     { label: "PortJob", href: "/estimates" },
     { label: "Tools", href: "/tools" },
