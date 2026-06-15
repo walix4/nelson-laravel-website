@@ -56,21 +56,18 @@ export default function Nav() {
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-1 text-[13px]">
-          {/* Home */}
           <Link href="/" className={linkCls}>Home</Link>
-
-          {/* Load Board button — right after Home */}
           <Link
             href="/#load-board"
             className="px-4 py-1.5 rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition"
           >
             Load Board
           </Link>
-
-          {/* Rest of nav links */}
-          {NAV_LINKS.filter((l) => l.label !== "Home").map((l) => (
-            <Link key={l.label} href={l.href} className={linkCls}>{l.label}</Link>
-          ))}
+          <Link href="/shipper" className={linkCls}>Shippers</Link>
+          <Link href="/broker" className={linkCls}>Broker</Link>
+          <Link href="/carriers" className={linkCls}>Carriers</Link>
+          <Link href="/#pricing" className={linkCls}>Pricing</Link>
+          <Link href="/about" className={linkCls}>About Us</Link>
 
           {/* Services dropdown */}
           <div
