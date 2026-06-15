@@ -97,18 +97,22 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
 
         {/* ── Header strip ── */}
         <div className="px-4 pt-4 pb-3 flex items-start gap-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-          {/* Number badge */}
-          <div className="shrink-0 flex flex-col items-center">
-            <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ background: "rgba(252,11,5,0.18)", border: "1px solid rgba(252,11,5,0.4)" }}>
-              <span className="w-2 h-2 rounded-full" style={{ background: "#fc0b05" }} />
+          {/* Number box — mini card style */}
+          <div className="shrink-0 rounded-lg flex flex-col items-center justify-between px-2.5 py-2" style={{ background: "rgba(255,255,255,0.10)", minWidth: "44px" }}>
+            {/* Sun icon: yellow ring + red dot */}
+            <div className="relative flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full" style={{ background: "radial-gradient(circle, #fc0b05 30%, #facc15 70%, transparent 100%)", boxShadow: "0 0 6px 2px rgba(250,204,21,0.5)" }} />
             </div>
-            <span className="display num text-[18px] font-extrabold text-white/80 leading-none mt-1">{num}</span>
+            {/* Number */}
+            <span className="display num text-[17px] font-extrabold leading-none mt-1.5 text-white">{num}</span>
           </div>
+
           {/* ID + mode */}
           <div className="flex-1 min-w-0 pt-0.5">
             <div className="text-[12px] font-bold text-white truncate">{load.id}</div>
-            <div className="text-[10px] text-white/40 mt-0.5">{load.mode}</div>
+            <div className="text-[11px] mt-0.5" style={{ color: "#fc0b05" }}>{load.mode}</div>
           </div>
+
           {/* Rate top-right */}
           <div className="text-right shrink-0">
             <div className="text-[8px] uppercase tracking-[0.14em] text-white/30 mb-0.5">Rate</div>
