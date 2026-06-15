@@ -187,7 +187,7 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
             className="px-3 py-1.5 rounded text-[11px] font-bold text-white/80 group-hover:text-white group-hover:border-white/30 transition"
             style={{ border: "1px solid rgba(255,255,255,0.14)", background: "rgba(255,255,255,0.05)" }}
           >
-            Claim Load
+            Get Job
           </div>
         </div>
 
