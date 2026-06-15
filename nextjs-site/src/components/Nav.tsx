@@ -56,13 +56,13 @@ export default function Nav() {
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-1 text-[13px]">
-          <Link href="/" className={linkCls}>Home</Link>
           <Link
             href="/#load-board"
             className="px-4 py-1.5 rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition"
           >
             Load Board
           </Link>
+          <Link href="/" className={linkCls}>Home</Link>
           <Link href="/shipper" className={linkCls}>Shippers</Link>
           <Link href="/broker" className={linkCls}>Broker</Link>
           <Link href="/carriers" className={linkCls}>Carriers</Link>
