@@ -290,58 +290,59 @@ export default function LoadBoardPage() {
       {showSignIn && <BookingDialog onClose={() => setShowSignIn(false)} />}
 
       {/* ── FIND LOADS BANNER ── */}
-      <section style={{ background: "#06143A", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-        <div className="max-w-[1400px] mx-auto px-6 py-4">
-          <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+      <section style={{ background: "#08163C", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+        <div className="max-w-[1400px] mx-auto px-6 py-5">
+          <div className="flex items-center gap-5">
 
             {/* Title */}
             <span className="text-white font-bold text-[17px] shrink-0">Find Loads</span>
 
-            {/* Fields row */}
-            <div className="flex flex-1 flex-wrap lg:flex-nowrap gap-2">
+            {/* Single unified input bar */}
+            <div className="flex flex-1 rounded-xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.13)", background: "rgba(255,255,255,0.04)" }}>
 
-              {/* Origin + radius */}
-              <div className="flex flex-1 min-w-[160px] rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.14)" }}>
-                <div className="flex-1">
-                  <div className="text-[9px] uppercase tracking-[0.14em] text-white/40 font-semibold px-3 pt-2">Origin</div>
-                  <input value={origin} onChange={e => setOrigin(e.target.value)}
-                    placeholder="City, State, ZIP"
-                    className="w-full text-[13px] px-3 pb-2 text-white placeholder-white/30 bg-transparent focus:outline-none" />
-                </div>
-                <div style={{ borderLeft: "1px solid rgba(255,255,255,0.10)" }}>
-                  <div className="text-[9px] uppercase tracking-[0.14em] text-white/40 font-semibold px-3 pt-2">Radius</div>
-                  <select className="text-[13px] px-3 pb-2 text-white bg-transparent focus:outline-none cursor-pointer appearance-none pr-6" style={{ colorScheme: "dark" }}>
-                    <option>+100 mi</option><option>+50 mi</option><option>+200 mi</option><option>+300 mi</option>
-                  </select>
-                </div>
+              {/* ORIGIN */}
+              <div className="flex-1 px-4 py-2.5 min-w-0">
+                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Origin</div>
+                <input value={origin} onChange={e => setOrigin(e.target.value)}
+                  placeholder="City, State, ZIP"
+                  className="w-full text-[13px] text-white placeholder-white/30 bg-transparent focus:outline-none" />
+              </div>
+              <div style={{ width:"1px", background:"rgba(255,255,255,0.09)", flexShrink:0 }} />
+
+              {/* RADIUS */}
+              <div className="px-4 py-2.5 shrink-0">
+                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Radius</div>
+                <select className="text-[13px] text-white bg-transparent focus:outline-none cursor-pointer" style={{ colorScheme:"dark" }}>
+                  <option>+100 mi</option><option>+50 mi</option><option>+200 mi</option><option>+300 mi</option>
+                </select>
+              </div>
+              <div className="flex items-center px-2 text-white/25 shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </div>
 
-              {/* Arrow */}
-              <div className="hidden lg:flex items-center text-white/30 shrink-0">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              {/* DESTINATION */}
+              <div className="flex-1 px-4 py-2.5 min-w-0">
+                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Destination</div>
+                <input value={destination} onChange={e => setDestination(e.target.value)}
+                  placeholder="City, State, ZIP"
+                  className="w-full text-[13px] text-white placeholder-white/30 bg-transparent focus:outline-none" />
               </div>
+              <div style={{ width:"1px", background:"rgba(255,255,255,0.09)", flexShrink:0 }} />
 
-              {/* Destination + radius */}
-              <div className="flex flex-1 min-w-[160px] rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.14)" }}>
-                <div className="flex-1">
-                  <div className="text-[9px] uppercase tracking-[0.14em] text-white/40 font-semibold px-3 pt-2">Destination</div>
-                  <input value={destination} onChange={e => setDestination(e.target.value)}
-                    placeholder="City, State, ZIP"
-                    className="w-full text-[13px] px-3 pb-2 text-white placeholder-white/30 bg-transparent focus:outline-none" />
-                </div>
-                <div style={{ borderLeft: "1px solid rgba(255,255,255,0.10)" }}>
-                  <div className="text-[9px] uppercase tracking-[0.14em] text-white/40 font-semibold px-3 pt-2">Radius</div>
-                  <select className="text-[13px] px-3 pb-2 text-white bg-transparent focus:outline-none cursor-pointer appearance-none pr-6" style={{ colorScheme: "dark" }}>
-                    <option>+100 mi</option><option>+50 mi</option><option>+200 mi</option><option>+300 mi</option>
-                  </select>
-                </div>
+              {/* RADIUS */}
+              <div className="px-4 py-2.5 shrink-0">
+                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Radius</div>
+                <select className="text-[13px] text-white bg-transparent focus:outline-none cursor-pointer" style={{ colorScheme:"dark" }}>
+                  <option>+100 mi</option><option>+50 mi</option><option>+200 mi</option><option>+300 mi</option>
+                </select>
               </div>
+              <div style={{ width:"1px", background:"rgba(255,255,255,0.09)", flexShrink:0 }} />
 
-              {/* Equipment Type */}
-              <div className="flex-1 min-w-[140px] rounded-lg" style={{ border: "1px solid rgba(255,255,255,0.14)" }}>
-                <div className="text-[9px] uppercase tracking-[0.14em] text-white/40 font-semibold px-3 pt-2">Equipment Type</div>
+              {/* EQUIPMENT TYPE */}
+              <div className="flex-1 px-4 py-2.5 min-w-[140px]">
+                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Equipment Type</div>
                 <select value={equipment} onChange={e => setEquipment(e.target.value)}
-                  className="w-full text-[13px] px-3 pb-2 text-white bg-transparent focus:outline-none cursor-pointer" style={{ colorScheme: "dark" }}>
+                  className="w-full text-[13px] text-white bg-transparent focus:outline-none cursor-pointer" style={{ colorScheme:"dark" }}>
                   <option value="all">All Equipment</option>
                   <option value="dry">Dry Van</option>
                   <option value="cool">Reefer / Cool</option>
@@ -349,11 +350,12 @@ export default function LoadBoardPage() {
                   <option value="ow">Overweight</option>
                 </select>
               </div>
+              <div style={{ width:"1px", background:"rgba(255,255,255,0.09)", flexShrink:0 }} />
 
-              {/* Job Type */}
-              <div className="flex-1 min-w-[130px] rounded-lg" style={{ border: "1px solid rgba(255,255,255,0.14)" }}>
-                <div className="text-[9px] uppercase tracking-[0.14em] text-white/40 font-semibold px-3 pt-2">Job Type</div>
-                <select className="w-full text-[13px] px-3 pb-2 text-white bg-transparent focus:outline-none cursor-pointer" style={{ colorScheme: "dark" }}>
+              {/* JOB TYPE */}
+              <div className="flex-1 px-4 py-2.5 min-w-[120px]">
+                <div className="text-[9px] uppercase tracking-[0.16em] font-bold text-white/35 mb-1">Job Type</div>
+                <select className="w-full text-[13px] text-white bg-transparent focus:outline-none cursor-pointer" style={{ colorScheme:"dark" }}>
                   <option>All Jobs</option>
                   <option>Drayage</option>
                   <option>Intermodal</option>
@@ -362,12 +364,10 @@ export default function LoadBoardPage() {
               </div>
             </div>
 
-            {/* Search button */}
-            <button
-              onClick={() => setActiveFilter(equipment !== "all" ? equipment : "all")}
-              className="shrink-0 px-8 py-3 rounded-lg text-[14px] font-bold text-white transition hover:opacity-90"
-              style={{ background: "#fc0b05" }}
-            >
+            {/* Search */}
+            <button onClick={() => setActiveFilter(equipment !== "all" ? equipment : "all")}
+              className="shrink-0 px-7 py-3.5 rounded-xl text-[14px] font-bold text-white transition hover:opacity-90"
+              style={{ background: "#fc0b05" }}>
               Search
             </button>
           </div>
@@ -375,7 +375,7 @@ export default function LoadBoardPage() {
       </section>
 
       {/* ── LIVE JOBS ── */}
-      <section className="min-h-screen py-10" style={{ background: "linear-gradient(180deg,#06143A 0%,#08192b 100%)" }}>
+      <section className="min-h-screen py-10" style={{ background: "#08192b" }}>
         <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(800px 600px at 80% 20%,rgba(252,11,5,0.06),transparent 60%)" }} />
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-6">
