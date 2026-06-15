@@ -23,14 +23,13 @@ const COLS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "#" },
-      { label: "Blog", href: "#" },
-      { label: "FAQ", href: "#" },
-      { label: "Contact", href: "#" },
-      { label: "Support", href: "#" },
-      { label: "Request access", href: "#" },
+      { label: "About", href: "/about" },
+      { label: "Blog", href: "/blog" },
+      { label: "Support", href: "/support" },
+      { label: "Data quality", href: "/data-quality" },
+      { label: "Route toll grade", href: "/toll-grade" },
+      { label: "Request access", href: "/pricing" },
       { label: "Privacy policy", href: "#" },
-      { label: "Data quality", href: "#" },
     ],
   },
 ];

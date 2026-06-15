@@ -12,8 +12,8 @@ export default function Nav() {
           <img src={asset("/draytoll-logo.png")} alt="DrayToll" className="h-8 md:h-9 w-auto" />
         </Link>
         <nav className="hidden lg:flex items-center gap-5 text-[13px] font-medium text-white/85">
-          <Link href="/tools" className="hover:text-white">Route toll grade</Link>
-          <Link href="/pricing" className="hover:text-white">Data quality</Link>
+          <Link href="/toll-grade" className="hover:text-white">Route toll grade</Link>
+          <Link href="/data-quality" className="hover:text-white">Data quality</Link>
           <div className={`mega-wrap ${open ? "open" : ""}`}>
             <button className="hover:text-white inline-flex items-center gap-1.5" onClick={() => setOpen((o) => !o)}>
               Solutions
@@ -37,10 +37,9 @@ export default function Nav() {
             </div>
           </div>
           <Link href="/pricing" className="hover:text-white">API pricing</Link>
-          <Link href="#" className="hover:text-white">Blog</Link>
-          <Link href="/pricing" className="hover:text-white">FAQ</Link>
-          <Link href="#" className="hover:text-white">About</Link>
-          <Link href="#" className="hover:text-white">Support</Link>
+          <Link href="/blog" className="hover:text-white">Blog</Link>
+          <Link href="/about" className="hover:text-white">About</Link>
+          <Link href="/support" className="hover:text-white">Support</Link>
         </nav>
         <div className="flex items-center gap-2.5">
           <Link href="/pricing" className="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5"><span className="label">Get API Key</span></Link>
