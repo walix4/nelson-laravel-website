@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import { asset } from "@/lib/site";
 
 const NAV_LINKS = [
@@ -11,7 +10,6 @@ const NAV_LINKS = [
   { label: "Carriers", href: "/carriers" },
   { label: "Pricing", href: "/#pricing" },
   { label: "About Us", href: "/about" },
-  { label: "PortJob", href: "/#load-board" },
 ];
 
 const SERVICES_ITEMS = [
@@ -41,26 +39,11 @@ const SERVICES_ITEMS = [
   },
 ];
 
+const linkCls = "px-3 py-1.5 text-[13px] font-medium text-white/80 hover:text-white transition-colors";
+
 export default function Nav() {
-  const pathname = usePathname();
   const [svcOpen, setSvcOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    const path = href.split("#")[0];
-    return path && pathname === path;
-  };
-
-  const linkClass = (href: string) => {
-    const active = isActive(href);
-    return [
-      "px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all",
-      active
-        ? "text-white font-semibold"
-        : "text-white/80 hover:text-white hover:bg-white/8",
-    ].join(" ");
-  };
 
   return (
     <header className="sticky top-0 z-40 border-b" style={{ background: "#08192b", borderColor: "rgba(255,255,255,0.12)" }}>
@@ -72,40 +55,27 @@ export default function Nav() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-0.5 text-[13px]">
-          {NAV_LINKS.map((l) => {
-            const active = isActive(l.href);
-            return (
-              <Link
-                key={l.label}
-                href={l.href}
-                className={[
-                  "px-3 py-1.5 rounded-lg font-medium transition-all text-[13px]",
-                  active
-                    ? "text-white"
-                    : "text-white/80 hover:text-white hover:bg-white/8",
-                ].join(" ")}
-                style={active ? { background: "#fc0b05" } : undefined}
-              >
-                {l.label}
-              </Link>
-            );
-          })}
+        <nav className="hidden lg:flex items-center gap-1 text-[13px]">
+          {NAV_LINKS.map((l) => (
+            <Link key={l.label} href={l.href} className={linkCls}>{l.label}</Link>
+          ))}
+
+          {/* Load Board button */}
+          <Link
+            href="/#load-board"
+            className="ml-1 px-4 py-1.5 rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition"
+          >
+            Load Board
+          </Link>
 
           {/* Services dropdown */}
           <div
-            className="relative ml-0.5"
+            className="relative"
             onMouseEnter={() => setSvcOpen(true)}
             onMouseLeave={() => setSvcOpen(false)}
           >
             <button
-              className={[
-                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium transition-all text-[13px]",
-                pathname === "/services"
-                  ? "text-white"
-                  : "text-white/80 hover:text-white hover:bg-white/8",
-              ].join(" ")}
-              style={pathname === "/services" ? { background: "#fc0b05" } : undefined}
+              className={`${linkCls} flex items-center gap-1.5`}
               onClick={() => setSvcOpen((o) => !o)}
             >
               Services
@@ -119,10 +89,7 @@ export default function Nav() {
             </button>
 
             {svcOpen && (
-              <div
-                className="absolute top-full left-0 mt-2 rounded-xl shadow-2xl bg-white border border-black/8 py-3 w-72"
-                style={{ zIndex: 50 }}
-              >
+              <div className="absolute top-full left-0 mt-2 rounded-xl shadow-2xl bg-white border border-black/8 py-3 w-72" style={{ zIndex: 50 }}>
                 {SERVICES_ITEMS.map((s) => (
                   <Link
                     key={s.label}
@@ -177,20 +144,11 @@ export default function Nav() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="lg:hidden border-t border-white/10 px-6 py-4 space-y-1" style={{ background: "#08192b" }}>
-          {NAV_LINKS.map((l) => {
-            const active = isActive(l.href);
-            return (
-              <Link
-                key={l.label}
-                href={l.href}
-                className="block py-2.5 px-3 rounded-lg text-[14px] font-medium transition"
-                style={active ? { background: "#fc0b05", color: "#fff" } : { color: "rgba(255,255,255,0.8)" }}
-                onClick={() => setMobileOpen(false)}
-              >
-                {l.label}
-              </Link>
-            );
-          })}
+          {NAV_LINKS.map((l) => (
+            <Link key={l.label} href={l.href} className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
+              {l.label}
+            </Link>
+          ))}
           <div className="pt-1 border-t border-white/10">
             <div className="text-[11px] uppercase tracking-[0.18em] text-white/40 mb-2 pt-2">Services</div>
             {SERVICES_ITEMS.map((s) => (
