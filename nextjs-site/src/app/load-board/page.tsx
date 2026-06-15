@@ -79,74 +79,114 @@ function SignInModal({ onClose }: { onClose: () => void }) {
 }
 
 /* ─── Single card ───────────────────────────────────────────────────── */
-function LoadCard({ load, onClick }: { load: typeof LOADS[0]; onClick: () => void }) {
+function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; onClick: () => void }) {
   const isHot = load.status === "hot";
+  const num = String(idx + 1).padStart(2, "0");
   return (
     <button
       onClick={onClick}
-      className="relative text-left w-full group transition-all duration-200 hover:-translate-y-0.5"
+      className="relative text-left w-full group transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl overflow-hidden"
       style={{
-        background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
+        background: "#0d1f3c",
         border: "1px solid rgba(255,255,255,0.09)",
         borderRadius: "10px",
-        backdropFilter: "blur(8px)",
-        WebkitBackdropFilter: "blur(8px)",
         aspectRatio: "1 / 1",
       }}
     >
-      {/* Red top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[10px] opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: "#fc0b05" }} />
+      <div className="h-full flex flex-col">
 
-      <div className="p-5 h-full flex flex-col justify-between gap-0">
-
-        {/* Row 1 — ID + status */}
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-bold tracking-[0.18em] text-white/40">{load.id}</span>
+        {/* ── Header strip ── */}
+        <div className="px-4 pt-4 pb-3 flex items-start gap-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          {/* Number badge */}
+          <div className="shrink-0 flex flex-col items-center">
+            <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ background: "rgba(252,11,5,0.18)", border: "1px solid rgba(252,11,5,0.4)" }}>
+              <span className="w-2 h-2 rounded-full" style={{ background: "#fc0b05" }} />
+            </div>
+            <span className="display num text-[18px] font-extrabold text-white/80 leading-none mt-1">{num}</span>
+          </div>
+          {/* ID + mode */}
+          <div className="flex-1 min-w-0 pt-0.5">
+            <div className="text-[12px] font-bold text-white truncate">{load.id}</div>
+            <div className="text-[10px] text-white/40 mt-0.5">{load.mode}</div>
+          </div>
+          {/* Status */}
           <span
-            className="text-[10px] font-bold px-2.5 py-1 rounded"
+            className="text-[9px] font-bold px-2 py-1 rounded shrink-0 mt-0.5"
             style={{
-              background: isHot ? "rgba(251,191,36,0.15)" : "rgba(74,222,128,0.12)",
+              background: isHot ? "rgba(251,191,36,0.14)" : "rgba(74,222,128,0.12)",
               color: isHot ? "#fbbf24" : "#4ade80",
-              border: `1px solid ${isHot ? "rgba(251,191,36,0.25)" : "rgba(74,222,128,0.20)"}`,
+              border: `1px solid ${isHot ? "rgba(251,191,36,0.28)" : "rgba(74,222,128,0.22)"}`,
             }}
           >
             {isHot ? "High Demand" : "Available"}
           </span>
         </div>
 
-        {/* Row 2 — mode + route */}
-        <div>
-          <div className="text-[9px] uppercase tracking-[0.22em] font-bold mb-3" style={{ color: "rgba(252,11,5,0.75)" }}>{load.mode}</div>
-          <div className="flex gap-3">
-            {/* Connector */}
-            <div className="flex flex-col items-center pt-1 shrink-0">
-              <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#fc0b05" }} />
-              <div className="w-px flex-1 my-1" style={{ background: "rgba(255,255,255,0.12)", minHeight: "20px" }} />
-              <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+        {/* ── Route timeline ── */}
+        <div className="flex-1 px-4 py-3 flex flex-col justify-center">
+          {/* Origin */}
+          <div className="flex items-start gap-2.5">
+            <div className="shrink-0 mt-0.5">
+              <div className="w-3 h-3 rounded-full border-2 border-[#fc0b05] bg-transparent" />
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-[13px] font-semibold text-white truncate">{load.origin}</div>
-              <div className="text-[13px] font-medium text-white/55 truncate mt-1.5">{load.dest}</div>
+            <div className="min-w-0">
+              <div className="text-[12px] font-semibold text-white truncate">{load.origin}</div>
+              <div className="text-[10px] text-white/35 mt-0.5">Port of Loading · {load.avail}</div>
+            </div>
+          </div>
+
+          {/* Dashed connector */}
+          <div className="ml-[5px] my-1.5 flex flex-col gap-[3px]">
+            {[0,1,2].map(i => <div key={i} className="w-px h-1.5 rounded-full" style={{ background: "rgba(255,255,255,0.18)" }} />)}
+          </div>
+
+          {/* Destination */}
+          <div className="flex items-start gap-2.5">
+            <div className="shrink-0 mt-0.5">
+              <div className="w-3 h-3 rounded-full border-2 border-[#4ade80] bg-transparent" />
+            </div>
+            <div className="min-w-0">
+              <div className="text-[12px] font-semibold text-white truncate">{load.dest}</div>
+              <div className="text-[10px] text-white/35 mt-0.5">Delivery · {load.miles} mi</div>
             </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div style={{ height: "1px", background: "rgba(255,255,255,0.07)" }} />
-
-        {/* Row 3 — meta + rate */}
-        <div className="flex items-end justify-between">
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded text-white/60" style={{ background: "rgba(255,255,255,0.07)" }}>{load.container}</span>
-            </div>
-            <div className="text-[11px] text-white/35">{load.miles} mi · {load.avail}</div>
+        {/* ── Detail columns ── */}
+        <div className="px-3 pb-3">
+          <div className="grid grid-cols-3 rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
+            {[
+              { label: "MODE",      value: load.mode.split("→")[0].trim() },
+              { label: "DISTANCE",  value: `${load.miles} mi` },
+              { label: "CONT TYPE", value: load.container },
+            ].map((d) => (
+              <div key={d.label} className="px-2 py-2 text-center" style={{ borderRight: "1px solid rgba(255,255,255,0.08)" }}>
+                <div className="text-[8px] uppercase tracking-[0.14em] text-white/35 font-semibold">{d.label}</div>
+                <div className="text-[10px] font-bold text-white mt-0.5 truncate">{d.value}</div>
+              </div>
+            ))}
           </div>
-          <div className="text-right">
-            <div className="text-[9px] uppercase tracking-[0.16em] text-white/35 mb-1">Rate</div>
-            <div className="text-[22px] font-extrabold leading-none" style={{ color: "#fc0b05" }}>${load.rate.toLocaleString()}</div>
+
+          {/* Progress bar */}
+          <div className="mt-2.5 h-[3px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
+            <div className="h-full rounded-full" style={{ background: "#fc0b05", width: isHot ? "72%" : "38%" }} />
           </div>
         </div>
+
+        {/* ── Footer ── */}
+        <div className="px-3 pb-3 flex items-center justify-between gap-2">
+          <div>
+            <div className="text-[8px] uppercase tracking-[0.14em] text-white/30">Rate</div>
+            <div className="text-[20px] font-extrabold leading-none" style={{ color: "#fc0b05" }}>${load.rate.toLocaleString()}</div>
+          </div>
+          <div
+            className="px-3 py-1.5 rounded text-[11px] font-bold text-white/80 group-hover:text-white group-hover:border-white/30 transition"
+            style={{ border: "1px solid rgba(255,255,255,0.14)", background: "rgba(255,255,255,0.05)" }}
+          >
+            Claim Load
+          </div>
+        </div>
+
       </div>
     </button>
   );
@@ -229,8 +269,8 @@ export default function LoadBoardPage() {
 
           {/* 3-column grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {LOADS.map((load) => (
-              <LoadCard key={load.id} load={load} onClick={() => setShowSignIn(true)} />
+            {LOADS.map((load, i) => (
+              <LoadCard key={load.id} load={load} idx={i} onClick={() => setShowSignIn(true)} />
             ))}
           </div>
 
