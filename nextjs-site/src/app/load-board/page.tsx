@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import LoadMapView from "./LoadMapView";
 
 const LOADS = [
   { id: "DG-4821", mode: "Drayage",    origin: "LA/Long Beach",  terminal: "APM Terminal",   dest: "Ontario, CA",      container: "40' HC",  miles: 58,  weight: "42K", rate: 1850, avail: "Today",    status: "hot",       type: "dry" },
@@ -210,9 +211,7 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
         </div>
 
         {/* Dashed connector */}
-        <div className="ml-[5px] my-1.5 flex flex-col gap-[3px]">
-          <div className="w-px h-1.5 bg-white/20 mx-auto" /><div className="w-px h-1.5 bg-white/20 mx-auto" /><div className="w-px h-1.5 bg-white/20 mx-auto" />
-        </div>
+        <div style={{ marginLeft: "5px", height: "24px", borderLeft: "1.5px dashed rgba(255,255,255,0.22)" }} />
 
         {/* Destination row */}
         <div className="flex items-start justify-between gap-2">
@@ -277,6 +276,7 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
 export default function LoadBoardPage() {
   const [showSignIn, setShowSignIn]     = useState(false);
   const [activeFilter, setActiveFilter] = useState("all");
+  const [viewMode, setViewMode]         = useState<"list" | "map">("list");
   const [origin, setOrigin]             = useState("");
   const [destination, setDestination]   = useState("");
   const [dateRange, setDateRange]       = useState("");
@@ -380,11 +380,32 @@ export default function LoadBoardPage() {
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-6">
 
-          {/* Header row: title + filters */}
+          {/* Header row: title + map/list toggle + filters */}
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse inline-block" />
             <span className="text-white font-semibold text-[15px]">Live Jobs</span>
             <span className="text-[12px] font-semibold px-2.5 py-1 rounded-full" style={{ background: "rgba(252,11,5,0.20)", color: "#fc0b05" }}>247 active</span>
+
+            <div className="w-px h-4 mx-1" style={{ background: "rgba(255,255,255,0.15)" }} />
+
+            {/* Map / List toggle */}
+            <div className="flex items-center overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.15)", borderRadius: "8px" }}>
+              {(["map", "list"] as const).map((mode, i) => (
+                <button key={mode} onClick={() => setViewMode(mode)}
+                  className="flex items-center gap-1.5 px-4 py-[6px] text-[11px] font-bold transition-all"
+                  style={{
+                    background: viewMode === mode ? "#fc0b05" : "transparent",
+                    color: viewMode === mode ? "#fff" : "rgba(255,255,255,0.50)",
+                    borderRight: i === 0 ? "1px solid rgba(255,255,255,0.15)" : "none",
+                  }}>
+                  {mode === "map"
+                    ? <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                    : <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                  }
+                  {mode === "map" ? "Map" : "List"}
+                </button>
+              ))}
+            </div>
 
             <div className="w-px h-4 mx-1" style={{ background: "rgba(255,255,255,0.15)" }} />
 
@@ -412,12 +433,16 @@ export default function LoadBoardPage() {
             <span className="ml-auto text-[12px] text-white/35">Click any load to view details</span>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {filtered.map((load, i) => (
-              <LoadCard key={load.id} load={load} idx={i} onClick={() => setShowSignIn(true)} />
-            ))}
-          </div>
+          {/* Map or List view */}
+          {viewMode === "map" ? (
+            <LoadMapView loads={filtered} onMarkerClick={() => setShowSignIn(true)} />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {filtered.map((load, i) => (
+                <LoadCard key={load.id} load={load} idx={i} onClick={() => setShowSignIn(true)} />
+              ))}
+            </div>
+          )}
 
           <div className="mt-8 text-center">
             <p className="text-white/35 text-[13px]">
