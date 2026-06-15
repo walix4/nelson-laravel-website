@@ -78,82 +78,73 @@ function SignInModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-/* ─── Single card (blurred, clickable) ─────────────────────────────── */
+/* ─── Single card ───────────────────────────────────────────────────── */
 function LoadCard({ load, onClick }: { load: typeof LOADS[0]; onClick: () => void }) {
   const isHot = load.status === "hot";
   return (
     <button
       onClick={onClick}
-      className="relative rounded-2xl overflow-hidden text-left w-full group transition-all duration-200 hover:scale-[1.02]"
+      className="relative text-left w-full group transition-all duration-200 hover:-translate-y-0.5"
       style={{
-        background: "rgba(255,255,255,0.055)",
-        border: "1px solid rgba(255,255,255,0.10)",
-        backdropFilter: "blur(6px)",
-        WebkitBackdropFilter: "blur(6px)",
-        aspectRatio: "1 / 1",
+        background: "linear-gradient(160deg,rgba(255,255,255,0.07) 0%,rgba(255,255,255,0.03) 100%)",
+        border: "1px solid rgba(255,255,255,0.09)",
+        borderRadius: "10px",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
       }}
     >
-      {/* Card content */}
-      <div
-        className="absolute inset-0 p-5 flex flex-col justify-between"
-        style={{ userSelect: "none", pointerEvents: "none" }}
-      >
-        {/* Top row */}
+      {/* Red top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-[10px] opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: "#fc0b05" }} />
+
+      <div className="p-5 flex flex-col gap-4">
+
+        {/* Row 1 — ID + status */}
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-bold text-white/60 tracking-widest">{load.id}</span>
+          <span className="text-[10px] font-bold tracking-[0.18em] text-white/40">{load.id}</span>
           <span
-            className="text-[10px] font-bold px-2.5 py-0.5 rounded-full"
+            className="text-[10px] font-bold px-2.5 py-1 rounded"
             style={{
-              background: isHot ? "rgba(251,191,36,0.22)" : "rgba(74,222,128,0.18)",
+              background: isHot ? "rgba(251,191,36,0.15)" : "rgba(74,222,128,0.12)",
               color: isHot ? "#fbbf24" : "#4ade80",
+              border: `1px solid ${isHot ? "rgba(251,191,36,0.25)" : "rgba(74,222,128,0.20)"}`,
             }}
           >
             {isHot ? "High Demand" : "Available"}
           </span>
         </div>
 
-        {/* Mode badge */}
+        {/* Row 2 — mode + route */}
         <div>
-          <div className="text-[10px] uppercase tracking-[0.18em] text-white/55 mb-2 font-semibold">{load.mode}</div>
-
-          {/* Route */}
-          <div className="flex items-start gap-2.5">
+          <div className="text-[9px] uppercase tracking-[0.22em] font-bold mb-3" style={{ color: "rgba(252,11,5,0.75)" }}>{load.mode}</div>
+          <div className="flex gap-3">
+            {/* Connector */}
             <div className="flex flex-col items-center pt-1 shrink-0">
-              <div className="w-2 h-2 rounded-full border-2 border-[#fc0b05]" />
-              <div className="w-px h-6 my-0.5" style={{ background: "rgba(255,255,255,0.15)" }} />
-              <div className="w-2 h-2 rounded-full bg-white/40" />
+              <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#fc0b05" }} />
+              <div className="w-px flex-1 my-1" style={{ background: "rgba(255,255,255,0.12)", minHeight: "20px" }} />
+              <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
             </div>
-            <div>
-              <div className="text-[14px] font-semibold text-white leading-snug">{load.origin}</div>
-              <div className="text-[14px] font-semibold text-white/80 leading-snug mt-1">{load.dest}</div>
+            <div className="flex-1 min-w-0">
+              <div className="text-[13px] font-semibold text-white truncate">{load.origin}</div>
+              <div className="text-[13px] font-medium text-white/55 truncate mt-1.5">{load.dest}</div>
             </div>
           </div>
         </div>
 
-        {/* Bottom row */}
+        {/* Divider */}
+        <div style={{ height: "1px", background: "rgba(255,255,255,0.07)" }} />
+
+        {/* Row 3 — meta + rate */}
         <div className="flex items-end justify-between">
-          <div className="space-y-1">
-            <div className="text-[11px] text-white/60 uppercase tracking-wide">{load.container}</div>
-            <div className="text-[11px] text-white/45">{load.miles} mi · {load.avail}</div>
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded text-white/60" style={{ background: "rgba(255,255,255,0.07)" }}>{load.container}</span>
+            </div>
+            <div className="text-[11px] text-white/35">{load.miles} mi · {load.avail}</div>
           </div>
           <div className="text-right">
-            <div className="text-[10px] text-white/50 uppercase tracking-wide mb-0.5">Rate</div>
-            <div className="text-[24px] font-extrabold leading-none" style={{ color: "#fc0b05" }}>${load.rate.toLocaleString()}</div>
+            <div className="text-[9px] uppercase tracking-[0.16em] text-white/35 mb-1">Rate</div>
+            <div className="text-[22px] font-extrabold leading-none" style={{ color: "#fc0b05" }}>${load.rate.toLocaleString()}</div>
           </div>
-        </div>
-      </div>
-
-      {/* Hover overlay — subtle indication it's clickable */}
-      <div
-        className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-150"
-        style={{ background: "rgba(252,11,5,0.08)" }}
-      >
-        <div
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-[12px] font-bold text-white"
-          style={{ background: "rgba(252,11,5,0.85)" }}
-        >
-          View Load Details
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
         </div>
       </div>
     </button>
