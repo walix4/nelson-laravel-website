@@ -93,14 +93,14 @@ function LoadCard({ load, onClick }: { load: typeof LOADS[0]; onClick: () => voi
         aspectRatio: "1 / 1",
       }}
     >
-      {/* Blurred content */}
+      {/* Card content */}
       <div
         className="absolute inset-0 p-5 flex flex-col justify-between"
-        style={{ filter: "blur(3.5px)", opacity: 0.5, userSelect: "none", pointerEvents: "none" }}
+        style={{ userSelect: "none", pointerEvents: "none" }}
       >
         {/* Top row */}
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-bold text-white/55 tracking-widest">{load.id}</span>
+          <span className="text-[11px] font-bold text-white/60 tracking-widest">{load.id}</span>
           <span
             className="text-[10px] font-bold px-2.5 py-0.5 rounded-full"
             style={{
@@ -114,7 +114,7 @@ function LoadCard({ load, onClick }: { load: typeof LOADS[0]; onClick: () => voi
 
         {/* Mode badge */}
         <div>
-          <div className="text-[10px] uppercase tracking-[0.18em] text-white/35 mb-2 font-semibold">{load.mode}</div>
+          <div className="text-[10px] uppercase tracking-[0.18em] text-white/55 mb-2 font-semibold">{load.mode}</div>
 
           {/* Route */}
           <div className="flex items-start gap-2.5">
@@ -124,8 +124,8 @@ function LoadCard({ load, onClick }: { load: typeof LOADS[0]; onClick: () => voi
               <div className="w-2 h-2 rounded-full bg-white/40" />
             </div>
             <div>
-              <div className="text-[13px] font-semibold text-white leading-snug">{load.origin}</div>
-              <div className="text-[13px] font-semibold text-white/70 leading-snug mt-1">{load.dest}</div>
+              <div className="text-[14px] font-semibold text-white leading-snug">{load.origin}</div>
+              <div className="text-[14px] font-semibold text-white/80 leading-snug mt-1">{load.dest}</div>
             </div>
           </div>
         </div>
@@ -133,12 +133,12 @@ function LoadCard({ load, onClick }: { load: typeof LOADS[0]; onClick: () => voi
         {/* Bottom row */}
         <div className="flex items-end justify-between">
           <div className="space-y-1">
-            <div className="text-[10px] text-white/35 uppercase tracking-wide">{load.container}</div>
-            <div className="text-[10px] text-white/30">{load.miles} mi · {load.avail}</div>
+            <div className="text-[11px] text-white/60 uppercase tracking-wide">{load.container}</div>
+            <div className="text-[11px] text-white/45">{load.miles} mi · {load.avail}</div>
           </div>
           <div className="text-right">
-            <div className="text-[9px] text-white/35 uppercase tracking-wide mb-0.5">Rate</div>
-            <div className="text-[22px] font-extrabold text-white leading-none">${load.rate.toLocaleString()}</div>
+            <div className="text-[10px] text-white/50 uppercase tracking-wide mb-0.5">Rate</div>
+            <div className="text-[24px] font-extrabold leading-none" style={{ color: "#fc0b05" }}>${load.rate.toLocaleString()}</div>
           </div>
         </div>
       </div>
@@ -236,7 +236,7 @@ export default function LoadBoardPage() {
           </div>
 
           {/* 3-column grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {LOADS.map((load) => (
               <LoadCard key={load.id} load={load} onClick={() => setShowSignIn(true)} />
             ))}
