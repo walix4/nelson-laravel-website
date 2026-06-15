@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -18,16 +18,6 @@ const LOADS = [
   { id: "DG-4830", mode: "Port→Port",  origin: "LA/LB — TTI",   terminal: "TTI Terminal",   dest: "LA/LB — Trapac",   container: "40' HC",  miles: 8,   weight: "36K", rate: 420,  avail: "Today",    status: "available", type: "flat" },
   { id: "DG-4831", mode: "Intermodal", origin: "Dallas, TX",     terminal: "BNSF Alliance",  dest: "Memphis, TN",      container: "40' Std", miles: 468, weight: "32K", rate: 3100, avail: "Jun 17",   status: "available", type: "ow" },
   { id: "DG-4832", mode: "Drayage",    origin: "Charleston, SC", terminal: "Wando Welch",    dest: "Greenville, SC",   container: "45' HC",  miles: 218, weight: "43K", rate: 2400, avail: "Tomorrow", status: "hot",       type: "dry" },
-];
-
-const TYPE_LABEL: Record<string, string> = {
-  dry: "Dry", cool: "Reefer", flat: "Flatbed", ow: "O/W",
-};
-
-const TIME_SLOTS = [
-  "8:00 AM","8:15 AM","8:30 AM","8:45 AM","9:00 AM",
-  "9:15 AM","9:30 AM","9:45 AM","10:00 AM","10:30 AM",
-  "11:00 AM","11:30 AM",
 ];
 
 /* ─── Icons ─────────────────────────────────────────────────────────── */
@@ -63,32 +53,37 @@ const OWIcon = ({ size = 20 }: { size?: number }) => (
     <path fill="#a78bfa" fillOpacity=".45" d="M2 17l10 5 10-5-10-5z"/>
   </svg>
 );
+const AllIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+    <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+  </svg>
+);
 
 const TYPE_ICON: Record<string, React.ReactNode> = {
-  dry:  <DryIcon size={18} />,
-  cool: <CoolIcon size={18} />,
-  flat: <FlatIcon size={18} />,
-  ow:   <OWIcon size={18} />,
+  dry:  <DryIcon size={22} />,
+  cool: <CoolIcon size={22} />,
+  flat: <FlatIcon size={22} />,
+  ow:   <OWIcon size={22} />,
 };
+
+const FILTERS = [
+  { key: "all",  label: "All",  Icon: AllIcon },
+  { key: "dry",  label: "Dry",  Icon: DryIcon },
+  { key: "cool", label: "Cool", Icon: CoolIcon },
+  { key: "flat", label: "Flat", Icon: FlatIcon },
+  { key: "ow",   label: "OW",   Icon: OWIcon },
+];
 
 /* ─── Booking dialog ─────────────────────────────────────────────────── */
 function BookingDialog({ onClose }: { onClose: () => void }) {
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
       style={{ background: "rgba(4,12,38,0.75)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}
-      onClick={onClose}
-    >
-      <div
-        className="w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl"
-        style={{
-          background: "linear-gradient(160deg,rgba(255,255,255,0.10) 0%,rgba(255,255,255,0.04) 100%)",
-          border: "1px solid rgba(255,255,255,0.14)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-        }}
-        onClick={e => e.stopPropagation()}
-      >
+      onClick={onClose}>
+      <div className="w-full max-w-sm rounded-2xl overflow-hidden shadow-2xl"
+        style={{ background: "linear-gradient(160deg,rgba(255,255,255,0.10) 0%,rgba(255,255,255,0.04) 100%)", border: "1px solid rgba(255,255,255,0.14)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}
+        onClick={e => e.stopPropagation()}>
         <div className="px-6 pt-6 pb-5 flex items-start justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
           <div>
             <h2 className="display text-white text-[22px] font-bold leading-tight">Booking Info</h2>
@@ -123,45 +118,92 @@ function BookingDialog({ onClose }: { onClose: () => void }) {
   );
 }
 
-/* ─── Load list row (glass style) ───────────────────────────────────── */
-function LoadListRow({ load, onClick }: { load: typeof LOADS[0]; onClick: () => void }) {
-  const isHot = load.status === "hot";
-  const icon  = TYPE_ICON[load.type] ?? TYPE_ICON.dry;
+/* ─── Load card ──────────────────────────────────────────────────────── */
+function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; onClick: () => void }) {
+  const isHot  = load.status === "hot";
+  const num    = String(idx + 1).padStart(2, "0");
+  const perMile = (load.rate / load.miles).toFixed(2);
+  const icon   = TYPE_ICON[load.type] ?? TYPE_ICON.dry;
 
   return (
-    <button
-      onClick={onClick}
-      className="w-full text-left transition-all hover:brightness-125 mb-2"
-      style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 12, padding: "14px 16px" }}
-    >
-      <div className="flex items-start gap-4">
-        <div className="flex-1 min-w-0">
-          {/* Tag row */}
-          <div className="flex items-center gap-1.5 mb-2 flex-wrap">
-            <span className="text-[11px] font-bold text-white/65">{load.id}</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-md font-medium" style={{ background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.55)" }}>{load.mode}</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-md font-medium" style={{ background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.55)" }}>{TYPE_LABEL[load.type]}</span>
-            <span style={{ display: "inline-flex", transform: "scale(0.80)", transformOrigin: "left center" }}>{icon}</span>
-            {isHot && (
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-md" style={{ background: "rgba(252,11,5,0.18)", color: "#fc0b05", border: "1px solid rgba(252,11,5,0.32)" }}>Hot</span>
-            )}
-            {!isHot && (
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-md" style={{ background: "rgba(74,222,128,0.12)", color: "#4ade80", border: "1px solid rgba(74,222,128,0.22)" }}>Premium</span>
-            )}
-          </div>
-          {/* Route */}
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-[14px] font-semibold text-white">{load.terminal}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            <span className="text-[14px] font-semibold text-white">{load.dest}</span>
-          </div>
-          {/* Meta */}
-          <div className="text-[12px] text-white/35">{load.miles} mi · {load.weight} · {load.avail}</div>
+    <button onClick={onClick}
+      className="relative text-left w-full group transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl"
+      style={{ background: "#0d1f3c", border: "1px solid rgba(255,255,255,0.09)", borderRadius: "10px" }}>
+
+      {/* Header */}
+      <div className="p-4 flex items-start gap-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="shrink-0 rounded-lg flex flex-col items-center justify-between px-2.5 py-2.5 gap-1" style={{ background: "rgba(255,255,255,0.09)", minWidth: "46px" }}>
+          <div className="flex items-center justify-center">{icon}</div>
+          <span className="display num text-[18px] font-extrabold leading-none text-white">{num}</span>
         </div>
-        {/* Price + Claim */}
-        <div className="shrink-0 text-right flex flex-col items-end gap-2.5">
-          <div className="num text-[22px] font-extrabold text-white leading-none">${load.rate.toLocaleString()}</div>
-          <div className="px-5 py-1.5 rounded-lg text-[12px] font-bold text-white" style={{ background: "#fc0b05" }}>Claim</div>
+        <div className="flex-1 min-w-0 pt-0.5">
+          <div className="text-[13px] font-bold text-white truncate">{load.id}</div>
+          <div className="text-[11px] mt-0.5 font-medium" style={{ color: "#fc0b05" }}>{load.mode}</div>
+        </div>
+        <div className="text-right shrink-0 pt-0.5">
+          <div className="text-[18px] font-extrabold leading-none text-white">${load.rate.toLocaleString()}</div>
+          <div className="text-[9px] text-white/35 mt-1 uppercase tracking-wide">{perMile} per mile</div>
+        </div>
+      </div>
+
+      {/* Route */}
+      <div className="px-4 pt-3 pb-2">
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-start gap-2.5 flex-1 min-w-0">
+            <div className="shrink-0 mt-1"><div className="w-3 h-3 rounded-full border-[2.5px] border-[#3b82f6] bg-[#3b82f6]" /></div>
+            <div className="min-w-0">
+              <div className="text-[13px] font-bold text-white truncate">{load.origin}</div>
+              <div className="text-[10px] text-white/40 mt-0.5">Pickup · {load.avail}</div>
+            </div>
+          </div>
+          <div className="text-right shrink-0">
+            <div className="text-[8px] uppercase tracking-[0.14em] text-white/30 font-semibold">WEIGHT</div>
+            <div className="text-[11px] font-bold text-white">{load.weight}</div>
+          </div>
+        </div>
+
+        {/* Dashed connector */}
+        <div style={{ marginLeft: "5px", height: "24px", borderLeft: "1.5px dashed rgba(255,255,255,0.22)" }} />
+
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-start gap-2.5 flex-1 min-w-0">
+            <div className="shrink-0 mt-1"><div className="w-3 h-3 rounded-full border-[2.5px] border-[#4ade80] bg-[#4ade80]" /></div>
+            <div className="min-w-0">
+              <div className="text-[13px] font-bold truncate" style={{ color: "#4ade80" }}>{load.dest}</div>
+              <div className="text-[10px] text-white/40 mt-0.5">Drop-off · {load.miles} mi</div>
+            </div>
+          </div>
+          <div className="text-right shrink-0">
+            <div className="text-[8px] uppercase tracking-[0.14em] text-white/30 font-semibold">AVAIL</div>
+            <div className="text-[11px] font-bold text-white">{load.avail}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Detail strip */}
+      <div className="px-4 pb-3 pt-2">
+        <div className="grid grid-cols-3 rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
+          {[{ label: "DISTANCE", value: `${load.miles} MI` }, { label: "WEIGHT", value: load.weight }, { label: "CONT TYPE", value: load.container }].map((d, i) => (
+            <div key={d.label} className="px-2 py-2 text-center" style={{ borderRight: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
+              <div className="text-[8px] uppercase tracking-[0.14em] text-white/30 font-semibold">{d.label}</div>
+              <div className="text-[11px] font-bold text-white mt-0.5">{d.value}</div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-2.5 h-[3px] rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
+          <div className="h-full rounded-full" style={{ background: isHot ? "#fc0b05" : "#4ade80", width: isHot ? "72%" : "38%" }} />
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="px-4 pb-4 flex items-center justify-between">
+        <span className="text-[9px] font-bold px-2.5 py-1.5 rounded"
+          style={{ background: isHot ? "rgba(251,191,36,0.14)" : "rgba(74,222,128,0.12)", color: isHot ? "#fbbf24" : "#4ade80", border: `1px solid ${isHot ? "rgba(251,191,36,0.28)" : "rgba(74,222,128,0.22)"}` }}>
+          {isHot ? "High Demand" : "Available"}
+        </span>
+        <div className="px-4 py-1.5 rounded text-[11px] font-bold text-white/75 group-hover:text-white group-hover:border-white/30 transition"
+          style={{ border: "1px solid rgba(255,255,255,0.14)", background: "rgba(255,255,255,0.05)" }}>
+          Get Job
         </div>
       </div>
     </button>
@@ -171,42 +213,15 @@ function LoadListRow({ load, onClick }: { load: typeof LOADS[0]; onClick: () => 
 /* ─── Page ─────────────────────────────────────────────────────────── */
 export default function LoadBoardPage() {
   const [showSignIn, setShowSignIn]     = useState(false);
-  const [activeMode, setActiveMode]     = useState("all");
   const [activeFilter, setActiveFilter] = useState("all");
   const [viewMode, setViewMode]         = useState<"list" | "map">("list");
-  const [selectedDay, setSelectedDay]   = useState(0);
-  const [selectedTime, setSelectedTime] = useState(0);
-  const [bookService, setBookService]   = useState<"Drayage" | "Import" | "Export">("Drayage");
-  const [weekDays, setWeekDays]         = useState<Array<{ day: string; date: number }>>([]);
 
-  useEffect(() => {
-    const today = new Date();
-    setWeekDays(Array.from({ length: 7 }, (_, i) => {
-      const d = new Date(today);
-      d.setDate(today.getDate() + i);
-      return { day: d.toLocaleDateString("en-US", { weekday: "short" }), date: d.getDate() };
-    }));
-  }, []);
-
-  const modeFiltered = LOADS.filter(l => {
-    if (activeMode === "all") return true;
-    if (activeMode === "drayage") return l.mode === "Drayage";
-    if (activeMode === "pp") return l.mode === "Port→Port";
-    if (activeMode === "intermodal") return l.mode === "Intermodal";
-    return true;
-  });
-  const filtered = modeFiltered.filter(l => activeFilter === "all" || l.type === activeFilter);
+  const filtered = LOADS.filter(l => activeFilter === "all" || l.type === activeFilter);
 
   return (
     <>
       <Nav />
       {showSignIn && <BookingDialog onClose={() => setShowSignIn(false)} />}
-      <style>{`
-        .glass-scroll::-webkit-scrollbar{width:5px}
-        .glass-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,0.04);border-radius:4px}
-        .glass-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.18);border-radius:4px}
-        .time-strip::-webkit-scrollbar{display:none}
-      `}</style>
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden" style={{ background: "#08192b", minHeight: "420px" }}>
@@ -225,7 +240,7 @@ export default function LoadBoardPage() {
             Hundreds of verified drayage jobs from US ports, updated in real time. Browse free — sign up to claim loads and get paid within 48 hours of delivery.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <button onClick={() => document.getElementById("load-board-glass")?.scrollIntoView({ behavior: "smooth" })}
+            <button onClick={() => document.getElementById("live-jobs")?.scrollIntoView({ behavior: "smooth" })}
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-[14px] font-bold text-white transition hover:opacity-90"
               style={{ background: "#fc0b05" }}>
               Browse Jobs
@@ -240,172 +255,70 @@ export default function LoadBoardPage() {
         </div>
       </section>
 
-      {/* ── QUICK BOOK STRIP ── */}
-      <section style={{ background: "#060f1e", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-        <div className="max-w-[1100px] mx-auto px-6 py-4">
-          {/* Day + time strip */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-3 time-strip">
-            {weekDays.map((d, i) => (
-              <button key={i} onClick={() => setSelectedDay(i)}
-                className="shrink-0 flex flex-col items-center rounded-xl transition-all"
-                style={{
-                  padding: "8px 12px", minWidth: 52,
-                  background: selectedDay === i ? "#fc0b05" : "rgba(255,255,255,0.06)",
-                  color: selectedDay === i ? "white" : "rgba(255,255,255,0.45)",
-                  border: `1px solid ${selectedDay === i ? "#fc0b05" : "rgba(255,255,255,0.09)"}`,
-                }}>
-                <span className="text-[10px] font-bold">{d.day}</span>
-                <span className="num text-[16px] font-extrabold">{d.date}</span>
-                <span style={{ width: 14, height: 2, background: selectedDay === i ? "rgba(255,255,255,0.5)" : "transparent", borderRadius: 1, marginTop: 2 }} />
-              </button>
-            ))}
-            <div style={{ width: 1, height: 44, background: "rgba(255,255,255,0.10)", flexShrink: 0, margin: "0 4px" }} />
-            {TIME_SLOTS.map((t, i) => (
-              <button key={i} onClick={() => setSelectedTime(i)}
-                className="shrink-0 rounded-xl text-[11px] font-semibold transition-all"
-                style={{
-                  padding: "8px 12px", minWidth: 70,
-                  background: selectedTime === i ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.04)",
-                  color: selectedTime === i ? "white" : "rgba(255,255,255,0.38)",
-                  border: `1px solid ${selectedTime === i ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.07)"}`,
-                }}>
-                {t}
-              </button>
-            ))}
-          </div>
-          {/* Service type + CTA */}
-          <div className="flex items-center gap-3 flex-wrap">
-            {(["Drayage", "Import", "Export"] as const).map(s => (
-              <button key={s} onClick={() => setBookService(s)}
-                className="px-5 py-2 rounded-lg text-[13px] font-semibold transition-all"
-                style={{
-                  background: bookService === s ? "rgba(255,255,255,0.10)" : "transparent",
-                  color: bookService === s ? "white" : "rgba(255,255,255,0.42)",
-                  border: `1px solid ${bookService === s ? "rgba(255,255,255,0.20)" : "rgba(255,255,255,0.09)"}`,
-                }}>
-                {s}
-              </button>
-            ))}
-            <div className="flex-1" />
-            <button onClick={() => setShowSignIn(true)}
-              className="px-6 py-2.5 rounded-xl text-[13px] font-bold text-white transition hover:opacity-90"
-              style={{ background: "#fc0b05" }}>
-              Get Instant Quote →
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* ── LIVE JOBS ── */}
+      <section id="live-jobs" className="min-h-screen py-10" style={{ background: "#08192b" }}>
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(800px 600px at 80% 20%,rgba(252,11,5,0.06),transparent 60%)" }} />
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6">
 
-      {/* ── GLASS LOAD BOARD ── */}
-      <section id="load-board-glass" className="py-12" style={{ background: "#08192b" }}>
-        <div className="max-w-[1100px] mx-auto px-6">
-          <div className="rounded-2xl overflow-hidden" style={{
-            background: "rgba(10,20,42,0.82)",
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
-            border: "1px solid rgba(255,255,255,0.10)",
-          }}>
+          {/* Header row */}
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse inline-block" />
+            <span className="text-white font-semibold text-[15px]">Live Jobs</span>
+            <span className="text-[12px] font-semibold px-2.5 py-1 rounded-full" style={{ background: "rgba(252,11,5,0.20)", color: "#fc0b05" }}>247 active</span>
 
-            {/* Glass header */}
-            <div className="px-6 pt-5 pb-4 flex items-center justify-between" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-              <div>
-                <div className="display text-white text-[22px] font-bold leading-tight">Load Board</div>
-                <div className="text-white/35 text-[12px] mt-0.5">Live available drayage loads</div>
-              </div>
-              <div className="flex items-center gap-3">
-                {/* Map / List toggle */}
-                <div className="flex overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.15)", borderRadius: 8 }}>
-                  {(["map", "list"] as const).map((mode, i) => (
-                    <button key={mode} onClick={() => setViewMode(mode)}
-                      className="flex items-center gap-1.5 text-[11px] font-bold transition"
-                      style={{
-                        padding: "6px 14px",
-                        background: viewMode === mode ? "#fc0b05" : "transparent",
-                        color: viewMode === mode ? "white" : "rgba(255,255,255,0.45)",
-                        borderRight: i === 0 ? "1px solid rgba(255,255,255,0.15)" : "none",
-                      }}>
-                      {mode === "map"
-                        ? <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-                        : <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-                      }
-                      {mode === "map" ? "Map" : "List"}
-                    </button>
-                  ))}
-                </div>
-                {/* LIVE indicator */}
-                <div className="flex items-center gap-1.5 font-bold text-[12px]" style={{ color: "#4ade80" }}>
-                  <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse inline-block" />
-                  LIVE
-                </div>
-              </div>
-            </div>
+            <div className="w-px h-4 mx-1" style={{ background: "rgba(255,255,255,0.15)" }} />
 
-            {/* Mode tabs: All | Drayage | P-P | Intermodal */}
-            <div className="px-6 pt-4 pb-3 flex gap-2 flex-wrap">
-              {[
-                { key: "all", label: "All" },
-                { key: "drayage", label: "Drayage" },
-                { key: "pp", label: "P-P" },
-                { key: "intermodal", label: "Intermodal" },
-              ].map(t => (
-                <button key={t.key} onClick={() => setActiveMode(t.key)}
-                  className="px-5 py-2.5 rounded-xl text-[13px] font-semibold transition-all"
-                  style={{
-                    background: activeMode === t.key
-                      ? "linear-gradient(135deg,rgba(252,11,5,0.88),rgba(180,8,3,0.88))"
-                      : "rgba(255,255,255,0.06)",
-                    color: activeMode === t.key ? "white" : "rgba(255,255,255,0.52)",
-                    border: activeMode === t.key ? "1px solid rgba(252,11,5,0.40)" : "1px solid rgba(255,255,255,0.09)",
-                  }}>
-                  {t.label}
+            {/* Map / List toggle */}
+            <div className="flex items-center overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.15)", borderRadius: "8px" }}>
+              {(["map", "list"] as const).map((mode, i) => (
+                <button key={mode} onClick={() => setViewMode(mode)}
+                  className="flex items-center gap-1.5 px-4 py-[6px] text-[11px] font-bold transition-all"
+                  style={{ background: viewMode === mode ? "#fc0b05" : "transparent", color: viewMode === mode ? "#fff" : "rgba(255,255,255,0.50)", borderRight: i === 0 ? "1px solid rgba(255,255,255,0.15)" : "none" }}>
+                  {mode === "map"
+                    ? <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                    : <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                  }
+                  {mode === "map" ? "Map" : "List"}
                 </button>
               ))}
             </div>
 
-            {/* Filter dropdowns */}
-            <div className="px-6 pb-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 rounded-xl p-3" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                {[
-                  { label: "DISTANCE", opts: [{ v: "all", l: "Any" }, { v: "local", l: "< 50 mi" }, { v: "mid", l: "50–200 mi" }, { v: "long", l: "200+ mi" }], val: "all" },
-                  { label: "TYPE",     opts: [{ v: "all", l: "Any" }, { v: "dry", l: "Dry" }, { v: "cool", l: "Reefer" }, { v: "flat", l: "Flatbed" }, { v: "ow", l: "O/W" }], val: activeFilter },
-                  { label: "WEIGHT",   opts: [{ v: "all", l: "Any" }, { v: "lt30", l: "< 30K" }, { v: "30-40", l: "30–40K" }, { v: "gt40", l: "40K+" }], val: "all" },
-                  { label: "WEATHER",  opts: [{ v: "all", l: "Any" }, { v: "dry", l: "Dry" }, { v: "cool", l: "Reefer" }], val: "all" },
-                ].map(f => (
-                  <div key={f.label}>
-                    <div className="text-[9px] uppercase tracking-[0.18em] text-white/30 mb-1.5 font-bold">{f.label}</div>
-                    <select
-                      value={f.val}
-                      onChange={f.label === "TYPE" ? e => setActiveFilter(e.target.value) : undefined}
-                      className="w-full text-[13px] text-white/80 bg-transparent focus:outline-none cursor-pointer font-medium"
-                      style={{ colorScheme: "dark" }}
-                    >
-                      {f.opts.map(o => <option key={o.v} value={o.v}>{o.l}</option>)}
-                    </select>
-                  </div>
-                ))}
-              </div>
+            <div className="w-px h-4 mx-1" style={{ background: "rgba(255,255,255,0.15)" }} />
+
+            {/* Type filter pills */}
+            <div className="flex items-center gap-1.5">
+              {FILTERS.map(({ key, label, Icon }) => {
+                const active = activeFilter === key;
+                return (
+                  <button key={key} onClick={() => setActiveFilter(key)}
+                    className="flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 transition-all"
+                    style={{ borderRadius: "6px", background: active ? "#fc0b05" : "rgba(255,255,255,0.07)", color: active ? "#fff" : "rgba(255,255,255,0.55)", border: active ? "1px solid #fc0b05" : "1px solid rgba(255,255,255,0.10)" }}>
+                    <span style={{ display: "flex", transform: "scale(0.78)", transformOrigin: "center" }}><Icon size={18} /></span>
+                    {label}
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Load list or map */}
-            <div className="px-6 pb-2 glass-scroll" style={{ maxHeight: 520, overflowY: "auto" }}>
-              {viewMode === "map" ? (
-                <div className="pb-4">
-                  <LoadMapView loads={filtered} onMarkerClick={() => setShowSignIn(true)} />
-                </div>
-              ) : (
-                filtered.map(load => (
-                  <LoadListRow key={load.id} load={load} onClick={() => setShowSignIn(true)} />
-                ))
-              )}
-            </div>
+            <span className="ml-auto text-[12px] text-white/35">Click any load to view details</span>
+          </div>
 
-            {/* Glass footer */}
-            <div className="px-6 py-4 flex items-center justify-between" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-              <span className="text-[12px] text-white/30">{filtered.length} loads · updates every 60s</span>
-              <button onClick={() => setShowSignIn(true)} className="text-[12px] font-semibold transition hover:opacity-80" style={{ color: "#fc0b05" }}>
-                + Post a Dry Load
-              </button>
+          {/* Map or card grid */}
+          {viewMode === "map" ? (
+            <LoadMapView loads={filtered} onMarkerClick={() => setShowSignIn(true)} />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {filtered.map((load, i) => (
+                <LoadCard key={load.id} load={load} idx={i} onClick={() => setShowSignIn(true)} />
+              ))}
             </div>
+          )}
+
+          <div className="mt-8 text-center">
+            <p className="text-white/35 text-[13px]">
+              Sign in to access full load details and claim loads instantly.{" "}
+              <button onClick={() => setShowSignIn(true)} className="font-semibold hover:underline" style={{ color: "#fc0b05" }}>Sign in now →</button>
+            </p>
           </div>
         </div>
       </section>
@@ -439,7 +352,7 @@ export default function LoadBoardPage() {
               <div className="space-y-6">
                 {[
                   { n:"1", t:"Browse live loads",    d:"Filter by location, container type, distance, and rate. See loads the moment they're posted." },
-                  { n:"2", t:"Claim in one tap",      d:"Hit Claim and receive the full packet — terminal name, container number, contacts — instantly." },
+                  { n:"2", t:"Claim in one tap",      d:"Hit Get Job and receive the full packet — terminal name, container number, contacts — instantly." },
                   { n:"3", t:"Complete & submit POD", d:"Deliver the load, get the proof of delivery signed, and upload it from your phone." },
                   { n:"4", t:"Get paid in 48h",       d:"DrayGo processes carrier payments within 48 hours of approved POD. No net-30 wait." },
                 ].map(s => (
