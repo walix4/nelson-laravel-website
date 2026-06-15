@@ -380,19 +380,6 @@ export default function LoadBoardPage() {
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-6">
 
-          {/* Stats bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-            {STATS.map((s) => (
-              <div key={s.label} className="rounded-xl px-4 py-3 flex items-center gap-3" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                {s.live && <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse shrink-0" />}
-                <div>
-                  <div className="display num text-[20px] font-extrabold text-white leading-none">{s.value}</div>
-                  <div className="text-[10px] text-white/45 mt-0.5">{s.label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
           {/* Header row: title + filters */}
           <div className="flex flex-wrap items-center gap-3 mb-6">
             <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse inline-block" />
