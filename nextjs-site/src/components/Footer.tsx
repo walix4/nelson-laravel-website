@@ -8,8 +8,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center">
-              <img src={asset("/logo-mark.png")} alt="" className="h-9 w-auto" />
-              <span className="display text-white text-[22px] tracking-tight leading-none ml-2.5">Dray <span style={{ color: "var(--red)" }}>Rate</span></span>
+              <img src={asset("/logo-draygo.png")} alt="DrayGo" className="h-10 w-auto" />
             </div>
             <p className="mt-3 max-w-sm text-white/75 text-[13px]">The drayage pricing network for North America. Instant rates across every U.S. container port.</p>
           </div>

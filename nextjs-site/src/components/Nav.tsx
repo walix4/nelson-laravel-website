@@ -8,11 +8,8 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b" style={{ background: "#08192b", borderColor: "rgba(255,255,255,0.18)" }}>
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5">
-          <img src={asset("/logo-mark.png")} alt="" className="h-9 md:h-10 w-auto" />
-          <span className="display text-white text-[22px] md:text-[24px] tracking-tight leading-none">
-            Dray <span style={{ color: "var(--red)" }}>Rate</span>
-          </span>
+        <Link href="/" className="flex items-center">
+          <img src={asset("/logo-draygo.png")} alt="DrayGo" className="h-10 md:h-11 w-auto" />
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-[13px] font-medium text-white/85">
           <div className={`mega-wrap ${open ? "open" : ""}`}>
