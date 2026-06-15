@@ -1,79 +1,174 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { TOOLS, asset } from "@/lib/site";
+import { asset } from "@/lib/site";
 
-const SERVICES = [
-  { label: "Shippers", href: "/shipper", desc: "Instant drayage quotes & load board access" },
-  { label: "Brokers", href: "/broker", desc: "Carrier network & freight matching tools" },
-  { label: "Carriers", href: "/carriers", desc: "Find loads, dispatch fast, track earnings" },
-  { label: "Services", href: "/services", desc: "Full suite of DrayGo platform features" },
+const SERVICES_ITEMS = [
+  {
+    label: "Toll Calculator",
+    href: "/#quote",
+    desc: "Instant drayage toll & rate estimates by route",
+    icon: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+  },
+  {
+    label: "Rate Map",
+    href: "/rate-map",
+    desc: "US drayage rate zones & port corridor pricing",
+    icon: '<path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>',
+  },
+  {
+    label: "Container Tools",
+    href: "/tools",
+    desc: "Demurrage, FSC, weight converter & more",
+    icon: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>',
+  },
+  {
+    label: "All Services",
+    href: "/services",
+    desc: "Full suite of DrayGo platform features",
+    icon: '<circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/>',
+  },
 ];
 
 export default function Nav() {
-  const [open, setOpen] = useState(false);
   const [svcOpen, setSvcOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
-    <header className="sticky top-0 z-40 border-b" style={{ background: "#08192b", borderColor: "rgba(255,255,255,0.18)" }}>
-      <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center">
+    <header className="sticky top-0 z-40 border-b" style={{ background: "#08192b", borderColor: "rgba(255,255,255,0.12)" }}>
+      <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between gap-4">
+
+        {/* Logo */}
+        <Link href="/" className="flex items-center shrink-0">
           <img src={asset("/logo-draygo.png")} alt="DrayGo" className="h-10 md:h-11 w-auto" />
         </Link>
-        <nav className="hidden md:flex items-center gap-5 text-[13px] font-medium text-white/85">
-          {/* Tools dropdown */}
-          <div className={`mega-wrap ${open ? "open" : ""}`}>
-            <button className="hover:text-white inline-flex items-center gap-1.5" onClick={() => { setOpen((o) => !o); setSvcOpen(false); }}>
-              Tools
-              <svg className="mega-caret" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
-            </button>
-            <div className="mega-panel">
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-1">
-                {TOOLS.map((t) => (
-                  <Link key={t.n} href={t.href} className="mega-tool" onClick={() => setOpen(false)}>
-                    <span className="mega-ic" style={{ background: t.g }}>
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: t.i }} />
-                    </span>
-                    <span><h4>{t.n}</h4><p>{t.d}</p></span>
-                  </Link>
-                ))}
-              </div>
-              <div className="border-t mt-3 pt-4 flex flex-wrap gap-3" style={{ borderColor: "rgba(11,35,80,0.1)" }}>
-                <Link href="/#quote" className="text-[13px] font-semibold px-5 py-2.5 rounded-lg" style={{ color: "var(--blue)", background: "rgba(58,95,192,0.08)" }}>Request a quote</Link>
-                <Link href="/tools" className="text-[13px] font-semibold px-5 py-2.5 rounded-lg" style={{ color: "var(--navy)", background: "rgba(11,35,80,0.06)" }}>All tools</Link>
-              </div>
-            </div>
-          </div>
+
+        {/* Desktop nav */}
+        <nav className="hidden lg:flex items-center gap-1 text-[13px] font-medium text-white/85">
+
+          <Link href="/" className="px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition">Home</Link>
+          <Link href="/shipper" className="px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition">Shippers</Link>
+          <Link href="/broker" className="px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition">Broker</Link>
+          <Link href="/carriers" className="px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition">Carriers</Link>
+          <Link href="/#pricing" className="px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition">Pricing</Link>
+
+          {/* PortJob red pill */}
+          <Link
+            href="/#load-board"
+            className="ml-1 px-4 py-2 rounded-lg text-white font-semibold transition hover:opacity-90"
+            style={{ background: "#fc0b05" }}
+          >
+            PortJob
+          </Link>
 
           {/* Services dropdown */}
-          <div className={`mega-wrap ${svcOpen ? "open" : ""}`} style={{ position: "relative" }}>
-            <button className="hover:text-white inline-flex items-center gap-1.5" onClick={() => { setSvcOpen((o) => !o); setOpen(false); }}>
+          <div
+            className="relative ml-1"
+            onMouseEnter={() => setSvcOpen(true)}
+            onMouseLeave={() => setSvcOpen(false)}
+          >
+            <button
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition"
+              onClick={() => setSvcOpen((o) => !o)}
+            >
               Services
-              <svg className="mega-caret" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+              <svg
+                width="13" height="13" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
+                style={{ transform: svcOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.18s" }}
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
             </button>
-            <div className="mega-panel" style={{ minWidth: 260 }}>
-              <div className="flex flex-col gap-1">
-                {SERVICES.map((s) => (
-                  <Link key={s.label} href={s.href} className="mega-tool" onClick={() => setSvcOpen(false)}>
-                    <span className="mega-ic" style={{ background: "rgba(252,11,5,0.12)" }}>
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+
+            {svcOpen && (
+              <div
+                className="absolute top-full left-0 mt-1 rounded-xl shadow-2xl bg-white border border-black/8 py-3 w-72"
+                style={{ zIndex: 50 }}
+              >
+                {SERVICES_ITEMS.map((s) => (
+                  <Link
+                    key={s.label}
+                    href={s.href}
+                    className="flex items-center gap-3.5 px-5 py-3 hover:bg-gray-50 transition"
+                    onClick={() => setSvcOpen(false)}
+                  >
+                    <span
+                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ background: "rgba(252,11,5,0.10)" }}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: s.icon }} />
                     </span>
-                    <span><h4>{s.label}</h4><p>{s.desc}</p></span>
+                    <span>
+                      <div className="text-[14px] font-semibold text-[#08192b]">{s.label}</div>
+                      <div className="text-[12px] text-[#64748b] leading-snug">{s.desc}</div>
+                    </span>
                   </Link>
                 ))}
               </div>
-            </div>
+            )}
           </div>
-
-          <Link href="/#how" className="hover:text-white">How it works</Link>
-          <Link href="/#features" className="hover:text-white">Platform</Link>
-          <Link href="/#pricing" className="hover:text-white">Pricing</Link>
-          <Link href="/estimates" className="nav-blink">PortJob</Link>
         </nav>
-        <div className="flex items-center gap-2.5">
-          <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5">Sign in</Link>
-          <Link href="/#load-board" className="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5"><span className="label">Load Board</span></Link>
+
+        {/* Right actions */}
+        <div className="flex items-center gap-2.5 shrink-0">
+          <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5 transition">
+            Sign in
+          </Link>
+          <Link
+            href="/#load-board"
+            className="text-[13px] font-semibold text-white px-4 py-2 rounded-lg inline-flex items-center gap-1.5 transition hover:opacity-90"
+            style={{ background: "#fc0b05" }}
+          >
+            <span>Load Board</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </Link>
+
+          {/* Mobile hamburger */}
+          <button
+            className="lg:hidden p-2 text-white/80 hover:text-white"
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen
+              ? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            }
+          </button>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="lg:hidden border-t border-white/10 px-6 py-4 space-y-1" style={{ background: "#08192b" }}>
+          {[
+            { label: "Home", href: "/" },
+            { label: "Shippers", href: "/shipper" },
+            { label: "Broker", href: "/broker" },
+            { label: "Carriers", href: "/carriers" },
+            { label: "Pricing", href: "/#pricing" },
+          ].map((l) => (
+            <Link key={l.label} href={l.href} className="block py-2.5 text-[14px] text-white/85 hover:text-white" onClick={() => setMobileOpen(false)}>
+              {l.label}
+            </Link>
+          ))}
+          <div className="pt-1 border-t border-white/10">
+            <div className="text-[11px] uppercase tracking-[0.18em] text-white/40 mb-2 pt-2">Services</div>
+            {SERVICES_ITEMS.map((s) => (
+              <Link key={s.label} href={s.href} className="block py-2 text-[14px] text-white/75 hover:text-white" onClick={() => setMobileOpen(false)}>
+                {s.label}
+              </Link>
+            ))}
+          </div>
+          <div className="pt-3">
+            <Link href="/#load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
+              PortJob → Load Board
+            </Link>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
