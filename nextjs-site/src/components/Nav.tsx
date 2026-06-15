@@ -1,7 +1,18 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { asset } from "@/lib/site";
+
+const NAV_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "Shippers", href: "/shipper" },
+  { label: "Broker", href: "/broker" },
+  { label: "Carriers", href: "/carriers" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "About Us", href: "/about" },
+  { label: "PortJob", href: "/#load-board" },
+];
 
 const SERVICES_ITEMS = [
   {
@@ -31,8 +42,25 @@ const SERVICES_ITEMS = [
 ];
 
 export default function Nav() {
+  const pathname = usePathname();
   const [svcOpen, setSvcOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    const path = href.split("#")[0];
+    return path && pathname === path;
+  };
+
+  const linkClass = (href: string) => {
+    const active = isActive(href);
+    return [
+      "px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all",
+      active
+        ? "text-white font-semibold"
+        : "text-white/80 hover:text-white hover:bg-white/8",
+    ].join(" ");
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b" style={{ background: "#08192b", borderColor: "rgba(255,255,255,0.12)" }}>
@@ -44,36 +72,45 @@ export default function Nav() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1 text-[13px] font-medium text-white/85">
-
-          <Link href="/" className="px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition">Home</Link>
-          <Link href="/shipper" className="px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition">Shippers</Link>
-          <Link href="/broker" className="px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition">Broker</Link>
-          <Link href="/carriers" className="px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition">Carriers</Link>
-          <Link href="/#pricing" className="px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition">Pricing</Link>
-
-          {/* PortJob red pill */}
-          <Link
-            href="/#load-board"
-            className="ml-1 px-4 py-2 rounded-lg text-white font-semibold transition hover:opacity-90"
-            style={{ background: "#fc0b05" }}
-          >
-            PortJob
-          </Link>
+        <nav className="hidden lg:flex items-center gap-0.5 text-[13px]">
+          {NAV_LINKS.map((l) => {
+            const active = isActive(l.href);
+            return (
+              <Link
+                key={l.label}
+                href={l.href}
+                className={[
+                  "px-3 py-1.5 rounded-lg font-medium transition-all text-[13px]",
+                  active
+                    ? "text-white"
+                    : "text-white/80 hover:text-white hover:bg-white/8",
+                ].join(" ")}
+                style={active ? { background: "#fc0b05" } : undefined}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
 
           {/* Services dropdown */}
           <div
-            className="relative ml-1"
+            className="relative ml-0.5"
             onMouseEnter={() => setSvcOpen(true)}
             onMouseLeave={() => setSvcOpen(false)}
           >
             <button
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg hover:text-white hover:bg-white/8 transition"
+              className={[
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium transition-all text-[13px]",
+                pathname === "/services"
+                  ? "text-white"
+                  : "text-white/80 hover:text-white hover:bg-white/8",
+              ].join(" ")}
+              style={pathname === "/services" ? { background: "#fc0b05" } : undefined}
               onClick={() => setSvcOpen((o) => !o)}
             >
               Services
               <svg
-                width="13" height="13" viewBox="0 0 24 24" fill="none"
+                width="12" height="12" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
                 style={{ transform: svcOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.18s" }}
               >
@@ -83,7 +120,7 @@ export default function Nav() {
 
             {svcOpen && (
               <div
-                className="absolute top-full left-0 mt-1 rounded-xl shadow-2xl bg-white border border-black/8 py-3 w-72"
+                className="absolute top-full left-0 mt-2 rounded-xl shadow-2xl bg-white border border-black/8 py-3 w-72"
                 style={{ zIndex: 50 }}
               >
                 {SERVICES_ITEMS.map((s) => (
@@ -93,15 +130,12 @@ export default function Nav() {
                     className="flex items-center gap-3.5 px-5 py-3 hover:bg-gray-50 transition"
                     onClick={() => setSvcOpen(false)}
                   >
-                    <span
-                      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ background: "rgba(252,11,5,0.10)" }}
-                    >
+                    <span className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(252,11,5,0.10)" }}>
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: s.icon }} />
                     </span>
                     <span>
-                      <div className="text-[14px] font-semibold text-[#08192b]">{s.label}</div>
-                      <div className="text-[12px] text-[#64748b] leading-snug">{s.desc}</div>
+                      <div className="text-[13.5px] font-semibold text-[#08192b]">{s.label}</div>
+                      <div className="text-[11.5px] text-[#64748b] leading-snug">{s.desc}</div>
                     </span>
                   </Link>
                 ))}
@@ -111,7 +145,7 @@ export default function Nav() {
         </nav>
 
         {/* Right actions */}
-        <div className="flex items-center gap-2.5 shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
           <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5 transition">
             Sign in
           </Link>
@@ -120,7 +154,7 @@ export default function Nav() {
             className="text-[13px] font-semibold text-white px-4 py-2 rounded-lg inline-flex items-center gap-1.5 transition hover:opacity-90"
             style={{ background: "#fc0b05" }}
           >
-            <span>Load Board</span>
+            Get Started
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
@@ -143,28 +177,31 @@ export default function Nav() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="lg:hidden border-t border-white/10 px-6 py-4 space-y-1" style={{ background: "#08192b" }}>
-          {[
-            { label: "Home", href: "/" },
-            { label: "Shippers", href: "/shipper" },
-            { label: "Broker", href: "/broker" },
-            { label: "Carriers", href: "/carriers" },
-            { label: "Pricing", href: "/#pricing" },
-          ].map((l) => (
-            <Link key={l.label} href={l.href} className="block py-2.5 text-[14px] text-white/85 hover:text-white" onClick={() => setMobileOpen(false)}>
-              {l.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((l) => {
+            const active = isActive(l.href);
+            return (
+              <Link
+                key={l.label}
+                href={l.href}
+                className="block py-2.5 px-3 rounded-lg text-[14px] font-medium transition"
+                style={active ? { background: "#fc0b05", color: "#fff" } : { color: "rgba(255,255,255,0.8)" }}
+                onClick={() => setMobileOpen(false)}
+              >
+                {l.label}
+              </Link>
+            );
+          })}
           <div className="pt-1 border-t border-white/10">
             <div className="text-[11px] uppercase tracking-[0.18em] text-white/40 mb-2 pt-2">Services</div>
             {SERVICES_ITEMS.map((s) => (
-              <Link key={s.label} href={s.href} className="block py-2 text-[14px] text-white/75 hover:text-white" onClick={() => setMobileOpen(false)}>
+              <Link key={s.label} href={s.href} className="block py-2 px-3 text-[14px] text-white/75 hover:text-white" onClick={() => setMobileOpen(false)}>
                 {s.label}
               </Link>
             ))}
           </div>
           <div className="pt-3">
             <Link href="/#load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
-              PortJob → Load Board
+              Get Started →
             </Link>
           </div>
         </div>
