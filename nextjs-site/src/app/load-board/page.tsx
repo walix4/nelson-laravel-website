@@ -5,18 +5,26 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 const LOADS = [
-  { id: "DG-4821", mode: "Drayage",    origin: "LA/Long Beach",  dest: "Ontario, CA",      container: "40' HC",  miles: 58,  rate: 1850, avail: "Today",    status: "hot" },
-  { id: "DG-4822", mode: "Drayage",    origin: "NY/NJ Port",     dest: "Newark, NJ",       container: "20' Std", miles: 12,  rate: 650,  avail: "Today",    status: "available" },
-  { id: "DG-4823", mode: "Intermodal", origin: "Savannah, GA",   dest: "Atlanta, GA",      container: "40' Std", miles: 246, rate: 2200, avail: "Tomorrow", status: "available" },
-  { id: "DG-4824", mode: "Drayage",    origin: "Houston, TX",    dest: "Pasadena, TX",     container: "45' HC",  miles: 34,  rate: 1100, avail: "Today",    status: "available" },
-  { id: "DG-4825", mode: "Port→Port",  origin: "Seattle, WA",    dest: "Tacoma, WA",       container: "20' Rfr", miles: 28,  rate: 980,  avail: "Today",    status: "hot" },
-  { id: "DG-4826", mode: "Drayage",    origin: "Miami, FL",      dest: "Medley, FL",       container: "40' HC",  miles: 22,  rate: 875,  avail: "Tomorrow", status: "available" },
-  { id: "DG-4827", mode: "Intermodal", origin: "Chicago, IL",    dest: "Indianapolis, IN", container: "53' Std", miles: 184, rate: 1750, avail: "Jun 17",   status: "available" },
-  { id: "DG-4828", mode: "Drayage",    origin: "Norfolk, VA",    dest: "Richmond, VA",     container: "40' Std", miles: 95,  rate: 1200, avail: "Today",    status: "hot" },
-  { id: "DG-4829", mode: "Drayage",    origin: "Baltimore, MD",  dest: "Frederick, MD",    container: "20' Std", miles: 62,  rate: 890,  avail: "Tomorrow", status: "available" },
-  { id: "DG-4830", mode: "Port→Port",  origin: "LA/LB — TTI",   dest: "LA/LB — Trapac",   container: "40' HC",  miles: 8,   rate: 420,  avail: "Today",    status: "available" },
-  { id: "DG-4831", mode: "Intermodal", origin: "Dallas, TX",     dest: "Memphis, TN",      container: "40' Std", miles: 468, rate: 3100, avail: "Jun 17",   status: "available" },
-  { id: "DG-4832", mode: "Drayage",    origin: "Charleston, SC", dest: "Greenville, SC",   container: "45' HC",  miles: 218, rate: 2400, avail: "Tomorrow", status: "hot" },
+  { id: "DG-4821", mode: "Drayage",    origin: "LA/Long Beach",  dest: "Ontario, CA",      container: "40' HC",  miles: 58,  rate: 1850, avail: "Today",    status: "hot",       type: "dry" },
+  { id: "DG-4822", mode: "Drayage",    origin: "NY/NJ Port",     dest: "Newark, NJ",       container: "20' Std", miles: 12,  rate: 650,  avail: "Today",    status: "available", type: "dry" },
+  { id: "DG-4823", mode: "Intermodal", origin: "Savannah, GA",   dest: "Atlanta, GA",      container: "40' Std", miles: 246, rate: 2200, avail: "Tomorrow", status: "available", type: "dry" },
+  { id: "DG-4824", mode: "Drayage",    origin: "Houston, TX",    dest: "Pasadena, TX",     container: "45' HC",  miles: 34,  rate: 1100, avail: "Today",    status: "available", type: "flat" },
+  { id: "DG-4825", mode: "Port→Port",  origin: "Seattle, WA",    dest: "Tacoma, WA",       container: "20' Rfr", miles: 28,  rate: 980,  avail: "Today",    status: "hot",       type: "cool" },
+  { id: "DG-4826", mode: "Drayage",    origin: "Miami, FL",      dest: "Medley, FL",       container: "40' HC",  miles: 22,  rate: 875,  avail: "Tomorrow", status: "available", type: "dry" },
+  { id: "DG-4827", mode: "Intermodal", origin: "Chicago, IL",    dest: "Indianapolis, IN", container: "53' Std", miles: 184, rate: 1750, avail: "Jun 17",   status: "available", type: "ow" },
+  { id: "DG-4828", mode: "Drayage",    origin: "Norfolk, VA",    dest: "Richmond, VA",     container: "40' Std", miles: 95,  rate: 1200, avail: "Today",    status: "hot",       type: "dry" },
+  { id: "DG-4829", mode: "Drayage",    origin: "Baltimore, MD",  dest: "Frederick, MD",    container: "20' Std", miles: 62,  rate: 890,  avail: "Tomorrow", status: "available", type: "cool" },
+  { id: "DG-4830", mode: "Port→Port",  origin: "LA/LB — TTI",   dest: "LA/LB — Trapac",   container: "40' HC",  miles: 8,   rate: 420,  avail: "Today",    status: "available", type: "flat" },
+  { id: "DG-4831", mode: "Intermodal", origin: "Dallas, TX",     dest: "Memphis, TN",      container: "40' Std", miles: 468, rate: 3100, avail: "Jun 17",   status: "available", type: "ow" },
+  { id: "DG-4832", mode: "Drayage",    origin: "Charleston, SC", dest: "Greenville, SC",   container: "45' HC",  miles: 218, rate: 2400, avail: "Tomorrow", status: "hot",       type: "dry" },
+];
+
+const FILTERS = [
+  { key: "all",  label: "All" },
+  { key: "dry",  label: "Dry" },
+  { key: "cool", label: "Cool" },
+  { key: "flat", label: "Flat" },
+  { key: "ow",   label: "OW" },
 ];
 
 const STATS = [
@@ -199,6 +207,7 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
 /* ─── Page ─────────────────────────────────────────────────────────── */
 export default function LoadBoardPage() {
   const [showSignIn, setShowSignIn] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("all");
 
   return (
     <>
@@ -262,18 +271,43 @@ export default function LoadBoardPage() {
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-6">
           {/* Row header */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse inline-block" />
-              <span className="text-white font-semibold text-[15px]">Live Jobs</span>
-              <span className="text-[12px] font-semibold px-2.5 py-1 rounded-full" style={{ background: "rgba(252,11,5,0.20)", color: "#fc0b05" }}>247 active</span>
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            {/* Live title */}
+            <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse inline-block" />
+            <span className="text-white font-semibold text-[15px]">Live Jobs</span>
+            <span className="text-[12px] font-semibold px-2.5 py-1 rounded-full" style={{ background: "rgba(252,11,5,0.20)", color: "#fc0b05" }}>247 active</span>
+
+            {/* Divider */}
+            <div className="w-px h-4 mx-1" style={{ background: "rgba(255,255,255,0.15)" }} />
+
+            {/* Filter pills */}
+            <div className="flex items-center gap-1.5">
+              {FILTERS.map((f) => {
+                const active = activeFilter === f.key;
+                return (
+                  <button
+                    key={f.key}
+                    onClick={() => setActiveFilter(f.key)}
+                    className="text-[11px] font-bold px-3 py-1.5 transition-all"
+                    style={{
+                      borderRadius: "6px",
+                      background: active ? "#fc0b05" : "rgba(255,255,255,0.07)",
+                      color: active ? "#fff" : "rgba(255,255,255,0.55)",
+                      border: active ? "1px solid #fc0b05" : "1px solid rgba(255,255,255,0.10)",
+                    }}
+                  >
+                    {f.label}
+                  </button>
+                );
+              })}
             </div>
-            <span className="text-[12px] text-white/40">Click any load to view details</span>
+
+            <span className="ml-auto text-[12px] text-white/40">Click any load to view details</span>
           </div>
 
-          {/* 3-column grid */}
+          {/* 4-column grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {LOADS.map((load, i) => (
+            {LOADS.filter(l => activeFilter === "all" || l.type === activeFilter).map((load, i) => (
               <LoadCard key={load.id} load={load} idx={i} onClick={() => setShowSignIn(true)} />
             ))}
           </div>
