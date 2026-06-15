@@ -1,102 +1,174 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
-/* ─── Demo load data (shown blurred behind gate) ────────────────────── */
 const LOADS = [
-  { id: "DG-4821", mode: "Drayage",    origin: "LA/Long Beach",  dest: "Ontario, CA",      container: "40' HC",  rate: 1850, avail: "Today",    status: "hot" },
-  { id: "DG-4822", mode: "Drayage",    origin: "NY/NJ Port",     dest: "Newark, NJ",       container: "20' Std", rate: 650,  avail: "Today",    status: "available" },
-  { id: "DG-4823", mode: "Intermodal", origin: "Savannah, GA",   dest: "Atlanta, GA",      container: "40' Std", rate: 2200, avail: "Tomorrow", status: "available" },
-  { id: "DG-4824", mode: "Drayage",    origin: "Houston, TX",    dest: "Houston, TX",      container: "45' HC",  rate: 1100, avail: "Today",    status: "available" },
-  { id: "DG-4825", mode: "Port→Port",  origin: "Seattle, WA",    dest: "Tacoma, WA",       container: "20' Rfr", rate: 980,  avail: "Today",    status: "hot" },
-  { id: "DG-4826", mode: "Drayage",    origin: "Miami, FL",      dest: "Medley, FL",       container: "40' HC",  rate: 875,  avail: "Tomorrow", status: "available" },
-  { id: "DG-4827", mode: "Intermodal", origin: "Chicago, IL",    dest: "Indianapolis, IN", container: "53' Std", rate: 1750, avail: "Jun 17",   status: "available" },
-  { id: "DG-4828", mode: "Drayage",    origin: "Norfolk, VA",    dest: "Richmond, VA",     container: "40' Std", rate: 1200, avail: "Today",    status: "hot" },
-  { id: "DG-4829", mode: "Drayage",    origin: "Baltimore, MD",  dest: "Frederick, MD",    container: "20' Std", rate: 890,  avail: "Tomorrow", status: "available" },
-  { id: "DG-4830", mode: "Port→Port",  origin: "LA/LB — TTI",   dest: "LA/LB — Trapac",   container: "40' HC",  rate: 420,  avail: "Today",    status: "available" },
-  { id: "DG-4831", mode: "Intermodal", origin: "Dallas, TX",     dest: "Memphis, TN",      container: "40' Std", rate: 3100, avail: "Jun 17",   status: "available" },
-  { id: "DG-4832", mode: "Drayage",    origin: "Charleston, SC", dest: "Greenville, SC",   container: "45' HC",  rate: 2400, avail: "Tomorrow", status: "hot" },
+  { id: "DG-4821", mode: "Drayage",    origin: "LA/Long Beach",  dest: "Ontario, CA",      container: "40' HC",  miles: 58,  rate: 1850, avail: "Today",    status: "hot" },
+  { id: "DG-4822", mode: "Drayage",    origin: "NY/NJ Port",     dest: "Newark, NJ",       container: "20' Std", miles: 12,  rate: 650,  avail: "Today",    status: "available" },
+  { id: "DG-4823", mode: "Intermodal", origin: "Savannah, GA",   dest: "Atlanta, GA",      container: "40' Std", miles: 246, rate: 2200, avail: "Tomorrow", status: "available" },
+  { id: "DG-4824", mode: "Drayage",    origin: "Houston, TX",    dest: "Pasadena, TX",     container: "45' HC",  miles: 34,  rate: 1100, avail: "Today",    status: "available" },
+  { id: "DG-4825", mode: "Port→Port",  origin: "Seattle, WA",    dest: "Tacoma, WA",       container: "20' Rfr", miles: 28,  rate: 980,  avail: "Today",    status: "hot" },
+  { id: "DG-4826", mode: "Drayage",    origin: "Miami, FL",      dest: "Medley, FL",       container: "40' HC",  miles: 22,  rate: 875,  avail: "Tomorrow", status: "available" },
+  { id: "DG-4827", mode: "Intermodal", origin: "Chicago, IL",    dest: "Indianapolis, IN", container: "53' Std", miles: 184, rate: 1750, avail: "Jun 17",   status: "available" },
+  { id: "DG-4828", mode: "Drayage",    origin: "Norfolk, VA",    dest: "Richmond, VA",     container: "40' Std", miles: 95,  rate: 1200, avail: "Today",    status: "hot" },
+  { id: "DG-4829", mode: "Drayage",    origin: "Baltimore, MD",  dest: "Frederick, MD",    container: "20' Std", miles: 62,  rate: 890,  avail: "Tomorrow", status: "available" },
+  { id: "DG-4830", mode: "Port→Port",  origin: "LA/LB — TTI",   dest: "LA/LB — Trapac",   container: "40' HC",  miles: 8,   rate: 420,  avail: "Today",    status: "available" },
+  { id: "DG-4831", mode: "Intermodal", origin: "Dallas, TX",     dest: "Memphis, TN",      container: "40' Std", miles: 468, rate: 3100, avail: "Jun 17",   status: "available" },
+  { id: "DG-4832", mode: "Drayage",    origin: "Charleston, SC", dest: "Greenville, SC",   container: "45' HC",  miles: 218, rate: 2400, avail: "Tomorrow", status: "hot" },
 ];
 
 const STATS = [
-  { value: "247",     label: "Active loads",     live: true },
-  { value: "83",      label: "Carriers online",  live: true },
+  { value: "247",     label: "Active loads",      live: true },
+  { value: "83",      label: "Carriers online",   live: true },
   { value: "1,240",   label: "Loads moved today", live: false },
-  { value: "< 4 min", label: "Avg. claim time",  live: false },
+  { value: "< 4 min", label: "Avg. claim time",   live: false },
 ];
 
-/* ─── Ghost card (blurred, locked) ──────────────────────────────────── */
-function GhostCard({ load }: { load: typeof LOADS[0] }) {
-  const isHot = load.status === "hot";
+/* ─── Sign-in modal ─────────────────────────────────────────────────── */
+function SignInModal({ onClose }: { onClose: () => void }) {
   return (
     <div
-      className="relative rounded-xl overflow-hidden select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: "rgba(6,20,58,0.80)", backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)" }}
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl"
+        style={{ background: "#0d1f3c", border: "1px solid rgba(255,255,255,0.12)" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="px-8 pt-8 pb-6 border-b" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+          <div className="flex items-center justify-between mb-5">
+            <div className="inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-[11px] font-bold" style={{ background: "rgba(252,11,5,0.18)", border: "1px solid rgba(252,11,5,0.4)" }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#fc0b05] animate-pulse inline-block" />
+              247 live loads available
+            </div>
+            <button onClick={onClose} className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/10 transition">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <h2 className="display text-white text-[26px] leading-tight">Sign in to view this load</h2>
+          <p className="mt-2 text-white/50 text-[13.5px] leading-relaxed">Access full details — terminal, container number, rate, and carrier contacts.</p>
+        </div>
+
+        {/* Buttons */}
+        <div className="px-8 py-7 space-y-3">
+          <Link
+            href="/login"
+            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-[14px] font-bold text-white transition hover:opacity-90"
+            style={{ background: "#fc0b05" }}
+          >
+            Sign In to DrayGo
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </Link>
+          <Link
+            href="/register"
+            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-[14px] font-semibold border text-white hover:bg-white/10 transition-colors"
+            style={{ borderColor: "rgba(255,255,255,0.18)" }}
+          >
+            Create Free Account
+          </Link>
+          <p className="text-center text-[12px] text-white/30 pt-1">Free to post loads · Carriers pay nothing to claim</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Single card (blurred, clickable) ─────────────────────────────── */
+function LoadCard({ load, onClick }: { load: typeof LOADS[0]; onClick: () => void }) {
+  const isHot = load.status === "hot";
+  return (
+    <button
+      onClick={onClick}
+      className="relative rounded-2xl overflow-hidden text-left w-full group transition-all duration-200 hover:scale-[1.02]"
       style={{
-        background: "rgba(255,255,255,0.06)",
+        background: "rgba(255,255,255,0.055)",
         border: "1px solid rgba(255,255,255,0.10)",
-        backdropFilter: "blur(4px)",
-        WebkitBackdropFilter: "blur(4px)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
         aspectRatio: "1 / 1",
       }}
     >
-      {/* Blurred content underneath */}
+      {/* Blurred content */}
       <div
-        className="absolute inset-0 p-4 flex flex-col justify-between"
-        style={{ filter: "blur(3px)", opacity: 0.45, userSelect: "none", pointerEvents: "none" }}
+        className="absolute inset-0 p-5 flex flex-col justify-between"
+        style={{ filter: "blur(3.5px)", opacity: 0.5, userSelect: "none", pointerEvents: "none" }}
       >
+        {/* Top row */}
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-bold text-white/60 tracking-wider">{load.id}</span>
+          <span className="text-[11px] font-bold text-white/55 tracking-widest">{load.id}</span>
           <span
-            className="text-[9px] font-bold px-2 py-0.5 rounded-full"
+            className="text-[10px] font-bold px-2.5 py-0.5 rounded-full"
             style={{
-              background: isHot ? "rgba(251,191,36,0.25)" : "rgba(74,222,128,0.20)",
+              background: isHot ? "rgba(251,191,36,0.22)" : "rgba(74,222,128,0.18)",
               color: isHot ? "#fbbf24" : "#4ade80",
             }}
           >
             {isHot ? "High Demand" : "Available"}
           </span>
         </div>
+
+        {/* Mode badge */}
         <div>
-          <div className="text-[9px] uppercase tracking-[0.14em] text-white/40 mb-1">{load.mode}</div>
-          <div className="text-[12px] font-semibold text-white leading-snug">{load.origin}</div>
-          <div className="text-white/25 text-[10px] my-1">↓</div>
-          <div className="text-[12px] font-semibold text-white leading-snug">{load.dest}</div>
+          <div className="text-[10px] uppercase tracking-[0.18em] text-white/35 mb-2 font-semibold">{load.mode}</div>
+
+          {/* Route */}
+          <div className="flex items-start gap-2.5">
+            <div className="flex flex-col items-center pt-1 shrink-0">
+              <div className="w-2 h-2 rounded-full border-2 border-[#fc0b05]" />
+              <div className="w-px h-6 my-0.5" style={{ background: "rgba(255,255,255,0.15)" }} />
+              <div className="w-2 h-2 rounded-full bg-white/40" />
+            </div>
+            <div>
+              <div className="text-[13px] font-semibold text-white leading-snug">{load.origin}</div>
+              <div className="text-[13px] font-semibold text-white/70 leading-snug mt-1">{load.dest}</div>
+            </div>
+          </div>
         </div>
+
+        {/* Bottom row */}
         <div className="flex items-end justify-between">
-          <div>
-            <div className="text-[9px] text-white/40 uppercase tracking-wide">{load.container}</div>
-            <div className="text-[9px] text-white/30">{load.avail}</div>
+          <div className="space-y-1">
+            <div className="text-[10px] text-white/35 uppercase tracking-wide">{load.container}</div>
+            <div className="text-[10px] text-white/30">{load.miles} mi · {load.avail}</div>
           </div>
           <div className="text-right">
-            <div className="text-[9px] text-white/40 uppercase tracking-wide">Rate</div>
-            <div className="text-[18px] font-extrabold text-white leading-none">${load.rate.toLocaleString()}</div>
+            <div className="text-[9px] text-white/35 uppercase tracking-wide mb-0.5">Rate</div>
+            <div className="text-[22px] font-extrabold text-white leading-none">${load.rate.toLocaleString()}</div>
           </div>
         </div>
       </div>
 
-      {/* Lock icon overlay */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+      {/* Hover overlay — subtle indication it's clickable */}
+      <div
+        className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-150"
+        style={{ background: "rgba(252,11,5,0.08)" }}
+      >
         <div
-          className="w-9 h-9 rounded-full flex items-center justify-center"
-          style={{ background: "rgba(252,11,5,0.20)", border: "1px solid rgba(252,11,5,0.40)" }}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-[12px] font-bold text-white"
+          style={{ background: "rgba(252,11,5,0.85)" }}
         >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
+          View Load Details
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
         </div>
-        <span className="text-[10px] font-semibold text-white/45">Sign in to view</span>
       </div>
-    </div>
+    </button>
   );
 }
 
 /* ─── Page ─────────────────────────────────────────────────────────── */
 export default function LoadBoardPage() {
+  const [showSignIn, setShowSignIn] = useState(false);
+
   return (
     <>
       <Nav />
+
+      {showSignIn && <SignInModal onClose={() => setShowSignIn(false)} />}
 
       {/* ── HERO ── */}
       <section
@@ -119,19 +191,11 @@ export default function LoadBoardPage() {
                 The live drayage marketplace. Find verified loads from top brokers and shippers — or post your own and get carrier bids in minutes.
               </p>
               <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/register"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-[14px] font-semibold text-white transition hover:opacity-90"
-                  style={{ background: "#fc0b05" }}
-                >
+                <Link href="/register" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-[14px] font-semibold text-white transition hover:opacity-90" style={{ background: "#fc0b05" }}>
                   Create Free Account
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
                 </Link>
-                <Link
-                  href="/login"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-[14px] font-semibold border text-white hover:bg-white/10 transition-colors"
-                  style={{ borderColor: "rgba(255,255,255,0.22)" }}
-                >
+                <Link href="/login" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-[14px] font-semibold border text-white hover:bg-white/10 transition-colors" style={{ borderColor: "rgba(255,255,255,0.22)" }}>
                   Sign In
                 </Link>
               </div>
@@ -168,57 +232,22 @@ export default function LoadBoardPage() {
               <span className="text-white font-semibold text-[15px]">Live Jobs</span>
               <span className="text-[12px] font-semibold px-2.5 py-1 rounded-full" style={{ background: "rgba(252,11,5,0.20)", color: "#fc0b05" }}>247 active</span>
             </div>
-            <span className="text-[12px] text-white/40">Updated just now</span>
+            <span className="text-[12px] text-white/40">Click any load to view details</span>
           </div>
 
-          {/* Square ghost cards */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
+          {/* 3-column grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {LOADS.map((load) => (
-              <GhostCard key={load.id} load={load} />
+              <LoadCard key={load.id} load={load} onClick={() => setShowSignIn(true)} />
             ))}
           </div>
 
-          {/* Gate banner */}
-          <div
-            className="mt-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6 px-8 py-7"
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.10)",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-            }}
-          >
-            <div className="flex items-center gap-4">
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                style={{ background: "rgba(252,11,5,0.18)", border: "1px solid rgba(252,11,5,0.35)" }}
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                </svg>
-              </div>
-              <div>
-                <div className="text-white font-semibold text-[15px]">Sign in to see live load details</div>
-                <div className="text-white/50 text-[13px] mt-0.5">247 loads available right now · rates, terminals, container numbers &amp; carrier contacts</div>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
-              <Link
-                href="/register"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-[13px] font-bold text-white transition hover:opacity-90 whitespace-nowrap"
-                style={{ background: "#fc0b05" }}
-              >
-                Create Free Account
-              </Link>
-              <Link
-                href="/login"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-[13px] font-semibold border text-white hover:bg-white/10 transition-colors whitespace-nowrap"
-                style={{ borderColor: "rgba(255,255,255,0.22)" }}
-              >
-                Sign In
-              </Link>
-            </div>
+          {/* Subtle sign-in nudge below */}
+          <div className="mt-8 text-center">
+            <p className="text-white/40 text-[13px]">
+              Sign in to access full load details, rates, and claim loads instantly.{" "}
+              <button onClick={() => setShowSignIn(true)} className="text-[#fc0b05] font-semibold hover:underline">Sign in now →</button>
+            </p>
           </div>
         </div>
       </section>
