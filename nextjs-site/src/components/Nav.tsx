@@ -54,34 +54,11 @@ export default function Nav() {
           <img src={asset("/logo-draygo.png")} alt="DrayGo" className="h-10 md:h-11 w-auto" />
         </Link>
 
-        {/* Feature buttons — always visible beside logo */}
-        <div className="hidden lg:flex items-center gap-2 shrink-0">
-          <Link
-            href="/load-board"
-            className="rounded-lg text-[13px] font-semibold border transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none"
-            style={{
-              padding: "6px 16px",
-              color: "#fc0b05",
-              borderColor: "rgba(252,11,5,0.55)",
-              background: "rgba(252,11,5,0.08)",
-            }}
-          >
-            Load Board
-          </Link>
-          <Link
-            href="/jobs-map"
-            className="rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none"
-            style={{ padding: "6px 16px" }}
-          >
-            Jobs on Map
-          </Link>
-        </div>
-
-        {/* Divider */}
-        <div className="hidden lg:block h-5 w-px shrink-0" style={{ background: "rgba(255,255,255,0.15)" }} />
 
         {/* Desktop nav links */}
         <nav className="hidden lg:flex items-center gap-0 text-[13px] flex-1 min-w-0">
+          <Link href="/load-board" className={linkCls} style={{ padding: "6px 12px" }}>Load Board</Link>
+          <Link href="/jobs-map" className={linkCls} style={{ padding: "6px 12px" }}>Jobs on Map</Link>
           {NAV_LINKS.map((l) => (
             <Link
               key={l.label}
@@ -170,13 +147,9 @@ export default function Nav() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="lg:hidden border-t border-white/10 px-6 py-4 space-y-1" style={{ background: "#08192b" }}>
-          <Link href="/load-board" className="flex items-center gap-2 py-2.5 px-3 text-[14px] font-semibold" style={{ color: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
-            Load Board
-          </Link>
-          <Link href="/jobs-map" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
-            Jobs on Map
-          </Link>
           <div className="border-t border-white/10 pt-1">
+            <Link href="/load-board" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Load Board</Link>
+            <Link href="/jobs-map" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Jobs on Map</Link>
             {NAV_LINKS.map((l) => (
               <Link key={l.label} href={l.href} className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
                 {l.label}
