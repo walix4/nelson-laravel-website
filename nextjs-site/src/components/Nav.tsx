@@ -39,7 +39,7 @@ const SERVICES_ITEMS = [
   },
 ];
 
-const linkCls = "px-3 py-1.5 text-[13px] font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap outline-none focus:outline-none";
+const linkCls = "px-3 py-1.5 text-[13px] font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none";
 
 export default function Nav() {
   const [svcOpen, setSvcOpen] = useState(false);
@@ -58,7 +58,7 @@ export default function Nav() {
         <div className="hidden lg:flex items-center gap-2 shrink-0">
           <Link
             href="/load-board"
-            className="px-4 py-1.5 rounded-lg text-[13px] font-semibold border transition whitespace-nowrap outline-none focus:outline-none"
+            className="px-4 py-1.5 rounded-lg text-[13px] font-semibold border transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none"
             style={{
               color: "#fc0b05",
               borderColor: "rgba(252,11,5,0.55)",
@@ -69,7 +69,7 @@ export default function Nav() {
           </Link>
           <Link
             href="/jobs-map"
-            className="px-4 py-1.5 rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition whitespace-nowrap outline-none focus:outline-none"
+            className="px-4 py-1.5 rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none"
           >
             Jobs on Map
           </Link>
