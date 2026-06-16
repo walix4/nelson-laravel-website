@@ -39,7 +39,7 @@ const SERVICES_ITEMS = [
   },
 ];
 
-const linkCls = "px-3 py-1.5 text-[13px] font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none";
+const linkCls = "text-[13px] font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none";
 
 export default function Nav() {
   const [svcOpen, setSvcOpen] = useState(false);
@@ -47,7 +47,7 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-40 border-b" style={{ background: "#08192b", borderColor: "rgba(255,255,255,0.12)" }}>
-      <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center gap-4">
+      <div className="max-w-[1400px] mx-auto flex items-center gap-4" style={{ height: 64, paddingLeft: 24, paddingRight: 24 }}>
 
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
@@ -58,8 +58,9 @@ export default function Nav() {
         <div className="hidden lg:flex items-center gap-2 shrink-0">
           <Link
             href="/load-board"
-            className="px-4 py-1.5 rounded-lg text-[13px] font-semibold border transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none"
+            className="rounded-lg text-[13px] font-semibold border transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none"
             style={{
+              padding: "6px 16px",
               color: "#fc0b05",
               borderColor: "rgba(252,11,5,0.55)",
               background: "rgba(252,11,5,0.08)",
@@ -69,7 +70,8 @@ export default function Nav() {
           </Link>
           <Link
             href="/jobs-map"
-            className="px-4 py-1.5 rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none"
+            className="rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none"
+            style={{ padding: "6px 16px" }}
           >
             Jobs on Map
           </Link>
@@ -85,6 +87,7 @@ export default function Nav() {
               key={l.label}
               href={l.href}
               className={linkCls}
+              style={{ padding: "6px 12px" }}
             >
               {l.label}
             </Link>
@@ -97,7 +100,8 @@ export default function Nav() {
             onMouseLeave={() => setSvcOpen(false)}
           >
             <button
-              className={`${linkCls} flex items-center gap-1.5`}
+              className={`${linkCls} flex items-center gap-[6px]`}
+              style={{ padding: "6px 12px" }}
               onClick={() => setSvcOpen((o) => !o)}
             >
               Services
@@ -135,13 +139,13 @@ export default function Nav() {
 
         {/* Right actions */}
         <div className="flex items-center gap-2 shrink-0 ml-auto">
-          <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5 transition whitespace-nowrap">
+          <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none" style={{ padding: "6px 12px" }}>
             Sign in
           </Link>
           <Link
             href="/#load-board"
-            className="hidden sm:inline-flex text-[13px] font-semibold text-white px-4 py-2 rounded-lg items-center gap-1.5 transition hover:opacity-90 whitespace-nowrap"
-            style={{ background: "#fc0b05" }}
+            className="hidden sm:inline-flex text-[13px] font-semibold text-white rounded-lg items-center gap-[6px] transition hover:opacity-90 whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none"
+            style={{ background: "#fc0b05", padding: "8px 16px" }}
           >
             Get Started
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
