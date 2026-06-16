@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { asset } from "@/lib/site";
 
 const NAV_LINKS = [
@@ -39,39 +40,61 @@ const SERVICES_ITEMS = [
   },
 ];
 
-const linkCls = "px-3 py-1.5 text-[13px] font-medium text-white/80 hover:text-white transition-colors";
+const linkCls = "px-3 py-1.5 text-[13px] font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap";
 
 export default function Nav() {
   const [svcOpen, setSvcOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-40 border-b" style={{ background: "#08192b", borderColor: "rgba(255,255,255,0.12)" }}>
-      <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center gap-4">
 
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
           <img src={asset("/logo-draygo.png")} alt="DrayGo" className="h-10 md:h-11 w-auto" />
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1 text-[13px]">
+        {/* Feature buttons — always visible beside logo */}
+        <div className="hidden lg:flex items-center gap-2 shrink-0">
           <Link
             href="/load-board"
-            className="px-4 py-1.5 rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition"
+            className="px-4 py-1.5 rounded-lg text-[13px] font-semibold border transition whitespace-nowrap"
+            style={{
+              color: "#fc0b05",
+              borderColor: "rgba(252,11,5,0.55)",
+              background: "rgba(252,11,5,0.08)",
+            }}
           >
             Load Board
           </Link>
-          <Link href="/" className={linkCls}>Home</Link>
-          <Link href="/shipper" className={linkCls}>Shippers</Link>
-          <Link href="/broker" className={linkCls}>Broker</Link>
-          <Link href="/carriers" className={linkCls}>Carriers</Link>
-          <Link href="/#pricing" className={linkCls}>Pricing</Link>
-          <Link href="/about" className={linkCls}>About Us</Link>
+          <Link
+            href="/jobs-map"
+            className="px-4 py-1.5 rounded-lg text-[13px] font-semibold text-white border border-white/25 hover:bg-white/10 transition whitespace-nowrap"
+          >
+            Jobs on Map
+          </Link>
+        </div>
+
+        {/* Divider */}
+        <div className="hidden lg:block h-5 w-px shrink-0" style={{ background: "rgba(255,255,255,0.15)" }} />
+
+        {/* Desktop nav links */}
+        <nav className="hidden lg:flex items-center gap-0 text-[13px] flex-1 min-w-0">
+          {NAV_LINKS.map((l) => (
+            <Link
+              key={l.label}
+              href={l.href}
+              className={`${linkCls} ${pathname === l.href ? "text-white" : ""}`}
+            >
+              {l.label}
+            </Link>
+          ))}
 
           {/* Services dropdown */}
           <div
-            className="relative"
+            className="relative shrink-0"
             onMouseEnter={() => setSvcOpen(true)}
             onMouseLeave={() => setSvcOpen(false)}
           >
@@ -113,13 +136,13 @@ export default function Nav() {
         </nav>
 
         {/* Right actions */}
-        <div className="flex items-center gap-2 shrink-0">
-          <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5 transition">
+        <div className="flex items-center gap-2 shrink-0 ml-auto">
+          <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white px-3 py-1.5 transition whitespace-nowrap">
             Sign in
           </Link>
           <Link
             href="/#load-board"
-            className="text-[13px] font-semibold text-white px-4 py-2 rounded-lg inline-flex items-center gap-1.5 transition hover:opacity-90"
+            className="hidden sm:inline-flex text-[13px] font-semibold text-white px-4 py-2 rounded-lg items-center gap-1.5 transition hover:opacity-90 whitespace-nowrap"
             style={{ background: "#fc0b05" }}
           >
             Get Started
@@ -145,11 +168,19 @@ export default function Nav() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="lg:hidden border-t border-white/10 px-6 py-4 space-y-1" style={{ background: "#08192b" }}>
-          {NAV_LINKS.map((l) => (
-            <Link key={l.label} href={l.href} className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
-              {l.label}
-            </Link>
-          ))}
+          <Link href="/load-board" className="flex items-center gap-2 py-2.5 px-3 text-[14px] font-semibold" style={{ color: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
+            Load Board
+          </Link>
+          <Link href="/jobs-map" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
+            Jobs on Map
+          </Link>
+          <div className="border-t border-white/10 pt-1">
+            {NAV_LINKS.map((l) => (
+              <Link key={l.label} href={l.href} className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
+                {l.label}
+              </Link>
+            ))}
+          </div>
           <div className="pt-1 border-t border-white/10">
             <div className="text-[11px] uppercase tracking-[0.18em] text-white/40 mb-2 pt-2">Services</div>
             {SERVICES_ITEMS.map((s) => (
@@ -159,7 +190,7 @@ export default function Nav() {
             ))}
           </div>
           <div className="pt-3">
-            <Link href="/load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
+            <Link href="/#load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
               Get Started →
             </Link>
           </div>
