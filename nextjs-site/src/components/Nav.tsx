@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { asset } from "@/lib/site";
 
 const NAV_LINKS = [
@@ -8,7 +9,7 @@ const NAV_LINKS = [
   { label: "Shippers", href: "/shipper" },
   { label: "Broker", href: "/broker" },
   { label: "Carriers", href: "/carriers" },
-  { label: "Pricing", href: "/#pricing" },
+  { label: "Pricing", href: "/pricing" },
   { label: "About Us", href: "/about" },
 ];
 
@@ -41,22 +42,47 @@ const SERVICES_ITEMS = [
 
 const linkCls = "text-[13px] font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none";
 
-export default function Nav() {
+export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
   const [svcOpen, setSvcOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const showBar = pathname === "/load-board" || pathname === "/load-board/" || pathname === "/jobs-map" || pathname === "/jobs-map/";
 
   return (
-    <header className="sticky top-0 z-40 border-b" style={{ background: "#08192b", borderColor: "rgba(255,255,255,0.12)" }}>
-      <div className="max-w-[1400px] mx-auto flex items-center gap-4" style={{ height: 64, paddingLeft: 24, paddingRight: 24 }}>
+    <>
+    <header className="sticky top-0 z-40" style={{ background: "#08192b" }}>
+      <div style={{ overflow: "hidden", transition: "height 0.22s ease", height: showBar ? 32 : 0 }}>
+        <div className="text-[11px] font-medium" style={{ background: "var(--red,#e8392a)", color: "#fff", height: 32 }}>
+          <div className="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
+            <div className="flex items-center gap-5">
+              <span className="flex items-center gap-2">
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fff", display: "inline-block", boxShadow: "0 0 0 2px rgba(255,255,255,0.4)", animation: "pulse 2s infinite" }} />
+                <span>Network <b>LIVE</b></span>
+              </span>
+              <span className="hidden sm:inline" style={{ opacity: 0.6 }}>·</span>
+              <span className="hidden sm:inline"><b>12,431</b> active routes</span>
+              <span className="hidden md:inline" style={{ opacity: 0.6 }}>·</span>
+              <span className="hidden md:inline">Diesel <b>$3.82</b>/gal · FSC <b>17%</b></span>
+              <span className="hidden lg:inline" style={{ opacity: 0.6 }}>·</span>
+              <span className="hidden lg:inline">Port congestion <b>Low</b></span>
+            </div>
+            <div className="flex items-center gap-4" style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.14em" }}>
+              <span style={{ opacity: 0.7 }}>v2026.06</span>
+              <a href="/load-board" style={{ color: "#fff", opacity: 0.9, textDecoration: "none" }}>Load Board →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="border-b" style={{ borderColor: "rgba(232,57,42,0.45)" }}>
+      <div className="max-w-[1400px] mx-auto flex items-center" style={{ height: 64, paddingLeft: 24, paddingRight: 24 }}>
 
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
-          <img src={asset("/logo-draygo.png")} alt="DrayGo" className="h-10 md:h-11 w-auto" />
+          <img src={logoSrc ?? asset("/logo-draygo.png")} alt="DrayGo" className="h-9 md:h-10 w-auto" />
         </Link>
 
-
-        {/* Desktop nav links */}
-        <nav className="hidden lg:flex items-center gap-0 text-[13px] flex-1 min-w-0">
+        {/* Desktop nav links — flex centered, no absolute positioning */}
+        <nav className="hidden lg:flex flex-1 justify-center items-center gap-0 text-[13px]">
           <Link href="/load-board" className={linkCls} style={{ padding: "6px 12px" }}>Load Board</Link>
           <Link href="/jobs-map" className={linkCls} style={{ padding: "6px 12px" }}>Jobs on Map</Link>
           {NAV_LINKS.map((l) => (
@@ -115,7 +141,7 @@ export default function Nav() {
         </nav>
 
         {/* Right actions */}
-        <div className="flex items-center gap-2 shrink-0 ml-auto">
+        <div className="flex items-center gap-2 shrink-0">
           <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none" style={{ padding: "6px 12px" }}>
             Sign in
           </Link>
@@ -171,6 +197,8 @@ export default function Nav() {
           </div>
         </div>
       )}
+      </div>
     </header>
+    </>
   );
 }

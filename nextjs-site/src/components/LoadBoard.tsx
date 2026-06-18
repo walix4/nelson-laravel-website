@@ -229,7 +229,7 @@ export default function LoadBoard() {
       </div>
 
       {/* Load cards */}
-      <div className="space-y-2 max-h-[260px] overflow-y-auto pr-0.5">
+      <div className="space-y-2 max-h-[260px] overflow-y-auto pr-0.5 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: "none" }}>
         {visible.map((load) => (
           <div
             key={load.id}

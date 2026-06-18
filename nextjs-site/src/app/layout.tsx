@@ -2,8 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DrayageRate · The drayage pricing network for North America",
+  title: "DrayGo · The drayage platform for North America",
   description: "Instant drayage quotes across every major U.S. port. Watch your freight move from port to door — in real time.",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

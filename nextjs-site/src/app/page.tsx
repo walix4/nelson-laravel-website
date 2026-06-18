@@ -33,16 +33,6 @@ const SHIP: { title: string; icon: React.ReactNode; rows: Lane[] }[] = [
 export default function Home() {
   return (
     <>
-      <div className="text-[11px] font-medium border-b" style={{ background: "var(--red)", color: "#fff", borderColor: "rgba(0,0,0,0.15)" }}>
-        <div className="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
-          <div className="flex items-center gap-5">
-            <span className="flex items-center gap-2"><span className="live-dot" /><span>Network <b>LIVE</b></span></span>
-            <span className="hidden sm:inline opacity-60">·</span><span className="hidden sm:inline num"><b>12,431</b> active routes</span>
-            <span className="hidden md:inline opacity-60">·</span><span className="hidden md:inline num">Diesel <b>$5.18</b>/gal · FSC <b>17%</b></span>
-          </div>
-          <div className="flex items-center gap-4 text-[10px] uppercase tracking-[0.14em]"><span className="opacity-70">v2026.05</span><a href="#api" className="opacity-90 hover:opacity-100">API status</a></div>
-        </div>
-      </div>
       <Nav />
       <RevealInit />
 
@@ -82,15 +72,6 @@ export default function Home() {
                 <div className="h-9 w-px bg-white/20" />
                 <div><div className="text-[26px] md:text-[30px] display num text-white">250,000+</div><div className="mt-0.5">Quotes</div></div>
               </div>
-            </div>
-          </div>
-        </div>
-        {/* trust band — bottom of hero, video plays behind the glass */}
-        <div className="relative z-10 py-9 border-t-2" style={{ borderColor: "rgba(255,59,48,0.6)", background: "rgba(255,255,255,0.06)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)" }}>
-          <div className="max-w-[1400px] mx-auto px-6">
-            <div className="text-center text-[11px] uppercase tracking-[0.2em] font-semibold text-white/65">Trusted by brokers, freight forwarders, importers &amp; 3PLs</div>
-            <div className="mt-6 overflow-hidden" style={{ maskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)", WebkitMaskImage: "linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)" }}>
-              <div className="marquee-track">{[...BRANDS, ...BRANDS].map((b, i) => <span key={i} className="brand-logo text-white"><span className="text-[18px] font-bold tracking-tight whitespace-nowrap">{b}</span></span>)}</div>
             </div>
           </div>
         </div>

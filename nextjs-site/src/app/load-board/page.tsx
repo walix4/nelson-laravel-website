@@ -103,6 +103,7 @@ function BookingDialog({ onClose }: { onClose: () => void }) {
 }
 
 function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; onClick: () => void }) {
+  const [hovered, setHovered] = useState(false);
   const isHot   = load.status === "hot";
   const num     = String(idx + 1).padStart(2, "0");
   const perMile = (load.rate / load.miles).toFixed(2);
@@ -110,8 +111,35 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
 
   return (
     <button onClick={onClick}
-      className="relative text-left w-full transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative text-left w-full transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl overflow-hidden"
       style={{ background: "#0d1f3c", border: "1px solid rgba(255,255,255,0.09)", borderRadius: "10px" }}>
+
+      {/* Hover sign-in overlay — slides in from left */}
+      <div style={{
+        position: "absolute", inset: 0, borderRadius: "10px", zIndex: 10,
+        background: "linear-gradient(135deg,rgba(8,25,60,0.97) 0%,rgba(14,32,72,0.95) 100%)",
+        backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
+        transform: hovered ? "translateX(0)" : "translateX(-100%)",
+        transition: "transform 0.32s cubic-bezier(0.23,1,0.32,1)",
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+        gap: 12, padding: "20px 22px",
+      }}>
+        <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(252,11,5,0.16)", border: "1px solid rgba(252,11,5,0.30)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <p style={{ color: "#fff", fontWeight: 700, fontSize: 14, marginBottom: 4 }}>Sign in to see details</p>
+          <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 11, lineHeight: 1.5 }}>Claim loads, view full route &amp; get paid in 48h</p>
+        </div>
+        <div style={{ display: "flex", gap: 8, width: "100%", marginTop: 4 }}>
+          <a href="/login" onClick={e => e.stopPropagation()} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "8px 0", borderRadius: 8, fontSize: 12, fontWeight: 600, color: "#fff", border: "1px solid rgba(255,255,255,0.22)", background: "transparent", textDecoration: "none" }}>Sign In</a>
+          <a href="/register" onClick={e => e.stopPropagation()} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "8px 0", borderRadius: 8, fontSize: 12, fontWeight: 700, color: "#fff", background: "#fc0b05", textDecoration: "none" }}>Sign Up</a>
+        </div>
+      </div>
 
       {/* Header */}
       <div className="p-4 flex items-start gap-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
@@ -201,6 +229,7 @@ export default function LoadBoardPage() {
   const [activeMode, setActiveMode] = useState("all");
   const [activeType, setActiveType] = useState("all");
   const [viewMode, setViewMode]     = useState<"list" | "map">("list");
+  const [hideList, setHideList]     = useState(false);
 
   const filtered = LOADS.filter(l => {
     const modeOk = activeMode === "all"
@@ -257,67 +286,74 @@ export default function LoadBoardPage() {
               </div>
             </div>
 
-            {/* Mode tabs — full width 4 equal columns */}
-            <div className="px-6 pt-5 pb-4">
-              <div className="grid grid-cols-4 gap-3">
-                {[
-                  { key: "all",        label: "All" },
-                  { key: "drayage",    label: "Drayage" },
-                  { key: "pp",         label: "P-P" },
-                  { key: "intermodal", label: "Intermodal" },
-                ].map(t => (
-                  <button key={t.key} onClick={() => setActiveMode(t.key)}
-                    className="py-3.5 rounded-xl text-[14px] font-semibold transition-all"
-                    style={{
-                      background: activeMode === t.key
-                        ? "linear-gradient(135deg,rgba(180,8,3,0.95),rgba(252,11,5,0.85))"
-                        : "rgba(255,255,255,0.05)",
-                      color: activeMode === t.key ? "white" : "rgba(255,255,255,0.45)",
-                      border: activeMode === t.key
-                        ? "1px solid rgba(252,11,5,0.45)"
-                        : "1px solid rgba(255,255,255,0.09)",
-                    }}>
-                    {t.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+            {/* Pill filter bar */}
+            <div className="px-4 py-3 flex items-center gap-1.5 flex-wrap" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+              {/* Type pills */}
+              {[
+                { key: "all",  label: "All Types",   icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> },
+                { key: "dry",  label: "Dry",          icon: <DryIcon size={14} /> },
+                { key: "cool", label: "Reefer",        icon: <CoolIcon size={14} /> },
+                { key: "flat", label: "Flatbed",       icon: <FlatIcon size={14} /> },
+                { key: "ow",   label: "Overweight",    icon: <OWIcon size={14} /> },
+              ].map(t => (
+                <button key={t.key} onClick={() => setActiveType(t.key)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold rounded-lg transition-all"
+                  style={{
+                    background: activeType === t.key ? "#fc0b05" : "rgba(255,255,255,0.06)",
+                    color:      activeType === t.key ? "#fff"    : "rgba(255,255,255,0.55)",
+                    border:     activeType === t.key ? "1px solid rgba(252,11,5,0.0)" : "1px solid rgba(255,255,255,0.1)",
+                  }}>
+                  {t.icon}{t.label}
+                </button>
+              ))}
 
-            {/* Filter dropdowns */}
-            <div className="px-6 pb-5">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-0 rounded-xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.03)" }}>
-                {[
-                  { label: "DISTANCE", opts: [{ v: "all", l: "Any" }, { v: "local", l: "< 50 mi" }, { v: "mid", l: "50–200 mi" }, { v: "long", l: "200+ mi" }], val: "all", onChange: undefined },
-                  { label: "TYPE",     opts: [{ v: "all", l: "Any" }, { v: "dry", l: "Dry" }, { v: "cool", l: "Reefer" }, { v: "flat", l: "Flatbed" }, { v: "ow", l: "O/W" }], val: activeType, onChange: (v: string) => setActiveType(v) },
-                  { label: "WEIGHT",   opts: [{ v: "all", l: "Any" }, { v: "lt30", l: "< 30K" }, { v: "30-40", l: "30–40K" }, { v: "gt40", l: "40K+" }], val: "all", onChange: undefined },
-                  { label: "WEATHER",  opts: [{ v: "all", l: "Any" }, { v: "clear", l: "Clear" }, { v: "rain", l: "Rain" }, { v: "snow", l: "Snow" }], val: "all", onChange: undefined },
-                ].map((f, i) => (
-                  <div key={f.label} className="px-5 py-4" style={{ borderRight: i < 3 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
-                    <div className="text-[9px] uppercase tracking-[0.18em] text-white/30 mb-2 font-bold">{f.label}</div>
-                    <select
-                      value={f.val}
-                      onChange={f.onChange ? e => f.onChange!(e.target.value) : undefined}
-                      className="w-full text-[14px] text-white/80 bg-transparent focus:outline-none cursor-pointer font-medium"
-                      style={{ colorScheme: "dark" }}>
-                      {f.opts.map(o => <option key={o.v} value={o.v}>{o.l}</option>)}
-                    </select>
-                  </div>
-                ))}
-              </div>
+              <div style={{ width: 1, height: 26, background: "rgba(255,255,255,0.13)", margin: "0 4px", flexShrink: 0 }} />
+
+              {/* Mode pills */}
+              {[
+                { key: "all",         label: "All Modes",  icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> },
+                { key: "drayage",     label: "Drayage",    icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
+                { key: "intermodal",  label: "Intermodal", icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> },
+                { key: "pp",          label: "Port→Port",  icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg> },
+              ].map(t => (
+                <button key={t.key} onClick={() => setActiveMode(t.key)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold rounded-lg transition-all"
+                  style={{
+                    background: activeMode === t.key ? "#3b82f6" : "rgba(255,255,255,0.06)",
+                    color:      activeMode === t.key ? "#fff"    : "rgba(255,255,255,0.55)",
+                    border:     activeMode === t.key ? "1px solid rgba(59,130,246,0.0)" : "1px solid rgba(255,255,255,0.1)",
+                  }}>
+                  {t.icon}{t.label}
+                </button>
+              ))}
+
+              {/* Hide List */}
+              <button onClick={() => setHideList(h => !h)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold rounded-lg transition-all ml-auto"
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  color: "rgba(255,255,255,0.55)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+                {hideList ? "Show List" : "Hide List"}
+              </button>
             </div>
 
             {/* Content: map or card grid */}
-            <div className="px-6 pb-6">
-              {viewMode === "map" ? (
-                <LoadMapView loads={filtered} onMarkerClick={() => setShowDialog(true)} />
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {filtered.map((load, idx) => (
-                    <LoadCard key={load.id} load={load} idx={idx} onClick={() => setShowDialog(true)} />
-                  ))}
-                </div>
-              )}
-            </div>
+            {!hideList && (
+              <div className="px-6 pb-6 pt-4">
+                {viewMode === "map" ? (
+                  <LoadMapView loads={filtered} onMarkerClick={() => setShowDialog(true)} />
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {filtered.slice(0, 8).map((load, idx) => (
+                      <LoadCard key={load.id} load={load} idx={idx} onClick={() => setShowDialog(true)} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Footer bar */}
             <div className="px-6 py-4 flex items-center justify-between" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
