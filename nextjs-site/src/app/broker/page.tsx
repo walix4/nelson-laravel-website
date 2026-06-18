@@ -371,9 +371,9 @@ export default function BrokerPage() {
       <section style={{ background: "#060d1a", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(0,165,231,0.12)", border: "1px solid rgba(0,165,231,0.35)", borderRadius: 99, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#00a5e7", marginBottom: 20 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(0,165,231,0.12)", border: "1px solid rgba(0,165,231,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#00a5e7", marginBottom: 20 }}>
               <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#00a5e7", display: "inline-block" }} />
-              Built for brokers
+              Benefits
             </div>
             <h2 style={{ fontSize: "clamp(34px,4vw,56px)", fontWeight: 900, color: "#fff", lineHeight: 1.04, margin: "0 0 14px" }}>
               Source faster. Protect margins.{" "}

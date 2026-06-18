@@ -305,9 +305,9 @@ export default function CarriersPage() {
       <section style={{ background: "#060d1a", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(39,179,10,0.12)", border: "1px solid rgba(39,179,10,0.35)", borderRadius: 99, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#27b30a", marginBottom: 20 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(39,179,10,0.12)", border: "1px solid rgba(39,179,10,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#27b30a", marginBottom: 20 }}>
               <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#27b30a", display: "inline-block" }} />
-              Built for carriers
+              Benefits
             </div>
             <h2 style={{ fontSize: "clamp(34px,4vw,56px)", fontWeight: 900, color: "#fff", lineHeight: 1.04, margin: "0 0 14px" }}>
               Drive more. Earn more.{" "}
