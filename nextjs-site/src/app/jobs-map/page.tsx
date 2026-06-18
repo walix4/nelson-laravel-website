@@ -22,18 +22,18 @@ const LOADS = [
 ];
 
 const TYPE_FILTERS = [
-  { key: "all",  label: "All Types" },
-  { key: "dry",  label: "Dry" },
-  { key: "cool", label: "Reefer" },
-  { key: "flat", label: "Flatbed" },
-  { key: "ow",   label: "Overweight" },
+  { key: "all",  label: "All Types",  icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> },
+  { key: "dry",  label: "Dry",        icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="#facc15"><circle cx="12" cy="12" r="4"/><g stroke="#facc15" strokeWidth="2" strokeLinecap="round"><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></g></svg> },
+  { key: "cool", label: "Reefer",     icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round"><line x1="12" y1="2" x2="12" y2="22"/><polyline points="20,7 12,12 4,7"/><polyline points="20,17 12,12 4,17"/><polyline points="12,2 16,6 12,10 8,6 12,2"/><polyline points="12,14 16,18 12,22 8,18 12,14"/></svg> },
+  { key: "flat", label: "Flatbed",    icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="#f97316"><rect x="1" y="9" width="14" height="6" rx="1"/><path d="M15 12h4l2 3H15z"/><circle cx="6" cy="19" r="2"/><circle cx="13" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg> },
+  { key: "ow",   label: "Overweight", icon: <svg width="13" height="13" viewBox="0 0 24 24"><path fill="#a78bfa" d="M12 2L2 7l10 5 10-5z"/><path fill="#a78bfa" fillOpacity=".65" d="M2 12l10 5 10-5-10-5z"/><path fill="#a78bfa" fillOpacity=".35" d="M2 17l10 5 10-5-10-5z"/></svg> },
 ];
 
 const MODE_FILTERS = [
-  { key: "all",        label: "All Modes" },
-  { key: "Drayage",    label: "Drayage" },
-  { key: "Intermodal", label: "Intermodal" },
-  { key: "Port→Port",  label: "Port→Port" },
+  { key: "all",        label: "All Modes",  icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> },
+  { key: "Drayage",    label: "Drayage",    icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
+  { key: "Intermodal", label: "Intermodal", icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg> },
+  { key: "Port→Port",  label: "Port→Port",  icon: <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg> },
 ];
 
 const STATUS_COLOR: Record<string, string> = {
@@ -188,35 +188,10 @@ export default function JobsMapPage() {
       <div style={{ background: "#08192b", borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "18px 24px" }}>
         <div className="max-w-[1400px] mx-auto">
           <div className="flex items-center justify-between flex-wrap gap-3">
-            {/* Title + tabs */}
-            <div className="flex items-center gap-4 flex-wrap">
-              <div>
-                <h1 className="text-white font-bold text-[22px] leading-tight">Jobs on Map</h1>
-                <p className="text-white/40 text-[13px] mt-0.5">Live drayage & intermodal loads across the US</p>
-              </div>
-
-              {/* View toggle */}
-              <div className="flex items-center gap-1 rounded-xl p-1" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)" }}>
-                <Link
-                  href="/load-board"
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] font-semibold transition text-white/55 hover:text-white"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
-                    <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
-                  </svg>
-                  Load Board
-                </Link>
-                <span
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-[13px] font-semibold text-white"
-                  style={{ background: "#fc0b05" }}
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/>
-                  </svg>
-                  Jobs on Map
-                </span>
-              </div>
+            {/* Title */}
+            <div>
+              <h1 className="text-white font-bold text-[22px] leading-tight">Jobs on Map</h1>
+              <p className="text-white/40 text-[13px] mt-0.5">Live drayage & intermodal loads across the US</p>
             </div>
 
             {/* Filters */}
@@ -227,13 +202,13 @@ export default function JobsMapPage() {
                   <button
                     key={f.key}
                     onClick={() => setTypeFilter(f.key)}
-                    className="px-3 py-1.5 rounded-md text-[12px] font-semibold transition"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-semibold transition"
                     style={{
                       background: typeFilter === f.key ? "rgba(252,11,5,0.85)" : "transparent",
                       color: typeFilter === f.key ? "#fff" : "rgba(255,255,255,0.45)",
                     }}
                   >
-                    {f.label}
+                    {f.icon}{f.label}
                   </button>
                 ))}
               </div>
@@ -244,13 +219,13 @@ export default function JobsMapPage() {
                   <button
                     key={f.key}
                     onClick={() => setModeFilter(f.key)}
-                    className="px-3 py-1.5 rounded-md text-[12px] font-semibold transition"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-semibold transition"
                     style={{
                       background: modeFilter === f.key ? "rgba(59,130,246,0.85)" : "transparent",
                       color: modeFilter === f.key ? "#fff" : "rgba(255,255,255,0.45)",
                     }}
                   >
-                    {f.label}
+                    {f.icon}{f.label}
                   </button>
                 ))}
               </div>
@@ -272,9 +247,13 @@ export default function JobsMapPage() {
       </div>
 
       {/* Map + sidebar layout */}
-      <div style={{ background: "#05101c", minHeight: "calc(100vh - 220px)" }}>
+      <style>{`
+        .jobs-sidebar::-webkit-scrollbar { display: none; }
+        .jobs-sidebar { scrollbar-width: none; -ms-overflow-style: none; }
+      `}</style>
+      <div style={{ background: "#05101c" }}>
         <div className="max-w-[1400px] mx-auto px-6 py-6">
-          <div className="flex gap-5 items-start">
+          <div className="flex gap-5 items-stretch">
 
             {/* Map */}
             <div className="flex-1 min-w-0">
@@ -326,10 +305,13 @@ export default function JobsMapPage() {
             {/* Sidebar load list */}
             {sidebarOpen && (
               <div
-                className="shrink-0 overflow-y-auto"
+                className="jobs-sidebar shrink-0 overflow-y-auto"
                 style={{
                   width: 320,
-                  maxHeight: "calc(100vh - 260px)",
+                  height: "fit-content",
+                  maxHeight: "calc(100vh - 200px)",
+                  position: "sticky",
+                  top: 80,
                   background: "rgba(255,255,255,0.03)",
                   border: "1px solid rgba(255,255,255,0.08)",
                   borderRadius: 16,
