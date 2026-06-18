@@ -302,91 +302,73 @@ export default function CarriersPage() {
       </section>
 
       {/* ── CARRIER BENEFITS ─────────────────────────────────── */}
-      <section style={{ background: "#08192b", padding: "96px 24px" }}>
+      <section style={{ background: "#060d1a", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          {/* header */}
-          <div style={{ textAlign: "center", marginBottom: 64 }}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] font-semibold mb-5 rounded" style={{ background: "rgba(39,179,10,0.14)", border: "1px solid rgba(39,179,10,0.4)", color: "#fff" }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#27b30a", display: "inline-block" }} />
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(39,179,10,0.12)", border: "1px solid rgba(39,179,10,0.35)", borderRadius: 99, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#27b30a", marginBottom: 20 }}>
+              <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#27b30a", display: "inline-block" }} />
               Built for carriers
             </div>
-            <h2 style={{ fontSize: "clamp(32px,4vw,54px)", fontWeight: 900, color: "#fff", lineHeight: 1.05, margin: "0 0 16px" }}>
-              Drive more. Earn more.<br />
+            <h2 style={{ fontSize: "clamp(34px,4vw,56px)", fontWeight: 900, color: "#fff", lineHeight: 1.04, margin: "0 0 14px" }}>
+              Drive more. Earn more.{" "}
               <span style={{ color: "#27b30a" }}>Get paid faster.</span>
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 17, maxWidth: 540, margin: "0 auto" }}>
+            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 17, maxWidth: 500, margin: "0 auto", lineHeight: 1.6 }}>
               DrayGo puts carriers first — faster payments, smarter loads, and technology that works as hard as you do.
             </p>
           </div>
 
-          {/* 2 hero benefit cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 24 }} className="benefits-top-carriers">
-
-            {/* Fast Payment */}
-            <div style={{ background: "linear-gradient(135deg, rgba(39,179,10,0.12) 0%, rgba(39,179,10,0.04) 100%)", border: "1px solid rgba(39,179,10,0.28)", borderRadius: 20, padding: "40px 40px", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", right: -20, top: -20, width: 160, height: 160, borderRadius: "50%", background: "rgba(39,179,10,0.07)" }} />
-              <div style={{ width: 52, height: 52, borderRadius: 14, background: "rgba(39,179,10,0.18)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24 }}>
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#27b30a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                </svg>
+          {/* bento top row */}
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16, marginBottom: 16 }}>
+            {/* HERO CARD */}
+            <div style={{ background: "linear-gradient(135deg, rgba(39,179,10,0.18) 0%, rgba(39,179,10,0.05) 100%)", border: "1.5px solid rgba(39,179,10,0.3)", borderRadius: 20, padding: "44px 48px", position: "relative", overflow: "hidden", minHeight: 340, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div style={{ position: "absolute", right: -60, top: -60, width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, rgba(39,179,10,0.15), transparent 70%)", pointerEvents: "none" }} />
+              <div>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#27b30a", borderRadius: 99, padding: "3px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#fff", marginBottom: 20 }}>FAST PAYMENT</div>
+                <div style={{ fontSize: "clamp(72px,8vw,96px)", fontWeight: 900, color: "#fff", lineHeight: 0.9, marginBottom: 4 }}>24h</div>
+                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 20 }}>Fastest payout after POD</div>
+                <h3 style={{ fontSize: 24, fontWeight: 800, color: "#fff", margin: "0 0 12px", lineHeight: 1.2 }}>Get paid in 24 to 72 hours.</h3>
+                <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, margin: 0, maxWidth: 480 }}>
+                  No more waiting 30–45 days for a check. DrayGo deposits directly to your bank account within 24 to 72 hours of POD confirmation — so your cash flow never stalls between loads.
+                </p>
               </div>
-              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#27b30a", marginBottom: 10 }}>Fast Payment</div>
-              <h3 style={{ fontSize: 28, fontWeight: 800, color: "#fff", margin: "0 0 14px", lineHeight: 1.1 }}>Get paid in 24–72 hours.</h3>
-              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.65, margin: 0 }}>
-                No more waiting 30–45 days for a check. DrayGo pays directly to your bank account within 24 to 72 hours of POD confirmation — so your cash flow never stalls between loads.
-              </p>
-              <div style={{ marginTop: 28, display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>24h</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Fastest payout</div></div>
-                <div style={{ width: 1, height: 36, background: "rgba(255,255,255,0.1)" }} />
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>72h</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Max wait</div></div>
-                <div style={{ width: 1, height: 36, background: "rgba(255,255,255,0.1)" }} />
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>Direct</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Bank deposit</div></div>
+              <div style={{ display: "flex", alignItems: "center", gap: 28, marginTop: 36, paddingTop: 28, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                <div><div style={{ fontSize: 22, fontWeight: 900, color: "#fff" }}>72h</div><div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 3 }}>Max wait</div></div>
+                <div style={{ width: 1, height: 32, background: "rgba(255,255,255,0.1)" }} />
+                <div><div style={{ fontSize: 22, fontWeight: 900, color: "#fff" }}>Direct</div><div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 3 }}>Bank deposit</div></div>
+                <div style={{ width: 1, height: 32, background: "rgba(255,255,255,0.1)" }} />
+                <div><div style={{ fontSize: 22, fontWeight: 900, color: "#fff" }}>48h</div><div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 3 }}>Average</div></div>
               </div>
             </div>
 
-            {/* Smart Load Board */}
-            <div style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 20, padding: "40px 40px", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", right: -20, top: -20, width: 160, height: 160, borderRadius: "50%", background: "rgba(39,179,10,0.04)" }} />
-              {/* AI + Blockchain badge */}
-              <div style={{ display: "flex", gap: 8, marginBottom: 24 }}>
-                <div style={{ width: 52, height: 52, borderRadius: 14, background: "rgba(39,179,10,0.18)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#27b30a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
-                  </svg>
+            {/* STAT TOWER */}
+            <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 20, display: "flex", flexDirection: "column" }}>
+              {[
+                { val: "2,800+", label: "Active Carriers" },
+                { val: "98.4%", label: "On-Time Rate" },
+                { val: "$2.85", label: "Avg Per Mile" },
+              ].map((s, i, arr) => (
+                <div key={s.label} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 20px", borderBottom: i < arr.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none" }}>
+                  <div style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>{s.val}</div>
+                  <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 8, textAlign: "center" }}>{s.label}</div>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", background: "rgba(39,179,10,0.2)", color: "#27b30a", padding: "2px 10px", borderRadius: 99, width: "fit-content" }}>AI Powered</span>
-                  <span style={{ fontSize: 10, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", background: "rgba(99,102,241,0.2)", color: "#818cf8", padding: "2px 10px", borderRadius: 99, width: "fit-content" }}>Blockchain Secured</span>
-                </div>
-              </div>
-              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#27b30a", marginBottom: 10 }}>Smart Load Board</div>
-              <h3 style={{ fontSize: 28, fontWeight: 800, color: "#fff", margin: "0 0 14px", lineHeight: 1.1 }}>AI matches you to the best loads.</h3>
-              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.65, margin: 0 }}>
-                Our AI learns your preferred lanes, rates, and ports — then surfaces the highest-paying loads near you first. Every transaction is recorded on blockchain for tamper-proof proof of delivery and instant payment release.
-              </p>
-              <div style={{ marginTop: 28, display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>AI</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Lane matching</div></div>
-                <div style={{ width: 1, height: 36, background: "rgba(255,255,255,0.1)" }} />
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>0 fraud</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Blockchain POD</div></div>
-                <div style={{ width: 1, height: 36, background: "rgba(255,255,255,0.1)" }} />
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>Real-time</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Load alerts</div></div>
-              </div>
+              ))}
             </div>
           </div>
 
-          {/* 3 smaller benefit cards */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="benefits-bottom-carriers">
+          {/* bento bottom row */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
             {[
-              { icon: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>', title: "No More Dispatch Calls", desc: "Every load is booked digitally. Accept from your phone, get route details instantly — no phone tag, no fax, no delays." },
-              { icon: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>', title: "Loads Near You", desc: "AI surfaces loads at ports closest to your current location. Minimize deadhead miles and maximize revenue per day." },
-              { icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>', title: "Verified & Protected", desc: "Every shipper is vetted. Blockchain-recorded POD means no disputes over proof of delivery and instant payment trigger." },
+              { iconPath: '<path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>', title: "AI + Blockchain Load Board", desc: "AI matches you to the highest-paying loads near your location. Blockchain-secured POD means instant payment release with zero disputes." },
+              { iconPath: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>', title: "Loads Near Your Location", desc: "AI surfaces loads at ports closest to where you are right now. Minimize deadhead miles and maximize your revenue every single day." },
+              { iconPath: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>', title: "Verified Shippers Only", desc: "Every shipper on DrayGo is vetted and pre-approved. No more chasing down payment or dealing with fraudulent load postings." },
             ].map(b => (
-              <div key={b.title} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: "28px 28px" }}>
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(39,179,10,0.14)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 18 }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#27b30a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: b.icon }} />
+              <div key={b.title} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "28px" }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(39,179,10,0.12)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#27b30a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: b.iconPath }} />
                 </div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 10 }}>{b.title}</div>
-                <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.55)", lineHeight: 1.65, margin: 0 }}>{b.desc}</p>
+                <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", margin: "14px 0 8px" }}>{b.title}</div>
+                <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.5)", lineHeight: 1.65, margin: 0 }}>{b.desc}</p>
               </div>
             ))}
           </div>

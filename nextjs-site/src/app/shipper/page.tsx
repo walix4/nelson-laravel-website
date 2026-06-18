@@ -369,83 +369,75 @@ export default function ShipperPage() {
       </section>
 
       {/* ══ SHIPPER BENEFITS ══════════════════════════════════════════════════ */}
-      <section style={{ background: "#08192b", padding: "96px 24px" }}>
+      <section style={{ background: "#060d1a", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           {/* header */}
-          <div style={{ textAlign: "center", marginBottom: 64 }}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] font-semibold mb-5 rounded" style={{ background: "rgba(252,11,5,0.14)", border: "1px solid rgba(252,11,5,0.4)", color: "#fff" }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fc0b05", display: "inline-block" }} />
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.12)", border: "1px solid rgba(252,11,5,0.35)", borderRadius: 99, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#fc0b05", marginBottom: 20 }}>
+              <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#fc0b05", display: "inline-block" }} />
               Built for shippers
             </div>
-            <h2 style={{ fontSize: "clamp(32px,4vw,54px)", fontWeight: 900, color: "#fff", lineHeight: 1.05, margin: "0 0 16px" }}>
-              Everything you need,<br />
+            <h2 style={{ fontSize: "clamp(34px,4vw,56px)", fontWeight: 900, color: "#fff", lineHeight: 1.04, margin: "0 0 14px" }}>
+              Everything you need,{" "}
               <span style={{ color: "#fc0b05" }}>nothing you don't.</span>
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 17, maxWidth: 540, margin: "0 auto" }}>
-              DrayGo eliminates the phone calls, fax machines, and guesswork from drayage shipping.
+            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 17, maxWidth: 500, margin: "0 auto", lineHeight: 1.6 }}>
+              DrayGo eliminates phone calls, fax machines, and guesswork from drayage shipping.
             </p>
           </div>
 
-          {/* top 2 hero benefits */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 24 }} className="benefits-top">
-            {/* Instant Quotes */}
-            <div style={{ background: "linear-gradient(135deg, rgba(252,11,5,0.12) 0%, rgba(252,11,5,0.04) 100%)", border: "1px solid rgba(252,11,5,0.25)", borderRadius: 20, padding: "40px 40px", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", right: -20, top: -20, width: 160, height: 160, borderRadius: "50%", background: "rgba(252,11,5,0.07)" }} />
-              <div style={{ width: 52, height: 52, borderRadius: 14, background: "rgba(252,11,5,0.18)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24 }}>
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-                </svg>
+          {/* bento top row: hero card + stat tower */}
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16, marginBottom: 16 }}>
+
+            {/* HERO CARD */}
+            <div style={{ background: "linear-gradient(135deg, rgba(252,11,5,0.18) 0%, rgba(252,11,5,0.05) 100%)", border: "1.5px solid rgba(252,11,5,0.3)", borderRadius: 20, padding: "44px 48px", position: "relative", overflow: "hidden", minHeight: 340, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div style={{ position: "absolute", right: -60, top: -60, width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, rgba(252,11,5,0.15), transparent 70%)", pointerEvents: "none" }} />
+              <div>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#fc0b05", borderRadius: 99, padding: "3px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#fff", marginBottom: 20 }}>INSTANT QUOTES</div>
+                <div style={{ fontSize: "clamp(72px,8vw,96px)", fontWeight: 900, color: "#fff", lineHeight: 0.9, marginBottom: 4 }}>&lt;60s</div>
+                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 20 }}>Average quote time</div>
+                <h3 style={{ fontSize: 24, fontWeight: 800, color: "#fff", margin: "0 0 12px", lineHeight: 1.2 }}>Live rate in under 60 seconds.</h3>
+                <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, margin: 0, maxWidth: 480 }}>
+                  Enter your port, destination, and container type — get a live market rate instantly. No broker callbacks, no email chains. A price you can act on immediately.
+                </p>
               </div>
-              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#fc0b05", marginBottom: 10 }}>Instant Quotes</div>
-              <h3 style={{ fontSize: 28, fontWeight: 800, color: "#fff", margin: "0 0 14px", lineHeight: 1.1 }}>Rate in under 60 seconds.</h3>
-              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.65, margin: 0 }}>
-                Enter your port, destination, and container type — get a live market rate instantly. No waiting on broker callbacks. No email chains. Just a number you can act on.
-              </p>
-              <div style={{ marginTop: 28, display: "flex", alignItems: "center", gap: 24 }}>
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>{"<"}60s</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Quote time</div></div>
-                <div style={{ width: 1, height: 36, background: "rgba(255,255,255,0.1)" }} />
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>500+</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Carrier rates</div></div>
-                <div style={{ width: 1, height: 36, background: "rgba(255,255,255,0.1)" }} />
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>Live</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Market data</div></div>
+              <div style={{ display: "flex", alignItems: "center", gap: 28, marginTop: 36, paddingTop: 28, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                <div><div style={{ fontSize: 22, fontWeight: 900, color: "#fff" }}>500+</div><div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 3 }}>Carrier rates</div></div>
+                <div style={{ width: 1, height: 32, background: "rgba(255,255,255,0.1)" }} />
+                <div><div style={{ fontSize: 22, fontWeight: 900, color: "#fff" }}>Live</div><div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 3 }}>Market data</div></div>
+                <div style={{ width: 1, height: 32, background: "rgba(255,255,255,0.1)" }} />
+                <div><div style={{ fontSize: 22, fontWeight: 900, color: "#fff" }}>$0</div><div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 3 }}>Quote fee</div></div>
               </div>
             </div>
 
-            {/* Instant Driver */}
-            <div style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 20, padding: "40px 40px", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", right: -20, top: -20, width: 160, height: 160, borderRadius: "50%", background: "rgba(255,255,255,0.03)" }} />
-              <div style={{ width: 52, height: 52, borderRadius: 14, background: "rgba(252,11,5,0.18)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24 }}>
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-              </div>
-              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#fc0b05", marginBottom: 10 }}>Instant Driver</div>
-              <h3 style={{ fontSize: 28, fontWeight: 800, color: "#fff", margin: "0 0 14px", lineHeight: 1.1 }}>Matched to a driver in minutes.</h3>
-              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.65, margin: 0 }}>
-                Book and get a verified, insured driver assigned automatically. No dispatch calls, no chasing confirmations. Your container moves — you watch it happen in real time.
-              </p>
-              <div style={{ marginTop: 28, display: "flex", alignItems: "center", gap: 24 }}>
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>8 min</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Avg match time</div></div>
-                <div style={{ width: 1, height: 36, background: "rgba(255,255,255,0.1)" }} />
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>100%</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Verified & insured</div></div>
-                <div style={{ width: 1, height: 36, background: "rgba(255,255,255,0.1)" }} />
-                <div><div style={{ fontSize: 28, fontWeight: 900, color: "#fff" }}>Live GPS</div><div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Tracking</div></div>
-              </div>
+            {/* STAT TOWER */}
+            <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 20, display: "flex", flexDirection: "column" }}>
+              {[
+                { val: "98.4%", label: "On-Time Rate" },
+                { val: "8 min", label: "Avg Driver Match" },
+                { val: "48h", label: "Max Payment Wait" },
+              ].map((s, i, arr) => (
+                <div key={s.label} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 20px", borderBottom: i < arr.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none" }}>
+                  <div style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>{s.val}</div>
+                  <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 8, textAlign: "center" }}>{s.label}</div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* bottom 3 smaller benefits */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="benefits-bottom">
+          {/* bento bottom row: 3 feature cards */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
             {[
-              { icon: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>', title: "No Hidden Fees", desc: "The price you see is the price you pay. Fuel surcharges, tolls, and accessorials shown upfront before you confirm." },
-              { icon: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>', title: "Full Visibility Dashboard", desc: "Track every container from gate release to delivery. Demurrage alerts, free day countdowns, and POD — all in one place." },
-              { icon: '<circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>', title: "48-Hour Guaranteed Payment", desc: "Carriers get paid in 48 hours so they prioritize your freight. Faster payments mean more drivers available for you." },
+              { iconPath: '<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>', title: "No Hidden Fees", desc: "The price you see is the price you pay. Fuel surcharges, tolls, and accessorials shown upfront before you confirm." },
+              { iconPath: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>', title: "Instant Driver Match", desc: "Book and get a verified, insured driver assigned automatically. No dispatch calls — your container moves while you watch live." },
+              { iconPath: '<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>', title: "Full Visibility Dashboard", desc: "Track every container from gate release to delivery. Demurrage alerts, free day countdowns, and POD — all in one screen." },
             ].map(b => (
-              <div key={b.title} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: "28px 28px" }}>
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(252,11,5,0.14)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 18 }}>
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: b.icon }} />
+              <div key={b.title} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "28px" }}>
+                <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(252,11,5,0.12)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 0 }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: b.iconPath }} />
                 </div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", marginBottom: 10 }}>{b.title}</div>
-                <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.55)", lineHeight: 1.65, margin: 0 }}>{b.desc}</p>
+                <div style={{ fontSize: 15, fontWeight: 700, color: "#fff", margin: "14px 0 8px" }}>{b.title}</div>
+                <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.5)", lineHeight: 1.65, margin: 0 }}>{b.desc}</p>
               </div>
             ))}
           </div>
