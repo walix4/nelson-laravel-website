@@ -47,6 +47,10 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const showBar = pathname === "/load-board" || pathname === "/load-board/" || pathname === "/jobs-map" || pathname === "/jobs-map/";
+  const isBroker = pathname === "/broker" || pathname === "/broker/";
+  const isCarriers = pathname === "/carriers" || pathname === "/carriers/";
+  const borderColor = isBroker ? "rgba(0,165,231,0.55)" : isCarriers ? "rgba(39,179,10,0.55)" : "rgba(232,57,42,0.45)";
+  const accentColor = isBroker ? "#00a5e7" : isCarriers ? "#27b30a" : "#fc0b05";
 
   return (
     <>
@@ -73,7 +77,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
           </div>
         </div>
       </div>
-      <div className="border-b" style={{ borderColor: "rgba(232,57,42,0.45)" }}>
+      <div className="border-b-2" style={{ borderColor, transition: "border-color 0.22s ease" }}>
       <div className="max-w-[1400px] mx-auto flex items-center" style={{ height: 64, paddingLeft: 24, paddingRight: 24 }}>
 
         {/* Logo */}
@@ -148,7 +152,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
           <Link
             href="/#load-board"
             className="hidden sm:inline-flex text-[13px] font-semibold text-white rounded-lg items-center gap-[6px] transition hover:opacity-90 whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none"
-            style={{ background: "#fc0b05", padding: "8px 16px" }}
+            style={{ background: accentColor, padding: "8px 16px", transition: "background 0.22s ease" }}
           >
             Get Started
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
