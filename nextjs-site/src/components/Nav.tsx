@@ -6,6 +6,7 @@ import { asset } from "@/lib/site";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
+  { label: "How it Works", href: "/how-it-works" },
   { label: "Shippers", href: "/shipper" },
   { label: "Broker", href: "/broker" },
   { label: "Carriers", href: "/carriers" },
