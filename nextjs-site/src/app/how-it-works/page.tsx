@@ -94,14 +94,16 @@ export default function HowItWorksPage() {
           {/* loop diagram */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, flexWrap: "wrap" }}>
             {[
-              { name: "Draygo", sub: "AI dispatch & TMS", color: "#635bff", rgb: "99,91,255" },
-              { name: "DrayChain", sub: "Blockchain trust", color: "#27b30a", rgb: "39,179,10" },
-              { name: "DrayPay", sub: "Instant settlement", color: "#00a5e7", rgb: "0,165,231" },
+              { logo: asset("/logo-draygo-white.png"), logoH: 32, sub: "AI dispatch & TMS", color: "#635bff", rgb: "99,91,255", name: "Draygo" },
+              { logo: asset("/logo-draychain.png"),    logoH: 32, sub: "Blockchain trust",  color: "#27b30a", rgb: "39,179,10",  name: "DrayChain" },
+              { logo: asset("/logo-draypay.png"),      logoH: 32, sub: "Instant settlement",color: "#00a5e7", rgb: "0,165,231",  name: "DrayPay" },
             ].map((item, i) => (
               <div key={item.name} style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ background: `rgba(${item.rgb},0.10)`, border: `1.5px solid rgba(${item.rgb},0.4)`, borderRadius: 14, padding: "18px 28px", minWidth: 160, textAlign: "center" }}>
-                  <div style={{ fontSize: 17, fontWeight: 800, color: item.color }}>{item.name}</div>
-                  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginTop: 4 }}>{item.sub}</div>
+                <div style={{ background: `rgba(${item.rgb},0.10)`, border: `1.5px solid rgba(${item.rgb},0.4)`, borderRadius: 14, padding: "20px 28px", minWidth: 172, textAlign: "center" }}>
+                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: 8 }}>
+                    <img src={item.logo} alt={item.name} style={{ height: item.logoH, width: "auto", objectFit: "contain", maxWidth: 130 }} />
+                  </div>
+                  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>{item.sub}</div>
                 </div>
                 {i < 2 && (
                   <div style={{ display: "flex", alignItems: "center", padding: "0 12px" }}>
@@ -135,16 +137,19 @@ export default function HowItWorksPage() {
                   <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
                 </div>
               </div>
-              <div style={{ padding: "52px 52px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 18 }}>
-                {step.bullets.map(b => (
-                  <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 8, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div style={{ padding: "52px 52px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 0 }}>
+                <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=900&q=80" alt="Truck driver" style={{ width: "100%", height: 200, objectFit: "cover", borderRadius: 10, marginBottom: 24, display: "block" }} />
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {step.bullets.map(b => (
+                    <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                      <div style={{ width: 28, height: 28, borderRadius: 8, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.8)", lineHeight: 1.55 }}>{b}</span>
                     </div>
-                    <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.8)", lineHeight: 1.55 }}>{b}</span>
-                  </div>
-                ))}
-                <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 8 }}>
+                  ))}
+                </div>
+                <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 8 }}>
                   <div style={{ flex: 1, height: 1, background: `rgba(${step.rgb},0.2)` }} />
                   <span style={{ fontSize: 11, color: `rgba(${step.rgb},0.7)`, fontWeight: 700, letterSpacing: "0.1em" }}>feeds into {STEPS[1].tag} →</span>
                 </div>
@@ -170,16 +175,19 @@ export default function HowItWorksPage() {
                   <p style={{ fontSize: 15, color: "#4a5568", lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
                 </div>
               </div>
-              <div style={{ padding: "52px 52px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 18 }}>
-                {step.bullets.map(b => (
-                  <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 8, background: `rgba(${step.rgb},0.12)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div style={{ padding: "52px 52px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 0, background: "#f8f9fc" }}>
+                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=900&q=80" alt="Blockchain technology" style={{ width: "100%", height: 200, objectFit: "cover", borderRadius: 10, marginBottom: 24, display: "block" }} />
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {step.bullets.map(b => (
+                    <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                      <div style={{ width: 28, height: 28, borderRadius: 8, background: `rgba(${step.rgb},0.12)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      <span style={{ fontSize: 14.5, color: "#374151", lineHeight: 1.55 }}>{b}</span>
                     </div>
-                    <span style={{ fontSize: 14.5, color: "#374151", lineHeight: 1.55 }}>{b}</span>
-                  </div>
-                ))}
-                <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 8 }}>
+                  ))}
+                </div>
+                <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 8 }}>
                   <div style={{ flex: 1, height: 1, background: `rgba(${step.rgb},0.18)` }} />
                   <span style={{ fontSize: 11, color: step.color, fontWeight: 700, letterSpacing: "0.1em" }}>feeds into {STEPS[2].tag} →</span>
                 </div>
@@ -205,15 +213,18 @@ export default function HowItWorksPage() {
                   <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
                 </div>
               </div>
-              <div style={{ padding: "52px 52px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 18 }}>
-                {step.bullets.map(b => (
-                  <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                    <div style={{ width: 28, height: 28, borderRadius: 8, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div style={{ padding: "52px 52px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 0 }}>
+                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=900&q=80" alt="Payment infrastructure" style={{ width: "100%", height: 200, objectFit: "cover", borderRadius: 10, marginBottom: 24, display: "block" }} />
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {step.bullets.map(b => (
+                    <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                      <div style={{ width: 28, height: 28, borderRadius: 8, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.8)", lineHeight: 1.55 }}>{b}</span>
                     </div>
-                    <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.8)", lineHeight: 1.55 }}>{b}</span>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           ); })()}
@@ -236,26 +247,26 @@ export default function HowItWorksPage() {
             </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }} className="diff-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 24 }} className="diff-grid">
             {DIFFS.map(col => (
               <div key={col.label} style={{
-                background: col.bad ? "#ffffff" : "#fff8f8",
-                border: col.bad ? "1px solid #e8eaf0" : "1.5px solid rgba(252,11,5,0.22)",
+                background: "#ffffff",
+                border: col.bad ? "1px solid #e8eaf0" : "1.5px solid rgba(252,11,5,0.20)",
                 borderRadius: 18,
                 padding: "36px 36px",
                 boxShadow: "0 2px 12px rgba(10,22,40,0.05)",
               }}>
-                <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: col.bad ? "#9ca3af" : "#fc0b05", marginBottom: 24 }}>{col.label}</div>
+                <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: col.bad ? "#94a3b8" : "#fc0b05", marginBottom: 24 }}>{col.label}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                   {col.items.map(item => (
                     <div key={item} style={{ display: "flex", alignItems: "center", gap: 12 }}>
                       <div style={{ width: 22, height: 22, borderRadius: 6, background: col.bad ? "#f3f4f6" : "rgba(252,11,5,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                         {col.bad
-                          ? <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                          ? <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                           : <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                         }
                       </div>
-                      <span style={{ fontSize: 14, color: col.bad ? "#6b7280" : "#0a1628", lineHeight: 1.4 }}>{item}</span>
+                      <span style={{ fontSize: 14, color: col.bad ? "rgba(0,0,0,0.4)" : "#1e293b", lineHeight: 1.4 }}>{item}</span>
                     </div>
                   ))}
                 </div>
@@ -263,16 +274,50 @@ export default function HowItWorksPage() {
             ))}
           </div>
 
-          {/* closing statement */}
-          <div style={{ marginTop: 48, background: "#ffffff", border: "1px solid #e0e2f0", borderLeft: "4px solid #635bff", borderRadius: 16, padding: "32px 40px", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: 32, boxShadow: "0 2px 16px rgba(10,22,40,0.06)" }} className="closing-cta">
+          {/* hard-to-copy card */}
+          <div style={{ background: "#ffffff", border: "1px solid #e0e2f0", borderLeft: "4px solid #635bff", borderRadius: 16, padding: "32px 40px", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: 32, boxShadow: "0 2px 16px rgba(10,22,40,0.06)" }} className="closing-cta">
             <div>
               <div style={{ fontSize: 18, fontWeight: 700, color: "#0a1628", marginBottom: 8 }}>The hard-to-copy part</div>
               <p style={{ fontSize: 14.5, color: "#4a5568", margin: 0, lineHeight: 1.65 }}>
                 By making the blockchain layer the single source of truth for both the operational record and the trigger for payment, we collapse "did this happen" and "did we get paid for it" into the same event. A competitor would need to rebuild fintech rails and a blockchain layer underneath their TMS — not just add a dashboard feature.
               </p>
             </div>
-            <a href="/#load-board" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#fc0b05", color: "#fff", fontWeight: 700, fontSize: 14, borderRadius: 8, padding: "14px 24px", textDecoration: "none", whiteSpace: "nowrap" as const, flexShrink: 0 }}>
+            <a href="/pricing" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#fc0b05", color: "#fff", fontWeight: 700, fontSize: 14, borderRadius: 8, padding: "14px 24px", textDecoration: "none", whiteSpace: "nowrap" as const, flexShrink: 0 }}>
+              View Pricing
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CLOSING CTA (DARK PHOTO) ──────────────────────────────────────── */}
+      <section style={{
+        position: "relative",
+        overflow: "hidden",
+        padding: "120px 24px",
+        backgroundImage: "url('https://images.unsplash.com/photo-1553413077-190dd305871c?w=900&q=80')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}>
+        <div style={{ position: "absolute", inset: 0, background: "rgba(6,13,26,0.88)", zIndex: 0 }} />
+        <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.15)", border: "1px solid rgba(252,11,5,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 28 }}>
+            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#fc0b05", display: "inline-block" }} />
+            Ready to start?
+          </div>
+          <h2 style={{ fontSize: "clamp(28px,5vw,52px)", fontWeight: 900, color: "#fff", lineHeight: 1.1, margin: "0 0 20px", letterSpacing: "-0.02em" }}>
+            Start moving containers<br />the modern way.
+          </h2>
+          <p style={{ fontSize: 17, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, margin: "0 0 48px" }}>
+            Join the carriers, shippers, and brokers already using Draygo to eliminate friction, get paid faster, and stay ahead.
+          </p>
+          <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+            <a href="/#load-board" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#fc0b05", color: "#fff", fontWeight: 700, fontSize: 15, borderRadius: 8, padding: "16px 32px", textDecoration: "none" }}>
               Get Started
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="/pricing" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: "#fff", fontWeight: 700, fontSize: 15, borderRadius: 8, padding: "16px 32px", textDecoration: "none", border: "1.5px solid rgba(255,255,255,0.35)" }}>
+              View Pricing
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
