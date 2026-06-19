@@ -43,7 +43,7 @@ export default function Footer() {
           <div>
             <span className="flex items-center gap-2.5">
               <img src={asset("/draychain-mark.png?v=1")} alt="Drayage Blockchain" className="h-9 w-auto" />
-              <span className="text-white font-bold text-[22px] tracking-tight leading-none">Dray<span className="text-[#8fa8e6]">Chain</span></span>
+              <span className="text-white font-bold text-[22px] tracking-tight leading-none">Drayage<span className="text-[#8fa8e6]"> Blockchain</span></span>
             </span>
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
               Blockchain verification for drayage and the supply chain. Immutable, tamper-proof records for rate confirmations, documents, container movements and payments.
