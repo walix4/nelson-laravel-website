@@ -14,7 +14,7 @@ export default function WhoUses() {
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto reveal">
           <div className="text-[11px] uppercase tracking-[0.2em] font-bold text-[var(--red)]">Across the supply chain</div>
-          <h2 className="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-3">Who uses DrayChain to verify records</h2>
+          <h2 className="display text-[38px] md:text-[50px] text-[var(--navy)] leading-[1.05] mt-3">Who uses Drayage Blockchain to verify records</h2>
           <p className="mt-4 text-[var(--muted)] text-[15px] md:text-[16px] leading-relaxed">Ports, carriers, brokers, 3PLs and shippers — anywhere a trusted, tamper-proof record of a shipment matters.</p>
         </div>
         <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">

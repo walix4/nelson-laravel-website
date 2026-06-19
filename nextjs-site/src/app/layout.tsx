@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DrayChain · Real-Time Blockchain Verification for Drayage",
+  title: "Drayage Blockchain · Real-Time Blockchain Verification for Drayage",
   description: "Create immutable records for rate confirmations, container movements, signatures, payments, and shipment events across the supply chain.",
 };
 

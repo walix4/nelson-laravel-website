@@ -7,7 +7,7 @@ import PageHero from "@/components/PageHero";
 import ChainCube from "@/components/ChainCube";
 import { asset } from "@/lib/site";
 
-export const metadata = { title: "Technology · DrayChain", description: "How DrayChain hashes, signs and anchors drayage records on an immutable ledger." };
+export const metadata = { title: "Technology · Drayage Blockchain", description: "How Drayage Blockchain hashes, signs and anchors drayage records on an immutable ledger." };
 
 const PIPELINE = [
   { n: "01", t: "Ingest", d: "A record arrives from your TMS, portal or the API — rate conf, BOL, POD, gate event or payment milestone." },
@@ -25,7 +25,7 @@ const SECURITY = [
 
 const FAQ = [
   ["Is shipment data public on the chain?", "No. Only the cryptographic hash, signatures and timestamps are anchored on-chain. The underlying documents stay in your systems — the chain proves they haven't changed without revealing them."],
-  ["Do my partners need a DrayChain account to verify?", "No. Every anchored record gets a shareable verification link that recomputes and checks the hash in the browser. Accounts are only needed to anchor new records."],
+  ["Do my partners need a Drayage Blockchain account to verify?", "No. Every anchored record gets a shareable verification link that recomputes and checks the hash in the browser. Accounts are only needed to anchor new records."],
   ["What happens if a record is corrected later?", "Corrections are appended as new versions linked to the original — the history shows both, with who signed what and when. Nothing is ever overwritten."],
   ["How fast is anchoring?", "Records are accepted in milliseconds and final after one block (~2 seconds). Verification against the chain averages 120 ms via the API."],
 ];
@@ -38,7 +38,7 @@ export default function Technology() {
       <PageHero
         eyebrow="Under the hood"
         title={<>The ledger engineered <span className="bg-gradient-to-r from-[#8fa8e6] via-[#4f74cf] to-[#2f61c0] bg-clip-text text-transparent">for freight</span></>}
-        sub="DrayChain is a purpose-built blockchain for supply-chain records: fast enough for gate events, private enough for rates, and permanent enough for audits."
+        sub="Drayage Blockchain is a purpose-built blockchain for supply-chain records: fast enough for gate events, private enough for rates, and permanent enough for audits."
         photo="/photos/chain-abstract.jpg"
       >
         <div className="mt-8 flex flex-wrap gap-3">
@@ -77,7 +77,7 @@ export default function Technology() {
           <div className="reveal">
             <div className="text-[11px] uppercase tracking-[0.2em] font-semibold text-[#8fa8e6]">Architecture</div>
             <h2 className="display text-[36px] md:text-[46px] leading-[1.06] mt-3">Built like a chain. Tuned like a freight system.</h2>
-            <p className="mt-5 text-white/65 text-[15px] leading-relaxed max-w-lg">Most chains are built for currency. DrayChain is built for documents and events: high-volume writes at port-gate speed, selective disclosure for commercially sensitive rates, and an audit trail regulators can rely on.</p>
+            <p className="mt-5 text-white/65 text-[15px] leading-relaxed max-w-lg">Most chains are built for currency. Drayage Blockchain is built for documents and events: high-volume writes at port-gate speed, selective disclosure for commercially sensitive rates, and an audit trail regulators can rely on.</p>
             <div className="mt-8 grid grid-cols-2 gap-3 max-w-lg">
               {[["Block time", "2s"], ["Writes / day", "1.4M"], ["Verify latency", "120ms"], ["Node operators", "510+"]].map(([k, v]) => (
                 <div key={k} className="glass-dark rounded-md p-4"><div className="text-white/55 text-[10px] uppercase tracking-wider">{k}</div><div className="display num text-[24px] mt-1">{v}</div></div>

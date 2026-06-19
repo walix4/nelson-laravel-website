@@ -13,7 +13,7 @@ const reply = (t: string) => {
 
 export default function Chat() {
   const [open, setOpen] = useState(false);
-  const [msgs, setMsgs] = useState<Msg[]>([{ who: "bot", text: "👋 Hi! I'm the DrayChain assistant. Ask me about verifying records, the audit trail, chain of custody or coverage — or tap a shortcut below." }]);
+  const [msgs, setMsgs] = useState<Msg[]>([{ who: "bot", text: "👋 Hi! I'm the Drayage Blockchain assistant. Ask me about verifying records, the audit trail, chain of custody or coverage — or tap a shortcut below." }]);
   const [typing, setTyping] = useState(false);
   const [val, setVal] = useState("");
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -28,7 +28,7 @@ export default function Chat() {
       <div className={`chat-panel ${open ? "open" : ""}`} role="dialog" aria-label="AI chat">
         <div className="chat-head">
           <div className="av"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="8" width="16" height="11" rx="3" /><path d="M12 8V4M9 13h.01M15 13h.01M9 16h6M2 12v2M22 12v2" /></svg></div>
-          <div className="flex-1"><div className="display text-[15px] leading-none">DrayChain Assistant</div><div className="status"><span className="dot" />AI · replies instantly</div></div>
+          <div className="flex-1"><div className="display text-[15px] leading-none">Drayage Blockchain Assistant</div><div className="status"><span className="dot" />AI · replies instantly</div></div>
           <button className="text-white/70 hover:text-white" onClick={() => setOpen(false)} aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M18 6L6 18M6 6l12 12" /></svg></button>
         </div>
         <div className="chat-body" ref={bodyRef}>

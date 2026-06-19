@@ -7,7 +7,7 @@ const REVIEWS: R[] = [
   { n: "Terry McCarty", r: 5, d: "May 05, 2026", img: 13, t: "Honestly the cleanest way to prove a delivery happened. Love it." },
   { n: "Ben Wallace", r: 5, d: "Apr 28, 2026", img: 33, t: "Just started using it and so far so good. The POD hashes matched our paperwork to the letter, and the audit trail is impossible to argue with. That kind of certainty matters when you move freight daily." },
   { n: "Talia Bennett", r: 5, d: "Apr 23, 2026", img: 45, t: "Quick, accurate, dependable. Exactly what our operations desk needed." },
-  { n: "Marie Barker", r: 5, d: "Apr 08, 2026", img: 5, t: "We'd be lost without this. Thank you DrayChain — you've taken the guesswork out of every container handoff we manage." },
+  { n: "Marie Barker", r: 5, d: "Apr 08, 2026", img: 5, t: "We'd be lost without this. Thank you Drayage Blockchain — you've taken the guesswork out of every container handoff we manage." },
   { n: "Tom Riggs", r: 5, d: "Mar 12, 2026", img: 51, t: "The app works very well and the web version is even better. Verifying a record now takes seconds." },
   { n: "Jarred Herman", r: 5, d: "Jan 10, 2026", img: 8, t: "The tamper-proof audit trail paid for itself in a week. It showed exactly where a document had been altered and gave us the on-chain proof to settle it." },
   { n: "Betty Sue Sands", r: 5, d: "Nov 22, 2025", img: 23, t: "Great people to work with and a genuinely useful product." },

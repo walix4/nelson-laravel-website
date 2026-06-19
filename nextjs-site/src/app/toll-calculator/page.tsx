@@ -30,7 +30,7 @@ export default function TollCalculator() {
   const [res, setRes] = useState<any>(null);
 
   useEffect(() => {
-    document.title = "Route Verification · DrayChain";
+    document.title = "Route Verification · Drayage Blockchain";
     const p = new URLSearchParams(window.location.search);
     const g = (k: string, s: (v: string) => void) => { const v = p.get(k); if (v) s(v); };
     g("from", setFrom); g("to", setTo); g("profile", setAxles); g("axles", setAxles);

@@ -7,7 +7,7 @@ import PageHero from "@/components/PageHero";
 import LiveRecords from "@/components/LiveRecords";
 import { asset } from "@/lib/site";
 
-export const metadata = { title: "Live Network · DrayChain", description: "Watch records being anchored on the DrayChain network in real time — blocks, nodes and verified events." };
+export const metadata = { title: "Live Network · Drayage Blockchain", description: "Watch records being anchored on the Drayage Blockchain network in real time — blocks, nodes and verified events." };
 
 const STATS = [
   { n: "5,184,902", l: "Block height" },

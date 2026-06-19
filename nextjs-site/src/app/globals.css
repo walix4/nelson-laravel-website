@@ -380,7 +380,7 @@
   .est-empty{padding:46px;text-align:center;color:var(--muted);font-size:14px;}
   .no-scrollbar::-webkit-scrollbar{display:none;} .no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
 
-/* ===== DrayChain 3D blocks ===== */
+/* ===== Drayage Blockchain 3D blocks ===== */
   .ccube-scene{perspective:1300px;display:flex;align-items:center;justify-content:center;}
   .ccube{position:relative;transform-style:preserve-3d;animation:ccubeSpin 16s linear infinite;}
   @keyframes ccubeSpin{from{transform:rotateX(-24deg) rotateY(0deg);}to{transform:rotateX(-24deg) rotateY(360deg);}}

@@ -6,7 +6,7 @@ import RevealInit from "@/components/RevealInit";
 import PageHero from "@/components/PageHero";
 import { asset } from "@/lib/site";
 
-export const metadata = { title: "Solutions · DrayChain", description: "Blockchain verification for ports, carriers, brokers, 3PLs and shippers." };
+export const metadata = { title: "Solutions · Drayage Blockchain", description: "Blockchain verification for ports, carriers, brokers, 3PLs and shippers." };
 
 const AUDIENCES = [
   {

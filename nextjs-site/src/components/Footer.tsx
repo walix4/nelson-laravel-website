@@ -42,7 +42,7 @@ export default function Footer() {
           {/* brand + contact */}
           <div>
             <span className="flex items-center gap-2.5">
-              <img src={asset("/draychain-mark.png?v=1")} alt="DrayChain" className="h-9 w-auto" />
+              <img src={asset("/draychain-mark.png?v=1")} alt="Drayage Blockchain" className="h-9 w-auto" />
               <span className="text-white font-bold text-[22px] tracking-tight leading-none">Dray<span className="text-[#8fa8e6]">Chain</span></span>
             </span>
             <p className="mt-4 max-w-xs text-white/60 text-[13.5px] leading-relaxed">
@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 text-[12.5px] text-white/45">
-          <div className="num">© 2026 DrayChain. All rights reserved.</div>
+          <div className="num">© 2026 Drayage Blockchain. All rights reserved.</div>
           <div className="num">3.1M+ records anchored · Tamper-proof audit trail · 99.9% uptime</div>
         </div>
       </div>

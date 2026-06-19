@@ -7,7 +7,7 @@ import PageHero from "@/components/PageHero";
 import VolumeExplorer from "@/components/VolumeExplorer";
 import ChainCube from "@/components/ChainCube";
 
-export const metadata = { title: "Container Volume Explorer · DrayChain", description: "Explore the volume of containers moving through the DrayChain network — per port, across any time window, every TEU anchored on-chain." };
+export const metadata = { title: "Container Volume Explorer · Drayage Blockchain", description: "Explore the volume of containers moving through the Drayage Blockchain network — per port, across any time window, every TEU anchored on-chain." };
 
 const PORTS = [
   { name: "LA / Long Beach", teu: "16,840", share: 35, d: "+6.66%", up: true },
