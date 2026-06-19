@@ -8,7 +8,7 @@ export default function Nav() {
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
           <img src={asset("/draychain-mark.png?v=1")} alt="Drayage Blockchain" className="h-8 md:h-9 w-auto" />
-          <span className="text-white font-bold text-[20px] md:text-[22px] tracking-tight leading-none">Dray<span className="text-[#8fa8e6]">Chain</span></span>
+          <span className="text-white font-bold text-[20px] md:text-[22px] tracking-tight leading-none">Drayage<span className="text-[#8fa8e6]"> Blockchain</span></span>
         </Link>
         <nav className="hidden lg:flex items-center gap-6 text-[13px] font-medium text-white/85">
           <Link href="/technology" className="hover:text-white">Technology</Link>
