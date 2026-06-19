@@ -107,32 +107,32 @@ export default function AboutPage() {
       </section>
 
       {/* ── MISSION ──────────────────────────────────────────────────────── */}
-      <section style={{ background: "#08192b", padding: "96px 24px" }}>
+      <section style={{ background: "#f8f9fc", padding: "96px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="mission-grid">
           {/* left: quote block */}
           <div>
             <svg width="56" height="40" viewBox="0 0 56 40" fill="none" style={{ marginBottom: 24 }}>
-              <path d="M0 40V24C0 10.745 8.955 3.16 26.865 0L28.56 3.84C20.205 5.76 15.3 10.17 13.845 17.07H22.8V40H0ZM33.2 40V24C33.2 10.745 42.155 3.16 60.065 0L61.76 3.84C53.405 5.76 48.5 10.17 47.045 17.07H56V40H33.2Z" fill="#fc0b05" fillOpacity="0.5"/>
+              <path d="M0 40V24C0 10.745 8.955 3.16 26.865 0L28.56 3.84C20.205 5.76 15.3 10.17 13.845 17.07H22.8V40H0ZM33.2 40V24C33.2 10.745 42.155 3.16 60.065 0L61.76 3.84C53.405 5.76 48.5 10.17 47.045 17.07H56V40H33.2Z" fill="#fc0b05" fillOpacity="0.7"/>
             </svg>
-            <p style={{ fontSize: 22, fontWeight: 600, color: "#fff", lineHeight: 1.55, margin: "0 0 24px" }}>
+            <p style={{ fontSize: 22, fontWeight: 600, color: "#0a1628", lineHeight: 1.55, margin: "0 0 24px" }}>
               We built Draygo because the gap between moving a container and getting paid for it is where drayage friction lives.
             </p>
-            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.75, margin: "0 0 16px" }}>
+            <p style={{ fontSize: 16, color: "#4a5568", lineHeight: 1.75, margin: "0 0 16px" }}>
               Most TMS platforms stop at visibility — tracking, dispatching, document storage — and then hand off to a completely separate, disconnected stack for money.
             </p>
-            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", lineHeight: 1.75, margin: 0 }}>
+            <p style={{ fontSize: 16, color: "#4a5568", lineHeight: 1.75, margin: 0 }}>
               Draygo collapses "did this happen" and "did we get paid for it" into the same event. That is the genuinely hard-to-copy part.
             </p>
           </div>
           {/* right: 2x2 mission cards */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {MISSION_CARDS.map(c => (
-              <div key={c.title} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "28px 24px" }}>
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: `rgba(${c.color === "#fc0b05" ? "252,11,5" : c.color === "#635bff" ? "99,91,255" : c.color === "#27b30a" ? "39,179,10" : "0,165,231"},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+              <div key={c.title} style={{ background: "#ffffff", border: "1px solid #e8eaf0", borderRadius: 16, padding: "28px 24px", boxShadow: "0 2px 12px rgba(10,22,40,0.06)" }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: `rgba(${c.color === "#fc0b05" ? "252,11,5" : c.color === "#635bff" ? "99,91,255" : c.color === "#27b30a" ? "39,179,10" : "0,165,231"},0.10)`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={c.color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: c.icon }} />
                 </div>
-                <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", marginBottom: 6 }}>{c.title}</div>
-                <div style={{ fontSize: 12.5, color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>{c.desc}</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: "#0a1628", marginBottom: 6 }}>{c.title}</div>
+                <div style={{ fontSize: 12.5, color: "#6b7280", lineHeight: 1.5 }}>{c.desc}</div>
               </div>
             ))}
           </div>
@@ -186,20 +186,20 @@ export default function AboutPage() {
       </section>
 
       {/* ── DRAYPAY FINANCIAL ─────────────────────────────────────────────── */}
-      <section style={{ background: "linear-gradient(135deg, rgba(0,165,231,0.08) 0%, #060d1a 60%)", padding: "96px 24px", borderTop: "1px solid rgba(0,165,231,0.12)", borderBottom: "1px solid rgba(0,165,231,0.12)" }}>
+      <section style={{ background: "#f8f9fc", padding: "96px 24px", borderTop: "1px solid rgba(0,165,231,0.15)", borderBottom: "1px solid rgba(0,165,231,0.15)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="draypay-grid">
           <div>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(0,165,231,0.12)", border: "1px solid rgba(0,165,231,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: "#00a5e7", marginBottom: 28 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(0,165,231,0.10)", border: "1px solid rgba(0,165,231,0.30)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: "#0090cc", marginBottom: 28 }}>
               <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#00a5e7", display: "inline-block" }} />
               DrayPay Financial Infrastructure
             </div>
-            <h2 style={{ fontSize: "clamp(26px,3.5vw,42px)", fontWeight: 900, color: "#fff", lineHeight: 1.1, margin: "0 0 24px" }}>
+            <h2 style={{ fontSize: "clamp(26px,3.5vw,42px)", fontWeight: 900, color: "#0a1628", lineHeight: 1.1, margin: "0 0 24px" }}>
               A new generation of financial infrastructure for logistics.
             </h2>
-            <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.6)", lineHeight: 1.8, margin: "0 0 18px" }}>
-              Integrated with the <strong style={{ color: "#fff" }}>DrayPay Digital Hash Wallet</strong> and <strong style={{ color: "#fff" }}>DrayPay Debit Card</strong>, Draygo lets shippers, brokers, carriers, and drivers instantly manage transportation expenses — fuel, tolls, chassis, parking, maintenance, and more.
+            <p style={{ fontSize: 15.5, color: "#4a5568", lineHeight: 1.8, margin: "0 0 18px" }}>
+              Integrated with the <strong style={{ color: "#0a1628" }}>DrayPay Digital Hash Wallet</strong> and <strong style={{ color: "#0a1628" }}>DrayPay Debit Card</strong>, Draygo lets shippers, brokers, carriers, and drivers instantly manage transportation expenses — fuel, tolls, chassis, parking, maintenance, and more.
             </p>
-            <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.6)", lineHeight: 1.8, margin: 0 }}>
+            <p style={{ fontSize: 15.5, color: "#4a5568", lineHeight: 1.8, margin: 0 }}>
               Smart contracts automatically execute predefined payment terms, release funds based on milestones, reduce disputes, accelerate settlements, and improve trust across the entire transportation chain.
             </p>
           </div>
@@ -210,9 +210,9 @@ export default function AboutPage() {
               { val: "$0", label: "Factoring Fees", color: "#27b30a" },
               { val: "100%", label: "Blockchain Secured", color: "#635bff" },
             ].map(s => (
-              <div key={s.label} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)", borderTop: `3px solid ${s.color}`, borderRadius: 14, padding: "32px 28px", textAlign: "center" }}>
-                <div style={{ fontSize: 52, fontWeight: 900, color: "#fff", lineHeight: 1, letterSpacing: "-0.02em" }}>{s.val}</div>
-                <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 12, textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>{s.label}</div>
+              <div key={s.label} style={{ background: "#ffffff", border: "1px solid #e8eaf0", borderTop: `3px solid ${s.color}`, borderRadius: 14, padding: "32px 28px", textAlign: "center", boxShadow: "0 2px 12px rgba(10,22,40,0.06)" }}>
+                <div style={{ fontSize: 52, fontWeight: 900, color: "#0a1628", lineHeight: 1, letterSpacing: "-0.02em" }}>{s.val}</div>
+                <div style={{ fontSize: 12, color: "#6b7280", marginTop: 12, textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -273,13 +273,13 @@ export default function AboutPage() {
       </section>
 
       {/* ── CLOSING CTA ───────────────────────────────────────────────────── */}
-      <section style={{ background: "#060d1a", padding: "112px 24px", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle, rgba(252,11,5,0.10), transparent 65%)", pointerEvents: "none" }} />
+      <section style={{ background: "#f8f9fc", padding: "112px 24px", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", left: "50%", top: "50%", transform: "translate(-50%,-50%)", width: 700, height: 700, borderRadius: "50%", background: "radial-gradient(circle, rgba(252,11,5,0.05), transparent 65%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-          <p style={{ fontSize: "clamp(24px,4vw,44px)", fontWeight: 900, color: "#fff", lineHeight: 1.2, margin: "0 0 16px", letterSpacing: "-0.01em" }}>
+          <p style={{ fontSize: "clamp(24px,4vw,44px)", fontWeight: 900, color: "#0a1628", lineHeight: 1.2, margin: "0 0 16px", letterSpacing: "-0.01em" }}>
             Draygo is more than a TMS.
           </p>
-          <p style={{ fontSize: "clamp(18px,3vw,28px)", fontWeight: 700, color: "rgba(255,255,255,0.45)", lineHeight: 1.3, margin: "0 0 48px" }}>
+          <p style={{ fontSize: "clamp(18px,3vw,28px)", fontWeight: 700, color: "#4a5568", lineHeight: 1.3, margin: "0 0 48px" }}>
             It is an <span style={{ color: "#fc0b05" }}>intelligent financial and operational infrastructure</span> designed to power the future of global drayage.
           </p>
           <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
@@ -287,7 +287,7 @@ export default function AboutPage() {
               Get Started
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a href="/how-it-works" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: "#fff", fontWeight: 700, fontSize: 15, borderRadius: 8, padding: "16px 32px", textDecoration: "none", border: "1.5px solid rgba(255,255,255,0.2)" }}>
+            <a href="/how-it-works" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: "#0a1628", fontWeight: 700, fontSize: 15, borderRadius: 8, padding: "16px 32px", textDecoration: "none", border: "1.5px solid rgba(10,22,40,0.2)" }}>
               How It Works
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
