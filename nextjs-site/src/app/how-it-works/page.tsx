@@ -10,6 +10,12 @@ const STEPS = [
     tagline: "AI dispatch & TMS",
     color: "#635bff",
     rgb: "99,91,255",
+    logo: "/logo-draygo-white.png",
+    role: "The Brain",
+    photo: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1200&q=80",
+    photoAlt: "Truck on highway",
+    nextTag: "DrayChain",
+    chips: ["500+ carriers", "< 60s quotes"],
     title: "The Brain — AI decides in real time.",
     desc: "Draygo's AI handles dispatching, pricing, and compliance decisions instantly. Every action — a rate quote, a dispatch assignment, a milestone like gate-out confirmed or POD scanned — generates a verified data event that flows to the next layer.",
     bullets: [
@@ -18,7 +24,6 @@ const STEPS = [
       "Compliance checks on MC/DOT, insurance, authority",
       "Every action generates a tamper-proof data event",
     ],
-    icon: '<circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>',
   },
   {
     num: "02",
@@ -26,6 +31,12 @@ const STEPS = [
     tagline: "Blockchain trust layer",
     color: "#27b30a",
     rgb: "39,179,10",
+    logo: "/logo-draychain.png",
+    role: "The Proof",
+    photo: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&q=80",
+    photoAlt: "Blockchain technology",
+    nextTag: "DrayPay",
+    chips: ["Tamper-proof records", "Smart contracts"],
     title: "The Proof — blockchain records everything.",
     desc: "Every data event from Draygo gets hashed and written to the blockchain layer immediately. The BOL, invoice, ISF filing — whatever document is involved — becomes a verifiable, tamper-proof record. A smart contract automatically checks whether milestone conditions for payment have been met.",
     bullets: [
@@ -34,7 +45,6 @@ const STEPS = [
       "Smart contracts verify payment milestone conditions",
       "Single source of truth — no disputed documents",
     ],
-    icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>',
   },
   {
     num: "03",
@@ -42,15 +52,20 @@ const STEPS = [
     tagline: "Instant settlement",
     color: "#00a5e7",
     rgb: "0,165,231",
+    logo: "/logo-draypay.png",
+    role: "The Money",
+    photo: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&q=80",
+    photoAlt: "Payment infrastructure",
+    nextTag: null,
+    chips: ["24-72h pay", "zero factoring"],
     title: "The Money — funds move automatically.",
     desc: "The moment the smart contract confirms a milestone, funds move automatically. No invoice sitting in a queue, no 30/60-day terms, no manual approval chain. Wallet-based debit cards give drivers instant access to earned funds at the pump or for per-diem expenses.",
     bullets: [
       "Payment triggered automatically on milestone confirm",
-      "No 30/60-day terms — funds move in 24–72 hours",
+      "No 30/60-day terms — funds move in 24-72 hours",
       "Wallet-based debit cards for drivers & owner-ops",
       "Instant pump access — no factoring fees",
     ],
-    icon: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
   },
 ];
 
@@ -62,7 +77,7 @@ const DIFFS = [
   },
   {
     label: "DrayGo ecosystem",
-    items: ["Operations + blockchain + payments in one loop", "Blockchain is single source of truth", "Smart contract triggers payment automatically", "24–72 hour settlement", "Tamper-proof records eliminate disputes", "Verified history improves AI over time"],
+    items: ["Operations + blockchain + payments in one loop", "Blockchain is single source of truth", "Smart contract triggers payment automatically", "24-72 hour settlement", "Tamper-proof records eliminate disputes", "Verified history improves AI over time"],
     bad: false,
   },
 ];
@@ -72,86 +87,96 @@ export default function HowItWorksPage() {
     <>
       <Nav />
 
-      {/* ── HERO ─────────────────────────────────────────────────────── */}
-      <section style={{ background: "#060d1a", padding: "100px 24px 80px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        {/* background glow orbs */}
-        <div style={{ position: "absolute", left: "15%", top: "20%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(99,91,255,0.12), transparent 70%)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", right: "10%", bottom: "10%", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,165,231,0.10), transparent 70%)", pointerEvents: "none" }} />
-        <div style={{ maxWidth: 760, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.12)", border: "1px solid rgba(252,11,5,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", color: "#fc0b05", marginBottom: 24 }}>
+      {/* HERO */}
+      <section style={{ position: "relative", minHeight: "90vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
+        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80" alt="" aria-hidden="true" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }} />
+        <div style={{ position: "absolute", inset: 0, background: "rgba(6,13,26,0.88)", zIndex: 1 }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "30px 30px", zIndex: 2 }} />
+        <div style={{ position: "absolute", left: "10%", top: "20%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(99,91,255,0.14), transparent 65%)", zIndex: 2, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", right: "8%", bottom: "15%", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,165,231,0.12), transparent 65%)", zIndex: 2, pointerEvents: "none" }} />
+
+        <div style={{ position: "relative", zIndex: 3, maxWidth: 900, margin: "0 auto", textAlign: "center", padding: "100px 24px 80px", width: "100%" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.14)", border: "1px solid rgba(252,11,5,0.40)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 32 }}>
             <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#fc0b05", display: "inline-block" }} />
             How It Works
           </div>
-          <h1 style={{ fontSize: "clamp(40px,6vw,72px)", fontWeight: 900, color: "#fff", lineHeight: 1.03, margin: "0 0 24px" }}>
+          <h1 style={{ fontSize: "clamp(48px,7vw,88px)", fontWeight: 900, color: "#fff", lineHeight: 1.0, margin: "0 0 28px", letterSpacing: "-0.03em" }}>
             One loop.<br />
-            <span style={{ color: "#fc0b05" }}>Three layers.</span><br />
+            <span style={{ background: "linear-gradient(90deg,#fc0b05,#ff5530)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Three layers.</span><br />
             Zero gaps.
           </h1>
-          <p style={{ fontSize: 18, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: 620, margin: "0 auto 56px" }}>
-            Draygo, DrayChain, and DrayPay aren't three products bolted together — they're one continuous cycle where each layer's output is the next layer's input.
+          <p style={{ fontSize: 18, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: 580, margin: "0 auto 64px" }}>
+            Draygo, DrayChain, and DrayPay are one continuous cycle where each layer&apos;s output is the next layer&apos;s input.
           </p>
 
-          {/* loop diagram */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 0, flexWrap: "wrap" }}>
+          {/* logo flow diagram */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 0 }}>
             {[
-              { logo: asset("/logo-draygo-white.png"), logoH: 32, sub: "AI dispatch & TMS", color: "#635bff", rgb: "99,91,255", name: "Draygo" },
-              { logo: asset("/logo-draychain.png"),    logoH: 32, sub: "Blockchain trust",  color: "#27b30a", rgb: "39,179,10",  name: "DrayChain" },
-              { logo: asset("/logo-draypay.png"),      logoH: 32, sub: "Instant settlement",color: "#00a5e7", rgb: "0,165,231",  name: "DrayPay" },
+              { logo: "/logo-draygo-white.png", sub: "AI dispatch & TMS", color: "#635bff", rgb: "99,91,255", name: "Draygo" },
+              { logo: "/logo-draychain.png",    sub: "Blockchain trust",  color: "#27b30a", rgb: "39,179,10",  name: "DrayChain" },
+              { logo: "/logo-draypay.png",      sub: "Instant settlement",color: "#00a5e7", rgb: "0,165,231",  name: "DrayPay" },
             ].map((item, i) => (
               <div key={item.name} style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ background: `rgba(${item.rgb},0.10)`, border: `1.5px solid rgba(${item.rgb},0.4)`, borderRadius: 14, padding: "20px 28px", minWidth: 172, textAlign: "center" }}>
-                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: 8 }}>
-                    <img src={item.logo} alt={item.name} style={{ height: item.logoH, width: "auto", objectFit: "contain", maxWidth: 130 }} />
+                <div style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(16px)", border: `1.5px solid rgba(${item.rgb},0.50)`, borderRadius: 16, padding: "24px 32px", minWidth: 185, textAlign: "center", boxShadow: `0 0 32px rgba(${item.rgb},0.10)` }}>
+                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: 10 }}>
+                    <img src={asset(item.logo)} alt={item.name} style={{ height: 36, width: "auto", objectFit: "contain", maxWidth: 140 }} />
                   </div>
-                  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>{item.sub}</div>
+                  <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", letterSpacing: "0.04em" }}>{item.sub}</div>
                 </div>
                 {i < 2 && (
-                  <div style={{ display: "flex", alignItems: "center", padding: "0 12px" }}>
+                  <div style={{ padding: "0 14px" }}>
                     <svg width="28" height="16" viewBox="0 0 28 16" fill="none">
-                      <path d="M0 8h24M20 2l6 6-6 6" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M0 8h24M20 2l6 6-6 6" stroke="rgba(255,255,255,0.28)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
                 )}
               </div>
             ))}
           </div>
-          <div style={{ marginTop: 16, fontSize: 12, color: "rgba(255,255,255,0.35)", letterSpacing: "0.04em" }}>
-            ↺ verified history feeds back into Draygo's AI — improving pricing & dispatch over time
+          <div style={{ marginTop: 20, fontSize: 12, color: "rgba(255,255,255,0.30)", letterSpacing: "0.05em" }}>
+            &#8635; verified history feeds back into Draygo&apos;s AI &mdash; improving pricing &amp; dispatch over time
           </div>
         </div>
       </section>
 
-      {/* ── STEP 1: DRAYGO (dark) ──────────────────────────────────────── */}
-      <section style={{ background: "#08192b", padding: "80px 24px 64px" }}>
+      {/* STEP 1: DRAYGO dark */}
+      <section style={{ background: "#08192b", padding: "0 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           {(() => { const step = STEPS[0]; return (
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, background: "rgba(255,255,255,0.03)", border: `1px solid rgba(${step.rgb},0.18)`, borderRadius: 20, overflow: "hidden" }} className="how-step-card">
-              <div style={{ padding: "52px 52px", borderRight: `1px solid rgba(${step.rgb},0.12)`, position: "relative" }}>
-                <div style={{ position: "absolute", left: 52, top: 52, fontSize: 100, fontWeight: 900, color: `rgba(${step.rgb},0.07)`, lineHeight: 1, userSelect: "none" as const }}>{step.num}</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, borderBottom: `1px solid rgba(${step.rgb},0.12)` }} className="how-step-card">
+              <div style={{ padding: "80px 60px", borderRight: `1px solid rgba(${step.rgb},0.12)`, position: "relative" }}>
+                <div style={{ position: "absolute", left: 60, top: 60, fontSize: 140, fontWeight: 900, color: step.color, opacity: 0.04, lineHeight: 1, userSelect: "none" as const, letterSpacing: "-0.05em" }}>{step.num}</div>
                 <div style={{ position: "relative", zIndex: 1 }}>
-                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.3)`, borderRadius: 6, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color, marginBottom: 20 }}>
-                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />
-                    {step.tag} · {step.tagline}
+                  <div style={{ marginBottom: 24 }}>
+                    <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
+                    <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
+                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
+                    </div>
                   </div>
-                  <h2 style={{ fontSize: "clamp(22px,2.5vw,30px)", fontWeight: 800, color: "#fff", lineHeight: 1.15, margin: "0 0 16px" }}>{step.title}</h2>
-                  <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
+                  <h2 style={{ fontSize: "clamp(22px,2.8vw,34px)", fontWeight: 900, color: "#fff", lineHeight: 1.15, margin: "0 0 18px", letterSpacing: "-0.01em" }}>{step.title}</h2>
+                  <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.58)", lineHeight: 1.75, margin: "0 0 32px" }}>{step.desc}</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                    {step.bullets.map(b => (
+                      <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                        <div style={{ width: 26, height: 26, borderRadius: 7, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.80)", lineHeight: 1.55 }}>{b}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ flex: 1, height: 1, background: `rgba(${step.rgb},0.18)` }} />
+                    <span style={{ fontSize: 11, color: step.color, fontWeight: 800, letterSpacing: "0.1em" }}>feeds into {step.nextTag} &rarr;</span>
+                  </div>
                 </div>
               </div>
-              <div style={{ padding: "52px 52px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 0 }}>
-                <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=900&q=80" alt="Truck driver" style={{ width: "100%", height: 200, objectFit: "cover", borderRadius: 10, marginBottom: 24, display: "block" }} />
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  {step.bullets.map(b => (
-                    <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                      <div style={{ width: 28, height: 28, borderRadius: 8, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      </div>
-                      <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.8)", lineHeight: 1.55 }}>{b}</span>
-                    </div>
+              <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.03)`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 280, objectFit: "cover", borderRadius: 16, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.15)` }} />
+                <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                  {step.chips.map(chip => (
+                    <div key={chip} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 20, padding: "8px 18px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
                   ))}
-                </div>
-                <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 8 }}>
-                  <div style={{ flex: 1, height: 1, background: `rgba(${step.rgb},0.2)` }} />
-                  <span style={{ fontSize: 11, color: `rgba(${step.rgb},0.7)`, fontWeight: 700, letterSpacing: "0.1em" }}>feeds into {STEPS[1].tag} →</span>
                 </div>
               </div>
             </div>
@@ -159,37 +184,44 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      {/* ── STEP 2: DRAYCHAIN (light) ──────────────────────────────────── */}
-      <section style={{ background: "#f8f9fc", padding: "64px 24px" }}>
+      {/* STEP 2: DRAYCHAIN light */}
+      <section style={{ background: "#f8f9fc", padding: "0 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           {(() => { const step = STEPS[1]; return (
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, background: "#ffffff", border: `1.5px solid rgba(${step.rgb},0.22)`, borderRadius: 20, overflow: "hidden", boxShadow: "0 4px 24px rgba(10,22,40,0.08)" }} className="how-step-card">
-              <div style={{ padding: "52px 52px", borderRight: `1px solid rgba(${step.rgb},0.12)`, position: "relative" }}>
-                <div style={{ position: "absolute", left: 52, top: 52, fontSize: 100, fontWeight: 900, color: step.color, opacity: 0.05, lineHeight: 1, userSelect: "none" as const }}>{step.num}</div>
-                <div style={{ position: "relative", zIndex: 1 }}>
-                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `rgba(${step.rgb},0.10)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 6, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color, marginBottom: 20 }}>
-                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />
-                    {step.tag} · {step.tagline}
-                  </div>
-                  <h2 style={{ fontSize: "clamp(22px,2.5vw,30px)", fontWeight: 800, color: "#0a1628", lineHeight: 1.15, margin: "0 0 16px" }}>{step.title}</h2>
-                  <p style={{ fontSize: 15, color: "#4a5568", lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
-                </div>
-              </div>
-              <div style={{ padding: "52px 52px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 0, background: "#f8f9fc" }}>
-                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=900&q=80" alt="Blockchain technology" style={{ width: "100%", height: 200, objectFit: "cover", borderRadius: 10, marginBottom: 24, display: "block" }} />
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  {step.bullets.map(b => (
-                    <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                      <div style={{ width: 28, height: 28, borderRadius: 8, background: `rgba(${step.rgb},0.12)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      </div>
-                      <span style={{ fontSize: 14.5, color: "#374151", lineHeight: 1.55 }}>{b}</span>
-                    </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
+              <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.04)`, display: "flex", flexDirection: "column", justifyContent: "center", borderRight: `1px solid rgba(${step.rgb},0.12)` }}>
+                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 280, objectFit: "cover", borderRadius: 16, marginBottom: 24, display: "block", boxShadow: `0 12px 40px rgba(${step.rgb},0.12)` }} />
+                <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                  {step.chips.map(chip => (
+                    <div key={chip} style={{ background: "#fff", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 20, padding: "8px 18px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
                   ))}
                 </div>
-                <div style={{ marginTop: 20, display: "flex", alignItems: "center", gap: 8 }}>
-                  <div style={{ flex: 1, height: 1, background: `rgba(${step.rgb},0.18)` }} />
-                  <span style={{ fontSize: 11, color: step.color, fontWeight: 700, letterSpacing: "0.1em" }}>feeds into {STEPS[2].tag} →</span>
+              </div>
+              <div style={{ padding: "80px 60px", background: "#fff", position: "relative" }}>
+                <div style={{ position: "absolute", right: 60, top: 60, fontSize: 140, fontWeight: 900, color: step.color, opacity: 0.04, lineHeight: 1, userSelect: "none" as const, letterSpacing: "-0.05em" }}>{step.num}</div>
+                <div style={{ position: "relative", zIndex: 1 }}>
+                  <div style={{ marginBottom: 24 }}>
+                    <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
+                    <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.10)`, border: `1px solid rgba(${step.rgb},0.25)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
+                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
+                    </div>
+                  </div>
+                  <h2 style={{ fontSize: "clamp(22px,2.8vw,34px)", fontWeight: 900, color: "#0a1628", lineHeight: 1.15, margin: "0 0 18px", letterSpacing: "-0.01em" }}>{step.title}</h2>
+                  <p style={{ fontSize: 15.5, color: "#4a5568", lineHeight: 1.75, margin: "0 0 32px" }}>{step.desc}</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                    {step.bullets.map(b => (
+                      <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                        <div style={{ width: 26, height: 26, borderRadius: 7, background: `rgba(${step.rgb},0.12)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span style={{ fontSize: 14.5, color: "#1e293b", lineHeight: 1.55 }}>{b}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ flex: 1, height: 1, background: `rgba(${step.rgb},0.18)` }} />
+                    <span style={{ fontSize: 11, color: step.color, fontWeight: 800, letterSpacing: "0.1em" }}>feeds into {step.nextTag} &rarr;</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -197,32 +229,39 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      {/* ── STEP 3: DRAYPAY (dark) ─────────────────────────────────────── */}
-      <section style={{ background: "#060d1a", padding: "64px 24px 80px" }}>
+      {/* STEP 3: DRAYPAY dark */}
+      <section style={{ background: "#060d1a", padding: "0 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           {(() => { const step = STEPS[2]; return (
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, background: "rgba(255,255,255,0.03)", border: `1px solid rgba(${step.rgb},0.18)`, borderRadius: 20, overflow: "hidden" }} className="how-step-card">
-              <div style={{ padding: "52px 52px", borderRight: `1px solid rgba(${step.rgb},0.12)`, position: "relative" }}>
-                <div style={{ position: "absolute", left: 52, top: 52, fontSize: 100, fontWeight: 900, color: `rgba(${step.rgb},0.07)`, lineHeight: 1, userSelect: "none" as const }}>{step.num}</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
+              <div style={{ padding: "80px 60px", borderRight: `1px solid rgba(${step.rgb},0.12)`, position: "relative" }}>
+                <div style={{ position: "absolute", left: 60, top: 60, fontSize: 140, fontWeight: 900, color: step.color, opacity: 0.04, lineHeight: 1, userSelect: "none" as const, letterSpacing: "-0.05em" }}>{step.num}</div>
                 <div style={{ position: "relative", zIndex: 1 }}>
-                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.3)`, borderRadius: 6, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color, marginBottom: 20 }}>
-                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />
-                    {step.tag} · {step.tagline}
+                  <div style={{ marginBottom: 24 }}>
+                    <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
+                    <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
+                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
+                    </div>
                   </div>
-                  <h2 style={{ fontSize: "clamp(22px,2.5vw,30px)", fontWeight: 800, color: "#fff", lineHeight: 1.15, margin: "0 0 16px" }}>{step.title}</h2>
-                  <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, margin: 0 }}>{step.desc}</p>
+                  <h2 style={{ fontSize: "clamp(22px,2.8vw,34px)", fontWeight: 900, color: "#fff", lineHeight: 1.15, margin: "0 0 18px", letterSpacing: "-0.01em" }}>{step.title}</h2>
+                  <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.58)", lineHeight: 1.75, margin: "0 0 32px" }}>{step.desc}</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                    {step.bullets.map(b => (
+                      <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                        <div style={{ width: 26, height: 26, borderRadius: 7, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.80)", lineHeight: 1.55 }}>{b}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div style={{ padding: "52px 52px", display: "flex", flexDirection: "column", justifyContent: "center", gap: 0 }}>
-                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=900&q=80" alt="Payment infrastructure" style={{ width: "100%", height: 200, objectFit: "cover", borderRadius: 10, marginBottom: 24, display: "block" }} />
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  {step.bullets.map(b => (
-                    <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                      <div style={{ width: 28, height: 28, borderRadius: 8, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                      </div>
-                      <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.8)", lineHeight: 1.55 }}>{b}</span>
-                    </div>
+              <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.03)`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 280, objectFit: "cover", borderRadius: 16, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.12)` }} />
+                <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                  {step.chips.map(chip => (
+                    <div key={chip} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 20, padding: "8px 18px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
                   ))}
                 </div>
               </div>
@@ -231,42 +270,40 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      {/* ── WHY DIFFERENT (light) ─────────────────────────────────────── */}
-      <section style={{ background: "#f8f9fc", padding: "88px 24px" }}>
+      {/* WHY DIFFERENT light */}
+      <section style={{ background: "#f8f9fc", padding: "100px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.10)", border: "1px solid rgba(252,11,5,0.30)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 20 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.09)", border: "1px solid rgba(252,11,5,0.25)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 20 }}>
               <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#fc0b05", display: "inline-block" }} />
-              Why it is different
+              Why it&apos;s different
             </div>
-            <h2 style={{ fontSize: "clamp(28px,4vw,48px)", fontWeight: 900, color: "#0a1628", lineHeight: 1.05, margin: "0 0 16px" }}>
-              The gap is where drayage friction lives.
-            </h2>
-            <p style={{ color: "#4a5568", fontSize: 16, maxWidth: 560, margin: "0 auto" }}>
-              Most TMS platforms stop at visibility, then hand off to a completely separate, disconnected stack for money. That is where 45-day cycles, disputed invoices, and lost paperwork come from.
-            </p>
+            <h2 style={{ fontSize: "clamp(28px,4vw,52px)", fontWeight: 900, color: "#0a1628", lineHeight: 1.05, margin: "0 0 16px", letterSpacing: "-0.02em" }}>Not just another TMS.</h2>
+            <p style={{ color: "#4a5568", fontSize: 16, maxWidth: 540, margin: "0 auto" }}>Most TMS platforms stop at visibility. That is where 45-day cycles, disputed invoices, and lost paperwork come from.</p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginBottom: 24 }} className="diff-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 24 }} className="diff-grid">
             {DIFFS.map(col => (
-              <div key={col.label} style={{
-                background: "#ffffff",
-                border: col.bad ? "1px solid #e8eaf0" : "1.5px solid rgba(252,11,5,0.20)",
-                borderRadius: 18,
-                padding: "36px 36px",
-                boxShadow: "0 2px 12px rgba(10,22,40,0.05)",
-              }}>
-                <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" as const, color: col.bad ? "#94a3b8" : "#fc0b05", marginBottom: 24 }}>{col.label}</div>
+              <div key={col.label} style={{ background: col.bad ? "#f4f6f9" : "#fff", border: col.bad ? "1px solid #e2e8f0" : "2px solid rgba(252,11,5,0.22)", borderRadius: 18, padding: "36px 36px", boxShadow: col.bad ? "none" : "0 4px 24px rgba(252,11,5,0.06)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+                  <div style={{ width: 28, height: 28, borderRadius: 8, background: col.bad ? "#e5e7eb" : "rgba(252,11,5,0.10)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    {col.bad
+                      ? <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      : <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    }
+                  </div>
+                  <span style={{ fontSize: 12, fontWeight: 800, color: col.bad ? "#9ca3af" : "#fc0b05", textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>{col.label}</span>
+                </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                   {col.items.map(item => (
                     <div key={item} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                      <div style={{ width: 22, height: 22, borderRadius: 6, background: col.bad ? "#f3f4f6" : "rgba(252,11,5,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <div style={{ width: 22, height: 22, borderRadius: 6, background: col.bad ? "#f3f4f6" : "rgba(252,11,5,0.08)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                         {col.bad
-                          ? <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                          ? <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                           : <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                         }
                       </div>
-                      <span style={{ fontSize: 14, color: col.bad ? "rgba(0,0,0,0.4)" : "#1e293b", lineHeight: 1.4 }}>{item}</span>
+                      <span style={{ fontSize: 14, color: col.bad ? "#9ca3af" : "#0a1628", lineHeight: 1.4 }}>{item}</span>
                     </div>
                   ))}
                 </div>
@@ -274,51 +311,44 @@ export default function HowItWorksPage() {
             ))}
           </div>
 
-          {/* hard-to-copy card */}
-          <div style={{ background: "#ffffff", border: "1px solid #e0e2f0", borderLeft: "4px solid #635bff", borderRadius: 16, padding: "32px 40px", display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: 32, boxShadow: "0 2px 16px rgba(10,22,40,0.06)" }} className="closing-cta">
-            <div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: "#0a1628", marginBottom: 8 }}>The hard-to-copy part</div>
-              <p style={{ fontSize: 14.5, color: "#4a5568", margin: 0, lineHeight: 1.65 }}>
-                By making the blockchain layer the single source of truth for both the operational record and the trigger for payment, we collapse "did this happen" and "did we get paid for it" into the same event. A competitor would need to rebuild fintech rails and a blockchain layer underneath their TMS — not just add a dashboard feature.
-              </p>
+          <div style={{ background: "#fff", border: "1.5px solid rgba(99,91,255,0.28)", borderRadius: 18, padding: "36px 40px", boxShadow: "0 4px 24px rgba(99,91,255,0.08)" }}>
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 20 }}>
+              <div style={{ width: 48, height: 48, borderRadius: 14, background: "rgba(99,91,255,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#635bff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 16, fontWeight: 800, color: "#0a1628", marginBottom: 10 }}>The hard-to-copy part</div>
+                <p style={{ fontSize: 14.5, color: "#4a5568", margin: "0 0 20px", lineHeight: 1.7 }}>By making the blockchain layer the single source of truth for both the operational record and the trigger for payment, we collapse &ldquo;did this happen&rdquo; and &ldquo;did we get paid for it&rdquo; into the same event. A competitor would need to rebuild fintech rails and a blockchain layer underneath their TMS.</p>
+                <a href="/#load-board" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#fc0b05", color: "#fff", fontWeight: 700, fontSize: 14, borderRadius: 8, padding: "12px 24px", textDecoration: "none" }}>
+                  Get Started
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+              </div>
             </div>
-            <a href="/pricing" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#fc0b05", color: "#fff", fontWeight: 700, fontSize: 14, borderRadius: 8, padding: "14px 24px", textDecoration: "none", whiteSpace: "nowrap" as const, flexShrink: 0 }}>
-              View Pricing
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
           </div>
         </div>
       </section>
 
-      {/* ── CLOSING CTA (DARK PHOTO) ──────────────────────────────────────── */}
-      <section style={{
-        position: "relative",
-        overflow: "hidden",
-        padding: "120px 24px",
-        backgroundImage: "url('https://images.unsplash.com/photo-1553413077-190dd305871c?w=900&q=80')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}>
-        <div style={{ position: "absolute", inset: 0, background: "rgba(6,13,26,0.88)", zIndex: 0 }} />
-        <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.15)", border: "1px solid rgba(252,11,5,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 28 }}>
-            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#fc0b05", display: "inline-block" }} />
-            Ready to start?
+      {/* CTA dark photo */}
+      <section style={{ position: "relative", overflow: "hidden", padding: "130px 24px" }}>
+        <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200&q=80" alt="" aria-hidden="true" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }} />
+        <div style={{ position: "absolute", inset: 0, background: "rgba(6,13,26,0.88)", zIndex: 1 }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "28px 28px", zIndex: 2 }} />
+        <div style={{ position: "relative", zIndex: 3, maxWidth: 720, margin: "0 auto", textAlign: "center" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.14)", border: "1px solid rgba(252,11,5,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 28 }}>
+            Ready to move freight smarter?
           </div>
-          <h2 style={{ fontSize: "clamp(28px,5vw,52px)", fontWeight: 900, color: "#fff", lineHeight: 1.1, margin: "0 0 20px", letterSpacing: "-0.02em" }}>
-            Start moving containers<br />the modern way.
+          <h2 style={{ fontSize: "clamp(34px,5vw,64px)", fontWeight: 900, color: "#fff", lineHeight: 1.05, margin: "0 0 18px", letterSpacing: "-0.02em" }}>
+            Start moving freight<br />the intelligent way.
           </h2>
-          <p style={{ fontSize: 17, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, margin: "0 0 48px" }}>
-            Join the carriers, shippers, and brokers already using Draygo to eliminate friction, get paid faster, and stay ahead.
-          </p>
+          <p style={{ fontSize: 18, color: "rgba(255,255,255,0.55)", lineHeight: 1.65, margin: "0 0 48px" }}>Zero setup fees. No long-term contract. Get your first shipment moving in minutes.</p>
           <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="/#load-board" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#fc0b05", color: "#fff", fontWeight: 700, fontSize: 15, borderRadius: 8, padding: "16px 32px", textDecoration: "none" }}>
-              Get Started
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <a href="/#load-board" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#fc0b05", color: "#fff", fontWeight: 700, fontSize: 16, borderRadius: 10, padding: "18px 36px", textDecoration: "none", boxShadow: "0 8px 32px rgba(252,11,5,0.35)" }}>
+              Get Started Free
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <a href="/pricing" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: "#fff", fontWeight: 700, fontSize: 15, borderRadius: 8, padding: "16px 32px", textDecoration: "none", border: "1.5px solid rgba(255,255,255,0.35)" }}>
+            <a href="/pricing" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: "#fff", fontWeight: 700, fontSize: 16, borderRadius: 10, padding: "18px 36px", textDecoration: "none", border: "1.5px solid rgba(255,255,255,0.30)" }}>
               View Pricing
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
         </div>
@@ -328,7 +358,6 @@ export default function HowItWorksPage() {
         @media (max-width: 768px) {
           .how-step-card { grid-template-columns: 1fr !important; }
           .diff-grid { grid-template-columns: 1fr !important; }
-          .closing-cta { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
