@@ -16,6 +16,7 @@ export default function Nav() {
           <Link href="/network" className="hover:text-white">Live Network</Link>
           <Link href="/explorer" className="hover:text-white">Container Volume</Link>
           <Link href="/estimates" className="hover:text-white">Records Stream</Link>
+          <Link href="/submit-container" className="hover:text-white" style={{color:"#7dd3fc",fontWeight:600}}>Submit Container</Link>
         </nav>
         <div className="flex items-center gap-2.5">
           <Link href="/network" className="btn-primary text-[13px] px-4 py-2 rounded inline-flex items-center gap-1.5"><span className="label">Verify a Record</span></Link>
