@@ -192,7 +192,7 @@ export default function HowItWorksPage() {
                 <path d="M0,0.5 L0,7.5 L7,4 z" fill="rgba(26,110,212,0.9)" />
               </marker>
               <marker id="back" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                <path d="M0,0.5 L0,7.5 L7,4 z" fill="rgba(255,255,255,0.5)" />
+                <path d="M0,0.5 L0,7.5 L7,4 z" fill="rgba(0,165,231,0.85)" />
               </marker>
               <filter id="glow-red" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
               <filter id="glow-blue" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
@@ -207,7 +207,7 @@ export default function HowItWorksPage() {
             <text x="130" y="116" textAnchor="middle" fill="rgba(255,255,255,0.50)" fontSize="12" fontFamily="system-ui,sans-serif">AI dispatch &amp; TMS</text>
 
             {/* ── Arrow 1→2 (red, spaced) ── */}
-            <line x1="258" y1="73" x2="322" y2="73"
+            <line x1="270" y1="73" x2="308" y2="73"
               stroke="rgba(252,11,5,0.80)" strokeWidth="2" strokeDasharray="6 3"
               markerEnd="url(#fwd1)"
               style={{ animation: "hiw-flow 1s linear infinite" }} />
@@ -220,7 +220,7 @@ export default function HowItWorksPage() {
             <text x="445" y="116" textAnchor="middle" fill="rgba(255,255,255,0.50)" fontSize="12" fontFamily="system-ui,sans-serif">Blockchain trust</text>
 
             {/* ── Arrow 2→3 (blue, spaced) ── */}
-            <line x1="573" y1="73" x2="637" y2="73"
+            <line x1="583" y1="73" x2="622" y2="73"
               stroke="rgba(26,110,212,0.80)" strokeWidth="2" strokeDasharray="6 3"
               markerEnd="url(#fwd2)"
               style={{ animation: "hiw-flow 1s linear infinite", animationDelay: "0.4s" }} />
@@ -234,7 +234,7 @@ export default function HowItWorksPage() {
 
             {/* ── Return arc: DrayPay → Draygo ── */}
             <path d="M 760,138 C 760,210 130,210 130,138"
-              fill="none" stroke="rgba(255,255,255,0.30)" strokeWidth="1.8"
+              fill="none" stroke="rgba(0,165,231,0.70)" strokeWidth="1.8"
               strokeDasharray="8 4"
               markerEnd="url(#back)"
               style={{ animation: "hiw-flow-back 1.6s linear infinite" }} />
