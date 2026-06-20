@@ -281,7 +281,7 @@ export default function HowItWorksPage() {
               </div>
               <div style={{ padding: "80px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
-                  <img src={step.photo} alt={step.photoAlt} style={{ flex: 1, minWidth: 0, height: 340, objectFit: "cover", borderRadius: 8, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.15)` }} />
+                  <img src={step.photo} alt={step.photoAlt} style={{ flex: 1, minWidth: 0, height: 460, objectFit: "cover", borderRadius: 8, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.15)` }} />
                   <div style={{ fontSize: 88, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", opacity: 0.45, userSelect: "none" as const, flexShrink: 0 }}>{step.num}</div>
                 </div>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -305,7 +305,7 @@ export default function HowItWorksPage() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
               <div style={{ padding: "80px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
-                  <img src={step.photo} alt={step.photoAlt} style={{ flex: 1, minWidth: 0, height: 340, objectFit: "cover", borderRadius: 8, display: "block", boxShadow: `0 12px 40px rgba(${step.rgb},0.12)` }} />
+                  <img src={step.photo} alt={step.photoAlt} style={{ flex: 1, minWidth: 0, height: 460, objectFit: "cover", borderRadius: 8, display: "block", boxShadow: `0 12px 40px rgba(${step.rgb},0.12)` }} />
                   <div style={{ fontSize: 88, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", opacity: 0.22, userSelect: "none" as const, flexShrink: 0 }}>{step.num}</div>
                 </div>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -372,7 +372,7 @@ export default function HowItWorksPage() {
               </div>
               <div style={{ padding: "80px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
-                  <img src={step.photo} alt={step.photoAlt} style={{ flex: 1, minWidth: 0, height: 340, objectFit: "cover", borderRadius: 8, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.12)` }} />
+                  <img src={step.photo} alt={step.photoAlt} style={{ flex: 1, minWidth: 0, height: 460, objectFit: "cover", borderRadius: 8, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.12)` }} />
                   <div style={{ fontSize: 88, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", opacity: 0.45, userSelect: "none" as const, flexShrink: 0 }}>{step.num}</div>
                 </div>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
