@@ -284,7 +284,7 @@ export default function HowItWorksPage() {
                 <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.15)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
-                    <div key={chip} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 20, padding: "8px 18px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
+                    <div key={chip} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 6, padding: "7px 16px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
                   ))}
                 </div>
               </div>
@@ -302,7 +302,7 @@ export default function HowItWorksPage() {
                 <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 12px 40px rgba(${step.rgb},0.12)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
-                    <div key={chip} style={{ background: "#fff", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 20, padding: "8px 18px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
+                    <div key={chip} style={{ background: "#fff", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 6, padding: "7px 16px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
                   ))}
                 </div>
               </div>
@@ -370,7 +370,7 @@ export default function HowItWorksPage() {
                 <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.12)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
-                    <div key={chip} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 20, padding: "8px 18px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
+                    <div key={chip} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 6, padding: "7px 16px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
                   ))}
                 </div>
               </div>
