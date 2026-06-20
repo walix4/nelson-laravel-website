@@ -143,21 +143,8 @@ export default function HowItWorksPage() {
 
       {/* HERO */}
       <section style={{ position: "relative", minHeight: "90vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
-        <img src={asset("/hero-port-night.jpg")} alt="" aria-hidden="true" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }} />
-        <div style={{ position: "absolute", inset: 0, background: "rgba(6,13,26,0.88)", zIndex: 1 }} />
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "30px 30px", zIndex: 2 }} />
-
-
-        {/* Floating particles */}
-        {[
-          { left:"18%", top:"70%", delay:"0s", color:"rgba(99,91,255,0.5)" },
-          { left:"35%", top:"80%", delay:"1.5s", color:"rgba(39,179,10,0.4)" },
-          { left:"60%", top:"75%", delay:"3s", color:"rgba(0,165,231,0.5)" },
-          { left:"75%", top:"65%", delay:"0.8s", color:"rgba(252,11,5,0.4)" },
-          { left:"50%", top:"85%", delay:"2.2s", color:"rgba(99,91,255,0.3)" },
-        ].map((p,i) => (
-          <div key={i} style={{ position:"absolute", left:p.left, top:p.top, width:4, height:4, borderRadius:"50%", background:p.color, zIndex:2, animation:`hiw-particle 4s ease-in-out infinite`, animationDelay:p.delay, pointerEvents:"none" }} />
-        ))}
+        <img src={asset("/hero-port-night.jpg")} alt="" aria-hidden="true" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", zIndex: 0 }} />
+        <div style={{ position: "absolute", inset: 0, background: "rgba(6,13,26,0.70)", zIndex: 1 }} />
 
         <div style={{ position: "relative", zIndex: 3, maxWidth: 960, margin: "0 auto", textAlign: "center", padding: "100px 24px 80px", width: "100%" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.14)", border: "1px solid rgba(252,11,5,0.40)", borderRadius: 6, padding: "5px 16px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 36, animation: "hiw-badge-pulse 2.5s ease-in-out infinite" }}>
