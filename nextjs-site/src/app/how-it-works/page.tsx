@@ -183,7 +183,7 @@ export default function HowItWorksPage() {
           </p>
 
           {/* SVG cycle diagram */}
-          <svg viewBox="0 0 880 250" style={{ width: "100%", maxWidth: 880, display: "block", margin: "0 auto", overflow: "visible" }}>
+          <svg viewBox="0 0 880 258" style={{ width: "100%", maxWidth: 880, display: "block", margin: "0 auto", overflow: "visible" }}>
             <defs>
               <marker id="fwd1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
                 <path d="M0,0.5 L0,7.5 L7,4 z" fill="rgba(252,11,5,0.9)" />
@@ -233,14 +233,14 @@ export default function HowItWorksPage() {
             <text x="760" y="116" textAnchor="middle" fill="rgba(255,255,255,0.50)" fontSize="12" fontFamily="system-ui,sans-serif">Instant settlement</text>
 
             {/* ── Return arc: DrayPay → Draygo ── */}
-            <path d="M 760,138 C 760,210 130,210 130,138"
+            <path d="M 740,158 C 740,222 150,222 150,158"
               fill="none" stroke="rgba(0,165,231,0.70)" strokeWidth="1.8"
               strokeDasharray="8 4"
               markerEnd="url(#back)"
               style={{ animation: "hiw-flow-back 1.6s linear infinite" }} />
 
             {/* ── Feedback label ── */}
-            <text x="445" y="238" textAnchor="middle" fill="rgba(255,255,255,0.30)" fontSize="12" fontFamily="system-ui,sans-serif">
+            <text x="445" y="244" textAnchor="middle" fill="rgba(0,165,231,0.85)" fontSize="13" fontFamily="system-ui,sans-serif" fontWeight="600" letterSpacing="0.3">
               ↺ verified history feeds back into Draygo&apos;s AI — improving pricing &amp; dispatch over time
             </text>
           </svg>
