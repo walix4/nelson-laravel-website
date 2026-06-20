@@ -147,10 +147,6 @@ export default function HowItWorksPage() {
         <div style={{ position: "absolute", inset: 0, background: "rgba(6,13,26,0.88)", zIndex: 1 }} />
         <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "30px 30px", zIndex: 2 }} />
 
-        {/* Animated glow orbs */}
-        <div style={{ position: "absolute", left: "8%", top: "15%", width: 560, height: 560, borderRadius: "50%", background: "radial-gradient(circle, rgba(99,91,255,0.18), transparent 65%)", zIndex: 2, pointerEvents: "none", animation: "hiw-float-a 9s ease-in-out infinite" }} />
-        <div style={{ position: "absolute", right: "6%", bottom: "10%", width: 440, height: 440, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,165,231,0.15), transparent 65%)", zIndex: 2, pointerEvents: "none", animation: "hiw-float-b 12s ease-in-out infinite" }} />
-        <div style={{ position: "absolute", left: "45%", bottom: "20%", width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, rgba(39,179,10,0.10), transparent 65%)", zIndex: 2, pointerEvents: "none", animation: "hiw-float-c 7s ease-in-out infinite" }} />
 
         {/* Floating particles */}
         {[
