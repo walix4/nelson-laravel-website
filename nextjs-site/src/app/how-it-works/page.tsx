@@ -249,38 +249,37 @@ export default function HowItWorksPage() {
       </section>
 
       {/* STEP 1: DRAYGO dark */}
-      <section style={{ background: "#08192b", padding: "60px 24px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <section style={{ background: "#08192b", padding: "0 24px", position: "relative" }}>
+        <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, right: 0, background: "rgba(252,11,5,0.07)", zIndex: 0 }} />
+        <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 2, background: "rgba(252,11,5,0.45)", transform: "translateX(-50%)", zIndex: 1 }} />
+        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 2 }}>
           {(() => { const step = STEPS[0]; return (
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, position: "relative" }} className="how-step-card">
-              <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 2, background: `rgba(${step.rgb},0.45)`, transform: "translateX(-50%)", zIndex: 0 }} />
-              <div style={{ padding: "80px 60px", position: "relative", zIndex: 1 }}>
-                <div style={{ position: "relative", zIndex: 1 }}>
-                  <div style={{ marginBottom: 24 }}>
-                    <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
-                    <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
-                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
-                    </div>
-                  </div>
-                  <h2 style={{ fontSize: "clamp(22px,2.8vw,34px)", fontWeight: 900, color: "#fff", lineHeight: 1.15, margin: "0 0 18px", letterSpacing: "-0.01em" }}>{step.title}</h2>
-                  <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.58)", lineHeight: 1.75, margin: "0 0 32px" }}>{step.desc}</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                    {step.bullets.map(b => (
-                      <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                        <div style={{ width: 26, height: 26, borderRadius: 7, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                        <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.80)", lineHeight: 1.55 }}>{b}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ flex: 1, height: 1, background: `rgba(${step.rgb},0.18)` }} />
-                    <span style={{ fontSize: 11, color: step.color, fontWeight: 800, letterSpacing: "0.1em" }}>feeds into {step.nextTag} &rarr;</span>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
+              <div style={{ padding: "80px 60px" }}>
+                <div style={{ marginBottom: 24 }}>
+                  <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
+                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
                   </div>
                 </div>
+                <h2 style={{ fontSize: "clamp(22px,2.8vw,34px)", fontWeight: 900, color: "#fff", lineHeight: 1.15, margin: "0 0 18px", letterSpacing: "-0.01em" }}>{step.title}</h2>
+                <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.58)", lineHeight: 1.75, margin: "0 0 32px" }}>{step.desc}</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                  {step.bullets.map(b => (
+                    <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                      <div style={{ width: 26, height: 26, borderRadius: 7, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.80)", lineHeight: 1.55 }}>{b}</span>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ flex: 1, height: 1, background: `rgba(${step.rgb},0.18)` }} />
+                  <span style={{ fontSize: 11, color: step.color, fontWeight: 800, letterSpacing: "0.1em" }}>feeds into {step.nextTag} &rarr;</span>
+                </div>
               </div>
-              <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.07)`, display: "flex", flexDirection: "column", justifyContent: "center", position: "relative", zIndex: 1 }}>
+              <div style={{ padding: "80px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ fontSize: 96, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 14, opacity: 0.40, userSelect: "none" as const }}>{step.num}</div>
                 <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.15)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -295,11 +294,14 @@ export default function HowItWorksPage() {
       </section>
 
       {/* STEP 2: DRAYCHAIN light */}
-      <section style={{ background: "#f8f9fc", padding: "0 24px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <section style={{ background: "#f8f9fc", padding: "0 24px", position: "relative" }}>
+        <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, right: "50%", background: "rgba(26,110,212,0.05)", zIndex: 0 }} />
+        <div style={{ position: "absolute", right: 0, top: 0, bottom: 0, left: "50%", background: "#fff", zIndex: 0 }} />
+        <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 1, background: "rgba(26,110,212,0.18)", transform: "translateX(-50%)", zIndex: 1 }} />
+        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 2 }}>
           {(() => { const step = STEPS[1]; return (
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
-              <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.04)`, display: "flex", flexDirection: "column", justifyContent: "center", borderRight: `1px solid rgba(${step.rgb},0.12)` }}>
+              <div style={{ padding: "80px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ fontSize: 96, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 14, opacity: 0.18, userSelect: "none" as const }}>{step.num}</div>
                 <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 12px 40px rgba(${step.rgb},0.12)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -308,30 +310,28 @@ export default function HowItWorksPage() {
                   ))}
                 </div>
               </div>
-              <div style={{ padding: "80px 60px", background: "#fff", position: "relative" }}>
-                <div style={{ position: "relative", zIndex: 1 }}>
-                  <div style={{ marginBottom: 24 }}>
-                    <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
-                    <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.10)`, border: `1px solid rgba(${step.rgb},0.25)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
-                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
-                    </div>
+              <div style={{ padding: "80px 60px" }}>
+                <div style={{ marginBottom: 24 }}>
+                  <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.10)`, border: `1px solid rgba(${step.rgb},0.25)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
+                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
                   </div>
-                  <h2 style={{ fontSize: "clamp(22px,2.8vw,34px)", fontWeight: 900, color: "#0a1628", lineHeight: 1.15, margin: "0 0 18px", letterSpacing: "-0.01em" }}>{step.title}</h2>
-                  <p style={{ fontSize: 15.5, color: "#4a5568", lineHeight: 1.75, margin: "0 0 32px" }}>{step.desc}</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                    {step.bullets.map(b => (
-                      <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                        <div style={{ width: 26, height: 26, borderRadius: 7, background: `rgba(${step.rgb},0.12)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                        <span style={{ fontSize: 14.5, color: "#1e293b", lineHeight: 1.55 }}>{b}</span>
+                </div>
+                <h2 style={{ fontSize: "clamp(22px,2.8vw,34px)", fontWeight: 900, color: "#0a1628", lineHeight: 1.15, margin: "0 0 18px", letterSpacing: "-0.01em" }}>{step.title}</h2>
+                <p style={{ fontSize: 15.5, color: "#4a5568", lineHeight: 1.75, margin: "0 0 32px" }}>{step.desc}</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                  {step.bullets.map(b => (
+                    <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                      <div style={{ width: 26, height: 26, borderRadius: 7, background: `rgba(${step.rgb},0.12)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                       </div>
-                    ))}
-                  </div>
-                  <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 8 }}>
-                    <div style={{ flex: 1, height: 1, background: `rgba(${step.rgb},0.18)` }} />
-                    <span style={{ fontSize: 11, color: step.color, fontWeight: 800, letterSpacing: "0.1em" }}>feeds into {step.nextTag} &rarr;</span>
-                  </div>
+                      <span style={{ fontSize: 14.5, color: "#1e293b", lineHeight: 1.55 }}>{b}</span>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ marginTop: 32, display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ flex: 1, height: 1, background: `rgba(${step.rgb},0.18)` }} />
+                  <span style={{ fontSize: 11, color: step.color, fontWeight: 800, letterSpacing: "0.1em" }}>feeds into {step.nextTag} &rarr;</span>
                 </div>
               </div>
             </div>
@@ -340,33 +340,33 @@ export default function HowItWorksPage() {
       </section>
 
       {/* STEP 3: DRAYPAY dark */}
-      <section style={{ background: "#060d1a", padding: "0 24px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      <section style={{ background: "#060d1a", padding: "0 24px", position: "relative" }}>
+        <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, right: 0, background: "rgba(0,165,231,0.06)", zIndex: 0 }} />
+        <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 2, background: "rgba(0,165,231,0.35)", transform: "translateX(-50%)", zIndex: 1 }} />
+        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 2 }}>
           {(() => { const step = STEPS[2]; return (
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
-              <div style={{ padding: "80px 60px", borderRight: `1px solid rgba(${step.rgb},0.12)`, position: "relative" }}>
-                <div style={{ position: "relative", zIndex: 1 }}>
-                  <div style={{ marginBottom: 24 }}>
-                    <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
-                    <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
-                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
-                    </div>
-                  </div>
-                  <h2 style={{ fontSize: "clamp(22px,2.8vw,34px)", fontWeight: 900, color: "#fff", lineHeight: 1.15, margin: "0 0 18px", letterSpacing: "-0.01em" }}>{step.title}</h2>
-                  <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.58)", lineHeight: 1.75, margin: "0 0 32px" }}>{step.desc}</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                    {step.bullets.map(b => (
-                      <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-                        <div style={{ width: 26, height: 26, borderRadius: 7, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                        <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.80)", lineHeight: 1.55 }}>{b}</span>
-                      </div>
-                    ))}
+              <div style={{ padding: "80px 60px" }}>
+                <div style={{ marginBottom: 24 }}>
+                  <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
+                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
                   </div>
                 </div>
+                <h2 style={{ fontSize: "clamp(22px,2.8vw,34px)", fontWeight: 900, color: "#fff", lineHeight: 1.15, margin: "0 0 18px", letterSpacing: "-0.01em" }}>{step.title}</h2>
+                <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.58)", lineHeight: 1.75, margin: "0 0 32px" }}>{step.desc}</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                  {step.bullets.map(b => (
+                    <div key={b} style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
+                      <div style={{ width: 26, height: 26, borderRadius: 7, background: `rgba(${step.rgb},0.14)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={step.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      </div>
+                      <span style={{ fontSize: 14.5, color: "rgba(255,255,255,0.80)", lineHeight: 1.55 }}>{b}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.03)`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <div style={{ padding: "80px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ fontSize: 96, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 14, opacity: 0.40, userSelect: "none" as const }}>{step.num}</div>
                 <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.12)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
