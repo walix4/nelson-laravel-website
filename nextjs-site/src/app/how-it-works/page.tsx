@@ -244,7 +244,10 @@ export default function HowItWorksPage() {
               <div style={{ padding: "80px 60px" }}>
                 <div style={{ marginBottom: 24 }}>
                   {step.logoText
-                    ? <div style={{ height: 40, marginBottom: 16, display: "flex", alignItems: "center", fontWeight: 800, fontSize: 22, color: step.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</div>
+                    ? <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+                        <img src={asset(step.logo)} alt={step.tag} style={{ height: 36, width: "auto", objectFit: "contain", display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
+                        <span style={{ fontWeight: 800, fontSize: 20, color: step.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</span>
+                      </div>
                     : <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 200, marginBottom: 16, display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
                   }
                   <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
@@ -306,7 +309,10 @@ export default function HowItWorksPage() {
               <div style={{ padding: "80px 60px" }}>
                 <div style={{ marginBottom: 24 }}>
                   {step.logoText
-                    ? <div style={{ height: 40, marginBottom: 16, display: "flex", alignItems: "center", fontWeight: 800, fontSize: 22, color: step.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</div>
+                    ? <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+                        <img src={asset(step.logo)} alt={step.tag} style={{ height: 36, width: "auto", objectFit: "contain", display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
+                        <span style={{ fontWeight: 800, fontSize: 20, color: step.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</span>
+                      </div>
                     : <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 200, marginBottom: 16, display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
                   }
                   <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.10)`, border: `1px solid rgba(${step.rgb},0.25)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
@@ -345,7 +351,10 @@ export default function HowItWorksPage() {
               <div style={{ padding: "80px 60px" }}>
                 <div style={{ marginBottom: 24 }}>
                   {step.logoText
-                    ? <div style={{ height: 40, marginBottom: 16, display: "flex", alignItems: "center", fontWeight: 800, fontSize: 22, color: step.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</div>
+                    ? <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
+                        <img src={asset(step.logo)} alt={step.tag} style={{ height: 36, width: "auto", objectFit: "contain", display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
+                        <span style={{ fontWeight: 800, fontSize: 20, color: step.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</span>
+                      </div>
                     : <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 200, marginBottom: 16, display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
                   }
                   <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
