@@ -52,7 +52,7 @@ const STEPS = [
     tagline: "Instant settlement",
     color: "#00a5e7",
     rgb: "0,165,231",
-    logo: "/logo-draypay.png",
+    logo: "/logo-draypay-white.png",
     role: "The Money",
     photo: "/step-draypay.jpg",
     photoAlt: "Payment infrastructure",
