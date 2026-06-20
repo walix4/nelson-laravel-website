@@ -249,12 +249,12 @@ export default function HowItWorksPage() {
       </section>
 
       {/* STEP 1: DRAYGO dark */}
-      <section style={{ background: "#08192b", padding: "0 24px" }}>
+      <section style={{ background: "#08192b", padding: "60px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           {(() => { const step = STEPS[0]; return (
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, borderBottom: `1px solid rgba(${step.rgb},0.12)` }} className="how-step-card">
-              <div style={{ padding: "80px 60px", borderRight: `1px solid rgba(${step.rgb},0.12)`, position: "relative" }}>
-                <div style={{ position: "absolute", left: 60, top: 60, fontSize: 140, fontWeight: 900, color: step.color, opacity: 0.04, lineHeight: 1, userSelect: "none" as const, letterSpacing: "-0.05em" }}>{step.num}</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, background: "rgba(255,255,255,0.03)", border: `1px solid rgba(${step.rgb},0.22)`, borderRadius: 20, overflow: "hidden" }} className="how-step-card">
+              <div style={{ padding: "80px 60px", borderRight: `1px solid rgba(${step.rgb},0.14)`, position: "relative" }}>
+                <div style={{ position: "absolute", left: 60, top: 60, fontSize: 140, fontWeight: 900, color: step.color, opacity: 0.08, lineHeight: 1, userSelect: "none" as const, letterSpacing: "-0.05em" }}>{step.num}</div>
                 <div style={{ position: "relative", zIndex: 1 }}>
                   <div style={{ marginBottom: 24 }}>
                     <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
