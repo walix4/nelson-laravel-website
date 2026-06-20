@@ -166,9 +166,10 @@ export default function HowItWorksPage() {
           </div>
 
           {/* 2-line headline */}
-          <h1 style={{ fontSize: "clamp(44px,7vw,90px)", fontWeight: 900, color: "#fff", lineHeight: 1.02, margin: "0 0 28px", letterSpacing: "-0.03em" }}>
-            One loop.{" "}
+          <h1 style={{ fontSize: "clamp(28px,6vw,90px)", fontWeight: 900, color: "#fff", lineHeight: 1.05, margin: "0 0 28px", letterSpacing: "-0.03em" }}>
+            <span style={{ whiteSpace: "nowrap" }}>One loop.{" "}
             <span style={{ background: "linear-gradient(90deg,#fc0b05,#ff5530)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Three layers.</span>
+            </span>
             <br />
             Zero gaps.
           </h1>
