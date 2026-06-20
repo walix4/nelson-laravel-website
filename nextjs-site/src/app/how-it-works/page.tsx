@@ -254,7 +254,6 @@ export default function HowItWorksPage() {
           {(() => { const step = STEPS[0]; return (
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
               <div style={{ padding: "80px 60px", borderRight: `2px solid rgba(${step.rgb},0.45)`, position: "relative" }}>
-                <div style={{ position: "absolute", left: 60, top: 60, fontSize: 160, fontWeight: 900, color: step.color, opacity: 0.18, lineHeight: 1, userSelect: "none" as const, letterSpacing: "-0.05em" }}>{step.num}</div>
                 <div style={{ position: "relative", zIndex: 1 }}>
                   <div style={{ marginBottom: 24 }}>
                     <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
@@ -281,6 +280,7 @@ export default function HowItWorksPage() {
                 </div>
               </div>
               <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.03)`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <div style={{ fontSize: 96, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 14, opacity: 0.40, userSelect: "none" as const }}>{step.num}</div>
                 <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.15)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
@@ -299,6 +299,7 @@ export default function HowItWorksPage() {
           {(() => { const step = STEPS[1]; return (
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
               <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.04)`, display: "flex", flexDirection: "column", justifyContent: "center", borderRight: `1px solid rgba(${step.rgb},0.12)` }}>
+                <div style={{ fontSize: 96, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 14, opacity: 0.18, userSelect: "none" as const }}>{step.num}</div>
                 <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 12px 40px rgba(${step.rgb},0.12)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
@@ -307,7 +308,6 @@ export default function HowItWorksPage() {
                 </div>
               </div>
               <div style={{ padding: "80px 60px", background: "#fff", position: "relative" }}>
-                <div style={{ position: "absolute", right: 60, top: 60, fontSize: 160, fontWeight: 900, color: step.color, opacity: 0.10, lineHeight: 1, userSelect: "none" as const, letterSpacing: "-0.05em" }}>{step.num}</div>
                 <div style={{ position: "relative", zIndex: 1 }}>
                   <div style={{ marginBottom: 24 }}>
                     <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
@@ -344,7 +344,6 @@ export default function HowItWorksPage() {
           {(() => { const step = STEPS[2]; return (
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
               <div style={{ padding: "80px 60px", borderRight: `1px solid rgba(${step.rgb},0.12)`, position: "relative" }}>
-                <div style={{ position: "absolute", left: 60, top: 60, fontSize: 160, fontWeight: 900, color: step.color, opacity: 0.18, lineHeight: 1, userSelect: "none" as const, letterSpacing: "-0.05em" }}>{step.num}</div>
                 <div style={{ position: "relative", zIndex: 1 }}>
                   <div style={{ marginBottom: 24 }}>
                     <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
@@ -367,6 +366,7 @@ export default function HowItWorksPage() {
                 </div>
               </div>
               <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.03)`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <div style={{ fontSize: 96, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 14, opacity: 0.40, userSelect: "none" as const }}>{step.num}</div>
                 <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.12)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
