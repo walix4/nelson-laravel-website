@@ -8,8 +8,8 @@ const STEPS = [
     num: "01",
     tag: "Draygo",
     tagline: "AI dispatch & TMS",
-    color: "#635bff",
-    rgb: "99,91,255",
+    color: "#fc0b05",
+    rgb: "252,11,5",
     logo: "/logo-draygo-white.png",
     role: "The Brain",
     photo: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1200&q=80",
@@ -29,8 +29,8 @@ const STEPS = [
     num: "02",
     tag: "DrayChain",
     tagline: "Blockchain trust layer",
-    color: "#27b30a",
-    rgb: "39,179,10",
+    color: "#1a6ed4",
+    rgb: "26,110,212",
     logo: "/logo-draychain.png",
     role: "The Proof",
     photo: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&q=80",
@@ -281,7 +281,7 @@ export default function HowItWorksPage() {
                 </div>
               </div>
               <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.03)`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 280, objectFit: "cover", borderRadius: 16, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.15)` }} />
+                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.15)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
                     <div key={chip} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 20, padding: "8px 18px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
@@ -299,7 +299,7 @@ export default function HowItWorksPage() {
           {(() => { const step = STEPS[1]; return (
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
               <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.04)`, display: "flex", flexDirection: "column", justifyContent: "center", borderRight: `1px solid rgba(${step.rgb},0.12)` }}>
-                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 280, objectFit: "cover", borderRadius: 16, marginBottom: 24, display: "block", boxShadow: `0 12px 40px rgba(${step.rgb},0.12)` }} />
+                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 12px 40px rgba(${step.rgb},0.12)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
                     <div key={chip} style={{ background: "#fff", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 20, padding: "8px 18px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
@@ -367,7 +367,7 @@ export default function HowItWorksPage() {
                 </div>
               </div>
               <div style={{ padding: "80px 60px", background: `rgba(${step.rgb},0.03)`, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 280, objectFit: "cover", borderRadius: 16, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.12)` }} />
+                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.12)` }} />
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
                     <div key={chip} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 20, padding: "8px 18px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
