@@ -118,6 +118,10 @@ export default function HowItWorksPage() {
           0%{stroke-dashoffset:60;}
           100%{stroke-dashoffset:0;}
         }
+        @keyframes hiw-flow-back {
+          0%{stroke-dashoffset:0;}
+          100%{stroke-dashoffset:66;}
+        }
         @keyframes hiw-arrow-pulse {
           0%,100%{opacity:0.3;}
           50%{opacity:0.9;}
@@ -178,35 +182,70 @@ export default function HowItWorksPage() {
             Draygo, DrayChain, and DrayPay are one continuous cycle where each layer&apos;s output is the next layer&apos;s input.
           </p>
 
-          {/* animated logo flow diagram */}
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 0 }}>
-            {[
-              { logo: "/logo-draygo-white.png", sub: "AI dispatch & TMS",  color: "#635bff", rgb: "99,91,255",  glow: "hiw-card-glow-purple", delay: "0s" },
-              { logo: "/logo-draychain.png",    sub: "Blockchain trust",   color: "#27b30a", rgb: "39,179,10",  glow: "hiw-card-glow-green",  delay: "0.8s" },
-              { logo: "/logo-draypay.png",      sub: "Instant settlement", color: "#00a5e7", rgb: "0,165,231",  glow: "hiw-card-glow-cyan",   delay: "1.6s" },
-            ].map((item, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ background: "rgba(255,255,255,0.07)", backdropFilter: "blur(18px)", border: `1.5px solid rgba(${item.rgb},0.55)`, borderRadius: 18, padding: "26px 34px", minWidth: 190, textAlign: "center", animation: `${item.glow} 3s ease-in-out infinite`, animationDelay: item.delay }}>
-                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: 12 }}>
-                    <img src={asset(item.logo)} alt={item.sub} style={{ height: 36, width: "auto", objectFit: "contain", maxWidth: 144 }} />
-                  </div>
-                  <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", letterSpacing: "0.04em" }}>{item.sub}</div>
-                </div>
-                {i < 2 && (
-                  <div style={{ padding: "0 10px", animation: "hiw-arrow-pulse 1.8s ease-in-out infinite", animationDelay: `${0.4 + i * 0.8}s` }}>
-                    <svg width="48" height="16" viewBox="0 0 48 16" fill="none">
-                      <line x1="0" y1="8" x2="36" y2="8" stroke={`rgba(${item.rgb},0.7)`} strokeWidth="1.5" strokeDasharray="5 3" style={{ animation: "hiw-flow 1.2s linear infinite", animationDelay: `${i * 0.4}s` }} />
-                      <path d="M34 2l8 6-8 6" stroke={`rgba(${item.rgb},0.9)`} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
-                    </svg>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          {/* SVG cycle diagram */}
+          <svg viewBox="0 0 800 230" style={{ width: "100%", maxWidth: 820, display: "block", margin: "0 auto", overflow: "visible" }}>
+            <defs>
+              <marker id="fwd1" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+                <path d="M0,0.5 L0,6.5 L6,3.5 z" fill="rgba(99,91,255,0.85)" />
+              </marker>
+              <marker id="fwd2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+                <path d="M0,0.5 L0,6.5 L6,3.5 z" fill="rgba(39,179,10,0.85)" />
+              </marker>
+              <marker id="back" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+                <path d="M0,0.5 L0,6.5 L6,3.5 z" fill="rgba(255,255,255,0.4)" />
+              </marker>
+              {/* glow filters */}
+              <filter id="glow-purple"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="glow-green"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="glow-cyan"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
 
-          <div style={{ marginTop: 24, fontSize: 12, color: "rgba(255,255,255,0.30)", letterSpacing: "0.05em" }}>
-            &#8635; verified history feeds back into Draygo&apos;s AI &mdash; improving pricing &amp; dispatch over time
-          </div>
+            {/* ── Card 1: Draygo ── */}
+            <rect x="15" y="10" width="210" height="110" rx="16"
+              fill="rgba(99,91,255,0.10)" stroke="rgba(99,91,255,0.55)" strokeWidth="1.5"
+              style={{ animation: "hiw-card-glow-purple 3s ease-in-out infinite" }} filter="url(#glow-purple)" />
+            <image href={asset("/logo-draygo-white.png")} x="45" y="28" width="150" height="38" preserveAspectRatio="xMidYMid meet" />
+            <text x="120" y="104" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="11" fontFamily="system-ui,sans-serif" letterSpacing="0.5">AI dispatch &amp; TMS</text>
+
+            {/* ── Arrow 1→2 ── */}
+            <line x1="227" y1="65" x2="293" y2="65"
+              stroke="rgba(99,91,255,0.75)" strokeWidth="1.8" strokeDasharray="5 3"
+              markerEnd="url(#fwd1)"
+              style={{ animation: "hiw-flow 1s linear infinite" }} />
+
+            {/* ── Card 2: DrayChain ── */}
+            <rect x="295" y="10" width="210" height="110" rx="16"
+              fill="rgba(39,179,10,0.10)" stroke="rgba(39,179,10,0.55)" strokeWidth="1.5"
+              style={{ animation: "hiw-card-glow-green 3s ease-in-out infinite", animationDelay: "0.8s" }} filter="url(#glow-green)" />
+            <image href={asset("/logo-draychain.png")} x="320" y="28" width="160" height="38" preserveAspectRatio="xMidYMid meet" />
+            <text x="400" y="104" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="11" fontFamily="system-ui,sans-serif" letterSpacing="0.5">Blockchain trust</text>
+
+            {/* ── Arrow 2→3 ── */}
+            <line x1="507" y1="65" x2="573" y2="65"
+              stroke="rgba(39,179,10,0.75)" strokeWidth="1.8" strokeDasharray="5 3"
+              markerEnd="url(#fwd2)"
+              style={{ animation: "hiw-flow 1s linear infinite", animationDelay: "0.4s" }} />
+
+            {/* ── Card 3: DrayPay ── */}
+            <rect x="575" y="10" width="210" height="110" rx="16"
+              fill="rgba(0,165,231,0.10)" stroke="rgba(0,165,231,0.55)" strokeWidth="1.5"
+              style={{ animation: "hiw-card-glow-cyan 3s ease-in-out infinite", animationDelay: "1.6s" }} filter="url(#glow-cyan)" />
+            <image href={asset("/logo-draypay.png")} x="600" y="28" width="160" height="38" preserveAspectRatio="xMidYMid meet" />
+            <text x="680" y="104" textAnchor="middle" fill="rgba(255,255,255,0.45)" fontSize="11" fontFamily="system-ui,sans-serif" letterSpacing="0.5">Instant settlement</text>
+
+            {/* ── Return arc: DrayPay → Draygo ── */}
+            <path d="M 680,122 C 680,195 120,195 120,122"
+              fill="none" stroke="rgba(255,255,255,0.28)" strokeWidth="1.6"
+              strokeDasharray="7 4"
+              markerEnd="url(#back)"
+              style={{ animation: "hiw-flow-back 1.6s linear infinite" }} />
+
+            {/* ── Feedback label ── */}
+            <text x="400" y="218" textAnchor="middle" fill="rgba(255,255,255,0.30)" fontSize="11.5" fontFamily="system-ui,sans-serif" letterSpacing="0.5">
+              ↺ verified history feeds back into Draygo&apos;s AI — improving pricing &amp; dispatch over time
+            </text>
+          </svg>
+
         </div>
       </section>
 
