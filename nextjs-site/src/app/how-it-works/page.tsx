@@ -87,53 +87,123 @@ export default function HowItWorksPage() {
     <>
       <Nav />
 
+      <style>{`
+        @keyframes hiw-float-a {
+          0%,100%{transform:translate(0,0) scale(1);}
+          33%{transform:translate(30px,-40px) scale(1.06);}
+          66%{transform:translate(-20px,20px) scale(0.96);}
+        }
+        @keyframes hiw-float-b {
+          0%,100%{transform:translate(0,0) scale(1);}
+          40%{transform:translate(-35px,25px) scale(1.04);}
+          70%{transform:translate(20px,-30px) scale(0.97);}
+        }
+        @keyframes hiw-float-c {
+          0%,100%{transform:translate(0,0);}
+          50%{transform:translate(15px,-20px);}
+        }
+        @keyframes hiw-card-glow-purple {
+          0%,100%{box-shadow:0 0 24px rgba(99,91,255,0.15),0 0 0 0 rgba(99,91,255,0);}
+          50%{box-shadow:0 0 48px rgba(99,91,255,0.35),0 0 80px rgba(99,91,255,0.12);}
+        }
+        @keyframes hiw-card-glow-green {
+          0%,100%{box-shadow:0 0 24px rgba(39,179,10,0.15),0 0 0 0 rgba(39,179,10,0);}
+          50%{box-shadow:0 0 48px rgba(39,179,10,0.35),0 0 80px rgba(39,179,10,0.12);}
+        }
+        @keyframes hiw-card-glow-cyan {
+          0%,100%{box-shadow:0 0 24px rgba(0,165,231,0.15);}
+          50%{box-shadow:0 0 48px rgba(0,165,231,0.35),0 0 80px rgba(0,165,231,0.12);}
+        }
+        @keyframes hiw-flow {
+          0%{stroke-dashoffset:60;}
+          100%{stroke-dashoffset:0;}
+        }
+        @keyframes hiw-arrow-pulse {
+          0%,100%{opacity:0.3;}
+          50%{opacity:0.9;}
+        }
+        @keyframes hiw-badge-pulse {
+          0%,100%{box-shadow:0 0 0 0 rgba(252,11,5,0.4);}
+          50%{box-shadow:0 0 0 6px rgba(252,11,5,0);}
+        }
+        @keyframes hiw-dot-blink {
+          0%,100%{opacity:1;} 50%{opacity:0.3;}
+        }
+        @keyframes hiw-particle {
+          0%{transform:translateY(0) translateX(0);opacity:0;}
+          10%{opacity:0.6;}
+          90%{opacity:0.2;}
+          100%{transform:translateY(-80px) translateX(20px);opacity:0;}
+        }
+      `}</style>
+
       {/* HERO */}
       <section style={{ position: "relative", minHeight: "90vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
         <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1920&q=80" alt="" aria-hidden="true" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", zIndex: 0 }} />
         <div style={{ position: "absolute", inset: 0, background: "rgba(6,13,26,0.88)", zIndex: 1 }} />
         <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "30px 30px", zIndex: 2 }} />
-        <div style={{ position: "absolute", left: "10%", top: "20%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(99,91,255,0.14), transparent 65%)", zIndex: 2, pointerEvents: "none" }} />
-        <div style={{ position: "absolute", right: "8%", bottom: "15%", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,165,231,0.12), transparent 65%)", zIndex: 2, pointerEvents: "none" }} />
 
-        <div style={{ position: "relative", zIndex: 3, maxWidth: 900, margin: "0 auto", textAlign: "center", padding: "100px 24px 80px", width: "100%" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.14)", border: "1px solid rgba(252,11,5,0.40)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 32 }}>
-            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#fc0b05", display: "inline-block" }} />
+        {/* Animated glow orbs */}
+        <div style={{ position: "absolute", left: "8%", top: "15%", width: 560, height: 560, borderRadius: "50%", background: "radial-gradient(circle, rgba(99,91,255,0.18), transparent 65%)", zIndex: 2, pointerEvents: "none", animation: "hiw-float-a 9s ease-in-out infinite" }} />
+        <div style={{ position: "absolute", right: "6%", bottom: "10%", width: 440, height: 440, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,165,231,0.15), transparent 65%)", zIndex: 2, pointerEvents: "none", animation: "hiw-float-b 12s ease-in-out infinite" }} />
+        <div style={{ position: "absolute", left: "45%", bottom: "20%", width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, rgba(39,179,10,0.10), transparent 65%)", zIndex: 2, pointerEvents: "none", animation: "hiw-float-c 7s ease-in-out infinite" }} />
+
+        {/* Floating particles */}
+        {[
+          { left:"18%", top:"70%", delay:"0s", color:"rgba(99,91,255,0.5)" },
+          { left:"35%", top:"80%", delay:"1.5s", color:"rgba(39,179,10,0.4)" },
+          { left:"60%", top:"75%", delay:"3s", color:"rgba(0,165,231,0.5)" },
+          { left:"75%", top:"65%", delay:"0.8s", color:"rgba(252,11,5,0.4)" },
+          { left:"50%", top:"85%", delay:"2.2s", color:"rgba(99,91,255,0.3)" },
+        ].map((p,i) => (
+          <div key={i} style={{ position:"absolute", left:p.left, top:p.top, width:4, height:4, borderRadius:"50%", background:p.color, zIndex:2, animation:`hiw-particle 4s ease-in-out infinite`, animationDelay:p.delay, pointerEvents:"none" }} />
+        ))}
+
+        <div style={{ position: "relative", zIndex: 3, maxWidth: 960, margin: "0 auto", textAlign: "center", padding: "100px 24px 80px", width: "100%" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.14)", border: "1px solid rgba(252,11,5,0.40)", borderRadius: 6, padding: "5px 16px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 36, animation: "hiw-badge-pulse 2.5s ease-in-out infinite" }}>
+            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#fc0b05", display: "inline-block", animation: "hiw-dot-blink 1.2s ease-in-out infinite" }} />
             How It Works
           </div>
-          <h1 style={{ fontSize: "clamp(48px,7vw,88px)", fontWeight: 900, color: "#fff", lineHeight: 1.0, margin: "0 0 28px", letterSpacing: "-0.03em" }}>
-            One loop.<br />
-            <span style={{ background: "linear-gradient(90deg,#fc0b05,#ff5530)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Three layers.</span><br />
+
+          {/* 2-line headline */}
+          <h1 style={{ fontSize: "clamp(44px,7vw,90px)", fontWeight: 900, color: "#fff", lineHeight: 1.02, margin: "0 0 28px", letterSpacing: "-0.03em" }}>
+            One loop.{" "}
+            <span style={{ background: "linear-gradient(90deg,#fc0b05,#ff5530)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Three layers.</span>
+            <br />
             Zero gaps.
           </h1>
+
           <p style={{ fontSize: 18, color: "rgba(255,255,255,0.6)", lineHeight: 1.7, maxWidth: 580, margin: "0 auto 64px" }}>
             Draygo, DrayChain, and DrayPay are one continuous cycle where each layer&apos;s output is the next layer&apos;s input.
           </p>
 
-          {/* logo flow diagram */}
+          {/* animated logo flow diagram */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 0 }}>
             {[
-              { logo: "/logo-draygo-white.png", sub: "AI dispatch & TMS", color: "#635bff", rgb: "99,91,255", name: "Draygo" },
-              { logo: "/logo-draychain.png",    sub: "Blockchain trust",  color: "#27b30a", rgb: "39,179,10",  name: "DrayChain" },
-              { logo: "/logo-draypay.png",      sub: "Instant settlement",color: "#00a5e7", rgb: "0,165,231",  name: "DrayPay" },
+              { logo: "/logo-draygo-white.png", sub: "AI dispatch & TMS",  color: "#635bff", rgb: "99,91,255",  glow: "hiw-card-glow-purple", delay: "0s" },
+              { logo: "/logo-draychain.png",    sub: "Blockchain trust",   color: "#27b30a", rgb: "39,179,10",  glow: "hiw-card-glow-green",  delay: "0.8s" },
+              { logo: "/logo-draypay.png",      sub: "Instant settlement", color: "#00a5e7", rgb: "0,165,231",  glow: "hiw-card-glow-cyan",   delay: "1.6s" },
             ].map((item, i) => (
-              <div key={item.name} style={{ display: "flex", alignItems: "center" }}>
-                <div style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(16px)", border: `1.5px solid rgba(${item.rgb},0.50)`, borderRadius: 16, padding: "24px 32px", minWidth: 185, textAlign: "center", boxShadow: `0 0 32px rgba(${item.rgb},0.10)` }}>
-                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: 10 }}>
-                    <img src={asset(item.logo)} alt={item.name} style={{ height: 36, width: "auto", objectFit: "contain", maxWidth: 140 }} />
+              <div key={i} style={{ display: "flex", alignItems: "center" }}>
+                <div style={{ background: "rgba(255,255,255,0.07)", backdropFilter: "blur(18px)", border: `1.5px solid rgba(${item.rgb},0.55)`, borderRadius: 18, padding: "26px 34px", minWidth: 190, textAlign: "center", animation: `${item.glow} 3s ease-in-out infinite`, animationDelay: item.delay }}>
+                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: 12 }}>
+                    <img src={asset(item.logo)} alt={item.sub} style={{ height: 36, width: "auto", objectFit: "contain", maxWidth: 144 }} />
                   </div>
                   <div style={{ fontSize: 11, color: "rgba(255,255,255,0.45)", letterSpacing: "0.04em" }}>{item.sub}</div>
                 </div>
                 {i < 2 && (
-                  <div style={{ padding: "0 14px" }}>
-                    <svg width="28" height="16" viewBox="0 0 28 16" fill="none">
-                      <path d="M0 8h24M20 2l6 6-6 6" stroke="rgba(255,255,255,0.28)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <div style={{ padding: "0 10px", animation: "hiw-arrow-pulse 1.8s ease-in-out infinite", animationDelay: `${0.4 + i * 0.8}s` }}>
+                    <svg width="48" height="16" viewBox="0 0 48 16" fill="none">
+                      <line x1="0" y1="8" x2="36" y2="8" stroke={`rgba(${item.rgb},0.7)`} strokeWidth="1.5" strokeDasharray="5 3" style={{ animation: "hiw-flow 1.2s linear infinite", animationDelay: `${i * 0.4}s` }} />
+                      <path d="M34 2l8 6-8 6" stroke={`rgba(${item.rgb},0.9)`} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                     </svg>
                   </div>
                 )}
               </div>
             ))}
           </div>
-          <div style={{ marginTop: 20, fontSize: 12, color: "rgba(255,255,255,0.30)", letterSpacing: "0.05em" }}>
+
+          <div style={{ marginTop: 24, fontSize: 12, color: "rgba(255,255,255,0.30)", letterSpacing: "0.05em" }}>
             &#8635; verified history feeds back into Draygo&apos;s AI &mdash; improving pricing &amp; dispatch over time
           </div>
         </div>
