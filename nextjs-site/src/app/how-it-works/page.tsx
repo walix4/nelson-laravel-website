@@ -229,7 +229,7 @@ export default function HowItWorksPage() {
             <rect x="640" y="10" width="240" height="126" rx="18"
               fill="rgba(0,165,231,0.10)" stroke="rgba(0,165,231,0.60)" strokeWidth="1.8"
               style={{ animation: "hiw-card-glow-cyan 3s ease-in-out infinite", animationDelay: "1.6s" }} filter="url(#glow-cyan)" />
-            <image href={asset("/logo-draypay-white.png")} x="665" y="30" width="190" height="42" preserveAspectRatio="xMidYMid meet" />
+            <image href={asset("/logo-draypay-white.png")} x="690" y="34" width="140" height="36" preserveAspectRatio="xMidYMid meet" />
             <text x="760" y="116" textAnchor="middle" fill="rgba(255,255,255,0.50)" fontSize="12" fontFamily="system-ui,sans-serif">Instant settlement</text>
 
             {/* ── Return arc: DrayPay → Draygo ── */}
