@@ -32,6 +32,7 @@ const STEPS = [
     color: "#1a6ed4",
     rgb: "26,110,212",
     logo: "/logo-draychain.png",
+    logoFilter: "brightness(0) saturate(100%) invert(28%) sepia(90%) saturate(700%) hue-rotate(199deg) brightness(90%)" as string | undefined,
     role: "The Proof",
     photo: "/step-blockchain.jpg",
     photoAlt: "Blockchain technology",
@@ -241,7 +242,7 @@ export default function HowItWorksPage() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
               <div style={{ padding: "80px 60px" }}>
                 <div style={{ marginBottom: 24 }}>
-                  <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
+                  <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
                   <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
                     <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
                   </div>
@@ -300,7 +301,7 @@ export default function HowItWorksPage() {
               </div>
               <div style={{ padding: "80px 60px" }}>
                 <div style={{ marginBottom: 24 }}>
-                  <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
+                  <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
                   <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.10)`, border: `1px solid rgba(${step.rgb},0.25)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
                     <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
                   </div>
@@ -336,7 +337,7 @@ export default function HowItWorksPage() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
               <div style={{ padding: "80px 60px" }}>
                 <div style={{ marginBottom: 24 }}>
-                  <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block" }} />
+                  <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 160, marginBottom: 16, display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
                   <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: `rgba(${step.rgb},0.12)`, border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 5, padding: "4px 12px", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: step.color }}>
                     <span style={{ width: 5, height: 5, borderRadius: "50%", background: step.color, display: "inline-block" }} />{step.tagline}
                   </div>
