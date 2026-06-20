@@ -246,7 +246,7 @@ export default function HowItWorksPage() {
                   {step.logoText
                     ? <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                         <img src={asset(step.logo)} alt={step.tag} style={{ height: 36, width: "auto", objectFit: "contain", display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
-                        <span style={{ fontWeight: 800, fontSize: 20, color: step.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</span>
+                        <span style={{ fontWeight: 800, fontSize: 26, color: "#1452b8", letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</span>
                       </div>
                     : <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 200, marginBottom: 16, display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
                   }
@@ -311,7 +311,7 @@ export default function HowItWorksPage() {
                   {step.logoText
                     ? <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                         <img src={asset(step.logo)} alt={step.tag} style={{ height: 36, width: "auto", objectFit: "contain", display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
-                        <span style={{ fontWeight: 800, fontSize: 20, color: step.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</span>
+                        <span style={{ fontWeight: 800, fontSize: 26, color: "#1452b8", letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</span>
                       </div>
                     : <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 200, marginBottom: 16, display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
                   }
@@ -353,7 +353,7 @@ export default function HowItWorksPage() {
                   {step.logoText
                     ? <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                         <img src={asset(step.logo)} alt={step.tag} style={{ height: 36, width: "auto", objectFit: "contain", display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
-                        <span style={{ fontWeight: 800, fontSize: 20, color: step.color, letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</span>
+                        <span style={{ fontWeight: 800, fontSize: 26, color: "#1452b8", letterSpacing: "-0.02em", lineHeight: 1 }}>{step.logoText}</span>
                       </div>
                     : <img src={asset(step.logo)} alt={step.tag} style={{ height: 40, width: "auto", objectFit: "contain", maxWidth: 200, marginBottom: 16, display: "block", ...(step.logoFilter ? { filter: step.logoFilter } : {}) }} />
                   }
