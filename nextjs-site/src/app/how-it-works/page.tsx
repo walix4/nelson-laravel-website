@@ -280,8 +280,10 @@ export default function HowItWorksPage() {
                 </div>
               </div>
               <div style={{ padding: "80px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                <div style={{ fontSize: 96, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 14, opacity: 0.40, userSelect: "none" as const }}>{step.num}</div>
-                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.15)` }} />
+                <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
+                  <img src={step.photo} alt={step.photoAlt} style={{ flex: 1, minWidth: 0, height: 340, objectFit: "cover", borderRadius: 8, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.15)` }} />
+                  <div style={{ fontSize: 88, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", opacity: 0.45, userSelect: "none" as const, flexShrink: 0 }}>{step.num}</div>
+                </div>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
                     <div key={chip} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 6, padding: "7px 16px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
@@ -302,8 +304,10 @@ export default function HowItWorksPage() {
           {(() => { const step = STEPS[1]; return (
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }} className="how-step-card">
               <div style={{ padding: "80px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                <div style={{ fontSize: 96, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 14, opacity: 0.18, userSelect: "none" as const }}>{step.num}</div>
-                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 12px 40px rgba(${step.rgb},0.12)` }} />
+                <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
+                  <img src={step.photo} alt={step.photoAlt} style={{ flex: 1, minWidth: 0, height: 340, objectFit: "cover", borderRadius: 8, display: "block", boxShadow: `0 12px 40px rgba(${step.rgb},0.12)` }} />
+                  <div style={{ fontSize: 88, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", opacity: 0.22, userSelect: "none" as const, flexShrink: 0 }}>{step.num}</div>
+                </div>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
                     <div key={chip} style={{ background: "#fff", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 6, padding: "7px 16px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
@@ -367,8 +371,10 @@ export default function HowItWorksPage() {
                 </div>
               </div>
               <div style={{ padding: "80px 60px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                <div style={{ fontSize: 96, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", marginBottom: 14, opacity: 0.40, userSelect: "none" as const }}>{step.num}</div>
-                <img src={step.photo} alt={step.photoAlt} style={{ width: "100%", height: 340, objectFit: "cover", borderRadius: 8, marginBottom: 24, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.12)` }} />
+                <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 24 }}>
+                  <img src={step.photo} alt={step.photoAlt} style={{ flex: 1, minWidth: 0, height: 340, objectFit: "cover", borderRadius: 8, display: "block", boxShadow: `0 16px 48px rgba(${step.rgb},0.12)` }} />
+                  <div style={{ fontSize: 88, fontWeight: 900, color: step.color, lineHeight: 1, letterSpacing: "-0.04em", opacity: 0.45, userSelect: "none" as const, flexShrink: 0 }}>{step.num}</div>
+                </div>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
                   {step.chips.map(chip => (
                     <div key={chip} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(8px)", border: `1px solid rgba(${step.rgb},0.28)`, borderRadius: 6, padding: "7px 16px", fontSize: 13, fontWeight: 700, color: step.color }}>{chip}</div>
