@@ -240,7 +240,7 @@ export default function HowItWorksPage() {
               style={{ animation: "hiw-flow-back 1.6s linear infinite" }} />
 
             {/* ── Feedback label ── */}
-            <text x="445" y="244" textAnchor="middle" fill="rgba(0,165,231,0.85)" fontSize="13" fontFamily="system-ui,sans-serif" fontWeight="600" letterSpacing="0.3">
+            <text x="445" y="244" textAnchor="middle" fill="rgba(255,255,255,0.85)" fontSize="13" fontFamily="system-ui,sans-serif" fontWeight="600" letterSpacing="0.3">
               ↺ verified history feeds back into Draygo&apos;s AI — improving pricing &amp; dispatch over time
             </text>
           </svg>
