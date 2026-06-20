@@ -12,7 +12,7 @@ const STEPS = [
     rgb: "252,11,5",
     logo: "/logo-draygo-white.png",
     role: "The Brain",
-    photo: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1200&q=80",
+    photo: "/hero-port-day.jpg",
     photoAlt: "Truck on highway",
     nextTag: "DrayChain",
     chips: ["500+ carriers", "< 60s quotes"],
