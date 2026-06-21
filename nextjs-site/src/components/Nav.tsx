@@ -72,7 +72,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
               <span className="hidden lg:inline">Port congestion <b>Low</b></span>
             </div>
             <div className="flex items-center gap-4" style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.14em" }}>
-              <span style={{ opacity: 0.7 }}>v2026.06</span>
+              <span style={{ opacity: 0.7 }}>v2026.07</span>
               <a href="/load-board" style={{ color: "#fff", opacity: 0.9, textDecoration: "none" }}>Load Board →</a>
             </div>
           </div>

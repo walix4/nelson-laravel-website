@@ -129,7 +129,7 @@ export default function CalculateRate({ compact = false }: { compact?: boolean }
         <div className={`p-5 md:p-6 lg:p-7 relative overflow-hidden ${compact ? "rounded-lg calc-glass border border-[var(--red)]/30 backdrop-blur-md shadow-2xl" : "rounded-2xl"}`} style={{ background: compact ? "rgba(255,255,255,0.08)" : "#fff", minHeight: phase === "form" ? undefined : 560 }}>
           <div className="flex items-center justify-between">
             <div><div className="text-[10px] uppercase tracking-[0.16em] font-bold text-[var(--navy)]/70">Instant quote engine</div><h3 className="display text-[24px] md:text-[26px] text-[var(--navy)] mt-1">Price your move</h3></div>
-            <div className="px-2.5 py-1 rounded-md text-[10px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 border border-[var(--navy)]/10">v2026</div>
+            <div className="px-2.5 py-1 rounded-md text-[10px] font-semibold text-[var(--navy)] bg-[var(--navy)]/8 border border-[var(--navy)]/10">v2026.07</div>
           </div>
 
           {phase !== "result" && (
