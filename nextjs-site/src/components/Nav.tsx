@@ -44,7 +44,6 @@ const SERVICES_ITEMS = [
 const linkCls = "text-[13px] font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none";
 
 export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
-  const [svcOpen, setSvcOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const showBar = pathname === "/load-board" || pathname === "/load-board/" || pathname === "/jobs-map" || pathname === "/jobs-map/";
@@ -101,48 +100,6 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
             </Link>
           ))}
 
-          {/* Services dropdown */}
-          <div
-            className="relative shrink-0"
-            onMouseEnter={() => setSvcOpen(true)}
-            onMouseLeave={() => setSvcOpen(false)}
-          >
-            <button
-              className={`${linkCls} flex items-center gap-[6px]`}
-              style={{ padding: "6px 12px" }}
-              onClick={() => setSvcOpen((o) => !o)}
-            >
-              Services
-              <svg
-                width="12" height="12" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"
-                style={{ transform: svcOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.18s" }}
-              >
-                <path d="M6 9l6 6 6-6" />
-              </svg>
-            </button>
-
-            {svcOpen && (
-              <div className="absolute top-full left-0 mt-2 rounded-xl shadow-2xl bg-white border border-black/8 py-3 w-72" style={{ zIndex: 50 }}>
-                {SERVICES_ITEMS.map((s) => (
-                  <Link
-                    key={s.label}
-                    href={s.href}
-                    className="flex items-center gap-3.5 px-5 py-3 hover:bg-gray-50 transition"
-                    onClick={() => setSvcOpen(false)}
-                  >
-                    <span className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "rgba(252,11,5,0.10)" }}>
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: s.icon }} />
-                    </span>
-                    <span>
-                      <div className="text-[13.5px] font-semibold text-[#08192b]">{s.label}</div>
-                      <div className="text-[11.5px] text-[#64748b] leading-snug">{s.desc}</div>
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
         </nav>
 
         {/* Right actions */}
@@ -184,14 +141,6 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
             {NAV_LINKS.map((l) => (
               <Link key={l.label} href={l.href} className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
                 {l.label}
-              </Link>
-            ))}
-          </div>
-          <div className="pt-1 border-t border-white/10">
-            <div className="text-[11px] uppercase tracking-[0.18em] text-white/40 mb-2 pt-2">Services</div>
-            {SERVICES_ITEMS.map((s) => (
-              <Link key={s.label} href={s.href} className="block py-2 px-3 text-[14px] text-white/75 hover:text-white" onClick={() => setMobileOpen(false)}>
-                {s.label}
               </Link>
             ))}
           </div>
