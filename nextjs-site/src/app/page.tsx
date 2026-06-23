@@ -148,10 +148,10 @@ export default function Home() {
           </div>
           <div style={{ display: "flex", flexDirection: "column" as const, gap: 14 }}>
             {[
-              { label:"Diesel (national avg)", val:"$3.82/gal", change:"+0.04", up:true, color:"#f59e0b" },
-              { label:"Fuel Surcharge (FSC)", val:"17.0%", change:"–0.5%", up:false, color:"#fc0b05" },
-              { label:"Chassis Daily Rate", val:"$95", change:"no change", up:null, color:"#3A7BEA" },
-              { label:"Port Terminal Fee (LAX avg)", val:"$142", change:"+$3", up:true, color:"#8b5cf6" },
+              { label:"Chassis (daily rate)", val:"$40/day", change:"no change", up:null, color:"#3A7BEA" },
+              { label:"Prepull Fee", val:"$125", change:"+$5", up:true, color:"#f59e0b" },
+              { label:"Storage (per day)", val:"$35/day", change:"–$5", up:false, color:"#fc0b05" },
+              { label:"Bobtail Rate", val:"50% drayage", change:"no change", up:null, color:"#8b5cf6" },
             ].map((row) => (
               <div key={row.label} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.11)", borderRadius: 14, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", boxShadow: "0 4px 20px rgba(0,0,0,0.35)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -164,7 +164,7 @@ export default function Home() {
                 </div>
               </div>
             ))}
-            <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", textAlign: "right" as const, marginTop: 4 }}>Last updated: 2 min ago · DOE, IANA, port data feeds</div>
+            <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", textAlign: "right" as const, marginTop: 4 }}>Last updated: 2 min ago · IANA, terminal operators, port data feeds</div>
           </div>
         </div>
       </section>
@@ -311,60 +311,45 @@ export default function Home() {
               Carriers paid in<br /><span style={{ color: "#00a5e7" }}>24-72 hours.</span><br />Not 45 days.
             </h2>
             <p style={{ fontSize: 16, color: "rgba(255,255,255,0.55)", lineHeight: 1.65, maxWidth: 420, marginBottom: 40 }}>DrayPay auto-generates invoices on POD and pays directly to the carrier — no factoring, no float, no paperwork. Smart contracts settle instantly.</p>
-            <div style={{ display: "flex", flexDirection: "column" as const, gap: 12 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 16, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 10, padding: "14px 18px" }}>
-                <div style={{ fontSize: 20, fontWeight: 900, color: "rgba(255,255,255,0.25)", minWidth: 56, textDecoration: "line-through" }}>45 days</div>
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>Traditional: net-30/45 cycles, factoring fees 2–5%, float risk</div>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 16, background: "rgba(0,165,231,0.10)", border: "1px solid rgba(0,165,231,0.35)", borderRadius: 10, padding: "14px 18px" }}>
-                <div style={{ fontSize: 20, fontWeight: 900, color: "#00a5e7", minWidth: 56 }}>24-72h</div>
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", fontWeight: 500 }}>DrayPay: auto-invoice on POD → direct payment, $0 factoring</div>
-              </div>
-            </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ animation: "floatCardB 5s ease-in-out infinite", position: "relative" }}>
-              {/* Shadow card behind */}
-              <div style={{ position: "absolute", width: 220, height: 360, background: "linear-gradient(160deg, rgba(0,165,231,0.18), rgba(26,110,212,0.25))", borderRadius: 28, border: "1px solid rgba(0,165,231,0.18)", transform: "perspective(900px) rotateX(6deg) rotateY(10deg) translateY(16px) translateX(20px)", boxShadow: "0 24px 60px rgba(0,0,0,0.55)" }} />
-              {/* Main vertical card */}
-              <div style={{ position: "relative", width: 220, height: 360, background: "linear-gradient(175deg, #0d2540 0%, #1a4a82 55%, #0e3060 100%)", borderRadius: 28, border: "1px solid rgba(0,165,231,0.5)", transform: "perspective(900px) rotateX(6deg) rotateY(10deg)", boxShadow: "0 28px 80px rgba(0,165,231,0.28), 0 8px 32px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.14)", overflow: "hidden", padding: "28px 24px", display: "flex", flexDirection: "column" as const, justifyContent: "space-between" }}>
-                {/* Glow orb */}
-                <div style={{ position: "absolute", top: -60, right: -60, width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,165,231,0.28), transparent 68%)", pointerEvents: "none" }} />
-                <div style={{ position: "absolute", bottom: -40, left: -40, width: 160, height: 160, borderRadius: "50%", background: "radial-gradient(circle, rgba(26,110,212,0.22), transparent 68%)", pointerEvents: "none" }} />
-                {/* Top row */}
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <div style={{ fontSize: 12, fontWeight: 900, color: "#00a5e7", letterSpacing: "0.14em" }}>DRAYPAY</div>
-                  <svg width="38" height="24" viewBox="0 0 40 26" fill="none"><circle cx="14" cy="13" r="13" fill="rgba(255,59,48,0.80)"/><circle cx="26" cy="13" r="13" fill="rgba(255,165,0,0.80)"/></svg>
-                </div>
-                {/* Chip */}
-                <div style={{ width: 42, height: 32, background: "linear-gradient(135deg, #c8a84b, #e8cc6a, #b8943a)", borderRadius: 6, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.4), 0 2px 6px rgba(0,0,0,0.4)" }} />
-                {/* Card number */}
+            {/* Payment Dashboard Mockup */}
+            <div style={{ width: 360, background: "rgba(255,255,255,0.05)", backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)", border: "1px solid rgba(0,165,231,0.22)", borderRadius: 20, overflow: "hidden", boxShadow: "0 28px 80px rgba(0,165,231,0.18), 0 8px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08)" }}>
+              {/* Dashboard header */}
+              <div style={{ background: "rgba(0,165,231,0.10)", borderBottom: "1px solid rgba(0,165,231,0.18)", padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: "rgba(255,255,255,0.85)", letterSpacing: "0.22em", marginBottom: 6 }}>•••• •••• •••• 7821</div>
-                  <div style={{ display: "flex", gap: 12 }}>
-                    <div>
-                      <div style={{ fontSize: 8, color: "rgba(255,255,255,0.4)", textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>Valid thru</div>
-                      <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.75)", marginTop: 2 }}>12/28</div>
-                    </div>
-                  </div>
+                  <div style={{ fontSize: 10, fontWeight: 800, color: "#00a5e7", letterSpacing: "0.14em", textTransform: "uppercase" as const }}>DrayPay · Payout Center</div>
+                  <div style={{ fontSize: 22, fontWeight: 900, color: "#fff", marginTop: 4, letterSpacing: "-0.02em" }}>$24,860 <span style={{ fontSize: 12, fontWeight: 500, color: "rgba(255,255,255,0.4)" }}>this week</span></div>
                 </div>
-                {/* Bottom info */}
-                <div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-                    <div>
-                      <div style={{ fontSize: 8, color: "rgba(255,255,255,0.4)", textTransform: "uppercase" as const, letterSpacing: "0.12em", marginBottom: 3 }}>Carrier</div>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>Apex Drayage LLC</div>
+                <div style={{ background: "rgba(39,179,10,0.15)", border: "1px solid rgba(39,179,10,0.4)", borderRadius: 20, padding: "5px 12px", fontSize: 11, fontWeight: 700, color: "#27b30a" }}>● Live</div>
+              </div>
+              {/* Payment rows */}
+              <div style={{ padding: "8px 0" }}>
+                {[
+                  { carrier:"Apex Drayage LLC", load:"DR-2041 · LAX→CHI", amount:"$3,280", time:"Paid 38h", color:"#27b30a" },
+                  { carrier:"Summit Freight Inc", load:"DR-2038 · NJ→ATL", amount:"$2,940", time:"Paid 51h", color:"#27b30a" },
+                  { carrier:"BlueLine Carriers", load:"DR-2035 · SAV→DFW", amount:"$4,120", time:"Paid 29h", color:"#27b30a" },
+                  { carrier:"Pacific Port Haulers", load:"DR-2033 · OAK→LAS", amount:"$1,860", time:"Processing", color:"#00a5e7" },
+                ].map((row, i) => (
+                  <div key={row.load} style={{ display: "flex", alignItems: "center", gap: 14, padding: "12px 20px", borderBottom: i < 3 ? "1px solid rgba(255,255,255,0.05)" : "none" }}>
+                    <div style={{ width: 36, height: 36, borderRadius: 10, background: `rgba(${row.color === "#27b30a" ? "39,179,10" : "0,165,231"},0.12)`, border: `1px solid rgba(${row.color === "#27b30a" ? "39,179,10" : "0,165,231"},0.3)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={row.color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                     </div>
-                    <div style={{ textAlign: "right" as const }}>
-                      <div style={{ fontSize: 8, color: "rgba(255,255,255,0.4)", textTransform: "uppercase" as const, letterSpacing: "0.12em", marginBottom: 3 }}>Paid in</div>
-                      <div style={{ fontSize: 26, fontWeight: 900, color: "#00a5e7", lineHeight: 1 }}>48h</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", whiteSpace: "nowrap" as const, overflow: "hidden", textOverflow: "ellipsis" }}>{row.carrier}</div>
+                      <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginTop: 1 }}>{row.load}</div>
+                    </div>
+                    <div style={{ textAlign: "right" as const, flexShrink: 0 }}>
+                      <div style={{ fontSize: 14, fontWeight: 800, color: "#fff" }}>{row.amount}</div>
+                      <div style={{ fontSize: 10, fontWeight: 700, color: row.color, marginTop: 2 }}>{row.time}</div>
                     </div>
                   </div>
-                  <div style={{ marginTop: 14, background: "rgba(0,165,231,0.18)", border: "1px solid rgba(0,165,231,0.35)", borderRadius: 8, padding: "8px 12px", display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#00a5e7", display: "inline-block", boxShadow: "0 0 0 2px rgba(0,165,231,0.3)" }} />
-                    <span style={{ fontSize: 10, fontWeight: 700, color: "#00a5e7", letterSpacing: "0.06em" }}>PAYMENT PROCESSING</span>
-                  </div>
-                </div>
+                ))}
+              </div>
+              {/* Footer bar */}
+              <div style={{ background: "rgba(0,165,231,0.07)", borderTop: "1px solid rgba(0,165,231,0.15)", padding: "12px 20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>Avg payout time</div>
+                <div style={{ fontSize: 16, fontWeight: 900, color: "#00a5e7" }}>42 hours</div>
               </div>
             </div>
           </div>
@@ -373,7 +358,7 @@ export default function Home() {
       </section>
 
       {/* ── SECTION 6: THREE PRODUCTS CTA ──────────────────────────────── */}
-      <section style={{ background: "linear-gradient(180deg,#070d20 0%,#060f1e 100%)", padding: "120px 24px 140px", overflow: "hidden", position: "relative" }}>
+      <section style={{ background: "linear-gradient(180deg,#070d20 0%,#060f1e 100%)", padding: "120px 24px 140px", position: "relative" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.022) 1px, transparent 1px)", backgroundSize: "36px 36px", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative" }}>
           <div style={{ textAlign: "center" as const, marginBottom: 80 }}>
@@ -382,7 +367,7 @@ export default function Home() {
             </h2>
             <p style={{ fontSize: 17, color: "rgba(255,255,255,0.5)", maxWidth: 500, margin: "0 auto" }}>Rates, blockchain tracking, and instant payments — unified under one login.</p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24, transform: "perspective(1800px) rotateX(5deg)", transformOrigin: "center top" }} className="products-3d-grid">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="products-3d-grid">
             {([
               { name:"DrayGo", tag:"Rate Engine", color:"#fc0b05", rgb:"252,11,5", desc:"Instant all-in drayage quotes across every U.S. & Canadian port. Live diesel, FSC, chassis and accessorials.", features:["30-second quotes","50+ ports covered","24h rate lock","PDF export"], cta:"Get Rates", href:"/#quote" },
               { name:"DrayChain", tag:"Blockchain Trust", color:"#1a6ed4", rgb:"26,110,212", desc:"Every load recorded on-chain. Smart contracts auto-release payment on POD. Tamper-proof, auditable, immutable.", features:["Tamper-proof records","Smart contracts","Auto-invoice on POD","Full audit trail"], cta:"Learn More", href:"/how-it-works" },
