@@ -28,7 +28,7 @@ export default function Footer() {
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 mb-12">
           <div>
-            <img src={asset("/logo-draygo.png")} alt="DrayGo" className="h-8 w-auto" />
+            <img src={asset("/logo-draygo.png")} alt="DrayGo" className="h-14 w-auto" />
             <p className="mt-3 max-w-sm text-white/60 text-[13px] leading-relaxed">The drayage platform for shippers, brokers, and carriers. Instant rates across every U.S. container port.</p>
             <div className="grid grid-cols-2 gap-3 mt-5" style={{ width: "fit-content" }}>
               <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.10] hover:bg-white/[0.20] border border-white/15 backdrop-blur-sm transition-colors duration-200">
