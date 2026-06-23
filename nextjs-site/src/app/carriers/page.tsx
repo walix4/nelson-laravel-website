@@ -215,7 +215,7 @@ export default function CarriersPage() {
       </section>
 
       {/* ── PRICING SECTION ──────────────────────────────────── */}
-      <section style={{ background: "#060f1e", padding: "88px 24px" }}>
+      <section style={{ background: "radial-gradient(ellipse 70% 90% at 15% 50%, rgba(39,179,10,0.12) 0%, transparent 65%), radial-gradient(ellipse 60% 70% at 85% 30%, rgba(39,179,10,0.07) 0%, transparent 55%), #060f1e", padding: "88px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] font-semibold mb-5 rounded" style={{ background: "rgba(39,179,10,0.14)", border: "1px solid rgba(39,179,10,0.4)", color: "#fff" }}>
@@ -231,7 +231,7 @@ export default function CarriersPage() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="pricing-grid-carriers">
             {/* Starter */}
-            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column" }}>
+            <div style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", border: "1px solid rgba(255,255,255,0.13)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", boxShadow: "0 4px 28px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)" }}>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#27b30a", marginBottom: 16 }}>Starter</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
                 <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>$0</span>
@@ -249,7 +249,7 @@ export default function CarriersPage() {
               <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "11px 0", borderRadius: 8, border: "1.5px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get Started Free</a>
             </div>
             {/* Carrier Pro — highlighted */}
-            <div style={{ background: "rgba(39,179,10,0.06)", border: "2px solid #27b30a", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", position: "relative" }}>
+            <div style={{ background: "rgba(39,179,10,0.11)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", border: "2px solid rgba(39,179,10,0.65)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", position: "relative", boxShadow: "0 0 0 1px rgba(39,179,10,0.18), 0 8px 40px rgba(39,179,10,0.22), inset 0 1px 0 rgba(255,255,255,0.10)" }}>
               <div style={{ position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", background: "#27b30a", color: "#fff", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", padding: "4px 14px", borderRadius: 99, whiteSpace: "nowrap" }}>MOST POPULAR</div>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#27b30a", marginBottom: 16 }}>Carrier Pro</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
@@ -268,7 +268,7 @@ export default function CarriersPage() {
               <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "11px 0", borderRadius: 8, background: "#27b30a", color: "#fff", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Start Free Trial</a>
             </div>
             {/* Fleet */}
-            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column" }}>
+            <div style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", border: "1px solid rgba(255,255,255,0.13)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", boxShadow: "0 4px 28px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)" }}>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#27b30a", marginBottom: 16 }}>Fleet</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
                 <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>$149</span>
@@ -286,7 +286,7 @@ export default function CarriersPage() {
               <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "11px 0", borderRadius: 8, border: "1.5px solid rgba(39,179,10,0.5)", color: "#27b30a", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get Started</a>
             </div>
             {/* Enterprise */}
-            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column" }}>
+            <div style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", border: "1px solid rgba(255,255,255,0.13)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", boxShadow: "0 4px 28px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)" }}>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#27b30a", marginBottom: 16 }}>Enterprise</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
                 <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>Custom</span>

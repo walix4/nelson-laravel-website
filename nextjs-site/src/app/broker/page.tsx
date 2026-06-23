@@ -266,7 +266,7 @@ export default function BrokerPage() {
       </section>
 
       {/* ── PRICING SECTION ─────────────────────────────────────────────── */}
-      <section style={{ background: "#060f1e", padding: "88px 24px" }}>
+      <section style={{ background: "radial-gradient(ellipse 70% 90% at 15% 50%, rgba(0,165,231,0.12) 0%, transparent 65%), radial-gradient(ellipse 60% 70% at 85% 30%, rgba(0,165,231,0.07) 0%, transparent 55%), #060f1e", padding: "88px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: 56 }}>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] font-semibold mb-5 rounded" style={{ background: "rgba(0,165,231,0.14)", border: "1px solid rgba(0,165,231,0.4)", color: "#fff" }}>
@@ -282,7 +282,7 @@ export default function BrokerPage() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="pricing-grid-broker">
             {/* Starter */}
-            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column" }}>
+            <div style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", border: "1px solid rgba(255,255,255,0.13)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", boxShadow: "0 4px 28px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)" }}>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#27b30a", marginBottom: 16 }}>Starter</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
                 <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>$0</span>
@@ -300,7 +300,7 @@ export default function BrokerPage() {
               <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "11px 0", borderRadius: 8, border: "1.5px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get Started Free</a>
             </div>
             {/* Broker — highlighted */}
-            <div style={{ background: "rgba(0,165,231,0.07)", border: "2px solid #00a5e7", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", position: "relative" }}>
+            <div style={{ background: "rgba(0,165,231,0.11)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", border: "2px solid rgba(0,165,231,0.65)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", position: "relative", boxShadow: "0 0 0 1px rgba(0,165,231,0.18), 0 8px 40px rgba(0,165,231,0.22), inset 0 1px 0 rgba(255,255,255,0.10)" }}>
               <div style={{ position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", background: "#00a5e7", color: "#fff", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", padding: "4px 14px", borderRadius: 99, whiteSpace: "nowrap" }}>BEST FOR YOU</div>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#00a5e7", marginBottom: 16 }}>Broker</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
@@ -319,7 +319,7 @@ export default function BrokerPage() {
               <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "11px 0", borderRadius: 8, background: "#00a5e7", color: "#fff", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Start Free Trial</a>
             </div>
             {/* Agency */}
-            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column" }}>
+            <div style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", border: "1px solid rgba(255,255,255,0.13)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", boxShadow: "0 4px 28px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)" }}>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#00a5e7", marginBottom: 16 }}>Agency</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
                 <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>$299</span>
@@ -337,7 +337,7 @@ export default function BrokerPage() {
               <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "11px 0", borderRadius: 8, border: "1.5px solid rgba(0,165,231,0.5)", color: "#00a5e7", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get Started</a>
             </div>
             {/* Enterprise */}
-            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column" }}>
+            <div style={{ background: "rgba(255,255,255,0.05)", backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)", border: "1px solid rgba(255,255,255,0.13)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", boxShadow: "0 4px 28px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08)" }}>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#00a5e7", marginBottom: 16 }}>Enterprise</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
                 <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>Custom</span>
