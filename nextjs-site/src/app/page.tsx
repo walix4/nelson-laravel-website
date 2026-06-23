@@ -122,72 +122,6 @@ export default function Home() {
         <style>{`@keyframes floatCardA{0%,100%{transform:perspective(900px) rotateX(5deg) rotateY(-10deg) translateY(0px)}50%{transform:perspective(900px) rotateX(5deg) rotateY(-10deg) translateY(-16px)}} @media(max-width:768px){.home-2col{grid-template-columns:1fr!important}}`}</style>
       </section>
 
-      {/* ── SECTION 2: FULL COST TRANSPARENCY ──────────────────────────── */}
-      <section style={{ background: "#030b18", padding: "120px 24px", overflow: "hidden" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div style={{ textAlign: "center" as const, marginBottom: 72 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(58,123,234,0.12)", border: "1px solid rgba(58,123,234,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "#3A7BEA", marginBottom: 20 }}>Full Cost Transparency</div>
-            <h2 style={{ fontSize: "clamp(34px,4vw,58px)", fontWeight: 900, color: "#fff", lineHeight: 1.04, margin: "0 0 16px", letterSpacing: "-0.025em" }}>
-              Every cost. Every time.<br /><span style={{ color: "rgba(255,255,255,0.3)" }}>Zero surprises.</span>
-            </h2>
-            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.5)", maxWidth: 480, margin: "0 auto" }}>Six cost components on every quote — priced from live market data, not estimates.</p>
-          </div>
-          <div style={{ transform: "perspective(1400px) rotateX(10deg)", transformOrigin: "center top", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }} className="costs-3d-grid">
-            {([
-              { label:"Base Rate", val:"~$1,180", color:"#fc0b05", desc:"Distance-based carrier rate, live market pricing per lane" },
-              { label:"Fuel + FSC", val:"~$212", color:"#f59e0b", desc:"Live diesel × MPG × distance plus carrier fuel surcharge" },
-              { label:"Chassis Pool", val:"~$95", color:"#3A7BEA", desc:"Daily rental, pool fees, per-diem on extended dwell" },
-              { label:"Port Terminal", val:"~$140", color:"#8b5cf6", desc:"Gate fees, terminal handling, exam fees if container pulled" },
-              { label:"Tolls & Overweight", val:"~$58", color:"#10b981", desc:"Route-specific tolls, permit fees, and overweight charges" },
-              { label:"Overhead & Admin", val:"~$45", color:"#06b6d4", desc:"Dispatch, ELD/TMS, insurance and depreciation costs" },
-            ] as {label:string;val:string;color:string;desc:string}[]).map((item) => (
-              <div key={item.label} style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: "24px 22px", boxShadow: "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)" }}>
-                <div style={{ width: 40, height: 40, borderRadius: 10, background: `${item.color}22`, border: `1px solid ${item.color}55`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
-                  <div style={{ width: 18, height: 18, borderRadius: "50%", background: item.color, opacity: 0.85 }} />
-                </div>
-                <div style={{ fontSize: 11, fontWeight: 800, color: item.color, textTransform: "uppercase" as const, letterSpacing: "0.1em", marginBottom: 6 }}>{item.label}</div>
-                <div style={{ fontSize: 26, fontWeight: 900, color: "#fff", lineHeight: 1, marginBottom: 8 }}>{item.val}</div>
-                <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", lineHeight: 1.5 }}>{item.desc}</div>
-              </div>
-            ))}
-          </div>
-          <style>{`@media(max-width:900px){.costs-3d-grid{grid-template-columns:repeat(2,1fr)!important;transform:none!important}}`}</style>
-        </div>
-      </section>
-
-      {/* ── SECTION 3: NETWORK COVERAGE ────────────────────────────────── */}
-      <section style={{ background: "radial-gradient(ellipse 90% 70% at 50% 30%, rgba(11,35,80,0.55) 0%, #06123a 50%, #050d28 100%)", padding: "140px 24px", overflow: "hidden", position: "relative" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none" }} />
-        <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative" }}>
-          <div style={{ textAlign: "center" as const, marginBottom: 80 }}>
-            <div style={{ display: "inline-block", background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.14)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "rgba(255,255,255,0.65)", marginBottom: 20 }}>North American Network</div>
-            <h2 style={{ fontSize: "clamp(34px,4vw,58px)", fontWeight: 900, color: "#fff", lineHeight: 1.04, margin: "0 0 16px", letterSpacing: "-0.025em" }}>
-              One rate engine.<br /><span style={{ color: "rgba(255,255,255,0.3)" }}>Every port. Coast to coast.</span>
-            </h2>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 2, transform: "perspective(1600px) rotateX(4deg)", transformOrigin: "center top" }} className="network-stats-grid">
-            {([
-              { val:"50", unit:"PORTS", sub:"Sea, rail & inland", color:"#fc0b05" },
-              { val:"1,200+", unit:"LANES", sub:"City-to-city routes", color:"#3A7BEA" },
-              { val:"2,800+", unit:"CARRIERS", sub:"FMCSA verified", color:"#27b30a" },
-            ] as {val:string;unit:string;sub:string;color:string}[]).map((s, i) => (
-              <div key={s.unit} style={{ textAlign: "center" as const, padding: "60px 24px", borderLeft: i > 0 ? "1px solid rgba(255,255,255,0.07)" : "none" }}>
-                <div style={{ fontSize: "clamp(72px,9vw,120px)", fontWeight: 900, color: "#fff", lineHeight: 0.9, letterSpacing: "-0.04em", textShadow: `0 0 80px ${s.color}55, 0 4px 0 rgba(0,0,0,0.5), 0 8px 0 rgba(0,0,0,0.3)` }}>{s.val}</div>
-                <div style={{ fontSize: 11, fontWeight: 800, color: s.color, textTransform: "uppercase" as const, letterSpacing: "0.2em", marginTop: 20 }}>{s.unit}</div>
-                <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginTop: 8 }}>{s.sub}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ marginTop: 80, overflow: "hidden", maskImage: "linear-gradient(90deg, transparent, black 8%, black 92%, transparent)" }}>
-            <div style={{ display: "flex", gap: 12, animation: "tickerRoll 30s linear infinite", width: "max-content" }}>
-              {["Los Angeles","Long Beach","Oakland","Seattle","New York/NJ","Savannah","Houston","Norfolk","Miami","Charleston","Baltimore","Boston","Tacoma","Vancouver","Montreal","Halifax","Chicago Ramp","Dallas Ramp","Atlanta Ramp","Memphis Ramp","Los Angeles","Long Beach","Oakland","Seattle","New York/NJ","Savannah"].map((port, i) => (
-                <div key={i} style={{ flexShrink: 0, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)", borderRadius: 20, padding: "7px 16px", fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.6)", whiteSpace: "nowrap" as const }}>{port}</div>
-              ))}
-            </div>
-          </div>
-        </div>
-        <style>{`@keyframes tickerRoll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}} @media(max-width:768px){.network-stats-grid{grid-template-columns:1fr!important;transform:none!important}}`}</style>
-      </section>
 
       {/* ── SECTION 4: VERIFIED CARRIER NETWORK ────────────────────────── */}
       <section style={{ background: "linear-gradient(180deg,#050d1e 0%,#060f1e 100%)", padding: "120px 24px", overflow: "hidden", position: "relative" }}>
@@ -264,22 +198,45 @@ export default function Home() {
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
             <div style={{ animation: "floatCardB 5s ease-in-out infinite", position: "relative" }}>
-              <div style={{ position: "absolute", width: 340, height: 200, background: "linear-gradient(135deg, rgba(0,165,231,0.20), rgba(26,110,212,0.28))", borderRadius: 16, border: "1px solid rgba(0,165,231,0.22)", transform: "perspective(800px) rotateX(8deg) rotateY(8deg) translateY(18px) translateX(18px)", boxShadow: "0 20px 60px rgba(0,0,0,0.5)" }} />
-              <div style={{ position: "relative", width: 340, height: 200, background: "linear-gradient(135deg, #0e2a4a, #1a4a7a)", borderRadius: 16, border: "1px solid rgba(0,165,231,0.45)", transform: "perspective(800px) rotateX(8deg) rotateY(8deg)", boxShadow: "0 24px 70px rgba(0,165,231,0.22), 0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12)", overflow: "hidden", padding: "24px 28px", display: "flex", flexDirection: "column" as const, justifyContent: "space-between" }}>
-                <div style={{ position: "absolute", top: -40, right: -40, width: 160, height: 160, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,165,231,0.22), transparent 70%)", pointerEvents: "none" }} />
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                  <div style={{ fontSize: 13, fontWeight: 800, color: "#00a5e7", letterSpacing: "0.08em" }}>DRAYPAY</div>
-                  <svg width="40" height="26" viewBox="0 0 40 26" fill="none"><circle cx="14" cy="13" r="13" fill="rgba(255,59,48,0.75)"/><circle cx="26" cy="13" r="13" fill="rgba(255,165,0,0.75)"/></svg>
+              {/* Shadow card behind */}
+              <div style={{ position: "absolute", width: 220, height: 360, background: "linear-gradient(160deg, rgba(0,165,231,0.18), rgba(26,110,212,0.25))", borderRadius: 28, border: "1px solid rgba(0,165,231,0.18)", transform: "perspective(900px) rotateX(6deg) rotateY(10deg) translateY(16px) translateX(20px)", boxShadow: "0 24px 60px rgba(0,0,0,0.55)" }} />
+              {/* Main vertical card */}
+              <div style={{ position: "relative", width: 220, height: 360, background: "linear-gradient(175deg, #0d2540 0%, #1a4a82 55%, #0e3060 100%)", borderRadius: 28, border: "1px solid rgba(0,165,231,0.5)", transform: "perspective(900px) rotateX(6deg) rotateY(10deg)", boxShadow: "0 28px 80px rgba(0,165,231,0.28), 0 8px 32px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.14)", overflow: "hidden", padding: "28px 24px", display: "flex", flexDirection: "column" as const, justifyContent: "space-between" }}>
+                {/* Glow orb */}
+                <div style={{ position: "absolute", top: -60, right: -60, width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,165,231,0.28), transparent 68%)", pointerEvents: "none" }} />
+                <div style={{ position: "absolute", bottom: -40, left: -40, width: 160, height: 160, borderRadius: "50%", background: "radial-gradient(circle, rgba(26,110,212,0.22), transparent 68%)", pointerEvents: "none" }} />
+                {/* Top row */}
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div style={{ fontSize: 12, fontWeight: 900, color: "#00a5e7", letterSpacing: "0.14em" }}>DRAYPAY</div>
+                  <svg width="38" height="24" viewBox="0 0 40 26" fill="none"><circle cx="14" cy="13" r="13" fill="rgba(255,59,48,0.80)"/><circle cx="26" cy="13" r="13" fill="rgba(255,165,0,0.80)"/></svg>
                 </div>
-                <div style={{ fontSize: 16, fontWeight: 700, color: "#fff", letterSpacing: "0.2em" }}>•••• •••• •••• 7821</div>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-                  <div>
-                    <div style={{ fontSize: 9, color: "rgba(255,255,255,0.45)", textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>Carrier</div>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: "#fff", marginTop: 2 }}>Apex Drayage LLC</div>
+                {/* Chip */}
+                <div style={{ width: 42, height: 32, background: "linear-gradient(135deg, #c8a84b, #e8cc6a, #b8943a)", borderRadius: 6, boxShadow: "inset 0 1px 0 rgba(255,255,255,0.4), 0 2px 6px rgba(0,0,0,0.4)" }} />
+                {/* Card number */}
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: "rgba(255,255,255,0.85)", letterSpacing: "0.22em", marginBottom: 6 }}>•••• •••• •••• 7821</div>
+                  <div style={{ display: "flex", gap: 12 }}>
+                    <div>
+                      <div style={{ fontSize: 8, color: "rgba(255,255,255,0.4)", textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>Valid thru</div>
+                      <div style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.75)", marginTop: 2 }}>12/28</div>
+                    </div>
                   </div>
-                  <div style={{ textAlign: "right" as const }}>
-                    <div style={{ fontSize: 9, color: "rgba(255,255,255,0.45)", textTransform: "uppercase" as const, letterSpacing: "0.12em" }}>Paid in</div>
-                    <div style={{ fontSize: 22, fontWeight: 900, color: "#00a5e7" }}>48h</div>
+                </div>
+                {/* Bottom info */}
+                <div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+                    <div>
+                      <div style={{ fontSize: 8, color: "rgba(255,255,255,0.4)", textTransform: "uppercase" as const, letterSpacing: "0.12em", marginBottom: 3 }}>Carrier</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>Apex Drayage LLC</div>
+                    </div>
+                    <div style={{ textAlign: "right" as const }}>
+                      <div style={{ fontSize: 8, color: "rgba(255,255,255,0.4)", textTransform: "uppercase" as const, letterSpacing: "0.12em", marginBottom: 3 }}>Paid in</div>
+                      <div style={{ fontSize: 26, fontWeight: 900, color: "#00a5e7", lineHeight: 1 }}>48h</div>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: 14, background: "rgba(0,165,231,0.18)", border: "1px solid rgba(0,165,231,0.35)", borderRadius: 8, padding: "8px 12px", display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#00a5e7", display: "inline-block", boxShadow: "0 0 0 2px rgba(0,165,231,0.3)" }} />
+                    <span style={{ fontSize: 10, fontWeight: 700, color: "#00a5e7", letterSpacing: "0.06em" }}>PAYMENT PROCESSING</span>
                   </div>
                 </div>
               </div>
