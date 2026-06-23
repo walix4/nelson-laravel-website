@@ -123,6 +123,132 @@ export default function Home() {
       </section>
 
 
+      {/* ── SECTION A: LIVE MARKET DATA ────────────────────────────────── */}
+      <section style={{ position: "relative", overflow: "hidden", minHeight: 620, display: "flex", alignItems: "center" }}>
+        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1400&q=80" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(100deg, rgba(4,10,22,0.97) 45%, rgba(4,10,22,0.55) 100%)" }} />
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 24px", position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "center" }} className="home-2col">
+          <div>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.12)", border: "1px solid rgba(252,11,5,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 24 }}>
+              <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#fc0b05", animation: "pulse 2s infinite", display: "inline-block" }} />
+              Live Market Data
+            </div>
+            <h2 style={{ fontSize: "clamp(34px,4vw,56px)", fontWeight: 900, color: "#fff", lineHeight: 1.06, margin: "0 0 20px", letterSpacing: "-0.025em" }}>
+              Live diesel, FSC &amp;<br />port fees — updated<br /><span style={{ color: "rgba(255,255,255,0.4)" }}>every 60 seconds.</span>
+            </h2>
+            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.6)", lineHeight: 1.65, maxWidth: 420, marginBottom: 40 }}>No stale rate sheets. Every quote pulls live diesel index, carrier FSC, chassis pool availability, and port terminal fees from real-time data sources.</p>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" as const }}>
+              {[["DOE Diesel Index","Live feed"],["Carrier FSC","Auto-calc"],["Port Terminals","50+ feeds"],["Chassis Pools","Real-time"]].map(([label, badge]) => (
+                <div key={label} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, padding: "8px 14px", display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.8)" }}>{label}</span>
+                  <span style={{ background: "rgba(39,179,10,0.18)", border: "1px solid rgba(39,179,10,0.4)", borderRadius: 10, padding: "2px 7px", fontSize: 9, fontWeight: 800, color: "#27b30a", textTransform: "uppercase" as const, letterSpacing: "0.1em" }}>{badge}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" as const, gap: 14 }}>
+            {[
+              { label:"Diesel (national avg)", val:"$3.82/gal", change:"+0.04", up:true, color:"#f59e0b" },
+              { label:"Fuel Surcharge (FSC)", val:"17.0%", change:"–0.5%", up:false, color:"#fc0b05" },
+              { label:"Chassis Daily Rate", val:"$95", change:"no change", up:null, color:"#3A7BEA" },
+              { label:"Port Terminal Fee (LAX avg)", val:"$142", change:"+$3", up:true, color:"#8b5cf6" },
+            ].map((row) => (
+              <div key={row.label} style={{ background: "rgba(255,255,255,0.06)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.11)", borderRadius: 14, padding: "16px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", boxShadow: "0 4px 20px rgba(0,0,0,0.35)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{ width: 8, height: 8, borderRadius: "50%", background: row.color, boxShadow: `0 0 0 3px ${row.color}33` }} />
+                  <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)" }}>{row.label}</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ fontSize: 16, fontWeight: 800, color: "#fff" }}>{row.val}</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: row.up === true ? "#27b30a" : row.up === false ? "#fc0b05" : "rgba(255,255,255,0.35)", background: row.up === true ? "rgba(39,179,10,0.12)" : row.up === false ? "rgba(252,11,5,0.12)" : "rgba(255,255,255,0.06)", borderRadius: 6, padding: "2px 7px" }}>{row.change}</span>
+                </div>
+              </div>
+            ))}
+            <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", textAlign: "right" as const, marginTop: 4 }}>Last updated: 2 min ago · DOE, IANA, port data feeds</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION B: EVERY FEE ITEMISED ──────────────────────────────── */}
+      <section style={{ background: "linear-gradient(180deg,#050d1c 0%,#040a17 100%)", padding: "120px 24px", overflow: "hidden", position: "relative" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 50% 0%, rgba(58,95,192,0.08) 0%, transparent 60%)", pointerEvents: "none" }} />
+        <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }} className="home-2col">
+            <div>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(58,95,192,0.12)", border: "1px solid rgba(58,95,192,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "#3A7BEA", marginBottom: 24 }}>Fully Itemised Quotes</div>
+              <h2 style={{ fontSize: "clamp(34px,4vw,56px)", fontWeight: 900, color: "#fff", lineHeight: 1.06, margin: "0 0 20px", letterSpacing: "-0.025em" }}>
+                Six fees.<br />One all-in price.<br /><span style={{ color: "rgba(255,255,255,0.35)" }}>No hidden charges.</span>
+              </h2>
+              <p style={{ fontSize: 16, color: "rgba(255,255,255,0.55)", lineHeight: 1.65, maxWidth: 420, marginBottom: 40 }}>Every quote shows exactly what you're paying — base rate, fuel, chassis, port fees, tolls, and accessorials broken out line by line. No surprises at delivery.</p>
+              <Link href="/#quote" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "rgba(58,95,192,0.15)", border: "1.5px solid rgba(58,95,192,0.5)", color: "#3A7BEA", padding: "12px 24px", borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: "none" }}>
+                See a sample quote
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </Link>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" as const, gap: 0 }}>
+              {[
+                { n:"Base Rate", d:"Distance × carrier tariff, market-priced per lane", pct:"~70%", color:"#fc0b05" },
+                { n:"Fuel + FSC", d:"Live DOE diesel index + carrier fuel surcharge", pct:"~13%", color:"#f59e0b" },
+                { n:"Chassis", d:"Pool rental + per-diem, by region and dwell time", pct:"~6%", color:"#3A7BEA" },
+                { n:"Port Terminal Fee", d:"Gate, handling, and exam fees per terminal", pct:"~8%", color:"#8b5cf6" },
+                { n:"Tolls & Permits", d:"Route-specific tolls, overweight & hazmat permits", pct:"~2%", color:"#10b981" },
+                { n:"Accessorials", d:"Detention, chassis splits, reefer, lumper etc.", pct:"~1%", color:"#06b6d4" },
+              ].map((item, i) => (
+                <div key={item.n} style={{ display: "flex", alignItems: "center", gap: 16, padding: "16px 0", borderBottom: i < 5 ? "1px solid rgba(255,255,255,0.06)" : "none" }}>
+                  <div style={{ width: 3, height: 36, borderRadius: 2, background: item.color, flexShrink: 0 }} />
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", marginBottom: 3 }}>{item.n}</div>
+                    <div style={{ fontSize: 12, color: "rgba(255,255,255,0.45)" }}>{item.d}</div>
+                  </div>
+                  <div style={{ fontSize: 13, fontWeight: 800, color: item.color, minWidth: 36, textAlign: "right" as const }}>{item.pct}</div>
+                </div>
+              ))}
+              <div style={{ marginTop: 16, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 10, padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: "rgba(255,255,255,0.6)", textTransform: "uppercase" as const, letterSpacing: "0.08em" }}>Total All-In</span>
+                <span style={{ fontSize: 20, fontWeight: 900, color: "#fff" }}>$1,685</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION C: 24H RATE LOCK ────────────────────────────────────── */}
+      <section style={{ position: "relative", overflow: "hidden", minHeight: 560, display: "flex", alignItems: "center" }}>
+        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1400&q=80" alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 60%" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(4,10,22,0.88) 0%, rgba(4,10,22,0.72) 50%, rgba(4,10,22,0.92) 100%)" }} />
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 24px", position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 60, alignItems: "center" }} className="home-2col">
+          <div>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(39,179,10,0.12)", border: "1px solid rgba(39,179,10,0.35)", borderRadius: 6, padding: "5px 14px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "#27b30a", marginBottom: 24 }}>
+              <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#27b30a", display: "inline-block" }} />
+              24-Hour Rate Lock
+            </div>
+            <h2 style={{ fontSize: "clamp(34px,4vw,56px)", fontWeight: 900, color: "#fff", lineHeight: 1.06, margin: "0 0 20px", letterSpacing: "-0.025em" }}>
+              Quote in 30 seconds.<br />Book anytime in the<br /><span style={{ color: "#27b30a" }}>next 24 hours.</span>
+            </h2>
+            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.65)", lineHeight: 1.65, maxWidth: 460 }}>Your rate is locked the moment you quote — no re-pricing, no "call for current rates." Present the quote to your customer and book at your convenience, up to 24 hours later.</p>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" as const, gap: 16 }}>
+            {[
+              { icon:"⚡", title:"Quote generated", desc:"All-in price calculated in under 30 seconds", time:"0:00" },
+              { icon:"🔒", title:"Rate locked", desc:"Price frozen — good for the next 24 hours", time:"0:01" },
+              { icon:"📋", title:"Share with customer", desc:"Send branded PDF quote immediately", time:"Any time" },
+              { icon:"✅", title:"Book the load", desc:"Confirm and assign a carrier within the 24h window", time:"< 24h" },
+            ].map((step, i) => (
+              <div key={step.title} style={{ display: "flex", alignItems: "flex-start", gap: 14, background: "rgba(255,255,255,0.06)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", border: "1px solid rgba(255,255,255,0.10)", borderRadius: 12, padding: "14px 16px", boxShadow: "0 4px 20px rgba(0,0,0,0.35)" }}>
+                <div style={{ fontSize: 20, lineHeight: 1, flexShrink: 0, marginTop: 2 }}>{step.icon}</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 3 }}>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: "#fff" }}>{step.title}</span>
+                    <span style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", fontWeight: 600 }}>{step.time}</span>
+                  </div>
+                  <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>{step.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── SECTION 4: VERIFIED CARRIER NETWORK ────────────────────────── */}
       <section style={{ background: "linear-gradient(180deg,#050d1e 0%,#060f1e 100%)", padding: "120px 24px", overflow: "hidden", position: "relative" }}>
         <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: "45%", background: "radial-gradient(ellipse 80% 60% at 10% 50%, rgba(39,179,10,0.07) 0%, transparent 65%)", pointerEvents: "none" }} />
