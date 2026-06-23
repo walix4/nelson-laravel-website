@@ -249,45 +249,17 @@ export default function BrokerPage() {
       </section>
 
       {/* ── SECTION 2: STATS BAND ────────────────────────────────────────── */}
-      <section style={{ background: "#00a5e7", padding: "44px 24px" }}>
-        <div
-          className="stats-band-inner"
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 32,
-            textAlign: "center",
-          }}
-        >
+      <section style={{ background: "linear-gradient(180deg,#09172a 0%,#060f1e 100%)", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "48px 24px" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }} className="hero-stats-grid">
           {[
             { val: "$2.4M+", label: "Brokered Monthly" },
             { val: "8 min", label: "Avg Booking Time" },
             { val: "500+", label: "Vetted Carriers" },
             { val: "12-18%", label: "Avg Broker Margin" },
-          ].map((s) => (
-            <div key={s.val}>
-              <div
-                style={{
-                  fontSize: "clamp(28px, 4vw, 44px)",
-                  fontWeight: 900,
-                  color: "#fff",
-                  lineHeight: 1,
-                }}
-              >
-                {s.val}
-              </div>
-              <div
-                style={{
-                  fontSize: 13,
-                  color: "rgba(255,255,255,0.75)",
-                  marginTop: 6,
-                  fontWeight: 500,
-                }}
-              >
-                {s.label}
-              </div>
+          ].map((s, i) => (
+            <div key={s.val} style={{ padding: "28px 0", paddingLeft: i === 0 ? 0 : 32, borderLeft: i === 0 ? "none" : "1px solid rgba(255,255,255,0.08)" }}>
+              <div style={{ fontSize: 40, fontWeight: 900, color: "#fff", lineHeight: 1, letterSpacing: "-0.02em" }}>{s.val}</div>
+              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", marginTop: 8, textTransform: "uppercase" as const, letterSpacing: "0.14em" }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -308,60 +280,78 @@ export default function BrokerPage() {
               Every plan includes live load board access, 500+ verified carriers, and real-time rate intelligence.
             </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="pricing-grid-broker">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }} className="pricing-grid-broker">
             {/* Starter */}
-            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "32px 28px", display: "flex", flexDirection: "column" }}>
+            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column" }}>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#27b30a", marginBottom: 16 }}>Starter</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
-                <span style={{ fontSize: 52, fontWeight: 900, color: "#fff", lineHeight: 1 }}>$0</span>
-                <span style={{ fontSize: 14, color: "rgba(255,255,255,0.5)" }}>forever</span>
+                <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>$0</span>
+                <span style={{ fontSize: 13, color: "rgba(255,255,255,0.5)" }}>forever</span>
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>For brokers just getting started on DrayGo.</p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px", display: "flex", flexDirection: "column", gap: 12 }}>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 24, lineHeight: 1.5 }}>For brokers just getting started on DrayGo.</p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", display: "flex", flexDirection: "column", gap: 10 }}>
                 {["Up to 5 loads/month","Live load board access","Basic rate calculator","Email support","Standard BOL upload"].map(f => (
-                  <li key={f} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "rgba(255,255,255,0.8)" }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#27b30a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <li key={f} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13, color: "rgba(255,255,255,0.8)" }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#27b30a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
               </ul>
-              <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "12px 0", borderRadius: 8, border: "1.5px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get Started Free</a>
+              <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "11px 0", borderRadius: 8, border: "1.5px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get Started Free</a>
             </div>
             {/* Broker — highlighted */}
-            <div style={{ background: "rgba(0,165,231,0.07)", border: "2px solid #00a5e7", borderRadius: 16, padding: "32px 28px", display: "flex", flexDirection: "column", position: "relative" }}>
+            <div style={{ background: "rgba(0,165,231,0.07)", border: "2px solid #00a5e7", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column", position: "relative" }}>
               <div style={{ position: "absolute", top: -14, left: "50%", transform: "translateX(-50%)", background: "#00a5e7", color: "#fff", fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", padding: "4px 14px", borderRadius: 99, whiteSpace: "nowrap" }}>BEST FOR YOU</div>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#00a5e7", marginBottom: 16 }}>Broker</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
-                <span style={{ fontSize: 52, fontWeight: 900, color: "#fff", lineHeight: 1 }}>$149</span>
-                <span style={{ fontSize: 14, color: "rgba(255,255,255,0.5)" }}>per month</span>
+                <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>$149</span>
+                <span style={{ fontSize: 13, color: "rgba(255,255,255,0.5)" }}>/ mo</span>
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>For freight brokers sourcing drayage capacity at scale.</p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px", display: "flex", flexDirection: "column", gap: 12 }}>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 24, lineHeight: 1.5 }}>For freight brokers sourcing drayage capacity at scale.</p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", display: "flex", flexDirection: "column", gap: 10 }}>
                 {["Full carrier network access","Multi-load management","Lane rate intelligence","Digital BOL & rate con","Margin reporting per load","API access (coming soon)"].map(f => (
-                  <li key={f} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "rgba(255,255,255,0.9)" }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00a5e7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <li key={f} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13, color: "rgba(255,255,255,0.9)" }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00a5e7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
               </ul>
-              <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "12px 0", borderRadius: 8, background: "#00a5e7", color: "#fff", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Start Free Trial</a>
+              <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "11px 0", borderRadius: 8, background: "#00a5e7", color: "#fff", fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Start Free Trial</a>
+            </div>
+            {/* Agency */}
+            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column" }}>
+              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#00a5e7", marginBottom: 16 }}>Agency</div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
+                <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>$299</span>
+                <span style={{ fontSize: 13, color: "rgba(255,255,255,0.5)" }}>/ mo</span>
+              </div>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 24, lineHeight: 1.5 }}>For large brokerages and 3PLs managing multiple teams.</p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", display: "flex", flexDirection: "column", gap: 10 }}>
+                {["Everything in Broker","Unlimited brokered loads","Multi-lane rate management","White-label portal option","Custom reporting dashboard","Dedicated account manager"].map(f => (
+                  <li key={f} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13, color: "rgba(255,255,255,0.8)" }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00a5e7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "11px 0", borderRadius: 8, border: "1.5px solid rgba(0,165,231,0.5)", color: "#00a5e7", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Get Started</a>
             </div>
             {/* Enterprise */}
-            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "32px 28px", display: "flex", flexDirection: "column" }}>
+            <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 16, padding: "28px 20px", display: "flex", flexDirection: "column" }}>
               <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "#00a5e7", marginBottom: 16 }}>Enterprise</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
-                <span style={{ fontSize: 52, fontWeight: 900, color: "#fff", lineHeight: 1 }}>Custom</span>
+                <span style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>Custom</span>
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 28, lineHeight: 1.5 }}>For large brokerages and 3PLs with dedicated support needs.</p>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px", display: "flex", flexDirection: "column", gap: 12 }}>
-                {["Everything in Broker","Dedicated account manager","Custom carrier contracts","Volume rate discounts","White-label options","SLA & uptime guarantee"].map(f => (
-                  <li key={f} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13.5, color: "rgba(255,255,255,0.8)" }}>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00a5e7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 24, lineHeight: 1.5 }}>For enterprise 3PLs and national brokerages.</p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", display: "flex", flexDirection: "column", gap: 10 }}>
+                {["Everything in Agency","Dedicated account manager","Custom carrier contracts","Volume rate discounts","White-label options","SLA & uptime guarantee"].map(f => (
+                  <li key={f} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 13, color: "rgba(255,255,255,0.8)" }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00a5e7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     {f}
                   </li>
                 ))}
               </ul>
-              <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "12px 0", borderRadius: 8, border: "1.5px solid rgba(0,165,231,0.5)", color: "#00a5e7", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Contact Sales</a>
+              <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "11px 0", borderRadius: 8, border: "1.5px solid rgba(0,165,231,0.5)", color: "#00a5e7", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>Contact Sales</a>
             </div>
           </div>
         </div>
