@@ -54,7 +54,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
 
   return (
     <>
-    <header className="sticky top-0 z-40" style={{ background: "#fc0b05" }}>
+    <header className="sticky top-0 z-40" style={{ background: "#08192b" }}>
       <div style={{ overflow: "hidden", transition: "height 0.22s ease", height: showBar ? 32 : 0 }}>
         <div className="text-[11px] font-medium" style={{ background: "var(--red,#e8392a)", color: "#fff", height: 32 }}>
           <div className="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
@@ -134,7 +134,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-white/10 px-6 py-4 space-y-1" style={{ background: "#fc0b05" }}>
+        <div className="lg:hidden border-t border-white/10 px-6 py-4 space-y-1" style={{ background: "#08192b" }}>
           <div className="border-t border-white/10 pt-1">
             <Link href="/load-board" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Load Board</Link>
             <Link href="/jobs-map" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Jobs on Map</Link>
