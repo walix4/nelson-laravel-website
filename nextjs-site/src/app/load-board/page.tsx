@@ -247,7 +247,18 @@ export default function LoadBoardPage() {
   });
 
   return (
-    <div style={{ background: "#08192b" }}>
+    <div style={{ position: "relative", background: "#08192b", overflow: "hidden" }}>
+      {/* Full-page background video */}
+      <video
+        autoPlay muted loop playsInline
+        style={{
+          position: "fixed", inset: 0, width: "100%", height: "100%",
+          objectFit: "cover", opacity: 0.45, zIndex: 0, pointerEvents: "none",
+        }}
+        src="/load-board-bg.mp4"
+      />
+      <div style={{ position: "fixed", inset: 0, background: "rgba(8,25,43,0.60)", zIndex: 1, pointerEvents: "none" }} />
+      <div style={{ position: "relative", zIndex: 2 }}>
       <Nav />
       {showDialog && <BookingDialog onClose={() => setShowDialog(false)} />}
 
@@ -375,6 +386,7 @@ export default function LoadBoardPage() {
       </section>
 
       <Footer />
+      </div>{/* end zIndex wrapper */}
     </div>
   );
 }
