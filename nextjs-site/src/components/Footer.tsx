@@ -24,7 +24,7 @@ const FOOTER_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="text-white/85 py-14 mt-10" style={{ background: "#08192b", borderTop: "3px solid #fc0b05" }}>
+    <footer className="text-white/85 py-14 mt-10" style={{ background: "#08192b", borderTop: "1px solid #fc0b05" }}>
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 mb-12">
           <div>
