@@ -120,8 +120,8 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
       <div style={{
         position: "absolute", inset: 0, borderRadius: "10px", zIndex: 10,
         background: "rgba(255,255,255,0.06)",
-        backdropFilter: "blur(40px) brightness(0.6)", WebkitBackdropFilter: "blur(40px) brightness(0.6)",
-        border: "1px solid rgba(255,255,255,0.10)",
+        backdropFilter: "none", WebkitBackdropFilter: "none",
+        border: "1px solid rgba(255,255,255,0.12)",
         transform: hovered ? "translateX(0)" : "translateX(-100%)",
         transition: "transform 0.32s cubic-bezier(0.23,1,0.32,1)",
         display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
@@ -141,6 +141,9 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
           <a href="/register" onClick={e => e.stopPropagation()} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "8px 0", borderRadius: 8, fontSize: 12, fontWeight: 700, color: "#fff", background: "#fc0b05", textDecoration: "none" }}>Sign Up</a>
         </div>
       </div>
+
+      {/* Card content — hidden when overlay is active */}
+      <div style={{ opacity: hovered ? 0 : 1, transition: "opacity 0.2s ease", pointerEvents: hovered ? "none" : "auto" }}>
 
       {/* Header */}
       <div className="p-4 flex items-start gap-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
@@ -221,6 +224,8 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
           Get Job
         </button>
       </div>
+
+      </div>{/* end card content wrapper */}
     </button>
   );
 }
