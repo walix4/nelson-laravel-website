@@ -247,11 +247,11 @@ export default function LoadBoardPage() {
   });
 
   return (
-    <>
+    <div style={{ background: "#08192b" }}>
       <Nav />
       {showDialog && <BookingDialog onClose={() => setShowDialog(false)} />}
 
-      <section className="min-h-screen py-8" style={{ background: "#08192b" }}>
+      <section className="min-h-screen py-8">
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="rounded-2xl overflow-hidden" style={{
             background: "rgba(255,255,255,0.08)",
@@ -375,6 +375,6 @@ export default function LoadBoardPage() {
       </section>
 
       <Footer />
-    </>
+    </div>
   );
 }
