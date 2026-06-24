@@ -263,12 +263,12 @@ export default function JobsMapPage() {
           autoPlay muted loop playsInline
           style={{
             position: "absolute", inset: 0, width: "100%", height: "100%",
-            objectFit: "cover", opacity: 0.18, zIndex: 0, pointerEvents: "none",
+            objectFit: "cover", opacity: 0.45, zIndex: 0, pointerEvents: "none",
           }}
           src="/jobs-map-bg.mp4"
         />
         {/* Dark overlay to keep content readable */}
-        <div style={{ position: "absolute", inset: 0, background: "rgba(5,16,28,0.72)", zIndex: 1, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", inset: 0, background: "rgba(5,16,28,0.50)", zIndex: 1, pointerEvents: "none" }} />
         <div className="max-w-[1400px] mx-auto px-6 py-6" style={{ position: "relative", zIndex: 2 }}>
           <div className="flex gap-5 items-stretch">
 
