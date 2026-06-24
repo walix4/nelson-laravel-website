@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { TRANSACTIONS, METHOD_COLORS, addrLabel } from "@/lib/data";
 
-export default function TxDetailPage({ params }: { params: { hash: string } }) {
-  const tx = TRANSACTIONS.find(t => t.hash === params.hash) ?? TRANSACTIONS[0];
+export function generateStaticParams() {
+  return TRANSACTIONS.map(tx => ({ hash: tx.hash }));
+}
+
+export default async function TxDetailPage({ params }: { params: Promise<{ hash: string }> }) {
+  const { hash } = await params;
+  const tx = TRANSACTIONS.find(t => t.hash === hash) ?? TRANSACTIONS[0];
 
   const LOAD_ID = `DLD-${tx.block}-${tx.hash.slice(2, 8).toUpperCase()}`;
   const PORT = ["LA/LB", "NY/NJ", "SEA", "HOU", "SAV", "OAK"][tx.block % 6];

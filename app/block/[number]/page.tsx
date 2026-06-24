@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { BLOCKS, TRANSACTIONS, addrLabel, shortHash, METHOD_COLORS } from "@/lib/data";
 
-export default function BlockDetailPage({ params }: { params: { number: string } }) {
-  const blockNum = parseInt(params.number);
+export function generateStaticParams() {
+  return BLOCKS.map(b => ({ number: String(b.number) }));
+}
+
+export default async function BlockDetailPage({ params }: { params: Promise<{ number: string }> }) {
+  const { number } = await params;
+  const blockNum = parseInt(number);
   const block = BLOCKS.find(b => b.number === blockNum) ?? BLOCKS[0];
   const txns = TRANSACTIONS.filter(tx => tx.block === block.number).slice(0, 15);
 
