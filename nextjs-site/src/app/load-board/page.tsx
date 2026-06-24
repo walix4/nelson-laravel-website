@@ -114,7 +114,7 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative text-left w-full transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl overflow-hidden"
-      style={{ background: "#0d1f3c", border: "1px solid rgba(255,255,255,0.09)", borderRadius: "10px" }}>
+      style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)", borderRadius: "10px", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}>
 
       {/* Hover sign-in overlay — slides in from left */}
       <div style={{
@@ -143,7 +143,7 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
 
       {/* Header */}
       <div className="p-4 flex items-start gap-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-        <div className="shrink-0 rounded-lg flex flex-col items-center justify-between px-2.5 py-2.5 gap-1" style={{ background: "rgba(255,255,255,0.09)", minWidth: "46px" }}>
+        <div className="shrink-0 rounded-lg flex flex-col items-center justify-between px-2.5 py-2.5 gap-1" style={{ background: "rgba(252,11,5,0.12)", border: "1px solid rgba(252,11,5,0.20)", minWidth: "46px" }}>
           <div className="flex items-center justify-center">{icon}</div>
           <span className="display num text-[18px] font-extrabold leading-none text-white">{num}</span>
         </div>
@@ -190,7 +190,7 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
 
       {/* Detail strip */}
       <div className="px-4 pb-3 pt-2">
-        <div className="grid grid-cols-3 rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
+        <div className="grid grid-cols-3 rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.10)", background: "rgba(255,255,255,0.04)" }}>
           {[
             { label: "DISTANCE", value: `${load.miles} MI` },
             { label: "WEIGHT",   value: load.weight },
@@ -248,10 +248,11 @@ export default function LoadBoardPage() {
       <section className="min-h-screen py-8" style={{ background: "#08192b" }}>
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="rounded-2xl overflow-hidden" style={{
-            background: "rgba(10,20,42,0.82)",
+            background: "rgba(255,255,255,0.08)",
             backdropFilter: "blur(24px)",
             WebkitBackdropFilter: "blur(24px)",
-            border: "1px solid rgba(255,255,255,0.10)",
+            border: "1px solid rgba(252,11,5,0.30)",
+            boxShadow: "0 25px 50px rgba(0,0,0,0.5)",
           }}>
 
             {/* Glass header */}
