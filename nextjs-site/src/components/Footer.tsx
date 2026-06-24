@@ -24,7 +24,7 @@ const FOOTER_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="text-white/85 py-14 border-t border-white/10 mt-10" style={{ background: "#08192b" }}>
+    <footer className="text-white/85 py-14 mt-10" style={{ background: "#08192b", borderTop: "3px solid #fc0b05" }}>
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 mb-12">
           <div>
@@ -43,11 +43,11 @@ export default function Footer() {
           </div>
           {FOOTER_LINKS.map((col) => (
             <div key={col.title}>
-              <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-white mb-4">{col.title}</div>
+              <div className="text-[12px] font-extrabold uppercase tracking-[0.14em] text-white mb-4">{col.title}</div>
               <ul className="space-y-3">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} className="text-[13px] text-white/60 hover:text-white transition">{l.label}</Link>
+                    <Link href={l.href} className="text-[13px] font-medium text-white/60 hover:text-white transition">{l.label}</Link>
                   </li>
                 ))}
               </ul>
