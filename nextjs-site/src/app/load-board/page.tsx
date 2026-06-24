@@ -119,9 +119,10 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
       {/* Hover sign-in overlay — slides in from left */}
       <div style={{
         position: "absolute", inset: 0, borderRadius: "10px", zIndex: 10,
-        background: "rgba(8,20,45,0.96)",
-        backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)",
-        border: "1px solid rgba(252,11,5,0.30)",
+        background: "linear-gradient(145deg, rgba(18,32,62,0.99) 0%, rgba(8,16,36,0.99) 100%)",
+        backdropFilter: "none", WebkitBackdropFilter: "none",
+        border: "1px solid rgba(252,11,5,0.35)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.07), inset 0 -1px 0 rgba(0,0,0,0.3)",
         transform: hovered ? "translateX(0)" : "translateX(-100%)",
         transition: "transform 0.32s cubic-bezier(0.23,1,0.32,1)",
         display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
