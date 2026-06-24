@@ -187,7 +187,18 @@ export default function JobsMapPage() {
   );
 
   return (
-    <div style={{ background: "#05101c" }}>
+    <div style={{ position: "relative", background: "#05101c", overflow: "hidden" }}>
+      {/* Full-page background video */}
+      <video
+        autoPlay muted loop playsInline
+        style={{
+          position: "fixed", inset: 0, width: "100%", height: "100%",
+          objectFit: "cover", opacity: 0.45, zIndex: 0, pointerEvents: "none",
+        }}
+        src="/jobs-map-bg.mp4"
+      />
+      <div style={{ position: "fixed", inset: 0, background: "rgba(5,16,28,0.55)", zIndex: 1, pointerEvents: "none" }} />
+      <div style={{ position: "relative", zIndex: 2 }}>
       <Nav />
 
       {/* Page header */}
@@ -257,19 +268,8 @@ export default function JobsMapPage() {
         .jobs-sidebar::-webkit-scrollbar { display: none; }
         .jobs-sidebar { scrollbar-width: none; -ms-overflow-style: none; }
       `}</style>
-      <div style={{ position: "relative", background: "#05101c", overflow: "hidden" }}>
-        {/* Background video */}
-        <video
-          autoPlay muted loop playsInline
-          style={{
-            position: "absolute", inset: 0, width: "100%", height: "100%",
-            objectFit: "cover", opacity: 0.45, zIndex: 0, pointerEvents: "none",
-          }}
-          src="/jobs-map-bg.mp4"
-        />
-        {/* Dark overlay to keep content readable */}
-        <div style={{ position: "absolute", inset: 0, background: "rgba(5,16,28,0.50)", zIndex: 1, pointerEvents: "none" }} />
-        <div className="max-w-[1400px] mx-auto px-6 py-6" style={{ position: "relative", zIndex: 2 }}>
+      <div style={{ background: "transparent" }}>
+        <div className="max-w-[1400px] mx-auto px-6 py-6">
           <div className="flex gap-5 items-stretch">
 
             {/* Map */}
@@ -366,6 +366,7 @@ export default function JobsMapPage() {
       </div>
 
       <Footer />
+      </div>{/* end zIndex wrapper */}
 
       {/* Booking dialog */}
       {selectedLoad && (
