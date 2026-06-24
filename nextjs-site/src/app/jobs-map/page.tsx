@@ -142,8 +142,14 @@ function LoadRow({ load, onClick }: { load: typeof LOADS[0]; onClick: () => void
   return (
     <button
       onClick={onClick}
-      className="w-full text-left transition hover:bg-white/5 rounded-xl px-4 py-3.5"
-      style={{ border: "1px solid rgba(255,255,255,0.07)", marginBottom: 8 }}
+      className="w-full text-left transition rounded-xl px-4 py-3.5"
+      style={{
+        background: "rgba(255,255,255,0.06)",
+        border: "1px solid rgba(255,255,255,0.10)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+        marginBottom: 8,
+      }}
     >
       <div className="flex items-start justify-between gap-2 mb-2">
         <div>
@@ -312,10 +318,13 @@ export default function JobsMapPage() {
                   maxHeight: "calc(100vh - 200px)",
                   position: "sticky",
                   top: 80,
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  background: "rgba(255,255,255,0.08)",
+                  border: "1px solid rgba(252,11,5,0.30)",
                   borderRadius: 16,
                   padding: "16px 12px",
+                  backdropFilter: "blur(24px)",
+                  WebkitBackdropFilter: "blur(24px)",
+                  boxShadow: "0 25px 50px rgba(0,0,0,0.5)",
                 }}
               >
                 <div className="flex items-center justify-between mb-4 px-2">
