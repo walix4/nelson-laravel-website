@@ -187,7 +187,7 @@ export default function JobsMapPage() {
   );
 
   return (
-    <>
+    <div style={{ background: "#05101c" }}>
       <Nav />
 
       {/* Page header */}
@@ -371,6 +371,6 @@ export default function JobsMapPage() {
       {selectedLoad && (
         <BookingDialog load={selectedLoad} onClose={() => setSelectedLoad(null)} />
       )}
-    </>
+    </div>
   );
 }
