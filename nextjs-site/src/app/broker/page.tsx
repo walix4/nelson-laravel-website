@@ -202,7 +202,7 @@ export default function BrokerPage() {
   const lane = LANES[activeLane];
 
   return (
-    <>
+    <div style={{ background: "#060f1e" }}>
       {/* ── NAV ─────────────────────────────────────────────────────────── */}
       <Nav logoSrc={asset("/logo-broker-blue.png")} />
 
@@ -1667,6 +1667,6 @@ export default function BrokerPage() {
           .lane-card-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
-    </>
+    </div>
   );
 }

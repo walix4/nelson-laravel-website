@@ -362,7 +362,7 @@ export default function LoadBoardPage() {
             {!hideList && (
               <div className="px-6 pb-6 pt-4">
                 {viewMode === "map" ? (
-                  <LoadMapView loads={filtered} onMarkerClick={() => setShowDialog(true)} />
+                  <LoadMapView loads={filtered} onMarkerClick={(_ids) => setShowDialog(true)} />
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {filtered.slice(0, 8).map((load, idx) => (

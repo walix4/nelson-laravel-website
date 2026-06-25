@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { asset } from "@/lib/site";
 
 const FOOTER_LINKS = [
@@ -23,12 +24,18 @@ const FOOTER_LINKS = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isBroker = pathname === "/broker" || pathname === "/broker/";
+  const isCarriers = pathname === "/carriers" || pathname === "/carriers/";
+  const logoSrc = isBroker ? asset("/logo-broker-blue.png") : isCarriers ? asset("/logo-carrier-green.png") : asset("/logo-draygo.png");
+  const borderColor = isBroker ? "#00a5e7" : isCarriers ? "#27b30a" : "#fc0b05";
+
   return (
-    <footer className="text-white/85 py-14 mt-10" style={{ background: "#08192b", borderTop: "1px solid #fc0b05" }}>
+    <footer className="text-white/85 py-14" style={{ background: "#08192b", borderTop: `2px solid ${borderColor}` }}>
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 mb-12">
           <div>
-            <img src={asset("/logo-draygo.png")} alt="DrayGo" className="h-14 w-auto" />
+            <img src={logoSrc} alt="DrayGo" className="h-14 w-auto" />
             <p className="mt-3 max-w-sm text-white/60 text-[13px] leading-relaxed">The drayage platform for shippers, brokers, and carriers. Instant rates across every U.S. container port.</p>
             <div className="grid grid-cols-2 gap-3 mt-5" style={{ width: "fit-content" }}>
               <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.10] hover:bg-white/[0.20] border border-white/15 backdrop-blur-sm transition-colors duration-200">

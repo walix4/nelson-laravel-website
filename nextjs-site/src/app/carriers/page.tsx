@@ -108,7 +108,7 @@ export default function CarriersPage() {
   }
 
   return (
-    <>
+    <div style={{ background: "#060f1e" }}>
       <Nav logoSrc={asset("/logo-carrier-green.png")} />
 
       {/* ── SECTION 1: HERO ──────────────────────────────────── */}
@@ -1344,6 +1344,6 @@ export default function CarriersPage() {
       </section>
 
       <Footer />
-    </>
+    </div>
   );
 }

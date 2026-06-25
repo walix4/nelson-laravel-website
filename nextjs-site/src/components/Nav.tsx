@@ -6,12 +6,12 @@ import { asset } from "@/lib/site";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
   { label: "How it Works", href: "/how-it-works" },
   { label: "Shippers", href: "/shipper" },
   { label: "Broker", href: "/broker" },
   { label: "Carriers", href: "/carriers" },
   { label: "Pricing", href: "/pricing" },
-  { label: "About Us", href: "/about" },
 ];
 
 const SERVICES_ITEMS = [
@@ -46,17 +46,16 @@ const linkCls = "text-[13px] font-medium text-white/80 hover:text-white transiti
 export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const showBar = pathname === "/load-board" || pathname === "/load-board/" || pathname === "/jobs-map" || pathname === "/jobs-map/";
+  const showBar = true;
   const isBroker = pathname === "/broker" || pathname === "/broker/";
   const isCarriers = pathname === "/carriers" || pathname === "/carriers/";
-  const borderColor = isBroker ? "rgba(0,165,231,0.55)" : isCarriers ? "rgba(39,179,10,0.55)" : "rgba(232,57,42,0.45)";
   const accentColor = isBroker ? "#00a5e7" : isCarriers ? "#27b30a" : "#fc0b05";
 
   return (
     <>
     <header className="sticky top-0 z-40" style={{ background: "#08192b" }}>
       <div style={{ overflow: "hidden", transition: "height 0.22s ease", height: showBar ? 32 : 0 }}>
-        <div className="text-[11px] font-medium" style={{ background: "var(--red,#e8392a)", color: "#fff", height: 32 }}>
+        <div className="text-[11px] font-medium" style={{ background: accentColor, color: "#fff", height: 32 }}>
           <div className="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
             <div className="flex items-center gap-5">
               <span className="flex items-center gap-2">
@@ -77,33 +76,27 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
           </div>
         </div>
       </div>
-      <div className="border-b-2" style={{ borderColor, transition: "border-color 0.22s ease" }}>
-      <div className="max-w-[1400px] mx-auto flex items-center" style={{ height: 64, paddingLeft: 24, paddingRight: 24 }}>
+      <div style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+      <div className="max-w-[1400px] mx-auto" style={{ height: 64, paddingLeft: 24, paddingRight: 24, display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center" }}>
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center shrink-0">
+        {/* Logo — left col */}
+        <Link href="/" className="flex items-center">
           <img src={logoSrc ?? asset("/logo-draygo.png")} alt="DrayGo" className="h-9 md:h-10 w-auto" />
         </Link>
 
-        {/* Desktop nav links — flex centered, no absolute positioning */}
-        <nav className="hidden lg:flex flex-1 justify-center items-center gap-0 text-[13px]">
+        {/* Desktop nav links — always centered col */}
+        <nav className="hidden lg:flex items-center gap-0 text-[13px]">
           <Link href="/load-board" className={linkCls} style={{ padding: "6px 12px" }}>Load Board</Link>
           <Link href="/jobs-map" className={linkCls} style={{ padding: "6px 12px" }}>Jobs on Map</Link>
           {NAV_LINKS.map((l) => (
-            <Link
-              key={l.label}
-              href={l.href}
-              className={linkCls}
-              style={{ padding: "6px 12px" }}
-            >
+            <Link key={l.label} href={l.href} className={linkCls} style={{ padding: "6px 12px" }}>
               {l.label}
             </Link>
           ))}
-
         </nav>
 
-        {/* Right actions */}
-        <div className="flex items-center gap-2 shrink-0">
+        {/* Right actions — right col */}
+        <div className="flex items-center gap-2 justify-end">
           <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white transition whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none" style={{ padding: "6px 12px" }}>
             Sign in
           </Link>
