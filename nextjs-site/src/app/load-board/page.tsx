@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -21,35 +21,29 @@ const LOADS = [
 ];
 
 const DryIcon  = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="#facc15">
-    <circle cx="12" cy="12" r="4.5"/>
-    <g stroke="#facc15" strokeWidth="2" strokeLinecap="round">
-      <line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </g>
+  <svg width={size} height={size} viewBox="0 0 45.16 45.16" fill="#facc15" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22.58,11.269c-6.237,0-11.311,5.075-11.311,11.312s5.074,11.312,11.311,11.312c6.236,0,11.311-5.074,11.311-11.312S28.816,11.269,22.58,11.269z M22.58,7.944c-1.219,0-2.207-0.988-2.207-2.206V2.207C20.373,0.988,21.361,0,22.58,0c1.219,0,2.207,0.988,2.207,2.207v3.531C24.787,6.956,23.798,7.944,22.58,7.944z M22.58,37.215c-1.219,0-2.207,0.988-2.207,2.207v3.53c0,1.22,0.988,2.208,2.207,2.208c1.219,0,2.207-0.988,2.207-2.208v-3.53C24.787,38.203,23.798,37.215,22.58,37.215z M32.928,12.231c-0.861-0.862-0.861-2.259,0-3.121l2.497-2.497c0.861-0.861,2.259-0.861,3.121,0c0.862,0.862,0.862,2.26,0,3.121l-2.497,2.497C35.188,13.093,33.791,13.093,32.928,12.231z M12.231,32.93c-0.862-0.863-2.259-0.863-3.121,0l-2.497,2.496c-0.861,0.861-0.862,2.26,0,3.121c0.862,0.861,2.26,0.861,3.121,0l2.497-2.498C13.093,35.188,13.093,33.79,12.231,32.93z M37.215,22.58c0-1.219,0.988-2.207,2.207-2.207h3.531c1.219,0,2.207,0.988,2.207,2.207c0,1.219-0.988,2.206-2.207,2.206h-3.531C38.203,24.786,37.215,23.799,37.215,22.58z M7.944,22.58c0-1.219-0.988-2.207-2.207-2.207h-3.53C0.988,20.373,0,21.361,0,22.58c0,1.219,0.988,2.206,2.207,2.206h3.531C6.956,24.786,7.944,23.799,7.944,22.58z M32.928,32.93c0.862-0.861,2.26-0.861,3.121,0l2.497,2.497c0.862,0.86,0.862,2.259,0,3.12s-2.259,0.861-3.121,0l-2.497-2.497C32.066,35.188,32.066,33.791,32.928,32.93z M12.231,12.231c0.862-0.862,0.862-2.259,0-3.121L9.734,6.614c-0.862-0.862-2.259-0.862-3.121,0c-0.862,0.861-0.862,2.259,0,3.12l2.497,2.497C9.972,13.094,11.369,13.094,12.231,12.231z"/>
   </svg>
 );
 const CoolIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2" strokeLinecap="round">
-    <line x1="12" y1="2" x2="12" y2="22"/>
-    <polyline points="20,7 12,12 4,7"/><polyline points="20,17 12,12 4,17"/>
-    <polyline points="12,2 16,6 12,10 8,6 12,2"/><polyline points="12,14 16,18 12,22 8,18 12,14"/>
+  <svg width={size} height={size} viewBox="80 320 64 64" fill="#38bdf8" xmlns="http://www.w3.org/2000/svg">
+    <path d="m109.044 346.923-7.674-4.43s-1.898-8.897-1.898-8.897c-.338-1.582-1.896-2.593-3.478-2.255-1.583.337-2.593 1.896-2.255 3.478 0 0 .795 3.727.795 3.727s-3.67-2.119-3.67-2.119c-1.401-.809-3.195-.328-4.004 1.073s-.328 3.195 1.073 4.004c0 0 3.67 2.119 3.67 2.119s-3.626 1.175-3.626 1.175c-1.539.498-2.383 2.153-1.884 3.691.498 1.539 2.153 2.384 3.692 1.885 0 0 8.654-2.805 8.654-2.805s7.674 4.431 7.674 4.431-7.674 4.431-7.674 4.431-8.654-2.805-8.654-2.805c-1.539-.499-3.194.346-3.692 1.885-.499 1.538.345 3.193 1.884 3.691 0 0 3.626 1.175 3.626 1.175s-3.67 2.119-3.67 2.119c-1.401.809-1.882 2.603-1.073 4.004s2.603 1.882 4.004 1.073c0 0 3.67-2.119 3.67-2.119s-.795 3.727-.795 3.727c-.338 1.582.672 3.141 2.255 3.478 1.582.338 3.14-.673 3.478-2.255 0 0 1.898-8.897 1.898-8.897s7.674-4.43 7.674-4.43v8.861s-6.756 6.092-6.756 6.092c-1.202 1.084-1.297 2.938-.214 4.14 1.083 1.201 2.938 1.297 4.14.214 0 0 2.83-2.553 2.83-2.553v4.238c0 1.618 1.313 2.931 2.931 2.931 1.617 0 2.931-1.313 2.931-2.931v-4.238s2.83 2.553 2.83 2.553c1.201 1.083 3.056.987 4.14-.214 1.083-1.202.987-3.056-.214-4.14 0 0-6.756-6.092-6.756-6.092v-8.861s7.674 4.43 7.674 4.43 1.898 8.897 1.898 8.897c.337 1.582 1.896 2.593 3.478 2.255 1.582-.337 2.593-1.896 2.255-3.478 0 0-.795-3.727-.795-3.727s3.67 2.119 3.67 2.119c1.401.809 3.195.328 4.004-1.073.808-1.401.328-3.195-1.073-4.004 0 0-3.67-2.119-3.67-2.119s3.625-1.175 3.625-1.175c1.539-.498 2.384-2.153 1.885-3.691-.499-1.539-2.153-2.384-3.692-1.885 0 0-8.654 2.805-8.654 2.805s-7.674-4.431-7.674-4.431 7.674-4.431 7.674-4.431 8.654 2.805 8.654 2.805c1.539.499 3.193-.346 3.692-1.885.499-1.538-.346-3.193-1.885-3.691 0 0-3.625-1.175-3.625-1.175s3.67-2.119 3.67-2.119c1.401-.809 1.881-2.603 1.073-4.004-.809-1.401-2.603-1.882-4.004-1.073 0 0-3.67 2.119-3.67 2.119s.795-3.727.795-3.727c.338-1.582-.673-3.141-2.255-3.478-1.582-.338-3.141.673-3.478 2.255 0 0-1.898 8.897-1.898 8.897s-7.674 4.43-7.674 4.43v-8.861s6.756-6.092 6.756-6.092c1.201-1.084 1.297-2.938.214-4.14-1.084-1.201-2.939-1.297-4.14-.214 0 0-2.83 2.553-2.83 2.553v-4.238c0-1.618-1.314-2.931-2.931-2.931-1.618 0-2.931 1.313-2.931 2.931v4.238s-2.83-2.553-2.83-2.553c-1.202-1.083-3.057-.987-4.14.214-1.083 1.202-.988 3.056.214 4.14 0 0 6.756 6.092 6.756 6.092z"/>
   </svg>
 );
 const FlatIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="#f97316">
-    <rect x="1" y="8" width="15" height="7" rx="1"/>
-    <path d="M16 11h4l2 4H16z"/>
-    <circle cx="6" cy="19" r="2.5"/><circle cx="14" cy="19" r="2.5"/><circle cx="20" cy="19" r="2.5"/>
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="1" y="14" width="22" height="3" rx="1"/>
+    <rect x="1" y="7" width="4" height="7" rx="0.5"/>
+    <rect x="19" y="7" width="4" height="7" rx="0.5"/>
   </svg>
 );
 const OWIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24">
-    <path fill="#a78bfa" d="M12 2L2 7l10 5 10-5z"/>
-    <path fill="#a78bfa" fillOpacity=".7" d="M2 12l10 5 10-5-10-5z"/>
-    <path fill="#a78bfa" fillOpacity=".45" d="M2 17l10 5 10-5-10-5z"/>
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="7" y1="12" x2="17" y2="12"/>
+    <line x1="5" y1="8" x2="5" y2="16"/>
+    <line x1="3" y1="9.5" x2="3" y2="14.5"/>
+    <line x1="19" y1="8" x2="19" y2="16"/>
+    <line x1="21" y1="9.5" x2="21" y2="14.5"/>
   </svg>
 );
 
@@ -102,8 +96,46 @@ function BookingDialog({ onClose }: { onClose: () => void }) {
   );
 }
 
-function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; onClick: () => void }) {
+function LoadCard({ load, idx, onClick, refreshing = false }: { load: typeof LOADS[0]; idx: number; onClick: () => void; refreshing?: boolean }) {
   const [hovered, setHovered] = useState(false);
+
+  if (refreshing) {
+    return (
+      <div className="relative overflow-hidden" style={{
+        background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.10)",
+        borderRadius: "12px", minHeight: "290px", display: "flex", flexDirection: "column",
+      }}>
+        {/* shimmer sweep */}
+        <div style={{
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: "linear-gradient(90deg, transparent 20%, rgba(255,255,255,0.07) 50%, transparent 80%)",
+          backgroundSize: "200% 100%", animation: "shimmerSweep 1.1s ease-in-out infinite",
+        }} />
+        {/* skeleton header */}
+        <div className="p-4 flex items-start gap-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+          <div style={{ width: 46, height: 64, borderRadius: 8, background: "rgba(255,255,255,0.08)" }} />
+          <div style={{ flex: 1, paddingTop: 2 }}>
+            <div style={{ height: 11, width: "55%", borderRadius: 4, background: "rgba(255,255,255,0.08)", marginBottom: 8 }} />
+            <div style={{ height: 9,  width: "35%", borderRadius: 4, background: "rgba(255,255,255,0.05)" }} />
+          </div>
+          <div style={{ width: 64, paddingTop: 2 }}>
+            <div style={{ height: 18, width: "100%", borderRadius: 4, background: "rgba(255,255,255,0.09)", marginBottom: 7 }} />
+            <div style={{ height: 8,  width: "65%",  borderRadius: 4, background: "rgba(255,255,255,0.05)", marginLeft: "auto" }} />
+          </div>
+        </div>
+        {/* center loading text */}
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, padding: "20px 16px" }}>
+          <div style={{ width: 26, height: 26, borderRadius: "50%", border: "2.5px solid rgba(255,255,255,0.10)", borderTopColor: "#fc0b05", animation: "spin 0.75s linear infinite" }} />
+          <span style={{ color: "rgba(255,255,255,0.42)", fontSize: 11, fontWeight: 700, letterSpacing: "0.10em", textTransform: "uppercase" }}>New Job Loading</span>
+        </div>
+        {/* skeleton footer */}
+        <div style={{ padding: "0 16px 16px" }}>
+          <div style={{ height: 36, borderRadius: 8, background: "rgba(255,255,255,0.05)", marginBottom: 8 }} />
+          <div style={{ height: 3, borderRadius: 4, background: "rgba(255,255,255,0.05)" }} />
+        </div>
+      </div>
+    );
+  }
   const isHot   = load.status === "hot";
   const num     = String(idx + 1).padStart(2, "0");
   const perMile = (load.rate / load.miles).toFixed(2);
@@ -114,14 +146,19 @@ function LoadCard({ load, idx, onClick }: { load: typeof LOADS[0]; idx: number; 
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative text-left w-full transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl overflow-hidden"
-      style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.10)", borderRadius: "10px", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" }}>
+      style={{
+        background: hovered ? "rgba(255,255,255,0.13)" : "rgba(255,255,255,0.07)",
+        border: hovered ? "1px solid rgba(255,255,255,0.22)" : "1px solid rgba(255,255,255,0.10)",
+        borderRadius: "12px",
+        boxShadow: hovered ? "0 6px 20px rgba(0,0,0,0.35)" : "0 2px 8px rgba(0,0,0,0.2)",
+        transition: "all 0.18s ease",
+      }}>
 
       {/* Hover sign-in overlay — slides in from left */}
       <div style={{
-        position: "absolute", inset: 0, borderRadius: "10px", zIndex: 10,
-        background: "rgba(255,255,255,0.06)",
-        backdropFilter: "none", WebkitBackdropFilter: "none",
-        border: "1px solid rgba(255,255,255,0.12)",
+        position: "absolute", inset: 0, borderRadius: "12px", zIndex: 10,
+        background: "rgba(255,255,255,0.07)",
+        border: "1px solid rgba(255,255,255,0.15)",
         transform: hovered ? "translateX(0)" : "translateX(-100%)",
         transition: "transform 0.32s cubic-bezier(0.23,1,0.32,1)",
         display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
@@ -236,6 +273,15 @@ export default function LoadBoardPage() {
   const [activeType, setActiveType] = useState("all");
   const [viewMode, setViewMode]     = useState<"list" | "map">("list");
   const [hideList, setHideList]     = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRefreshing(true);
+      setTimeout(() => setRefreshing(false), 3000);
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
 
   const filtered = LOADS.filter(l => {
     const modeOk = activeMode === "all"
@@ -248,6 +294,16 @@ export default function LoadBoardPage() {
 
   return (
     <div style={{ position: "relative", background: "#08192b", overflow: "hidden" }}>
+      <style>{`
+        @keyframes shimmerSweep {
+          0%   { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+      `}</style>
       {/* Full-page background video */}
       <video
         autoPlay muted loop playsInline
@@ -270,6 +326,7 @@ export default function LoadBoardPage() {
             WebkitBackdropFilter: "blur(24px)",
             border: "1px solid rgba(252,11,5,0.30)",
             boxShadow: "0 25px 50px rgba(0,0,0,0.5)",
+            borderTop: "1px solid rgba(255,255,255,0.13)",
           }}>
 
             {/* Glass header */}
@@ -306,27 +363,6 @@ export default function LoadBoardPage() {
 
             {/* Pill filter bar */}
             <div className="px-4 py-3 flex items-center gap-1.5 flex-wrap" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-              {/* Type pills */}
-              {[
-                { key: "all",  label: "All Types",   icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> },
-                { key: "dry",  label: "Dry",          icon: <DryIcon size={14} /> },
-                { key: "cool", label: "Reefer",        icon: <CoolIcon size={14} /> },
-                { key: "flat", label: "Flatbed",       icon: <FlatIcon size={14} /> },
-                { key: "ow",   label: "Overweight",    icon: <OWIcon size={14} /> },
-              ].map(t => (
-                <button key={t.key} onClick={() => setActiveType(t.key)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold rounded-lg transition-all"
-                  style={{
-                    background: activeType === t.key ? "#fc0b05" : "rgba(255,255,255,0.06)",
-                    color:      activeType === t.key ? "#fff"    : "rgba(255,255,255,0.55)",
-                    border:     activeType === t.key ? "1px solid rgba(252,11,5,0.0)" : "1px solid rgba(255,255,255,0.1)",
-                  }}>
-                  {t.icon}{t.label}
-                </button>
-              ))}
-
-              <div style={{ width: 1, height: 26, background: "rgba(255,255,255,0.13)", margin: "0 4px", flexShrink: 0 }} />
-
               {/* Mode pills */}
               {[
                 { key: "all",         label: "All Modes",  icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> },
@@ -340,6 +376,27 @@ export default function LoadBoardPage() {
                     background: activeMode === t.key ? "#3b82f6" : "rgba(255,255,255,0.06)",
                     color:      activeMode === t.key ? "#fff"    : "rgba(255,255,255,0.55)",
                     border:     activeMode === t.key ? "1px solid rgba(59,130,246,0.0)" : "1px solid rgba(255,255,255,0.1)",
+                  }}>
+                  {t.icon}{t.label}
+                </button>
+              ))}
+
+              <div style={{ width: 1, height: 26, background: "rgba(255,255,255,0.13)", margin: "0 4px", flexShrink: 0 }} />
+
+              {/* Type pills */}
+              {[
+                { key: "all",  label: "All Types",   icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> },
+                { key: "dry",  label: "Dry",          icon: <DryIcon size={14} /> },
+                { key: "cool", label: "Reefer",        icon: <CoolIcon size={14} /> },
+                { key: "flat", label: "Flatrack",       icon: <FlatIcon size={14} /> },
+                { key: "ow",   label: "Overweight",    icon: <OWIcon size={14} /> },
+              ].map(t => (
+                <button key={t.key} onClick={() => setActiveType(t.key)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-semibold rounded-lg transition-all"
+                  style={{
+                    background: activeType === t.key ? "#fc0b05" : "rgba(255,255,255,0.06)",
+                    color:      activeType === t.key ? "#fff"    : "rgba(255,255,255,0.55)",
+                    border:     activeType === t.key ? "1px solid rgba(252,11,5,0.0)" : "1px solid rgba(255,255,255,0.1)",
                   }}>
                   {t.icon}{t.label}
                 </button>
@@ -366,7 +423,7 @@ export default function LoadBoardPage() {
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {filtered.slice(0, 8).map((load, idx) => (
-                      <LoadCard key={load.id} load={load} idx={idx} onClick={() => setShowDialog(true)} />
+                      <LoadCard key={load.id} load={load} idx={idx} onClick={() => setShowDialog(true)} refreshing={refreshing} />
                     ))}
                   </div>
                 )}
@@ -375,7 +432,7 @@ export default function LoadBoardPage() {
 
             {/* Footer bar */}
             <div className="px-6 py-4 flex items-center justify-between" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-              <span className="text-[12px] text-white/30">{filtered.length} loads · updates every 60s</span>
+              <span className="text-[12px] text-white/30">{filtered.length} loads · updates every 8s</span>
               <button onClick={() => setShowDialog(true)} className="text-[12px] font-semibold transition hover:opacity-80" style={{ color: "#fc0b05" }}>
                 + Post a Load
               </button>

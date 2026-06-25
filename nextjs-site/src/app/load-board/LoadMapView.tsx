@@ -39,30 +39,18 @@ const LOAD_COORDS: Record<string, [number, number]> = {
 };
 
 const BASE_CLUSTERS = [
-  { id: 0,  lat: 45.52, lng: -122.68, base: 6  },
-  { id: 1,  lat: 37.77, lng: -122.42, base: 28 },
-  { id: 2,  lat: 32.72, lng: -117.16, base: 15 },
-  { id: 3,  lat: 33.45, lng: -112.07, base: 4  },
-  { id: 4,  lat: 39.74, lng: -104.99, base: 12 },
-  { id: 5,  lat: 40.76, lng: -111.89, base: 5  },
-  { id: 6,  lat: 44.98, lng: -93.27,  base: 23 },
-  { id: 7,  lat: 39.10, lng: -94.58,  base: 18 },
-  { id: 8,  lat: 38.63, lng: -90.20,  base: 11 },
-  { id: 9,  lat: 35.15, lng: -90.05,  base: 9  },
-  { id: 10, lat: 33.75, lng: -84.39,  base: 19 },
-  { id: 11, lat: 42.33, lng: -83.05,  base: 14 },
-  { id: 12, lat: 41.50, lng: -81.69,  base: 8  },
-  { id: 13, lat: 39.95, lng: -75.17,  base: 22 },
-  { id: 14, lat: 42.36, lng: -71.06,  base: 16 },
-  { id: 15, lat: 35.23, lng: -80.84,  base: 7  },
-  { id: 16, lat: 29.95, lng: -90.07,  base: 13 },
-  { id: 17, lat: 43.05, lng: -76.15,  base: 3  },
-  { id: 18, lat: 30.33, lng: -81.66,  base: 8  },
-  { id: 19, lat: 44.52, lng: -88.01,  base: 5  },
-  { id: 20, lat: 36.17, lng: -86.78,  base: 10 },
-  { id: 21, lat: 35.46, lng: -97.52,  base: 6  },
-  { id: 22, lat: 30.07, lng: -99.14,  base: 4  },
-  { id: 23, lat: 31.55, lng: -97.15,  base: 7  },
+  { id: 0,  lat: 41.85, lng: -87.65,  base: 24 },  // Chicago
+  { id: 1,  lat: 44.98, lng: -93.27,  base: 18 },  // Minneapolis
+  { id: 2,  lat: 39.74, lng: -104.99, base: 9  },  // Denver
+  { id: 3,  lat: 39.10, lng: -94.58,  base: 14 },  // Kansas City
+  { id: 4,  lat: 38.63, lng: -90.20,  base: 8  },  // St. Louis
+  { id: 5,  lat: 35.15, lng: -90.05,  base: 7  },  // Memphis
+  { id: 6,  lat: 33.75, lng: -84.39,  base: 15 },  // Atlanta
+  { id: 7,  lat: 42.33, lng: -83.05,  base: 11 },  // Detroit
+  { id: 8,  lat: 40.76, lng: -111.89, base: 5  },  // Salt Lake City
+  { id: 9,  lat: 35.46, lng: -97.52,  base: 6  },  // Oklahoma City
+  { id: 10, lat: 36.17, lng: -86.78,  base: 8  },  // Nashville
+  { id: 11, lat: 32.78, lng: -96.80,  base: 12 },  // Dallas
 ];
 
 /* pre-compute cluster SVG positions once */
@@ -70,6 +58,29 @@ const CLUSTER_PTS = BASE_CLUSTERS.map(c => {
   const pt = proj([c.lng, c.lat]);
   return pt ? { id: c.id, x: pt[0], y: pt[1], base: c.base } : null;
 }).filter(Boolean) as { id: number; x: number; y: number; base: number }[];
+
+const PORT_TERMINALS = [
+  { name: "Long Beach",   abbr: "LB",  lat: 33.73,  lng: -118.27 },
+  { name: "New York",     abbr: "NY",  lat: 40.64,  lng: -74.15  },
+  { name: "Savannah",     abbr: "SAV", lat: 31.98,  lng: -81.10  },
+  { name: "Houston",      abbr: "HOU", lat: 29.73,  lng: -95.27  },
+  { name: "Tacoma",       abbr: "TAC", lat: 47.25,  lng: -122.44 },
+  { name: "Charleston",   abbr: "CHS", lat: 32.79,  lng: -79.95  },
+  { name: "Norfolk",      abbr: "NOR", lat: 36.92,  lng: -76.30  },
+  { name: "Baltimore",    abbr: "BAL", lat: 39.27,  lng: -76.58  },
+  { name: "Miami",        abbr: "MIA", lat: 25.77,  lng: -80.17  },
+  { name: "Oakland",      abbr: "OAK", lat: 37.80,  lng: -122.27 },
+  { name: "New Orleans",  abbr: "NOL", lat: 29.95,  lng: -90.07  },
+  { name: "Jacksonville", abbr: "JAX", lat: 30.33,  lng: -81.66  },
+  { name: "Wilmington",   abbr: "WIL", lat: 39.73,  lng: -75.55  },
+  { name: "Boston",       abbr: "BOS", lat: 42.36,  lng: -71.06  },
+  { name: "Tampa",        abbr: "TPA", lat: 27.95,  lng: -82.46  },
+];
+
+const PORT_PTS = PORT_TERMINALS.map(p => {
+  const pt = proj([p.lng, p.lat]);
+  return pt ? { name: p.name, abbr: p.abbr, x: pt[0], y: pt[1] } : null;
+}).filter(Boolean) as { name: string; abbr: string; x: number; y: number }[];
 
 type ClusterState = { id: number; count: number; opacity: number };
 
@@ -207,8 +218,8 @@ export default function LoadMapView({ loads, onMarkerClick, fillHeight }: Props)
           );
         })}
 
-        {/* Active load markers */}
-        {markers.map((m, i) => {
+        {/* Active load markers — skip any that sit on a port terminal */}
+        {markers.filter(m => !PORT_PTS.some(pt => Math.hypot(m.x - pt.x, m.y - pt.y) < 26)).map((m, i) => {
           const count = m.ids.length;
           const r = count > 1 ? 19 : 16;
           const color = markerColor(m.loads);
@@ -223,6 +234,20 @@ export default function LoadMapView({ loads, onMarkerClick, fillHeight }: Props)
             </g>
           );
         })}
+
+        {/* Port terminal markers — orange circles with terminal icon, rendered last */}
+        {PORT_PTS.map((p, i) => (
+          <g key={`port-${i}`}>
+            <circle cx={p.x} cy={p.y} r={16} fill="rgba(249,115,22,0.07)" />
+            <circle cx={p.x} cy={p.y} r={12} fill="rgba(249,115,22,0.18)" stroke="#f97316" strokeWidth={1.4} />
+            <text x={p.x} y={p.y} textAnchor="middle" dominantBaseline="central"
+              fill="#fdba74" fontSize="8" fontWeight="800"
+              fontFamily="system-ui,-apple-system,sans-serif">{p.abbr}</text>
+            <text x={p.x} y={p.y + 20} textAnchor="middle"
+              fill="rgba(253,186,116,0.88)" fontSize="8" fontWeight="700"
+              fontFamily="system-ui,-apple-system,sans-serif">{p.name}</text>
+          </g>
+        ))}
       </svg>
 
       <div style={{
