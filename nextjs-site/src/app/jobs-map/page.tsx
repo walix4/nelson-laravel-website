@@ -181,14 +181,24 @@ function BookingDialog({ load, onClose }: { load: LoadItem | null; onClose: () =
 
             {/* Stats grid — transparent cells, dividers only */}
             <div className="grid grid-cols-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-              {[{ label: "Rate", value: `$${load.rate.toLocaleString()}` }, { label: "$/Mile", value: `$${perMile}` }, { label: "Miles", value: `${load.miles} mi` }, { label: "Available", value: load.avail }].map((s, i) => (
+              {[{ label: "Rate", value: `$${load.rate.toLocaleString()}`, locked: true }, { label: "$/Mile", value: `$${perMile}`, locked: true }, { label: "Miles", value: `${load.miles} mi`, locked: false }, { label: "Available", value: load.avail, locked: false }].map((s, i) => (
                 <div key={s.label} className="px-5 py-4"
                   style={{
                     borderRight: i % 2 === 0 ? "1px solid rgba(255,255,255,0.08)" : "none",
                     borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.08)" : "none",
                   }}>
                   <div className="text-[11px] text-white/35 uppercase tracking-widest mb-1">{s.label}</div>
-                  <div className="text-white font-bold text-[18px]">{s.value}</div>
+                  {s.locked ? (
+                    <div style={{ position: "relative", display: "inline-flex", alignItems: "center", gap: 4 }}>
+                      <div className="text-white font-bold text-[18px]" style={{ filter: "blur(7px)", userSelect: "none" }}>{s.value}</div>
+                      <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: 3 }}>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="#ffffff"/><path d="M8 11V7a4 4 0 018 0v4" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"/></svg>
+                        <span style={{ fontSize: 11, color: "#ffffff", fontWeight: 800 }}>Login to see price</span>
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="text-white font-bold text-[18px]">{s.value}</div>
+                  )}
                 </div>
               ))}
             </div>
@@ -405,9 +415,21 @@ function LoadRow({ load, onClick, isNew }: { load: LoadItem; onClick: () => void
           <div className="text-white font-semibold text-[13px] leading-tight truncate">{load.origin}</div>
           <div className="text-white/45 text-[11px] mt-0.5 truncate">→ {load.dest}</div>
         </div>
-        <div className="text-right shrink-0">
-          <div className="text-white font-bold text-[15px]">${load.rate.toLocaleString()}</div>
-          <div className="text-white/30 text-[10px]">${perMile}/mi</div>
+        <div className="text-right shrink-0" style={{ position: "relative" }}>
+          <div style={{ filter: "blur(6px)", userSelect: "none", pointerEvents: "none" }}>
+            <div className="text-white font-bold text-[15px]">${load.rate.toLocaleString()}</div>
+            <div className="text-white/30 text-[10px]">${perMile}/mi</div>
+          </div>
+          <div style={{
+            position: "absolute", inset: 0, display: "flex", flexDirection: "column",
+            alignItems: "center", justifyContent: "center", gap: 1,
+          }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <rect x="5" y="11" width="14" height="10" rx="2" fill="#ffffff"/>
+              <path d="M8 11V7a4 4 0 018 0v4" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            <span style={{ fontSize: 9, color: "#ffffff", fontWeight: 800, letterSpacing: "0.02em", whiteSpace: "nowrap" }}>Login to see price</span>
+          </div>
         </div>
       </div>
 
