@@ -136,6 +136,7 @@ function BookingDialog({ load, onClose }: { load: LoadItem | null; onClose: () =
   if (!load) return null;
   const perMile = (load.rate / load.miles).toFixed(2);
   const chip = TYPE_CHIP[load.type];
+  const lockColor = load.status === "hot" ? "#ffffff" : "#4ade80";
 
   return (
     <div
@@ -165,8 +166,8 @@ function BookingDialog({ load, onClose }: { load: LoadItem | null; onClose: () =
                   <span className="text-[11px] font-bold tracking-widest text-white/40 uppercase">Load</span>
                   <span className="text-[12px] font-bold text-white/60">{load.id}</span>
                   {chip && (
-                    <span className="flex items-center gap-1 text-[11px] font-semibold px-1.5 py-0.5 rounded-full"
-                      style={{ background: `${chip.color}22`, color: chip.color }}>
+                    <span className="flex items-center gap-1 text-[11px] font-semibold px-1.5 py-0.5"
+                      style={{ borderRadius: 2, background: `${chip.color}22`, color: chip.color }}>
                       {chip.icon} {chip.label}
                     </span>
                   )}
@@ -192,8 +193,8 @@ function BookingDialog({ load, onClose }: { load: LoadItem | null; onClose: () =
                     <div style={{ position: "relative", display: "inline-flex", alignItems: "center", gap: 4 }}>
                       <div className="text-white font-bold text-[18px]" style={{ filter: "blur(7px)", userSelect: "none" }}>{s.value}</div>
                       <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: 3 }}>
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill="#ffffff"/><path d="M8 11V7a4 4 0 018 0v4" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"/></svg>
-                        <span style={{ fontSize: 11, color: "#ffffff", fontWeight: 800 }}>Login to see price</span>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" fill={lockColor}/><path d="M8 11V7a4 4 0 018 0v4" stroke={lockColor} strokeWidth="2" strokeLinecap="round"/></svg>
+                        <span style={{ fontSize: 11, color: lockColor, fontWeight: 800 }}>Price</span>
                       </span>
                     </div>
                   ) : (
@@ -381,13 +382,14 @@ function LoadRow({ load, onClick, isNew }: { load: LoadItem; onClick: () => void
   const [hovered, setHovered] = useState(false);
   const perMile = (load.rate / load.miles).toFixed(2);
   const chip = TYPE_CHIP[load.type];
+  const lockColor = load.status === "hot" ? "#ffffff" : "#4ade80";
 
   return (
     <button
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="w-full text-left rounded-xl px-4 py-3"
+      className="w-full text-left px-4 py-3"
       style={{
         background: hovered ? "rgba(255,255,255,0.13)" : "rgba(255,255,255,0.07)",
         border: hovered ? "1px solid rgba(255,255,255,0.22)" : "1px solid rgba(255,255,255,0.10)",
@@ -395,6 +397,7 @@ function LoadRow({ load, onClick, isNew }: { load: LoadItem; onClick: () => void
         transform: hovered ? "translateY(-1px)" : "translateY(0)",
         transition: "all 0.18s ease",
         cursor: "pointer",
+        borderRadius: 6,
         animation: isNew ? "slideInNew 0.4s ease" : undefined,
         marginBottom: 7,
         flexShrink: 0,
@@ -405,9 +408,15 @@ function LoadRow({ load, onClick, isNew }: { load: LoadItem; onClick: () => void
         <div className="min-w-0">
           <div className="flex items-center gap-1.5 mb-0.5">
             <span className="text-[10px] text-white/30 font-mono">{load.id}</span>
+            {chip && (
+              <span className="flex items-center gap-0.5 text-[9px] px-1.5 py-0.5 font-semibold shrink-0"
+                style={{ borderRadius: 2, background: `${chip.color}18`, color: chip.color }}>
+                {chip.icon} {chip.label}
+              </span>
+            )}
             {isNew && (
-              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full"
-                style={{ background: "rgba(74,222,128,0.20)", color: "#4ade80", letterSpacing: "0.08em" }}>
+              <span className="text-[9px] font-bold px-1.5 py-0.5"
+                style={{ borderRadius: 2, background: "rgba(74,222,128,0.20)", color: "#4ade80", letterSpacing: "0.08em" }}>
                 NEW
               </span>
             )}
@@ -425,38 +434,31 @@ function LoadRow({ load, onClick, isNew }: { load: LoadItem; onClick: () => void
             alignItems: "center", justifyContent: "center", gap: 1,
           }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <rect x="5" y="11" width="14" height="10" rx="2" fill="#ffffff"/>
-              <path d="M8 11V7a4 4 0 018 0v4" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"/>
+              <rect x="5" y="11" width="14" height="10" rx="2" fill={lockColor}/>
+              <path d="M8 11V7a4 4 0 018 0v4" stroke={lockColor} strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            <span style={{ fontSize: 9, color: "#ffffff", fontWeight: 800, letterSpacing: "0.02em", whiteSpace: "nowrap" }}>Login to see price</span>
+            <span style={{ fontSize: 9, color: lockColor, fontWeight: 800, letterSpacing: "0.02em", whiteSpace: "nowrap" }}>Price</span>
           </div>
         </div>
       </div>
 
-      {/* Bottom row: chips */}
-      <div className="flex items-center gap-1.5 flex-wrap">
-        {/* Type chip with icon */}
-        {chip && (
-          <span className="flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded-full font-semibold"
-            style={{ background: `${chip.color}18`, color: chip.color }}>
-            {chip.icon} {chip.label}
-          </span>
-        )}
-        <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
-          style={{ background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.45)" }}>
+      {/* Bottom row: chips — single row, no wrap */}
+      <div className="flex items-center gap-1.5 overflow-hidden">
+        <span className="text-[10px] px-1.5 py-0.5 font-medium shrink-0"
+          style={{ borderRadius: 2, background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.45)" }}>
           {load.mode}
         </span>
-        <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
-          style={{ background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.45)" }}>
+        <span className="text-[10px] px-1.5 py-0.5 font-medium shrink-0"
+          style={{ borderRadius: 2, background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.45)" }}>
           {load.miles} mi
         </span>
-        <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
-          style={{ background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.45)" }}>
-          {load.avail}
+        <span className="text-[10px] px-1.5 py-0.5 font-medium shrink-0"
+          style={{ borderRadius: 2, background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.45)" }}>
+          {load.weight}
         </span>
         {load.status === "hot" && (
-          <span className="text-[10px] px-1.5 py-0.5 rounded-full font-bold"
-            style={{ background: "rgba(252,11,5,0.18)", color: "#fc0b05" }}>
+          <span className="text-[10px] px-1.5 py-0.5 font-bold shrink-0 ml-auto"
+            style={{ borderRadius: 2, background: "rgba(252,11,5,0.18)", color: "#fc0b05" }}>
             🔥 HOT
           </span>
         )}
@@ -476,7 +478,7 @@ export default function JobsMapPage() {
 
   /* live feed state: rolling window of up to SIDEBAR_MAX + buffer loads */
   const [liveLoads, setLiveLoads] = useState<LoadItem[]>(BASE_LOADS.slice(0, SIDEBAR_MAX + 4));
-  const [newIds, setNewIds] = useState<Set<string>>(new Set());
+  const [newIds, setNewIds] = useState<Set<string>>(new Set(BASE_LOADS.slice(0, 4).map(l => l.id)));
   const [showSkeleton, setShowSkeleton] = useState(false);
   const poolIdxRef = useRef(0);
 

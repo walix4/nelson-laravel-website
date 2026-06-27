@@ -5,7 +5,7 @@ import { asset } from "@/lib/site";
 
 const PILLARS = [
   {
-    color: "#635bff", rgb: "99,91,255", label: "Draygo", num: "01",
+    color: "#fc0b05", rgb: "252,11,5", label: "Draygo", num: "01",
     logo: "/logo-draygo-white.png",
     sub: "AI dispatch & TMS",
     role: "The Brain",
@@ -13,7 +13,7 @@ const PILLARS = [
     bullets: ["Instant rate quotes", "AI dispatch assignment", "Compliance automation", "Real-time data events"],
   },
   {
-    color: "#27b30a", rgb: "39,179,10", label: "DrayChain", num: "02",
+    color: "#3b82f6", rgb: "59,130,246", label: "DrayChain", num: "02",
     logo: "/logo-draychain.png",
     sub: "Blockchain proof layer",
     role: "The Proof",
@@ -103,14 +103,27 @@ export default function AboutPage() {
           {/* photo side */}
           <div style={{ position: "relative" }}>
             <img
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80"
-              alt="Office team"
-              style={{ width: "100%", height: 500, objectFit: "cover", borderRadius: 20, boxShadow: "0 32px 80px rgba(10,22,40,0.15)", display: "block" }}
+              src="/about-mission.jpg"
+              alt="Global network"
+              style={{ width: "100%", height: 500, objectFit: "cover", borderRadius: 8, boxShadow: "0 32px 80px rgba(10,22,40,0.15)", display: "block" }}
             />
             {/* floating accent card */}
-            <div style={{ position: "absolute", bottom: -28, right: -28, background: "#fff", borderRadius: 16, padding: "20px 26px", boxShadow: "0 12px 40px rgba(10,22,40,0.15)", border: "1px solid #e8eaf0", minWidth: 210 }}>
-              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: "#94a3b8", marginBottom: 6 }}>Our Mission</div>
-              <div style={{ fontSize: 14, fontWeight: 700, color: "#0a1628", lineHeight: 1.45 }}>Transparent pay for every driver. Every time.</div>
+            <div style={{ position: "absolute", bottom: -28, right: -28, background: "#fff", borderRadius: 16, padding: "20px 26px", boxShadow: "0 12px 40px rgba(10,22,40,0.15)", border: "1px solid #e8eaf0", minWidth: 220 }}>
+              <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" as const, color: "#94a3b8", marginBottom: 10 }}>2026 Drayage Activity</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", gap: 16 }}>
+                  <span style={{ fontSize: 12, color: "#4a5568" }}>Import Containers</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: "#0a1628" }}>3,500</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", gap: 16 }}>
+                  <span style={{ fontSize: 12, color: "#4a5568" }}>Export Containers</span>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: "#0a1628" }}>1,500</span>
+                </div>
+                <div style={{ borderTop: "1px solid #e8eaf0", marginTop: 4, paddingTop: 8, display: "flex", justifyContent: "space-between", gap: 16 }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: "#0a1628" }}>Total Containers</span>
+                  <span style={{ fontSize: 12, fontWeight: 800, color: "#fc0b05" }}>5,000+</span>
+                </div>
+              </div>
             </div>
           </div>
 

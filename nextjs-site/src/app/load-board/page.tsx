@@ -6,33 +6,33 @@ import Footer from "@/components/Footer";
 import LoadMapView from "./LoadMapView";
 
 const LOADS = [
-  { id: "DG-4821", mode: "Drayage",    origin: "LA/Long Beach",  terminal: "APM Terminal",   dest: "Ontario, CA",      container: "40' HC",  miles: 58,  weight: "42K", rate: 1850, avail: "Today",    status: "hot",       type: "dry" },
-  { id: "DG-4822", mode: "Drayage",    origin: "NY/NJ Port",     terminal: "Maher Terminal", dest: "Newark, NJ",       container: "20' Std", miles: 12,  weight: "28K", rate: 650,  avail: "Today",    status: "available", type: "dry" },
-  { id: "DG-4823", mode: "Intermodal", origin: "Savannah, GA",   terminal: "GPA Garden City",dest: "Atlanta, GA",      container: "40' Std", miles: 246, weight: "35K", rate: 2200, avail: "Tomorrow", status: "available", type: "dry" },
-  { id: "DG-4824", mode: "Drayage",    origin: "Houston, TX",    terminal: "Bayport Term.",  dest: "Pasadena, TX",     container: "45' HC",  miles: 34,  weight: "44K", rate: 1100, avail: "Today",    status: "available", type: "hazmat" },
-  { id: "DG-4825", mode: "Port→Port",  origin: "Seattle, WA",    terminal: "SSA T-18",       dest: "Tacoma, WA",       container: "20' Rfr", miles: 28,  weight: "18K", rate: 980,  avail: "Today",    status: "hot",       type: "reefer" },
-  { id: "DG-4826", mode: "Drayage",    origin: "Miami, FL",      terminal: "PortMiami D",    dest: "Medley, FL",       container: "40' HC",  miles: 22,  weight: "38K", rate: 875,  avail: "Tomorrow", status: "available", type: "dry" },
-  { id: "DG-4827", mode: "Intermodal", origin: "Chicago, IL",    terminal: "BNSF Alliance",  dest: "Indianapolis, IN", container: "53' Std", miles: 184, weight: "41K", rate: 1750, avail: "Jun 17",   status: "available", type: "urgent" },
-  { id: "DG-4828", mode: "Drayage",    origin: "Norfolk, VA",    terminal: "NIT Terminal",   dest: "Richmond, VA",     container: "40' Std", miles: 95,  weight: "30K", rate: 1200, avail: "Today",    status: "hot",       type: "hot_load" },
-  { id: "DG-4829", mode: "Drayage",    origin: "Baltimore, MD",  terminal: "Seagirt Marine", dest: "Frederick, MD",    container: "20' Std", miles: 62,  weight: "22K", rate: 890,  avail: "Tomorrow", status: "available", type: "reefer" },
-  { id: "DG-4830", mode: "Port→Port",  origin: "LA/LB — TTI",   terminal: "TTI Terminal",   dest: "LA/LB — Trapac",   container: "40' HC",  miles: 8,   weight: "36K", rate: 420,  avail: "Today",    status: "available", type: "flat" },
-  { id: "DG-4831", mode: "Intermodal", origin: "Dallas, TX",     terminal: "BNSF Alliance",  dest: "Memphis, TN",      container: "40' Std", miles: 468, weight: "32K", rate: 3100, avail: "Jun 17",   status: "available", type: "urgent" },
-  { id: "DG-4832", mode: "Drayage",    origin: "Charleston, SC", terminal: "Wando Welch",    dest: "Greenville, SC",   container: "45' HC",  miles: 218, weight: "43K", rate: 2400, avail: "Tomorrow", status: "hot",       type: "hot_load" },
+  { id: "DG-4821", mode: "Drayage",    origin: "LA/Long Beach",  terminal: "APM Terminal",   dest: "Ontario, CA",      container: "40' HC",  miles: 58,  weight: "42K", rate: 1850, avail: "Today",    status: "hot",       type: "dry",      pickupTime: "07:00 AM", dropoffTime: "10:30 AM", fsc: "19.5%" },
+  { id: "DG-4822", mode: "Drayage",    origin: "NY/NJ Port",     terminal: "Maher Terminal", dest: "Newark, NJ",       container: "20' Std", miles: 12,  weight: "28K", rate: 650,  avail: "Today",    status: "available", type: "dry",      pickupTime: "09:00 AM", dropoffTime: "11:00 AM", fsc: "17.2%" },
+  { id: "DG-4823", mode: "Intermodal", origin: "Savannah, GA",   terminal: "GPA Garden City",dest: "Atlanta, GA",      container: "40' Std", miles: 246, weight: "35K", rate: 2200, avail: "Tomorrow", status: "available", type: "dry",      pickupTime: "06:30 AM", dropoffTime: "02:00 PM", fsc: "21.0%" },
+  { id: "DG-4824", mode: "Drayage",    origin: "Houston, TX",    terminal: "Bayport Term.",  dest: "Pasadena, TX",     container: "45' HC",  miles: 34,  weight: "44K", rate: 1100, avail: "Today",    status: "available", type: "hazmat",   pickupTime: "10:00 AM", dropoffTime: "12:30 PM", fsc: "18.8%" },
+  { id: "DG-4825", mode: "Port→Port",  origin: "Seattle, WA",    terminal: "SSA T-18",       dest: "Tacoma, WA",       container: "20' Rfr", miles: 28,  weight: "18K", rate: 980,  avail: "Today",    status: "hot",       type: "reefer",   pickupTime: "08:00 AM", dropoffTime: "10:00 AM", fsc: "22.3%" },
+  { id: "DG-4826", mode: "Drayage",    origin: "Miami, FL",      terminal: "PortMiami D",    dest: "Medley, FL",       container: "40' HC",  miles: 22,  weight: "38K", rate: 875,  avail: "Tomorrow", status: "available", type: "dry",      pickupTime: "07:30 AM", dropoffTime: "09:30 AM", fsc: "16.5%" },
+  { id: "DG-4827", mode: "Intermodal", origin: "Chicago, IL",    terminal: "BNSF Alliance",  dest: "Indianapolis, IN", container: "53' Std", miles: 184, weight: "41K", rate: 1750, avail: "Jun 17",   status: "available", type: "urgent",   pickupTime: "05:00 AM", dropoffTime: "01:00 PM", fsc: "20.1%" },
+  { id: "DG-4828", mode: "Drayage",    origin: "Norfolk, VA",    terminal: "NIT Terminal",   dest: "Richmond, VA",     container: "40' Std", miles: 95,  weight: "30K", rate: 1200, avail: "Today",    status: "hot",       type: "hot_load", pickupTime: "06:00 AM", dropoffTime: "09:30 AM", fsc: "23.7%" },
+  { id: "DG-4829", mode: "Drayage",    origin: "Baltimore, MD",  terminal: "Seagirt Marine", dest: "Frederick, MD",    container: "20' Std", miles: 62,  weight: "22K", rate: 890,  avail: "Tomorrow", status: "available", type: "reefer",   pickupTime: "08:30 AM", dropoffTime: "11:00 AM", fsc: "18.0%" },
+  { id: "DG-4830", mode: "Port→Port",  origin: "LA/LB — TTI",   terminal: "TTI Terminal",   dest: "LA/LB — Trapac",   container: "40' HC",  miles: 8,   weight: "36K", rate: 420,  avail: "Today",    status: "available", type: "flat",     pickupTime: "11:00 AM", dropoffTime: "12:00 PM", fsc: "15.9%" },
+  { id: "DG-4831", mode: "Intermodal", origin: "Dallas, TX",     terminal: "BNSF Alliance",  dest: "Memphis, TN",      container: "40' Std", miles: 468, weight: "32K", rate: 3100, avail: "Jun 17",   status: "available", type: "urgent",   pickupTime: "04:00 AM", dropoffTime: "03:00 PM", fsc: "21.8%" },
+  { id: "DG-4832", mode: "Drayage",    origin: "Charleston, SC", terminal: "Wando Welch",    dest: "Greenville, SC",   container: "45' HC",  miles: 218, weight: "43K", rate: 2400, avail: "Tomorrow", status: "hot",       type: "hot_load", pickupTime: "07:00 AM", dropoffTime: "01:30 PM", fsc: "24.5%" },
 ];
 
 const LIVE_POOL = [
-  { id: "DG-4833", mode: "Drayage",    origin: "Boston, MA",     terminal: "Conley Term.",   dest: "Worcester, MA",    container: "40' HC",  miles: 45,  weight: "34K", rate: 1300, avail: "Today",    status: "hot",       type: "dry" },
-  { id: "DG-4834", mode: "Intermodal", origin: "Portland, OR",   terminal: "Terminal 6",     dest: "Eugene, OR",       container: "40' Std", miles: 113, weight: "29K", rate: 1650, avail: "Tomorrow", status: "available", type: "reefer" },
-  { id: "DG-4835", mode: "Drayage",    origin: "Tampa, FL",      terminal: "Port Tampa",     dest: "Orlando, FL",      container: "20' Std", miles: 78,  weight: "25K", rate: 960,  avail: "Today",    status: "available", type: "hazmat" },
-  { id: "DG-4836", mode: "Port→Port",  origin: "Tacoma, WA",     terminal: "T-4 Terminal",   dest: "Seattle, WA",      container: "45' HC",  miles: 31,  weight: "40K", rate: 780,  avail: "Today",    status: "hot",       type: "flat" },
-  { id: "DG-4837", mode: "Drayage",    origin: "Oakland, CA",    terminal: "Outer Harbor",   dest: "Stockton, CA",     container: "40' HC",  miles: 82,  weight: "37K", rate: 1450, avail: "Tomorrow", status: "available", type: "reefer" },
-  { id: "DG-4838", mode: "Intermodal", origin: "Detroit, MI",    terminal: "Conrail Yard",   dest: "Columbus, OH",     container: "53' Std", miles: 165, weight: "44K", rate: 2100, avail: "Jun 27",   status: "available", type: "urgent" },
-  { id: "DG-4839", mode: "Drayage",    origin: "San Diego, CA",  terminal: "National City",  dest: "Los Angeles, CA",  container: "20' Rfr", miles: 118, weight: "18K", rate: 1580, avail: "Today",    status: "hot",       type: "hot_load" },
-  { id: "DG-4840", mode: "Drayage",    origin: "Wilmington, DE", terminal: "Port of Wilm.",  dest: "Philadelphia, PA", container: "40' Std", miles: 28,  weight: "31K", rate: 740,  avail: "Tomorrow", status: "available", type: "dry" },
-  { id: "DG-4841", mode: "Drayage",    origin: "Philadelphia, PA",terminal: "PhilaPORT",     dest: "Allentown, PA",    container: "40' HC",  miles: 59,  weight: "39K", rate: 1090, avail: "Today",    status: "available", type: "dry" },
-  { id: "DG-4842", mode: "Intermodal", origin: "Kansas City, MO",terminal: "BNSF Intermodal",dest: "Wichita, KS",      container: "53' Std", miles: 202, weight: "38K", rate: 2350, avail: "Jun 27",   status: "available", type: "urgent" },
-  { id: "DG-4843", mode: "Drayage",    origin: "New Orleans, LA",terminal: "ICTSI Louisiana",dest: "Baton Rouge, LA",  container: "40' HC",  miles: 81,  weight: "42K", rate: 1480, avail: "Today",    status: "hot",       type: "dry" },
-  { id: "DG-4844", mode: "Port→Port",  origin: "Long Beach, CA", terminal: "Pier J",         dest: "LA/LB — Yusen",   container: "40' Std", miles: 5,   weight: "33K", rate: 310,  avail: "Today",    status: "available", type: "flat" },
+  { id: "DG-4833", mode: "Drayage",    origin: "Boston, MA",     terminal: "Conley Term.",   dest: "Worcester, MA",    container: "40' HC",  miles: 45,  weight: "34K", rate: 1300, avail: "Today",    status: "hot",       type: "dry",      pickupTime: "08:00 AM", dropoffTime: "10:30 AM", fsc: "20.4%" },
+  { id: "DG-4834", mode: "Intermodal", origin: "Portland, OR",   terminal: "Terminal 6",     dest: "Eugene, OR",       container: "40' Std", miles: 113, weight: "29K", rate: 1650, avail: "Tomorrow", status: "available", type: "reefer",   pickupTime: "06:00 AM", dropoffTime: "10:00 AM", fsc: "17.8%" },
+  { id: "DG-4835", mode: "Drayage",    origin: "Tampa, FL",      terminal: "Port Tampa",     dest: "Orlando, FL",      container: "20' Std", miles: 78,  weight: "25K", rate: 960,  avail: "Today",    status: "available", type: "hazmat",   pickupTime: "09:30 AM", dropoffTime: "12:00 PM", fsc: "19.1%" },
+  { id: "DG-4836", mode: "Port→Port",  origin: "Tacoma, WA",     terminal: "T-4 Terminal",   dest: "Seattle, WA",      container: "45' HC",  miles: 31,  weight: "40K", rate: 780,  avail: "Today",    status: "hot",       type: "flat",     pickupTime: "07:00 AM", dropoffTime: "09:00 AM", fsc: "22.0%" },
+  { id: "DG-4837", mode: "Drayage",    origin: "Oakland, CA",    terminal: "Outer Harbor",   dest: "Stockton, CA",     container: "40' HC",  miles: 82,  weight: "37K", rate: 1450, avail: "Tomorrow", status: "available", type: "reefer",   pickupTime: "10:00 AM", dropoffTime: "01:30 PM", fsc: "18.5%" },
+  { id: "DG-4838", mode: "Intermodal", origin: "Detroit, MI",    terminal: "Conrail Yard",   dest: "Columbus, OH",     container: "53' Std", miles: 165, weight: "44K", rate: 2100, avail: "Jun 27",   status: "available", type: "urgent",   pickupTime: "05:30 AM", dropoffTime: "11:00 AM", fsc: "21.3%" },
+  { id: "DG-4839", mode: "Drayage",    origin: "San Diego, CA",  terminal: "National City",  dest: "Los Angeles, CA",  container: "20' Rfr", miles: 118, weight: "18K", rate: 1580, avail: "Today",    status: "hot",       type: "hot_load", pickupTime: "06:30 AM", dropoffTime: "10:30 AM", fsc: "24.2%" },
+  { id: "DG-4840", mode: "Drayage",    origin: "Wilmington, DE", terminal: "Port of Wilm.",  dest: "Philadelphia, PA", container: "40' Std", miles: 28,  weight: "31K", rate: 740,  avail: "Tomorrow", status: "available", type: "dry",      pickupTime: "08:00 AM", dropoffTime: "09:30 AM", fsc: "16.7%" },
+  { id: "DG-4841", mode: "Drayage",    origin: "Philadelphia, PA",terminal: "PhilaPORT",     dest: "Allentown, PA",    container: "40' HC",  miles: 59,  weight: "39K", rate: 1090, avail: "Today",    status: "available", type: "dry",      pickupTime: "09:00 AM", dropoffTime: "11:30 AM", fsc: "18.9%" },
+  { id: "DG-4842", mode: "Intermodal", origin: "Kansas City, MO",terminal: "BNSF Intermodal",dest: "Wichita, KS",      container: "53' Std", miles: 202, weight: "38K", rate: 2350, avail: "Jun 27",   status: "available", type: "urgent",   pickupTime: "04:30 AM", dropoffTime: "12:00 PM", fsc: "20.6%" },
+  { id: "DG-4843", mode: "Drayage",    origin: "New Orleans, LA",terminal: "ICTSI Louisiana",dest: "Baton Rouge, LA",  container: "40' HC",  miles: 81,  weight: "42K", rate: 1480, avail: "Today",    status: "hot",       type: "dry",      pickupTime: "07:30 AM", dropoffTime: "10:30 AM", fsc: "23.1%" },
+  { id: "DG-4844", mode: "Port→Port",  origin: "Long Beach, CA", terminal: "Pier J",         dest: "LA/LB — Yusen",   container: "40' Std", miles: 5,   weight: "33K", rate: 310,  avail: "Today",    status: "available", type: "flat",     pickupTime: "01:00 PM", dropoffTime: "02:00 PM", fsc: "15.5%" },
 ];
 
 const DryIcon = ({ size = 20 }: { size?: number }) => (
@@ -104,6 +104,14 @@ const WEATHER_POOL = [
   { temp: 91, label: "Humid",   icon: "🌤️" },
   { temp: 75, label: "Breezy",  icon: "🌬️" },
 ];
+
+function fmtAvail(avail: string): string {
+  const today = new Date();
+  const fmt = (d: Date) => d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  if (avail === "Today") return fmt(today);
+  if (avail === "Tomorrow") { const t = new Date(today); t.setDate(t.getDate() + 1); return fmt(t); }
+  return avail;
+}
 
 const TYPE_CHIP_LB: Record<string, { icon: React.ReactNode; label: string; color: string }> = {
   dry:      { label: "Dry",       color: "#facc15", icon: <DryIcon size={11} /> },
@@ -267,24 +275,21 @@ function LoadCard({ load, idx, onClick, refreshing = false, isNew = false }: { l
           <span className="display num text-[18px] font-extrabold leading-none text-white">{num}</span>
         </div>
         <div className="flex-1 min-w-0 pt-0.5">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 flex-wrap">
             <div className="text-[13px] font-bold text-white">{load.id}</div>
-            {isNew && <span className="text-[8px] font-bold px-1.5 py-0.5 shrink-0" style={{ borderRadius: 4, background: "rgba(74,222,128,0.20)", color: "#4ade80", letterSpacing: "0.08em" }}>NEW</span>}
+            {TYPE_CHIP_LB[load.type] && (() => { const c = TYPE_CHIP_LB[load.type]; return (
+              <span className="inline-flex items-center gap-0.5 text-[9px] font-semibold px-1.5 py-0.5 shrink-0" style={{ borderRadius: 2, background: `${c.color}20`, color: c.color }}>{c.icon}{c.label}</span>
+            ); })()}
+            {isNew && <span className="text-[8px] font-bold px-1.5 py-0.5 shrink-0" style={{ borderRadius: 2, background: "rgba(74,222,128,0.20)", color: "#4ade80", letterSpacing: "0.08em" }}>NEW</span>}
           </div>
           <div className="text-[11px] mt-0.5 font-medium" style={{ color: "#fc0b05" }}>{load.mode}</div>
-          {TYPE_CHIP_LB[load.type] && (() => { const c = TYPE_CHIP_LB[load.type]; return (
-            <div className="mt-1.5 flex items-center gap-1 flex-wrap">
-              <span className="inline-flex items-center gap-0.5 text-[9px] font-semibold px-1.5 py-0.5" style={{ borderRadius: 4, background: `${c.color}20`, color: c.color }}>{c.icon}{c.label}</span>
-              <span style={{ color: "rgba(255,255,255,0.20)", fontSize: 9 }}>/</span>
-              <span className="text-[9px] font-medium" style={{ color: "rgba(255,255,255,0.40)" }}>{load.mode}</span>
-              <span style={{ color: "rgba(255,255,255,0.20)", fontSize: 9 }}>/</span>
-              <span className="text-[9px] font-medium" style={{ color: "rgba(255,255,255,0.40)" }}>{load.miles} mi</span>
-              <span style={{ color: "rgba(255,255,255,0.20)", fontSize: 9 }}>/</span>
-              <span className="text-[9px] font-medium" style={{ color: "rgba(255,255,255,0.40)" }}>{load.avail}</span>
-            </div>
-          ); })()}
+          <div className="mt-1 flex items-center gap-1.5">
+            {isHot && (
+              <span className="text-[9px] font-bold px-1.5 py-0.5" style={{ borderRadius: 2, background: "rgba(252,11,5,0.18)", color: "#fc0b05" }}>🔥 HOT</span>
+            )}
+          </div>
         </div>
-        <div className="shrink-0 pt-0.5 flex flex-col items-end gap-1.5">
+        <div className="shrink-0 pt-0.5 flex flex-col items-center gap-1.5">
           <div style={{ position: "relative" }}>
             <div style={{ filter: "blur(6px)", userSelect: "none", pointerEvents: "none" }}>
               <div className="text-[18px] font-extrabold leading-none text-white">${load.rate.toLocaleString()}</div>
@@ -300,31 +305,35 @@ function LoadCard({ load, idx, onClick, refreshing = false, isNew = false }: { l
 
       {/* Route */}
       <div className="px-4 pt-3 pb-2">
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex items-start gap-2.5 flex-1 min-w-0">
-            <div className="shrink-0 mt-1"><div className="w-3 h-3 rounded-full" style={{ border: "2.5px solid #3b82f6", background: "#3b82f6" }} /></div>
-            <div className="min-w-0">
-              <div className="text-[13px] font-bold text-white truncate">{load.origin}</div>
-              <div className="text-[10px] text-white/40 mt-0.5">Pickup · {load.avail}</div>
+        <div className="flex gap-2">
+          {/* Left: route */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start gap-2.5">
+              <div className="shrink-0 mt-1"><div className="w-3 h-3 rounded-full" style={{ border: "2.5px solid #3b82f6", background: "#3b82f6" }} /></div>
+              <div className="min-w-0">
+                <div className="text-[13px] font-bold text-white truncate">{load.origin}</div>
+                <div className="text-[10px] text-white/40 mt-0.5">Pickup · {fmtAvail(load.avail)} · {load.pickupTime}</div>
+              </div>
+            </div>
+            <div style={{ marginLeft: "5px", height: "18px", borderLeft: "1.5px dashed rgba(255,255,255,0.22)" }} />
+            <div className="flex items-start gap-2.5">
+              <div className="shrink-0 mt-1"><div className="w-3 h-3 rounded-full" style={{ border: "2.5px solid #4ade80", background: "#4ade80" }} /></div>
+              <div className="min-w-0">
+                <div className="text-[13px] font-bold truncate" style={{ color: "#4ade80" }}>{load.dest}</div>
+                <div className="text-[10px] text-white/40 mt-0.5">Drop-off · {fmtAvail(load.avail)} · {load.dropoffTime}</div>
+              </div>
             </div>
           </div>
-          <div className="text-right shrink-0">
-            <div className="text-[8px] uppercase tracking-[0.14em] text-white/30 font-semibold">WEIGHT</div>
-            <div className="text-[11px] font-bold text-white">{load.weight}</div>
-          </div>
-        </div>
-        <div style={{ marginLeft: "5px", height: "22px", borderLeft: "1.5px dashed rgba(255,255,255,0.22)" }} />
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex items-start gap-2.5 flex-1 min-w-0">
-            <div className="shrink-0 mt-1"><div className="w-3 h-3 rounded-full" style={{ border: "2.5px solid #4ade80", background: "#4ade80" }} /></div>
-            <div className="min-w-0">
-              <div className="text-[13px] font-bold truncate" style={{ color: "#4ade80" }}>{load.dest}</div>
-              <div className="text-[10px] text-white/40 mt-0.5">Drop-off · {load.miles} mi</div>
+          {/* Right: $/MI top, FSURC bottom */}
+          <div className="shrink-0 flex flex-col justify-between text-right">
+            <div>
+              <div className="text-[8px] uppercase tracking-[0.14em] text-white/30 font-semibold">$/MI</div>
+              <div className="text-[11px] font-bold text-white">${perMile}</div>
             </div>
-          </div>
-          <div className="text-right shrink-0">
-            <div className="text-[8px] uppercase tracking-[0.14em] text-white/30 font-semibold">AVAIL</div>
-            <div className="text-[11px] font-bold text-white">{load.avail}</div>
+            <div>
+              <div className="text-[8px] uppercase tracking-[0.14em] text-white/30 font-semibold">FSURC</div>
+              <div className="text-[11px] font-bold text-white">{load.fsc}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -585,7 +594,7 @@ export default function LoadBoardPage() {
                 { key: "all",      label: "All Types",    icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> },
                 { key: "dry",      label: "Dry",          icon: <DryIcon size={14} /> },
                 { key: "reefer",   label: "Reefer",       icon: <ReeferIcon size={14} /> },
-                { key: "hot_load", label: "Hot Load",     icon: <HotIcon size={14} /> },
+                { key: "hot_load", label: "Hot Load",     icon: <span style={{ fontSize: 13, lineHeight: 1 }}>🔥</span> },
                 { key: "urgent",   label: "Urgent Load",  icon: <UrgentIcon size={14} /> },
                 { key: "hazmat",   label: "Hazmat",       icon: <HazmatIcon size={14} /> },
                 { key: "flat",     label: "Flat Rack",    icon: <FlatRackIcon size={14} /> },

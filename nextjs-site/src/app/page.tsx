@@ -75,10 +75,26 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* ── STATS BAR inside hero so video shows through ── */}
+        <div style={{ position: "relative", zIndex: 10, background: "rgba(255,255,255,0.06)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", borderTop: "1px solid rgba(255,255,255,0.12)" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }}>
+            {[
+              { val: "2026",   label: "Drayage Activity" },
+              { val: "3,847",  label: "Import Containers" },
+              { val: "1,293",  label: "Export Containers" },
+              { val: "5,140+", label: "Total Containers" },
+            ].map((s, i) => (
+              <div key={s.label} style={{ padding: "28px 0", paddingLeft: i === 0 ? 0 : 32, borderLeft: i === 0 ? "none" : "1px solid rgba(255,255,255,0.08)" }}>
+                <div style={{ fontSize: 40, fontWeight: 900, color: "#fff", lineHeight: 1, letterSpacing: "-0.02em" }}>{s.val}</div>
+                <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", marginTop: 8, textTransform: "uppercase", letterSpacing: "0.14em" }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── SECTION 1: INSTANT QUOTES ──────────────────────────────────── */}
-      <section style={{ background: "linear-gradient(180deg,#060f1e 0%,#070d1c 100%)", padding: "120px 24px", overflow: "hidden", position: "relative" }}>
+      <section style={{ background: "linear-gradient(180deg,#0a0d18 0%,#0b0e1a 100%)", padding: "120px 24px", overflow: "hidden", position: "relative" }}>
         <div style={{ position: "absolute", top: 0, right: 0, width: "55%", height: "100%", background: "radial-gradient(ellipse 80% 70% at 80% 40%, rgba(252,11,5,0.08) 0%, transparent 65%)", pointerEvents: "none" }} />
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center", position: "relative" }} className="home-2col">
           <div>
