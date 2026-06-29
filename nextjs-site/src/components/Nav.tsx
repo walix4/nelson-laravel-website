@@ -19,10 +19,10 @@ export default function Nav() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b" style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "blur(14px) saturate(160%)", WebkitBackdropFilter: "blur(14px) saturate(160%)", borderColor: "rgba(11,45,92,0.08)" }}>
+    <header className="sticky top-0 z-40 border-b overflow-hidden" style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "blur(14px) saturate(160%)", WebkitBackdropFilter: "blur(14px) saturate(160%)", borderColor: "rgba(11,45,92,0.08)" }}>
       <div className="max-w-[1280px] mx-auto px-6 h-[68px] flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
-          <img src={asset("/draypay-d-dark.png?v=1")} alt="" className="h-8 md:h-9 w-auto" />
+          <img src={asset("/draypay-d-dark.png?v=1")} alt="" className="h-8 md:h-9 w-auto" style={{ height: 32, width: "auto" }} />
           <span className="italic font-black text-[22px] md:text-[24px] tracking-tight leading-none text-[var(--navy)]" style={{ fontFamily: "'Roboto', sans-serif" }}>Dray<span className="text-[#00a2e7]">Pay</span></span>
         </Link>
         <nav className="hidden lg:flex items-center gap-7 text-[13.5px] font-medium text-[var(--navy)]/75">

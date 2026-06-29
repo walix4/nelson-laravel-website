@@ -148,7 +148,7 @@ export default function Home() {
                   <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] opacity-90">Download on the</span><span className="block text-[14px] font-semibold tracking-tight">App Store</span></span>
                 </a>
                 <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] w-full pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200">
-                  <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" />
+                  <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" style={{ height: 28, width: "auto" }} />
                   <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
                 </a>
               </div>
