@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
 import { asset } from "@/lib/site";
 import Nav from "@/components/Nav";
@@ -114,7 +115,25 @@ const FEATURES = [
   { label: "Mobile-first apps", desc: "iOS and Android apps built for the road — offline-capable, fast, always up to date.", icon: '<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>' },
 ];
 
+const FAQS = [
+  { q: "Is DrayGo free to use for shippers?", a: "Yes — shippers get free access to instant rate quotes, container tracking and port appointment scheduling. No credit card required." },
+  { q: "How does instant drayage pricing work?", a: "DrayGo pulls live diesel index, port congestion, chassis and lane data to generate locked rates for any U.S. port-to-inland move in under 30 seconds." },
+  { q: "Which ports does DrayGo cover?", a: "40+ U.S. sea ports, rail ramps and inland destinations — including LA/Long Beach, NY/NJ, Houston, Savannah, Seattle and more." },
+  { q: "How quickly do carriers get paid?", a: "DrayPay settles carrier invoices within 24 hours of an approved POD upload. No net-30, no factoring, no waiting." },
+  { q: "Can freight brokers use DrayGo?", a: "Yes. DrayGo Broker gives you a full drayage TMS — dispatch, carrier matching, real-time status, instant billing — all in one dashboard." },
+  { q: "What container types does DrayGo support?", a: "All standard ISO sizes (20', 40', 45', 53') including dry, reefer, open-top and flat rack, across domestic and international port moves." },
+];
+
+const TESTIMONIALS = [
+  { quote: "DrayGo cut our per-container drayage cost by 18% in Q1. The instant quoting saves my team hours every week.", name: "Marcus T.", role: "Import Manager", company: "Pacific Rim Logistics" },
+  { quote: "I used to wait 5 days for payment. DrayPay hits my account the next morning. This is how it should always have worked.", name: "Darius W.", role: "Owner-Operator", company: "DW Trucking" },
+  { quote: "The broker dashboard is genuinely the best TMS I've used for drayage. Real-time tracking, instant docs, clean UI.", name: "Priya K.", role: "Drayage Broker", company: "Summit Freight" },
+  { quote: "Long Beach to Phoenix rates locked in 20 seconds. Our finance team loves the predictability.", name: "James O.", role: "VP Operations", company: "West Coast Importers" },
+  { quote: "Three apps that actually talk to each other. No more spreadsheets, no more phone tag. DrayGo runs our entire container operation.", name: "Chen L.", role: "Logistics Director", company: "Apex Distribution" },
+];
+
 export default function Home() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
     <>
       <Nav />
@@ -132,11 +151,11 @@ export default function Home() {
         <div className="relative z-10 max-w-[1280px] mx-auto px-6 min-h-[100svh] grid lg:grid-cols-2 gap-10 items-center py-20">
 
         {/* ── LEFT: 3 phone mockups ── */}
-        <div className="flex items-end justify-center gap-3 md:gap-4 order-2 lg:order-1 pt-10 lg:pt-0 reveal">
+        <div className="flex items-end justify-center gap-3 md:gap-4 order-2 lg:order-2 pt-10 lg:pt-0 reveal">
 
           {/* Shipper phone (red, lower) */}
           <div className="flex-shrink-0 hidden sm:block" style={{ width: 185, transform: "translateY(48px)" }}>
-            <div className="rounded-[30px] overflow-hidden" style={{ background: "#0D0D1A", border: "2px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 80px -20px rgba(0,0,0,0.8)" }}>
+            <div className="rounded-[18px] overflow-hidden" style={{ background: "#0D0D1A", border: "2px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 80px -20px rgba(0,0,0,0.8)" }}>
               <div className="flex items-center justify-between px-4 pt-3 pb-1" style={{ background: "#0D0D1A" }}>
                 <span className="text-[9px] font-bold text-white">9:41</span>
                 <div className="flex items-center gap-1">
@@ -187,7 +206,7 @@ export default function Home() {
 
           {/* Carrier phone (green, center, tallest/highest) */}
           <div className="flex-shrink-0" style={{ width: 210, zIndex: 2 }}>
-            <div className="rounded-[34px] overflow-hidden" style={{ background: "#0A0F0D", border: "2px solid rgba(255,255,255,0.15)", boxShadow: "0 60px 120px -20px rgba(0,0,0,0.9), 0 0 0 1px rgba(24,163,84,0.2)" }}>
+            <div className="rounded-[22px] overflow-hidden" style={{ background: "#0A0F0D", border: "2px solid rgba(255,255,255,0.15)", boxShadow: "0 60px 120px -20px rgba(0,0,0,0.9), 0 0 0 1px rgba(24,163,84,0.2)" }}>
               <div className="flex items-center justify-between px-4 pt-3 pb-1" style={{ background: "#0A0F0D" }}>
                 <span className="text-[9px] font-bold text-white">9:41</span>
                 <div className="flex items-center gap-1">
@@ -242,7 +261,7 @@ export default function Home() {
 
           {/* Broker phone (blue, lower) */}
           <div className="flex-shrink-0 hidden sm:block" style={{ width: 185, transform: "translateY(48px)" }}>
-            <div className="rounded-[30px] overflow-hidden" style={{ background: "#0B0D18", border: "2px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 80px -20px rgba(0,0,0,0.8)" }}>
+            <div className="rounded-[18px] overflow-hidden" style={{ background: "#0B0D18", border: "2px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 80px -20px rgba(0,0,0,0.8)" }}>
               <div className="flex items-center justify-between px-4 pt-3 pb-1" style={{ background: "#0B0D18" }}>
                 <span className="text-[9px] font-bold text-white">9:41</span>
                 <div className="flex items-center gap-1">
@@ -286,9 +305,9 @@ export default function Home() {
         </div>
 
         {/* ── RIGHT: text content ── */}
-        <div className="order-1 lg:order-2 text-left reveal reveal-delay-1">
+        <div className="order-1 lg:order-1 text-left reveal reveal-delay-1">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 text-[12px] font-semibold text-white/70" style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.14)" }}>
+          <div className="inline-flex items-center gap-2 rounded-xl px-4 py-1.5 mb-8 text-[12px] font-semibold text-white/70" style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.14)" }}>
             <span style={{ display: "inline-block", width: 7, height: 7, borderRadius: "50%", background: "#fc0b05", animation: "livePulse 1.8s ease-out infinite" }} />
             The DrayGo Platform — Now Live
           </div>
@@ -307,7 +326,7 @@ export default function Home() {
           <div className="mt-6 flex flex-wrap gap-2">
             {APPS.map((app) => (
               <a key={app.id} href={`#${app.id}`}
-                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12px] font-semibold text-white transition-all duration-200 hover:scale-105"
+                className="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-[12px] font-semibold text-white transition-all duration-200 hover:scale-105"
                 style={{ background: app.colorAlpha, border: `1px solid ${app.colorBorder}` }}>
                 <span style={{ display: "inline-block", width: 7, height: 7, borderRadius: "50%", background: app.color, flexShrink: 0 }} />
                 {app.name}
@@ -327,15 +346,6 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Stats */}
-          <div className="mt-10 grid grid-cols-2 gap-3 max-w-sm">
-            {STATS.map(({ n, label }) => (
-              <div key={label} className="rounded-xl py-4 px-4" style={{ background: "rgba(255,255,255,0.045)", border: "1px solid rgba(255,255,255,0.09)" }}>
-                <div className="display text-white leading-none" style={{ fontSize: 28 }}>{n}</div>
-                <div className="mt-1 text-[11px] font-medium text-white/40">{label}</div>
-              </div>
-            ))}
-          </div>
         </div>
 
         </div>
@@ -409,7 +419,7 @@ export default function Home() {
                   {/* Gradient overlay */}
                   <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${app.color}60 0%, rgba(5,15,44,0.35) 50%, rgba(5,15,44,0.80) 100%)` }} />
                   {/* Live badge */}
-                  <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] font-bold text-white"
+                  <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-[11px] font-bold text-white"
                     style={{ background: "rgba(0,0,0,0.48)", backdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.14)" }}>
                     <span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: app.color, animation: "livePulse 1.8s ease-out infinite" }} />
                     {app.name}
@@ -432,73 +442,436 @@ export default function Home() {
         </section>
       ))}
 
-      {/* ─── HOW IT CONNECTS ─── */}
-      <section id="how-it-works" className="grid-bg relative overflow-hidden py-24 md:py-32">
-        <div className="relative z-10 max-w-[1280px] mx-auto px-6">
-
-          {/* Header */}
+      {/* ─── HOW IT WORKS ─── */}
+      <section id="how-it-works" className="relative py-24 md:py-32" style={{ background: "#07153B" }}>
+        <div className="max-w-[1280px] mx-auto px-6">
           <div className="text-center mb-16 reveal">
-            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 text-[12px] font-semibold text-white/65"
+            <div className="inline-flex items-center gap-2 rounded-xl px-4 py-1.5 mb-6 text-[12px] font-semibold text-white/65"
               style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.13)" }}>
-              The DrayGo Ecosystem
+              How it works
             </div>
-            <h2 className="display text-white" style={{ fontSize: "clamp(34px, 5vw, 56px)" }}>Where it all connects</h2>
-            <p className="mt-4 text-white/50 max-w-xl mx-auto leading-relaxed" style={{ fontSize: 17 }}>
-              Every app talks to every other. A shipper&apos;s booking becomes a carrier&apos;s load. A broker&apos;s dispatch becomes a same-day payment. One network, zero gaps.
+            <h2 className="display text-white" style={{ fontSize: "clamp(32px, 4.5vw, 52px)" }}>
+              Built for every move<br />on the drayage chain
+            </h2>
+            <p className="mt-4 text-white/50 max-w-xl mx-auto" style={{ fontSize: 16 }}>
+              Shippers, brokers and carriers — each gets a purpose-built app, all connected on one real-time platform.
             </p>
           </div>
 
-          {/* Flow steps */}
-          <div className="grid md:grid-cols-3 gap-6 reveal">
-            {FLOW.map(({ step, title, desc, color, icon }, idx) => (
-              <div key={step} className="relative">
-                <div className="rounded-2xl p-8 h-full flex flex-col" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                  {/* Icon */}
-                  <div className="w-14 h-14 rounded-2xl mb-6 flex items-center justify-center" style={{ background: `${color}1a`, border: `1px solid ${color}40` }}>
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: icon }} />
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-4 reveal">
+              {[
+                { title: "Instant Drayage Pricing", desc: "Locked rates for any U.S. lane in under 30 seconds — live diesel, FSC, chassis & terminal fees all included.", color: "#fc0b05", active: true },
+                { title: "Real-time Container Visibility", desc: "Gate-in to gate-out tracking on every container, across all three apps simultaneously, 24/7.", color: "#3A5FC0", active: false },
+                { title: "Same-Day Carrier Payments", desc: "Upload POD and DrayPay settles within 24 hours. No net-30, no factoring, no waiting.", color: "#18a354", active: false },
+              ].map((f) => (
+                <div key={f.title} className="rounded-2xl p-6"
+                  style={{
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    borderBottom: f.active ? `3px solid ${f.color}` : "1px solid rgba(255,255,255,0.08)",
+                  }}>
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center mt-0.5"
+                      style={{ background: `${f.color}20`, border: `1px solid ${f.color}40` }}>
+                      <div className="w-2.5 h-2.5 rounded-full" style={{ background: f.color }} />
+                    </div>
+                    <div>
+                      <h3 className="text-[16px] font-bold text-white mb-1">{f.title}</h3>
+                      <p className="text-[13.5px] text-white/50 leading-relaxed">{f.desc}</p>
+                    </div>
                   </div>
-                  <div className="display text-[40px] leading-none mb-3 text-white/10 num">{step}</div>
-                  <h3 className="text-[17px] font-bold text-white mb-2">{title}</h3>
-                  <p className="text-[13.5px] text-white/50 leading-relaxed flex-1">{desc}</p>
                 </div>
-                {/* Arrow connector */}
-                {idx < 2 && (
-                  <div className="hidden md:flex absolute top-10 -right-3 z-10 w-6 h-6 rounded-full items-center justify-center"
-                    style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.15)" }}>
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              ))}
+              <a href="#shipper" className="inline-flex items-center gap-2 mt-2 text-[14px] font-semibold text-white/70 hover:text-white transition-colors">
+                Explore all features
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+
+            <div className="flex justify-center lg:justify-end reveal reveal-delay-1">
+              <div style={{ width: 280 }}>
+                <div className="rounded-[28px] overflow-hidden"
+                  style={{ background: "#0A0F0D", border: "2px solid rgba(255,255,255,0.14)", boxShadow: "0 60px 120px -20px rgba(0,0,0,0.8), 0 0 0 1px rgba(24,163,84,0.15)" }}>
+                  <div className="flex items-center justify-between px-5 pt-3 pb-1" style={{ background: "#0A0F0D" }}>
+                    <span className="text-[10px] font-bold text-white">9:41</span>
+                    <div className="flex items-center gap-1">
+                      <svg width="12" height="8" viewBox="0 0 12 8" fill="white" opacity="0.7"><rect x="0" y="2" width="2" height="6" rx="0.5"/><rect x="3" y="1" width="2" height="7" rx="0.5"/><rect x="6" y="0" width="2" height="8" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5" opacity="0.3"/></svg>
+                      <svg width="14" height="8" viewBox="0 0 14 8" fill="white" opacity="0.7"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5" stroke="white" strokeWidth="1" fill="none" opacity="0.5"/><rect x="12" y="2.5" width="1.5" height="3" rx="0.5" fill="white" opacity="0.5"/><rect x="1.5" y="1.5" width="8" height="5" rx="0.8" fill="white"/></svg>
+                    </div>
                   </div>
-                )}
+                  <div className="px-4 pt-2 pb-5" style={{ background: "#0A0F0D" }}>
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <div className="text-[10px] text-white/40">Welcome back</div>
+                        <div className="text-[14px] font-black text-white">DrayGo <span style={{ color: "#18a354" }}>Carrier</span></div>
+                      </div>
+                      <div className="rounded-xl px-2.5 py-1.5 text-[10px] font-bold text-white flex items-center gap-1.5"
+                        style={{ background: "rgba(24,163,84,0.2)", border: "1px solid rgba(24,163,84,0.35)" }}>
+                        <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#18a354", display: "inline-block" }} />
+                        Online
+                      </div>
+                    </div>
+                    <div className="rounded-2xl p-4 mb-3"
+                      style={{ background: "linear-gradient(135deg, rgba(24,163,84,0.28) 0%, rgba(24,163,84,0.08) 100%)", border: "1px solid rgba(24,163,84,0.25)" }}>
+                      <div className="text-[9px] text-white/40 uppercase tracking-widest mb-0.5">Today&apos;s earnings</div>
+                      <div className="text-[26px] font-black text-white leading-none">$1,240</div>
+                      <div className="mt-1 text-[9px]" style={{ color: "#18a354" }}>↑ 3 loads completed today</div>
+                    </div>
+                    <div className="rounded-xl p-3 mb-3" style={{ background: "#111A12" }}>
+                      <div className="text-[9px] text-white/30 mb-2">Weekly earnings</div>
+                      <div className="flex items-end gap-1.5 h-10">
+                        {[40, 65, 45, 80, 55, 90, 100].map((h, i) => (
+                          <div key={i} className="flex-1 rounded-sm" style={{ height: `${h}%`, background: i === 6 ? "#18a354" : "rgba(24,163,84,0.25)" }} />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="text-[11px] font-bold text-white mb-2 flex items-center justify-between">
+                      <span>Available loads</span>
+                      <span className="text-[9px] font-bold rounded-full px-2 py-0.5" style={{ background: "rgba(24,163,84,0.2)", color: "#18a354" }}>24 new</span>
+                    </div>
+                    {[{ r: "Long Beach → Phoenix", p: "$680" }, { r: "Oakland → Sacramento", p: "$420" }].map((l) => (
+                      <div key={l.r} className="flex items-center justify-between rounded-xl px-3 py-2.5 mb-1.5"
+                        style={{ background: "#161E15", border: "1px solid rgba(255,255,255,0.06)" }}>
+                        <span className="text-[11px] text-white/70">{l.r}</span>
+                        <span className="text-[11px] font-black" style={{ color: "#18a354" }}>{l.p}</span>
+                      </div>
+                    ))}
+                    <div className="mt-3 flex justify-center"><div className="w-20 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.18)" }} /></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── PLATFORM FEATURES ─── */}
+      <section className="relative py-24 md:py-32 grid-bg">
+        <div className="max-w-[1280px] mx-auto px-6">
+          <div className="text-center mb-14 reveal">
+            <div className="inline-flex items-center gap-2 rounded-xl px-4 py-1.5 mb-6 text-[12px] font-semibold text-white/65"
+              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.13)" }}>
+              Platform Capabilities
+            </div>
+            <h2 className="display text-white" style={{ fontSize: "clamp(32px, 4.5vw, 52px)" }}>Everything drayage was missing</h2>
+            <p className="mt-4 text-white/50 max-w-xl mx-auto" style={{ fontSize: 16 }}>Built from the ground up for container freight — not adapted from generic TMS software.</p>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 reveal">
+            {/* Big card: Rate Calculator */}
+            <div className="col-span-2 row-span-2 rounded-2xl p-7 flex flex-col"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", minHeight: 380 }}>
+              <div className="rounded-xl p-4 mb-5 flex-1" style={{ background: "rgba(255,255,255,0.04)" }}>
+                <div className="text-[10px] uppercase tracking-widest text-white/35 mb-3 font-bold">New Rate Quote</div>
+                <div className="space-y-2 mb-3">
+                  <div className="rounded-lg px-3.5 py-2.5 flex items-center gap-2"
+                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                    <span className="w-2 h-2 rounded-full shrink-0" style={{ background: "#fc0b05" }} />
+                    <span className="text-[12px] text-white/65">Long Beach, CA (POLB)</span>
+                  </div>
+                  <div className="rounded-lg px-3.5 py-2.5 flex items-center gap-2"
+                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                    <span className="w-2 h-2 rounded-full shrink-0" style={{ background: "#18a354" }} />
+                    <span className="text-[12px] text-white/65">Phoenix, AZ</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="flex-1 rounded-lg px-3.5 py-2.5"
+                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                      <span className="text-[11px] text-white/45">40&apos; Dry Van</span>
+                    </div>
+                    <div className="flex-1 rounded-lg px-3.5 py-2.5"
+                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                      <span className="text-[11px] text-white/45">2 axles</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-lg py-2.5 text-center text-[12px] font-bold text-white" style={{ background: "#fc0b05" }}>
+                  Get Instant Rate →
+                </div>
+                <div className="mt-3 rounded-xl px-4 py-3"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <div className="text-[9px] uppercase text-white/30 tracking-widest mb-0.5">Estimated rate</div>
+                  <div className="text-[28px] font-black text-white leading-none">$742<span className="text-[13px] font-normal text-white/30">.00</span></div>
+                  <div className="text-[10px] mt-1" style={{ color: "#18a354" }}>✓ 24h lock · Live diesel applied · FSC included</div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-[17px] font-bold text-white mb-1.5">Rate Calculator</h3>
+                <p className="text-[13px] text-white/50 leading-relaxed">Locked drayage rates for any U.S. lane in under 30 seconds — live diesel, FSC, chassis and port fees all included automatically.</p>
+              </div>
+            </div>
+
+            {/* Card A: Live Load Board */}
+            <div className="rounded-2xl p-6 flex flex-col"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div className="rounded-xl p-3 mb-4 flex-1" style={{ background: "rgba(24,163,84,0.08)" }}>
+                {[{ r: "LA → Phoenix", p: "$680" }, { r: "Houston → Dallas", p: "$420" }, { r: "NY → Chicago", p: "$580" }].map((l) => (
+                  <div key={l.r} className="flex items-center justify-between py-1.5 border-b last:border-0"
+                    style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                    <span className="text-[10px] text-white/55">{l.r}</span>
+                    <span className="text-[10px] font-bold" style={{ color: "#18a354" }}>{l.p}</span>
+                  </div>
+                ))}
+              </div>
+              <h3 className="text-[15px] font-bold text-white mb-1">Live Load Board</h3>
+              <p className="text-[12px] text-white/45">Hundreds of drayage loads posted daily across every major port.</p>
+            </div>
+
+            {/* Card B: DrayPay */}
+            <div className="rounded-2xl p-6 flex flex-col"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div className="rounded-xl p-3 mb-4 flex-1 flex flex-col items-center justify-center"
+                style={{ background: "rgba(58,95,192,0.08)" }}>
+                <div className="text-[11px] text-white/35 uppercase tracking-widest mb-1">Paid in</div>
+                <div className="text-[32px] font-black text-white leading-none">24h</div>
+                <div className="text-[10px] mt-1" style={{ color: "#3A5FC0" }}>guaranteed payout</div>
+              </div>
+              <h3 className="text-[15px] font-bold text-white mb-1">DrayPay 24h</h3>
+              <p className="text-[12px] text-white/45">Carriers paid within 24 hours of POD upload. No net-30.</p>
+            </div>
+
+            {/* Card C: Support Chat */}
+            <div className="rounded-2xl p-6 flex flex-col"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div className="rounded-xl p-3 mb-4 space-y-2" style={{ background: "rgba(252,11,5,0.08)" }}>
+                <div className="rounded-lg px-3 py-2" style={{ background: "rgba(255,255,255,0.06)" }}>
+                  <span className="text-[10px] text-white/55">Where is my container?</span>
+                </div>
+                <div className="rounded-lg px-3 py-2 ml-4" style={{ background: "rgba(252,11,5,0.2)" }}>
+                  <span className="text-[10px] text-white/80">Gate-out 2h ago · On route</span>
+                </div>
+              </div>
+              <h3 className="text-[15px] font-bold text-white mb-1">24/7 Support Chat</h3>
+              <p className="text-[12px] text-white/45">Live support for shippers, carriers and brokers anytime.</p>
+            </div>
+
+            {/* Card D: Port Coverage */}
+            <div className="rounded-2xl p-6 flex flex-col"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <div className="rounded-xl p-3 mb-4 flex flex-wrap gap-1.5" style={{ background: "rgba(58,95,192,0.08)" }}>
+                {["POLB", "POLA", "NY/NJ", "SAV", "HOU", "SEA", "+35"].map((p) => (
+                  <span key={p} className="rounded-md px-2 py-1 text-[9px] font-bold text-white/60"
+                    style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)" }}>{p}</span>
+                ))}
+              </div>
+              <h3 className="text-[15px] font-bold text-white mb-1">40+ Port Coverage</h3>
+              <p className="text-[12px] text-white/45">Every major U.S. sea port, rail ramp and inland destination.</p>
+            </div>
+
+            {/* Card E: Platform Analytics (dark) */}
+            <div className="rounded-2xl p-6 flex flex-col justify-between"
+              style={{ background: "#020A1A", border: "1px solid rgba(255,255,255,0.06)" }}>
+              <div>
+                <h3 className="text-[16px] font-bold text-white mb-1">Platform Analytics</h3>
+                <p className="text-[12px] text-white/40 leading-relaxed">Real-time earnings and route performance across the full network.</p>
+              </div>
+              <div className="relative mt-4 overflow-hidden" style={{ height: 80 }}>
+                {[0,1,2,3,4,5,6].map((i) => (
+                  <div key={i} className="absolute top-0 bottom-0 w-px"
+                    style={{ left: `${i*(100/6)}%`, background: "rgba(255,255,255,0.06)" }} />
+                ))}
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 80" preserveAspectRatio="none">
+                  <path d="M0 60 C50 55, 100 65, 160 45 S260 20, 320 30 S370 15, 400 5" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="2"/>
+                  <path d="M0 60 C50 55, 100 65, 160 45 S260 20, 320 30 S370 15, 400 5 L400 80 L0 80 Z" fill="rgba(252,11,5,0.08)"/>
+                </svg>
+                <div className="absolute right-0 bottom-0 w-5 rounded-t-sm" style={{ height: 55, background: "rgba(252,11,5,0.7)" }} />
+                <div className="absolute w-3 h-3 rounded-full border-2 border-white" style={{ right: 4, bottom: 55, background: "#020A1A" }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FEATURE BANNERS ─── */}
+      <section className="relative py-20 md:py-28" style={{ background: "#07153B" }}>
+        <div className="max-w-[1280px] mx-auto px-6 space-y-6">
+
+          {/* Banner 1 */}
+          <div className="rounded-3xl overflow-hidden grid lg:grid-cols-2 min-h-[280px]"
+            style={{ background: "rgba(255,255,255,0.035)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <div className="p-10 lg:p-14 flex flex-col justify-center reveal">
+              <h2 className="display text-white leading-tight" style={{ fontSize: "clamp(26px, 3.5vw, 40px)" }}>
+                Quote any lane<br />in 30 seconds.
+              </h2>
+              <p className="mt-3 text-white/50 max-w-sm leading-relaxed" style={{ fontSize: 15 }}>
+                Live diesel index, FSC, chassis fees and port surcharges — all baked in. Lock a rate before your competitor even gets a callback.
+              </p>
+              <p className="mt-3 text-white/35 text-sm">No credit card. No wait. No middleman.</p>
+              <a href="/shipper" className="mt-6 inline-flex items-center gap-2 rounded-xl px-6 py-3 text-[14px] font-bold text-white w-fit transition-all hover:opacity-90"
+                style={{ background: "#fc0b05" }}>
+                Download App →
+              </a>
+            </div>
+            <div className="relative overflow-hidden flex items-center justify-center min-h-[220px]"
+              style={{ background: "linear-gradient(135deg, rgba(252,11,5,0.22) 0%, rgba(252,11,5,0.05) 100%)" }}>
+              <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 60% 50%, rgba(252,11,5,0.28) 0%, transparent 65%)" }} />
+              <div className="relative flex items-center gap-6">
+                <div className="w-28 h-28 rounded-full flex items-center justify-center"
+                  style={{ background: "#fc0b05", boxShadow: "0 0 60px rgba(252,11,5,0.45)" }}>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h4"/>
+                  </svg>
+                </div>
+                <div className="display text-white" style={{ fontSize: "clamp(28px, 4vw, 52px)", letterSpacing: "-0.02em" }}>Quote</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Banner 2 */}
+          <div className="rounded-3xl overflow-hidden grid lg:grid-cols-2 min-h-[280px]"
+            style={{ background: "rgba(255,255,255,0.035)", border: "1px solid rgba(255,255,255,0.08)" }}>
+            <div className="relative overflow-hidden flex items-center justify-center min-h-[220px] order-2 lg:order-1"
+              style={{ background: "linear-gradient(135deg, rgba(24,163,84,0.22) 0%, rgba(24,163,84,0.05) 100%)" }}>
+              <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 40% 50%, rgba(24,163,84,0.28) 0%, transparent 65%)" }} />
+              <div className="relative flex items-center gap-6">
+                <div className="display text-white" style={{ fontSize: "clamp(28px, 4vw, 52px)", letterSpacing: "-0.02em" }}>Receive</div>
+                <div className="w-28 h-28 rounded-full flex items-center justify-center"
+                  style={{ background: "#18a354", boxShadow: "0 0 60px rgba(24,163,84,0.45)" }}>
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2v16M6 12l6 6 6-6"/><path d="M3 20h18"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div className="p-10 lg:p-14 flex flex-col justify-center order-1 lg:order-2 reveal">
+              <h2 className="display text-white leading-tight" style={{ fontSize: "clamp(26px, 3.5vw, 40px)" }}>
+                Carriers get paid<br />the same day.
+              </h2>
+              <p className="mt-3 text-white/50 max-w-sm leading-relaxed" style={{ fontSize: 15 }}>
+                Upload your proof of delivery and DrayPay settles your invoice within 24 hours. No factoring, no net-30, no chasing brokers.
+              </p>
+              <p className="mt-3 text-white/35 text-sm">Guaranteed. Every load. Every time.</p>
+              <a href="/carriers" className="mt-6 inline-flex items-center gap-2 rounded-xl px-6 py-3 text-[14px] font-bold text-white w-fit transition-all hover:opacity-90"
+                style={{ background: "#18a354" }}>
+                Download App →
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─── TESTIMONIALS ─── */}
+      <section className="relative py-24 md:py-32" style={{ background: "#08192b" }}>
+        <div className="max-w-[1280px] mx-auto px-6">
+          <div className="text-center mb-14 reveal">
+            <div className="inline-flex items-center gap-2 rounded-xl px-4 py-1.5 mb-6 text-[12px] font-semibold text-white/65"
+              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.13)" }}>
+              What people are saying
+            </div>
+            <h2 className="display text-white" style={{ fontSize: "clamp(30px, 4.5vw, 50px)" }}>Voices from the road</h2>
+            <p className="mt-4 text-white/50 max-w-md mx-auto" style={{ fontSize: 16 }}>
+              Shippers, carriers and brokers already running on DrayGo.
+            </p>
+          </div>
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 reveal">
+            {TESTIMONIALS.map((t) => (
+              <div key={t.name} className="break-inside-avoid mb-5 rounded-2xl p-7"
+                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <div className="flex gap-0.5 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#fc0b05">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-[14px] text-white/75 leading-relaxed mb-5">&ldquo;{t.quote}&rdquo;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-[13px] font-bold text-white shrink-0"
+                    style={{ background: "rgba(252,11,5,0.3)" }}>
+                    {t.name.charAt(0)}
+                  </div>
+                  <div>
+                    <div className="text-[13px] font-bold text-white">{t.name}</div>
+                    <div className="text-[11px] text-white/40">{t.role} · {t.company}</div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── PLATFORM FEATURES ─── */}
-      <section className="relative py-24 md:py-32" style={{ background: "#07153B" }}>
+      {/* ─── CONTACT + FAQ ─── */}
+      <section className="relative py-24 md:py-32 grid-bg">
         <div className="max-w-[1280px] mx-auto px-6">
 
-          <div className="text-center mb-16 reveal">
-            <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 text-[12px] font-semibold text-white/65"
+          <div className="text-center mb-12 reveal">
+            <div className="inline-flex items-center gap-2 rounded-xl px-4 py-1.5 mb-6 text-[12px] font-semibold text-white/65"
               style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.13)" }}>
-              Platform Capabilities
+              Get in touch
             </div>
-            <h2 className="display text-white" style={{ fontSize: "clamp(32px, 4.5vw, 50px)" }}>Everything drayage needs</h2>
-            <p className="mt-4 text-white/50 max-w-xl mx-auto" style={{ fontSize: 16 }}>Built from the ground up for container freight — not adapted from generic TMS software.</p>
+            <h2 className="display text-white" style={{ fontSize: "clamp(30px, 4.5vw, 50px)" }}>Get in Touch with DrayGo</h2>
+            <p className="mt-3 text-white/50" style={{ fontSize: 16 }}>Questions about the platform? We&apos;d love to hear from you.</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 reveal">
-            {FEATURES.map(({ label, desc, icon }, i) => (
-              <div key={label} className={`rounded-2xl p-7 reveal reveal-delay-${(i % 3) + 1}`}
-                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <div className="w-11 h-11 rounded-xl mb-5 flex items-center justify-center" style={{ background: "rgba(252,11,5,0.13)", border: "1px solid rgba(252,11,5,0.3)" }}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: icon }} />
-                </div>
-                <h3 className="text-[15px] font-bold text-white mb-1.5">{label}</h3>
-                <p className="text-[13px] text-white/50 leading-relaxed">{desc}</p>
+          <div className="max-w-[640px] mx-auto mb-24 reveal">
+            <div className="rounded-3xl p-8 md:p-10"
+              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.10)" }}>
+              <h3 className="text-[20px] font-bold text-white text-center mb-1.5">Contact Us</h3>
+              <p className="text-[13px] text-white/45 text-center mb-7">Our team typically responds within a few hours.</p>
+              <div className="grid grid-cols-2 gap-3 mb-3">
+                <input type="email" placeholder="Your Email"
+                  className="rounded-xl px-4 py-3 text-[13px] text-white placeholder-white/30 outline-none"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }} />
+                <input type="text" placeholder="Your Name"
+                  className="rounded-xl px-4 py-3 text-[13px] text-white placeholder-white/30 outline-none"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }} />
               </div>
+              <textarea rows={5} placeholder="Your Message"
+                className="w-full rounded-xl px-4 py-3 text-[13px] text-white placeholder-white/30 outline-none resize-none mb-3"
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.10)" }} />
+              <button className="w-full rounded-xl py-3.5 text-[14px] font-bold text-white transition-all hover:opacity-90"
+                style={{ background: "#fc0b05" }}>
+                Submit
+              </button>
+            </div>
+          </div>
+
+          <div className="text-center mb-12 reveal">
+            <h2 className="display text-white" style={{ fontSize: "clamp(30px, 4.5vw, 50px)" }}>FAQ</h2>
+            <p className="mt-3 text-white/50 max-w-lg mx-auto" style={{ fontSize: 16 }}>
+              Whether you&apos;re curious about DrayGo&apos;s features, pricing, or how it works — we&apos;ve got you covered.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-3 mb-8 reveal">
+            {FAQS.map((faq, i) => (
+              <button key={i} onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                className="rounded-2xl px-6 py-5 text-left transition-all duration-200 w-full"
+                style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${openFaq === i ? "rgba(252,11,5,0.4)" : "rgba(255,255,255,0.08)"}` }}>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-[15px] font-semibold text-white">{faq.q}</span>
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0"
+                    style={{ border: "1.5px solid rgba(255,255,255,0.25)" }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
+                      {openFaq === i
+                        ? <line x1="5" y1="12" x2="19" y2="12"/>
+                        : <><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></>
+                      }
+                    </svg>
+                  </div>
+                </div>
+                {openFaq === i && (
+                  <p className="mt-3 text-[13.5px] text-white/55 leading-relaxed">{faq.a}</p>
+                )}
+              </button>
             ))}
           </div>
+
+          <div className="rounded-2xl px-8 py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 reveal"
+            style={{ background: "#fc0b05" }}>
+            <div>
+              <div className="text-[18px] font-bold text-white mb-1">Still have questions?</div>
+              <div className="text-[13px] text-white/80">Can&apos;t find what you&apos;re looking for? Our team is ready to help.</div>
+            </div>
+            <a href="mailto:support@draygo.net"
+              className="rounded-xl px-6 py-3 text-[14px] font-bold text-[#fc0b05] bg-white shrink-0 transition-all hover:scale-[1.03] whitespace-nowrap">
+              Contact Us
+            </a>
+          </div>
+
         </div>
       </section>
 
@@ -512,7 +885,7 @@ export default function Home() {
           {/* App badges */}
           <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
             {APPS.map((app) => (
-              <span key={app.id} className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px] font-semibold"
+              <span key={app.id} className="inline-flex items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-[12px] font-semibold"
                 style={{ background: app.colorAlpha, border: `1px solid ${app.colorBorder}`, color: app.color }}>
                 <span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: app.color }} />
                 {app.name}
