@@ -5,13 +5,11 @@ import { usePathname } from "next/navigation";
 import { asset } from "@/lib/site";
 
 const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "How it Works", href: "/how-it-works" },
-  { label: "Shippers", href: "/shipper" },
+  { label: "Shipper", href: "/shipper" },
+  { label: "Carrier", href: "/carriers" },
   { label: "Broker", href: "/broker" },
-  { label: "Carriers", href: "/carriers" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "How it Works", href: "/#how-it-works" },
+  { label: "About", href: "/about" },
 ];
 
 const SERVICES_ITEMS = [
@@ -86,8 +84,6 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
 
         {/* Desktop nav links — always centered col */}
         <nav className="hidden lg:flex items-center gap-0 text-[13px]">
-          <Link href="/load-board" className={linkCls} style={{ padding: "6px 12px" }}>Load Board</Link>
-          <Link href="/jobs-map" className={linkCls} style={{ padding: "6px 12px" }}>Jobs on Map</Link>
           {NAV_LINKS.map((l) => (
             <Link key={l.label} href={l.href} className={linkCls} style={{ padding: "6px 12px" }}>
               {l.label}
@@ -129,8 +125,6 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
       {mobileOpen && (
         <div className="lg:hidden border-t border-white/10 px-6 py-4 space-y-1" style={{ background: "#08192b" }}>
           <div className="border-t border-white/10 pt-1">
-            <Link href="/load-board" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Load Board</Link>
-            <Link href="/jobs-map" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Jobs on Map</Link>
             {NAV_LINKS.map((l) => (
               <Link key={l.label} href={l.href} className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
                 {l.label}
