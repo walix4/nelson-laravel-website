@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { asset } from "@/lib/site";
 
 const NAV_LINKS = [
+  { label: "Home", href: "/" },
   { label: "Shipper", href: "/shipper" },
   { label: "Carrier", href: "/carriers" },
   { label: "Broker", href: "/broker" },
