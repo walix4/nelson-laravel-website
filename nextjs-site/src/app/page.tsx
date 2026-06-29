@@ -121,214 +121,223 @@ export default function Home() {
       <RevealInit />
 
       {/* ─── HERO ─── */}
-      <section className="grid-bg relative overflow-hidden" style={{ paddingBottom: 0 }}>
+      <section className="grid-bg relative overflow-hidden min-h-[100svh]" style={{ paddingBottom: 0 }}>
         {/* Glows */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full" style={{ background: "radial-gradient(circle, rgba(252,11,5,0.14) 0%, transparent 60%)" }} />
           <div className="absolute top-0 -right-40 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(58,95,192,0.14) 0%, transparent 60%)" }} />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full" style={{ background: "radial-gradient(ellipse, rgba(24,163,84,0.10) 0%, transparent 65%)" }} />
+          <div className="absolute bottom-0 right-0 w-[600px] h-[400px] rounded-full" style={{ background: "radial-gradient(ellipse, rgba(24,163,84,0.08) 0%, transparent 65%)" }} />
         </div>
 
-        {/* ── TOP: centered text ── */}
-        <div className="relative z-10 max-w-[820px] mx-auto px-6 pt-24 md:pt-32 pb-14 text-center">
+        <div className="relative z-10 max-w-[1280px] mx-auto px-6 min-h-[100svh] grid lg:grid-cols-2 gap-10 items-center py-20">
+
+        {/* ── LEFT: 3 phone mockups ── */}
+        <div className="flex items-end justify-center gap-3 md:gap-4 order-2 lg:order-1 pt-10 lg:pt-0 reveal">
+
+          {/* Shipper phone (red, lower) */}
+          <div className="flex-shrink-0 hidden sm:block" style={{ width: 185, transform: "translateY(48px)" }}>
+            <div className="rounded-[30px] overflow-hidden" style={{ background: "#0D0D1A", border: "2px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 80px -20px rgba(0,0,0,0.8)" }}>
+              <div className="flex items-center justify-between px-4 pt-3 pb-1" style={{ background: "#0D0D1A" }}>
+                <span className="text-[9px] font-bold text-white">9:41</span>
+                <div className="flex items-center gap-1">
+                  <svg width="10" height="7" viewBox="0 0 12 8" fill="white" opacity="0.7"><rect x="0" y="2" width="2" height="6" rx="0.5"/><rect x="3" y="1" width="2" height="7" rx="0.5"/><rect x="6" y="0" width="2" height="8" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5" opacity="0.3"/></svg>
+                  <svg width="12" height="7" viewBox="0 0 14 8" fill="white" opacity="0.7"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5" stroke="white" strokeWidth="1" fill="none" opacity="0.5"/><rect x="12" y="2.5" width="1.5" height="3" rx="0.5" fill="white" opacity="0.5"/><rect x="1.5" y="1.5" width="8" height="5" rx="0.8" fill="white"/></svg>
+                </div>
+              </div>
+              <div className="px-3.5 pt-2 pb-3" style={{ background: "#0D0D1A" }}>
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className="text-[11px] font-black text-white">DrayGo <span style={{ color: "#fc0b05" }}>Shipper</span></span>
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ background: "rgba(252,11,5,0.2)" }}>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4-6 8-6s6.5 2 8 6"/></svg>
+                  </div>
+                </div>
+                <div className="rounded-xl p-3" style={{ background: "#161626", border: "1px solid rgba(252,11,5,0.2)" }}>
+                  <div className="text-[8px] uppercase tracking-widest text-white/40 mb-1">New quote</div>
+                  <div className="flex items-center gap-1 mb-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#fc0b05" }} />
+                    <span className="text-[10px] text-white font-semibold">Long Beach, CA</span>
+                  </div>
+                  <div className="w-px h-2.5 ml-[2.5px] mb-1.5" style={{ background: "rgba(255,255,255,0.15)" }} />
+                  <div className="flex items-center gap-1 mb-2.5">
+                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "#18a354" }} />
+                    <span className="text-[10px] text-white font-semibold">Phoenix, AZ</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[9px] text-white/40">40&apos; Dry · 2 axle</span>
+                    <div className="rounded-md px-2 py-0.5 text-[9px] font-bold text-white" style={{ background: "#fc0b05" }}>Quote →</div>
+                  </div>
+                </div>
+                <div className="mt-2 rounded-xl p-3" style={{ background: "#161626" }}>
+                  <div className="text-[8px] text-white/40 uppercase tracking-widest mb-0.5">Estimated rate</div>
+                  <div className="text-[22px] font-black text-white leading-none">$742<span className="text-[11px] font-normal text-white/40">.00</span></div>
+                  <div className="mt-0.5 text-[8px] font-medium" style={{ color: "#18a354" }}>✓ Locked 24h · Diesel live</div>
+                </div>
+                <div className="mt-2 space-y-1.5">
+                  {[["LA → Denver", "$1,140"], ["Oakland → Reno", "$480"]].map(([r, p]) => (
+                    <div key={r} className="flex items-center justify-between rounded-lg px-2.5 py-1.5" style={{ background: "#161626" }}>
+                      <span className="text-[9px] text-white/55">{r}</span>
+                      <span className="text-[9px] font-bold text-white">{p}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-3 flex justify-center"><div className="w-16 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)" }} /></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Carrier phone (green, center, tallest/highest) */}
+          <div className="flex-shrink-0" style={{ width: 210, zIndex: 2 }}>
+            <div className="rounded-[34px] overflow-hidden" style={{ background: "#0A0F0D", border: "2px solid rgba(255,255,255,0.15)", boxShadow: "0 60px 120px -20px rgba(0,0,0,0.9), 0 0 0 1px rgba(24,163,84,0.2)" }}>
+              <div className="flex items-center justify-between px-4 pt-3 pb-1" style={{ background: "#0A0F0D" }}>
+                <span className="text-[9px] font-bold text-white">9:41</span>
+                <div className="flex items-center gap-1">
+                  <svg width="10" height="7" viewBox="0 0 12 8" fill="white" opacity="0.7"><rect x="0" y="2" width="2" height="6" rx="0.5"/><rect x="3" y="1" width="2" height="7" rx="0.5"/><rect x="6" y="0" width="2" height="8" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5" opacity="0.3"/></svg>
+                  <svg width="12" height="7" viewBox="0 0 14 8" fill="white" opacity="0.7"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5" stroke="white" strokeWidth="1" fill="none" opacity="0.5"/><rect x="12" y="2.5" width="1.5" height="3" rx="0.5" fill="white" opacity="0.5"/><rect x="1.5" y="1.5" width="8" height="5" rx="0.8" fill="white"/></svg>
+                </div>
+              </div>
+              <div className="px-3.5 pt-2 pb-4" style={{ background: "#0A0F0D" }}>
+                <div className="flex items-center justify-between mb-3">
+                  <div>
+                    <div className="text-[9px] text-white/40">Good morning,</div>
+                    <div className="text-[12px] font-black text-white">DrayGo <span style={{ color: "#18a354" }}>Carrier</span></div>
+                  </div>
+                  <div className="rounded-lg px-2 py-1 text-[9px] font-bold text-white flex items-center gap-1" style={{ background: "rgba(24,163,84,0.2)", border: "1px solid rgba(24,163,84,0.35)" }}>
+                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#18a354", display: "inline-block" }} />Online
+                  </div>
+                </div>
+                <div className="rounded-xl p-3 mb-2.5" style={{ background: "linear-gradient(135deg, rgba(24,163,84,0.25) 0%, rgba(24,163,84,0.08) 100%)", border: "1px solid rgba(24,163,84,0.25)" }}>
+                  <div className="text-[8px] text-white/45 uppercase tracking-widest mb-0.5">Today&apos;s earnings</div>
+                  <div className="text-[22px] font-black text-white leading-none">$1,240</div>
+                  <div className="mt-0.5 text-[8px]" style={{ color: "#18a354" }}>↑ 3 loads completed</div>
+                </div>
+                <div className="text-[10px] font-bold text-white mb-2 flex items-center justify-between">
+                  <span>Nearby Loads</span>
+                  <span className="rounded-full px-1.5 py-0.5 text-[8px] font-bold" style={{ background: "rgba(24,163,84,0.2)", color: "#18a354" }}>24 new</span>
+                </div>
+                {[
+                  { from: "Long Beach", to: "Phoenix", pay: "$680", t: "2h ago" },
+                  { from: "Oakland", to: "Sac.", pay: "$420", t: "4h ago" },
+                  { from: "Houston", to: "Dallas", pay: "$580", t: "5h ago" },
+                ].map((l) => (
+                  <div key={l.from} className="flex items-center justify-between rounded-xl px-2.5 py-2 mb-1.5" style={{ background: "#161E15", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <div>
+                      <div className="text-[10px] font-semibold text-white">{l.from} → {l.to}</div>
+                      <div className="text-[8px] text-white/40">{l.t}</div>
+                    </div>
+                    <div className="text-[11px] font-black" style={{ color: "#18a354" }}>{l.pay}</div>
+                  </div>
+                ))}
+                <div className="mt-2.5 grid grid-cols-4 gap-0">
+                  {["Home", "Loads", "Pay", "Me"].map((n, i) => (
+                    <div key={n} className="flex flex-col items-center gap-0.5 py-1.5">
+                      <div className="w-3 h-3 rounded" style={{ background: i === 1 ? "#18a354" : "rgba(255,255,255,0.15)" }} />
+                      <span className="text-[7px]" style={{ color: i === 1 ? "#18a354" : "rgba(255,255,255,0.3)" }}>{n}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex justify-center mt-1"><div className="w-20 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)" }} /></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Broker phone (blue, lower) */}
+          <div className="flex-shrink-0 hidden sm:block" style={{ width: 185, transform: "translateY(48px)" }}>
+            <div className="rounded-[30px] overflow-hidden" style={{ background: "#0B0D18", border: "2px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 80px -20px rgba(0,0,0,0.8)" }}>
+              <div className="flex items-center justify-between px-4 pt-3 pb-1" style={{ background: "#0B0D18" }}>
+                <span className="text-[9px] font-bold text-white">9:41</span>
+                <div className="flex items-center gap-1">
+                  <svg width="10" height="7" viewBox="0 0 12 8" fill="white" opacity="0.7"><rect x="0" y="2" width="2" height="6" rx="0.5"/><rect x="3" y="1" width="2" height="7" rx="0.5"/><rect x="6" y="0" width="2" height="8" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5" opacity="0.3"/></svg>
+                  <svg width="12" height="7" viewBox="0 0 14 8" fill="white" opacity="0.7"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5" stroke="white" strokeWidth="1" fill="none" opacity="0.5"/><rect x="12" y="2.5" width="1.5" height="3" rx="0.5" fill="white" opacity="0.5"/><rect x="1.5" y="1.5" width="8" height="5" rx="0.8" fill="white"/></svg>
+                </div>
+              </div>
+              <div className="px-3.5 pt-2 pb-3" style={{ background: "#0B0D18" }}>
+                <div className="flex items-center justify-between mb-2.5">
+                  <span className="text-[11px] font-black text-white">DrayGo <span style={{ color: "#3A5FC0" }}>Broker</span></span>
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ background: "rgba(58,95,192,0.2)" }}>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#3A5FC0" strokeWidth="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                  </div>
+                </div>
+                <div className="grid grid-cols-3 gap-1 mb-2.5">
+                  {[["12", "Active"], ["4", "Pending"], ["$8.4k", "Week"]].map(([v, l]) => (
+                    <div key={l} className="rounded-xl p-2 text-center" style={{ background: "#131525" }}>
+                      <div className="text-[12px] font-black text-white">{v}</div>
+                      <div className="text-[7px] text-white/40">{l}</div>
+                    </div>
+                  ))}
+                </div>
+                <div className="text-[9px] font-bold text-white mb-1.5 uppercase tracking-widest">Active loads</div>
+                {[
+                  { id: "DR-8841", route: "NY → Chicago", status: "In transit", color: "#18a354" },
+                  { id: "DR-8842", route: "LA → Phoenix", status: "Dispatched", color: "#3A5FC0" },
+                  { id: "DR-8843", route: "Houston → Dallas", status: "Pending", color: "#fc0b05" },
+                ].map((l) => (
+                  <div key={l.id} className="rounded-lg px-2.5 py-2 mb-1.5" style={{ background: "#131525", border: "1px solid rgba(255,255,255,0.05)" }}>
+                    <div className="flex items-center justify-between mb-0.5">
+                      <span className="text-[9px] font-bold text-white">{l.route}</span>
+                      <span className="text-[7px] rounded-full px-1.5 py-0.5 font-bold" style={{ background: `${l.color}22`, color: l.color }}>{l.status}</span>
+                    </div>
+                    <div className="text-[8px] text-white/30">{l.id}</div>
+                  </div>
+                ))}
+                <div className="mt-3 flex justify-center"><div className="w-16 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)" }} /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── RIGHT: text content ── */}
+        <div className="order-1 lg:order-2 text-left reveal reveal-delay-1">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 text-[12px] font-semibold text-white/70 reveal" style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.14)" }}>
+          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 text-[12px] font-semibold text-white/70" style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.14)" }}>
             <span style={{ display: "inline-block", width: 7, height: 7, borderRadius: "50%", background: "#fc0b05", animation: "livePulse 1.8s ease-out infinite" }} />
             The DrayGo Platform — Now Live
           </div>
 
           {/* Headline */}
-          <h1 className="display text-white leading-[1.05] reveal reveal-delay-1" style={{ fontSize: "clamp(40px, 7vw, 80px)" }}>
+          <h1 className="display text-white leading-[1.05]" style={{ fontSize: "clamp(38px, 5vw, 72px)" }}>
             Three Apps,<br /><span style={{ color: "var(--red)" }}>One Drayage</span><br />Ecosystem.
           </h1>
 
           {/* Sub */}
-          <p className="mt-5 text-white/55 leading-relaxed max-w-xl mx-auto reveal reveal-delay-2" style={{ fontSize: "clamp(15px, 1.8vw, 18px)" }}>
+          <p className="mt-5 text-white/55 leading-relaxed max-w-md" style={{ fontSize: "clamp(15px, 1.6vw, 17px)" }}>
             DrayGo Shipper, Carrier and Broker — three purpose-built apps connected on a single real-time platform with instant quotes, live loads and same-day payments.
           </p>
 
+          {/* App pills */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {APPS.map((app) => (
+              <a key={app.id} href={`#${app.id}`}
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12px] font-semibold text-white transition-all duration-200 hover:scale-105"
+                style={{ background: app.colorAlpha, border: `1px solid ${app.colorBorder}` }}>
+                <span style={{ display: "inline-block", width: 7, height: 7, borderRadius: "50%", background: app.color, flexShrink: 0 }} />
+                {app.name}
+              </a>
+            ))}
+          </div>
+
           {/* Download CTAs */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4 reveal reveal-delay-2">
-            <a href="#" className="inline-flex items-center gap-3 rounded-2xl px-6 py-3.5 bg-white text-[var(--navy)] font-bold text-[14px] transition-all duration-200 hover:scale-[1.03]">
-              <svg width="22" height="22" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-              <span><span className="block text-[9px] font-medium opacity-60 uppercase tracking-widest">Download for</span><span className="block text-[15px] font-black leading-tight">iOS</span></span>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.10] hover:bg-white/[0.20] border border-white/15 backdrop-blur-sm transition-colors duration-200">
+              <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" className="shrink-0"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] opacity-90">Download on the</span><span className="block text-[14px] font-semibold tracking-tight">App Store</span></span>
             </a>
-            <a href="#" className="inline-flex items-center gap-3 rounded-2xl px-6 py-3.5 text-white font-bold text-[14px] transition-all duration-200 hover:scale-[1.03]" style={{ background: "rgba(255,255,255,0.10)", border: "1px solid rgba(255,255,255,0.18)" }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 0 0 2.92-.02l.02-.02 9.2-9.2-2.12-2.12-10.02 10a2 2 0 0 0 0 3.36zM20.68 10.04l-2.76-1.6-2.44 2.44 2.44 2.44 2.78-1.6a1.4 1.4 0 0 0 0-2.44l-.02-.24zM2.1.28A2 2 0 0 0 2 1v22a2 2 0 0 0 .1.72l.02.02L13.26 12.5 2.12.26 2.1.28zM6.12.28l9.2 9.2-2.12 2.12L4.94.26A2 2 0 0 1 6.12.28z"/></svg>
-              <span><span className="block text-[9px] font-medium opacity-60 uppercase tracking-widest">Download for</span><span className="block text-[15px] font-black leading-tight">Android</span></span>
+            <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.10] hover:bg-white/[0.20] border border-white/15 backdrop-blur-sm transition-colors duration-200">
+              <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" />
+              <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
             </a>
+          </div>
+
+          {/* Stats */}
+          <div className="mt-10 grid grid-cols-2 gap-3 max-w-sm">
+            {STATS.map(({ n, label }) => (
+              <div key={label} className="rounded-xl py-4 px-4" style={{ background: "rgba(255,255,255,0.045)", border: "1px solid rgba(255,255,255,0.09)" }}>
+                <div className="display text-white leading-none" style={{ fontSize: 28 }}>{n}</div>
+                <div className="mt-1 text-[11px] font-medium text-white/40">{label}</div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* ── BOTTOM: 3 phone mockups ── */}
-        <div className="relative z-10 flex items-end justify-center gap-4 md:gap-6 px-4 reveal reveal-delay-3" style={{ maxWidth: 1000, margin: "0 auto" }}>
-
-          {/* LEFT — DrayGo Shipper (red) */}
-          <div className="flex-shrink-0 hidden sm:block" style={{ width: 230, transform: "translateY(40px)" }}>
-            <div className="rounded-[36px] overflow-hidden" style={{ background: "#0D0D1A", border: "2.5px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 80px -20px rgba(0,0,0,0.8)" }}>
-              {/* Status bar */}
-              <div className="flex items-center justify-between px-5 pt-3 pb-1" style={{ background: "#0D0D1A" }}>
-                <span className="text-[10px] font-bold text-white">9:41</span>
-                <div className="flex items-center gap-1">
-                  <svg width="12" height="8" viewBox="0 0 12 8" fill="white" opacity="0.7"><rect x="0" y="2" width="2" height="6" rx="0.5"/><rect x="3" y="1" width="2" height="7" rx="0.5"/><rect x="6" y="0" width="2" height="8" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5" opacity="0.3"/></svg>
-                  <svg width="14" height="8" viewBox="0 0 14 8" fill="white" opacity="0.7"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5" stroke="white" strokeWidth="1" fill="none" opacity="0.5"/><rect x="12" y="2.5" width="1.5" height="3" rx="0.5" fill="white" opacity="0.5"/><rect x="1.5" y="1.5" width="8" height="5" rx="0.8" fill="white"/></svg>
-                </div>
-              </div>
-              {/* App header */}
-              <div className="px-4 pt-2 pb-3" style={{ background: "#0D0D1A" }}>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[13px] font-black text-white">DrayGo <span style={{ color: "#fc0b05" }}>Shipper</span></span>
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: "rgba(252,11,5,0.2)" }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4-6 8-6s6.5 2 8 6"/></svg>
-                  </div>
-                </div>
-                {/* Quote card */}
-                <div className="rounded-2xl p-3.5" style={{ background: "#161626", border: "1px solid rgba(252,11,5,0.2)" }}>
-                  <div className="text-[9px] uppercase tracking-widest text-white/40 mb-1">New quote</div>
-                  <div className="flex items-center gap-1.5 mb-2">
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#fc0b05" }} />
-                    <span className="text-[11px] text-white font-semibold">Long Beach, CA</span>
-                  </div>
-                  <div className="w-px h-3 ml-[2.5px] mb-2" style={{ background: "rgba(255,255,255,0.15)" }} />
-                  <div className="flex items-center gap-1.5 mb-3">
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#18a354" }} />
-                    <span className="text-[11px] text-white font-semibold">Phoenix, AZ</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] text-white/40">40&apos; Dry · 2 axle</span>
-                    <div className="rounded-lg px-2.5 py-1 text-[10px] font-bold text-white" style={{ background: "#fc0b05" }}>Quote →</div>
-                  </div>
-                </div>
-                {/* Result */}
-                <div className="mt-2.5 rounded-2xl p-3.5" style={{ background: "#161626" }}>
-                  <div className="text-[9px] text-white/40 uppercase tracking-widest mb-1">Estimated rate</div>
-                  <div className="text-[26px] font-black text-white leading-none">$742<span className="text-[14px] font-normal text-white/40">.00</span></div>
-                  <div className="mt-1 text-[9px] font-medium" style={{ color: "#18a354" }}>✓ Locked 24 hours · Diesel live</div>
-                </div>
-                {/* Recent */}
-                <div className="mt-2.5 space-y-2">
-                  {[["LA → Denver", "$1,140"], ["Oakland → Reno", "$480"]].map(([r, p]) => (
-                    <div key={r} className="flex items-center justify-between rounded-xl px-3 py-2" style={{ background: "#161626" }}>
-                      <span className="text-[10px] text-white/60">{r}</span>
-                      <span className="text-[10px] font-bold text-white">{p}</span>
-                    </div>
-                  ))}
-                </div>
-                {/* Home bar */}
-                <div className="mt-4 flex justify-center"><div className="w-20 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)" }} /></div>
-              </div>
-            </div>
-          </div>
-
-          {/* CENTER — DrayGo Carrier (green, largest, elevated) */}
-          <div className="flex-shrink-0" style={{ width: 260, transform: "translateY(0px)", zIndex: 2 }}>
-            <div className="rounded-[40px] overflow-hidden" style={{ background: "#0A0F0D", border: "2.5px solid rgba(255,255,255,0.15)", boxShadow: "0 60px 120px -20px rgba(0,0,0,0.9), 0 0 0 1px rgba(24,163,84,0.15)" }}>
-              {/* Status bar */}
-              <div className="flex items-center justify-between px-5 pt-3 pb-1" style={{ background: "#0A0F0D" }}>
-                <span className="text-[10px] font-bold text-white">9:41</span>
-                <div className="flex items-center gap-1">
-                  <svg width="12" height="8" viewBox="0 0 12 8" fill="white" opacity="0.7"><rect x="0" y="2" width="2" height="6" rx="0.5"/><rect x="3" y="1" width="2" height="7" rx="0.5"/><rect x="6" y="0" width="2" height="8" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5" opacity="0.3"/></svg>
-                  <svg width="14" height="8" viewBox="0 0 14 8" fill="white" opacity="0.7"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5" stroke="white" strokeWidth="1" fill="none" opacity="0.5"/><rect x="12" y="2.5" width="1.5" height="3" rx="0.5" fill="white" opacity="0.5"/><rect x="1.5" y="1.5" width="8" height="5" rx="0.8" fill="white"/></svg>
-                </div>
-              </div>
-              {/* App header */}
-              <div className="px-4 pt-2 pb-4" style={{ background: "#0A0F0D" }}>
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <div className="text-[11px] text-white/40">Good morning,</div>
-                    <div className="text-[14px] font-black text-white">DrayGo <span style={{ color: "#18a354" }}>Carrier</span></div>
-                  </div>
-                  <div className="rounded-xl px-2.5 py-1.5 text-[10px] font-bold text-white flex items-center gap-1.5" style={{ background: "rgba(24,163,84,0.2)", border: "1px solid rgba(24,163,84,0.35)" }}>
-                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#18a354", display: "inline-block" }} />
-                    Online
-                  </div>
-                </div>
-                {/* Earnings strip */}
-                <div className="rounded-2xl p-3.5 mb-3" style={{ background: "linear-gradient(135deg, rgba(24,163,84,0.25) 0%, rgba(24,163,84,0.08) 100%)", border: "1px solid rgba(24,163,84,0.25)" }}>
-                  <div className="text-[9px] text-white/45 uppercase tracking-widest mb-0.5">Today&apos;s earnings</div>
-                  <div className="text-[24px] font-black text-white leading-none">$1,240</div>
-                  <div className="mt-1 text-[9px]" style={{ color: "#18a354" }}>↑ 3 loads completed</div>
-                </div>
-                {/* Load board */}
-                <div className="text-[11px] font-bold text-white mb-2 flex items-center justify-between">
-                  <span>Nearby Loads</span>
-                  <span className="rounded-full px-2 py-0.5 text-[9px] font-bold" style={{ background: "rgba(24,163,84,0.2)", color: "#18a354" }}>24 new</span>
-                </div>
-                {[
-                  { from: "Long Beach", to: "Phoenix", pay: "$680", t: "2h ago" },
-                  { from: "Oakland", to: "Sacramento", pay: "$420", t: "4h ago" },
-                  { from: "Houston", to: "Dallas", pay: "$580", t: "5h ago" },
-                ].map((l) => (
-                  <div key={l.from} className="flex items-center justify-between rounded-xl px-3 py-2.5 mb-2" style={{ background: "#161E15", border: "1px solid rgba(255,255,255,0.06)" }}>
-                    <div>
-                      <div className="text-[11px] font-semibold text-white">{l.from} → {l.to}</div>
-                      <div className="text-[9px] text-white/40 mt-0.5">{l.t}</div>
-                    </div>
-                    <div className="text-[12px] font-black" style={{ color: "#18a354" }}>{l.pay}</div>
-                  </div>
-                ))}
-                {/* Bottom nav */}
-                <div className="mt-3 grid grid-cols-4 gap-0">
-                  {["Home", "Loads", "Pay", "Me"].map((n, i) => (
-                    <div key={n} className="flex flex-col items-center gap-1 py-2">
-                      <div className="w-4 h-4 rounded" style={{ background: i === 1 ? "#18a354" : "rgba(255,255,255,0.15)" }} />
-                      <span className="text-[8px]" style={{ color: i === 1 ? "#18a354" : "rgba(255,255,255,0.3)" }}>{n}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex justify-center mt-1"><div className="w-24 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)" }} /></div>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT — DrayGo Broker (blue) */}
-          <div className="flex-shrink-0 hidden sm:block" style={{ width: 230, transform: "translateY(40px)" }}>
-            <div className="rounded-[36px] overflow-hidden" style={{ background: "#0B0D18", border: "2.5px solid rgba(255,255,255,0.12)", boxShadow: "0 40px 80px -20px rgba(0,0,0,0.8)" }}>
-              {/* Status bar */}
-              <div className="flex items-center justify-between px-5 pt-3 pb-1" style={{ background: "#0B0D18" }}>
-                <span className="text-[10px] font-bold text-white">9:41</span>
-                <div className="flex items-center gap-1">
-                  <svg width="12" height="8" viewBox="0 0 12 8" fill="white" opacity="0.7"><rect x="0" y="2" width="2" height="6" rx="0.5"/><rect x="3" y="1" width="2" height="7" rx="0.5"/><rect x="6" y="0" width="2" height="8" rx="0.5"/><rect x="9" y="0" width="2" height="8" rx="0.5" opacity="0.3"/></svg>
-                  <svg width="14" height="8" viewBox="0 0 14 8" fill="white" opacity="0.7"><rect x="0.5" y="0.5" width="11" height="7" rx="1.5" stroke="white" strokeWidth="1" fill="none" opacity="0.5"/><rect x="12" y="2.5" width="1.5" height="3" rx="0.5" fill="white" opacity="0.5"/><rect x="1.5" y="1.5" width="8" height="5" rx="0.8" fill="white"/></svg>
-                </div>
-              </div>
-              {/* App header */}
-              <div className="px-4 pt-2 pb-3" style={{ background: "#0B0D18" }}>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[13px] font-black text-white">DrayGo <span style={{ color: "#3A5FC0" }}>Broker</span></span>
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center" style={{ background: "rgba(58,95,192,0.2)" }}>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3A5FC0" strokeWidth="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-                  </div>
-                </div>
-                {/* Stats row */}
-                <div className="grid grid-cols-3 gap-1.5 mb-3">
-                  {[["12", "Active"], ["4", "Pending"], ["$8.4k", "Week"]].map(([v, l]) => (
-                    <div key={l} className="rounded-xl p-2.5 text-center" style={{ background: "#131525" }}>
-                      <div className="text-[14px] font-black text-white">{v}</div>
-                      <div className="text-[8px] text-white/40">{l}</div>
-                    </div>
-                  ))}
-                </div>
-                {/* Active loads */}
-                <div className="text-[10px] font-bold text-white mb-2 uppercase tracking-widest">Active loads</div>
-                {[
-                  { id: "DR-8841", route: "NY/NJ → Chicago", carrier: "Halo Freight", status: "In transit", color: "#18a354" },
-                  { id: "DR-8842", route: "LA → Phoenix", carrier: "Atlas BCO", status: "Dispatched", color: "#3A5FC0" },
-                  { id: "DR-8843", route: "Houston → Dallas", carrier: "Meridian", status: "Pending", color: "#fc0b05" },
-                ].map((l) => (
-                  <div key={l.id} className="rounded-xl px-3 py-2.5 mb-1.5" style={{ background: "#131525", border: "1px solid rgba(255,255,255,0.05)" }}>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-[10px] font-bold text-white">{l.route}</span>
-                      <span className="text-[8px] rounded-full px-2 py-0.5 font-bold" style={{ background: `${l.color}22`, color: l.color }}>{l.status}</span>
-                    </div>
-                    <div className="text-[9px] text-white/35">{l.carrier} · {l.id}</div>
-                  </div>
-                ))}
-                {/* Home bar */}
-                <div className="mt-3 flex justify-center"><div className="w-20 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)" }} /></div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
