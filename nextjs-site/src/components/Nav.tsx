@@ -6,13 +6,12 @@ import { asset } from "@/lib/site";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
   { label: "How it Works", href: "/how-it-works" },
   { label: "Shippers", href: "/shipper" },
   { label: "Broker", href: "/broker" },
-  { label: "How it Works", href: "/#how-it-works" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Carriers", href: "/carriers" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Contact", href: "/contact", highlight: true },
 ];
 
 const SERVICES_ITEMS = [
@@ -90,11 +89,24 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
           <Link href="/load-board" className={linkCls} style={{ padding: "6px 12px" }}>Load Board</Link>
           <Link href="/jobs-map" className={linkCls} style={{ padding: "6px 12px" }}>Jobs on Map</Link>
           {NAV_LINKS.map((l) => (
-            <Link key={l.label} href={l.href} className={linkCls} style={{ padding: "6px 12px" }}>
-              {l.label}
-            </Link>
+            l.highlight ? (
+              <Link key={l.label} href={l.href}
+                className="text-[13px] font-semibold whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none active:outline-none relative"
+                style={{ padding: "6px 12px", color: "#fc0b05", animation: "navContactPulse 2.8s ease-in-out infinite" }}>
+                {l.label}
+                <span className="absolute bottom-0 left-3 right-3 h-[1.5px] rounded-full" style={{ background: "#fc0b05", animation: "navUnderline 2.8s ease-in-out infinite" }} />
+              </Link>
+            ) : (
+              <Link key={l.label} href={l.href} className={linkCls} style={{ padding: "6px 12px" }}>
+                {l.label}
+              </Link>
+            )
           ))}
         </nav>
+        <style>{`
+          @keyframes navContactPulse { 0%,100%{opacity:1;text-shadow:none} 50%{opacity:0.7;text-shadow:0 0 12px rgba(252,11,5,0.6)} }
+          @keyframes navUnderline { 0%,100%{transform:scaleX(1);opacity:0.6} 50%{transform:scaleX(0.4);opacity:1} }
+        `}</style>
 
         {/* Right actions — right col */}
         <div className="flex items-center gap-2 justify-end">
