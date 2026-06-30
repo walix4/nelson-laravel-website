@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { label: "Broker", href: "/broker" },
   { label: "Carriers", href: "/carriers" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const SERVICES_ITEMS = [
