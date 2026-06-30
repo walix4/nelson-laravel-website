@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
 
 // ─── Get your FREE key: go to web3forms.com → enter info@draygo.net → click the email link ───
-const WEB3FORMS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const WEB3FORMS_KEY = "70a957d6-a4a7-44b0-a150-3e0f166f8100";
 
 const BULLETS = [
   "Instant Drayage Rate Quotes",
@@ -212,14 +212,14 @@ export default function ContactPage() {
                     style={{ animation: "fadeUp 0.4s ease both" }}>
                     <div className="relative mb-6 w-20 h-20">
                       <div className="w-20 h-20 rounded-full flex items-center justify-center"
-                        style={{ background: "rgba(24,163,84,0.10)", border: "1.5px solid rgba(24,163,84,0.38)", animation: "scaleIn 0.5s cubic-bezier(.34,1.56,.64,1) both" }}>
-                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#18a354" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                        style={{ background: "rgba(34,197,94,0.15)", border: "2px solid rgba(34,197,94,0.55)", animation: "scaleIn 0.5s cubic-bezier(.34,1.56,.64,1) both", boxShadow: "0 0 28px rgba(34,197,94,0.18)" }}>
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round"
                           style={{ strokeDasharray: 40, strokeDashoffset: 40, animation: "drawCheck 0.5s 0.35s ease forwards" }}>
                           <polyline points="20 6 9 17 4 12"/>
                         </svg>
                       </div>
-                      <div className="absolute inset-0 rounded-full" style={{ border: "1px solid rgba(24,163,84,0.3)", animation: "ripple1 1.1s 0.6s ease-out forwards" }} />
-                      <div className="absolute inset-0 rounded-full" style={{ border: "1px solid rgba(24,163,84,0.15)", animation: "ripple2 1.3s 0.8s ease-out forwards" }} />
+                      <div className="absolute inset-0 rounded-full" style={{ border: "1.5px solid rgba(34,197,94,0.35)", animation: "ripple1 1.1s 0.6s ease-out forwards" }} />
+                      <div className="absolute inset-0 rounded-full" style={{ border: "1px solid rgba(34,197,94,0.18)", animation: "ripple2 1.3s 0.8s ease-out forwards" }} />
                     </div>
                     <h3 className="text-[24px] font-bold text-white mb-2">Message Sent!</h3>
                     <p className="text-[14px] text-white/50 mb-1">We received your message.</p>
