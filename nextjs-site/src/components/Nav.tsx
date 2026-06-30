@@ -102,7 +102,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
             Sign in
           </Link>
           <Link
-            href="/#load-board"
+            href="/contact"
             className="hidden sm:inline-flex text-[13px] font-semibold text-white rounded-lg items-center gap-[6px] transition hover:opacity-90 whitespace-nowrap outline-none focus:outline-none focus-visible:outline-none"
             style={{ background: accentColor, padding: "8px 16px", transition: "background 0.22s ease" }}
           >
@@ -139,7 +139,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
             ))}
           </div>
           <div className="pt-3">
-            <Link href="/#load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
+            <Link href="/contact" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
               Get Started →
             </Link>
           </div>
