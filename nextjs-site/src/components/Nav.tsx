@@ -10,8 +10,8 @@ const NAV_LINKS = [
   { label: "How it Works", href: "/how-it-works" },
   { label: "Shippers", href: "/shipper" },
   { label: "Broker", href: "/broker" },
-  { label: "Carriers", href: "/carriers" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "How it Works", href: "/#how-it-works" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
