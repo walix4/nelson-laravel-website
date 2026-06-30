@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { label: "Broker", href: "/broker" },
   { label: "How it Works", href: "/#how-it-works" },
   { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const SERVICES_ITEMS = [
