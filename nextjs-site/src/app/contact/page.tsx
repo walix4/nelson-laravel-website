@@ -33,8 +33,13 @@ export default function ContactPage() {
   const [status, setStatus] = useState<Status>("idle");
   const [focused, setFocused] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [bulletsAnimated, setBulletsAnimated] = useState(false);
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+    const t = setTimeout(() => setBulletsAnimated(true), 120);
+    return () => clearTimeout(t);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -98,12 +103,19 @@ export default function ContactPage() {
         @keyframes float  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
         @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
         @keyframes spin   { to{transform:rotate(360deg)} }
+        @keyframes bulletIn { from{opacity:0;transform:translateX(-18px)} to{opacity:1;transform:translateX(0)} }
+        @keyframes tickDraw { from{stroke-dashoffset:20} to{stroke-dashoffset:0} }
         .field-label{font-size:11px;font-weight:600;letter-spacing:.08em;color:rgba(255,255,255,.38);margin-bottom:6px;display:block;text-transform:uppercase;transition:color .2s}
         .field-wrap:focus-within .field-label{color:rgba(252,11,5,.75)}
         .g1{animation:float 4s ease-in-out infinite}
         .g2{animation:float 5.5s ease-in-out .8s infinite}
         .g3{animation:float 3.8s ease-in-out 1.5s infinite}
         .g4{animation:float 6s ease-in-out .3s infinite}
+        .bullet-item{opacity:0;animation:bulletIn 0.5s cubic-bezier(0.22,1,0.36,1) forwards}
+        .bullet-item .tick-svg{stroke-dasharray:20;stroke-dashoffset:20}
+        .bullet-item .tick-circle{transform:scale(0.6);transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1)}
+        .bullet-item.animated .tick-svg{animation:tickDraw 0.35s ease forwards}
+        .bullet-item.animated .tick-circle{transform:scale(1)}
       `}</style>
 
       <section className="relative overflow-hidden min-h-screen flex items-center py-24"
@@ -142,14 +154,21 @@ export default function ContactPage() {
 
               <ul className="space-y-3.5 mb-10">
                 {BULLETS.map((b, i) => (
-                  <li key={b} className="flex items-center gap-3.5">
-                    <div className="relative w-[22px] h-[22px] shrink-0 flex items-center justify-center rounded-full"
-                      style={{ background: "rgba(252,11,5,0.11)", border: "1px solid rgba(252,11,5,0.28)" }}>
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fc0b05" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+                  <li key={b}
+                    className={`bullet-item flex items-center gap-3.5${bulletsAnimated ? " animated" : ""}`}
+                    style={{ animationDelay: `${i * 90}ms`, animationFillMode: "forwards" }}>
+                    <div className="tick-circle relative w-[22px] h-[22px] shrink-0 flex items-center justify-center rounded-full"
+                      style={{
+                        background: "rgba(34,197,94,0.13)",
+                        border: "1px solid rgba(34,197,94,0.35)",
+                        transitionDelay: `${i * 90 + 180}ms`,
+                      }}>
+                      <svg className="tick-svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"
+                        style={{ animationDelay: `${i * 90 + 220}ms` }}>
                         <polyline points="20 6 9 17 4 12"/>
                       </svg>
                     </div>
-                    <span className="text-[14px] font-medium" style={{ color: `rgba(255,255,255,${0.55 + i * 0.07})` }}>{b}</span>
+                    <span className="text-[14px] font-medium" style={{ color: `rgba(255,255,255,${0.6 + i * 0.06})` }}>{b}</span>
                   </li>
                 ))}
               </ul>
