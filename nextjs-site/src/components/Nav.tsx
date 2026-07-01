@@ -9,6 +9,8 @@ const NAV_LINKS = [
   { label: "Shipper", href: "/shipper" },
   { label: "Carrier", href: "/carriers" },
   { label: "Broker", href: "/broker" },
+  { label: "Load Board", href: "/load-board" },
+  { label: "Jobs Map", href: "/jobs-map" },
   { label: "How it Works", href: "/how-it-works" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact", highlight: true },
