@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 import { asset } from "@/lib/site";
 
 const NAV_LINKS = [
-  { label: "Load Board", href: "/load-board" },
-  { label: "Jobs Map", href: "/jobs-map" },
   { label: "Home", href: "/" },
   { label: "Shipper", href: "/shipper" },
   { label: "Carrier", href: "/carriers" },
