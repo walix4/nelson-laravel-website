@@ -125,7 +125,7 @@ const TESTIMONIALS: Testimonial[] = [
     location: "Houston, TX",
     stat: "120 loads/month",
     quote:
-      "DrayGo cut our average booking time from 2 hours to under 8 minutes. We book twice the loads with the same team.",
+      "DrayGo cut our average booking time from 2 hours to under 22 minutes. We book twice the loads with the same team.",
   },
   {
     initials: "S",
@@ -227,7 +227,7 @@ export default function BrokerPage() {
             </h1>
 
             <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">
-              DrayGo connects freight brokers to 500+ vetted drayage carriers across every major US port complex. Real rates, real capacity, real-time.
+              DrayGo connects freight brokers to 1,800+ vetted drayage carriers across every major US port complex. Real rates, real capacity, real-time.
             </p>
 
             <div className="mt-8 flex gap-2.5 flex-wrap">
@@ -252,10 +252,10 @@ export default function BrokerPage() {
       <section style={{ background: "linear-gradient(180deg,#09172a 0%,#060f1e 100%)", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "48px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }} className="hero-stats-grid">
           {[
-            { val: "$2.4M+", label: "Brokered Monthly" },
-            { val: "8 min", label: "Avg Booking Time" },
-            { val: "500+", label: "Vetted Carriers" },
-            { val: "12-18%", label: "Avg Broker Margin" },
+            { val: "$14.6M+", label: "Brokered Monthly" },
+            { val: "22 min", label: "Avg Booking Time" },
+            { val: "1,800+", label: "Vetted Carriers" },
+            { val: "15-22%", label: "Avg Broker Margin" },
           ].map((s, i) => (
             <div key={s.val} style={{ padding: "28px 0", paddingLeft: i === 0 ? 0 : 32, borderLeft: i === 0 ? "none" : "1px solid rgba(255,255,255,0.08)" }}>
               <div style={{ fontSize: 40, fontWeight: 900, color: "#fff", lineHeight: 1, letterSpacing: "-0.02em" }}>{s.val}</div>
@@ -277,7 +277,7 @@ export default function BrokerPage() {
               Plans built for brokers.
             </h2>
             <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 16, maxWidth: 520, margin: "0 auto" }}>
-              Every plan includes live load board access, 500+ verified carriers, and real-time rate intelligence.
+              Every plan includes live load board access, 1,800+ verified carriers, and real-time rate intelligence.
             </p>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 28 }} className="pricing-grid-broker">
@@ -370,7 +370,7 @@ export default function BrokerPage() {
               <span style={{ color: "#00a5e7" }}>Never miss a free day.</span>
             </h2>
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 17, maxWidth: 520, margin: "0 auto", lineHeight: 1.6 }}>
-              Instant access to the closest vetted drivers, live demurrage alerts, and a 500+ carrier network — all in one platform.
+              Instant access to the closest vetted drivers, live demurrage alerts, and a 1,800+ carrier network — all in one platform.
             </p>
           </div>
 
@@ -393,16 +393,16 @@ export default function BrokerPage() {
                 <div style={{ width: 1, height: 32, background: "rgba(255,255,255,0.1)" }} />
                 <div><div style={{ fontSize: 22, fontWeight: 900, color: "#fff" }}>Auto</div><div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 3 }}>Detention alerts</div></div>
                 <div style={{ width: 1, height: 32, background: "rgba(255,255,255,0.1)" }} />
-                <div><div style={{ fontSize: 22, fontWeight: 900, color: "#fff" }}>&lt;8 min</div><div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 3 }}>Driver booked</div></div>
+                <div><div style={{ fontSize: 22, fontWeight: 900, color: "#fff" }}>&lt;22 min</div><div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.12em", marginTop: 3 }}>Driver booked</div></div>
               </div>
             </div>
 
             {/* STAT TOWER */}
             <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 20, display: "flex", flexDirection: "column" }}>
               {[
-                { val: "500+", label: "Vetted Carriers" },
-                { val: "12–18%", label: "Avg Broker Margin" },
-                { val: "8 min", label: "Avg Booking Time" },
+                { val: "1,800+", label: "Vetted Carriers" },
+                { val: "15–22%", label: "Avg Broker Margin" },
+                { val: "22 min", label: "Avg Booking Time" },
               ].map((s, i, arr) => (
                 <div key={s.label} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 20px", borderBottom: i < arr.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none" }}>
                   <div style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>{s.val}</div>
@@ -416,7 +416,7 @@ export default function BrokerPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
             {[
               { iconPath: '<circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>', title: "Closest Driver to Terminal", desc: "See which carriers are physically nearest to the terminal right now. Book the fastest, most competitive move for your shipper — every time." },
-              { iconPath: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>', title: "500+ Carrier Network", desc: "The largest vetted drayage carrier network across every major US port. Pre-screened, insured, and rated by brokers like you." },
+              { iconPath: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>', title: "1,800+ Carrier Network", desc: "The largest vetted drayage carrier network across every major US port. Pre-screened, insured, and rated by brokers like you." },
               { iconPath: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>', title: "Margin Intelligence", desc: "Real-time lane rate benchmarks so you always know your spread before you quote. Never leave money on the table again." },
             ].map(b => (
               <div key={b.title} style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 16, padding: "28px" }}>
@@ -526,7 +526,7 @@ export default function BrokerPage() {
                     <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                   </svg>
                 ),
-                title: "500+ Vetted Carriers",
+                title: "1,800+ Vetted Carriers",
                 desc: "Real capacity at every major US port complex. Every carrier MC/DOT verified.",
               },
               {
@@ -1169,7 +1169,7 @@ export default function BrokerPage() {
                   lineHeight: 1,
                 }}
               >
-                12–18%
+                15–22%
               </div>
               <p
                 style={{

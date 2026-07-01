@@ -9,6 +9,20 @@ export const metadata: Metadata = {
     shortcut: "/favicon.png",
     apple: "/favicon.png",
   },
+  openGraph: {
+    title: "DrayGo · The drayage platform for North America",
+    description: "Instant drayage quotes across every major U.S. port. Watch your freight move from port to door — in real time.",
+    url: "https://draygo.net",
+    siteName: "DrayGo",
+    images: [{ url: "https://draygo.net/og-image.png", width: 1200, height: 630, alt: "DrayGo" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DrayGo · The drayage platform for North America",
+    description: "Instant drayage quotes across every major U.S. port.",
+    images: ["https://draygo.net/og-image.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

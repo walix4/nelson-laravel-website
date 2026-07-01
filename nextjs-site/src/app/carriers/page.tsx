@@ -9,10 +9,10 @@ const PRIMARY = "#27b30a";
 
 /* ─── data ─────────────────────────────────────────────────── */
 const STATS = [
-  ["2,800+", "Active Carriers"],
+  ["4,600+", "Active Carriers"],
   ["48h", "Average Payment"],
-  ["$2.85", "Avg Per Mile"],
-  ["98.4%", "On-Time Rate"],
+  ["$3.42", "Avg Per Mile"],
+  ["96.2%", "On-Time Rate"],
 ];
 
 const LOADS = [
@@ -87,7 +87,7 @@ export default function CarriersPage() {
   const [loadsPerWeek, setLoadsPerWeek] = useState(8);
   const [avgMiles, setAvgMiles] = useState(65);
 
-  const weeklyGross = loadsPerWeek * avgMiles * 2.85;
+  const weeklyGross = loadsPerWeek * avgMiles * 3.42;
   const monthlyGross = weeklyGross * 4.3;
   const annualGross = weeklyGross * 52;
   const fuelCost = avgMiles * loadsPerWeek * 4.3 * 0.42;
@@ -349,9 +349,9 @@ export default function CarriersPage() {
             {/* STAT TOWER */}
             <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 20, display: "flex", flexDirection: "column" }}>
               {[
-                { val: "2,800+", label: "Active Carriers" },
-                { val: "98.4%", label: "On-Time Rate" },
-                { val: "$2.85", label: "Avg Per Mile" },
+                { val: "4,600+", label: "Active Carriers" },
+                { val: "96.2%", label: "On-Time Rate" },
+                { val: "$3.42", label: "Avg Per Mile" },
               ].map((s, i, arr) => (
                 <div key={s.label} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 20px", borderBottom: i < arr.length - 1 ? "1px solid rgba(255,255,255,0.07)" : "none" }}>
                   <div style={{ fontSize: 44, fontWeight: 900, color: "#fff", lineHeight: 1 }}>{s.val}</div>
@@ -423,7 +423,7 @@ export default function CarriersPage() {
                 marginBottom: 12,
               }}
             >
-              2,800+ carriers earning more on DrayGo.
+              4,600+ carriers earning more on DrayGo.
             </p>
             <span
               style={{
@@ -436,7 +436,7 @@ export default function CarriersPage() {
                 borderRadius: 999,
               }}
             >
-              $2.85/mi average
+              $3.42/mi average
             </span>
           </div>
         </div>
@@ -553,7 +553,7 @@ export default function CarriersPage() {
               marginTop: 16,
             }}
           >
-            Est. based on $2.85/mi avg. Actual varies.
+            Est. based on $3.42/mi avg. Actual varies.
           </p>
         </div>
       </section>
