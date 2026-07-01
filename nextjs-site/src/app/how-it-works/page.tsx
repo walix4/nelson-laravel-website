@@ -1,7 +1,10 @@
 "use client";
+import dynamic from "next/dynamic";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { asset } from "@/lib/site";
+
+const ShaderBackground = dynamic(() => import("@/components/ShaderBackground"), { ssr: false });
 
 const STEPS = [
   {
@@ -144,9 +147,9 @@ export default function HowItWorksPage() {
       `}</style>
 
       {/* HERO */}
-      <section style={{ position: "relative", minHeight: "90vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
-        <img src={asset("/hero-port-night.jpg")} alt="" aria-hidden="true" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", zIndex: 0 }} />
-        <div style={{ position: "absolute", inset: 0, background: "rgba(6,13,26,0.70)", zIndex: 1 }} />
+      <section style={{ position: "relative", minHeight: "90vh", display: "flex", alignItems: "center", overflow: "hidden", background: "#000" }}>
+        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}><ShaderBackground /></div>
+        <div style={{ position: "absolute", inset: 0, background: "rgba(4,10,20,0.55)", zIndex: 1 }} />
 
         <div style={{ position: "relative", zIndex: 3, maxWidth: 960, margin: "0 auto", textAlign: "center", padding: "100px 24px 80px", width: "100%" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(252,11,5,0.14)", border: "1px solid rgba(252,11,5,0.40)", borderRadius: 6, padding: "5px 16px", fontSize: 10, fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" as const, color: "#fc0b05", marginBottom: 36, animation: "hiw-badge-pulse 2.5s ease-in-out infinite" }}>

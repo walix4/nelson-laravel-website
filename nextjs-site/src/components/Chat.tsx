@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // ─── Same key as contact page — get at web3forms.com ───
-const WEB3FORMS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const WEB3FORMS_KEY = "70a957d6-a4a7-44b0-a150-3e0f166f8100";
 
 type Msg = { who: "bot" | "me"; text: string };
 type Step = "idle" | "ask_name" | "ask_contact" | "ask_inquiry" | "done";
@@ -120,7 +120,7 @@ export default function Chat() {
         .chat-widget *{box-sizing:border-box}
         .chat-panel{
           position:fixed;bottom:90px;right:24px;width:360px;max-height:560px;
-          border-radius:20px;overflow:hidden;display:flex;flex-direction:column;
+          border-radius:10px;overflow:hidden;display:flex;flex-direction:column;
           background:#0d1f35;border:1px solid rgba(255,255,255,0.09);
           box-shadow:0 24px 80px rgba(0,0,0,0.55),0 0 0 1px rgba(252,11,5,0.08);
           transform:scale(0.92) translateY(12px);opacity:0;pointer-events:none;
@@ -149,9 +149,9 @@ export default function Chat() {
         }
         .chat-chip:hover{background:rgba(252,11,5,0.15);border-color:rgba(252,11,5,0.4);color:#fff}
         .chat-typing{display:flex;align-items:center;gap:4px;padding:12px 14px;align-self:flex-start;background:rgba(255,255,255,0.07);border-radius:14px 14px 14px 4px}
-        .chat-typing span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5);animation:chatBounce 1.2s ease-in-out infinite}
-        .chat-typing span:nth-child(2){animation-delay:.18s}
-        .chat-typing span:nth-child(3){animation-delay:.36s}
+        .chat-typing-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5);animation:chatBounce 1.2s ease-in-out infinite}
+        .chat-typing-dot:nth-child(2){animation-delay:.18s}
+        .chat-typing-dot:nth-child(3){animation-delay:.36s}
         .chat-foot{display:flex;align-items:center;gap:8px;padding:10px 12px;border-top:1px solid rgba(255,255,255,0.07);flex-shrink:0}
         .chat-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:12px;padding:10px 14px;font-size:13px;color:#fff;outline:none;transition:border-color .2s}
         .chat-input::placeholder{color:rgba(255,255,255,0.3)}
@@ -178,17 +178,22 @@ export default function Chat() {
       `}</style>
 
       {/* ── Panel ── */}
-      <div className={`chat-widget chat-panel${open ? " open" : ""}`} role="dialog" aria-label="DrayGo Assistant">
+      <div
+        className={`chat-widget chat-panel${open ? " open" : ""}`}
+        role="dialog"
+        aria-label="DrayGo Assistant"
+        style={{ background: "#0d1f35" }}
+      >
         {/* Header */}
-        <div className="chat-head">
-          <div className="chat-av">
+        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "14px 16px", background: "linear-gradient(135deg,#fc0b05 0%,#b00904 100%)", flexShrink: 0 }}>
+          <div style={{ width: 36, height: 36, borderRadius: 8, background: "rgba(255,255,255,0.18)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 8V4M9 13h.01M15 13h.01M9 16h6M2 12v2M22 12v2"/>
             </svg>
           </div>
-          <div className="flex-1">
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", lineHeight: 1.2 }}>Dray Rate Assistant</div>
-            <div className="chat-status">
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", lineHeight: 1.2 }}>DrayGo AI Chat</div>
+            <div style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "rgba(255,255,255,0.8)", marginTop: 2 }}>
               <span className="chat-dot" />
               AI · replies instantly
             </div>
@@ -201,26 +206,46 @@ export default function Chat() {
         </div>
 
         {/* Body */}
-        <div className="chat-body" ref={bodyRef}>
+        <div
+          ref={bodyRef}
+          style={{ flex: 1, overflowY: "auto", padding: "14px 14px 8px", display: "flex", flexDirection: "column", gap: 8, scrollbarWidth: "none", background: "#0d1f35" }}
+        >
           {msgs.map((m, i) => (
-            <div key={i} className={`chat-msg ${m.who}`}>{m.text}</div>
+            <div key={i} style={{
+              maxWidth: "82%",
+              padding: "10px 13px",
+              borderRadius: m.who === "bot" ? "8px 8px 8px 2px" : "8px 8px 2px 8px",
+              fontSize: 13.5,
+              lineHeight: 1.45,
+              alignSelf: m.who === "bot" ? "flex-start" : "flex-end",
+              background: m.who === "bot" ? "rgba(255,255,255,0.09)" : "#fc0b05",
+              color: m.who === "bot" ? "rgba(255,255,255,0.92)" : "#fff",
+              boxShadow: m.who === "me" ? "0 4px 14px rgba(252,11,5,0.3)" : "none",
+              animation: "chatIn 0.3s cubic-bezier(0.22,1,0.36,1) both",
+            }}>{m.text}</div>
           ))}
           {showShortcuts && (
-            <div className="chat-shortcuts">
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 4, alignSelf: "flex-start" }}>
               {SHORTCUTS.map((s) => (
-                <button key={s} className="chat-chip" onClick={() => send(s)}>{s}</button>
+                <button key={s} className="chat-chip" onClick={() => send(s)}
+                  style={{ padding: "7px 12px", borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: "pointer", border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.88)", whiteSpace: "nowrap" }}>
+                  {s}
+                </button>
               ))}
             </div>
           )}
           {typing && (
-            <div className="chat-typing">
-              <span /><span /><span />
+            <div style={{ display: "flex", alignItems: "center", gap: 4, padding: "12px 14px", alignSelf: "flex-start", background: "rgba(255,255,255,0.09)", borderRadius: "14px 14px 14px 4px" }}>
+              <span className="chat-typing-dot" /><span className="chat-typing-dot" /><span className="chat-typing-dot" />
             </div>
           )}
         </div>
 
         {/* Footer */}
-        <form className="chat-foot" onSubmit={(e) => { e.preventDefault(); send(val); }}>
+        <form
+          style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 12px", borderTop: "1px solid rgba(255,255,255,0.08)", flexShrink: 0, background: "#0d1f35" }}
+          onSubmit={(e) => { e.preventDefault(); send(val); }}
+        >
           <input
             className="chat-input"
             value={val}
@@ -233,8 +258,14 @@ export default function Chat() {
             }
             autoComplete="off"
             disabled={step === "done"}
+            style={{ flex: 1, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 6, padding: "10px 14px", fontSize: 13, color: "#fff", outline: "none" }}
           />
-          <button className="chat-send" type="submit" disabled={step === "done"} aria-label="Send">
+          <button
+            type="submit"
+            disabled={step === "done"}
+            aria-label="Send"
+            style={{ width: 38, height: 38, borderRadius: 6, background: "#fc0b05", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", border: "none", flexShrink: 0 }}
+          >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
               <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
             </svg>
