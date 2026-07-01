@@ -61,7 +61,13 @@ export default function Footer() {
             </div>
           ))}
         </div>
-        <div className="border-t border-white/10 pt-6 text-[11px] text-white/45 num">© 2026 DrayGo · All rights reserved</div>
+        <div className="border-t border-white/10 pt-6 flex flex-wrap items-center justify-between gap-3 text-[11px] text-white/45 num">
+          <span>© 2026 DrayGo LLC · All rights reserved</span>
+          <div className="flex items-center gap-4">
+            <a href="/privacy" className="hover:text-white/70 transition-colors" style={{ color: "inherit", textDecoration: "none" }}>Privacy Policy</a>
+            <a href="/terms" className="hover:text-white/70 transition-colors" style={{ color: "inherit", textDecoration: "none" }}>Terms &amp; Conditions</a>
+          </div>
+        </div>
       </div>
     </footer>
   );
