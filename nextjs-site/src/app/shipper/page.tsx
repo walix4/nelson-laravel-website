@@ -218,9 +218,12 @@ export default function ShipperPage() {
 
       {/* ══ SECTION 1 — HERO ══════════════════════════════════════════════════ */}
       <section style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
-        <video autoPlay muted loop playsInline style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}>
-          <source src={asset("/shipper-hero.mp4")} type="video/mp4" />
-        </video>
+        {/* Animated gradient — no video */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 0, background: "linear-gradient(135deg, #08192b 0%, #0a0f2e 50%, #150508 100%)" }}>
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 90% 70% at 75% 35%, rgba(252,11,5,0.22) 0%, transparent 60%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 15% 80%, rgba(58,10,10,0.30) 0%, transparent 55%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 40% 30% at 55% 60%, rgba(252,11,5,0.08) 0%, transparent 50%)" }} />
+        </div>
         {/* overlay */}
         <div style={{
           position: "absolute", inset: 0, zIndex: 1,

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { asset } from "@/lib/site";
 import Nav from "@/components/Nav";
@@ -409,32 +409,131 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* VISUAL — swap order on flip */}
+              {/* VISUAL — premium animated widget, no video */}
               <div className={`${app.flip ? "lg:order-1" : "lg:order-2"} reveal reveal-delay-1`}>
-                <div className="relative rounded-2xl overflow-hidden" style={{ border: `1px solid ${app.colorBorder}`, aspectRatio: "16/10" }}>
-                  {/* Video */}
-                  <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline>
-                    <source src={asset(app.video)} type="video/mp4" />
-                  </video>
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${app.color}60 0%, rgba(5,15,44,0.35) 50%, rgba(5,15,44,0.80) 100%)` }} />
-                  {/* Live badge */}
-                  <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-[11px] font-bold text-white"
-                    style={{ background: "rgba(0,0,0,0.48)", backdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.14)" }}>
-                    <span style={{ display: "inline-block", width: 6, height: 6, borderRadius: "50%", background: app.color, animation: "livePulse 1.8s ease-out infinite" }} />
-                    {app.name}
+                <style>{`
+                  @keyframes widgetFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+                  @keyframes barGrow { from{transform:scaleY(0);transform-origin:bottom} to{transform:scaleY(1);transform-origin:bottom} }
+                  @keyframes shimmer { 0%{opacity:0.4} 50%{opacity:1} 100%{opacity:0.4} }
+                  @keyframes statusPing { 0%{transform:scale(1);opacity:1} 100%{transform:scale(2.2);opacity:0} }
+                  @keyframes slideIn { from{opacity:0;transform:translateX(12px)} to{opacity:1;transform:translateX(0)} }
+                `}</style>
+
+                {/* ── SHIPPER WIDGET ── */}
+                {app.id === "shipper" && (
+                  <div style={{ background:"rgba(4,10,28,0.92)", backdropFilter:"blur(28px)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.55), 0 0 80px ${app.color}18`, animation:"widgetFloat 5s ease-in-out infinite" }}>
+                    <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
+                      <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${app.color}18`, border:`1px solid ${app.colorBorder}`, borderRadius:8, padding:"4px 12px", fontSize:9, fontWeight:800, letterSpacing:"0.14em", textTransform:"uppercase" as const, color:app.color }}>
+                        <span style={{ width:5, height:5, borderRadius:"50%", background:app.color, display:"inline-block", animation:"shimmer 1.6s ease-in-out infinite" }} />
+                        Instant Quote
+                      </div>
+                      <span style={{ fontSize:10, color:"rgba(255,255,255,0.3)" }}>DrayGo Shipper</span>
+                    </div>
+                    <div style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.08)", borderRadius:14, padding:"16px 18px", marginBottom:14 }}>
+                      <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:12 }}>
+                        <div style={{ width:8, height:8, borderRadius:"50%", background:app.color, flexShrink:0 }} />
+                        <span style={{ fontSize:13, fontWeight:600, color:"#fff" }}>Long Beach, CA</span>
+                        <span style={{ fontSize:10, color:"rgba(255,255,255,0.28)", marginLeft:"auto" }}>POLB</span>
+                      </div>
+                      <div style={{ width:1, height:18, background:"rgba(255,255,255,0.1)", marginLeft:3.5, marginBottom:12 }} />
+                      <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+                        <div style={{ width:8, height:8, borderRadius:"50%", background:"#18a354", flexShrink:0 }} />
+                        <span style={{ fontSize:13, fontWeight:600, color:"#fff" }}>Phoenix, AZ</span>
+                        <span style={{ fontSize:10, color:"rgba(255,255,255,0.28)", marginLeft:"auto" }}>PHX</span>
+                      </div>
+                    </div>
+                    <div style={{ background:`${app.color}10`, border:`1px solid ${app.colorBorder}`, borderRadius:14, padding:"18px 18px", marginBottom:14 }}>
+                      <div style={{ fontSize:9, color:"rgba(255,255,255,0.38)", textTransform:"uppercase" as const, letterSpacing:"0.14em", marginBottom:6 }}>Locked Rate · 40&apos; Dry</div>
+                      <div style={{ fontSize:40, fontWeight:900, color:"#fff", lineHeight:1, marginBottom:6 }}>$742<span style={{ fontSize:16, fontWeight:400, color:"rgba(255,255,255,0.35)" }}>.00</span></div>
+                      <div style={{ display:"flex", alignItems:"center", gap:6 }}>
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#18a354" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span style={{ fontSize:10, color:"#18a354", fontWeight:700 }}>Locked 24h · All-in · Diesel live</span>
+                      </div>
+                    </div>
+                    {[["LA → Denver","$1,140","#fc0b05"],["Oakland → Reno","$480","#18a354"]].map(([r,p,c])=>(
+                      <div key={r} style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"9px 0", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
+                        <span style={{ fontSize:11, color:"rgba(255,255,255,0.42)" }}>{r}</span>
+                        <span style={{ fontSize:11, fontWeight:800, color:c as string }}>{p}</span>
+                      </div>
+                    ))}
                   </div>
-                  {/* Bottom stat strip */}
-                  <div className="absolute bottom-0 left-0 right-0 px-5 py-4" style={{ background: "linear-gradient(0deg, rgba(5,15,44,0.95) 0%, transparent 100%)" }}>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[12px] font-semibold text-white/60">{app.role}</span>
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-white/80">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-                        {app.cta}
-                      </span>
+                )}
+
+                {/* ── CARRIER WIDGET ── */}
+                {app.id === "carrier" && (
+                  <div style={{ background:"rgba(4,12,8,0.92)", backdropFilter:"blur(28px)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.55), 0 0 80px ${app.color}18`, animation:"widgetFloat 5.5s ease-in-out infinite" }}>
+                    <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
+                      <span style={{ fontSize:13, fontWeight:700, color:"#fff" }}>DrayGo <span style={{ color:app.color }}>Carrier</span></span>
+                      <div style={{ position:"relative", display:"inline-flex", alignItems:"center", gap:5, background:`${app.color}20`, border:`1px solid ${app.colorBorder}`, borderRadius:20, padding:"4px 12px 4px 8px" }}>
+                        <span style={{ position:"absolute", width:8, height:8, borderRadius:"50%", background:app.color, left:8, animation:"statusPing 1.6s ease-out infinite" }} />
+                        <span style={{ width:8, height:8, borderRadius:"50%", background:app.color, flexShrink:0, position:"relative" }} />
+                        <span style={{ fontSize:9, fontWeight:800, color:app.color, textTransform:"uppercase" as const, letterSpacing:"0.1em" }}>Online</span>
+                      </div>
+                    </div>
+                    <div style={{ marginBottom:20 }}>
+                      <div style={{ fontSize:9, color:"rgba(255,255,255,0.32)", textTransform:"uppercase" as const, letterSpacing:"0.14em", marginBottom:4 }}>Today&apos;s Earnings</div>
+                      <div style={{ fontSize:44, fontWeight:900, color:"#fff", lineHeight:1 }}>$1,240</div>
+                      <div style={{ display:"flex", gap:14, marginTop:8 }}>
+                        <span style={{ fontSize:10, color:"rgba(255,255,255,0.38)" }}>3 loads · 247 mi</span>
+                        <span style={{ fontSize:10, color:app.color, fontWeight:700 }}>↑ 18% vs yesterday</span>
+                      </div>
+                    </div>
+                    <div style={{ display:"flex", alignItems:"flex-end", gap:5, height:72, marginBottom:20 }}>
+                      {[42,68,55,80,65,90,74].map((h,i)=>(
+                        <div key={i} style={{ flex:1, display:"flex", flexDirection:"column" as const, alignItems:"center", gap:4 }}>
+                          <div style={{ width:"100%", height:`${h}%`, background:i===6?app.color:`${app.color}38`, borderRadius:4, animation:`barGrow 0.5s ease-out ${i*0.07}s both` }} />
+                          <span style={{ fontSize:8, color:"rgba(255,255,255,0.22)" }}>{["M","T","W","T","F","S","S"][i]}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.08)", borderRadius:14, padding:"14px 16px" }}>
+                      <div style={{ fontSize:9, color:"rgba(255,255,255,0.35)", textTransform:"uppercase" as const, letterSpacing:"0.1em", marginBottom:10 }}>Available Loads Nearby</div>
+                      {[{r:"Long Beach → Phoenix",p:"$680",t:"2h ago"},{r:"LA Port → Las Vegas",p:"$520",t:"45m ago"}].map((l)=>(
+                        <div key={l.r} style={{ display:"flex", alignItems:"center", justifyContent:"space-between", padding:"8px 0", borderBottom:"1px solid rgba(255,255,255,0.05)" }}>
+                          <div>
+                            <div style={{ fontSize:11, fontWeight:600, color:"#fff" }}>{l.r}</div>
+                            <div style={{ fontSize:9, color:"rgba(255,255,255,0.28)", marginTop:2 }}>{l.t}</div>
+                          </div>
+                          <span style={{ fontSize:12, fontWeight:900, color:app.color }}>{l.p}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </div>
+                )}
+
+                {/* ── BROKER WIDGET ── */}
+                {app.id === "broker" && (
+                  <div style={{ background:"rgba(4,8,22,0.92)", backdropFilter:"blur(28px)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.55), 0 0 80px ${app.color}18`, animation:"widgetFloat 6s ease-in-out infinite" }}>
+                    <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
+                      <span style={{ fontSize:13, fontWeight:700, color:"#fff" }}>DrayGo <span style={{ color:app.color }}>Broker</span></span>
+                      <span style={{ fontSize:9, color:"rgba(255,255,255,0.32)", textTransform:"uppercase" as const, letterSpacing:"0.12em" }}>Operations</span>
+                    </div>
+                    <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12, marginBottom:18 }}>
+                      {[{label:"Monthly Rev",val:"$14.6M",sub:"↑ 22% MoM",col:app.color},{label:"Avg Margin",val:"18%",sub:"1,800+ carriers",col:"#18a354"}].map((s)=>(
+                        <div key={s.label} style={{ background:`${s.col}10`, border:`1px solid ${s.col}28`, borderRadius:14, padding:"14px 16px" }}>
+                          <div style={{ fontSize:9, color:"rgba(255,255,255,0.32)", textTransform:"uppercase" as const, letterSpacing:"0.12em", marginBottom:4 }}>{s.label}</div>
+                          <div style={{ fontSize:26, fontWeight:900, color:"#fff" }}>{s.val}</div>
+                          <div style={{ fontSize:9, color:s.col, fontWeight:700, marginTop:3 }}>{s.sub}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{ fontSize:9, color:"rgba(255,255,255,0.32)", textTransform:"uppercase" as const, letterSpacing:"0.12em", marginBottom:10 }}>Active Load Queue</div>
+                    {[
+                      {id:"DG-8821",route:"POLB → Phoenix AZ",status:"Matched",carrier:"Veloz Trucking",col:"#18a354"},
+                      {id:"DG-8822",route:"NY/NJ → Chicago IL",status:"In Transit",carrier:"FastLane LLC",col:app.color},
+                      {id:"DG-8823",route:"Houston → Dallas TX",status:"Pending",carrier:"Assigning...",col:"#f59e0b"},
+                    ].map((load,idx)=>(
+                      <div key={load.id} style={{ display:"flex", alignItems:"center", gap:10, padding:"9px 0", borderBottom:"1px solid rgba(255,255,255,0.06)", animation:`slideIn 0.4s ease-out ${idx*0.1}s both` }}>
+                        <div style={{ width:6, height:6, borderRadius:"50%", background:load.col, flexShrink:0 }} />
+                        <div style={{ flex:1, minWidth:0 }}>
+                          <div style={{ fontSize:11, fontWeight:600, color:"#fff" }}>{load.route}</div>
+                          <div style={{ fontSize:9, color:"rgba(255,255,255,0.32)", marginTop:1 }}>{load.id} · {load.carrier}</div>
+                        </div>
+                        <span style={{ fontSize:9, fontWeight:700, color:load.col, background:`${load.col}18`, border:`1px solid ${load.col}35`, borderRadius:6, padding:"3px 8px", whiteSpace:"nowrap" as const }}>{load.status}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
             </div>

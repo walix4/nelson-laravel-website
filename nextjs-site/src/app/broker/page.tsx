@@ -208,8 +208,12 @@ export default function BrokerPage() {
 
       {/* ── SECTION 1: HERO ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden text-white" style={{ minHeight: "100vh", display: "flex", alignItems: "center" }}>
-        <video autoPlay muted loop playsInline src={asset("/broker-hero.mp4")}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }} />
+        {/* Animated gradient — no video */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 0, background: "linear-gradient(135deg, #060f1e 0%, #06143a 50%, #04101e 100%)" }}>
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 90% 70% at 72% 32%, rgba(0,165,231,0.20) 0%, transparent 60%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 15% 75%, rgba(10,30,80,0.35) 0%, transparent 55%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 40% 30% at 50% 55%, rgba(58,95,192,0.12) 0%, transparent 50%)" }} />
+        </div>
         <div className="absolute inset-0" style={{ background: "linear-gradient(105deg, rgba(8,25,43,0.88) 0%, rgba(6,20,58,0.60) 100%)", zIndex: 1 }} />
 
         <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-16 md:py-24">
