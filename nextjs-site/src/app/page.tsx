@@ -352,7 +352,7 @@ export default function Home() {
       </section>
 
       {/* ─── STATS STRIP ─── */}
-      <section style={{ background:"#0d0d0d", borderTop:"1px solid rgba(255,255,255,0.06)", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
+      <section style={{ background:"#0b1222", borderTop:"1px solid rgba(255,255,255,0.06)", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-[1200px] mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
             { n:"$2.4B+", label:"Drayage Moved" },
@@ -378,10 +378,10 @@ export default function Home() {
         @keyframes statusPing { 0%{transform:scale(1);opacity:1} 100%{transform:scale(2.2);opacity:0} }
         @keyframes slideIn { from{opacity:0;transform:translateX(12px)} to{opacity:1;transform:translateX(0)} }
       `}</style>
-      <section style={{ background:"#0d0d0d", padding:"72px 0 80px" }}>
+      <section style={{ background:"#0b1222", padding:"72px 0 80px" }}>
         <div className="max-w-[1200px] mx-auto px-6" style={{ display:"flex", flexDirection:"column" as const, gap:16 }}>
           {APPS.map((app) => (
-            <div key={app.id} id={app.id} style={{ background:"#161616", border:"1px solid rgba(255,255,255,0.07)", borderRadius:24, overflow:"hidden", position:"relative" }}>
+            <div key={app.id} id={app.id} style={{ background:"#101c30", border:"1px solid rgba(255,255,255,0.07)", borderRadius:24, overflow:"hidden", position:"relative" }}>
               {/* Subtle glow */}
               <div style={{ position:"absolute", top:"50%", [app.flip ? "left" : "right"]:-120, transform:"translateY(-50%)", width:480, height:480, borderRadius:"50%", background:`radial-gradient(circle, ${app.color}14 0%, transparent 65%)`, pointerEvents:"none" }} />
 
@@ -423,7 +423,7 @@ export default function Home() {
 
                   {/* ── SHIPPER WIDGET ── */}
                   {app.id === "shipper" && (
-                    <div style={{ background:"rgba(10,10,10,0.95)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, animation:"widgetFloat 5s ease-in-out infinite", width:"100%", maxWidth:380 }}>
+                    <div style={{ background:"rgba(8,16,36,0.95)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, animation:"widgetFloat 5s ease-in-out infinite", width:"100%", maxWidth:380 }}>
                       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
                         <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${app.color}18`, border:`1px solid ${app.colorBorder}`, borderRadius:8, padding:"4px 12px", fontSize:9, fontWeight:800, letterSpacing:"0.14em", textTransform:"uppercase" as const, color:app.color }}>
                           <span style={{ width:5, height:5, borderRadius:"50%", background:app.color, display:"inline-block", animation:"shimmer 1.6s ease-in-out infinite" }} />
@@ -463,7 +463,7 @@ export default function Home() {
 
                   {/* ── CARRIER WIDGET ── */}
                   {app.id === "carrier" && (
-                    <div style={{ background:"rgba(10,10,10,0.95)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, animation:"widgetFloat 5.5s ease-in-out infinite", width:"100%", maxWidth:380 }}>
+                    <div style={{ background:"rgba(8,16,36,0.95)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, animation:"widgetFloat 5.5s ease-in-out infinite", width:"100%", maxWidth:380 }}>
                       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
                         <span style={{ fontSize:13, fontWeight:700, color:"#fff" }}>DrayGo <span style={{ color:app.color }}>Carrier</span></span>
                         <div style={{ position:"relative", display:"inline-flex", alignItems:"center", gap:5, background:`${app.color}20`, border:`1px solid ${app.colorBorder}`, borderRadius:20, padding:"4px 12px 4px 8px" }}>
@@ -505,7 +505,7 @@ export default function Home() {
 
                   {/* ── BROKER WIDGET ── */}
                   {app.id === "broker" && (
-                    <div style={{ background:"rgba(10,10,10,0.95)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, animation:"widgetFloat 6s ease-in-out infinite", width:"100%", maxWidth:380 }}>
+                    <div style={{ background:"rgba(8,16,36,0.95)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, animation:"widgetFloat 6s ease-in-out infinite", width:"100%", maxWidth:380 }}>
                       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
                         <span style={{ fontSize:13, fontWeight:700, color:"#fff" }}>DrayGo <span style={{ color:app.color }}>Broker</span></span>
                         <span style={{ fontSize:9, color:"rgba(255,255,255,0.32)", textTransform:"uppercase" as const, letterSpacing:"0.12em" }}>Operations</span>
@@ -544,7 +544,7 @@ export default function Home() {
       </section>
 
       {/* ─── HOW IT WORKS ─── */}
-      <section id="how-it-works" className="relative py-24 md:py-32" style={{ background: "#111111" }}>
+      <section id="how-it-works" className="relative py-24 md:py-32" style={{ background: "#0e1628" }}>
         <div className="max-w-[1280px] mx-auto px-6">
           <div className="text-center mb-16 reveal">
             <div className="inline-flex items-center gap-2 rounded-xl px-4 py-1.5 mb-6 text-[12px] font-semibold text-white/65"
@@ -648,7 +648,7 @@ export default function Home() {
       </section>
 
       {/* ─── PLATFORM FEATURES ─── */}
-      <section className="relative py-24 md:py-32" style={{ background:"#0d0d0d" }}>
+      <section className="relative py-24 md:py-32" style={{ background:"#0b1222" }}>
         <div className="max-w-[1280px] mx-auto px-6">
           <div className="text-center mb-14 reveal">
             <div className="inline-flex items-center gap-2 rounded-xl px-4 py-1.5 mb-6 text-[12px] font-semibold text-white/65"
@@ -662,7 +662,7 @@ export default function Home() {
           <div className="grid grid-cols-3 gap-4 reveal">
             {/* Big card: Rate Calculator */}
             <div className="col-span-2 row-span-2 rounded-2xl p-7 flex flex-col"
-              style={{ background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.07)", minHeight: 380 }}>
+              style={{ background: "#132038", border: "1px solid rgba(255,255,255,0.07)", minHeight: 380 }}>
               <div className="rounded-xl p-4 mb-5 flex-1" style={{ background: "rgba(255,255,255,0.04)" }}>
                 <div className="text-[10px] uppercase tracking-widest text-white/35 mb-3 font-bold">New Rate Quote</div>
                 <div className="space-y-2 mb-3">
@@ -705,7 +705,7 @@ export default function Home() {
 
             {/* Card A: Live Load Board */}
             <div className="rounded-2xl p-6 flex flex-col"
-              style={{ background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.07)" }}>
+              style={{ background: "#132038", border: "1px solid rgba(255,255,255,0.07)" }}>
               <div className="rounded-xl p-3 mb-4 flex-1" style={{ background: "rgba(24,163,84,0.08)" }}>
                 {[{ r: "LA → Phoenix", p: "$680" }, { r: "Houston → Dallas", p: "$420" }, { r: "NY → Chicago", p: "$580" }].map((l) => (
                   <div key={l.r} className="flex items-center justify-between py-1.5 border-b last:border-0"
@@ -721,7 +721,7 @@ export default function Home() {
 
             {/* Card B: DrayPay */}
             <div className="rounded-2xl p-6 flex flex-col"
-              style={{ background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.07)" }}>
+              style={{ background: "#132038", border: "1px solid rgba(255,255,255,0.07)" }}>
               <div className="rounded-xl p-3 mb-4 flex-1 flex flex-col items-center justify-center"
                 style={{ background: "rgba(58,95,192,0.08)" }}>
                 <div className="text-[11px] text-white/35 uppercase tracking-widest mb-1">Paid in</div>
@@ -734,7 +734,7 @@ export default function Home() {
 
             {/* Card C: Support Chat */}
             <div className="rounded-2xl p-6 flex flex-col"
-              style={{ background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.07)" }}>
+              style={{ background: "#132038", border: "1px solid rgba(255,255,255,0.07)" }}>
               <div className="rounded-xl p-3 mb-4 space-y-2" style={{ background: "rgba(252,11,5,0.08)" }}>
                 <div className="rounded-lg px-3 py-2" style={{ background: "rgba(255,255,255,0.06)" }}>
                   <span className="text-[10px] text-white/55">Where is my container?</span>
@@ -749,7 +749,7 @@ export default function Home() {
 
             {/* Card D: Port Coverage */}
             <div className="rounded-2xl p-6 flex flex-col"
-              style={{ background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.07)" }}>
+              style={{ background: "#132038", border: "1px solid rgba(255,255,255,0.07)" }}>
               <div className="rounded-xl p-3 mb-4 flex flex-wrap gap-1.5" style={{ background: "rgba(58,95,192,0.08)" }}>
                 {["POLB", "POLA", "NY/NJ", "SAV", "HOU", "SEA", "+35"].map((p) => (
                   <span key={p} className="rounded-md px-2 py-1 text-[9px] font-bold text-white/60"
@@ -785,12 +785,12 @@ export default function Home() {
       </section>
 
       {/* ─── FEATURE BANNERS ─── */}
-      <section className="relative py-20 md:py-28" style={{ background: "#0d0d0d" }}>
+      <section className="relative py-20 md:py-28" style={{ background: "#0b1222" }}>
         <div className="max-w-[1280px] mx-auto px-6 space-y-6">
 
           {/* Banner 1 */}
           <div className="rounded-3xl overflow-hidden grid lg:grid-cols-2 min-h-[280px]"
-            style={{ background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.07)" }}>
+            style={{ background: "#132038", border: "1px solid rgba(255,255,255,0.07)" }}>
             <div className="p-10 lg:p-14 flex flex-col justify-center reveal">
               <h2 className="display text-white leading-tight" style={{ fontSize: "clamp(26px, 3.5vw, 40px)" }}>
                 Quote any lane<br />in 30 seconds.
@@ -821,7 +821,7 @@ export default function Home() {
 
           {/* Banner 2 */}
           <div className="rounded-3xl overflow-hidden grid lg:grid-cols-2 min-h-[280px]"
-            style={{ background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.07)" }}>
+            style={{ background: "#132038", border: "1px solid rgba(255,255,255,0.07)" }}>
             <div className="relative overflow-hidden flex items-center justify-center min-h-[220px] order-2 lg:order-1"
               style={{ background: "linear-gradient(135deg, rgba(24,163,84,0.22) 0%, rgba(24,163,84,0.05) 100%)" }}>
               <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 40% 50%, rgba(24,163,84,0.28) 0%, transparent 65%)" }} />
@@ -854,7 +854,7 @@ export default function Home() {
       </section>
 
       {/* ─── TESTIMONIALS ─── */}
-      <section className="relative py-24 md:py-32" style={{ background: "#111111" }}>
+      <section className="relative py-24 md:py-32" style={{ background: "#0e1628" }}>
         <div className="max-w-[1280px] mx-auto px-6">
           <div className="text-center mb-14 reveal">
             <div className="inline-flex items-center gap-2 rounded-xl px-4 py-1.5 mb-6 text-[12px] font-semibold text-white/65"
@@ -869,7 +869,7 @@ export default function Home() {
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-5 reveal">
             {TESTIMONIALS.map((t) => (
               <div key={t.name} className="break-inside-avoid mb-5 rounded-2xl p-7"
-                style={{ background: "#1a1a1a", border: "1px solid rgba(255,255,255,0.07)" }}>
+                style={{ background: "#132038", border: "1px solid rgba(255,255,255,0.07)" }}>
                 <div className="flex gap-0.5 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#fc0b05">
@@ -895,7 +895,7 @@ export default function Home() {
       </section>
 
       {/* ─── CONTACT + FAQ ─── */}
-      <section className="relative py-24 md:py-32" style={{ background:"#0d0d0d" }}>
+      <section className="relative py-24 md:py-32" style={{ background:"#0b1222" }}>
         <div className="max-w-[1280px] mx-auto px-6">
 
           <div className="text-center mb-12 reveal">
@@ -977,9 +977,9 @@ export default function Home() {
       </section>
 
       {/* ─── FINAL CTA (Fincash style) ─── */}
-      <section style={{ background:"#0d0d0d", padding:"0 0 80px" }}>
+      <section style={{ background:"#0b1222", padding:"0 0 80px" }}>
         <div className="max-w-[1200px] mx-auto px-6">
-          <div style={{ background:"#161616", border:"1px solid rgba(255,255,255,0.07)", borderRadius:24, overflow:"hidden", display:"grid" }} className="lg:grid-cols-2">
+          <div style={{ background:"#101c30", border:"1px solid rgba(255,255,255,0.07)", borderRadius:24, overflow:"hidden", display:"grid" }} className="lg:grid-cols-2">
             {/* Left: text */}
             <div style={{ padding:"56px 60px", display:"flex", flexDirection:"column" as const, justifyContent:"center" }}>
               <h2 style={{ fontSize:"clamp(32px,4vw,52px)", fontWeight:900, color:"#fff", lineHeight:1.1, marginBottom:16 }}>
@@ -989,14 +989,14 @@ export default function Home() {
                 Join thousands of shippers, carriers and brokers already running on DrayGo. Free to start. No contracts.
               </p>
               <div style={{ display:"flex", gap:12, flexWrap:"wrap" as const, marginBottom:20 }}>
-                <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"#1a1a1a", border:"1px solid rgba(255,255,255,0.12)", borderRadius:12, padding:"10px 20px", textDecoration:"none" }}>
+                <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"#132038", border:"1px solid rgba(255,255,255,0.12)", borderRadius:12, padding:"10px 20px", textDecoration:"none" }}>
                   <svg width="26" height="26" viewBox="0 0 384 512" fill="#fff"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
                   <span style={{ lineHeight:1 }}>
                     <span style={{ display:"block", fontSize:9, color:"rgba(255,255,255,0.5)" }}>Download on the</span>
                     <span style={{ display:"block", fontSize:14, fontWeight:700, color:"#fff" }}>App Store</span>
                   </span>
                 </a>
-                <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"#1a1a1a", border:"1px solid rgba(255,255,255,0.12)", borderRadius:12, padding:"10px 20px", textDecoration:"none" }}>
+                <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"#132038", border:"1px solid rgba(255,255,255,0.12)", borderRadius:12, padding:"10px 20px", textDecoration:"none" }}>
                   <img src={asset("/google-play.png")} alt="" style={{ height:26, width:"auto" }} />
                   <span style={{ lineHeight:1 }}>
                     <span style={{ display:"block", fontSize:9, color:"rgba(255,255,255,0.5)", textTransform:"uppercase" as const, letterSpacing:"0.1em" }}>Get it on</span>
