@@ -13,7 +13,7 @@
     }
     *{-webkit-font-smoothing:antialiased;}
     html{scrollbar-gutter:stable;overflow-y:scroll;}
-    html,body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:#000;}
+    html,body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:#06101e;}
     .display{font-family:'Poppins',system-ui,sans-serif;letter-spacing:-0.02em;font-weight:700;}
     .num{font-feature-settings:"tnum","cv01";font-variant-numeric:tabular-nums;}
 

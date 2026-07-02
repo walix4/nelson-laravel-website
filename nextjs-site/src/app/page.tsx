@@ -5,6 +5,7 @@ import { asset } from "@/lib/site";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
+import { AllNewSections } from "@/components/NewSections";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 import type { Card as CardType } from "@/components/ui/apple-cards-carousel";
 
@@ -311,7 +312,7 @@ export default function Home() {
       <RevealInit />
 
       {/* ─── HERO ─── */}
-      <section className="relative overflow-hidden" style={{ paddingBottom: 0, background: "#000" }}>
+      <section className="relative overflow-hidden" style={{ paddingBottom: 0, background: "#06101e" }}>
         {/* Video background */}
         <video
           autoPlay muted loop playsInline
@@ -439,12 +440,12 @@ export default function Home() {
         @keyframes heroLineOut { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-28px)} }
         @keyframes heroLineIn  { 0%{opacity:0;transform:translateY(28px)} 100%{opacity:1;transform:translateY(0)} }
       `}</style>
-      <section style={{ background:"#000", overflow:"hidden" }}>
+      <section style={{ background:"#06101e", overflow:"hidden" }}>
         {APPS.map((app) => <AppSection key={app.id} app={app} />)}
       </section>
 
       {/* ─── PLATFORM FEATURES BENTO ─── */}
-      <section id="how-it-works" style={{ background:"linear-gradient(180deg,#050508 0%,#0a0b10 100%)", padding:"88px 0", position:"relative" as const }}>
+      <section id="how-it-works" style={{ background:"linear-gradient(180deg,#070f1f 0%,#0a1428 100%)", padding:"88px 0", position:"relative" as const }}>
         <div style={{ position:"absolute", inset:0, backgroundImage:"radial-gradient(ellipse 80% 50% at 20% 40%, rgba(252,11,5,0.06) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 80% 60%, rgba(24,163,84,0.05) 0%, transparent 60%)", pointerEvents:"none" }} />
         <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 clamp(20px,4vw,48px)" }}>
           {/* Header */}
@@ -527,10 +528,12 @@ export default function Home() {
         </div>
       </section>
 
+      <AllNewSections />
+
       {/* ─── FINAL CTA (Fincash style) ─── */}
-      <section style={{ background:"#0f172a", padding:"0 0 80px" }}>
+      <section style={{ background:"#06101e", padding:"0 0 80px" }}>
         <div className="max-w-[1200px] mx-auto px-6">
-          <div className="reveal reveal-scale lg:grid-cols-2" style={{ background:"#1e293b", border:"1px solid rgba(255,255,255,0.12)", borderRadius:24, overflow:"hidden", display:"grid" }}>
+          <div className="reveal reveal-scale lg:grid-cols-2" style={{ background:"#0b1a30", border:"1px solid rgba(255,255,255,0.10)", borderRadius:24, overflow:"hidden", display:"grid" }}>
             {/* Left: text */}
             <div className="reveal-left reveal-delay-1" style={{ padding:"56px 60px", display:"flex", flexDirection:"column" as const, justifyContent:"center" }}>
               <h2 style={{ fontSize:"clamp(32px,4vw,52px)", fontWeight:900, color:"#fff", lineHeight:1.1, marginBottom:16 }}>
@@ -540,14 +543,14 @@ export default function Home() {
                 Join thousands of shippers, carriers and brokers already running on DrayGo. Free to start. No contracts.
               </p>
               <div style={{ display:"flex", gap:12, flexWrap:"wrap" as const, marginBottom:20 }}>
-                <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"#1e293b", border:"1px solid rgba(255,255,255,0.12)", borderRadius:12, padding:"10px 20px", textDecoration:"none" }}>
+                <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"#0d1e35", border:"1px solid rgba(255,255,255,0.12)", borderRadius:12, padding:"10px 20px", textDecoration:"none" }}>
                   <svg width="26" height="26" viewBox="0 0 384 512" fill="#fff"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
                   <span style={{ lineHeight:1 }}>
                     <span style={{ display:"block", fontSize:9, color:"rgba(255,255,255,0.5)" }}>Download on the</span>
                     <span style={{ display:"block", fontSize:14, fontWeight:700, color:"#fff" }}>App Store</span>
                   </span>
                 </a>
-                <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"#1e293b", border:"1px solid rgba(255,255,255,0.12)", borderRadius:12, padding:"10px 20px", textDecoration:"none" }}>
+                <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"#0d1e35", border:"1px solid rgba(255,255,255,0.12)", borderRadius:12, padding:"10px 20px", textDecoration:"none" }}>
                   <img src={asset("/google-play.png")} alt="" style={{ height:26, width:"auto" }} />
                   <span style={{ lineHeight:1 }}>
                     <span style={{ display:"block", fontSize:9, color:"rgba(255,255,255,0.5)", textTransform:"uppercase" as const, letterSpacing:"0.1em" }}>Get it on</span>
