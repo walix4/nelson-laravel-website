@@ -5,6 +5,8 @@ import { asset } from "@/lib/site";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
+import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+import type { Card as CardType } from "@/components/ui/apple-cards-carousel";
 
 const APPS = [
   {
@@ -804,6 +806,129 @@ export default function Home() {
 
         </div>
       </section>
+
+      {/* ─── APPLE CARDS CAROUSEL ─── */}
+      {(() => {
+        const carouselData: CardType[] = [
+          {
+            category: "For Shippers",
+            title: "Quote any lane in 30 seconds.",
+            src: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop",
+            content: (
+              <div>
+                <p>Get locked drayage rates for any U.S. port-to-inland lane in under 30 seconds. Live diesel index, FSC, chassis and terminal fees all baked in automatically — no callbacks, no surprises.</p>
+                <ul style={{ marginTop:16, display:"flex", flexDirection:"column" as const, gap:8 }}>
+                  {["Instant pricing across 40+ U.S. ports","Lock rates for 24 hours guaranteed","All-in pricing: diesel, FSC, chassis, port fees","Book directly from the app in one tap"].map(f=>(
+                    <li key={f} style={{ display:"flex", gap:10, alignItems:"center" }}>
+                      <span style={{ width:6, height:6, borderRadius:"50%", background:"#fc0b05", flexShrink:0 }} />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ),
+          },
+          {
+            category: "For Carriers",
+            title: "Find loads. Get paid in 24 hours.",
+            src: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=2070&auto=format&fit=crop",
+            content: (
+              <div>
+                <p>Hundreds of drayage loads posted daily near every major U.S. port. Accept from your phone, upload POD, and DrayPay settles your invoice within 24 hours — no net-30, no factoring, no chasing.</p>
+                <ul style={{ marginTop:16, display:"flex", flexDirection:"column" as const, gap:8 }}>
+                  {["Live load board updated in real time","Digital dispatch & POD from your phone","24-hour guaranteed payout via DrayPay","Turn-by-turn port gate routing"].map(f=>(
+                    <li key={f} style={{ display:"flex", gap:10, alignItems:"center" }}>
+                      <span style={{ width:6, height:6, borderRadius:"50%", background:"#18a354", flexShrink:0 }} />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ),
+          },
+          {
+            category: "For Brokers",
+            title: "Manage your full book at scale.",
+            src: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2070&auto=format&fit=crop",
+            content: (
+              <div>
+                <p>Source vetted carriers instantly, post and assign loads from one operations dashboard, and give your shippers a branded live tracking portal. Built for drayage brokers and 3PLs moving volume.</p>
+                <ul style={{ marginTop:16, display:"flex", flexDirection:"column" as const, gap:8 }}>
+                  {["8,000+ vetted drayage carriers","Instant bid & counter-offer engine","White-label shipper tracking portal","P&L analytics per customer account"].map(f=>(
+                    <li key={f} style={{ display:"flex", gap:10, alignItems:"center" }}>
+                      <span style={{ width:6, height:6, borderRadius:"50%", background:"#3A5FC0", flexShrink:0 }} />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ),
+          },
+          {
+            category: "Port Coverage",
+            title: "40+ U.S. ports and rail ramps.",
+            src: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?q=80&w=2070&auto=format&fit=crop",
+            content: (
+              <div>
+                <p>From Long Beach and Los Angeles to New York/NJ, Savannah, Houston and Seattle — DrayGo covers every major U.S. sea port, inland rail ramp and cross-dock destination.</p>
+                <div style={{ marginTop:16, display:"flex", flexWrap:"wrap" as const, gap:8 }}>
+                  {["POLB","POLA","NY/NJ","SAV","HOU","SEA","CHI","ATL","MEM","DAL","+30 more"].map(p=>(
+                    <span key={p} style={{ background:"rgba(255,255,255,0.08)", border:"1px solid rgba(255,255,255,0.12)", borderRadius:6, padding:"4px 10px", fontSize:11, fontWeight:700, color:"rgba(255,255,255,0.7)" }}>{p}</span>
+                  ))}
+                </div>
+              </div>
+            ),
+          },
+          {
+            category: "DrayPay",
+            title: "Same-day carrier payments.",
+            src: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2070&auto=format&fit=crop",
+            content: (
+              <div>
+                <p>DrayPay is DrayGo's built-in payment rail. Carriers upload their proof of delivery and the money moves within 24 hours — no factoring company, no broker delays, no net-30 invoicing cycles.</p>
+                <div style={{ marginTop:20, background:"rgba(24,163,84,0.10)", border:"1px solid rgba(24,163,84,0.25)", borderRadius:14, padding:"20px 24px" }}>
+                  <div style={{ fontSize:11, color:"rgba(255,255,255,0.4)", textTransform:"uppercase" as const, letterSpacing:"0.12em", marginBottom:4 }}>Average settlement time</div>
+                  <div style={{ fontSize:42, fontWeight:900, color:"#fff", lineHeight:1 }}>6.4 <span style={{ fontSize:18, color:"rgba(255,255,255,0.4)" }}>hours</span></div>
+                  <div style={{ fontSize:11, color:"#18a354", marginTop:6, fontWeight:700 }}>✓ Guaranteed within 24h on every load</div>
+                </div>
+              </div>
+            ),
+          },
+          {
+            category: "Real-Time Visibility",
+            title: "Track every container, every move.",
+            src: "https://images.unsplash.com/photo-1504222490345-c075b626a046?q=80&w=2070&auto=format&fit=crop",
+            content: (
+              <div>
+                <p>Gate-in to gate-out container tracking across all three DrayGo apps simultaneously. Shippers, brokers and carriers all see the same real-time status — no more phone calls to check ETA.</p>
+                <ul style={{ marginTop:16, display:"flex", flexDirection:"column" as const, gap:8 }}>
+                  {["Live gate-in / gate-out events","Chassis & terminal dwell alerts","Automated status updates to all parties","24/7 live support for every move"].map(f=>(
+                    <li key={f} style={{ display:"flex", gap:10, alignItems:"center" }}>
+                      <span style={{ width:6, height:6, borderRadius:"50%", background:"#fc0b05", flexShrink:0 }} />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ),
+          },
+        ];
+        const cards = carouselData.map((card, index) => <Card key={card.src} card={card} index={index} />);
+        return (
+          <section style={{ background:"#0f172a", padding:"80px 0 60px" }}>
+            <div className="max-w-[1200px] mx-auto px-6 mb-10">
+              <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(252,11,5,0.10)", border:"1px solid rgba(252,11,5,0.28)", borderRadius:8, padding:"5px 14px", fontSize:10, fontWeight:700, letterSpacing:"0.14em", textTransform:"uppercase" as const, color:"#fc0b05", marginBottom:20 }}>
+                Explore DrayGo
+              </div>
+              <h2 className="display text-white" style={{ fontSize:"clamp(28px,4vw,48px)" }}>
+                Everything your drayage operation needs.
+              </h2>
+              <p style={{ fontSize:15, color:"rgba(255,255,255,0.4)", marginTop:10 }}>Tap any card to learn more.</p>
+            </div>
+            <Carousel items={cards} />
+          </section>
+        );
+      })()}
 
       {/* ─── TESTIMONIALS ─── */}
       <section className="relative py-24 md:py-32" style={{ background: "#111827" }}>
