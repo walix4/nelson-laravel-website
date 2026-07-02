@@ -132,6 +132,30 @@ const TESTIMONIALS = [
   { quote: "Three apps that actually talk to each other. No more spreadsheets, no more phone tag. DrayGo runs our entire container operation.", name: "Chen L.", role: "Logistics Director", company: "Apex Distribution" },
 ];
 
+function tiltProps(color: string) {
+  return {
+    onMouseMove: (e: React.MouseEvent<HTMLDivElement>) => {
+      const el = e.currentTarget;
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      el.style.transform = `perspective(1100px) rotateX(${(y - 0.5) * -14}deg) rotateY(${(x - 0.5) * 14}deg) scale(1.018)`;
+      el.style.transition = "transform 0.08s ease";
+      const shine = el.querySelector<HTMLElement>(".tilt-shine");
+      if (shine) {
+        shine.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, ${color}30 0%, transparent 65%)`;
+        shine.style.opacity = "1";
+      }
+    },
+    onMouseLeave: (e: React.MouseEvent<HTMLDivElement>) => {
+      e.currentTarget.style.transform = "perspective(1100px) rotateX(0deg) rotateY(0deg) scale(1)";
+      e.currentTarget.style.transition = "transform 0.6s cubic-bezier(0.23,1,0.32,1)";
+      const shine = e.currentTarget.querySelector<HTMLElement>(".tilt-shine");
+      if (shine) { shine.style.opacity = "0"; shine.style.transition = "opacity 0.5s ease"; }
+    },
+  };
+}
+
 export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   return (
@@ -380,8 +404,12 @@ export default function Home() {
       `}</style>
       <section style={{ background:"#0f172a", padding:"72px 0 80px" }}>
         <div className="max-w-[1200px] mx-auto px-6" style={{ display:"flex", flexDirection:"column" as const, gap:16 }}>
-          {APPS.map((app) => (
-            <div key={app.id} id={app.id} style={{ background:"#1e293b", border:"1px solid rgba(255,255,255,0.12)", borderRadius:24, overflow:"hidden", position:"relative" }}>
+          {APPS.map((app) => {
+            const tilt = tiltProps(app.color);
+            return (
+            <div key={app.id} id={app.id} {...tilt} style={{ background:"#1e293b", border:"1px solid rgba(255,255,255,0.12)", borderRadius:24, overflow:"hidden", position:"relative", cursor:"default" }}>
+              {/* Tilt shine overlay */}
+              <div className="tilt-shine" style={{ position:"absolute", inset:0, borderRadius:24, opacity:0, pointerEvents:"none", zIndex:20, transition:"opacity 0.4s ease" }} />
               {/* Subtle glow */}
               <div style={{ position:"absolute", top:"50%", [app.flip ? "left" : "right"]:-120, transform:"translateY(-50%)", width:480, height:480, borderRadius:"50%", background:`radial-gradient(circle, ${app.color}14 0%, transparent 65%)`, pointerEvents:"none" }} />
 
@@ -423,7 +451,7 @@ export default function Home() {
 
                   {/* ── SHIPPER WIDGET ── */}
                   {app.id === "shipper" && (
-                    <div style={{ background:"rgba(15,23,42,0.97)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, animation:"widgetFloat 5s ease-in-out infinite", width:"100%", maxWidth:380 }}>
+                    <div style={{ background:"rgba(15,23,42,0.97)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, width:"100%", maxWidth:380 }}>
                       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
                         <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:`${app.color}18`, border:`1px solid ${app.colorBorder}`, borderRadius:8, padding:"4px 12px", fontSize:9, fontWeight:800, letterSpacing:"0.14em", textTransform:"uppercase" as const, color:app.color }}>
                           <span style={{ width:5, height:5, borderRadius:"50%", background:app.color, display:"inline-block", animation:"shimmer 1.6s ease-in-out infinite" }} />
@@ -463,7 +491,7 @@ export default function Home() {
 
                   {/* ── CARRIER WIDGET ── */}
                   {app.id === "carrier" && (
-                    <div style={{ background:"rgba(15,23,42,0.97)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, animation:"widgetFloat 5.5s ease-in-out infinite", width:"100%", maxWidth:380 }}>
+                    <div style={{ background:"rgba(15,23,42,0.97)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, width:"100%", maxWidth:380 }}>
                       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
                         <span style={{ fontSize:13, fontWeight:700, color:"#fff" }}>DrayGo <span style={{ color:app.color }}>Carrier</span></span>
                         <div style={{ position:"relative", display:"inline-flex", alignItems:"center", gap:5, background:`${app.color}20`, border:`1px solid ${app.colorBorder}`, borderRadius:20, padding:"4px 12px 4px 8px" }}>
@@ -505,7 +533,7 @@ export default function Home() {
 
                   {/* ── BROKER WIDGET ── */}
                   {app.id === "broker" && (
-                    <div style={{ background:"rgba(15,23,42,0.97)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, animation:"widgetFloat 6s ease-in-out infinite", width:"100%", maxWidth:380 }}>
+                    <div style={{ background:"rgba(15,23,42,0.97)", border:`1px solid ${app.colorBorder}`, borderRadius:24, padding:28, boxShadow:`0 40px 80px rgba(0,0,0,0.7), 0 0 60px ${app.color}14`, width:"100%", maxWidth:380 }}>
                       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:20 }}>
                         <span style={{ fontSize:13, fontWeight:700, color:"#fff" }}>DrayGo <span style={{ color:app.color }}>Broker</span></span>
                         <span style={{ fontSize:9, color:"rgba(255,255,255,0.32)", textTransform:"uppercase" as const, letterSpacing:"0.12em" }}>Operations</span>
@@ -539,7 +567,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          ))}
+          );})}
         </div>
       </section>
 
@@ -647,138 +675,62 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── PLATFORM FEATURES ─── */}
-      <section className="relative py-24 md:py-32" style={{ background:"#0f172a" }}>
-        <div className="max-w-[1280px] mx-auto px-6">
-          <div className="text-center mb-14 reveal">
-            <div className="inline-flex items-center gap-2 rounded-xl px-4 py-1.5 mb-6 text-[12px] font-semibold text-white/65"
-              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.13)" }}>
-              Platform Capabilities
+      {/* ─── INTERACTIVE GROWTH CHART ─── */}
+      <section style={{ background:"#0b1a10", padding:"88px 0" }}>
+        <style>{`
+          @keyframes barRise { from { transform:scaleY(0); transform-origin:bottom } to { transform:scaleY(1); transform-origin:bottom } }
+          .chart-bar { animation: barRise 0.7s cubic-bezier(0.34,1.56,0.64,1) both; }
+          .chart-bar:hover { filter: brightness(1.35); cursor:pointer; }
+          .chart-col:hover .bar-value { opacity:1 !important; }
+        `}</style>
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="text-center mb-12">
+            <div style={{ display:"inline-flex", alignItems:"center", gap:6, background:"rgba(24,163,84,0.12)", border:"1px solid rgba(24,163,84,0.3)", borderRadius:8, padding:"5px 14px", fontSize:10, fontWeight:700, letterSpacing:"0.14em", textTransform:"uppercase" as const, color:"#18a354", marginBottom:20 }}>
+              Platform Metrics
             </div>
-            <h2 className="display text-white" style={{ fontSize: "clamp(32px, 4.5vw, 52px)" }}>Everything drayage was missing</h2>
-            <p className="mt-4 text-white/50 max-w-xl mx-auto" style={{ fontSize: 16 }}>Built from the ground up for container freight — not adapted from generic TMS software.</p>
+            <h2 className="display text-white" style={{ fontSize:"clamp(30px,4vw,50px)" }}>
+              Built from zero.<br />Growing every month.
+            </h2>
+            <p style={{ fontSize:15, color:"rgba(255,255,255,0.4)", marginTop:12 }}>Real drayage volume across shippers, carriers and brokers on the DrayGo network.</p>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 reveal">
-            {/* Big card: Rate Calculator */}
-            <div className="col-span-2 row-span-2 rounded-2xl p-7 flex flex-col"
-              style={{ background: "#1e293b", border: "1px solid rgba(255,255,255,0.12)", minHeight: 380 }}>
-              <div className="rounded-xl p-4 mb-5 flex-1" style={{ background: "rgba(255,255,255,0.04)" }}>
-                <div className="text-[10px] uppercase tracking-widest text-white/35 mb-3 font-bold">New Rate Quote</div>
-                <div className="space-y-2 mb-3">
-                  <div className="rounded-lg px-3.5 py-2.5 flex items-center gap-2"
-                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                    <span className="w-2 h-2 rounded-full shrink-0" style={{ background: "#fc0b05" }} />
-                    <span className="text-[12px] text-white/65">Long Beach, CA (POLB)</span>
+          {/* Chart card */}
+          <div style={{ background:"#071410", border:"1px solid rgba(24,163,84,0.28)", borderRadius:24, padding:"44px 48px" }}>
+            <div style={{ fontSize:11, fontWeight:700, letterSpacing:"0.22em", color:"#18a354", textTransform:"uppercase" as const, marginBottom:36, fontFamily:"monospace" }}>
+              12-Month Load Volume Growth
+            </div>
+
+            {/* Bars */}
+            <div style={{ display:"flex", gap:20, alignItems:"flex-end", height:200, marginBottom:14 }}>
+              {[
+                { val:"1,200", label:"START", pct:12, delay:"0s" },
+                { val:"3,400", label:"MO 3",  pct:26, delay:"0.1s" },
+                { val:"7,800", label:"MO 6",  pct:48, delay:"0.2s" },
+                { val:"14,200",label:"MO 9",  pct:72, delay:"0.3s" },
+                { val:"24,500",label:"MO 12", pct:100, delay:"0.4s" },
+              ].map((b,i)=>(
+                <div key={b.label} className="chart-col" style={{ flex:1, display:"flex", flexDirection:"column" as const, alignItems:"center", gap:8, height:"100%" }}>
+                  <div className="bar-value" style={{ fontSize:11, fontWeight:700, color:"#18a354", fontFamily:"monospace", opacity:i===4?1:0.55, transition:"opacity 0.2s" }}>{b.val}</div>
+                  <div style={{ flex:1, width:"100%", display:"flex", alignItems:"flex-end" }}>
+                    <div className="chart-bar" style={{ width:"100%", height:`${b.pct}%`, background:i===4?"#18a354":`rgba(24,163,84,${0.2 + i*0.1})`, borderRadius:"6px 6px 4px 4px", animationDelay:b.delay, animationDuration:"0.8s" }} />
                   </div>
-                  <div className="rounded-lg px-3.5 py-2.5 flex items-center gap-2"
-                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                    <span className="w-2 h-2 rounded-full shrink-0" style={{ background: "#18a354" }} />
-                    <span className="text-[12px] text-white/65">Phoenix, AZ</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <div className="flex-1 rounded-lg px-3.5 py-2.5"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                      <span className="text-[11px] text-white/45">40&apos; Dry Van</span>
-                    </div>
-                    <div className="flex-1 rounded-lg px-3.5 py-2.5"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                      <span className="text-[11px] text-white/45">2 axles</span>
-                    </div>
-                  </div>
+                  <div style={{ fontSize:10, color:"rgba(255,255,255,0.3)", fontFamily:"monospace", letterSpacing:"0.08em" }}>{b.label}</div>
                 </div>
-                <div className="rounded-lg py-2.5 text-center text-[12px] font-bold text-white" style={{ background: "#fc0b05" }}>
-                  Get Instant Rate →
-                </div>
-                <div className="mt-3 rounded-xl px-4 py-3"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}>
-                  <div className="text-[9px] uppercase text-white/30 tracking-widest mb-0.5">Estimated rate</div>
-                  <div className="text-[28px] font-black text-white leading-none">$742<span className="text-[13px] font-normal text-white/30">.00</span></div>
-                  <div className="text-[10px] mt-1" style={{ color: "#18a354" }}>✓ 24h lock · Live diesel applied · FSC included</div>
-                </div>
-              </div>
-              <div>
-                <h3 className="text-[17px] font-bold text-white mb-1.5">Rate Calculator</h3>
-                <p className="text-[13px] text-white/50 leading-relaxed">Locked drayage rates for any U.S. lane in under 30 seconds — live diesel, FSC, chassis and port fees all included automatically.</p>
-              </div>
+              ))}
             </div>
 
-            {/* Card A: Live Load Board */}
-            <div className="rounded-2xl p-6 flex flex-col"
-              style={{ background: "#1e293b", border: "1px solid rgba(255,255,255,0.12)" }}>
-              <div className="rounded-xl p-3 mb-4 flex-1" style={{ background: "rgba(24,163,84,0.08)" }}>
-                {[{ r: "LA → Phoenix", p: "$680" }, { r: "Houston → Dallas", p: "$420" }, { r: "NY → Chicago", p: "$580" }].map((l) => (
-                  <div key={l.r} className="flex items-center justify-between py-1.5 border-b last:border-0"
-                    style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-                    <span className="text-[10px] text-white/55">{l.r}</span>
-                    <span className="text-[10px] font-bold" style={{ color: "#18a354" }}>{l.p}</span>
-                  </div>
-                ))}
-              </div>
-              <h3 className="text-[15px] font-bold text-white mb-1">Live Load Board</h3>
-              <p className="text-[12px] text-white/45">Hundreds of drayage loads posted daily across every major port.</p>
-            </div>
-
-            {/* Card B: DrayPay */}
-            <div className="rounded-2xl p-6 flex flex-col"
-              style={{ background: "#1e293b", border: "1px solid rgba(255,255,255,0.12)" }}>
-              <div className="rounded-xl p-3 mb-4 flex-1 flex flex-col items-center justify-center"
-                style={{ background: "rgba(58,95,192,0.08)" }}>
-                <div className="text-[11px] text-white/35 uppercase tracking-widest mb-1">Paid in</div>
-                <div className="text-[32px] font-black text-white leading-none">24h</div>
-                <div className="text-[10px] mt-1" style={{ color: "#3A5FC0" }}>guaranteed payout</div>
-              </div>
-              <h3 className="text-[15px] font-bold text-white mb-1">DrayPay 24h</h3>
-              <p className="text-[12px] text-white/45">Carriers paid within 24 hours of POD upload. No net-30.</p>
-            </div>
-
-            {/* Card C: Support Chat */}
-            <div className="rounded-2xl p-6 flex flex-col"
-              style={{ background: "#1e293b", border: "1px solid rgba(255,255,255,0.12)" }}>
-              <div className="rounded-xl p-3 mb-4 space-y-2" style={{ background: "rgba(252,11,5,0.08)" }}>
-                <div className="rounded-lg px-3 py-2" style={{ background: "rgba(255,255,255,0.06)" }}>
-                  <span className="text-[10px] text-white/55">Where is my container?</span>
+            {/* Divider + stats */}
+            <div style={{ borderTop:"1px solid rgba(255,255,255,0.07)", paddingTop:28, display:"flex", gap:0, flexWrap:"wrap" as const }}>
+              {[
+                { n:"+23,300", label:"MONTHLY LOADS" },
+                { n:"1,940%",  label:"NETWORK GROWTH" },
+                { n:"$2.4B",   label:"VOLUME MOVED" },
+              ].map((s,i)=>(
+                <div key={s.label} style={{ flex:1, minWidth:160, paddingRight:32, borderRight:i<2?"1px solid rgba(255,255,255,0.07)":"none", paddingLeft:i>0?32:0 }}>
+                  <div style={{ fontSize:"clamp(22px,3vw,32px)", fontWeight:900, color:"#18a354", fontFamily:"monospace", lineHeight:1 }}>{s.n}</div>
+                  <div style={{ fontSize:9, color:"rgba(255,255,255,0.3)", letterSpacing:"0.18em", marginTop:6, textTransform:"uppercase" as const, fontFamily:"monospace" }}>{s.label}</div>
                 </div>
-                <div className="rounded-lg px-3 py-2 ml-4" style={{ background: "rgba(252,11,5,0.2)" }}>
-                  <span className="text-[10px] text-white/80">Gate-out 2h ago · On route</span>
-                </div>
-              </div>
-              <h3 className="text-[15px] font-bold text-white mb-1">24/7 Support Chat</h3>
-              <p className="text-[12px] text-white/45">Live support for shippers, carriers and brokers anytime.</p>
-            </div>
-
-            {/* Card D: Port Coverage */}
-            <div className="rounded-2xl p-6 flex flex-col"
-              style={{ background: "#1e293b", border: "1px solid rgba(255,255,255,0.12)" }}>
-              <div className="rounded-xl p-3 mb-4 flex flex-wrap gap-1.5" style={{ background: "rgba(58,95,192,0.08)" }}>
-                {["POLB", "POLA", "NY/NJ", "SAV", "HOU", "SEA", "+35"].map((p) => (
-                  <span key={p} className="rounded-md px-2 py-1 text-[9px] font-bold text-white/60"
-                    style={{ background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.1)" }}>{p}</span>
-                ))}
-              </div>
-              <h3 className="text-[15px] font-bold text-white mb-1">40+ Port Coverage</h3>
-              <p className="text-[12px] text-white/45">Every major U.S. sea port, rail ramp and inland destination.</p>
-            </div>
-
-            {/* Card E: Platform Analytics (dark) */}
-            <div className="rounded-2xl p-6 flex flex-col justify-between"
-              style={{ background: "#020A1A", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <div>
-                <h3 className="text-[16px] font-bold text-white mb-1">Platform Analytics</h3>
-                <p className="text-[12px] text-white/40 leading-relaxed">Real-time earnings and route performance across the full network.</p>
-              </div>
-              <div className="relative mt-4 overflow-hidden" style={{ height: 80 }}>
-                {[0,1,2,3,4,5,6].map((i) => (
-                  <div key={i} className="absolute top-0 bottom-0 w-px"
-                    style={{ left: `${i*(100/6)}%`, background: "rgba(255,255,255,0.06)" }} />
-                ))}
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 80" preserveAspectRatio="none">
-                  <path d="M0 60 C50 55, 100 65, 160 45 S260 20, 320 30 S370 15, 400 5" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="2"/>
-                  <path d="M0 60 C50 55, 100 65, 160 45 S260 20, 320 30 S370 15, 400 5 L400 80 L0 80 Z" fill="rgba(252,11,5,0.08)"/>
-                </svg>
-                <div className="absolute right-0 bottom-0 w-5 rounded-t-sm" style={{ height: 55, background: "rgba(252,11,5,0.7)" }} />
-                <div className="absolute w-3 h-3 rounded-full border-2 border-white" style={{ right: 4, bottom: 55, background: "#020A1A" }} />
-              </div>
+              ))}
             </div>
           </div>
         </div>
