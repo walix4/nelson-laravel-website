@@ -51,7 +51,7 @@ export default function Nav() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
-          <img src={asset("/logo-draygo.png")} alt="DrayGo" className="h-10 md:h-11 w-auto" />
+          <img src={asset("/logo-mark.png")} alt="DrayageRate" className="h-10 md:h-11 w-auto" />
         </Link>
 
 
