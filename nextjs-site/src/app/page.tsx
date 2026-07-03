@@ -417,7 +417,8 @@ export default function Home() {
             <div className="text-[11px] uppercase tracking-[0.22em] font-semibold mb-3" style={{ color: "#ffde01" }}>Why DrayOW</div>
             <h2 className="display text-[36px] md:text-[50px] text-white leading-[1.04]">The only platform built end-to-end for overweight compliance.</h2>
           </FadeUp>
-          <FadeIn className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,222,1,0.15)" }}>
+          <FadeIn>
+          <div className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,222,1,0.15)" }}>
             <div className="grid grid-cols-4 text-[12px] font-bold uppercase tracking-[0.12em]" style={{ background: "#0B2D5C", borderBottom: "1px solid rgba(255,222,1,0.2)" }}>
               <div className="px-6 py-4 col-span-1 text-white/60">Feature</div>
               <div className="px-6 py-4 text-center" style={{ background: "rgba(255,222,1,0.1)", color: "#ffde01" }}>DrayOW ✦</div>
@@ -432,6 +433,7 @@ export default function Home() {
                 <div className="px-6 py-4 text-center"><Check ok={r.comp} /></div>
               </div>
             ))}
+          </div>
           </FadeIn>
         </div>
       </section>
