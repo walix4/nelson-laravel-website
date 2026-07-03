@@ -5,6 +5,8 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { asset } from "@/lib/site";
 import HeroStatsBar from "@/components/HeroStatsBar";
+import RevealInit from "@/components/RevealInit";
+import { HowItWorksSection, LiveActivitySection, TestimonialsSection, StatsSection, ComparisonSection, FAQSection } from "@/components/NewSections";
 
 const PRIMARY = "#27b30a";
 
@@ -127,6 +129,7 @@ export default function CarriersPage() {
 
   return (
     <div style={{ background: "#060f1e" }}>
+      <RevealInit />
       <Nav logoSrc={asset("/logo-carrier-green.png")} />
 
       {/* ── SECTION 1: HERO ──────────────────────────────────── */}
@@ -1299,6 +1302,48 @@ export default function CarriersPage() {
           >
             View Live Loads
           </Link>
+        </div>
+      </section>
+
+      <HowItWorksSection />
+      <LiveActivitySection />
+      <TestimonialsSection />
+      <StatsSection />
+      <ComparisonSection />
+      <FAQSection />
+
+      {/* ── CARRIER CTA ──────────────────────────────────────────────────── */}
+      <section style={{ position:"relative", background:"linear-gradient(160deg,#06101e 0%,#031008 55%,#06101e 100%)", padding:"100px 24px", overflow:"hidden" }}>
+        <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 70% 70% at 50% 50%, rgba(39,179,10,0.10) 0%, transparent 65%)", zIndex:1 }} />
+        <div style={{ position:"absolute", inset:0, backgroundImage:"radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px)", backgroundSize:"28px 28px", zIndex:2 }} />
+        <div style={{ position:"relative", zIndex:3, maxWidth:760, margin:"0 auto", textAlign:"center" }}>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(39,179,10,0.14)", border:"1px solid rgba(39,179,10,0.40)", borderRadius:6, padding:"5px 14px", fontSize:10, fontWeight:800, letterSpacing:"0.16em", textTransform:"uppercase" as const, color:"#27b30a", marginBottom:28 }}>
+            <span style={{ width:5, height:5, borderRadius:"50%", background:"#27b30a", display:"inline-block" }} />
+            For Carriers &amp; Owner-Operators
+          </div>
+          <h2 style={{ fontSize:"clamp(34px,5vw,64px)", fontWeight:900, color:"#fff", lineHeight:1.05, margin:"0 0 18px", letterSpacing:"-0.02em" }}>
+            More loads. Faster pay.<br /><span style={{ color:"#27b30a" }}>Start today. Free.</span>
+          </h2>
+          <p style={{ fontSize:18, color:"rgba(255,255,255,0.50)", lineHeight:1.65, margin:"0 auto 40px", maxWidth:520 }}>
+            Join 8,000+ verified carriers already hauling on DrayGo. Get paid in 48 hours — no factoring, no waiting.
+          </p>
+          <div style={{ display:"flex", gap:14, justifyContent:"center", flexWrap:"wrap", marginBottom:28 }}>
+            <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"#27b30a", color:"#fff", fontWeight:700, fontSize:16, borderRadius:10, padding:"18px 36px", textDecoration:"none", boxShadow:"0 8px 32px rgba(39,179,10,0.30)" }}>
+              Get Started Free
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="/contact" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"transparent", color:"#fff", fontWeight:700, fontSize:16, borderRadius:10, padding:"18px 36px", textDecoration:"none", border:"1.5px solid rgba(255,255,255,0.22)" }}>
+              Talk to Recruitment
+            </a>
+          </div>
+          <div style={{ display:"flex", gap:24, justifyContent:"center", flexWrap:"wrap" }}>
+            {["No setup fees", "48h guaranteed pay", "All CDL-A welcome"].map(t => (
+              <div key={t} style={{ display:"flex", alignItems:"center", gap:7, fontSize:13, color:"rgba(255,255,255,0.40)" }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#27b30a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                {t}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
