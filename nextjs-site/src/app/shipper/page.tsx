@@ -1,12 +1,18 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { asset } from "@/lib/site";
 import HeroStatsBar from "@/components/HeroStatsBar";
 import RevealInit from "@/components/RevealInit";
 import { HowItWorksSection, LiveActivitySection, TestimonialsSection, StatsSection, ComparisonSection, FAQSection } from "@/components/NewSections";
+
+const SHIPPER_LINES = [
+  { text: "Locked Rates. Zero Surprises.", color: "#fc0b05" },
+  { text: "Port to Dock. 24/7 Visibility.",  color: "#4ADE80" },
+  { text: "Quote in 30 Seconds Flat.",       color: "#38BDF8" },
+];
 
 // ─── glass card style ────────────────────────────────────────────────────────
 const glass: React.CSSProperties = {
@@ -196,6 +202,17 @@ export default function ShipperPage() {
   // journey stepper
   const [activeStep, setActiveStep] = useState(0);
 
+  // hero animation
+  const [shipperIdx, setShipperIdx] = useState(0);
+  const [shipperOut, setShipperOut] = useState(false);
+  useEffect(() => {
+    const t = setInterval(() => {
+      setShipperOut(true);
+      setTimeout(() => { setShipperIdx(i => (i + 1) % SHIPPER_LINES.length); setShipperOut(false); }, 380);
+    }, 2800);
+    return () => clearInterval(t);
+  }, []);
+
   // rate calc logic
   const portRates = PORT_BASE_RATES[port] ?? 1000;
   const containerMult = CONTAINER_MULT[container] ?? 1.0;
@@ -221,55 +238,44 @@ export default function ShipperPage() {
       <Nav />
 
       {/* ══ SECTION 1 — HERO ══════════════════════════════════════════════════ */}
-      <section style={{ position: "relative", overflow: "hidden", paddingTop: "clamp(100px,14vh,160px)", paddingBottom: "clamp(64px,10vh,120px)" }}>
-        {/* Animated gradient — no video */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 0, background: "linear-gradient(135deg, #08192b 0%, #0a0f2e 50%, #150508 100%)" }}>
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 90% 70% at 75% 35%, rgba(252,11,5,0.22) 0%, transparent 60%)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 60% 50% at 15% 80%, rgba(58,10,10,0.30) 0%, transparent 55%)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 40% 30% at 55% 60%, rgba(252,11,5,0.08) 0%, transparent 50%)" }} />
+      <section className="relative overflow-hidden" style={{ background: "#06101e", paddingBottom: 0 }}>
+        <video autoPlay muted loop playsInline style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", zIndex:0 }}>
+          <source src={asset("/hero-bg.mp4")} type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 pointer-events-none" style={{ zIndex:2 }}>
+          <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full" style={{ background:"radial-gradient(circle, rgba(252,11,5,0.14) 0%, transparent 60%)" }} />
+          <div className="absolute top-0 -right-40 w-[600px] h-[600px] rounded-full" style={{ background:"radial-gradient(circle, rgba(58,95,192,0.14) 0%, transparent 60%)" }} />
         </div>
-        {/* overlay */}
-        <div style={{
-          position: "absolute", inset: 0, zIndex: 1,
-          background: "linear-gradient(105deg, rgba(8,25,43,0.82) 0%, rgba(6,20,58,0.55) 100%)",
-        }} />
-        <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 860, margin: "0 auto", padding: "0 32px", textAlign: "center" }}>
-            {/* Badge */}
-            <div style={{
-              display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px",
-              borderRadius: 4, background: "rgba(252,11,5,0.16)", border: "1px solid rgba(252,11,5,0.4)",
-              marginBottom: 24,
-            }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fc0b05", display: "inline-block" }} />
-              <span style={{ fontSize: 11, fontWeight: 700, color: "#fff", letterSpacing: "0.06em", textTransform: "uppercase" }}>For Shippers &amp; BCOs</span>
-            </div>
-            <h1 style={{ fontSize: "clamp(36px,5.5vw,72px)", fontWeight: 900, lineHeight: 1.04, margin: "0 0 20px", color: "#fff" }}>
-              Your cargo, port to door &mdash;{" "}
-              <span style={{ color: "#fc0b05" }}>On time. Every time.</span>
-            </h1>
-            <p style={{ fontSize: 18, color: "rgba(255,255,255,0.72)", lineHeight: 1.7, margin: "0 auto 36px", maxWidth: 560 }}>
-              Instant drayage quotes from 500+ verified carriers. Real-time GPS tracking from gate-out to your dock &mdash; fully transparent, locked rates, 24/7 visibility.
-            </p>
-            {/* App store buttons */}
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 20, justifyContent: "center" }}>
-              <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200" style={{ textDecoration: "none", whiteSpace: "nowrap" }}>
-                <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" className="shrink-0">
-                  <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
-                </svg>
-                <span className="leading-none text-white text-left whitespace-nowrap">
-                  <span className="block text-[8.5px] opacity-90">Download on the</span>
-                  <span className="block text-[14px] font-semibold tracking-tight">App Store</span>
-                </span>
-              </a>
-              <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200" style={{ textDecoration: "none", whiteSpace: "nowrap" }}>
-                <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" />
-                <span className="leading-none text-white text-left whitespace-nowrap">
-                  <span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span>
-                  <span className="block text-[14px] font-semibold tracking-tight">Google Play</span>
-                </span>
-              </a>
-            </div>
-            <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>&#128230; Built for shippers, BCOs &amp; importers</div>
+        <div className="relative max-w-[1100px] mx-auto px-6 flex flex-col items-center text-center" style={{ paddingTop:"clamp(110px,13vh,150px)", paddingBottom:"clamp(48px,8vh,80px)", zIndex:3 }}>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"6px 14px", borderRadius:4, background:"rgba(252,11,5,0.16)", border:"1px solid rgba(252,11,5,0.4)", marginBottom:24 }}>
+            <span style={{ width:6, height:6, borderRadius:"50%", background:"#fc0b05", display:"inline-block" }} />
+            <span style={{ fontSize:11, fontWeight:700, color:"#fff", letterSpacing:"0.06em", textTransform:"uppercase" }}>For Shippers &amp; BCOs</span>
+          </div>
+          <h1 className="display text-white" style={{ fontSize:"clamp(40px,5.8vw,76px)", lineHeight:1.02, letterSpacing:"-0.03em", maxWidth:900, margin:"0 0 8px" }}>
+            Ship Every Container,<br />
+            <span style={{ display:"inline-block", color:SHIPPER_LINES[shipperIdx].color, transition:"color 0.3s ease", animation:shipperOut ? "heroLineOut 0.38s ease forwards" : "heroLineIn 0.42s ease forwards" }}>
+              {SHIPPER_LINES[shipperIdx].text}
+            </span>
+          </h1>
+          <p className="mt-5 text-white/50" style={{ fontSize:"clamp(15px,1.4vw,17px)", maxWidth:480, marginBottom:32 }}>
+            Instant drayage quotes from 500+ verified carriers. Real-time GPS tracking from gate-out to your dock &mdash; locked rates, 24/7 visibility.
+          </p>
+          <div style={{ display:"flex", gap:10, flexWrap:"wrap", marginBottom:8, justifyContent:"center" }}>
+            <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200" style={{ textDecoration:"none", whiteSpace:"nowrap" }}>
+              <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" className="shrink-0"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] opacity-90">Download on the</span><span className="block text-[14px] font-semibold tracking-tight">App Store</span></span>
+            </a>
+            <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200" style={{ textDecoration:"none", whiteSpace:"nowrap" }}>
+              <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" />
+              <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
+            </a>
+          </div>
+          <div className="w-full flex justify-center" style={{ marginTop:20 }}>
+            <picture style={{ width:"100%", maxWidth:1000, display:"block" }}>
+              <source srcSet={asset("/hero-mockup.webp")} type="image/webp" />
+              <img src={asset("/hero-mockup.png")} alt="DrayGo Shipper App" loading="eager" fetchPriority="high" style={{ width:"100%", display:"block", opacity:1 }} />
+            </picture>
+          </div>
         </div>
       </section>
 
