@@ -1,0 +1,210 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:file((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/]+\\.\\w+)/",
+      "destination": "/:file",
+      "internal": true,
+      "missing": [
+        {
+          "type": "header",
+          "key": "x-nextjs-data"
+        }
+      ],
+      "statusCode": 308,
+      "regex": "^(?:/((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/]+\\.\\w+))/$"
+    },
+    {
+      "source": "/:notfile((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/\\.]+)",
+      "destination": "/:notfile/",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/\\.]+))$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [
+      {
+        "source": "/_assets/_next/:path+",
+        "destination": "/_next/:path+",
+        "regex": "^/_assets/_next(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))(?:/)?$"
+      }
+    ],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/about",
+      "regex": "^/about(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/about(?:/)?$"
+    },
+    {
+      "page": "/broker",
+      "regex": "^/broker(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/broker(?:/)?$"
+    },
+    {
+      "page": "/carriers",
+      "regex": "^/carriers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/carriers(?:/)?$"
+    },
+    {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
+    },
+    {
+      "page": "/estimates",
+      "regex": "^/estimates(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/estimates(?:/)?$"
+    },
+    {
+      "page": "/how-it-works",
+      "regex": "^/how\\-it\\-works(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/how\\-it\\-works(?:/)?$"
+    },
+    {
+      "page": "/jobs-map",
+      "regex": "^/jobs\\-map(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/jobs\\-map(?:/)?$"
+    },
+    {
+      "page": "/load-board",
+      "regex": "^/load\\-board(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/load\\-board(?:/)?$"
+    },
+    {
+      "page": "/pricing",
+      "regex": "^/pricing(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/pricing(?:/)?$"
+    },
+    {
+      "page": "/privacy",
+      "regex": "^/privacy(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/privacy(?:/)?$"
+    },
+    {
+      "page": "/rate-map",
+      "regex": "^/rate\\-map(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/rate\\-map(?:/)?$"
+    },
+    {
+      "page": "/services",
+      "regex": "^/services(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/services(?:/)?$"
+    },
+    {
+      "page": "/shipper",
+      "regex": "^/shipper(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/shipper(?:/)?$"
+    },
+    {
+      "page": "/terms",
+      "regex": "^/terms(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/terms(?:/)?$"
+    },
+    {
+      "page": "/tools",
+      "regex": "^/tools(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tools(?:/)?$"
+    },
+    {
+      "page": "/tools/accessorials",
+      "regex": "^/tools/accessorials(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tools/accessorials(?:/)?$"
+    },
+    {
+      "page": "/tools/co2",
+      "regex": "^/tools/co2(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tools/co2(?:/)?$"
+    },
+    {
+      "page": "/tools/containers",
+      "regex": "^/tools/containers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tools/containers(?:/)?$"
+    },
+    {
+      "page": "/tools/converter",
+      "regex": "^/tools/converter(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tools/converter(?:/)?$"
+    },
+    {
+      "page": "/tools/demurrage",
+      "regex": "^/tools/demurrage(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tools/demurrage(?:/)?$"
+    },
+    {
+      "page": "/tools/distance",
+      "regex": "^/tools/distance(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tools/distance(?:/)?$"
+    },
+    {
+      "page": "/tools/fsc",
+      "regex": "^/tools/fsc(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tools/fsc(?:/)?$"
+    },
+    {
+      "page": "/tools/ports",
+      "regex": "^/tools/ports(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tools/ports(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

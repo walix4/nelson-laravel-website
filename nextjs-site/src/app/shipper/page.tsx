@@ -4,6 +4,9 @@ import { useState } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { asset } from "@/lib/site";
+import HeroStatsBar from "@/components/HeroStatsBar";
+import RevealInit from "@/components/RevealInit";
+import { HowItWorksSection, LiveActivitySection, TestimonialsSection, StatsSection, ComparisonSection, FAQSection } from "@/components/NewSections";
 
 // ─── glass card style ────────────────────────────────────────────────────────
 const glass: React.CSSProperties = {
@@ -214,10 +217,11 @@ export default function ShipperPage() {
 
   return (
     <div style={{ background: "#08192b", color: "#fff", minHeight: "100vh", fontFamily: "system-ui,sans-serif" }}>
+      <RevealInit />
       <Nav />
 
       {/* ══ SECTION 1 — HERO ══════════════════════════════════════════════════ */}
-      <section style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden" }}>
+      <section style={{ position: "relative", overflow: "hidden", paddingTop: "clamp(100px,14vh,160px)", paddingBottom: "clamp(64px,10vh,120px)" }}>
         {/* Animated gradient — no video */}
         <div style={{ position: "absolute", inset: 0, zIndex: 0, background: "linear-gradient(135deg, #08192b 0%, #0a0f2e 50%, #150508 100%)" }}>
           <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 90% 70% at 75% 35%, rgba(252,11,5,0.22) 0%, transparent 60%)" }} />
@@ -229,8 +233,7 @@ export default function ShipperPage() {
           position: "absolute", inset: 0, zIndex: 1,
           background: "linear-gradient(105deg, rgba(8,25,43,0.82) 0%, rgba(6,20,58,0.55) 100%)",
         }} />
-        <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 1400, margin: "0 auto", padding: "0 32px" }}>
-          <div style={{ maxWidth: 600 }}>
+        <div style={{ position: "relative", zIndex: 2, width: "100%", maxWidth: 860, margin: "0 auto", padding: "0 32px", textAlign: "center" }}>
             {/* Badge */}
             <div style={{
               display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px",
@@ -240,15 +243,15 @@ export default function ShipperPage() {
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fc0b05", display: "inline-block" }} />
               <span style={{ fontSize: 11, fontWeight: 700, color: "#fff", letterSpacing: "0.06em", textTransform: "uppercase" }}>For Shippers &amp; BCOs</span>
             </div>
-            <h1 style={{ fontSize: "clamp(36px,5vw,64px)", fontWeight: 900, lineHeight: 1.04, margin: "0 0 20px", color: "#fff" }}>
+            <h1 style={{ fontSize: "clamp(36px,5.5vw,72px)", fontWeight: 900, lineHeight: 1.04, margin: "0 0 20px", color: "#fff" }}>
               Your cargo, port to door &mdash;{" "}
               <span style={{ color: "#fc0b05" }}>On time. Every time.</span>
             </h1>
-            <p style={{ fontSize: 18, color: "rgba(255,255,255,0.72)", lineHeight: 1.7, margin: "0 0 36px", maxWidth: 520 }}>
+            <p style={{ fontSize: 18, color: "rgba(255,255,255,0.72)", lineHeight: 1.7, margin: "0 auto 36px", maxWidth: 560 }}>
               Instant drayage quotes from 500+ verified carriers. Real-time GPS tracking from gate-out to your dock &mdash; fully transparent, locked rates, 24/7 visibility.
             </p>
             {/* App store buttons */}
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 20 }}>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 20, justifyContent: "center" }}>
               <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200" style={{ textDecoration: "none", whiteSpace: "nowrap" }}>
                 <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" className="shrink-0">
                   <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
@@ -267,26 +270,10 @@ export default function ShipperPage() {
               </a>
             </div>
             <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>&#128230; Built for shippers, BCOs &amp; importers</div>
-          </div>
         </div>
       </section>
 
-      {/* ══ STATS BAND ════════════════════════════════════════════════════════ */}
-      <section style={{ background: "linear-gradient(180deg,#09172a 0%,#060f1e 100%)", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "48px 24px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }} className="hero-stats-grid">
-          {([
-            ["50+", "Port Complexes"],
-            ["500+", "Verified Carriers"],
-            ["<60s", "Instant Quotes"],
-            ["$0", "To Post First Load"],
-          ] as [string, string][]).map(([val, lbl], i) => (
-            <div key={lbl} style={{ padding: "28px 0", paddingLeft: i === 0 ? 0 : 32, borderLeft: i === 0 ? "none" : "1px solid rgba(255,255,255,0.08)" }}>
-              <div style={{ fontSize: 40, fontWeight: 900, color: "#fff", lineHeight: 1, letterSpacing: "-0.02em" }}>{val}</div>
-              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", marginTop: 8, textTransform: "uppercase" as const, letterSpacing: "0.14em" }}>{lbl}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <HeroStatsBar />
 
       {/* ══ PRICING SECTION ══════════════════════════════════════════════════ */}
       <section style={{ background: "radial-gradient(ellipse 70% 90% at 15% 50%, rgba(252,11,5,0.13) 0%, transparent 65%), radial-gradient(ellipse 60% 70% at 85% 30%, rgba(252,11,5,0.08) 0%, transparent 55%), #060f1e", padding: "88px 24px" }}>
@@ -980,6 +967,47 @@ export default function ShipperPage() {
         </div>
       </section>
 
+      <HowItWorksSection />
+      <LiveActivitySection />
+      <TestimonialsSection />
+      <StatsSection />
+      <ComparisonSection />
+      <FAQSection />
+      {/* ── SHIPPER CTA ─────────────────────────────────────────────────── */}
+      <section style={{ background:"linear-gradient(160deg,#06101e 0%,#100508 55%,#06101e 100%)", padding:"100px 24px", position:"relative", overflow:"hidden" }}>
+        <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 70% 60% at 50% 50%, rgba(252,11,5,0.12) 0%, transparent 65%)", pointerEvents:"none" }} />
+        <div style={{ maxWidth:780, margin:"0 auto", textAlign:"center", position:"relative", zIndex:1 }}>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(252,11,5,0.1)", border:"1px solid rgba(252,11,5,0.3)", borderRadius:100, padding:"8px 20px", fontSize:11, fontWeight:700, color:"#fc0b05", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:28 }}>
+            <span style={{ width:6, height:6, borderRadius:"50%", background:"#fc0b05", display:"inline-block" }}/> Free to start · No credit card
+          </div>
+          <h2 style={{ fontSize:"clamp(40px,6vw,76px)", fontWeight:900, color:"#fff", lineHeight:1.04, margin:"0 0 20px", letterSpacing:"-0.025em" }}>
+            Ship your first container<br/><span style={{ color:"#fc0b05" }}>today. Free.</span>
+          </h2>
+          <p style={{ fontSize:"clamp(15px,1.5vw,18px)", color:"rgba(255,255,255,0.45)", lineHeight:1.75, marginBottom:44, maxWidth:520, margin:"0 auto 44px" }}>
+            Get instant drayage quotes, schedule port pickups, and track every container in real time — all from one dashboard built for shippers.
+          </p>
+          <div style={{ display:"flex", gap:14, justifyContent:"center", flexWrap:"wrap", marginBottom:28 }}>
+            <a href="#" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"#fc0b05", borderRadius:14, padding:"17px 40px", fontSize:16, fontWeight:800, color:"#fff", textDecoration:"none", letterSpacing:"-0.01em", boxShadow:"0 8px 32px rgba(252,11,5,0.35)", transition:"opacity 0.2s, transform 0.2s" }}
+              onMouseEnter={e=>{(e.currentTarget as HTMLAnchorElement).style.opacity="0.88";(e.currentTarget as HTMLAnchorElement).style.transform="translateY(-2px)"}}
+              onMouseLeave={e=>{(e.currentTarget as HTMLAnchorElement).style.opacity="1";(e.currentTarget as HTMLAnchorElement).style.transform="translateY(0)"}}>
+              Get Instant Quotes →
+            </a>
+            <a href="/contact" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(255,255,255,0.07)", border:"1px solid rgba(255,255,255,0.15)", borderRadius:14, padding:"17px 40px", fontSize:16, fontWeight:700, color:"#fff", textDecoration:"none", transition:"background 0.2s" }}
+              onMouseEnter={e=>(e.currentTarget as HTMLAnchorElement).style.background="rgba(255,255,255,0.12)"}
+              onMouseLeave={e=>(e.currentTarget as HTMLAnchorElement).style.background="rgba(255,255,255,0.07)"}>
+              Talk to Sales
+            </a>
+          </div>
+          <div style={{ display:"flex", gap:24, justifyContent:"center", flexWrap:"wrap" }}>
+            {["No setup fees","Live tracking included","Cancel anytime"].map(t=>(
+              <div key={t} style={{ display:"flex", alignItems:"center", gap:6, fontSize:13, color:"rgba(255,255,255,0.3)" }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                {t}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <Footer />
     </div>
   );

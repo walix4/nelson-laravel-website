@@ -67,29 +67,66 @@ const PORTS = [
 
 export function TrustedBySection() {
   return (
-    <section style={{ background:"#06101e", padding:"80px 0 88px", overflow:"hidden" }}>
-      <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 clamp(20px,4vw,48px)" }}>
+    <section style={{ background:"#06101e", padding:"88px 0 96px", overflow:"hidden", position:"relative" as const }}>
+      {/* Subtle red glow at top */}
+      <div style={{ position:"absolute", top:0, left:"50%", transform:"translateX(-50%)", width:"60%", height:1, background:"linear-gradient(90deg,transparent,rgba(252,11,5,0.35),transparent)", pointerEvents:"none" }} />
+      <div style={{ position:"absolute", top:0, left:"50%", transform:"translateX(-50%)", width:"40%", height:160, background:"radial-gradient(ellipse at top,rgba(252,11,5,0.06) 0%,transparent 70%)", pointerEvents:"none" }} />
+
+      <div style={{ maxWidth:1280, margin:"0 auto", padding:"0 clamp(16px,3vw,40px)" }}>
         <SectionHead tag="Trusted By" title="Active Across Every Major Port" sub="Connecting freight across the busiest container terminals in North America — from gate-in to final delivery." />
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(148px,1fr))", gap:12 }}>
-          {PORTS.map((p, i) => (
-            <div key={p.code} className={`reveal reveal-delay-${(i % 4) + 1}`}
-              style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.08)", borderRadius:16, padding:"20px 16px", textAlign:"center" as const, cursor:"default", transition:"background 0.3s, border-color 0.3s, transform 0.3s" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = "rgba(252,11,5,0.08)"; (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(252,11,5,0.3)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.04)"; (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.08)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}
-            >
-              {/* Anchor icon */}
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ margin:"0 auto 10px", display:"block" }}>
-                <circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M6 12H2a10 10 0 0 0 20 0h-4"/><line x1="5" y1="17" x2="19" y2="17"/>
-              </svg>
-              <div style={{ fontSize:22, fontWeight:900, color:"#fff", letterSpacing:"-0.02em" }}>{p.code}</div>
-              <div style={{ fontSize:11, color:"rgba(255,255,255,0.45)", marginTop:4, lineHeight:1.3 }}>{p.name.replace("Port of ","")}</div>
-              <div style={{ fontSize:10, color:"#fc0b05", fontWeight:700, marginTop:6, letterSpacing:"0.05em" }}>{p.rank}</div>
+
+        {/* Single-row scrollable on mobile, 7-col on desktop */}
+        <div style={{ overflowX:"auto", WebkitOverflowScrolling:"touch" as any, paddingBottom:4 }}>
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", gap:10, minWidth:840 }}>
+            {PORTS.map((p, i) => (
+              <div key={p.code} className={`reveal reveal-delay-${(i % 4) + 1}`}
+                style={{ background:"rgba(255,255,255,0.035)", border:"1px solid rgba(255,255,255,0.07)", borderRadius:18, padding:"28px 14px 22px", textAlign:"center" as const, cursor:"default", transition:"all 0.28s ease", position:"relative" as const, overflow:"hidden" }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLDivElement;
+                  el.style.background = "rgba(252,11,5,0.07)";
+                  el.style.borderColor = "rgba(252,11,5,0.35)";
+                  el.style.transform = "translateY(-6px)";
+                  el.style.boxShadow = "0 16px 40px rgba(252,11,5,0.12), 0 0 0 1px rgba(252,11,5,0.18)";
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLDivElement;
+                  el.style.background = "rgba(255,255,255,0.035)";
+                  el.style.borderColor = "rgba(255,255,255,0.07)";
+                  el.style.transform = "translateY(0)";
+                  el.style.boxShadow = "none";
+                }}
+              >
+                {/* Rank badge top-right */}
+                <div style={{ position:"absolute", top:10, right:10, fontSize:9, fontWeight:800, color:"rgba(252,11,5,0.75)", letterSpacing:"0.06em", background:"rgba(252,11,5,0.1)", border:"1px solid rgba(252,11,5,0.2)", borderRadius:6, padding:"2px 6px" }}>{p.rank}</div>
+
+                {/* Ship/anchor icon */}
+                <div style={{ width:44, height:44, borderRadius:12, background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.1)", display:"flex", alignItems:"center", justifyContent:"center", margin:"0 auto 14px" }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="22"/><path d="M6 12H2a10 10 0 0 0 20 0h-4"/>
+                  </svg>
+                </div>
+
+                {/* Code */}
+                <div style={{ fontSize:26, fontWeight:900, color:"#fff", letterSpacing:"-0.03em", lineHeight:1 }}>{p.code}</div>
+                {/* Full name */}
+                <div style={{ fontSize:11, color:"rgba(255,255,255,0.38)", marginTop:6, lineHeight:1.4 }}>{p.name.replace("Port of ","")}</div>
+
+                {/* Bottom accent line */}
+                <div style={{ position:"absolute", bottom:0, left:"20%", right:"20%", height:2, background:"linear-gradient(90deg,transparent,rgba(252,11,5,0.4),transparent)", borderRadius:2 }} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom stats strip */}
+        <div className="reveal" style={{ display:"flex", justifyContent:"center", gap:"clamp(24px,4vw,64px)", marginTop:44, flexWrap:"wrap" as const }}>
+          {[["40+","Ports Covered"],["8,000+","Vetted Carriers"],["50 States","Full Coverage"],["24/7","Live Tracking"]].map(([v,l]) => (
+            <div key={l} style={{ textAlign:"center" as const }}>
+              <div style={{ fontSize:20, fontWeight:900, color:"#fff", letterSpacing:"-0.02em" }}>{v}</div>
+              <div style={{ fontSize:11, color:"rgba(255,255,255,0.3)", marginTop:3, letterSpacing:"0.04em" }}>{l}</div>
             </div>
           ))}
         </div>
-        <p className="reveal" style={{ textAlign:"center" as const, marginTop:40, fontSize:13, color:"rgba(255,255,255,0.2)", letterSpacing:"0.04em" }}>
-          COVERING 40+ PORTS ACROSS THE UNITED STATES AND CANADA
-        </p>
       </div>
     </section>
   );
@@ -811,22 +848,422 @@ export function EnterpriseCTASection() {
   );
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   SECTION A — LIVE ACTIVITY TICKER
+══════════════════════════════════════════════════════════════════ */
+const FEED_ITEMS = [
+  { type:"load",   icon:"📦", msg:"Load #DR-8821 dispatched · LA → Phoenix",       time:"2s ago",  color:"#22c55e" },
+  { type:"pay",    icon:"💳", msg:"Payment $3,240 settled · Long Beach carrier",    time:"11s ago", color:"#38bdf8" },
+  { type:"bid",    icon:"⚡", msg:"8 bids received · Container TGHU4412301",        time:"23s ago", color:"#f59e0b" },
+  { type:"del",    icon:"✅", msg:"Delivery confirmed · NY → Newark · POD uploaded", time:"41s ago", color:"#22c55e" },
+  { type:"track",  icon:"📍", msg:"Live GPS lock · Truck DRY-2291 · I-10 West",    time:"1m ago",  color:"#a78bfa" },
+  { type:"load",   icon:"📦", msg:"Load #DR-8822 accepted · Savannah Port",         time:"1m ago",  color:"#22c55e" },
+  { type:"pay",    icon:"💳", msg:"Payment $1,890 settled · Oakland carrier",       time:"2m ago",  color:"#38bdf8" },
+  { type:"bid",    icon:"⚡", msg:"12 bids received · Reefer container HLBU2239",   time:"3m ago",  color:"#f59e0b" },
+  { type:"del",    icon:"✅", msg:"Gate-out confirmed · Houston · 40ft dry van",    time:"4m ago",  color:"#22c55e" },
+  { type:"track",  icon:"📍", msg:"ETA updated · NFK terminal · 14 min early",      time:"5m ago",  color:"#a78bfa" },
+];
+
+export function LiveActivitySection() {
+  const [items, setItems] = useState(FEED_ITEMS);
+  const [highlight, setHighlight] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setHighlight(h => (h + 1) % FEED_ITEMS.length);
+      setItems(prev => {
+        const next = [...prev];
+        const last = next.pop()!;
+        return [last, ...next];
+      });
+    }, 2200);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <section style={{ background:"linear-gradient(180deg,#07101f 0%,#060e1b 100%)", padding:"80px 0", overflow:"hidden", position:"relative" as const }}>
+      <div style={{ position:"absolute", inset:0, backgroundImage:"radial-gradient(ellipse 50% 60% at 70% 50%, rgba(56,189,248,0.04) 0%, transparent 60%)", pointerEvents:"none" }} />
+      <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 clamp(20px,4vw,48px)" }}>
+        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"center" }}>
+
+          {/* Left copy */}
+          <div className="reveal reveal-left">
+            <Tag>Live Network</Tag>
+            <h2 style={{ fontSize:"clamp(30px,3.8vw,50px)", fontWeight:900, color:"#fff", lineHeight:1.1, margin:"0 0 18px", letterSpacing:"-0.025em" }}>
+              Thousands of loads<br/>moving <span style={{ color:"#38bdf8" }}>right now</span>
+            </h2>
+            <p style={{ fontSize:15, color:"rgba(255,255,255,0.42)", lineHeight:1.75, marginBottom:32 }}>
+              DrayGo processes hundreds of drayage events every minute — bids, dispatches, GPS pings, and instant payments. Watch it happen in real time.
+            </p>
+            <div style={{ display:"flex", gap:32 }}>
+              {[["847","Loads active now"],["2.3s","Avg bid response"],["99.8%","Uptime SLA"]].map(([v,l])=>(
+                <div key={l}>
+                  <div style={{ fontSize:24, fontWeight:900, color:"#38bdf8" }}>{v}</div>
+                  <div style={{ fontSize:11, color:"rgba(255,255,255,0.35)", marginTop:3 }}>{l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right feed */}
+          <div className="reveal reveal-right" style={{ position:"relative" as const }}>
+            {/* Fade edges */}
+            <div style={{ position:"absolute", top:0, left:0, right:0, height:48, background:"linear-gradient(180deg,#07101f,transparent)", zIndex:2, pointerEvents:"none" }} />
+            <div style={{ position:"absolute", bottom:0, left:0, right:0, height:48, background:"linear-gradient(0deg,#07101f,transparent)", zIndex:2, pointerEvents:"none" }} />
+
+            <div style={{ display:"flex", flexDirection:"column" as const, gap:8, maxHeight:380, overflow:"hidden" }}>
+              {items.slice(0, 7).map((item, i) => (
+                <div key={`${item.msg}-${i}`}
+                  style={{ display:"flex", alignItems:"center", gap:12, background: i===0 ? "rgba(56,189,248,0.07)" : "rgba(255,255,255,0.028)", border:`1px solid ${i===0 ? "rgba(56,189,248,0.2)" : "rgba(255,255,255,0.06)"}`, borderRadius:12, padding:"11px 14px", transition:"all 0.4s ease", opacity: i > 5 ? 0 : 1 }}>
+                  <div style={{ width:32, height:32, borderRadius:10, background:`rgba(255,255,255,0.05)`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:15, flexShrink:0 }}>{item.icon}</div>
+                  <div style={{ flex:1, minWidth:0 }}>
+                    <div style={{ fontSize:12, color:"rgba(255,255,255,0.75)", fontWeight:500, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" as const }}>{item.msg}</div>
+                    <div style={{ fontSize:10, color:"rgba(255,255,255,0.25)", marginTop:2 }}>{item.time}</div>
+                  </div>
+                  <div style={{ width:6, height:6, borderRadius:"50%", background:item.color, flexShrink:0, boxShadow:`0 0 6px ${item.color}` }} />
+                </div>
+              ))}
+            </div>
+
+            {/* Live pulse dot */}
+            <div style={{ display:"flex", alignItems:"center", gap:6, marginTop:14 }}>
+              <div style={{ position:"relative" as const, width:8, height:8 }}>
+                <div style={{ position:"absolute", inset:0, borderRadius:"50%", background:"#22c55e", animation:"ping 1.4s cubic-bezier(0,0,0.2,1) infinite" }} />
+                <div style={{ position:"absolute", inset:0, borderRadius:"50%", background:"#22c55e" }} />
+              </div>
+              <span style={{ fontSize:11, color:"rgba(255,255,255,0.3)", fontWeight:600, letterSpacing:"0.06em" }}>LIVE NETWORK FEED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SECTION B — ANIMATED FEATURE CAROUSEL (TABBED)
+══════════════════════════════════════════════════════════════════ */
+const FEATURES_TAB = [
+  {
+    id:"dispatch", label:"Smart Dispatch", color:"#fc0b05",
+    headline:"Dispatch loads in under 60 seconds",
+    desc:"AI-powered carrier matching routes your load to the best available truck based on proximity, rating, and equipment type. No phone calls. No back-and-forth.",
+    points:["Auto-match to 8,000+ carriers","ETA + rate locked instantly","Full paperwork generated automatically"],
+    visual: (
+      <div style={{ background:"rgba(252,11,5,0.06)", border:"1px solid rgba(252,11,5,0.15)", borderRadius:16, padding:24 }}>
+        <div style={{ fontSize:12, color:"rgba(255,255,255,0.4)", marginBottom:16, fontWeight:700, letterSpacing:"0.06em" }}>MATCHING CARRIERS</div>
+        {[{name:"Carlos M. · DryTruck",dist:"2.1 mi",rate:"$380",score:98,c:"#22c55e"},{name:"Ahmed K. · FastFreight",dist:"3.8 mi",rate:"$390",score:94,c:"#22c55e"},{name:"Sam T. · GoLoad",dist:"5.2 mi",rate:"$405",score:87,c:"#f59e0b"}].map((c,i)=>(
+          <div key={c.name} style={{ display:"flex", alignItems:"center", gap:12, padding:"10px 0", borderBottom:i<2?"1px solid rgba(255,255,255,0.06)":"none" }}>
+            <div style={{ width:32, height:32, borderRadius:10, background:"rgba(255,255,255,0.08)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:13 }}>🚛</div>
+            <div style={{ flex:1 }}>
+              <div style={{ fontSize:12, color:"#fff", fontWeight:600 }}>{c.name}</div>
+              <div style={{ fontSize:10, color:"rgba(255,255,255,0.3)", marginTop:2 }}>{c.dist} away</div>
+            </div>
+            <div style={{ textAlign:"right" as const }}>
+              <div style={{ fontSize:13, color:"#fff", fontWeight:700 }}>{c.rate}</div>
+              <div style={{ fontSize:10, color:c.c, marginTop:2 }}>Score {c.score}</div>
+            </div>
+            {i===0 && <div style={{ background:"#fc0b05", borderRadius:6, padding:"3px 8px", fontSize:9, fontWeight:800, color:"#fff", letterSpacing:"0.06em" }}>BEST</div>}
+          </div>
+        ))}
+        <button style={{ width:"100%", marginTop:16, padding:"10px", background:"#fc0b05", border:"none", borderRadius:10, fontSize:13, fontWeight:800, color:"#fff", cursor:"pointer", letterSpacing:"-0.01em" }}>Dispatch Now →</button>
+      </div>
+    )
+  },
+  {
+    id:"track", label:"GPS Tracking", color:"#38bdf8",
+    headline:"Full container visibility, gate to gate",
+    desc:"Real-time GPS updates every 30 seconds. Know exactly where your container is at all times — from terminal gate-out to final warehouse delivery.",
+    points:["30-second location refresh","Geofence alerts at every checkpoint","Full audit trail for compliance"],
+    visual: (
+      <div style={{ background:"rgba(56,189,248,0.06)", border:"1px solid rgba(56,189,248,0.15)", borderRadius:16, padding:24 }}>
+        <div style={{ fontSize:12, color:"rgba(255,255,255,0.4)", marginBottom:12, fontWeight:700, letterSpacing:"0.06em" }}>CONTAINER TGHU4412301</div>
+        {/* Fake map track */}
+        <div style={{ height:140, background:"rgba(255,255,255,0.03)", borderRadius:12, border:"1px solid rgba(255,255,255,0.06)", marginBottom:12, position:"relative" as const, overflow:"hidden", display:"flex", alignItems:"center", justifyContent:"center" }}>
+          <svg viewBox="0 0 320 140" width="100%" height="100%" style={{ position:"absolute", inset:0 }}>
+            <polyline points="20,110 80,85 140,70 200,55 280,35" fill="none" stroke="rgba(56,189,248,0.4)" strokeWidth="2" strokeDasharray="6,4"/>
+            {[{x:20,y:110,done:true},{x:80,y:85,done:true},{x:140,y:70,done:true},{x:200,y:55,done:true},{x:280,y:35,done:false}].map((pt,i)=>(
+              <circle key={i} cx={pt.x} cy={pt.y} r={i===3?7:4} fill={pt.done?"#38bdf8":"rgba(255,255,255,0.2)"} stroke={i===3?"rgba(56,189,248,0.4)":"none"} strokeWidth={i===3?8:0}/>
+            ))}
+          </svg>
+          <div style={{ position:"absolute", bottom:8, left:8, fontSize:10, color:"rgba(255,255,255,0.3)" }}>LA Port → Phoenix WH</div>
+        </div>
+        {[["Status","In Transit • I-10 W"],["ETA","4h 22min (on time)"],["Last ping","18 seconds ago"]].map(([k,v])=>(
+          <div key={k} style={{ display:"flex", justifyContent:"space-between", padding:"7px 0", borderBottom:"1px solid rgba(255,255,255,0.05)", fontSize:12 }}>
+            <span style={{ color:"rgba(255,255,255,0.35)" }}>{k}</span>
+            <span style={{ color:"#fff", fontWeight:600 }}>{v}</span>
+          </div>
+        ))}
+      </div>
+    )
+  },
+  {
+    id:"pay", label:"Instant Pay", color:"#a78bfa",
+    headline:"Carriers paid within 24 hours",
+    desc:"DrayPay settles every load automatically the moment POD is uploaded. No net-30, no wire transfers, no payment chasing. Carriers love DrayGo because they actually get paid.",
+    points:["Same-day ACH for top-rated carriers","Automatic invoice generation","Full payment history + tax exports"],
+    visual: (
+      <div style={{ background:"rgba(167,139,250,0.06)", border:"1px solid rgba(167,139,250,0.15)", borderRadius:16, padding:24 }}>
+        <div style={{ fontSize:12, color:"rgba(255,255,255,0.4)", marginBottom:12, fontWeight:700, letterSpacing:"0.06em" }}>DRAYPAY SETTLEMENTS</div>
+        {[{id:"#8821",amt:"$3,240",carrier:"Carlos M.",status:"Paid",dt:"Today 2:14pm",c:"#22c55e"},{id:"#8819",amt:"$1,890",carrier:"Ahmed K.",status:"Paid",dt:"Today 11:02am",c:"#22c55e"},{id:"#8817",amt:"$4,100",carrier:"Sam T.",status:"Processing",dt:"Today 8:30am",c:"#f59e0b"},{id:"#8815",amt:"$2,750",carrier:"Maria L.",status:"Paid",dt:"Yesterday",c:"#22c55e"}].map((r,i)=>(
+          <div key={r.id} style={{ display:"flex", alignItems:"center", gap:10, padding:"9px 0", borderBottom:i<3?"1px solid rgba(255,255,255,0.05)":"none" }}>
+            <div style={{ flex:1 }}>
+              <div style={{ fontSize:12, color:"#fff", fontWeight:600 }}>{r.id} · {r.carrier}</div>
+              <div style={{ fontSize:10, color:"rgba(255,255,255,0.25)", marginTop:2 }}>{r.dt}</div>
+            </div>
+            <div style={{ fontSize:13, color:"#fff", fontWeight:700 }}>{r.amt}</div>
+            <div style={{ fontSize:9, fontWeight:800, color:r.c, background:`${r.c}18`, border:`1px solid ${r.c}40`, borderRadius:5, padding:"2px 7px", letterSpacing:"0.06em" }}>{r.status}</div>
+          </div>
+        ))}
+        <div style={{ marginTop:14, padding:"10px 14px", background:"rgba(167,139,250,0.08)", borderRadius:10, display:"flex", justifyContent:"space-between", alignItems:"center" }}>
+          <span style={{ fontSize:12, color:"rgba(255,255,255,0.45)" }}>This month</span>
+          <span style={{ fontSize:17, fontWeight:900, color:"#a78bfa" }}>$284,310</span>
+        </div>
+      </div>
+    )
+  },
+];
+
+export function FeatureTabSection() {
+  const [active, setActive] = useState(0);
+  const [animKey, setAnimKey] = useState(0);
+
+  function switchTab(i: number) {
+    setActive(i);
+    setAnimKey(k => k + 1);
+  }
+
+  useEffect(() => {
+    const t = setInterval(() => switchTab((active + 1) % FEATURES_TAB.length), 5000);
+    return () => clearInterval(t);
+  }, [active]);
+
+  const tab = FEATURES_TAB[active];
+
+  return (
+    <section style={{ background:"linear-gradient(180deg,#060e1b 0%,#06101e 100%)", padding:"96px 0", overflow:"hidden", position:"relative" as const }}>
+      <div style={{ position:"absolute", inset:0, backgroundImage:`radial-gradient(ellipse 55% 65% at 80% 50%, ${tab.color}0a 0%, transparent 60%)`, transition:"background-image 0.6s ease", pointerEvents:"none" }} />
+      <div style={{ maxWidth:1200, margin:"0 auto", padding:"0 clamp(20px,4vw,48px)" }}>
+        <SectionHead tag="Platform Features" title={<>Everything you need<br/>to run drayage</>} sub="Three core systems. One unified platform." />
+
+        {/* Tab switcher */}
+        <div className="reveal" style={{ display:"flex", justifyContent:"center", gap:10, marginBottom:56 }}>
+          {FEATURES_TAB.map((t,i)=>(
+            <button key={t.id} onClick={()=>switchTab(i)}
+              style={{ padding:"10px 24px", borderRadius:100, border:`1.5px solid ${active===i ? t.color : "rgba(255,255,255,0.1)"}`, background: active===i ? `${t.color}18` : "transparent", color: active===i ? t.color : "rgba(255,255,255,0.45)", fontSize:13, fontWeight:700, cursor:"pointer", transition:"all 0.25s ease", letterSpacing:"0.01em" }}>
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Content */}
+        <div key={animKey} style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"center", opacity:1, transition:"opacity 0.35s ease" }}>
+          {/* Left text */}
+          <div>
+            <h3 style={{ fontSize:"clamp(26px,3vw,42px)", fontWeight:900, color:"#fff", lineHeight:1.1, margin:"0 0 16px", letterSpacing:"-0.02em" }}>{tab.headline}</h3>
+            <p style={{ fontSize:15, color:"rgba(255,255,255,0.42)", lineHeight:1.75, marginBottom:28 }}>{tab.desc}</p>
+            <div style={{ display:"flex", flexDirection:"column" as const, gap:10 }}>
+              {tab.points.map(pt=>(
+                <div key={pt} style={{ display:"flex", alignItems:"flex-start", gap:10 }}>
+                  <div style={{ width:20, height:20, borderRadius:6, background:`${tab.color}20`, border:`1px solid ${tab.color}40`, display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0, marginTop:1 }}>
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke={tab.color} strokeWidth="3" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </div>
+                  <span style={{ fontSize:14, color:"rgba(255,255,255,0.65)", lineHeight:1.5 }}>{pt}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right visual */}
+          <div>{tab.visual}</div>
+        </div>
+
+        {/* Progress bar */}
+        <div style={{ display:"flex", gap:6, justifyContent:"center", marginTop:40 }}>
+          {FEATURES_TAB.map((_,i)=>(
+            <div key={i} style={{ height:3, width: active===i ? 32 : 16, borderRadius:2, background: active===i ? tab.color : "rgba(255,255,255,0.12)", transition:"all 0.3s ease" }} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SECTION C — ANIMATED PARTICLE NETWORK (Canvas)
+══════════════════════════════════════════════════════════════════ */
+export function NetworkShaderSection() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let raf: number;
+    const NODES = 55;
+    const MAX_DIST = 160;
+
+    function resize() {
+      if (!canvas) return;
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx!.scale(window.devicePixelRatio, window.devicePixelRatio);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    const W = () => canvas.offsetWidth;
+    const H = () => canvas.offsetHeight;
+
+    // Nodes
+    const nodes = Array.from({ length: NODES }, () => ({
+      x: Math.random() * W(),
+      y: Math.random() * H(),
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      r: 1.5 + Math.random() * 2,
+      pulse: Math.random() * Math.PI * 2,
+    }));
+
+    // Active "data" packets travelling along edges
+    const packets: { from: number; to: number; t: number; speed: number; color: string }[] = [];
+    const COLORS = ["#fc0b05","#38bdf8","#22c55e","#a78bfa","#f59e0b"];
+
+    function spawnPacket() {
+      const from = Math.floor(Math.random() * NODES);
+      const to = Math.floor(Math.random() * NODES);
+      if (from === to) return;
+      packets.push({ from, to, t: 0, speed: 0.008 + Math.random() * 0.012, color: COLORS[Math.floor(Math.random() * COLORS.length)] });
+    }
+
+    let frame = 0;
+    function draw() {
+      if (!canvas || !ctx) return;
+      const w = W(), h = H();
+      ctx.clearRect(0, 0, w, h);
+
+      // Move nodes
+      nodes.forEach(n => {
+        n.x += n.vx;
+        n.y += n.vy;
+        if (n.x < 0 || n.x > w) n.vx *= -1;
+        if (n.y < 0 || n.y > h) n.vy *= -1;
+        n.pulse += 0.02;
+      });
+
+      // Draw edges
+      for (let i = 0; i < NODES; i++) {
+        for (let j = i + 1; j < NODES; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MAX_DIST) {
+            const alpha = (1 - dist / MAX_DIST) * 0.18;
+            ctx.strokeStyle = `rgba(56,189,248,${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw nodes
+      nodes.forEach(n => {
+        const pulse = Math.sin(n.pulse) * 0.5 + 0.5;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.r * (1 + pulse * 0.3), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(56,189,248,${0.4 + pulse * 0.4})`;
+        ctx.fill();
+      });
+
+      // Move packets
+      packets.forEach((p, idx) => {
+        p.t += p.speed;
+        const na = nodes[p.from], nb = nodes[p.to];
+        const x = na.x + (nb.x - na.x) * p.t;
+        const y = na.y + (nb.y - na.y) * p.t;
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        if (p.t >= 1) packets.splice(idx, 1);
+      });
+
+      // Spawn packets
+      if (frame % 18 === 0) spawnPacket();
+      frame++;
+      raf = requestAnimationFrame(draw);
+    }
+
+    draw();
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return (
+    <section style={{ background:"linear-gradient(180deg,#060e1b 0%,#06101e 100%)", padding:"96px 0", position:"relative" as const, overflow:"hidden" }}>
+      {/* Canvas background */}
+      <canvas ref={canvasRef} style={{ position:"absolute", inset:0, width:"100%", height:"100%", opacity:0.65 }} />
+
+      <div style={{ position:"relative" as const, zIndex:1, maxWidth:960, margin:"0 auto", padding:"0 clamp(20px,4vw,48px)", textAlign:"center" as const }}>
+        <div className="reveal">
+          <div style={{ display:"inline-flex", alignItems:"center", gap:8, background:"rgba(56,189,248,0.1)", border:"1px solid rgba(56,189,248,0.25)", borderRadius:100, padding:"7px 18px", fontSize:11, fontWeight:700, color:"#38bdf8", letterSpacing:"0.08em", textTransform:"uppercase" as const, marginBottom:24 }}>
+            <span style={{ width:5, height:5, borderRadius:"50%", background:"#38bdf8", display:"inline-block" }}/> Connected Network
+          </div>
+          <h2 style={{ fontSize:"clamp(32px,5vw,64px)", fontWeight:900, color:"#fff", lineHeight:1.08, margin:"0 0 20px", letterSpacing:"-0.025em" }}>
+            One network.<br/><span style={{ color:"#38bdf8" }}>Every shipment connected.</span>
+          </h2>
+          <p style={{ fontSize:"clamp(14px,1.4vw,17px)", color:"rgba(255,255,255,0.4)", lineHeight:1.8, maxWidth:580, margin:"0 auto 52px" }}>
+            DrayGo's carrier network spans the entire continental US. Every load, every carrier, every container — connected in a single intelligent mesh.
+          </p>
+        </div>
+
+        {/* Animated stats */}
+        <div className="reveal reveal-delay-1" style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:2, background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.07)", borderRadius:20, overflow:"hidden" }}>
+          {[
+            { value:"8,200+", label:"Carriers online", color:"#38bdf8" },
+            { value:"340ms",  label:"Match speed",     color:"#22c55e" },
+            { value:"50",     label:"States covered",  color:"#a78bfa" },
+            { value:"99.8%",  label:"Network uptime",  color:"#f59e0b" },
+          ].map((s, i) => (
+            <div key={s.label} style={{ padding:"28px 20px", textAlign:"center" as const, borderRight: i < 3 ? "1px solid rgba(255,255,255,0.06)" : "none", position:"relative" as const }}>
+              <div style={{ fontSize:"clamp(22px,2.5vw,34px)", fontWeight:900, color:s.color, letterSpacing:"-0.03em", lineHeight:1 }}>{s.value}</div>
+              <div style={{ fontSize:12, color:"rgba(255,255,255,0.3)", marginTop:8, fontWeight:500 }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ── Master export ─────────────────────────────────────────────── */
 export function AllNewSections() {
   return (
     <>
       <TrustedBySection />
       <HowItWorksSection />
+      <LiveActivitySection />
       <DashboardSection />
       <FeatureGridSection />
+      <FeatureTabSection />
       <CoverageMapSection />
+      <NetworkShaderSection />
       <TestimonialsSection />
       <SecuritySection />
       <StatsSection />
       <ComparisonSection />
       <FAQSection />
       <BlogSection />
-      <DownloadAppsSection />
       <EnterpriseCTASection />
     </>
   );

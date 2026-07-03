@@ -4,6 +4,7 @@ import { useState } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { asset } from "@/lib/site";
+import HeroStatsBar from "@/components/HeroStatsBar";
 
 const PRIMARY = "#27b30a";
 
@@ -112,10 +113,7 @@ export default function CarriersPage() {
       <Nav logoSrc={asset("/logo-carrier-green.png")} />
 
       {/* ── SECTION 1: HERO ──────────────────────────────────── */}
-      <section
-        className="relative overflow-hidden text-white"
-        style={{ minHeight: "100vh", display: "flex", alignItems: "center" }}
-      >
+      <section className="relative overflow-hidden text-white" style={{ paddingTop: "clamp(100px,14vh,160px)", paddingBottom: "clamp(64px,10vh,120px)" }}>
         {/* Animated gradient — no video */}
         <div style={{ position: "absolute", inset: 0, zIndex: 0, background: "linear-gradient(135deg, #060f1e 0%, #041a0e 50%, #071e15 100%)" }}>
           <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 90% 70% at 72% 32%, rgba(24,163,84,0.22) 0%, transparent 60%)" }} />
@@ -129,45 +127,28 @@ export default function CarriersPage() {
             zIndex: 1,
           }}
         />
-        <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 py-16 md:py-24">
-          <div className="flex flex-col" style={{ maxWidth: 600 }}>
+        <div className="relative z-10 w-full mx-auto px-6 py-16 md:py-24" style={{ maxWidth: 860, textAlign: "center" }}>
             {/* badge */}
             <div
-              className="inline-flex items-center gap-2 self-start px-3.5 py-1.5 text-[11px] font-semibold mb-5"
-              style={{
-                borderRadius: 4,
-                background: "rgba(39,179,10,0.16)",
-                border: "1px solid rgba(39,179,10,0.4)",
-                color: "#fff",
-              }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] font-semibold mb-5"
+              style={{ borderRadius: 4, background: "rgba(39,179,10,0.16)", border: "1px solid rgba(39,179,10,0.4)", color: "#fff" }}
             >
-              <span
-                style={{
-                  width: 7,
-                  height: 7,
-                  borderRadius: "50%",
-                  background: PRIMARY,
-                  display: "inline-block",
-                }}
-              />
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: PRIMARY, display: "inline-block" }} />
               For Drayage Carriers
             </div>
 
-            <h1
-              className="text-white font-extrabold leading-[1.03]"
-              style={{ fontSize: "clamp(36px, 5vw, 64px)" }}
-            >
+            <h1 className="text-white font-extrabold leading-[1.03]" style={{ fontSize: "clamp(36px, 5.5vw, 72px)" }}>
               Find loads near you —{" "}
               <span style={{ color: PRIMARY }}>Get paid in 48 hours.</span>
             </h1>
 
-            <p className="mt-5 text-white/75 text-[16px] md:text-[18px] max-w-xl leading-relaxed">
+            <p className="mt-5 text-white/75 text-[16px] md:text-[18px] leading-relaxed" style={{ maxWidth: 560, margin: "20px auto 0" }}>
               Browse live drayage loads near every major US port complex. Claim loads, sign
               digitally, and get paid in 48 hours — no factoring, no waiting 30+ days.
             </p>
 
             {/* app store buttons */}
-            <div className="mt-8 flex gap-2.5 flex-wrap">
+            <div className="mt-8 flex gap-2.5 flex-wrap justify-center">
               <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200" style={{ textDecoration: "none", whiteSpace: "nowrap" }}>
                 <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" className="shrink-0">
                   <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
@@ -189,21 +170,10 @@ export default function CarriersPage() {
             <div className="mt-5 text-[12px] text-white/55">
               🚛 Owner-operators &amp; small fleets welcome
             </div>
-          </div>
         </div>
       </section>
 
-      {/* ── SECTION 2: STATS BAND ────────────────────────────── */}
-      <section style={{ background: "linear-gradient(180deg,#09172a 0%,#060f1e 100%)", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "48px 24px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)" }} className="hero-stats-grid">
-          {STATS.map(([v, l], i) => (
-            <div key={l} style={{ padding: "28px 0", paddingLeft: i === 0 ? 0 : 32, borderLeft: i === 0 ? "none" : "1px solid rgba(255,255,255,0.08)" }}>
-              <div style={{ fontSize: 40, fontWeight: 900, color: "#fff", lineHeight: 1, letterSpacing: "-0.02em" }}>{v}</div>
-              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", marginTop: 8, textTransform: "uppercase" as const, letterSpacing: "0.14em" }}>{l}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <HeroStatsBar />
 
       {/* ── PRICING SECTION ──────────────────────────────────── */}
       <section style={{ background: "radial-gradient(ellipse 70% 90% at 15% 50%, rgba(39,179,10,0.12) 0%, transparent 65%), radial-gradient(ellipse 60% 70% at 85% 30%, rgba(39,179,10,0.07) 0%, transparent 55%), #060f1e", padding: "88px 24px" }}>

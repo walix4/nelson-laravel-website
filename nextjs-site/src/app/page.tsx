@@ -9,17 +9,6 @@ import { AllNewSections } from "@/components/NewSections";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 import type { Card as CardType } from "@/components/ui/apple-cards-carousel";
 
-/* ── deterministic confetti (no Math.random → no hydration mismatch) ── */
-const CONFETTI_PIECES = Array.from({length:80}, (_,i) => ({
-  id:i,
-  x:(i*137.508)%100,
-  delay:(i*0.13)%3.2,
-  dur:2.2+(i%6)*0.35,
-  color:['#fc0b05','#4ADE80','#38BDF8','#f59e0b','#a78bfa','#ffffff','#FF4D00','#f472b6'][i%8],
-  size:6+(i%9),
-  circle:i%4===0,
-}));
-
 function LaunchOverlay({onDone}:{onDone:()=>void}) {
   const [out,setOut] = useState(false);
   useEffect(()=>{
@@ -29,15 +18,11 @@ function LaunchOverlay({onDone}:{onDone:()=>void}) {
   return (
     <>
       <style>{`
-        @keyframes cFall{0%{transform:translateY(-40px) rotate(0deg);opacity:1}85%{opacity:.7}100%{transform:translateY(110vh) rotate(780deg);opacity:0}}
         @keyframes launchIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
         @keyframes launchOut{to{opacity:0;transform:scale(1.06)}}
         @keyframes textGlow{0%,100%{opacity:.85}50%{opacity:1}}
       `}</style>
       <div style={{position:'fixed',inset:0,zIndex:9999,background:'linear-gradient(160deg,#060606 0%,#0e0e1c 55%,#060606 100%)',display:'flex',alignItems:'center',justifyContent:'center',overflow:'hidden',animation:out?'launchOut 0.8s ease forwards':undefined}}>
-        {CONFETTI_PIECES.map(p=>(
-          <div key={p.id} style={{position:'absolute',left:`${p.x}%`,top:-24,width:p.size,height:p.circle?p.size:Math.round(p.size*.55),borderRadius:p.circle?'50%':3,background:p.color,animation:`cFall ${p.dur}s ${p.delay}s ease-in infinite`}}/>
-        ))}
         <div style={{textAlign:'center',position:'relative',zIndex:1,padding:'0 24px',animation:'launchIn 0.6s ease forwards'}}>
           <img src={asset("/logo-draygo-white.png")} alt="DrayGo" style={{height:56,objectFit:'contain',marginBottom:32,filter:'drop-shadow(0 0 20px rgba(252,11,5,0.5))'}} />
           <h2 style={{fontSize:'clamp(28px,5.5vw,58px)',fontWeight:900,color:'#fff',marginBottom:16,letterSpacing:'-0.025em',lineHeight:1.1,animation:'textGlow 1.5s ease-in-out infinite'}}>
@@ -429,20 +414,6 @@ export default function Home() {
         );
       })()}
 
-      {/* ─── APP FEATURE ROWS (Opal style) ─── */}
-      <style>{`
-        @keyframes barGrow { from{transform:scaleY(0);transform-origin:bottom} to{transform:scaleY(1);transform-origin:bottom} }
-        @keyframes shimmer { 0%{opacity:0.4} 50%{opacity:1} 100%{opacity:0.4} }
-        @keyframes statusPing { 0%{transform:scale(1);opacity:1} 100%{transform:scale(2.2);opacity:0} }
-        @keyframes slideIn { from{opacity:0;transform:translateX(12px)} to{opacity:1;transform:translateX(0)} }
-        @keyframes imgFade { from{opacity:0} to{opacity:1} }
-        picture img { animation: imgFade 0.5s ease forwards; }
-        @keyframes heroLineOut { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-28px)} }
-        @keyframes heroLineIn  { 0%{opacity:0;transform:translateY(28px)} 100%{opacity:1;transform:translateY(0)} }
-      `}</style>
-      <section style={{ background:"#06101e", overflow:"hidden" }}>
-        {APPS.map((app) => <AppSection key={app.id} app={app} />)}
-      </section>
 
       {/* ─── PLATFORM FEATURES BENTO ─── */}
       <section id="how-it-works" style={{ background:"linear-gradient(180deg,#070f1f 0%,#0a1428 100%)", padding:"88px 0", position:"relative" as const }}>
@@ -560,19 +531,13 @@ export default function Home() {
               </div>
               <p style={{ fontSize:11, color:"rgba(255,255,255,0.22)" }}>No credit card required · Free to start · Cancel anytime</p>
             </div>
-            {/* Right: hero video bg + 3-app phones on top */}
-            <div className="reveal-right reveal-delay-2" style={{ position:"relative", overflow:"hidden", minHeight:320, display:"flex", alignItems:"center", justifyContent:"center", padding:"24px 16px" }}>
-              {/* video background */}
-              <video autoPlay muted loop playsInline style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", zIndex:0 }}>
-                <source src={asset("/hero-bg.mp4")} type="video/mp4" />
-              </video>
-              {/* dark overlay so phones stay readable */}
-              <div style={{ position:"absolute", inset:0, background:"rgba(0,0,0,0.55)", zIndex:1 }} />
-              {/* phones */}
-              <picture style={{ display:"block", width:"100%", position:"relative", zIndex:2 }}>
-                <source srcSet={asset("/cta-phones.webp")} type="image/webp" />
-                <img src={asset("/cta-phones.png")} alt="DrayGo Apps" style={{ width:"100%", display:"block", filter:"drop-shadow(0 24px 48px rgba(0,0,0,0.7))" }} />
-              </picture>
+            {/* Right: logo + glow */}
+            <div className="reveal-right reveal-delay-2" style={{ position:"relative", overflow:"hidden", minHeight:320, display:"flex", alignItems:"center", justifyContent:"center", padding:"48px 32px" }}>
+              <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 80% 80% at 50% 50%, rgba(252,11,5,0.1) 0%, transparent 70%)", pointerEvents:"none" }} />
+              <div style={{ textAlign:"center", position:"relative", zIndex:1 }}>
+                <img src={asset("/logo-draygo-white.png")} alt="DrayGo" style={{ height:80, objectFit:"contain", filter:"drop-shadow(0 0 40px rgba(252,11,5,0.5))", marginBottom:24 }} />
+                <div style={{ fontSize:13, color:"rgba(255,255,255,0.25)", letterSpacing:"0.12em", fontWeight:700, textTransform:"uppercase" }}>The Drayage Platform</div>
+              </div>
             </div>
           </div>
         </div>
