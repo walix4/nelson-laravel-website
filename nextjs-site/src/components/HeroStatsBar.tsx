@@ -9,7 +9,7 @@ const STATS = [
 
 export default function HeroStatsBar() {
   return (
-    <div style={{ padding: "0 clamp(16px,4vw,48px)" }}>
+    <div style={{ padding: "40px clamp(16px,4vw,48px) 0" }}>
       <div style={{
         maxWidth: 1100,
         margin: "0 auto",

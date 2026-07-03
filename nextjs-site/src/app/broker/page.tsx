@@ -232,7 +232,7 @@ export default function BrokerPage() {
           <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full" style={{ background:"radial-gradient(circle, rgba(0,165,231,0.14) 0%, transparent 60%)" }} />
           <div className="absolute top-0 -right-40 w-[600px] h-[600px] rounded-full" style={{ background:"radial-gradient(circle, rgba(58,95,192,0.14) 0%, transparent 60%)" }} />
         </div>
-        <div className="relative max-w-[1100px] mx-auto px-6 flex flex-col items-center text-center" style={{ paddingTop:"clamp(110px,13vh,150px)", paddingBottom:"clamp(48px,8vh,80px)", zIndex:3 }}>
+        <div className="relative max-w-[1100px] mx-auto px-6 flex flex-col items-center text-center" style={{ paddingTop:"clamp(110px,13vh,150px)", paddingBottom:0, zIndex:3 }}>
           <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"6px 14px", borderRadius:4, background:"rgba(0,165,231,0.16)", border:"1px solid rgba(0,165,231,0.4)", marginBottom:24 }}>
             <span style={{ width:6, height:6, borderRadius:"50%", background:"#00a5e7", display:"inline-block" }} />
             <span style={{ fontSize:11, fontWeight:700, color:"#fff", letterSpacing:"0.06em", textTransform:"uppercase" }}>For Freight Brokers &amp; 3PLs</span>
