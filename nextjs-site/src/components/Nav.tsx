@@ -38,10 +38,8 @@ export default function Nav() {
             </div>
           </div>
           <Link href="/pricing" className="hover:text-white">API pricing</Link>
-          <Link href="#" className="hover:text-white">Blog</Link>
-          <Link href="/pricing" className="hover:text-white">FAQ</Link>
-          <Link href="#" className="hover:text-white">About</Link>
-          <Link href="#" className="hover:text-white">Support</Link>
+          <Link href="/how-it-works" className="hover:text-white">How it works</Link>
+          <Link href="/about" className="hover:text-white">About</Link>
         </nav>
         <div className="flex items-center gap-2.5">
           <Link href="/pricing" className="btn-primary text-[13px] px-4 py-2 rounded-lg inline-flex items-center gap-1.5"><span className="label">Get API Key</span></Link>
