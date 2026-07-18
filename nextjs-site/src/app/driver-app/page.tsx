@@ -140,11 +140,13 @@ function Hero() {
             maskImage: "linear-gradient(180deg, black 86%, transparent 99%)", WebkitMaskImage: "linear-gradient(180deg, black 86%, transparent 99%)" }}>
             <source srcSet={asset("/driver-app/hand-hero.webp?v=2")} type="image/webp" />
             <img src={asset("/driver-app/hand-hero.png?v=2")} alt="DrayGo Driver app in hand — home and today's earnings" loading="eager"
-              style={{ width: "100%", display: "block",
-                maskImage: "linear-gradient(90deg, black 84%, transparent 98%)", WebkitMaskImage: "linear-gradient(90deg, black 84%, transparent 98%)" }} />
+              style={{ width: "100%", display: "block" }} />
           </picture>
         </div>
       </div>
+
+      {/* glass stats strip over the hero render */}
+      <StatsStrip glass />
     </section>
   );
 }
@@ -158,9 +160,11 @@ const STATS: [string, string][] = [
   ["0", "Paperwork. Digital POD & BOL"],
 ];
 
-function StatsStrip() {
+function StatsStrip({ glass = false }: { glass?: boolean }) {
   return (
-    <section style={{ borderBottom: `1px solid ${BORDER}`, background: "rgba(255,255,255,0.02)" }}>
+    <section style={glass
+      ? { borderTop: `1px solid rgba(255,255,255,0.12)`, background: "rgba(10,14,7,0.35)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", position: "relative", zIndex: 1 }
+      : { borderBottom: `1px solid ${BORDER}`, background: "rgba(255,255,255,0.02)" }}>
       <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4" style={{ padding: "0 clamp(24px,4vw,56px)" }}>
         {STATS.map(([n, l], i) => (
           <div key={l} className={`reveal reveal-delay-${i % 4}`} style={{ padding: "34px 20px", textAlign: "center", borderLeft: i > 0 ? `1px solid ${BORDER}` : "none" }}>
@@ -426,7 +430,6 @@ export default function DriverAppPage() {
       <Nav logoSrc={asset("/logo-draygo-lime.png")} />
       <main>
         <Hero />
-        <StatsStrip />
         <FeatureGrid />
         {DEEPS.map(s => <DeepSection key={s.tag} s={s} />)}
         <ScreensMarquee />
