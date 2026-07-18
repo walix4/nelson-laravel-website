@@ -98,12 +98,12 @@ function Hero() {
     <section style={{ position: "relative", overflow: "hidden", borderBottom: `1px solid ${BORDER}` }}>
       {/* truck-route background */}
       <picture>
-        <source srcSet={asset("/driver-app/hero-bg.webp")} type="image/webp" />
-        <img src={asset("/driver-app/hero-bg.jpg")} alt="" aria-hidden="true"
+        <source srcSet={asset("/driver-app/hero-bg.webp?v=2")} type="image/webp" />
+        <img src={asset("/driver-app/hero-bg.jpg?v=2")} alt="" aria-hidden="true"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
       </picture>
       {/* scrim — keeps copy readable, fades into page bg */}
-      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(90deg, rgba(10,14,7,0.94) 0%, rgba(10,14,7,0.78) 38%, rgba(10,14,7,0.35) 70%, rgba(10,14,7,0.45) 100%)`, pointerEvents: "none" }} />
+      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(90deg, rgba(10,14,7,0.9) 0%, rgba(10,14,7,0.68) 38%, rgba(10,14,7,0.3) 70%, rgba(10,14,7,0.4) 100%)`, pointerEvents: "none" }} />
       <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, rgba(10,14,7,0.55) 0%, rgba(10,14,7,0) 30%, rgba(10,14,7,0) 62%, rgba(10,14,7,0.9) 100%)`, pointerEvents: "none" }} />
 
       <div className="max-w-[1200px] mx-auto grid lg:grid-cols-[1.05fr_1fr] gap-10 items-center" style={{ padding: "clamp(56px,8vw,110px) clamp(24px,4vw,56px) 0", position: "relative", zIndex: 1 }}>
@@ -136,10 +136,16 @@ function Hero() {
           </div>
         </div>
 
-        {/* phone-in-hand mockup */}
-        <div className="reveal-right reveal-delay-1 flex" style={{ alignItems: "center", justifyContent: "center", position: "relative", padding: "8px 0 24px" }}>
-          <HandShot name="hand-home" alt="DrayGo Driver app in hand — home and today's earnings" eager zoom={1.5}
-            style={{ width: "min(680px, 100%)" }} />
+        {/* phone-in-hands cutout mockup */}
+        <div className="reveal-right reveal-delay-1 flex" style={{ alignItems: "flex-end", justifyContent: "center", position: "relative", paddingTop: 24 }}>
+          <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 55% 55% at 50% 60%, ${LIME}22 0%, transparent 70%)`, pointerEvents: "none" }} />
+          <picture style={{ display: "block", width: "min(620px, 100%)", position: "relative",
+            maskImage: "linear-gradient(180deg, black 86%, transparent 99%)", WebkitMaskImage: "linear-gradient(180deg, black 86%, transparent 99%)" }}>
+            <source srcSet={asset("/driver-app/hand-hero.webp")} type="image/webp" />
+            <img src={asset("/driver-app/hand-hero.png")} alt="Driver accepting a load in the DrayGo Driver app" loading="eager"
+              style={{ width: "100%", display: "block",
+                maskImage: "linear-gradient(90deg, black 84%, transparent 98%)", WebkitMaskImage: "linear-gradient(90deg, black 84%, transparent 98%)" }} />
+          </picture>
         </div>
       </div>
     </section>
