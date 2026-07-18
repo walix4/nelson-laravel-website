@@ -122,14 +122,13 @@ function Hero() {
         </div>
 
         {/* phone */}
-        <div className="reveal-right reveal-delay-1 hidden md:flex" style={{ alignItems: "flex-end", justifyContent: "center", position: "relative", minHeight: 560 }}>
-          <Phone name="04-home" alt="DrayGo Driver home — today's earnings" width={340} glow
-            style={{ marginBottom: -90 }} />
+        <div className="reveal-right reveal-delay-1 hidden md:flex" style={{ alignItems: "center", justifyContent: "center", position: "relative", padding: "40px 0 56px" }}>
+          <Phone name="04-home" alt="DrayGo Driver home — today's earnings" width={320} glow />
         </div>
 
         {/* single phone on small screens */}
-        <div className="reveal reveal-delay-1 flex md:hidden" style={{ justifyContent: "center", paddingBottom: 8 }}>
-          <Phone name="04-home" alt="DrayGo Driver home — today's earnings" width={270} glow style={{ marginBottom: -60 }} />
+        <div className="reveal reveal-delay-1 flex md:hidden" style={{ justifyContent: "center", paddingBottom: 40 }}>
+          <Phone name="04-home" alt="DrayGo Driver home — today's earnings" width={270} glow />
         </div>
       </div>
     </section>
@@ -291,10 +290,7 @@ function DeepSection({ s }: { s: Deep }) {
 
 const ALL_SHOTS = [
   ["04-home", "Home & today's earnings"], ["06-load-board", "Load board"], ["05-job-details", "Job details"],
-  ["15-active-trip", "Active trip"], ["09-earnings", "Earnings"], ["10-withdraw", "Withdraw"],
-  ["13-hos", "Hours of Service"], ["07-trip-history", "Trip history"], ["08-trip-receipt", "Trip receipt"],
-  ["14-terminals", "Terminals"], ["11-profile", "Profile"], ["12-settings", "Settings"],
-  ["02-onboarding", "Onboarding"], ["03-signup", "Sign up"], ["01-splash", "Splash"],
+  ["15-active-trip", "Active trip"], ["09-earnings", "Earnings"], ["13-hos", "Hours of Service"],
 ] as const;
 
 function ScreensMarquee() {
@@ -311,14 +307,14 @@ function ScreensMarquee() {
       </div>
 
       <style>{`
-        @keyframes daMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .da-marquee { display: flex; gap: 22px; width: max-content; animation: daMarquee 60s linear infinite; }
+        @keyframes daMarquee { from { transform: translateX(0); } to { transform: translateX(-33.3333%); } }
+        .da-marquee { display: flex; gap: 26px; width: max-content; animation: daMarquee 34s linear infinite; }
         .da-marquee:hover { animation-play-state: paused; }
       `}</style>
       <div style={{ maskImage: "linear-gradient(90deg, transparent, black 6%, black 94%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, black 6%, black 94%, transparent)" }}>
         <div className="da-marquee">
-          {[...ALL_SHOTS, ...ALL_SHOTS].map(([name, label], i) => (
-            <figure key={`${name}-${i}`} style={{ margin: 0, width: 208, flexShrink: 0 }}>
+          {[...ALL_SHOTS, ...ALL_SHOTS, ...ALL_SHOTS].map(([name, label], i) => (
+            <figure key={`${name}-${i}`} style={{ margin: 0, width: 236, flexShrink: 0 }}>
               <div style={{ padding: 7, borderRadius: 28, background: "#161a12", border: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 16px 44px rgba(0,0,0,0.5)" }}>
                 <Shot name={name} alt={`DrayGo Driver — ${label}`} radius={21} />
               </div>

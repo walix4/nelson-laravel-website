@@ -113,18 +113,21 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
   const pathname = usePathname();
   const isBroker = pathname === "/broker" || pathname === "/broker/";
   const isCarriers = pathname === "/carriers" || pathname === "/carriers/";
-  const accentColor = isBroker ? "#00a5e7" : isCarriers ? "#27b30a" : "#fc0b05";
+  const isDriverApp = pathname === "/driver-app" || pathname === "/driver-app/";
+  const accentColor = isDriverApp ? "#C8FF45" : isBroker ? "#00a5e7" : isCarriers ? "#27b30a" : "#fc0b05";
+  const accentText = isDriverApp ? "#0a0e07" : "#fff";
+  const headerBg = isDriverApp ? "#0a0e07" : "#08192b";
 
   return (
     <>
-    <header className="sticky top-0 z-40" style={{ background: "#08192b" }}>
+    <header className="sticky top-0 z-40" style={{ background: headerBg }}>
       {/* Top bar */}
       <div style={{ overflow: "hidden", height: 32 }}>
-        <div className="text-[11px] font-medium" style={{ background: accentColor, color: "#fff", height: 32, transition: "background 0.3s" }}>
+        <div className="text-[11px] font-medium" style={{ background: accentColor, color: accentText, height: 32, transition: "background 0.3s" }}>
           <div className="max-w-[1400px] mx-auto px-6 h-8 flex items-center justify-between">
             <div className="flex items-center gap-5">
               <span className="flex items-center gap-2">
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fff", display: "inline-block", boxShadow: "0 0 0 2px rgba(255,255,255,0.4)", animation: "pulse 2s infinite" }} />
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: accentText, display: "inline-block", boxShadow: "0 0 0 2px rgba(255,255,255,0.4)", animation: "pulse 2s infinite" }} />
                 <span>Network <b>LIVE</b></span>
               </span>
               <span className="hidden sm:inline" style={{ opacity: 0.6 }}>·</span>
@@ -136,7 +139,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
             </div>
             <div className="flex items-center gap-4" style={{ fontSize: 10, textTransform: "uppercase", letterSpacing: "0.14em" }}>
               <span style={{ opacity: 0.7 }}>v2026.07</span>
-              <a href="/load-board" style={{ color: "#fff", opacity: 0.9, textDecoration: "none" }}>Load Board →</a>
+              <a href="/load-board" style={{ color: accentText, opacity: 0.9, textDecoration: "none" }}>Load Board →</a>
             </div>
           </div>
         </div>
@@ -165,14 +168,14 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
             <Link href="/about"        className={linkCls} style={{ padding: "6px 12px" }}>About</Link>
             <Link href="/contact"
               className="text-[13px] font-semibold whitespace-nowrap outline-none focus:outline-none relative"
-              style={{ padding: "6px 12px", color: "#fc0b05", animation: "navContactPulse 2.8s ease-in-out infinite" }}>
+              style={{ padding: "6px 12px", color: isDriverApp ? "#C8FF45" : "#fc0b05", animation: "navContactPulse 2.8s ease-in-out infinite" }}>
               Contact
-              <span className="absolute bottom-0 left-3 right-3 h-[1.5px] rounded-full" style={{ background: "#fc0b05", animation: "navUnderline 2.8s ease-in-out infinite" }} />
+              <span className="absolute bottom-0 left-3 right-3 h-[1.5px] rounded-full" style={{ background: isDriverApp ? "#C8FF45" : "#fc0b05", animation: "navUnderline 2.8s ease-in-out infinite" }} />
             </Link>
           </nav>
 
           <style>{`
-            @keyframes navContactPulse { 0%,100%{opacity:1;text-shadow:none} 50%{opacity:0.7;text-shadow:0 0 12px rgba(252,11,5,0.6)} }
+            @keyframes navContactPulse { 0%,100%{opacity:1;text-shadow:none} 50%{opacity:0.7;text-shadow:0 0 12px currentColor} }
             @keyframes navUnderline { 0%,100%{transform:scaleX(1);opacity:0.6} 50%{transform:scaleX(0.4);opacity:1} }
           `}</style>
 
@@ -183,7 +186,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
             </Link>
             <Link href="/#load-board"
               className="hidden sm:inline-flex text-[13px] font-semibold text-white rounded-lg items-center gap-[6px] transition hover:opacity-90 whitespace-nowrap outline-none focus:outline-none"
-              style={{ background: accentColor, padding: "8px 16px", transition: "background 0.22s ease" }}>
+              style={{ background: accentColor, color: accentText, padding: "8px 16px", transition: "background 0.22s ease" }}>
               Get Started
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 6l6 6-6 6" />
@@ -202,7 +205,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="lg:hidden border-t border-white/10 px-4 py-3" style={{ background: "#08192b" }}>
+          <div className="lg:hidden border-t border-white/10 px-4 py-3" style={{ background: headerBg }}>
             <Link href="/"         className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Home</Link>
             <Link href="/driver-app" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
               Driver App <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: "0.08em", color: "#0a0e07", background: "#C8FF45", borderRadius: 5, padding: "2px 5px", marginLeft: 6, verticalAlign: "middle" }}>NEW</span>
@@ -216,7 +219,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
             <Link href="/contact"      className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Contact</Link>
 
             <div className="pt-3">
-              <Link href="/#load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: "#fc0b05" }} onClick={() => setMobileOpen(false)}>
+              <Link href="/#load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: accentColor, color: accentText }} onClick={() => setMobileOpen(false)}>
                 Get Started →
               </Link>
             </div>
