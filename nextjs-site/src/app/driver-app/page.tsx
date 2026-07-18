@@ -1,0 +1,439 @@
+"use client";
+import { useState, useEffect } from "react";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import RevealInit from "@/components/RevealInit";
+import { asset } from "@/lib/site";
+
+const LIME = "#C8FF45";
+const BG = "#0a0e07";
+const CARD = "rgba(255,255,255,0.04)";
+const BORDER = "rgba(255,255,255,0.08)";
+
+/* ─── shared bits ──────────────────────────────────────────── */
+
+function Shot({ name, alt, radius = 28, style }: { name: string; alt: string; radius?: number; style?: React.CSSProperties }) {
+  return (
+    <picture style={{ display: "block", ...style }}>
+      <source srcSet={asset(`/driver-app/${name}.webp`)} type="image/webp" />
+      <img src={asset(`/driver-app/${name}.png`)} alt={alt} loading="lazy"
+        style={{ width: "100%", display: "block", borderRadius: radius }} />
+    </picture>
+  );
+}
+
+function Phone({ name, alt, width = 300, glow = false, style }: { name: string; alt: string; width?: number; glow?: boolean; style?: React.CSSProperties }) {
+  return (
+    <div style={{
+      width, flexShrink: 0, padding: 10, borderRadius: 40, background: "#161a12",
+      border: `1px solid rgba(255,255,255,0.12)`,
+      boxShadow: glow
+        ? `0 30px 90px rgba(0,0,0,0.65), 0 0 80px ${LIME}30, inset 0 1px 0 rgba(255,255,255,0.08)`
+        : "0 30px 90px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.08)",
+      ...style,
+    }}>
+      <Shot name={name} alt={alt} radius={30} />
+    </div>
+  );
+}
+
+function StoreButtons({ dark = false }: { dark?: boolean }) {
+  const base = dark
+    ? { background: "rgba(10,14,7,0.92)", border: "1px solid rgba(10,14,7,1)", color: "#fff" }
+    : { background: "rgba(255,255,255,0.08)", border: `1px solid rgba(255,255,255,0.16)`, color: "#fff" };
+  return (
+    <div className="flex flex-wrap gap-3">
+      <a href="#" className="inline-flex items-center gap-2.5 rounded-xl h-[54px] pl-4 pr-5 transition hover:opacity-85"
+        style={{ ...base, textDecoration: "none", backdropFilter: "blur(6px)" }}>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.22 1.3-2.2 3.88.03 3.02 2.65 4.03 2.68 4.04l-.03.1zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.2 }}>
+          <span style={{ fontSize: 10, opacity: 0.65 }}>Download on the</span>
+          <span style={{ fontSize: 14, fontWeight: 700 }}>App Store</span>
+        </span>
+      </a>
+      <a href="#" className="inline-flex items-center gap-2.5 rounded-xl h-[54px] pl-4 pr-5 transition hover:opacity-85"
+        style={{ ...base, textDecoration: "none", backdropFilter: "blur(6px)" }}>
+        <img src={asset("/google-play.png")} alt="Google Play" style={{ width: 21, height: 21, objectFit: "contain" }} />
+        <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.2 }}>
+          <span style={{ fontSize: 10, opacity: 0.65 }}>Get it on</span>
+          <span style={{ fontSize: 14, fontWeight: 700 }}>Google Play</span>
+        </span>
+      </a>
+    </div>
+  );
+}
+
+function SectionTag({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{
+      display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 12, padding: "7px 16px",
+      fontSize: 11.5, fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase",
+      color: LIME, background: `${LIME}14`, border: `1px solid ${LIME}30`, width: "fit-content",
+    }}>
+      <span style={{ width: 6, height: 6, borderRadius: 2, background: LIME, display: "inline-block" }} />
+      {children}
+    </div>
+  );
+}
+
+/* ─── hero ─────────────────────────────────────────────────── */
+
+const ROTATE = ["Get Paid in 24 Hours.", "Never Miss a Load.", "Run Legal, Automatically."];
+
+function Hero() {
+  const [line, setLine] = useState(0);
+  const [fade, setFade] = useState(true);
+  useEffect(() => {
+    const t = setInterval(() => {
+      setFade(false);
+      setTimeout(() => { setLine(l => (l + 1) % ROTATE.length); setFade(true); }, 350);
+    }, 3400);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <section style={{ position: "relative", overflow: "hidden", borderBottom: `1px solid ${BORDER}` }}>
+      {/* glows */}
+      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 60% 55% at 78% 42%, ${LIME}1c 0%, transparent 60%)`, pointerEvents: "none" }} />
+      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 45% 40% at 12% 88%, ${LIME}10 0%, transparent 60%)`, pointerEvents: "none" }} />
+      {/* faint grid */}
+      <div style={{ position: "absolute", inset: 0, opacity: 0.05, backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "56px 56px", pointerEvents: "none", maskImage: "radial-gradient(ellipse 70% 70% at 50% 30%, black, transparent)" }} />
+
+      <div className="max-w-[1200px] mx-auto grid lg:grid-cols-[1.05fr_1fr] gap-10 items-center" style={{ padding: "clamp(56px,8vw,110px) clamp(24px,4vw,56px) 0", position: "relative", zIndex: 1 }}>
+        {/* text */}
+        <div className="reveal-left" style={{ paddingBottom: "clamp(56px,7vw,100px)" }}>
+          <SectionTag>DrayGo Driver App</SectionTag>
+          <h1 style={{ fontSize: "clamp(34px,3.9vw,54px)", fontWeight: 900, color: "#fff", lineHeight: 1.06, letterSpacing: "-0.025em", margin: "26px 0 8px" }}>
+            Built for the<br />Modern Drayage Driver.
+          </h1>
+          <div style={{ height: "clamp(36px,3.5vw,48px)", display: "flex", alignItems: "center" }}>
+            <span style={{
+              fontSize: "clamp(20px,2.3vw,32px)", fontWeight: 900, letterSpacing: "-0.02em", color: LIME, whiteSpace: "nowrap",
+              opacity: fade ? 1 : 0, transform: fade ? "translateY(0)" : "translateY(10px)",
+              transition: "opacity .35s ease, transform .35s ease", textShadow: `0 0 34px ${LIME}55`,
+            }}>
+              {ROTATE[line]}
+            </span>
+          </div>
+          <p style={{ fontSize: "clamp(15px,1.25vw,17.5px)", color: "rgba(255,255,255,0.52)", lineHeight: 1.75, maxWidth: 480, margin: "14px 0 36px" }}>
+            Loads near your port, one-tap accept, live trip guidance, HOS that tracks itself and money that
+            hits your bank in 24 hours. Everything a container driver needs — in one app.
+          </p>
+          <StoreButtons />
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2" style={{ marginTop: 28, fontSize: 13, color: "rgba(255,255,255,0.45)" }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
+              <span style={{ color: LIME, fontSize: 15 }}>★★★★★</span> <b style={{ color: "#fff" }}>4.9</b> rating
+            </span>
+            <span><b style={{ color: "#fff" }}>8,000+</b> drivers on the network</span>
+            <span>Free download</span>
+          </div>
+        </div>
+
+        {/* phones */}
+        <div className="reveal-right reveal-delay-1 hidden md:flex" style={{ alignItems: "flex-end", justifyContent: "center", position: "relative", minHeight: 560 }}>
+          <Phone name="06-load-board" alt="DrayGo Driver load board" width={252}
+            style={{ transform: "rotate(-8deg) translate(34px, 26px)", zIndex: 1, opacity: 0.9 }} />
+          <Phone name="04-home" alt="DrayGo Driver home — today's earnings" width={296} glow
+            style={{ zIndex: 3, marginBottom: -70 }} />
+          <Phone name="15-active-trip" alt="DrayGo Driver active trip tracking" width={252}
+            style={{ transform: "rotate(8deg) translate(-34px, 26px)", zIndex: 2, opacity: 0.9 }} />
+        </div>
+
+        {/* single phone on small screens */}
+        <div className="reveal reveal-delay-1 flex md:hidden" style={{ justifyContent: "center", paddingBottom: 8 }}>
+          <Phone name="04-home" alt="DrayGo Driver home — today's earnings" width={270} glow style={{ marginBottom: -60 }} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── stats strip ──────────────────────────────────────────── */
+
+const STATS: [string, string][] = [
+  ["24h", "DrayPay Payout After POD"],
+  ["$8,820", "Top-Driver Weekly Earnings"],
+  ["40+", "Ports & Rail Terminals"],
+  ["0", "Paperwork. Digital POD & BOL"],
+];
+
+function StatsStrip() {
+  return (
+    <section style={{ borderBottom: `1px solid ${BORDER}`, background: "rgba(255,255,255,0.02)" }}>
+      <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4" style={{ padding: "0 clamp(24px,4vw,56px)" }}>
+        {STATS.map(([n, l], i) => (
+          <div key={l} className={`reveal reveal-delay-${i % 4}`} style={{ padding: "34px 20px", textAlign: "center", borderLeft: i > 0 ? `1px solid ${BORDER}` : "none" }}>
+            <div style={{ fontSize: "clamp(28px,2.8vw,40px)", fontWeight: 900, color: LIME, letterSpacing: "-0.02em", textShadow: `0 0 30px ${LIME}40` }}>{n}</div>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginTop: 6, letterSpacing: "0.06em", textTransform: "uppercase" }}>{l}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ─── feature grid ─────────────────────────────────────────── */
+
+const GRID = [
+  { t: "Live Load Board", d: "Loads near you, refreshed live — flat rate, $/mi and fuel surcharge shown up front. Filter by day and equipment, accept in one tap.", i: "M9 17H7A5 5 0 0 1 7 7h2M15 7h2a5 5 0 0 1 0 10h-2M8 12h8" },
+  { t: "Instant Alerts", d: "New trips, rate changes and payments land on your lock screen the second they happen. Never miss a load or a dollar.", i: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0" },
+  { t: "QR Container Scan", d: "Scan the container code at the gate — chassis, seal and box verified in seconds. Gate-in logged automatically.", i: "M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10" },
+  { t: "Digital POD & Signature", d: "Photo proof of delivery plus on-glass signature. Receipts generated instantly — the office gets it before you leave the yard.", i: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M9 15l2 2 4-4" },
+  { t: "HOS & ELD Built In", d: "Drive, shift and 70-hour cycle clocks with break warnings before you need them. ELD-connected, always audit-ready.", i: "M12 3a9 9 0 1 0 9 9M12 7v5l3 2M21 3l-4 4M21 3h-4M21 3v4" },
+  { t: "Terminals Directory", d: "Gate hours, appointment rules and live congestion for 40+ ports and rail ramps — before you burn a trip finding out.", i: "M12 2a3 3 0 0 1 3 3M12 22V8M5 12H2a10 10 0 0 0 20 0h-3M12 2a3 3 0 0 0-3 3" },
+];
+
+function FeatureGrid() {
+  return (
+    <section style={{ borderBottom: `1px solid ${BORDER}`, position: "relative" }}>
+      <div className="max-w-[1200px] mx-auto" style={{ padding: "clamp(64px,8vw,110px) clamp(24px,4vw,56px)" }}>
+        <div className="reveal" style={{ textAlign: "center", maxWidth: 640, margin: "0 auto 56px" }}>
+          <div style={{ display: "flex", justifyContent: "center" }}><SectionTag>One App. The Whole Job.</SectionTag></div>
+          <h2 style={{ fontSize: "clamp(30px,3.6vw,48px)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "22px 0 14px" }}>
+            Everything from gate&#8209;in<br />to getting paid
+          </h2>
+          <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.48)", lineHeight: 1.7 }}>
+            46 screens of driver-first design. No dispatcher phone tag, no paper, no waiting on net-30.
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {GRID.map((f, i) => (
+            <div key={f.t} className={`reveal reveal-delay-${i % 3}`}
+              style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: "26px 24px", transition: "border-color .2s, transform .2s" }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = `${LIME}50`; e.currentTarget.style.transform = "translateY(-3px)"; }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.transform = "translateY(0)"; }}>
+              <div style={{ width: 44, height: 44, borderRadius: 12, background: `${LIME}14`, border: `1px solid ${LIME}30`, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 18 }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={LIME} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d={f.i} /></svg>
+              </div>
+              <div style={{ fontSize: 16.5, fontWeight: 800, color: "#fff", marginBottom: 8 }}>{f.t}</div>
+              <div style={{ fontSize: 13.5, color: "rgba(255,255,255,0.46)", lineHeight: 1.65 }}>{f.d}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── deep-dive sections ───────────────────────────────────── */
+
+type Deep = { tag: string; title: string; desc: string; points: [string, string][]; shot: string; alt: string; flip?: boolean };
+
+const DEEPS: Deep[] = [
+  {
+    tag: "Load Board",
+    title: "42 loads near you.\nPick the ones worth driving.",
+    desc: "Go online and watch loads roll in from every terminal around your port. Every card shows the flat rate, per-mile money and fuel surcharge before you commit — urgent moves flagged in red, one tap to accept.",
+    points: [
+      ["Rate transparency", "Flat rate, $/mi and FSC% on every card — no calling to find out."],
+      ["Filter your week", "Day strip + Dry / Reefer / Flatbed filters. Build the week you want."],
+      ["One-tap accept", "See it, take it. The load locks to you instantly."],
+    ],
+    shot: "06-load-board", alt: "DrayGo Driver load board with live loads",
+  },
+  {
+    tag: "Live Trips",
+    title: "Every trip guided,\ngate to gate.",
+    desc: "From “departed yard” to “return empty,” the app walks each step with live GPS, terminal timelines and QR gate-in confirmation. Dispatch is one tap away — and so is SOS if something goes wrong.",
+    points: [
+      ["Step-by-step timeline", "Yard → terminal → gate-in → deliver → return empty, stamped in real time."],
+      ["Scan to confirm", "QR container scan logs gate-in and seal checks automatically."],
+      ["Call Dispatch / SOS", "Straight line to your dispatcher, emergency button always visible."],
+    ],
+    shot: "15-active-trip", alt: "DrayGo Driver active trip with live map and step timeline", flip: true,
+  },
+  {
+    tag: "Earnings + DrayPay Wallet",
+    title: "Deliver today.\nMoney tomorrow.",
+    desc: "Upload the POD and DrayPay settles within 24 hours — no net-30, no factoring fees eating your rate. Watch the week build on your earnings chart and move money to your bank whenever you want.",
+    points: [
+      ["24-hour settlement", "POD in, money out. Same-day on most lanes."],
+      ["DrayGo Wallet", "Balance, weekly charts and every load itemized — loads, gas, tolls, misc."],
+      ["Withdraw anywhere", "Linked bank transfers in one tap. Your money, your schedule."],
+    ],
+    shot: "09-earnings", alt: "DrayGo Driver earnings screen with wallet and withdraw",
+  },
+  {
+    tag: "Hours of Service",
+    title: "Stay legal without\nwatching the clock.",
+    desc: "Drive, shift and 70-hour/8-day cycle clocks run themselves off your ELD. The app warns you before a 30-minute break is due, keeps today's log clean, and files your DVIR and fuel purchases in the same place.",
+    points: [
+      ["ELD connected", "Duty status flips automatically. Logs are always inspection-ready."],
+      ["Break warnings", "Alerts before you run out of drive time — not after."],
+      ["DVIR + fuel log", "Pre-trip inspections and fuel receipts, digital and attached to the day."],
+    ],
+    shot: "13-hos", alt: "DrayGo Driver hours of service screen", flip: true,
+  },
+];
+
+function DeepSection({ s }: { s: Deep }) {
+  return (
+    <div style={{ borderBottom: `1px solid ${BORDER}`, position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 50% 80% at ${s.flip ? "18%" : "82%"} 50%, ${LIME}12 0%, transparent 58%)`, pointerEvents: "none" }} />
+      <div className="max-w-[1200px] mx-auto grid lg:grid-cols-2 items-center gap-12" style={{ padding: "clamp(64px,7vw,100px) clamp(24px,4vw,56px)", position: "relative", zIndex: 1 }}>
+        <div className={s.flip ? "lg:order-2 reveal-right" : "reveal-left"}>
+          <SectionTag>{s.tag}</SectionTag>
+          <h2 style={{ fontSize: "clamp(30px,3.4vw,46px)", fontWeight: 900, color: "#fff", lineHeight: 1.08, letterSpacing: "-0.02em", margin: "24px 0 16px", whiteSpace: "pre-line" }}>
+            {s.title}
+          </h2>
+          <p style={{ fontSize: 15.5, color: "rgba(255,255,255,0.5)", lineHeight: 1.75, maxWidth: 460, marginBottom: 30 }}>{s.desc}</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            {s.points.map(([t, d]) => (
+              <div key={t} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                <div style={{ width: 26, height: 26, borderRadius: 8, background: `${LIME}16`, border: `1px solid ${LIME}35`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={LIME} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                </div>
+                <div>
+                  <div style={{ fontSize: 14.5, fontWeight: 700, color: "#fff" }}>{t}</div>
+                  <div style={{ fontSize: 13, color: "rgba(255,255,255,0.44)", lineHeight: 1.6, marginTop: 2 }}>{d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={`${s.flip ? "lg:order-1 reveal-left" : "reveal-right"} reveal-delay-1`} style={{ display: "flex", justifyContent: "center" }}>
+          <Phone name={s.shot} alt={s.alt} width={310} glow />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── screens marquee ──────────────────────────────────────── */
+
+const ALL_SHOTS = [
+  ["04-home", "Home & today's earnings"], ["06-load-board", "Load board"], ["05-job-details", "Job details"],
+  ["15-active-trip", "Active trip"], ["09-earnings", "Earnings"], ["10-withdraw", "Withdraw"],
+  ["13-hos", "Hours of Service"], ["07-trip-history", "Trip history"], ["08-trip-receipt", "Trip receipt"],
+  ["14-terminals", "Terminals"], ["11-profile", "Profile"], ["12-settings", "Settings"],
+  ["02-onboarding", "Onboarding"], ["03-signup", "Sign up"], ["01-splash", "Splash"],
+] as const;
+
+function ScreensMarquee() {
+  return (
+    <section style={{ borderBottom: `1px solid ${BORDER}`, padding: "clamp(64px,7vw,96px) 0", overflow: "hidden" }}>
+      <div className="reveal" style={{ textAlign: "center", maxWidth: 620, margin: "0 auto 48px", padding: "0 24px" }}>
+        <div style={{ display: "flex", justifyContent: "center" }}><SectionTag>Inside the App</SectionTag></div>
+        <h2 style={{ fontSize: "clamp(30px,3.6vw,48px)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "22px 0 12px" }}>
+          Take the tour
+        </h2>
+        <p style={{ fontSize: 15, color: "rgba(255,255,255,0.48)", lineHeight: 1.7 }}>
+          Every screen a working driver actually needs — dark, glanceable, one-handed.
+        </p>
+      </div>
+
+      <style>{`
+        @keyframes daMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .da-marquee { display: flex; gap: 22px; width: max-content; animation: daMarquee 60s linear infinite; }
+        .da-marquee:hover { animation-play-state: paused; }
+      `}</style>
+      <div style={{ maskImage: "linear-gradient(90deg, transparent, black 6%, black 94%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, black 6%, black 94%, transparent)" }}>
+        <div className="da-marquee">
+          {[...ALL_SHOTS, ...ALL_SHOTS].map(([name, label], i) => (
+            <figure key={`${name}-${i}`} style={{ margin: 0, width: 208, flexShrink: 0 }}>
+              <div style={{ padding: 7, borderRadius: 28, background: "#161a12", border: "1px solid rgba(255,255,255,0.1)", boxShadow: "0 16px 44px rgba(0,0,0,0.5)" }}>
+                <Shot name={name} alt={`DrayGo Driver — ${label}`} radius={21} />
+              </div>
+              <figcaption style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", textAlign: "center", marginTop: 10, fontWeight: 600 }}>{label}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── how it works ─────────────────────────────────────────── */
+
+const STEPS = [
+  { t: "Download & sign up", d: "Phone number + OTP. You're in before your coffee cools — about 2 minutes." },
+  { t: "Verify once", d: "CDL, MC/DOT and insurance checked in-app. Most drivers approved same day." },
+  { t: "Go online, take loads", d: "Flip the toggle, watch loads near your port roll in, accept the ones you want." },
+  { t: "Deliver & get paid", d: "Photo POD + signature at drop. DrayPay settles to your bank within 24 hours." },
+];
+
+function Steps() {
+  return (
+    <section style={{ borderBottom: `1px solid ${BORDER}`, position: "relative" }}>
+      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 55% 60% at 50% 0%, ${LIME}0e 0%, transparent 60%)`, pointerEvents: "none" }} />
+      <div className="max-w-[1200px] mx-auto" style={{ padding: "clamp(64px,8vw,110px) clamp(24px,4vw,56px)", position: "relative", zIndex: 1 }}>
+        <div className="reveal" style={{ textAlign: "center", margin: "0 auto 56px", maxWidth: 620 }}>
+          <div style={{ display: "flex", justifyContent: "center" }}><SectionTag>Getting Started</SectionTag></div>
+          <h2 style={{ fontSize: "clamp(30px,3.6vw,48px)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "22px 0 0" }}>
+            From download to first payout
+          </h2>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {STEPS.map((s, i) => (
+            <div key={s.t} className={`reveal reveal-delay-${i}`} style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: "28px 24px", position: "relative" }}>
+              <div style={{ fontSize: 44, fontWeight: 900, color: `${LIME}2e`, lineHeight: 1, marginBottom: 14, letterSpacing: "-0.03em" }}>{String(i + 1).padStart(2, "0")}</div>
+              <div style={{ fontSize: 16, fontWeight: 800, color: "#fff", marginBottom: 8 }}>{s.t}</div>
+              <div style={{ fontSize: 13.5, color: "rgba(255,255,255,0.46)", lineHeight: 1.65 }}>{s.d}</div>
+              {i < 3 && (
+                <svg className="hidden lg:block" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={LIME} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"
+                  style={{ position: "absolute", right: -18, top: "50%", transform: "translateY(-50%)", zIndex: 2, opacity: 0.7 }}>
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── final CTA ────────────────────────────────────────────── */
+
+function DownloadCTA() {
+  return (
+    <section style={{ padding: "clamp(64px,8vw,110px) clamp(24px,4vw,56px)" }}>
+      <div className="max-w-[1200px] mx-auto reveal-scale" style={{
+        borderRadius: 28, position: "relative", overflow: "hidden",
+        background: `linear-gradient(135deg, ${LIME} 0%, #a8e21f 55%, #8fcf07 100%)`,
+        boxShadow: `0 40px 120px ${LIME}30`,
+      }}>
+        <div style={{ position: "absolute", inset: 0, opacity: 0.1, backgroundImage: "radial-gradient(circle at 2px 2px, #0a0e07 1.4px, transparent 0)", backgroundSize: "26px 26px" }} />
+        <div className="grid lg:grid-cols-[1.2fr_1fr] items-center" style={{ position: "relative", zIndex: 1 }}>
+          <div style={{ padding: "clamp(44px,5vw,72px)" }}>
+            <div style={{ fontSize: 12, fontWeight: 900, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(10,14,7,0.65)", marginBottom: 14 }}>
+              Free on iOS &amp; Android
+            </div>
+            <h2 style={{ fontSize: "clamp(32px,4vw,54px)", fontWeight: 900, color: "#0a0e07", lineHeight: 1.05, letterSpacing: "-0.025em", marginBottom: 16 }}>
+              Your next load is<br />already waiting.
+            </h2>
+            <p style={{ fontSize: 16, color: "rgba(10,14,7,0.68)", lineHeight: 1.7, maxWidth: 440, marginBottom: 32, fontWeight: 500 }}>
+              Join 8,000+ drayage drivers running their whole day — loads, trips, compliance and pay — from one app.
+            </p>
+            <StoreButtons dark />
+          </div>
+          <div className="hidden lg:flex" style={{ justifyContent: "center", alignItems: "flex-end", paddingTop: 40 }}>
+            <Phone name="04-home" alt="DrayGo Driver app home screen" width={272} style={{ marginBottom: -80, transform: "rotate(-4deg)" }} />
+            <Phone name="09-earnings" alt="DrayGo Driver earnings screen" width={220} style={{ marginBottom: -110, marginLeft: -46, transform: "rotate(6deg)", opacity: 0.95 }} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── page ─────────────────────────────────────────────────── */
+
+export default function DriverAppPage() {
+  return (
+    <div style={{ background: BG, minHeight: "100vh" }}>
+      <RevealInit />
+      <Nav />
+      <main>
+        <Hero />
+        <StatsStrip />
+        <FeatureGrid />
+        {DEEPS.map(s => <DeepSection key={s.tag} s={s} />)}
+        <ScreensMarquee />
+        <Steps />
+        <DownloadCTA />
+      </main>
+      <Footer />
+    </div>
+  );
+}

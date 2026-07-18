@@ -11,6 +11,7 @@ const FOOTER_LINKS = [
     { label: "All Services", href: "/services" },
   ]},
   { title: "Platform", links: [
+    { label: "Driver App", href: "/driver-app" },
     { label: "Load Board", href: "/load-board" },
     { label: "Rate Map", href: "/rate-map" },
     { label: "PortJob", href: "/estimates" },

@@ -154,6 +154,10 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-0 text-[13px]">
             <Link href="/"             className={linkCls} style={{ padding: "6px 12px" }}>Home</Link>
+            <Link href="/driver-app"   className={linkCls} style={{ padding: "6px 12px", display: "inline-flex", alignItems: "center", gap: 6 }}>
+              Driver App
+              <span style={{ fontSize: 8.5, fontWeight: 800, letterSpacing: "0.08em", color: "#0a0e07", background: "#C8FF45", borderRadius: 5, padding: "2px 5px", lineHeight: 1 }}>NEW</span>
+            </Link>
             <Link href="/shipper"      className={linkCls} style={{ padding: "6px 12px" }}>Shipper</Link>
             <Link href="/carriers"     className={linkCls} style={{ padding: "6px 12px" }}>Carrier</Link>
             <Link href="/broker"       className={linkCls} style={{ padding: "6px 12px" }}>Broker</Link>
@@ -200,6 +204,9 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
         {mobileOpen && (
           <div className="lg:hidden border-t border-white/10 px-4 py-3" style={{ background: "#08192b" }}>
             <Link href="/"         className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Home</Link>
+            <Link href="/driver-app" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
+              Driver App <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: "0.08em", color: "#0a0e07", background: "#C8FF45", borderRadius: 5, padding: "2px 5px", marginLeft: 6, verticalAlign: "middle" }}>NEW</span>
+            </Link>
             <Link href="/shipper"  className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Shipper</Link>
             <Link href="/carriers" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Carrier</Link>
             <Link href="/broker"   className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Broker</Link>
