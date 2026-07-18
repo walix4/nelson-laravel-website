@@ -141,8 +141,8 @@ function Hero() {
           <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 55% 55% at 50% 60%, ${LIME}22 0%, transparent 70%)`, pointerEvents: "none" }} />
           <picture style={{ display: "block", width: "min(620px, 100%)", position: "relative",
             maskImage: "linear-gradient(180deg, black 86%, transparent 99%)", WebkitMaskImage: "linear-gradient(180deg, black 86%, transparent 99%)" }}>
-            <source srcSet={asset("/driver-app/hand-hero.webp")} type="image/webp" />
-            <img src={asset("/driver-app/hand-hero.png")} alt="Driver accepting a load in the DrayGo Driver app" loading="eager"
+            <source srcSet={asset("/driver-app/hand-hero.webp?v=2")} type="image/webp" />
+            <img src={asset("/driver-app/hand-hero.png?v=2")} alt="DrayGo Driver app in hand — home and today's earnings" loading="eager"
               style={{ width: "100%", display: "block",
                 maskImage: "linear-gradient(90deg, black 84%, transparent 98%)", WebkitMaskImage: "linear-gradient(90deg, black 84%, transparent 98%)" }} />
           </picture>
