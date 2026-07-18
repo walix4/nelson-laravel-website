@@ -102,9 +102,6 @@ function Hero() {
         <img src={asset("/driver-app/hero-bg.jpg?v=2")} alt="" aria-hidden="true"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
       </picture>
-      {/* scrim — keeps copy readable, fades into page bg */}
-      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(90deg, rgba(10,14,7,0.9) 0%, rgba(10,14,7,0.68) 38%, rgba(10,14,7,0.3) 70%, rgba(10,14,7,0.4) 100%)`, pointerEvents: "none" }} />
-      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, rgba(10,14,7,0.55) 0%, rgba(10,14,7,0) 30%, rgba(10,14,7,0) 62%, rgba(10,14,7,0.9) 100%)`, pointerEvents: "none" }} />
 
       <div className="max-w-[1200px] mx-auto grid lg:grid-cols-[1.05fr_1fr] gap-10 items-center" style={{ padding: "clamp(56px,8vw,110px) clamp(24px,4vw,56px) 0", position: "relative", zIndex: 1 }}>
         {/* text */}
