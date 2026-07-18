@@ -151,7 +151,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
 
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <img src={logoSrc ?? asset("/logo-draygo.png")} alt="DrayGo" className="h-9 md:h-10 w-auto" />
+            <img src={logoSrc ?? asset("/logo-draygo.png")} alt="DrayGo" className="h-7 md:h-8 w-auto" />
           </Link>
 
           {/* Desktop nav */}
