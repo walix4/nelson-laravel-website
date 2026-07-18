@@ -37,6 +37,17 @@ function Phone({ name, alt, width = 300, glow = false, style }: { name: string; 
   );
 }
 
+function HandShot({ name, alt, eager = false, zoom = 1.35, style }: { name: string; alt: string; eager?: boolean; zoom?: number; style?: React.CSSProperties }) {
+  const mask = "radial-gradient(ellipse 68% 68% at 50% 50%, black 55%, transparent 85%)";
+  return (
+    <picture style={{ display: "block", ...style }}>
+      <source srcSet={asset(`/driver-app/${name}.webp`)} type="image/webp" />
+      <img src={asset(`/driver-app/${name}.jpg`)} alt={alt} loading={eager ? "eager" : "lazy"}
+        style={{ width: "100%", display: "block", maskImage: mask, WebkitMaskImage: mask, transform: `scale(${zoom})` }} />
+    </picture>
+  );
+}
+
 function StoreButtons({ dark = false }: { dark?: boolean }) {
   const cls = dark
     ? "inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-[#0a0e07] hover:bg-[#151a0e] border border-black/50 transition-colors duration-200"
@@ -121,14 +132,10 @@ function Hero() {
           </div>
         </div>
 
-        {/* phone */}
-        <div className="reveal-right reveal-delay-1 hidden md:flex" style={{ alignItems: "center", justifyContent: "center", position: "relative", padding: "40px 0 56px" }}>
-          <Phone name="04-home" alt="DrayGo Driver home — today's earnings" width={320} glow />
-        </div>
-
-        {/* single phone on small screens */}
-        <div className="reveal reveal-delay-1 flex md:hidden" style={{ justifyContent: "center", paddingBottom: 40 }}>
-          <Phone name="04-home" alt="DrayGo Driver home — today's earnings" width={270} glow />
+        {/* phone-in-hand mockup */}
+        <div className="reveal-right reveal-delay-1 flex" style={{ alignItems: "center", justifyContent: "center", position: "relative", padding: "8px 0 24px" }}>
+          <HandShot name="hand-home" alt="DrayGo Driver app in hand — home and today's earnings" eager zoom={1.5}
+            style={{ width: "min(680px, 100%)" }} />
         </div>
       </div>
     </section>
@@ -204,7 +211,7 @@ function FeatureGrid() {
 
 /* ─── deep-dive sections ───────────────────────────────────── */
 
-type Deep = { tag: string; title: string; desc: string; points: [string, string][]; shot: string; alt: string; flip?: boolean };
+type Deep = { tag: string; title: string; desc: string; points: [string, string][]; shot: string; mock?: string; alt: string; flip?: boolean };
 
 const DEEPS: Deep[] = [
   {
@@ -216,7 +223,7 @@ const DEEPS: Deep[] = [
       ["Filter your week", "Day strip + Dry / Reefer / Flatbed filters. Build the week you want."],
       ["One-tap accept", "See it, take it. The load locks to you instantly."],
     ],
-    shot: "06-load-board", alt: "DrayGo Driver load board with live loads",
+    shot: "06-load-board", mock: "hand-loadboard", alt: "Driver accepting a load on the DrayGo Driver load board",
   },
   {
     tag: "Live Trips",
@@ -235,10 +242,10 @@ const DEEPS: Deep[] = [
     desc: "Upload the POD and DrayPay settles within 24 hours — no net-30, no factoring fees eating your rate. Watch the week build on your earnings chart and move money to your bank whenever you want.",
     points: [
       ["24-hour settlement", "POD in, money out. Same-day on most lanes."],
-      ["DrayGo Wallet", "Balance, weekly charts and every load itemized — loads, gas, tolls, misc."],
+      ["Overtime paid at 1.5×", "Time past 8 hours is tracked per leg — port, warehouse, return — and paid automatically."],
       ["Withdraw anywhere", "Linked bank transfers in one tap. Your money, your schedule."],
     ],
-    shot: "09-earnings", alt: "DrayGo Driver earnings screen with wallet and withdraw",
+    shot: "09-earnings", mock: "hand-overtime", alt: "DrayGo Driver overtime tracking with OT pay",
   },
   {
     tag: "Hours of Service",
@@ -249,7 +256,7 @@ const DEEPS: Deep[] = [
       ["Break warnings", "Alerts before you run out of drive time — not after."],
       ["DVIR + fuel log", "Pre-trip inspections and fuel receipts, digital and attached to the day."],
     ],
-    shot: "13-hos", alt: "DrayGo Driver hours of service screen", flip: true,
+    shot: "13-hos", mock: "hand-eld", alt: "Dray ELD driving clock in a driver's hand", flip: true,
   },
 ];
 
@@ -278,8 +285,10 @@ function DeepSection({ s }: { s: Deep }) {
             ))}
           </div>
         </div>
-        <div className={`${s.flip ? "lg:order-1 reveal-left" : "reveal-right"} reveal-delay-1`} style={{ display: "flex", justifyContent: "center" }}>
-          <Phone name={s.shot} alt={s.alt} width={310} glow />
+        <div className={`${s.flip ? "lg:order-1 reveal-left" : "reveal-right"} reveal-delay-1`} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          {s.mock
+            ? <HandShot name={s.mock} alt={s.alt} zoom={s.mock === "hand-overtime" ? 1.6 : 1.45} style={{ width: "min(640px, 100%)" }} />
+            : <Phone name={s.shot} alt={s.alt} width={310} glow />}
         </div>
       </div>
     </div>
