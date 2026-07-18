@@ -28,7 +28,8 @@ export default function Footer({ bg, accent }: { bg?: string; accent?: string } 
   const pathname = usePathname();
   const isBroker = pathname === "/broker" || pathname === "/broker/";
   const isCarriers = pathname === "/carriers" || pathname === "/carriers/";
-  const logoSrc = isBroker ? asset("/logo-broker-blue.png") : isCarriers ? asset("/logo-carrier-green.png") : asset("/logo-draygo.png");
+  const isDriverApp = pathname === "/driver-app" || pathname === "/driver-app/";
+  const logoSrc = isDriverApp ? asset("/logo-draygo-lime.png") : isBroker ? asset("/logo-broker-blue.png") : isCarriers ? asset("/logo-carrier-green.png") : asset("/logo-draygo.png");
   const borderColor = accent ?? (isBroker ? "#00a5e7" : isCarriers ? "#27b30a" : "#fc0b05");
 
   return (

@@ -96,11 +96,15 @@ function Hero() {
 
   return (
     <section style={{ position: "relative", overflow: "hidden", borderBottom: `1px solid ${BORDER}` }}>
-      {/* glows */}
-      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 60% 55% at 78% 42%, ${LIME}1c 0%, transparent 60%)`, pointerEvents: "none" }} />
-      <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 45% 40% at 12% 88%, ${LIME}10 0%, transparent 60%)`, pointerEvents: "none" }} />
-      {/* faint grid */}
-      <div style={{ position: "absolute", inset: 0, opacity: 0.05, backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "56px 56px", pointerEvents: "none", maskImage: "radial-gradient(ellipse 70% 70% at 50% 30%, black, transparent)" }} />
+      {/* truck-route background */}
+      <picture>
+        <source srcSet={asset("/driver-app/hero-bg.webp")} type="image/webp" />
+        <img src={asset("/driver-app/hero-bg.jpg")} alt="" aria-hidden="true"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }} />
+      </picture>
+      {/* scrim — keeps copy readable, fades into page bg */}
+      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(90deg, rgba(10,14,7,0.94) 0%, rgba(10,14,7,0.78) 38%, rgba(10,14,7,0.35) 70%, rgba(10,14,7,0.45) 100%)`, pointerEvents: "none" }} />
+      <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, rgba(10,14,7,0.55) 0%, rgba(10,14,7,0) 30%, rgba(10,14,7,0) 62%, rgba(10,14,7,0.9) 100%)`, pointerEvents: "none" }} />
 
       <div className="max-w-[1200px] mx-auto grid lg:grid-cols-[1.05fr_1fr] gap-10 items-center" style={{ padding: "clamp(56px,8vw,110px) clamp(24px,4vw,56px) 0", position: "relative", zIndex: 1 }}>
         {/* text */}
@@ -416,7 +420,7 @@ export default function DriverAppPage() {
   return (
     <div style={{ background: BG, minHeight: "100vh" }}>
       <RevealInit />
-      <Nav />
+      <Nav logoSrc={asset("/logo-draygo-lime.png")} />
       <main>
         <Hero />
         <StatsStrip />
