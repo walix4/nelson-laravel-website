@@ -24,15 +24,15 @@ const FOOTER_LINKS = [
   ]},
 ];
 
-export default function Footer() {
+export default function Footer({ bg, accent }: { bg?: string; accent?: string } = {}) {
   const pathname = usePathname();
   const isBroker = pathname === "/broker" || pathname === "/broker/";
   const isCarriers = pathname === "/carriers" || pathname === "/carriers/";
   const logoSrc = isBroker ? asset("/logo-broker-blue.png") : isCarriers ? asset("/logo-carrier-green.png") : asset("/logo-draygo.png");
-  const borderColor = isBroker ? "#00a5e7" : isCarriers ? "#27b30a" : "#fc0b05";
+  const borderColor = accent ?? (isBroker ? "#00a5e7" : isCarriers ? "#27b30a" : "#fc0b05");
 
   return (
-    <footer className="text-white/85 py-14" style={{ background: "#08192b", borderTop: `2px solid ${borderColor}` }}>
+    <footer className="text-white/85 py-14" style={{ background: bg ?? "#08192b", borderTop: `2px solid ${borderColor}` }}>
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10 mb-12">
           <div>

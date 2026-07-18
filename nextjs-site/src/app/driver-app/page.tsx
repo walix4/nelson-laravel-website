@@ -38,26 +38,18 @@ function Phone({ name, alt, width = 300, glow = false, style }: { name: string; 
 }
 
 function StoreButtons({ dark = false }: { dark?: boolean }) {
-  const base = dark
-    ? { background: "rgba(10,14,7,0.92)", border: "1px solid rgba(10,14,7,1)", color: "#fff" }
-    : { background: "rgba(255,255,255,0.08)", border: `1px solid rgba(255,255,255,0.16)`, color: "#fff" };
+  const cls = dark
+    ? "inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-[#0a0e07] hover:bg-[#151a0e] border border-black/50 transition-colors duration-200"
+    : "inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.10] hover:bg-white/[0.20] border border-white/15 backdrop-blur-sm transition-colors duration-200";
   return (
     <div className="flex flex-wrap gap-3">
-      <a href="#" className="inline-flex items-center gap-2.5 rounded-xl h-[54px] pl-4 pr-5 transition hover:opacity-85"
-        style={{ ...base, textDecoration: "none", backdropFilter: "blur(6px)" }}>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.22 1.3-2.2 3.88.03 3.02 2.65 4.03 2.68 4.04l-.03.1zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.2 }}>
-          <span style={{ fontSize: 10, opacity: 0.65 }}>Download on the</span>
-          <span style={{ fontSize: 14, fontWeight: 700 }}>App Store</span>
-        </span>
+      <a href="#" className={cls} style={{ textDecoration: "none" }}>
+        <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" aria-hidden="true" className="shrink-0"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+        <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] opacity-90">Download on the</span><span className="block text-[14px] font-semibold tracking-tight">App Store</span></span>
       </a>
-      <a href="#" className="inline-flex items-center gap-2.5 rounded-xl h-[54px] pl-4 pr-5 transition hover:opacity-85"
-        style={{ ...base, textDecoration: "none", backdropFilter: "blur(6px)" }}>
-        <img src={asset("/google-play.png")} alt="Google Play" style={{ width: 21, height: 21, objectFit: "contain" }} />
-        <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.2 }}>
-          <span style={{ fontSize: 10, opacity: 0.65 }}>Get it on</span>
-          <span style={{ fontSize: 14, fontWeight: 700 }}>Google Play</span>
-        </span>
+      <a href="#" className={cls} style={{ textDecoration: "none" }}>
+        <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" />
+        <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
       </a>
     </div>
   );
@@ -129,14 +121,10 @@ function Hero() {
           </div>
         </div>
 
-        {/* phones */}
+        {/* phone */}
         <div className="reveal-right reveal-delay-1 hidden md:flex" style={{ alignItems: "flex-end", justifyContent: "center", position: "relative", minHeight: 560 }}>
-          <Phone name="06-load-board" alt="DrayGo Driver load board" width={252}
-            style={{ transform: "rotate(-8deg) translate(34px, 26px)", zIndex: 1, opacity: 0.9 }} />
-          <Phone name="04-home" alt="DrayGo Driver home — today's earnings" width={296} glow
-            style={{ zIndex: 3, marginBottom: -70 }} />
-          <Phone name="15-active-trip" alt="DrayGo Driver active trip tracking" width={252}
-            style={{ transform: "rotate(8deg) translate(-34px, 26px)", zIndex: 2, opacity: 0.9 }} />
+          <Phone name="04-home" alt="DrayGo Driver home — today's earnings" width={340} glow
+            style={{ marginBottom: -90 }} />
         </div>
 
         {/* single phone on small screens */}
@@ -433,7 +421,7 @@ export default function DriverAppPage() {
         <Steps />
         <DownloadCTA />
       </main>
-      <Footer />
+      <Footer bg="#000000" accent={LIME} />
     </div>
   );
 }
