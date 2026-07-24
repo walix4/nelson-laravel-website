@@ -16,6 +16,7 @@
     "next": "15.5.4",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "three": "^0.185.1",
     "topojson-client": "^3.1.0",
     "us-atlas": "^3.0.1"
   },
@@ -24,7 +25,12 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.185.1",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "optionalDependencies": {
+    "@tailwindcss/oxide-darwin-arm64": "^4.3.3",
+    "lightningcss-darwin-arm64": "^1.33.0"
   }
 }

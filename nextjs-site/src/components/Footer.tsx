@@ -7,7 +7,6 @@ const FOOTER_LINKS = [
   { title: "Services", links: [
     { label: "For Shippers", href: "/shipper" },
     { label: "For Brokers", href: "/broker" },
-    { label: "For Carriers", href: "/carriers" },
     { label: "All Services", href: "/services" },
   ]},
   { title: "Platform", links: [

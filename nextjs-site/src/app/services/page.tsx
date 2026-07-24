@@ -26,7 +26,7 @@ const SERVICES = [
   },
   {
     label: "Carriers",
-    href: "/carriers",
+    href: "/load-board",
     tag: "For Carriers",
     headline: "More loads, faster pay, less deadhead",
     desc: "Find drayage loads near your terminal, accept with one tap, and get paid within 48 hours of POD submission. No broker markup on your rate.",

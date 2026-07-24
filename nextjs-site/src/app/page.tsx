@@ -161,7 +161,7 @@ const APPS = [
       { label: "Earnings dashboard", sub: "Miles, on-time rate and total revenue tracked automatically." },
     ],
     cta: "Find loads",
-    href: "/carriers",
+    href: "/load-board",
     flip: true,
   },
   {

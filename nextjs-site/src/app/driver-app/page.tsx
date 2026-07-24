@@ -422,6 +422,89 @@ function DownloadCTA() {
 
 /* ─── page ─────────────────────────────────────────────────── */
 
+/* ─── pricing ──────────────────────────────────────────────── */
+
+const PLANS = [
+  {
+    name: "Starter", price: "$0", per: "", popular: false, cta: "Get Started Free", ctaSolid: false,
+    desc: "For owner-operators just getting started on DrayGo.",
+    features: ["3 loads per month", "Live load board access", "Basic rate calculator", "Email support", "Standard POD upload", "48h payment on delivery"],
+  },
+  {
+    name: "Carrier Pro", price: "$49", per: "/ mo", popular: true, cta: "Start Free Trial", ctaSolid: true,
+    desc: "For active drayage carriers running high load volumes.",
+    features: ["Unlimited load claims", "Priority load matching", "Real-time GPS tracking", "Instant POD processing", "Dedicated carrier support", "Same-day payment option"],
+  },
+  {
+    name: "Fleet", price: "$99", per: "/ mo", popular: false, cta: "Get Started", ctaSolid: false,
+    desc: "For small fleets and dispatchers managing multiple trucks.",
+    features: ["Everything in Carrier Pro", "Multi-truck dashboard", "Fleet GPS overview", "Driver management tools", "Fuel card integration", "Priority phone support"],
+  },
+  {
+    name: "Enterprise", price: "$199", per: "/ mo", popular: false, cta: "Contact Sales", ctaSolid: false,
+    desc: "For large fleets and carriers with enterprise needs.",
+    features: ["Everything in Fleet", "Unlimited trucks & drivers", "Enterprise GPS & telematics", "Custom rate negotiations", "Dedicated account team", "SLA & uptime guarantee"],
+  },
+];
+
+function Pricing() {
+  return (
+    <section style={{ background: `radial-gradient(ellipse 70% 90% at 15% 50%, ${LIME}14 0%, transparent 65%), radial-gradient(ellipse 60% 70% at 85% 30%, ${LIME}0b 0%, transparent 55%), ${BG}`, padding: "88px 24px", borderTop: `1px solid ${BORDER}` }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+        <div className="reveal" style={{ textAlign: "center", marginBottom: 56 }}>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] font-semibold mb-5 rounded" style={{ background: `${LIME}14`, border: `1px solid ${LIME}44`, color: "#fff" }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: LIME, display: "inline-block" }} />
+            Simple, transparent pricing
+          </div>
+          <h2 style={{ fontSize: "clamp(32px,4vw,52px)", fontWeight: 900, color: "#fff", lineHeight: 1.05, margin: "0 0 16px" }}>
+            Plans built for drivers.
+          </h2>
+          <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 16, maxWidth: 520, margin: "0 auto" }}>
+            Every plan includes live load board access, verified loads, and 48-hour payments. No setup fees.
+          </p>
+        </div>
+        <div className="pricing-grid-driver" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 28 }}>
+          {PLANS.map((p, i) => (
+            <div key={p.name} className={`reveal reveal-delay-${i % 4}`} style={{
+              background: p.popular ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.03)",
+              backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
+              border: p.popular ? `1px solid ${LIME}` : "1px solid rgba(255,255,255,0.09)",
+              borderRadius: 16, padding: "32px 28px", display: "flex", flexDirection: "column", position: "relative",
+              boxShadow: p.popular ? `0 0 40px ${LIME}22` : "none",
+            }}>
+              {p.popular && (
+                <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: LIME, color: "#0a0e07", fontSize: 11, fontWeight: 800, letterSpacing: "0.06em", textTransform: "uppercase", padding: "4px 14px", borderRadius: 4, whiteSpace: "nowrap" }}>Most Popular</div>
+              )}
+              <div style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: LIME, marginBottom: 16 }}>{p.name}</div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 8 }}>
+                <span style={{ fontSize: 48, fontWeight: 800, color: "#fff", lineHeight: 1 }}>{p.price}</span>
+                {p.per && <span style={{ fontSize: 13, color: "rgba(255,255,255,0.5)" }}>{p.per}</span>}
+              </div>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 24, lineHeight: 1.5 }}>{p.desc}</p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", flex: 1 }}>
+                {p.features.map(f => (
+                  <li key={f} style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, fontSize: 14, color: "rgba(255,255,255,0.75)" }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={LIME} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a href="#" style={{ marginTop: "auto", display: "block", textAlign: "center", padding: "13px 20px", borderRadius: 8,
+                background: p.ctaSolid ? LIME : "rgba(255,255,255,0.07)",
+                border: p.ctaSolid ? "none" : "1px solid rgba(255,255,255,0.16)",
+                color: p.ctaSolid ? "#0a0e07" : "#fff", fontSize: 14, fontWeight: p.ctaSolid ? 800 : 600, textDecoration: "none" }}>{p.cta}</a>
+            </div>
+          ))}
+        </div>
+      </div>
+      <style>{`
+        @media (max-width: 1024px) { .pricing-grid-driver { grid-template-columns: repeat(2,1fr) !important; } }
+        @media (max-width: 560px) { .pricing-grid-driver { grid-template-columns: 1fr !important; } }
+      `}</style>
+    </section>
+  );
+}
+
 export default function DriverAppPage() {
   return (
     <div style={{ background: BG, minHeight: "100vh" }}>
@@ -433,6 +516,7 @@ export default function DriverAppPage() {
         {DEEPS.map(s => <DeepSection key={s.tag} s={s} />)}
         <ScreensMarquee />
         <Steps />
+        <Pricing />
         <DownloadCTA />
       </main>
       <Footer bg="#000000" accent={LIME} />

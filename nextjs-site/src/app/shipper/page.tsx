@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { asset } from "@/lib/site";
-import HeroStatsBar from "@/components/HeroStatsBar";
+import HeroStatBand from "@/components/HeroStatBand";
 import RevealInit from "@/components/RevealInit";
 import { HowItWorksSection, LiveActivitySection, TestimonialsSection, StatsSection, ComparisonSection, FAQSection } from "@/components/NewSections";
 
@@ -239,14 +239,16 @@ export default function ShipperPage() {
 
       {/* ══ SECTION 1 — HERO ══════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden" style={{ background: "#06101e", paddingBottom: 0 }}>
-        <video autoPlay muted loop playsInline style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", zIndex:0 }}>
-          <source src={asset("/hero-bg.mp4")} type="video/mp4" />
-        </video>
+        <picture style={{ position:"absolute", inset:0, width:"100%", height:"100%", zIndex:0 }}>
+          <source srcSet={asset("/shipper-hero-bg.webp")} type="image/webp" />
+          <img src={asset("/shipper-hero-bg.jpg")} alt="" fetchPriority="high" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+        </picture>
+        <div className="absolute inset-0" style={{ zIndex:1, background:"linear-gradient(180deg, rgba(6,16,30,0.55) 0%, rgba(6,16,30,0.35) 45%, rgba(6,15,30,0.9) 100%)" }} />
         <div className="absolute inset-0 pointer-events-none" style={{ zIndex:2 }}>
           <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full" style={{ background:"radial-gradient(circle, rgba(252,11,5,0.14) 0%, transparent 60%)" }} />
           <div className="absolute top-0 -right-40 w-[600px] h-[600px] rounded-full" style={{ background:"radial-gradient(circle, rgba(58,95,192,0.14) 0%, transparent 60%)" }} />
         </div>
-        <div className="relative max-w-[1100px] mx-auto px-6 flex flex-col items-center text-center" style={{ paddingTop:"clamp(110px,13vh,150px)", paddingBottom:0, zIndex:3 }}>
+        <div className="relative max-w-[1100px] mx-auto px-6 flex flex-col items-start text-left" style={{ paddingTop:"clamp(110px,13vh,150px)", paddingBottom:0, zIndex:3 }}>
           <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"6px 14px", borderRadius:4, background:"rgba(252,11,5,0.16)", border:"1px solid rgba(252,11,5,0.4)", marginBottom:24 }}>
             <span style={{ width:6, height:6, borderRadius:"50%", background:"#fc0b05", display:"inline-block" }} />
             <span style={{ fontSize:11, fontWeight:700, color:"#fff", letterSpacing:"0.06em", textTransform:"uppercase" }}>For Shippers &amp; BCOs</span>
@@ -260,7 +262,7 @@ export default function ShipperPage() {
           <p className="mt-5 text-white/50" style={{ fontSize:"clamp(15px,1.4vw,17px)", maxWidth:480, marginBottom:32 }}>
             Instant drayage quotes from 500+ verified carriers. Real-time GPS tracking from gate-out to your dock &mdash; locked rates, 24/7 visibility.
           </p>
-          <div style={{ display:"flex", gap:10, flexWrap:"wrap", marginBottom:8, justifyContent:"center" }}>
+          <div style={{ display:"flex", gap:10, flexWrap:"wrap", marginBottom:8, justifyContent:"flex-start" }}>
             <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200" style={{ textDecoration:"none", whiteSpace:"nowrap" }}>
               <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" className="shrink-0"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
               <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] opacity-90">Download on the</span><span className="block text-[14px] font-semibold tracking-tight">App Store</span></span>
@@ -270,16 +272,11 @@ export default function ShipperPage() {
               <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
             </a>
           </div>
-          <div className="w-full flex justify-center" style={{ marginTop:20 }}>
-            <picture style={{ width:"100%", maxWidth:1000, display:"block" }}>
-              <source srcSet={asset("/hero-mockup.webp")} type="image/webp" />
-              <img src={asset("/hero-mockup.png")} alt="DrayGo Shipper App" loading="eager" fetchPriority="high" style={{ width:"100%", display:"block", opacity:1 }} />
-            </picture>
-          </div>
+          <div style={{ height:"clamp(80px,12vh,150px)" }} />
         </div>
       </section>
 
-      <HeroStatsBar />
+      <HeroStatBand accent="#fc0b05" />
 
       {/* ══ PRICING SECTION ══════════════════════════════════════════════════ */}
       <section style={{ background: "radial-gradient(ellipse 70% 90% at 15% 50%, rgba(252,11,5,0.13) 0%, transparent 65%), radial-gradient(ellipse 60% 70% at 85% 30%, rgba(252,11,5,0.08) 0%, transparent 55%), #060f1e", padding: "88px 24px" }}>
