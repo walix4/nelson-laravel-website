@@ -238,28 +238,27 @@ export default function ShipperPage() {
       <Nav />
 
       {/* ══ SECTION 1 — HERO ══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ background: "#06101e", paddingBottom: 0 }}>
-        <picture style={{ position:"absolute", inset:0, width:"100%", height:"100%", zIndex:0 }}>
+      <section style={{ position:"relative", overflow:"hidden", borderBottom:"1px solid rgba(255,255,255,0.12)" }}>
+        <picture>
           <source srcSet={asset("/shipper-hero-bg.webp")} type="image/webp" />
-          <img src={asset("/shipper-hero-bg.jpg")} alt="" fetchPriority="high" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
+          <img src={asset("/shipper-hero-bg.jpg")} alt="" aria-hidden="true" style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", objectPosition:"center" }} />
         </picture>
-        <div className="absolute inset-0" style={{ zIndex:1, background:"linear-gradient(180deg, rgba(6,16,30,0.55) 0%, rgba(6,16,30,0.35) 45%, rgba(6,15,30,0.9) 100%)" }} />
-        <div className="absolute inset-0 pointer-events-none" style={{ zIndex:2 }}>
-          <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full" style={{ background:"radial-gradient(circle, rgba(252,11,5,0.14) 0%, transparent 60%)" }} />
-          <div className="absolute top-0 -right-40 w-[600px] h-[600px] rounded-full" style={{ background:"radial-gradient(circle, rgba(58,95,192,0.14) 0%, transparent 60%)" }} />
-        </div>
-        <div className="relative max-w-[1100px] mx-auto px-6 flex flex-col items-start text-left" style={{ paddingTop:"clamp(110px,13vh,150px)", paddingBottom:0, zIndex:3 }}>
-          <div style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"6px 14px", borderRadius:4, background:"rgba(252,11,5,0.16)", border:"1px solid rgba(252,11,5,0.4)", marginBottom:24 }}>
-            <span style={{ width:6, height:6, borderRadius:"50%", background:"#fc0b05", display:"inline-block" }} />
-            <span style={{ fontSize:11, fontWeight:700, color:"#fff", letterSpacing:"0.06em", textTransform:"uppercase" }}>For Shippers &amp; BCOs</span>
+        <div className="absolute inset-0" style={{ background:"linear-gradient(90deg, rgba(6,12,20,0.88) 0%, rgba(6,12,20,0.5) 45%, rgba(6,12,20,0.12) 100%)" }} />
+        <div className="max-w-[1200px] mx-auto grid lg:grid-cols-[1.05fr_1fr] gap-10 items-center" style={{ padding:"clamp(56px,8vw,110px) clamp(24px,4vw,56px) 0", position:"relative", zIndex:1 }}>
+          <div className="reveal-left" style={{ paddingBottom:"clamp(56px,7vw,100px)" }}>
+          <div style={{ display:"inline-flex", alignItems:"center", gap:8, borderRadius:12, padding:"7px 16px", fontSize:11.5, fontWeight:800, letterSpacing:"0.14em", textTransform:"uppercase", color:"#fc0b05", background:"rgba(252,11,5,0.08)", border:"1px solid rgba(252,11,5,0.3)", width:"fit-content" }}>
+            <span style={{ width:6, height:6, borderRadius:2, background:"#fc0b05", display:"inline-block" }} />
+            For Shippers &amp; BCOs
           </div>
-          <h1 className="display text-white" style={{ fontSize:"clamp(40px,5.8vw,76px)", lineHeight:1.02, letterSpacing:"-0.03em", maxWidth:900, margin:"0 0 8px" }}>
-            Ship Every Container,<br />
-            <span style={{ display:"inline-block", color:SHIPPER_LINES[shipperIdx].color, transition:"color 0.3s ease", animation:shipperOut ? "heroLineOut 0.38s ease forwards" : "heroLineIn 0.42s ease forwards" }}>
+          <h1 style={{ fontSize:"clamp(34px,3.9vw,54px)", fontWeight:900, color:"#fff", lineHeight:1.06, letterSpacing:"-0.025em", margin:"26px 0 8px" }}>
+            Ship Every Container.
+          </h1>
+          <div style={{ height:"clamp(36px,3.5vw,48px)", display:"flex", alignItems:"center" }}>
+            <span style={{ fontSize:"clamp(20px,2.3vw,32px)", fontWeight:900, letterSpacing:"-0.02em", color:SHIPPER_LINES[shipperIdx].color, whiteSpace:"nowrap", transition:"color 0.3s ease", animation:shipperOut ? "heroLineOut 0.38s ease forwards" : "heroLineIn 0.42s ease forwards", textShadow:`0 0 34px ${SHIPPER_LINES[shipperIdx].color}55` }}>
               {SHIPPER_LINES[shipperIdx].text}
             </span>
-          </h1>
-          <p className="mt-5 text-white/50" style={{ fontSize:"clamp(15px,1.4vw,17px)", maxWidth:480, marginBottom:32 }}>
+          </div>
+          <p style={{ fontSize:"clamp(15px,1.25vw,17.5px)", color:"rgba(255,255,255,0.52)", lineHeight:1.75, maxWidth:480, margin:"14px 0 36px" }}>
             Instant drayage quotes from 500+ verified carriers. Real-time GPS tracking from gate-out to your dock &mdash; locked rates, 24/7 visibility.
           </p>
           <div style={{ display:"flex", gap:10, flexWrap:"wrap", marginBottom:8, justifyContent:"flex-start" }}>
@@ -272,11 +271,24 @@ export default function ShipperPage() {
               <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
             </a>
           </div>
-          <div style={{ height:"clamp(80px,12vh,150px)" }} />
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2" style={{ marginTop:28, fontSize:13, color:"rgba(255,255,255,0.45)" }}>
+            <span style={{ display:"inline-flex", alignItems:"center", gap:7 }}>
+              <span style={{ color:"#fc0b05", fontSize:15 }}>★★★★★</span> <b style={{ color:"#fff" }}>4.9</b> rating
+            </span>
+            <span><b style={{ color:"#fff" }}>500+</b> verified carriers</span>
+            <span>Free to start</span>
+          </div>
+          </div>
+          <div className="reveal-right reveal-delay-1 flex" style={{ alignItems:"flex-end", justifyContent:"center", position:"relative", paddingTop:24 }}>
+            <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 55% 55% at 50% 60%, rgba(252,11,5,0.18) 0%, transparent 70%)", pointerEvents:"none" }} />
+            <picture style={{ display:"block", width:"min(620px,100%)", position:"relative" }}>
+              <source srcSet={asset("/driver-app/hand-hero.webp?v=3")} type="image/webp" />
+              <img src={asset("/driver-app/hand-hero.png?v=3")} alt="DrayGo app in hand" loading="eager" style={{ width:"100%", display:"block" }} />
+            </picture>
+          </div>
         </div>
+        <HeroStatBand accent="#fc0b05" />
       </section>
-
-      <HeroStatBand accent="#fc0b05" />
 
       {/* ══ PRICING SECTION ══════════════════════════════════════════════════ */}
       <section style={{ background: "radial-gradient(ellipse 70% 90% at 15% 50%, rgba(252,11,5,0.13) 0%, transparent 65%), radial-gradient(ellipse 60% 70% at 85% 30%, rgba(252,11,5,0.08) 0%, transparent 55%), #060f1e", padding: "88px 24px" }}>

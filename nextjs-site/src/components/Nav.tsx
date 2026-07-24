@@ -116,7 +116,7 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
   const isDriverApp = pathname === "/driver-app" || pathname === "/driver-app/";
   const accentColor = isDriverApp ? "#C8FF45" : isBroker ? "#00a5e7" : isCarriers ? "#27b30a" : "#fc0b05";
   const accentText = isDriverApp ? "#0a0e07" : "#fff";
-  const headerBg = isDriverApp ? "#0a0e07" : "#08192b";
+  const headerBg = "#000000";
 
   return (
     <>
@@ -156,14 +156,22 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-0 text-[13px]">
+            <Link href="/load-board"
+              className="inline-flex items-center gap-[6px] text-[13px] font-semibold text-white rounded-lg transition whitespace-nowrap outline-none focus:outline-none"
+              style={{ border: "1px solid rgba(255,255,255,0.28)", padding: "6px 12px", marginRight: 6, background: "rgba(255,255,255,0.04)" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.12)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.04)"; }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" />
+              </svg>
+              Load Board
+            </Link>
             <Link href="/"             className={linkCls} style={{ padding: "6px 12px" }}>Home</Link>
             <Link href="/shipper"      className={linkCls} style={{ padding: "6px 12px" }}>Shipper</Link>
             <Link href="/broker"       className={linkCls} style={{ padding: "6px 12px" }}>Broker</Link>
-            <Link href="/driver-app"   className={linkCls} style={{ padding: "6px 12px", display: "inline-flex", alignItems: "center", gap: 6 }}>
-              Carrier
-              <span style={{ fontSize: 8.5, fontWeight: 800, letterSpacing: "0.08em", color: "#0a0e07", background: "#C8FF45", borderRadius: 5, padding: "2px 5px", lineHeight: 1 }}>NEW</span>
-            </Link>
+            <Link href="/driver-app"   className={linkCls} style={{ padding: "6px 12px" }}>Carrier</Link>
             <Link href="/how-it-works" className={linkCls} style={{ padding: "6px 12px" }}>How it Works</Link>
+            <Link href="/book-meeting" className={linkCls} style={{ padding: "6px 12px" }}>Book Meeting</Link>
             <Link href="/about"        className={linkCls} style={{ padding: "6px 12px" }}>About</Link>
             <Link href="/contact"
               className="text-[13px] font-semibold whitespace-nowrap outline-none focus:outline-none relative"
@@ -180,16 +188,6 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
 
           {/* Right actions */}
           <div className="flex items-center gap-2 justify-end">
-            <Link href="/book-meeting"
-              className="hidden md:inline-flex text-[13px] font-semibold text-white items-center gap-[6px] rounded-lg transition whitespace-nowrap outline-none focus:outline-none"
-              style={{ border: "1px solid rgba(255,255,255,0.28)", padding: "7px 14px", background: "rgba(255,255,255,0.04)" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.12)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.04)"; }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
-              </svg>
-              Book Meeting
-            </Link>
             <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white transition whitespace-nowrap outline-none focus:outline-none" style={{ padding: "6px 12px" }}>
               Sign in
             </Link>
@@ -218,18 +216,14 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
             <Link href="/"         className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Home</Link>
             <Link href="/shipper"  className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Shipper</Link>
             <Link href="/broker"   className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Broker</Link>
-            <Link href="/driver-app" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>
-              Carrier <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: "0.08em", color: "#0a0e07", background: "#C8FF45", borderRadius: 5, padding: "2px 5px", marginLeft: 6, verticalAlign: "middle" }}>NEW</span>
-            </Link>
+            <Link href="/driver-app" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Carrier</Link>
 
             <Link href="/how-it-works" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>How it Works</Link>
+            <Link href="/book-meeting" className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Book Meeting</Link>
             <Link href="/about"        className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>About</Link>
             <Link href="/contact"      className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Contact</Link>
 
             <div className="pt-3">
-              <Link href="/book-meeting" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white mb-2" style={{ border: "1px solid rgba(255,255,255,0.28)" }} onClick={() => setMobileOpen(false)}>
-                Book Meeting
-              </Link>
               <Link href="/#load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: accentColor, color: accentText }} onClick={() => setMobileOpen(false)}>
                 Get Started →
               </Link>

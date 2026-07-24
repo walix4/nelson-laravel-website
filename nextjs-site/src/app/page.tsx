@@ -5,6 +5,7 @@ import { asset } from "@/lib/site";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
+import HeroStatBand from "@/components/HeroStatBand";
 import { AllNewSections } from "@/components/NewSections";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 import type { Card as CardType } from "@/components/ui/apple-cards-carousel";
@@ -297,55 +298,58 @@ export default function Home() {
       <RevealInit />
 
       {/* ─── HERO ─── */}
-      <section className="relative overflow-hidden" style={{ paddingBottom: 0, background: "#06101e" }}>
-        {/* Video background */}
-        <video
-          autoPlay muted loop playsInline
-          style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover", zIndex:0 }}
-        >
+      <section style={{ position:"relative", overflow:"hidden", borderBottom:"1px solid rgba(255,255,255,0.12)" }}>
+        {/* video background */}
+        <video autoPlay muted loop playsInline style={{ position:"absolute", inset:0, width:"100%", height:"100%", objectFit:"cover" }}>
           <source src={asset("/hero-bg.mp4")} type="video/mp4" />
         </video>
-        {/* Glows */}
-        <div className="absolute inset-0 pointer-events-none" style={{ zIndex:2 }}>
-          <div className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full" style={{ background: "radial-gradient(circle, rgba(252,11,5,0.14) 0%, transparent 60%)" }} />
-          <div className="absolute top-0 -right-40 w-[600px] h-[600px] rounded-full" style={{ background: "radial-gradient(circle, rgba(58,95,192,0.14) 0%, transparent 60%)" }} />
-        </div>
-
-        <div className="relative max-w-[1100px] mx-auto px-6 flex flex-col items-center text-center" style={{ paddingTop: "clamp(110px, 13vh, 150px)", zIndex:3 }}>
-
-          {/* ── HEADLINE ── */}
-          <h1 className="display text-white reveal reveal-delay-1" style={{ fontSize: "clamp(40px, 5.8vw, 76px)", lineHeight: 1.02, letterSpacing: "-0.03em", maxWidth: 900 }}>
-            Move Every Container,<br />
-            <span style={{
-              display: "inline-block",
-              color: HERO_LINES[heroIdx].color,
-              transition: "color 0.3s ease",
-              animation: heroOut ? "heroLineOut 0.38s ease forwards" : "heroLineIn 0.42s ease forwards",
-            }}>
-              {HERO_LINES[heroIdx].text}
-            </span>
-          </h1>
-
-          {/* ── SUB ── */}
-          <p className="mt-5 text-white/50 reveal reveal-delay-1" style={{ fontSize: "clamp(15px, 1.4vw, 17px)", maxWidth: 460 }}>
-            The all-in-one drayage platform for shippers, carriers and brokers.
-          </p>
-
-          {/* ── HERO IMAGE ── */}
-          <div className="w-full flex justify-center reveal" style={{ marginTop: 28 }}>
-            <picture style={{ width: "100%", maxWidth: 1000, display: "block" }}>
-              <source srcSet={asset("/hero-mockup.webp")} type="image/webp" />
-              <img
-                src={asset("/hero-mockup.png")}
-                alt="DrayGo Apps — Shipper, Broker, Carrier"
-                loading="eager"
-                fetchPriority="high"
-                style={{ width: "100%", display: "block", opacity: 1 }}
-              />
+        <div className="absolute inset-0" style={{ background:"linear-gradient(90deg, rgba(6,12,20,0.88) 0%, rgba(6,12,20,0.5) 45%, rgba(6,12,20,0.12) 100%)" }} />
+        <div className="max-w-[1200px] mx-auto grid lg:grid-cols-[1.05fr_1fr] gap-10 items-center" style={{ padding:"clamp(56px,8vw,110px) clamp(24px,4vw,56px) 0", position:"relative", zIndex:1 }}>
+          {/* text */}
+          <div className="reveal-left" style={{ paddingBottom:"clamp(56px,7vw,100px)" }}>
+            <div style={{ display:"inline-flex", alignItems:"center", gap:8, borderRadius:12, padding:"7px 16px", fontSize:11.5, fontWeight:800, letterSpacing:"0.14em", textTransform:"uppercase", color:"#fc0b05", background:"rgba(252,11,5,0.08)", border:"1px solid rgba(252,11,5,0.3)", width:"fit-content" }}>
+              <span style={{ width:6, height:6, borderRadius:2, background:"#fc0b05", display:"inline-block" }} />
+              The Drayage Platform
+            </div>
+            <h1 style={{ fontSize:"clamp(34px,3.9vw,54px)", fontWeight:900, color:"#fff", lineHeight:1.06, letterSpacing:"-0.025em", margin:"26px 0 8px" }}>
+              Move Every Container.
+            </h1>
+            <div style={{ height:"clamp(36px,3.5vw,48px)", display:"flex", alignItems:"center" }}>
+              <span style={{ fontSize:"clamp(20px,2.3vw,32px)", fontWeight:900, letterSpacing:"-0.02em", color:HERO_LINES[heroIdx].color, whiteSpace:"nowrap", transition:"color 0.3s ease", animation:heroOut ? "heroLineOut 0.38s ease forwards" : "heroLineIn 0.42s ease forwards", textShadow:`0 0 34px ${HERO_LINES[heroIdx].color}55` }}>
+                {HERO_LINES[heroIdx].text}
+              </span>
+            </div>
+            <p style={{ fontSize:"clamp(15px,1.25vw,17.5px)", color:"rgba(255,255,255,0.52)", lineHeight:1.75, maxWidth:480, margin:"14px 0 36px" }}>
+              The all-in-one drayage platform for shippers, carriers and brokers.
+            </p>
+            <div className="flex gap-2.5 flex-wrap justify-start" style={{ marginBottom:8 }}>
+              <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200" style={{ textDecoration:"none", whiteSpace:"nowrap" }}>
+                <svg width="30" height="30" viewBox="0 0 384 512" fill="#fff" className="shrink-0"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] opacity-90">Download on the</span><span className="block text-[14px] font-semibold tracking-tight">App Store</span></span>
+              </a>
+              <a href="#" className="inline-flex items-center gap-2.5 rounded-md h-[54px] pl-3 pr-4 bg-white/[0.12] hover:bg-white/[0.26] border border-white/15 backdrop-blur-md transition-colors duration-200" style={{ textDecoration:"none", whiteSpace:"nowrap" }}>
+                <img src={asset("/google-play.png")} alt="" className="h-7 w-auto shrink-0" />
+                <span className="leading-none text-white text-left whitespace-nowrap"><span className="block text-[8.5px] uppercase tracking-[0.14em] opacity-90">Get it on</span><span className="block text-[14px] font-semibold tracking-tight">Google Play</span></span>
+              </a>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2" style={{ marginTop:28, fontSize:13, color:"rgba(255,255,255,0.45)" }}>
+              <span style={{ display:"inline-flex", alignItems:"center", gap:7 }}>
+                <span style={{ color:"#fc0b05", fontSize:15 }}>★★★★★</span> <b style={{ color:"#fff" }}>4.9</b> rating
+              </span>
+              <span><b style={{ color:"#fff" }}>8,000+</b> on the network</span>
+              <span>Free download</span>
+            </div>
+          </div>
+          {/* phone-in-hands */}
+          <div className="reveal-right reveal-delay-1 flex" style={{ alignItems:"flex-end", justifyContent:"center", position:"relative", paddingTop:24 }}>
+            <div style={{ position:"absolute", inset:0, background:"radial-gradient(ellipse 55% 55% at 50% 60%, rgba(252,11,5,0.18) 0%, transparent 70%)", pointerEvents:"none" }} />
+            <picture style={{ display:"block", width:"min(620px,100%)", position:"relative" }}>
+              <source srcSet={asset("/driver-app/hand-hero.webp?v=3")} type="image/webp" />
+              <img src={asset("/driver-app/hand-hero.png?v=3")} alt="DrayGo app in hand" loading="eager" style={{ width:"100%", display:"block" }} />
             </picture>
           </div>
-
         </div>
+        <HeroStatBand accent="#fc0b05" />
       </section>
 
       {/* ─── STATS STRIP ─── */}

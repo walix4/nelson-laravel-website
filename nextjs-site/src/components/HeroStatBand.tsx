@@ -11,10 +11,12 @@ const STATS: [string, string][] = [
 export default function HeroStatBand({ accent = "#C8FF45" }: { accent?: string }) {
   return (
     <section style={{
-      borderTop: "1px solid rgba(255,255,255,0.10)",
-      background: "#000000",
+      borderTop: "1px solid rgba(255,255,255,0.12)",
+      background: "rgba(0,0,0,0.45)",
+      backdropFilter: "blur(14px)",
+      WebkitBackdropFilter: "blur(14px)",
       position: "relative",
-      zIndex: 1,
+      zIndex: 3,
     }}>
       <div className="max-w-[1200px] mx-auto grid grid-cols-2 lg:grid-cols-4" style={{ padding: "0 clamp(24px,4vw,56px)" }}>
         {STATS.map(([n, l], i) => (

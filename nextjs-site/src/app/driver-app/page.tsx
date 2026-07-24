@@ -108,7 +108,7 @@ function Hero() {
         <div className="reveal-left" style={{ paddingBottom: "clamp(56px,7vw,100px)" }}>
           <SectionTag>DrayGo Driver App</SectionTag>
           <h1 style={{ fontSize: "clamp(34px,3.9vw,54px)", fontWeight: 900, color: "#fff", lineHeight: 1.06, letterSpacing: "-0.025em", margin: "26px 0 8px" }}>
-            Built for the<br />Modern Drayage Driver.
+            Built for the Modern<br />Drayage Driver.
           </h1>
           <div style={{ height: "clamp(36px,3.5vw,48px)", display: "flex", alignItems: "center" }}>
             <span style={{
