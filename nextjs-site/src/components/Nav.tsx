@@ -181,6 +181,16 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
 
           {/* Right actions */}
           <div className="flex items-center gap-2 justify-end">
+            <Link href="/book-meeting"
+              className="hidden md:inline-flex text-[13px] font-semibold text-white items-center gap-[6px] rounded-lg transition whitespace-nowrap outline-none focus:outline-none"
+              style={{ border: "1px solid rgba(255,255,255,0.28)", padding: "7px 14px", background: "rgba(255,255,255,0.04)" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.12)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.04)"; }}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+              </svg>
+              Book Meeting
+            </Link>
             <Link href="/#login" className="hidden sm:inline text-[13px] font-semibold text-white/90 hover:text-white transition whitespace-nowrap outline-none focus:outline-none" style={{ padding: "6px 12px" }}>
               Sign in
             </Link>
@@ -219,6 +229,9 @@ export default function Nav({ logoSrc }: { logoSrc?: string } = {}) {
             <Link href="/contact"      className="block py-2.5 px-3 text-[14px] text-white/80 hover:text-white" onClick={() => setMobileOpen(false)}>Contact</Link>
 
             <div className="pt-3">
+              <Link href="/book-meeting" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white mb-2" style={{ border: "1px solid rgba(255,255,255,0.28)" }} onClick={() => setMobileOpen(false)}>
+                Book Meeting
+              </Link>
               <Link href="/#load-board" className="block text-center py-3 rounded-lg text-[14px] font-semibold text-white" style={{ background: accentColor, color: accentText }} onClick={() => setMobileOpen(false)}>
                 Get Started →
               </Link>

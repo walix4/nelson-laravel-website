@@ -137,8 +137,8 @@ function Hero() {
         <div className="reveal-right reveal-delay-1 flex" style={{ alignItems: "flex-end", justifyContent: "center", position: "relative", paddingTop: 24 }}>
           <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 55% 55% at 50% 60%, ${LIME}22 0%, transparent 70%)`, pointerEvents: "none" }} />
           <picture style={{ display: "block", width: "min(620px, 100%)", position: "relative" }}>
-            <source srcSet={asset("/driver-app/hand-hero.webp?v=2")} type="image/webp" />
-            <img src={asset("/driver-app/hand-hero.png?v=2")} alt="DrayGo Driver app in hand — home and today's earnings" loading="eager"
+            <source srcSet={asset("/driver-app/hand-hero.webp?v=3")} type="image/webp" />
+            <img src={asset("/driver-app/hand-hero.png?v=3")} alt="DrayGo Driver app in hand — home and today's earnings" loading="eager"
               style={{ width: "100%", display: "block" }} />
           </picture>
         </div>
